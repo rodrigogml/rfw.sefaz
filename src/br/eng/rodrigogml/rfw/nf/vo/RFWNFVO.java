@@ -293,14 +293,14 @@ public class RFWNFVO extends RFWVO {
    * Versão do leiaute<Br>
    * TAG: NFe/infNFe/@versao
    */
-  @RFWMetaStringField(caption = "Versão do Layout", maxlength = 10, pattern = "[0-9]+\\.[0-9]+", required = true)
+  @RFWMetaStringField(caption = "Versão do Layout", maxLength = 10, pattern = "[0-9]+\\.[0-9]+", required = true)
   private String layoutVersion = null;
 
   /**
    * Chave de acesso da nota. Tamanho 44 Dígitos.<Br>
    * Tag: NFe/infNFe/@Id - Nesta tag, informar a Chave de Acesso precedida do literal ‘NFe’ (total 47 dígitos)
    */
-  @RFWMetaStringField(caption = "Chave", maxlength = 44, minlength = 44, pattern = "[0-9]{44}", required = false, unique = true)
+  @RFWMetaStringField(caption = "Chave", maxLength = 44, minlength = 44, pattern = "[0-9]{44}", required = false, unique = true)
   private String chave = null;
 
   /**
@@ -319,7 +319,7 @@ public class RFWNFVO extends RFWVO {
    * Informar a natureza da operação de que decorrer a saída ou a entrada, tais como: venda, compra, transferência, devolução, importação, consignação, remessa (para fins de demonstração, de industrialização ou outra), conforme previsto na alínea 'i', inciso I, art. 19 do CONVÊNIO S/Nº, de 15 de dezembro de 1970.<br>
    * TAG: NFe/infNFe/ide/natOp
    */
-  @RFWMetaStringField(caption = "Natureza da Operação", maxlength = 200, required = false)
+  @RFWMetaStringField(caption = "Natureza da Operação", maxLength = 200, required = false)
   private String operationNature = null;
 
   /**
@@ -414,7 +414,7 @@ public class RFWNFVO extends RFWVO {
    * <br>
    * TAG: NFe/infNFe/ide/cMunFG
    */
-  @RFWMetaStringField(caption = "Código Município do Fato Gerador", maxlength = 7, pattern = "[0-9]{0,7}", required = false, preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
+  @RFWMetaStringField(caption = "Código Município do Fato Gerador", maxLength = 7, pattern = "[0-9]{0,7}", required = false, preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
   private String cityCodeTaxEvent = null;
 
   /**

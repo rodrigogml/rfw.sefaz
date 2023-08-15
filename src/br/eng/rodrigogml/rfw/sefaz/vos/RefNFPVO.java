@@ -30,7 +30,7 @@ public class RefNFPVO extends RFWVO {
    * BA12 AAMM Ano e Mês de emissão da NF-e E BA10 N 1-1 4<br>
    * AAMM da emissão da NF de produtor (v2.0)
    */
-  @RFWMetaStringField(caption = "Ano e Mês de Emissão", minlength = 4, maxlength = 4, required = true, pattern = "\\d{4}")
+  @RFWMetaStringField(caption = "Ano e Mês de Emissão", minlength = 4, maxLength = 4, required = true, pattern = "\\d{4}")
   private String aamm = null;
 
   /**
@@ -51,7 +51,7 @@ public class RefNFPVO extends RFWVO {
    * BA15 IE IE do emitente E BA10 N 1-1 2 - 14<br>
    * Informar a IE do emitente da NF de Produtor ou o literal “ISENTO” (v2.0)
    */
-  @RFWMetaStringField(caption = "IE do Emitente", minlength = 2, maxlength = 14, required = true, pattern = "^(ISENTO|[0-9]+)$")
+  @RFWMetaStringField(caption = "IE do Emitente", minlength = 2, maxLength = 14, required = true, pattern = "^(ISENTO|[0-9]+)$")
   private String ie = null;
 
   /**
@@ -59,7 +59,7 @@ public class RefNFPVO extends RFWVO {
    * <li>04=NF de Produtor
    * <li>01=NF (v2.0)
    */
-  @RFWMetaStringField(caption = "Modelo do Documento Fiscal", minlength = 2, maxlength = 2, required = true, pattern = "^(01|02)$")
+  @RFWMetaStringField(caption = "Modelo do Documento Fiscal", minlength = 2, maxLength = 2, required = true, pattern = "^(01|02)$")
   private String mod = null;
 
   /**
@@ -80,7 +80,7 @@ public class RefNFPVO extends RFWVO {
    * BA19 refCTe Chave de acesso do CT-e referenciada CE BA01 N 1-1 44<br>
    * Utilizar esta TAG para referenciar um CT-e emitido anteriormente, vinculada a NF-e atual - (v2.0).
    */
-  @RFWMetaStringField(caption = "Chave da CT-e", minlength = 44, maxlength = 44, required = true, pattern = "\\d{44}")
+  @RFWMetaStringField(caption = "Chave da CT-e", minlength = 44, maxLength = 44, required = true, pattern = "\\d{44}")
   private String refCTe = null;
 
   /**

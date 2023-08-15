@@ -74,7 +74,7 @@ public class RFWNFReferencedDocVO extends RFWVO {
    * <Br>
    * TAG: NFe/infNFe/ide/NFref/refNFe
    */
-  @RFWMetaStringField(caption = "Chave NFe", maxlength = 44, minlength = 44, pattern = "[0-9]{44}", required = false)
+  @RFWMetaStringField(caption = "Chave NFe", maxLength = 44, minlength = 44, pattern = "[0-9]{44}", required = false)
   private String chave = null;
 
   /**
@@ -92,7 +92,7 @@ public class RFWNFReferencedDocVO extends RFWVO {
    * TAG: NFe/infNFe/ide/refNF/AAMM, ou<Br>
    * TAG: NFe/infNFe/ide/refNFP/AAMM
    */
-  @RFWMetaStringField(caption = "Ano/Mês de Emissão", maxlength = 4, pattern = "[0-9]{4}", required = false)
+  @RFWMetaStringField(caption = "Ano/Mês de Emissão", maxLength = 4, pattern = "[0-9]{4}", required = false)
   private String aamm = null;
 
   /**
@@ -135,7 +135,7 @@ public class RFWNFReferencedDocVO extends RFWVO {
    * TAG: NFe/infNFe/ide/refNFP/mod, ou<Br>
    * TAG: NFe/infNFe/ide/refECF/mod
    */
-  @RFWMetaStringField(caption = "Modelo Documento", maxlength = 2, minlength = 2, required = false)
+  @RFWMetaStringField(caption = "Modelo Documento", maxLength = 2, minlength = 2, required = false)
   private String modelo = null;
 
   /**
@@ -185,7 +185,7 @@ public class RFWNFReferencedDocVO extends RFWVO {
    * <Br>
    * TAG: NFe/infNFe/ide/refNFP/refCTe
    */
-  @RFWMetaStringField(caption = "CTe Referenciada", maxlength = 44, pattern = "[0-9]{44}", required = false)
+  @RFWMetaStringField(caption = "CTe Referenciada", maxLength = 44, pattern = "[0-9]{44}", required = false)
   private String refCTe = null;
 
   /**

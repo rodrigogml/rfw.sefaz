@@ -37,7 +37,7 @@ public class RFWNFEmitterVO extends RFWVO {
    * <br>
    * TAG: NFe/infNFe/emit/xNome
    */
-  @RFWMetaStringField(caption = "Nome/Razão Social do Emissor", required = false, minlength = 2, maxlength = 60)
+  @RFWMetaStringField(caption = "Nome/Razão Social do Emissor", required = false, minlength = 2, maxLength = 60)
   private String name = null;
 
   /**
@@ -45,7 +45,7 @@ public class RFWNFEmitterVO extends RFWVO {
    * <Br>
    * TAG: NFe/infNFe/emit/xFant
    */
-  @RFWMetaStringField(caption = "Nome Fantasia", required = false, maxlength = 60)
+  @RFWMetaStringField(caption = "Nome Fantasia", required = false, maxLength = 60)
   private String brandName = null;
 
   /**
@@ -74,7 +74,7 @@ public class RFWNFEmitterVO extends RFWVO {
    * <br>
    * TAG: NFe/infNFe/emit/IEST
    */
-  @RFWMetaStringField(caption = "IEST", required = false, maxlength = 14, minlength = 2)
+  @RFWMetaStringField(caption = "IEST", required = false, maxLength = 14, minlength = 2)
   private String iest = null;
 
   /**
@@ -83,14 +83,14 @@ public class RFWNFEmitterVO extends RFWVO {
    * <br>
    * TAG: NFe/infNFe/emit/IM
    */
-  @RFWMetaStringField(caption = "IM", required = false, maxlength = 15, minlength = 1)
+  @RFWMetaStringField(caption = "IM", required = false, maxLength = 15, minlength = 1)
   private String im = null;
 
   /**
    * CNAE fiscal<Br>
    * Campo Opcional. Pode ser informado quando a Inscrição Municipal (id:C19) for informada.
    */
-  @RFWMetaStringField(caption = "CNAE", required = false, maxlength = 7)
+  @RFWMetaStringField(caption = "CNAE", required = false, maxLength = 7)
   private String cnae = null;
 
   /**
@@ -107,7 +107,7 @@ public class RFWNFEmitterVO extends RFWVO {
    * <br>
    * TAG: NFe/infNFe/emit/enderEmit/xLgr
    */
-  @RFWMetaStringField(caption = "Endereço", required = false, minlength = 2, maxlength = 60)
+  @RFWMetaStringField(caption = "Endereço", required = false, minlength = 2, maxLength = 60)
   private String addressStreet = null;
 
   /**
@@ -115,7 +115,7 @@ public class RFWNFEmitterVO extends RFWVO {
    * <br>
    * TAG: NFe/infNFe/emit/enderEmit/nro
    */
-  @RFWMetaStringField(caption = "Número", required = false, maxlength = 60)
+  @RFWMetaStringField(caption = "Número", required = false, maxLength = 60)
   private String addressNumber = null;
 
   /**
@@ -123,7 +123,7 @@ public class RFWNFEmitterVO extends RFWVO {
    * <br>
    * TAG: NFe/infNFe/emit/enderEmit/xCpl
    */
-  @RFWMetaStringField(caption = "Complemento", required = false, maxlength = 60)
+  @RFWMetaStringField(caption = "Complemento", required = false, maxLength = 60)
   private String addressComplement = null;
 
   /**
@@ -131,7 +131,7 @@ public class RFWNFEmitterVO extends RFWVO {
    * <br>
    * TAG: NFe/infNFe/emit/enderEmit/xBairro
    */
-  @RFWMetaStringField(caption = "Bairro", required = false, maxlength = 60)
+  @RFWMetaStringField(caption = "Bairro", required = false, maxLength = 60)
   private String addressNeighborhood = null;
 
   /**
@@ -139,7 +139,7 @@ public class RFWNFEmitterVO extends RFWVO {
    * <br>
    * TAG: NFe/infNFe/emit/enderEmit/xMun
    */
-  @RFWMetaStringField(caption = "Cidade", required = false, maxlength = 60)
+  @RFWMetaStringField(caption = "Cidade", required = false, maxLength = 60)
   private String addressCity = null;
 
   /**
@@ -156,7 +156,7 @@ public class RFWNFEmitterVO extends RFWVO {
    * <br>
    * TAG: NFe/infNFe/emit/enderEmit/UF
    */
-  @RFWMetaStringField(caption = "UF", required = false, maxlength = 2, minlength = 2, pattern = "[a-zA-Z]{2}")
+  @RFWMetaStringField(caption = "UF", required = false, maxLength = 2, minlength = 2, pattern = "[a-zA-Z]{2}")
   private String addressUF = null;
 
   /**
@@ -173,7 +173,7 @@ public class RFWNFEmitterVO extends RFWVO {
    * <br>
    * TAG: NFe/infNFe/emit/enderEmit/xPais
    */
-  @RFWMetaStringField(caption = "País", required = false, maxlength = 60)
+  @RFWMetaStringField(caption = "País", required = false, maxLength = 60)
   private String addressCountry = null;
 
   /**

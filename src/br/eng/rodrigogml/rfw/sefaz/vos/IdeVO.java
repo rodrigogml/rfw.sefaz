@@ -43,7 +43,7 @@ public class IdeVO extends RFWVO {
    * natOp Descrição da Natureza da Operação E B01 C 1-1 1 - 60<Br>
    * Informar a natureza da operação de que decorrer a saída ou a entrada, tais como: venda, compra, transferência, devolução, importação, consignação, remessa (para fins de demonstração, de industrialização ou outra), conforme previsto na alínea 'i', inciso I, art. 19 do CONVÊNIO S/Nº, de 15 de dezembro de 1970.
    */
-  @RFWMetaStringField(caption = "Natureza da Operação", minlength = 1, maxlength = 60, required = true)
+  @RFWMetaStringField(caption = "Natureza da Operação", minlength = 1, maxLength = 60, required = true)
   private String natOp = null;
 
   /**
@@ -55,7 +55,7 @@ public class IdeVO extends RFWVO {
    * @deprecated Deixou de existir desde a NT2016.002. Mas ainda presente para que seja possível lêr o conteúdo de notas anteriores ao layout 4.
    */
   @Deprecated
-  @RFWMetaStringField(caption = "Forma de Pagamento", minlength = 1, maxlength = 1, required = false, pattern = "^(0|1|2)$")
+  @RFWMetaStringField(caption = "Forma de Pagamento", minlength = 1, maxLength = 1, required = false, pattern = "^(0|1|2)$")
   private String indPag = null;
 
   /**
@@ -63,7 +63,7 @@ public class IdeVO extends RFWVO {
    * <li>55=NF-e emitida em substituição ao modelo 1 ou 1A;
    * <li>65=NFC-e, utilizada nas operações de venda no varejo (a critério da UF aceitar este modelo de documento).
    */
-  @RFWMetaStringField(caption = "Modelo do Documento Fiscal", minlength = 2, maxlength = 2, required = true, pattern = "^(55|65)$")
+  @RFWMetaStringField(caption = "Modelo do Documento Fiscal", minlength = 2, maxLength = 2, required = true, pattern = "^(55|65)$")
   private String mod = null;
 
   /**
@@ -106,7 +106,7 @@ public class IdeVO extends RFWVO {
    * <li>0=Entrada;
    * <li>1=Saída
    */
-  @RFWMetaStringField(caption = "Tipo de Operação", minlength = 1, maxlength = 1, required = true, pattern = "^(0|1)$")
+  @RFWMetaStringField(caption = "Tipo de Operação", minlength = 1, maxLength = 1, required = true, pattern = "^(0|1)$")
   private String tpNF = null;
 
   /**
@@ -115,7 +115,7 @@ public class IdeVO extends RFWVO {
    * <li>2=Operação interestadual;
    * <li>3=Operação com exterior
    */
-  @RFWMetaStringField(caption = "Destino da Operação", minlength = 1, maxlength = 1, required = true, pattern = "^(0|1|2)$")
+  @RFWMetaStringField(caption = "Destino da Operação", minlength = 1, maxLength = 1, required = true, pattern = "^(0|1|2)$")
   private String idDist = null;
 
   /**
@@ -133,7 +133,7 @@ public class IdeVO extends RFWVO {
    * <li>3=DANFE Simplificado; 4=DANFE NFC-e;
    * <li>5=DANFE NFC-e em mensagem eletrônica (o envio de mensagem eletrônica pode ser feita de forma simultânea com a impressão do DANFE; usar o tpImp=5 quando esta for a única forma de disponibilização do DANFE)
    */
-  @RFWMetaStringField(caption = "Formato de Impressão", minlength = 1, maxlength = 1, required = true)
+  @RFWMetaStringField(caption = "Formato de Impressão", minlength = 1, maxLength = 1, required = true)
   private String tpImp = null;
 
   /**
@@ -149,7 +149,7 @@ public class IdeVO extends RFWVO {
    * Observação: Para a NFC-e somente é válida a opção de contingência: 9-Contingência Off-Line e, a critério da UF, opção 4-Contingência EPEC. (NT 2015/002)
    *
    */
-  @RFWMetaStringField(caption = "Tipo de Emissão", minlength = 1, maxlength = 1, required = true, pattern = "^(1|2|3|4|5|7|9)$")
+  @RFWMetaStringField(caption = "Tipo de Emissão", minlength = 1, maxLength = 1, required = true, pattern = "^(1|2|3|4|5|7|9)$")
   private String tpEmis = null;
 
   /**
@@ -164,7 +164,7 @@ public class IdeVO extends RFWVO {
    * <li>1=Produção;
    * <li>2=Homologação
    */
-  @RFWMetaStringField(caption = "Identificação do Ambiente", minlength = 1, maxlength = 1, required = true, pattern = "^(1|2)$")
+  @RFWMetaStringField(caption = "Identificação do Ambiente", minlength = 1, maxLength = 1, required = true, pattern = "^(1|2)$")
   private String tpAmb = null;
 
   /**
@@ -174,7 +174,7 @@ public class IdeVO extends RFWVO {
    * <li>3=NF-e de ajuste;
    * <li>4=Devolução de mercadoria
    */
-  @RFWMetaStringField(caption = "Finalidade de Emissão", minlength = 1, maxlength = 1, required = true, pattern = "^(1|2|3|4)$")
+  @RFWMetaStringField(caption = "Finalidade de Emissão", minlength = 1, maxLength = 1, required = true, pattern = "^(1|2|3|4)$")
   private String finNFe = null;
 
   /**
@@ -182,7 +182,7 @@ public class IdeVO extends RFWVO {
    * <li>0=Normal;
    * <li>1=Consumidor final;
    */
-  @RFWMetaStringField(caption = "Consumidor Final", minlength = 1, maxlength = 1, required = true, pattern = "^(0|1)$")
+  @RFWMetaStringField(caption = "Consumidor Final", minlength = 1, maxLength = 1, required = true, pattern = "^(0|1)$")
   private String indFinal = null;
 
   /**
@@ -195,7 +195,7 @@ public class IdeVO extends RFWVO {
    * <li>5=Operação presencial, fora do estabelecimento; (incluído NT2016.002)
    * <li>9=Operação não presencial, outros.
    */
-  @RFWMetaStringField(caption = "Indicador de Presença", minlength = 1, maxlength = 1, required = true, pattern = "^(0|1|2|3|4|5|9)$")
+  @RFWMetaStringField(caption = "Indicador de Presença", minlength = 1, maxLength = 1, required = true, pattern = "^(0|1|2|3|4|5|9)$")
   private String indPres = null;
 
   /**
@@ -206,7 +206,7 @@ public class IdeVO extends RFWVO {
    * <li>Considera-se intermediador/marketplace os prestadores de serviços e de negócios referentes às transações comerciais ou de prestação de serviços intermediadas, realizadas por pessoas jurídicas inscritas no Cadastro Nacional de Pessoa Jurídica - CNPJ ou pessoas físicas inscritas no Cadastro de Pessoa Física - CPF, ainda que não inscritas no cadastro de contribuintes do ICMS. <br>
    * <li>Considera-se site/plataforma própria as vendas que não foram intermediadas (por marketplace), como venda em site próprio, teleatendimento. (Criado na NT 2020.006)
    */
-  @RFWMetaStringField(caption = "Intermediador/Marketplace", minlength = 1, maxlength = 1, required = false, pattern = "^(0|1)$")
+  @RFWMetaStringField(caption = "Intermediador/Marketplace", minlength = 1, maxLength = 1, required = false, pattern = "^(0|1)$")
   private String indIntermid = null;
 
   /**
@@ -216,14 +216,14 @@ public class IdeVO extends RFWVO {
    * <li>2=Emissão de NF-e avulsa, pelo contribuinte com seu certificado digital, através do site do Fisco;
    * <li>3=Emissão NF-e pelo contribuinte com aplicativo fornecido pelo Fisco.
    */
-  @RFWMetaStringField(caption = "Processo de Emissão", minlength = 1, maxlength = 1, required = true, pattern = "^(0|1|2|3)$")
+  @RFWMetaStringField(caption = "Processo de Emissão", minlength = 1, maxLength = 1, required = true, pattern = "^(0|1|2|3)$")
   private String procEmi = null;
 
   /**
    * B27 verProc Versão do Processo de emissão da NF-e E B01 C 1-1 1- 20<Br>
    * Informar a versão do aplicativo emissor de NF-e
    */
-  @RFWMetaStringField(caption = "Versão Processo Emissão", minlength = 1, maxlength = 20, required = true, preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
+  @RFWMetaStringField(caption = "Versão Processo Emissão", minlength = 1, maxLength = 20, required = true, preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
   private String verProc = null;
 
   /**
@@ -236,7 +236,7 @@ public class IdeVO extends RFWVO {
   /**
    * B29 xJust Justificativa da entrada em contingência E B27.1 C 1-1 15 - 256 (v2.0)
    */
-  @RFWMetaStringField(caption = "Justificativa Entrada Contigência", minlength = 15, maxlength = 256, required = false)
+  @RFWMetaStringField(caption = "Justificativa Entrada Contigência", minlength = 15, maxLength = 256, required = false)
   private String xjust = null;
 
   /**

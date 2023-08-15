@@ -22,7 +22,7 @@ public class NFrefVO extends RFWVO {
    * BA02 refNFe Chave de acesso da NF-e referenciada CE BA01 N 1-1 44 <br>
    * Referencia uma NF-e (modelo 55) emitida anteriormente, vinculada a NF-e atual, ou uma NFC-e (modelo 65)
    */
-  @RFWMetaStringField(caption = "Chave Acesso NFe Referenciada", minlength = 44, maxlength = 44, required = false)
+  @RFWMetaStringField(caption = "Chave Acesso NFe Referenciada", minlength = 44, maxLength = 44, required = false)
   private String refNFe = null;
 
   /**
@@ -43,5 +43,85 @@ public class NFrefVO extends RFWVO {
    */
   @RFWMetaRelationshipField(caption = "Cupom Fiscal", relationship = RelationshipTypes.ASSOCIATION, required = false)
   private RefECFVO recECF = null;
+
+  /**
+   * # bA02 refNFe Chave de acesso da NF-e referenciada CE BA01 N 1-1 44 <br>
+   * Referencia uma NF-e (modelo 55) emitida anteriormente, vinculada a NF-e atual, ou uma NFC-e (modelo 65).
+   *
+   * @return # bA02 refNFe Chave de acesso da NF-e referenciada CE BA01 N 1-1 44 <br>
+   *         Referencia uma NF-e (modelo 55) emitida anteriormente, vinculada a NF-e atual, ou uma NFC-e (modelo 65)
+   */
+  public String getRefNFe() {
+    return refNFe;
+  }
+
+  /**
+   * # bA02 refNFe Chave de acesso da NF-e referenciada CE BA01 N 1-1 44 <br>
+   * Referencia uma NF-e (modelo 55) emitida anteriormente, vinculada a NF-e atual, ou uma NFC-e (modelo 65).
+   *
+   * @param refNFe # bA02 refNFe Chave de acesso da NF-e referenciada CE BA01 N 1-1 44 <br>
+   *          Referencia uma NF-e (modelo 55) emitida anteriormente, vinculada a NF-e atual, ou uma NFC-e (modelo 65)
+   */
+  public void setRefNFe(String refNFe) {
+    this.refNFe = refNFe;
+  }
+
+  /**
+   * # bA03 refNF Informação da NF modelo 1/1A ou NF modelo 2 referenciada (alterado pela NT2016.002) CG BA01 1-1.
+   *
+   * @return # bA03 refNF Informação da NF modelo 1/1A ou NF modelo 2 referenciada (alterado pela NT2016
+   */
+  public RefNFVO getRefNF() {
+    return refNF;
+  }
+
+  /**
+   * # bA03 refNF Informação da NF modelo 1/1A ou NF modelo 2 referenciada (alterado pela NT2016.002) CG BA01 1-1.
+   *
+   * @param refNF # bA03 refNF Informação da NF modelo 1/1A ou NF modelo 2 referenciada (alterado pela NT2016
+   */
+  public void setRefNF(RefNFVO refNF) {
+    this.refNF = refNF;
+  }
+
+  /**
+   * # bA10 refNFP Informações da NF de produtor rural referenciada CG BA01 1-1.
+   *
+   * @return # bA10 refNFP Informações da NF de produtor rural referenciada CG BA01 1-1
+   */
+  public RefNFPVO getRefNFP() {
+    return refNFP;
+  }
+
+  /**
+   * # bA10 refNFP Informações da NF de produtor rural referenciada CG BA01 1-1.
+   *
+   * @param refNFP # bA10 refNFP Informações da NF de produtor rural referenciada CG BA01 1-1
+   */
+  public void setRefNFP(RefNFPVO refNFP) {
+    this.refNFP = refNFP;
+  }
+
+  /**
+   * # bA20 refECF Informações do Cupom Fiscal referenciado CG BA01 1-1<br>
+   * Grupo do Cupom Fiscal vinculado à NF-e (v2.0).
+   *
+   * @return # bA20 refECF Informações do Cupom Fiscal referenciado CG BA01 1-1<br>
+   *         Grupo do Cupom Fiscal vinculado à NF-e (v2
+   */
+  public RefECFVO getRecECF() {
+    return recECF;
+  }
+
+  /**
+   * # bA20 refECF Informações do Cupom Fiscal referenciado CG BA01 1-1<br>
+   * Grupo do Cupom Fiscal vinculado à NF-e (v2.0).
+   *
+   * @param recECF # bA20 refECF Informações do Cupom Fiscal referenciado CG BA01 1-1<br>
+   *          Grupo do Cupom Fiscal vinculado à NF-e (v2
+   */
+  public void setRecECF(RefECFVO recECF) {
+    this.recECF = recECF;
+  }
 
 }

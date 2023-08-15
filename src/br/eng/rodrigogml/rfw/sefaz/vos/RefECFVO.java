@@ -22,7 +22,7 @@ public class RefECFVO extends RFWVO {
    * <li>01=modelo 01
    * <li>02=modelo 02 (incluído na NT2016.002)
    */
-  @RFWMetaStringField(caption = "Modelo do Documento Fiscal", minlength = 2, maxlength = 2, required = true, pattern = "^(01|02)$")
+  @RFWMetaStringField(caption = "Modelo do Documento Fiscal", minlength = 2, maxLength = 2, required = true, pattern = "^(01|02)$")
   private String mod = null;
 
   /**

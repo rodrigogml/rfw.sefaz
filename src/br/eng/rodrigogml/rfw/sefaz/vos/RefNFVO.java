@@ -29,7 +29,7 @@ public class RefNFVO extends RFWVO {
    * BA05 AAMM Ano e Mês de emissão da NF-e E BA03 N 1-1 4<br>
    * AAMM da emissão da NF
    */
-  @RFWMetaStringField(caption = "Ano e Mês de Emissão", minlength = 4, maxlength = 4, required = true, pattern = "\\d{4}")
+  @RFWMetaStringField(caption = "Ano e Mês de Emissão", minlength = 4, maxLength = 4, required = true, pattern = "\\d{4}")
   private String aamm = null;
 
   /**
@@ -44,7 +44,7 @@ public class RefNFVO extends RFWVO {
    * <li>01=modelo 01
    * <li>02=modelo 02 (incluído na NT2016.002)
    */
-  @RFWMetaStringField(caption = "Modelo do Documento Fiscal", minlength = 2, maxlength = 2, required = true, pattern = "^(01|02)$")
+  @RFWMetaStringField(caption = "Modelo do Documento Fiscal", minlength = 2, maxLength = 2, required = true, pattern = "^(01|02)$")
   private String mod = null;
 
   /**
