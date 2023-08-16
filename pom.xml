@@ -72,11 +72,6 @@
 			<artifactId>RFW.Kernel</artifactId>
 			<version>1.0</version>
 		</dependency>
-		<dependency>
-			<groupId>br.eng.rodrigogml.rfw</groupId>
-			<artifactId>RFW.Files</artifactId>
-			<version>1.0</version>
-		</dependency>
 
 	</dependencies>
 </project>
