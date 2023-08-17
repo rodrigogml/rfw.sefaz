@@ -79,7 +79,7 @@ public class EnderEmitVO extends RFWVO {
    * Brasil ou BRASIL
    */
   @RFWMetaStringField(caption = "Nome do País", minlength = 1, maxLength = 60, required = true, preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
-  private String xnome = null;
+  private String xpais = null;
 
   /**
    * C16 fone Telefone E C05 N 0-1 6 - 14<br>
@@ -249,28 +249,6 @@ public class EnderEmitVO extends RFWVO {
   }
 
   /**
-   * # c15 xPais Nome do País E C05 C 0-1 1 - 60<br>
-   * Brasil ou BRASIL.
-   *
-   * @return # c15 xPais Nome do País E C05 C 0-1 1 - 60<br>
-   *         Brasil ou BRASIL
-   */
-  public String getXnome() {
-    return xnome;
-  }
-
-  /**
-   * # c15 xPais Nome do País E C05 C 0-1 1 - 60<br>
-   * Brasil ou BRASIL.
-   *
-   * @param xnome # c15 xPais Nome do País E C05 C 0-1 1 - 60<br>
-   *          Brasil ou BRASIL
-   */
-  public void setXnome(String xnome) {
-    this.xnome = xnome;
-  }
-
-  /**
    * # c16 fone Telefone E C05 N 0-1 6 - 14<br>
    * Preencher com o Código DDD + número do telefone. Nas operações com exterior é permitido informar o código do país + código da localidade + número do telefone (v2.0).
    *
@@ -290,6 +268,28 @@ public class EnderEmitVO extends RFWVO {
    */
   public void setFone(String fone) {
     this.fone = fone;
+  }
+
+  /**
+   * # c15 xPais Nome do País E C05 C 0-1 1 - 60<br>
+   * Brasil ou BRASIL.
+   *
+   * @return # c15 xPais Nome do País E C05 C 0-1 1 - 60<br>
+   *         Brasil ou BRASIL
+   */
+  public String getXpais() {
+    return xpais;
+  }
+
+  /**
+   * # c15 xPais Nome do País E C05 C 0-1 1 - 60<br>
+   * Brasil ou BRASIL.
+   *
+   * @param xpais # c15 xPais Nome do País E C05 C 0-1 1 - 60<br>
+   *          Brasil ou BRASIL
+   */
+  public void setXpais(String xpais) {
+    this.xpais = xpais;
   }
 
 }

@@ -116,7 +116,7 @@ public class IdeVO extends RFWVO {
    * <li>3=Operação com exterior
    */
   @RFWMetaStringField(caption = "Destino da Operação", minlength = 1, maxLength = 1, required = true, pattern = "^(0|1|2)$")
-  private String idDist = null;
+  private String idDest = null;
 
   /**
    * B12 cMunFG Código do Município de Ocorrência do Fato Gerador E B01 N 1-1 7<br>
@@ -505,8 +505,8 @@ public class IdeVO extends RFWVO {
    *         <li>2=Operação interestadual;
    *         <li>3=Operação com exterior
    */
-  public String getIdDist() {
-    return idDist;
+  public String getIdDest() {
+    return idDest;
   }
 
   /**
@@ -515,13 +515,13 @@ public class IdeVO extends RFWVO {
    * <li>2=Operação interestadual;
    * <li>3=Operação com exterior.
    *
-   * @param idDist # b11a idDest Identificador de local de destino da operação E B01 N 1-1 1
+   * @param idDest # b11a idDest Identificador de local de destino da operação E B01 N 1-1 1
    *          <li>1=Operação interna;
    *          <li>2=Operação interestadual;
    *          <li>3=Operação com exterior
    */
-  public void setIdDist(String idDist) {
-    this.idDist = idDist;
+  public void setIdDest(String idDest) {
+    this.idDest = idDest;
   }
 
   public Integer getcMunFG() {

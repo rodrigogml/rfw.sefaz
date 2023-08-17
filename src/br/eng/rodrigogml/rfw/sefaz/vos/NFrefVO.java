@@ -42,7 +42,7 @@ public class NFrefVO extends RFWVO {
    * Grupo do Cupom Fiscal vinculado à NF-e (v2.0)
    */
   @RFWMetaRelationshipField(caption = "Cupom Fiscal", relationship = RelationshipTypes.COMPOSITION, required = false)
-  private RefECFVO recECF = null;
+  private RefECFVO refECF = null;
 
   /**
    * # bA02 refNFe Chave de acesso da NF-e referenciada CE BA01 N 1-1 44 <br>
@@ -109,19 +109,19 @@ public class NFrefVO extends RFWVO {
    * @return # bA20 refECF Informações do Cupom Fiscal referenciado CG BA01 1-1<br>
    *         Grupo do Cupom Fiscal vinculado à NF-e (v2
    */
-  public RefECFVO getRecECF() {
-    return recECF;
+  public RefECFVO getRefECF() {
+    return refECF;
   }
 
   /**
    * # bA20 refECF Informações do Cupom Fiscal referenciado CG BA01 1-1<br>
    * Grupo do Cupom Fiscal vinculado à NF-e (v2.0).
    *
-   * @param recECF # bA20 refECF Informações do Cupom Fiscal referenciado CG BA01 1-1<br>
+   * @param refECF # bA20 refECF Informações do Cupom Fiscal referenciado CG BA01 1-1<br>
    *          Grupo do Cupom Fiscal vinculado à NF-e (v2
    */
-  public void setRecECF(RefECFVO recECF) {
-    this.recECF = recECF;
+  public void setRefECF(RefECFVO refECF) {
+    this.refECF = refECF;
   }
 
 }

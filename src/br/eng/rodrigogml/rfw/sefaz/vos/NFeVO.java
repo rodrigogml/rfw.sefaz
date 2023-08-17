@@ -18,33 +18,33 @@ public class NFeVO extends RFWVO {
   private static final long serialVersionUID = 2120555035105610040L;
 
   /**
-   * A01 infNFeVO Informações da NF-e G Raiz - 1-1 Grupo que contém as informações da NF-e
+   * A01 infNFe Informações da NF-e G Raiz - 1-1 Grupo que contém as informações da NF-e
    */
   @RFWMetaRelationshipField(caption = "Informações da NF-e", relationship = RelationshipTypes.COMPOSITION, required = true)
-  private InfNFeVO infNFeVO = null;
+  private InfNFeVO infNFe = null;
 
   /**
    * B01 ide Informações de identificação da NF-e G A01 1-1
    */
   @RFWMetaRelationshipField(caption = "Informações de identificação da NF-e", relationship = RelationshipTypes.COMPOSITION, required = true)
-  private IdeVO ideVO = null;
+  private IdeVO ide = null;
 
   /**
-   * # a01 infNFeVO Informações da NF-e G Raiz - 1-1 Grupo que contém as informações da NF-e.
+   * # a01 infNFe Informações da NF-e G Raiz - 1-1 Grupo que contém as informações da NF-e.
    *
-   * @return # a01 infNFeVO Informações da NF-e G Raiz - 1-1 Grupo que contém as informações da NF-e
+   * @return # a01 infNFe Informações da NF-e G Raiz - 1-1 Grupo que contém as informações da NF-e
    */
-  public InfNFeVO getInfNFeVO() {
-    return infNFeVO;
+  public InfNFeVO getInfNFe() {
+    return infNFe;
   }
 
   /**
-   * # a01 infNFeVO Informações da NF-e G Raiz - 1-1 Grupo que contém as informações da NF-e.
+   * # a01 infNFe Informações da NF-e G Raiz - 1-1 Grupo que contém as informações da NF-e.
    *
-   * @param infNFeVO # a01 infNFeVO Informações da NF-e G Raiz - 1-1 Grupo que contém as informações da NF-e
+   * @param infNFe # a01 infNFe Informações da NF-e G Raiz - 1-1 Grupo que contém as informações da NF-e
    */
-  public void setInfNFeVO(InfNFeVO infNFeVO) {
-    this.infNFeVO = infNFeVO;
+  public void setInfNFe(InfNFeVO infNFeVO) {
+    this.infNFe = infNFeVO;
   }
 
   /**
@@ -52,17 +52,17 @@ public class NFeVO extends RFWVO {
    *
    * @return # b01 ide Informações de identificação da NF-e G A01 1-1
    */
-  public IdeVO getIdeVO() {
-    return ideVO;
+  public IdeVO getIde() {
+    return ide;
   }
 
   /**
    * # b01 ide Informações de identificação da NF-e G A01 1-1.
    *
-   * @param ideVO # b01 ide Informações de identificação da NF-e G A01 1-1
+   * @param ide # b01 ide Informações de identificação da NF-e G A01 1-1
    */
-  public void setIdeVO(IdeVO ideVO) {
-    this.ideVO = ideVO;
+  public void setIde(IdeVO ideVO) {
+    this.ide = ideVO;
   }
 
 }

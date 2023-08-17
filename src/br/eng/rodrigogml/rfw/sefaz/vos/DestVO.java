@@ -309,4 +309,22 @@ public class DestVO extends RFWVO {
     this.email = email;
   }
 
+  /**
+   * # e05 enderDest Endereço do Destinatário da NF-e G E01 0 -1 Grupo Obrig.atório para a NF-e (modelo 55).
+   *
+   * @return # e05 enderDest Endereço do Destinatário da NF-e G E01 0 -1 Grupo Obrig
+   */
+  public EnderDestVO getEnderDest() {
+    return enderDest;
+  }
+
+  /**
+   * # e05 enderDest Endereço do Destinatário da NF-e G E01 0 -1 Grupo Obrig.atório para a NF-e (modelo 55).
+   *
+   * @param enderDest # e05 enderDest Endereço do Destinatário da NF-e G E01 0 -1 Grupo Obrig
+   */
+  public void setEnderDest(EnderDestVO enderDest) {
+    this.enderDest = enderDest;
+  }
+
 }
