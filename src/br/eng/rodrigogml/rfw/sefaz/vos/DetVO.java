@@ -3,6 +3,7 @@ package br.eng.rodrigogml.rfw.sefaz.vos;
 import br.eng.rodrigogml.rfw.kernel.rfwmeta.RFWMetaIntegerField;
 import br.eng.rodrigogml.rfw.kernel.rfwmeta.RFWMetaRelationshipField;
 import br.eng.rodrigogml.rfw.kernel.rfwmeta.RFWMetaRelationshipField.RelationshipTypes;
+import br.eng.rodrigogml.rfw.kernel.rfwmeta.RFWMetaStringField;
 import br.eng.rodrigogml.rfw.kernel.vo.RFWVO;
 
 /**
@@ -28,15 +29,29 @@ public class DetVO extends RFWVO {
   /**
    * I01 prod Detalhamento de Produtos e Serviços G H01 1-1
    */
-  @RFWMetaRelationshipField(caption = "Detalhamento de Produtos e Serviços", required = true, relationship = RelationshipTypes.ASSOCIATION)
+  @RFWMetaRelationshipField(caption = "Detalhamento de Produtos e Serviços", required = true, relationship = RelationshipTypes.COMPOSITION)
   private ProdVO prod = null;
 
   /**
    * M01 imposto Tributos incidentes no Produto ou Serviço G H01 1-1<br>
    * Grupo ISSQN mutuamente exclusivo com os grupos ICMS e II, isto é, se o grupo ISSQN for informado os grupos ICMS e II não serão informados e vice-versa.
    */
-  @RFWMetaRelationshipField(caption = "Tributos Incidentes no Produto/Serviço", required = true, relationship = RelationshipTypes.ASSOCIATION)
+  @RFWMetaRelationshipField(caption = "Tributos Incidentes no Produto/Serviço", required = true, relationship = RelationshipTypes.COMPOSITION)
   private ImpostoVO imposto = null;
+
+  /**
+   * UA01 impostoDevol Informação do Imposto devolvido G H01 0-1<br>
+   * Observação: O motivo da devolução deverá ser informado pela empresa no campo de Informações Adicionais do Produto (tag:infAdProd).
+   */
+  @RFWMetaRelationshipField(caption = "Informação do Imposto Devolvido", required = true, relationship = RelationshipTypes.COMPOSITION)
+  private ImpostoDevolVO impostoDevol = null;
+
+  /**
+   * V01 infAdProd Informações Adicionais do Produto E H01 C 0-1 1-500<br>
+   * Norma referenciada, informações complementares, etc.
+   */
+  @RFWMetaStringField(caption = "Informações Adicionais do Produto", minlength = 1, maxLength = 500, required = false)
+  private String infAddProd = null;
 
   /**
    * # h02 nItem Número do item A H01 N 1-1 1 - 3<br>
@@ -98,6 +113,50 @@ public class DetVO extends RFWVO {
    */
   public void setImposto(ImpostoVO imposto) {
     this.imposto = imposto;
+  }
+
+  /**
+   * # uA01 impostoDevol Informação do Imposto devolvido G H01 0-1<br>
+   * Observação: O motivo da devolução deverá ser informado pela empresa no campo de Informações Adicionais do Produto (tag:infAdProd).
+   *
+   * @return # uA01 impostoDevol Informação do Imposto devolvido G H01 0-1<br>
+   *         Observação: O motivo da devolução deverá ser informado pela empresa no campo de Informações Adicionais do Produto (tag:infAdProd)
+   */
+  public ImpostoDevolVO getImpostoDevol() {
+    return impostoDevol;
+  }
+
+  /**
+   * # uA01 impostoDevol Informação do Imposto devolvido G H01 0-1<br>
+   * Observação: O motivo da devolução deverá ser informado pela empresa no campo de Informações Adicionais do Produto (tag:infAdProd).
+   *
+   * @param impostoDevol # uA01 impostoDevol Informação do Imposto devolvido G H01 0-1<br>
+   *          Observação: O motivo da devolução deverá ser informado pela empresa no campo de Informações Adicionais do Produto (tag:infAdProd)
+   */
+  public void setImpostoDevol(ImpostoDevolVO impostoDevol) {
+    this.impostoDevol = impostoDevol;
+  }
+
+  /**
+   * # v01 infAdProd Informações Adicionais do Produto E H01 C 0-1 1-500<br>
+   * Norma referenciada, informações complementares, etc.
+   *
+   * @return # v01 infAdProd Informações Adicionais do Produto E H01 C 0-1 1-500<br>
+   *         Norma referenciada, informações complementares, etc
+   */
+  public String getInfAddProd() {
+    return infAddProd;
+  }
+
+  /**
+   * # v01 infAdProd Informações Adicionais do Produto E H01 C 0-1 1-500<br>
+   * Norma referenciada, informações complementares, etc.
+   *
+   * @param infAddProd # v01 infAdProd Informações Adicionais do Produto E H01 C 0-1 1-500<br>
+   *          Norma referenciada, informações complementares, etc
+   */
+  public void setInfAddProd(String infAddProd) {
+    this.infAddProd = infAddProd;
   }
 
 }

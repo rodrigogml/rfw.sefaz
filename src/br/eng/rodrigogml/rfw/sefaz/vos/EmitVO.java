@@ -25,7 +25,7 @@ public class EmitVO extends RFWVO {
   /**
    * C05 enderEmit Endereço do emitente G C01 1-1
    */
-  @RFWMetaRelationshipField(caption = "Endereço do Emitente", required = true, relationship = RelationshipTypes.ASSOCIATION)
+  @RFWMetaRelationshipField(caption = "Endereço do Emitente", required = true, relationship = RelationshipTypes.COMPOSITION)
   private EnderEmitVO enderEmit = null;
 
   /**

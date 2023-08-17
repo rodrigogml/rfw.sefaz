@@ -28,20 +28,20 @@ public class NFrefVO extends RFWVO {
   /**
    * BA03 refNF Informação da NF modelo 1/1A ou NF modelo 2 referenciada (alterado pela NT2016.002) CG BA01 1-1
    */
-  @RFWMetaRelationshipField(caption = "NF modelo 1/1A ou 2", relationship = RelationshipTypes.ASSOCIATION, required = false)
+  @RFWMetaRelationshipField(caption = "NF modelo 1/1A ou 2", relationship = RelationshipTypes.COMPOSITION, required = false)
   private RefNFVO refNF = null;
 
   /**
    * BA10 refNFP Informações da NF de produtor rural referenciada CG BA01 1-1
    */
-  @RFWMetaRelationshipField(caption = "NF Produtor Rural", relationship = RelationshipTypes.ASSOCIATION, required = false)
+  @RFWMetaRelationshipField(caption = "NF Produtor Rural", relationship = RelationshipTypes.COMPOSITION, required = false)
   private RefNFPVO refNFP = null;
 
   /**
    * BA20 refECF Informações do Cupom Fiscal referenciado CG BA01 1-1<br>
    * Grupo do Cupom Fiscal vinculado à NF-e (v2.0)
    */
-  @RFWMetaRelationshipField(caption = "Cupom Fiscal", relationship = RelationshipTypes.ASSOCIATION, required = false)
+  @RFWMetaRelationshipField(caption = "Cupom Fiscal", relationship = RelationshipTypes.COMPOSITION, required = false)
   private RefECFVO recECF = null;
 
   /**

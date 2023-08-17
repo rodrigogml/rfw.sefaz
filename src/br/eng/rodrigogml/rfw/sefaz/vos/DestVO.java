@@ -25,7 +25,7 @@ public class DestVO extends RFWVO {
   /**
    * E05 enderDest Endereço do Destinatário da NF-e G E01 0 -1 Grupo Obrig.atório para a NF-e (modelo 55).
    */
-  @RFWMetaRelationshipField(caption = "Endereço do Destinatário", required = false, relationship = RelationshipTypes.ASSOCIATION)
+  @RFWMetaRelationshipField(caption = "Endereço do Destinatário", required = false, relationship = RelationshipTypes.COMPOSITION)
   private EnderDestVO enderDest = null;
 
   /**

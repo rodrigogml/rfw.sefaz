@@ -243,7 +243,7 @@ public class IdeVO extends RFWVO {
    * BA01 NFref Informação de Documentos Fiscais referenciados G B01 0-500<br>
    * Grupo com informações de Documentos Fiscais referenciados. Informação utilizada nas hipóteses previstas na legislação. (Ex.: Devolução de mercadorias, Substituição de NF cancelada, Complementação de NF, etc.).
    */
-  @RFWMetaRelationshipField(caption = "Documentos Referenciados", relationship = RelationshipTypes.ASSOCIATION, required = false, targetRelationship = NFrefVO.class)
+  @RFWMetaRelationshipField(caption = "Documentos Referenciados", relationship = RelationshipTypes.COMPOSITION, required = false, targetRelationship = NFrefVO.class)
   private List<NFrefVO> nfref = null;
 
   /**
