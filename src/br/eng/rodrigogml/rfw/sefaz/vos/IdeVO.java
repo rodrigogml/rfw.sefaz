@@ -98,7 +98,7 @@ public class IdeVO extends RFWVO {
    * Data e hora no formato UTC (Universal Coordinated Time): AAAA-MM-DDThh:mm:ssTZD. <br>
    * Observação: Não informar este campo para a NFC-e.
    */
-  @RFWMetaDateField(caption = "Data e Hora Entrada/Saída", required = true, resolution = DateResolution.SECOND)
+  @RFWMetaDateField(caption = "Data e Hora Entrada/Saída", required = false, resolution = DateResolution.SECOND)
   private LocalDateTime dhSaiEnt = null;
 
   /**
@@ -123,7 +123,7 @@ public class IdeVO extends RFWVO {
    * Informar o município de ocorrência do fato gerador do ICMS. Utilizar a Tabela do IBGE (Seção 8.2 do MOC – Visão Geral, Tabela de UF, Município e País)
    */
   @RFWMetaIntegerField(caption = "Código do Município do Fato Gerador", minvalue = 0, maxvalue = 9999999, required = true)
-  private Integer cMunFG = null;
+  private Integer cmunFG = null;
 
   /**
    * B21 tpImp Formato de Impressão do DANFE E B01 N 1-1 1
@@ -149,7 +149,7 @@ public class IdeVO extends RFWVO {
    * Observação: Para a NFC-e somente é válida a opção de contingência: 9-Contingência Off-Line e, a critério da UF, opção 4-Contingência EPEC. (NT 2015/002)
    *
    */
-  @RFWMetaStringField(caption = "Tipo de Emissão", minlength = 1, maxLength = 1, required = true, pattern = "^(1|2|3|4|5|7|9)$")
+  @RFWMetaStringField(caption = "Tipo de Emissão", minlength = 1, maxLength = 1, required = true, pattern = "^(1|2|3|4|5|6|7|9)$")
   private String tpEmis = null;
 
   /**
@@ -522,14 +522,6 @@ public class IdeVO extends RFWVO {
    */
   public void setIdDest(String idDest) {
     this.idDest = idDest;
-  }
-
-  public Integer getcMunFG() {
-    return cMunFG;
-  }
-
-  public void setcMunFG(Integer cMunFG) {
-    this.cMunFG = cMunFG;
   }
 
   /**
@@ -926,6 +918,28 @@ public class IdeVO extends RFWVO {
    */
   public void setNfref(List<NFrefVO> nfref) {
     this.nfref = nfref;
+  }
+
+  /**
+   * # b12 cMunFG Código do Município de Ocorrência do Fato Gerador E B01 N 1-1 7<br>
+   * Informar o município de ocorrência do fato gerador do ICMS. Utilizar a Tabela do IBGE (Seção 8.2 do MOC – Visão Geral, Tabela de UF, Município e País).
+   *
+   * @return # b12 cMunFG Código do Município de Ocorrência do Fato Gerador E B01 N 1-1 7<br>
+   *         Informar o município de ocorrência do fato gerador do ICMS
+   */
+  public Integer getCmunFG() {
+    return cmunFG;
+  }
+
+  /**
+   * # b12 cMunFG Código do Município de Ocorrência do Fato Gerador E B01 N 1-1 7<br>
+   * Informar o município de ocorrência do fato gerador do ICMS. Utilizar a Tabela do IBGE (Seção 8.2 do MOC – Visão Geral, Tabela de UF, Município e País).
+   *
+   * @param cmunFG # b12 cMunFG Código do Município de Ocorrência do Fato Gerador E B01 N 1-1 7<br>
+   *          Informar o município de ocorrência do fato gerador do ICMS
+   */
+  public void setCmunFG(Integer cmunFG) {
+    this.cmunFG = cmunFG;
   }
 
 }

@@ -43,7 +43,7 @@ public class DetVO extends RFWVO {
    * UA01 impostoDevol Informação do Imposto devolvido G H01 0-1<br>
    * Observação: O motivo da devolução deverá ser informado pela empresa no campo de Informações Adicionais do Produto (tag:infAdProd).
    */
-  @RFWMetaRelationshipField(caption = "Informação do Imposto Devolvido", required = true, relationship = RelationshipTypes.COMPOSITION)
+  @RFWMetaRelationshipField(caption = "Informação do Imposto Devolvido", required = false, relationship = RelationshipTypes.COMPOSITION)
   private ImpostoDevolVO impostoDevol = null;
 
   /**

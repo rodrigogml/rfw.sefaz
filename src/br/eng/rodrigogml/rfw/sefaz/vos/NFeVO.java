@@ -24,12 +24,6 @@ public class NFeVO extends RFWVO {
   private InfNFeVO infNFe = null;
 
   /**
-   * B01 ide Informações de identificação da NF-e G A01 1-1
-   */
-  @RFWMetaRelationshipField(caption = "Informações de identificação da NF-e", relationship = RelationshipTypes.COMPOSITION, required = true)
-  private IdeVO ide = null;
-
-  /**
    * # a01 infNFe Informações da NF-e G Raiz - 1-1 Grupo que contém as informações da NF-e.
    *
    * @return # a01 infNFe Informações da NF-e G Raiz - 1-1 Grupo que contém as informações da NF-e
@@ -45,24 +39,6 @@ public class NFeVO extends RFWVO {
    */
   public void setInfNFe(InfNFeVO infNFeVO) {
     this.infNFe = infNFeVO;
-  }
-
-  /**
-   * # b01 ide Informações de identificação da NF-e G A01 1-1.
-   *
-   * @return # b01 ide Informações de identificação da NF-e G A01 1-1
-   */
-  public IdeVO getIde() {
-    return ide;
-  }
-
-  /**
-   * # b01 ide Informações de identificação da NF-e G A01 1-1.
-   *
-   * @param ide # b01 ide Informações de identificação da NF-e G A01 1-1
-   */
-  public void setIde(IdeVO ideVO) {
-    this.ide = ideVO;
   }
 
 }

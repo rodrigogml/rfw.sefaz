@@ -43,7 +43,7 @@ public class DupVO extends RFWVO {
    * Y10 vDup Valor da Parcela E Y07 N 1-1 13v2<br>
    * (NT 2012/003)
    */
-  @RFWMetaBigDecimalField(caption = "Valor da Parcela", minValue = "0", maxValue = "9999999999999.99", required = true)
+  @RFWMetaBigDecimalField(caption = "Valor da Parcela", minValue = "0", maxValue = "9999999999999.99", scale = 0, scaleMax = 2, required = true)
   private BigDecimal vdup = null;
 
   /**

@@ -69,7 +69,7 @@ public class PISVO extends RFWVO {
    * <br>
    * Q07 vBC Valor da Base de Cálculo do PIS E Q06.1 N 1-1 13v2
    */
-  @RFWMetaBigDecimalField(caption = "Valor da Base de Cálculo", minValue = "0", maxValue = "9999999999999.99", scale = 2, required = false)
+  @RFWMetaBigDecimalField(caption = "Valor da Base de Cálculo", minValue = "0", maxValue = "9999999999999.99", scale = 0, scaleMax = 2, required = false)
   private BigDecimal vbc = null;
 
   /**
@@ -77,7 +77,7 @@ public class PISVO extends RFWVO {
    * <br>
    * Q08 pPIS Alíquota do PIS (em percentual) E Q06.1 N 1-1 3v2-4
    */
-  @RFWMetaBigDecimalField(caption = "Alíquota(%)", minValue = "0", maxValue = "999.9999", scale = 2, scaleMax = 4, required = false)
+  @RFWMetaBigDecimalField(caption = "Alíquota(%)", minValue = "0", maxValue = "999.9999", scale = 0, scaleMax = 4, required = false)
   private BigDecimal ppis = null;
 
   /**
@@ -85,7 +85,7 @@ public class PISVO extends RFWVO {
    * <br>
    * Q09 vPIS Valor do PIS E Q03 N 1-1 13v2
    */
-  @RFWMetaBigDecimalField(caption = "Valor", minValue = "0", maxValue = "9999999999999.99", scale = 2, required = false)
+  @RFWMetaBigDecimalField(caption = "Valor", minValue = "0", maxValue = "9999999999999.99", scale = 0, scaleMax = 2, required = false)
   private BigDecimal vpis = null;
 
   /**

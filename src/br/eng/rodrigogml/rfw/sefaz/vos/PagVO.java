@@ -1,5 +1,9 @@
 package br.eng.rodrigogml.rfw.sefaz.vos;
 
+import java.math.BigDecimal;
+import java.util.List;
+
+import br.eng.rodrigogml.rfw.kernel.rfwmeta.RFWMetaBigDecimalField;
 import br.eng.rodrigogml.rfw.kernel.rfwmeta.RFWMetaRelationshipField;
 import br.eng.rodrigogml.rfw.kernel.rfwmeta.RFWMetaRelationshipField.RelationshipTypes;
 import br.eng.rodrigogml.rfw.kernel.vo.RFWVO;
@@ -21,14 +25,21 @@ public class PagVO extends RFWVO {
    * YA01a detPag Grupo Detalhamento do Pagamento G YA01 1-100
    */
   @RFWMetaRelationshipField(caption = "Grupo Detalhemento do Pagamento", minSize = 1, required = true, relationship = RelationshipTypes.COMPOSITION)
-  private DetPagVO detPag = null;
+  private List<DetPagVO> detPag = null;
+
+  /**
+   * YA09 vTroco Valor do troco E YA01 N 0-1 13v2<bR>
+   * Valor do troco (Incluído na NT2016.002)
+   */
+  @RFWMetaBigDecimalField(caption = "Troco", minValue = "0", maxValue = "9999999999999.99", scale = 0, scaleMax = 2, required = false)
+  private BigDecimal vtroco = null;
 
   /**
    * # yA01a detPag Grupo Detalhamento do Pagamento G YA01 1-100.
    *
    * @return # yA01a detPag Grupo Detalhamento do Pagamento G YA01 1-100
    */
-  public DetPagVO getDetPag() {
+  public List<DetPagVO> getDetPag() {
     return detPag;
   }
 
@@ -37,8 +48,30 @@ public class PagVO extends RFWVO {
    *
    * @param detPag # yA01a detPag Grupo Detalhamento do Pagamento G YA01 1-100
    */
-  public void setDetPag(DetPagVO detPag) {
+  public void setDetPag(List<DetPagVO> detPag) {
     this.detPag = detPag;
+  }
+
+  /**
+   * # yA09 vTroco Valor do troco E YA01 N 0-1 13v2<bR>
+   * Valor do troco (Incluído na NT2016.002).
+   *
+   * @return # yA09 vTroco Valor do troco E YA01 N 0-1 13v2<bR>
+   *         Valor do troco (Incluído na NT2016
+   */
+  public BigDecimal getVtroco() {
+    return vtroco;
+  }
+
+  /**
+   * # yA09 vTroco Valor do troco E YA01 N 0-1 13v2<bR>
+   * Valor do troco (Incluído na NT2016.002).
+   *
+   * @param vtroco # yA09 vTroco Valor do troco E YA01 N 0-1 13v2<bR>
+   *          Valor do troco (Incluído na NT2016
+   */
+  public void setVtroco(BigDecimal vtroco) {
+    this.vtroco = vtroco;
   }
 
 }

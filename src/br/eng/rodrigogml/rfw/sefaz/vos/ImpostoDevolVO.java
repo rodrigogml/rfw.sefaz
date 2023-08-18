@@ -27,7 +27,7 @@ public class ImpostoDevolVO extends RFWVO {
   /**
    * UA04 vIPIDevol Valor do IPI devolvido E UA03 N 1-1 13v2
    */
-  @RFWMetaBigDecimalField(caption = "Valor do IPI Devolvido", minValue = "0", maxValue = "9999999999999.99", scale = 2, required = true)
+  @RFWMetaBigDecimalField(caption = "Valor do IPI Devolvido", minValue = "0", maxValue = "9999999999999.99", scale = 0, scaleMax = 2, required = true)
   private BigDecimal vipiDevol = null;
 
   /**

@@ -75,7 +75,7 @@ public class InfNFeVO extends RFWVO {
   /**
    * Y01 cobr Grupo Cobrança G A01 0-1
    */
-  @RFWMetaRelationshipField(caption = "Grupo Cobrança", required = true, relationship = RelationshipTypes.COMPOSITION)
+  @RFWMetaRelationshipField(caption = "Grupo Cobrança", required = false, relationship = RelationshipTypes.COMPOSITION)
   private CobrVO cobr = null;
 
   /**

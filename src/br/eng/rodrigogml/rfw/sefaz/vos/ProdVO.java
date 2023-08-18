@@ -56,7 +56,7 @@ public class ProdVO extends RFWVO {
    * Campo CEST (Código Especificador da Substituição Tributária), que estabelece a sistemática de uniformização e identificação das mercadorias e bens passíveis de sujeição aos regimes de substituição tributária e de antecipação de recolhimento do ICMS. <BR>
    * (Incluído na NT 2015/003. Atualizado NT2016.002)
    */
-  @RFWMetaStringField(caption = "CEST", minlength = 7, maxLength = 7, required = true, pattern = "\\d{7}")
+  @RFWMetaStringField(caption = "CEST", minlength = 7, maxLength = 7, required = false, pattern = "\\d{7}")
   private String cest = null;
 
   /**
@@ -117,7 +117,7 @@ public class ProdVO extends RFWVO {
    * I11 vProd Valor Total Bruto dos Produtos ou Serviços. E I01 N 1-1 13v2<br>
    * O valor do ICMS faz parte do Valor Total Bruto
    */
-  @RFWMetaBigDecimalField(caption = "Valor Total Bruto dos Produtos ou Serviços", minValue = "0", maxValue = "9999999999999.99", scale = 2, required = true)
+  @RFWMetaBigDecimalField(caption = "Valor Total Bruto dos Produtos ou Serviços", minValue = "0", maxValue = "9999999999999.99", scale = 0, scaleMax = 2, required = true)
   private BigDecimal vprod = null;
 
   /**
@@ -127,7 +127,7 @@ public class ProdVO extends RFWVO {
    * Para produtos que não possuem código de barras com GTIN, deve ser informado o literal "SEM GTIN”; <br>
    * (Atualizado NT 2017.001)
    */
-  @RFWMetaStringField(caption = "EAN/GTIN da Unidade Tributável", minlength = 0, maxLength = 14, pattern = "\\d*", required = true)
+  @RFWMetaStringField(caption = "EAN/GTIN da Unidade Tributável", minlength = 0, maxLength = 14, pattern = "(SEM GTIN|\\d*)", required = true)
   private String ceanTrib = null;
 
   /**
@@ -141,7 +141,7 @@ public class ProdVO extends RFWVO {
    * O GTIN da unidade tributável deve corresponder àquele da menor unidade comercializável identificada por código GTIN.
    */
   @RFWMetaBigDecimalField(caption = "Quantidade Tributável", minValue = "0", maxValue = "99999999999.9999", scale = 0, scaleMax = 4, required = true)
-  private BigDecimal qTrib = null;
+  private BigDecimal qtrib = null;
 
   /**
    * I14a vUnTrib Valor Unitário de tributação E I01 N 1-1 11v0-10
@@ -154,25 +154,25 @@ public class ProdVO extends RFWVO {
    * Para produtos que não possuem código de barras com GTIN, deve ser informado o literal "SEM GTIN”;<br>
    * <b>A linha de descrição acima foi tirada do manual da NFe, porem acredito que seja um erro, pois o campo é do tipo numérico.</b>
    */
-  @RFWMetaBigDecimalField(caption = "Valor Total do Frete", minValue = "0", maxValue = "9999999999999.99", scale = 2, required = false)
+  @RFWMetaBigDecimalField(caption = "Valor Total do Frete", minValue = "0", maxValue = "9999999999999.99", scale = 0, scaleMax = 2, required = false)
   private BigDecimal vfrete = null;
 
   /**
    * I16 vSeg Valor Total do Seguro E I01 N 0-1 13v2
    */
-  @RFWMetaBigDecimalField(caption = "Valor Total do Seguro", minValue = "0", maxValue = "9999999999999.99", scale = 2, required = false)
+  @RFWMetaBigDecimalField(caption = "Valor Total do Seguro", minValue = "0", maxValue = "9999999999999.99", scale = 0, scaleMax = 2, required = false)
   private BigDecimal vseg = null;
 
   /**
    * I17 vDesc Valor do Desconto E I01 N 0-1 13v2
    */
-  @RFWMetaBigDecimalField(caption = "Valor do Desconto", minValue = "0", maxValue = "9999999999999.99", scale = 2, required = false)
+  @RFWMetaBigDecimalField(caption = "Valor do Desconto", minValue = "0", maxValue = "9999999999999.99", scale = 0, scaleMax = 2, required = false)
   private BigDecimal vdesc = null;
 
   /**
    * I17a vOutro Outras despesas acessórias E I01 N 0-1 13v2 (v2.0)
    */
-  @RFWMetaBigDecimalField(caption = "Outras Despesas Acessórias", minValue = "0", maxValue = "9999999999999.99", scale = 2, required = false)
+  @RFWMetaBigDecimalField(caption = "Outras Despesas Acessórias", minValue = "0", maxValue = "9999999999999.99", scale = 0, scaleMax = 2, required = false)
   private BigDecimal voutro = null;
 
   /**
@@ -533,14 +533,6 @@ public class ProdVO extends RFWVO {
     this.utrib = utrib;
   }
 
-  public BigDecimal getqTrib() {
-    return qTrib;
-  }
-
-  public void setqTrib(BigDecimal qTrib) {
-    this.qTrib = qTrib;
-  }
-
   /**
    * # i14a vUnTrib Valor Unitário de tributação E I01 N 1-1 11v0-10.
    *
@@ -663,6 +655,28 @@ public class ProdVO extends RFWVO {
    */
   public void setIndTot(String indTot) {
     this.indTot = indTot;
+  }
+
+  /**
+   * # i14 qTrib Quantidade Tributável E I01 N 1-1 11v0-4<br>
+   * O GTIN da unidade tributável deve corresponder àquele da menor unidade comercializável identificada por código GTIN.
+   *
+   * @return # i14 qTrib Quantidade Tributável E I01 N 1-1 11v0-4<br>
+   *         O GTIN da unidade tributável deve corresponder àquele da menor unidade comercializável identificada por código GTIN
+   */
+  public BigDecimal getQtrib() {
+    return qtrib;
+  }
+
+  /**
+   * # i14 qTrib Quantidade Tributável E I01 N 1-1 11v0-4<br>
+   * O GTIN da unidade tributável deve corresponder àquele da menor unidade comercializável identificada por código GTIN.
+   *
+   * @param qtrib # i14 qTrib Quantidade Tributável E I01 N 1-1 11v0-4<br>
+   *          O GTIN da unidade tributável deve corresponder àquele da menor unidade comercializável identificada por código GTIN
+   */
+  public void setQtrib(BigDecimal qtrib) {
+    this.qtrib = qtrib;
   }
 
 }

@@ -31,7 +31,7 @@ public class ProtNFeVO extends RFWVO {
    * <br>
    * <b>Note que este atributo no XML é "id", mas foi chamado de idAttribute para evitar o conflito com o ID herdado de {@link RFWVO}
    */
-  @RFWMetaStringField(caption = "Id", maxLength = 47, minlength = 47, required = true, pattern = "NFe[0-9]{44}")
+  @RFWMetaStringField(caption = "Id", minlength = 0, maxLength = 47, required = false)
   private String idAttribute = null;
 
   /**

@@ -22,7 +22,7 @@ public class EnderEmitVO extends RFWVO {
    * C06 xLgr Logradouro E C05 C 1-1 2 - 60
    */
   @RFWMetaStringField(caption = "Logaradouro", minlength = 2, maxLength = 60, required = true, preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
-  private String xLgr = null;
+  private String xlgr = null;
 
   /**
    * C07 nro Número E C05 C 1-1 1 - 60
@@ -78,7 +78,7 @@ public class EnderEmitVO extends RFWVO {
    * C15 xPais Nome do País E C05 C 0-1 1 - 60<br>
    * Brasil ou BRASIL
    */
-  @RFWMetaStringField(caption = "Nome do País", minlength = 1, maxLength = 60, required = true, preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
+  @RFWMetaStringField(caption = "Nome do País", minlength = 1, maxLength = 60, required = false, preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
   private String xpais = null;
 
   /**
@@ -87,14 +87,6 @@ public class EnderEmitVO extends RFWVO {
    */
   @RFWMetaStringField(caption = "Telefone", minlength = 6, maxLength = 14, required = false, pattern = "\\d{6,14}")
   private String fone = null;
-
-  public String getxLgr() {
-    return xLgr;
-  }
-
-  public void setxLgr(String xLgr) {
-    this.xLgr = xLgr;
-  }
 
   /**
    * # c07 nro Número E C05 C 1-1 1 - 60.
@@ -290,6 +282,24 @@ public class EnderEmitVO extends RFWVO {
    */
   public void setXpais(String xpais) {
     this.xpais = xpais;
+  }
+
+  /**
+   * # c06 xLgr Logradouro E C05 C 1-1 2 - 60.
+   *
+   * @return # c06 xLgr Logradouro E C05 C 1-1 2 - 60
+   */
+  public String getXlgr() {
+    return xlgr;
+  }
+
+  /**
+   * # c06 xLgr Logradouro E C05 C 1-1 2 - 60.
+   *
+   * @param xlgr # c06 xLgr Logradouro E C05 C 1-1 2 - 60
+   */
+  public void setXlgr(String xlgr) {
+    this.xlgr = xlgr;
   }
 
 }

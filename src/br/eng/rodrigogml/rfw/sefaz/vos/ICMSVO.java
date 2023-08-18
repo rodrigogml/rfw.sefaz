@@ -231,7 +231,7 @@ public class ICMSVO extends RFWVO {
    * <li>2=Preço Tabelado Máx. (valor);
    * <li>3=Valor da operação.
    */
-  @RFWMetaStringField(caption = "Modalidade de BC do ICMS", minlength = 1, maxLength = 1, required = true, pattern = "^(0|1|2|3)$")
+  @RFWMetaStringField(caption = "Modalidade de BC do ICMS", minlength = 1, maxLength = 1, required = false, pattern = "^(0|1|2|3)$")
   private String modBC = null;
 
   /**
@@ -261,7 +261,7 @@ public class ICMSVO extends RFWVO {
    * N15 vBC Valor da BC do ICMS E N12.1 N 1-1 13v2<br>
    * (v2.0)
    */
-  @RFWMetaBigDecimalField(caption = "Valor BC do ICMS", minValue = "0", maxValue = "9999999999999.99", required = false, scale = 2)
+  @RFWMetaBigDecimalField(caption = "Valor BC do ICMS", minValue = "0", maxValue = "9999999999999.99", scale = 0, scaleMax = 2, required = false)
   private BigDecimal vbc = null;
 
   /**
@@ -297,7 +297,7 @@ public class ICMSVO extends RFWVO {
    * N16 pICMS Alíquota do imposto E N12.1 N 1-1 3v2-4<br>
    * (v2.0)
    */
-  @RFWMetaBigDecimalField(caption = "Alíquota do ICMS", minValue = "0", maxValue = "999.9999", scale = 2, scaleMax = 4, required = true)
+  @RFWMetaBigDecimalField(caption = "Alíquota do ICMS", minValue = "0", maxValue = "999.9999", scale = 0, scaleMax = 4, required = false)
   private BigDecimal picms = null;
 
   /**
@@ -326,7 +326,7 @@ public class ICMSVO extends RFWVO {
    * <h4>TAG N10h - ICMSSN900</h4><br>
    * N17 vICMS Valor do ICMS E N12.1 N 1-1 13v2 (v2.0)
    */
-  @RFWMetaBigDecimalField(caption = "Valor do ICMS", minValue = "0", maxValue = "9999999999999.99", scale = 2, required = true)
+  @RFWMetaBigDecimalField(caption = "Valor do ICMS", minValue = "0", maxValue = "9999999999999.99", scale = 0, scaleMax = 2, required = false)
   private BigDecimal vicms = null;
 
   /**
@@ -356,7 +356,7 @@ public class ICMSVO extends RFWVO {
    * Percentual relativo ao Fundo de Combate à Pobreza (FCP). Nota: Percentual máximo de 2%, conforme a legislação.
    *
    */
-  @RFWMetaBigDecimalField(caption = "Percentual do ICMS relativo ao FCP", minValue = "0", maxValue = "999.9999", scale = 2, scaleMax = 4, required = false)
+  @RFWMetaBigDecimalField(caption = "Percentual do ICMS relativo ao FCP", minValue = "0", maxValue = "999.9999", scale = 0, scaleMax = 4, required = false)
   private BigDecimal pfcp = null;
 
   /**
@@ -385,7 +385,7 @@ public class ICMSVO extends RFWVO {
    * Valor do ICMS relativo ao Fundo de Combate à Pobreza (FCP).
    *
    */
-  @RFWMetaBigDecimalField(caption = "Valor do FCP", minValue = "0", maxValue = "9999999999999.99", scale = 2, required = false)
+  @RFWMetaBigDecimalField(caption = "Valor do FCP", minValue = "0", maxValue = "9999999999999.99", scale = 0, scaleMax = 2, required = false)
   private BigDecimal vfcp = null;
 
   /**
@@ -409,7 +409,7 @@ public class ICMSVO extends RFWVO {
    * N17a vBCFCP Valor da Base de Cálculo do FCP E N17.0 N 1-1 13v2<br>
    * Informar o valor da Base de Cálculo do FCP
    */
-  @RFWMetaBigDecimalField(caption = "Base Cálculo do FCP", minValue = "0", maxValue = "9999999999999.99", scale = 2, required = false)
+  @RFWMetaBigDecimalField(caption = "Base Cálculo do FCP", minValue = "0", maxValue = "9999999999999.99", scale = 0, scaleMax = 2, required = false)
   private BigDecimal vbcFCP = null;
 
   /**
@@ -520,7 +520,7 @@ public class ICMSVO extends RFWVO {
    * N19 pMVAST Percentual da margem de valor Adicionado do ICMS ST E N17.1 N 0-1 3v2-4<br>
    * (v2.0)
    */
-  @RFWMetaBigDecimalField(caption = "Percentual MVA do ICMS ST", minValue = "0", maxValue = "999.9999", scale = 2, scaleMax = 4, required = false)
+  @RFWMetaBigDecimalField(caption = "Percentual MVA do ICMS ST", minValue = "0", maxValue = "999.9999", scale = 0, scaleMax = 4, required = false)
   private BigDecimal pmvaST = null;
 
   /**
@@ -552,7 +552,7 @@ public class ICMSVO extends RFWVO {
    * N20 pRedBCST Percentual da Redução de BC do ICMS ST E N17.1 N 0-1 3v2-4<br>
    * (v2.0)
    */
-  @RFWMetaBigDecimalField(caption = "Percentual Redução BC do ICMS ST", minValue = "0", maxValue = "999.9999", scale = 2, scaleMax = 4, required = false)
+  @RFWMetaBigDecimalField(caption = "Percentual Redução BC do ICMS ST", minValue = "0", maxValue = "999.9999", scale = 0, scaleMax = 4, required = false)
   private BigDecimal predBCST = null;
 
   /**
@@ -584,7 +584,7 @@ public class ICMSVO extends RFWVO {
    * N21 vBCST Valor da BC do ICMS ST E N17.1 N 1-1 13v2<br>
    * (v2.0)
    */
-  @RFWMetaBigDecimalField(caption = "Base Cálculo do FCP", minValue = "0", maxValue = "9999999999999.99", scale = 2, required = false)
+  @RFWMetaBigDecimalField(caption = "Base Cálculo do FCP", minValue = "0", maxValue = "9999999999999.99", scale = 0, scaleMax = 2, required = false)
   private BigDecimal vbcST = null;
 
   /**
@@ -620,7 +620,7 @@ public class ICMSVO extends RFWVO {
    * N22 pICMSST Alíquota do imposto do ICMS ST E N17.1 N 1-1 3v2-4<br>
    * Alíquota do ICMS ST sem o FCP. Quando for o caso, informar a alíquota do FCP no campo pFCP
    */
-  @RFWMetaBigDecimalField(caption = "Aliquota do ICMS ST", minValue = "0", maxValue = "999.9999", scale = 2, scaleMax = 4, required = false)
+  @RFWMetaBigDecimalField(caption = "Aliquota do ICMS ST", minValue = "0", maxValue = "999.9999", scale = 0, scaleMax = 4, required = false)
   private BigDecimal picmsST = null;
 
   /**
@@ -656,7 +656,7 @@ public class ICMSVO extends RFWVO {
    * N23 vICMSST Valor do ICMS ST E N17.1 N 1-1 13v2 Valor do ICMS ST retido<br>
    * (v2.0)
    */
-  @RFWMetaBigDecimalField(caption = "Valor do ICMS ST", minValue = "0", maxValue = "9999999999999.99", scale = 2, required = false)
+  @RFWMetaBigDecimalField(caption = "Valor do ICMS ST", minValue = "0", maxValue = "9999999999999.99", scale = 0, scaleMax = 2, required = false)
   private BigDecimal vicmsST = null;
 
   /**
@@ -688,7 +688,7 @@ public class ICMSVO extends RFWVO {
    * N23a vBCFCPST Valor da Base de Cálculo do FCP retido por Substituição Tributária E N23.1 N 1-1 13v2<br>
    * Informar o valor da Base de Cálculo do FCP retido por Substituição Tributária
    */
-  @RFWMetaBigDecimalField(caption = "Valor BC do FCP ST", minValue = "0", maxValue = "9999999999999.99", scale = 2, required = false)
+  @RFWMetaBigDecimalField(caption = "Valor BC do FCP ST", minValue = "0", maxValue = "9999999999999.99", scale = 0, scaleMax = 2, required = false)
   private BigDecimal vbcFCPST = null;
 
   /**
@@ -721,7 +721,7 @@ public class ICMSVO extends RFWVO {
    * N23b pFCPST Percentual do FCP retido por Substituição Tributária E N23.1 N 1-1 3v2-4<br>
    * Percentual relativo ao Fundo de Combate à Pobreza (FCP) retido por substituição tributária
    */
-  @RFWMetaBigDecimalField(caption = "Percentual do FCP ST", minValue = "0", maxValue = "999.9999", scale = 2, scaleMax = 4, required = false)
+  @RFWMetaBigDecimalField(caption = "Percentual do FCP ST", minValue = "0", maxValue = "999.9999", scale = 0, scaleMax = 4, required = false)
   private BigDecimal pfcpST = null;
 
   /**
@@ -753,7 +753,7 @@ public class ICMSVO extends RFWVO {
    * N23d vFCPST Valor do FCP retido por Substituição Tributária E N23.1 N N 1-1 13v2 <br>
    * Valor do ICMS relativo ao Fundo de Combate à Pobreza (FCP) retido por substituição tributária.
    */
-  @RFWMetaBigDecimalField(caption = "Valor FCP ST", minValue = "0", maxValue = "9999999999999.99", scale = 2, required = false)
+  @RFWMetaBigDecimalField(caption = "Valor FCP ST", minValue = "0", maxValue = "9999999999999.99", scale = 0, scaleMax = 2, required = false)
   private BigDecimal vfcpST = null;
 
   /**
@@ -777,7 +777,7 @@ public class ICMSVO extends RFWVO {
    * N14 pRedBC Percentual da Redução de BC E N12.1 N 0-1 3v2-4<br>
    * (v2.0)
    */
-  @RFWMetaBigDecimalField(caption = "Percentual de Redução de BC", minValue = "0", maxValue = "999.9999", scale = 2, scaleMax = 4, required = false)
+  @RFWMetaBigDecimalField(caption = "Percentual de Redução de BC", minValue = "0", maxValue = "999.9999", scale = 0, scaleMax = 4, required = false)
   private BigDecimal predBC = null;
 
   /**
@@ -805,7 +805,7 @@ public class ICMSVO extends RFWVO {
    * N28a vICMSDeson Valor do ICMS desonerado E N27.1 N 1-1 13v2<br>
    * Informar apenas nos motivos de desoneração documentados abaixo.
    */
-  @RFWMetaBigDecimalField(caption = "Base Cálculo do FCP", minValue = "0", maxValue = "9999999999999.99", scale = 2, required = false)
+  @RFWMetaBigDecimalField(caption = "Base Cálculo do FCP", minValue = "0", maxValue = "9999999999999.99", scale = 0, scaleMax = 2, required = false)
   private BigDecimal vicmsDeson = null;
 
   /**
@@ -865,7 +865,7 @@ public class ICMSVO extends RFWVO {
    * N16a vICMSOp Valor do ICMS da Operação E N07 N 0-1 13v2<br>
    * Valor como se não tivesse o diferimento
    */
-  @RFWMetaBigDecimalField(caption = "Valor do ICMS da Operação", minValue = "0", maxValue = "9999999999999.99", scale = 2, required = false)
+  @RFWMetaBigDecimalField(caption = "Valor do ICMS da Operação", minValue = "0", maxValue = "9999999999999.99", scale = 0, scaleMax = 2, required = false)
   private BigDecimal vicmsOp = null;
 
   /**
@@ -873,14 +873,14 @@ public class ICMSVO extends RFWVO {
    * N16b pDif Percentual do diferimento E N07 N 0-1 3v2-4<br>
    * No caso de diferimento total, informar o percentual de diferimento "100".
    */
-  @RFWMetaBigDecimalField(caption = "Percentual do Diferimento", minValue = "0", maxValue = "999.9999", scale = 2, scaleMax = 4, required = false)
+  @RFWMetaBigDecimalField(caption = "Percentual do Diferimento", minValue = "0", maxValue = "999.9999", scale = 0, scaleMax = 4, required = false)
   private BigDecimal pdif = null;
 
   /**
    * <h4>TAG N07 - ICMS51</h4><br>
    * N16c vICMSDif Valor do ICMS diferido E N07 N 0-1 13v2
    */
-  @RFWMetaBigDecimalField(caption = "Valor do ICMS Diferido", minValue = "0", maxValue = "9999999999999.99", scale = 2, required = false)
+  @RFWMetaBigDecimalField(caption = "Valor do ICMS Diferido", minValue = "0", maxValue = "9999999999999.99", scale = 0, scaleMax = 2, required = false)
   private BigDecimal vicmsDif = null;
 
   /**
@@ -897,7 +897,7 @@ public class ICMSVO extends RFWVO {
    * N26 vBCSTRet Valor da BC do ICMS ST retido E N25.1 N 1-1 13v2<br>
    * Valor da BC do ICMS ST cobrado anteriormente por ST (v2.0). O valor pode ser omitido quando a legislação não exigir a sua informação. (NT 2011/004)
    */
-  @RFWMetaBigDecimalField(caption = "Valor da BC do ICMS ST Retido", minValue = "0", maxValue = "9999999999999.99", scale = 2, required = false)
+  @RFWMetaBigDecimalField(caption = "Valor da BC do ICMS ST Retido", minValue = "0", maxValue = "9999999999999.99", scale = 0, scaleMax = 2, required = false)
   private BigDecimal vbcSTRet = null;
 
   /**
@@ -914,7 +914,7 @@ public class ICMSVO extends RFWVO {
    * N26a pST Alíquota suportada pelo Consumidor Final E N25.1 N 1-1 3v2-4<br>
    * Deve ser informada a alíquota do cálculo do ICMS-ST, já incluso o FCP. Exemplo: alíquota da mercadoria na venda ao consumidor final = 18% e 2% de FCP. A alíquota a ser informada no campo pST deve ser 20%. (Atualizada NT2016.002)
    */
-  @RFWMetaBigDecimalField(caption = "Alíquota Suportada pelo Consumidor Final", minValue = "0", maxValue = "999.9999", scale = 2, scaleMax = 4, required = false)
+  @RFWMetaBigDecimalField(caption = "Alíquota Suportada pelo Consumidor Final", minValue = "0", maxValue = "999.9999", scale = 0, scaleMax = 4, required = false)
   private BigDecimal pst = null;
 
   /**
@@ -930,7 +930,7 @@ public class ICMSVO extends RFWVO {
    * N26b vICMSSubstituto Valor do ICMS próprio do Substituto E N25.1 N 0-1 13v2<br>
    * Valor do ICMS próprio do Substituto cobrado em operação anterior (Criado na NT 2018.005 v1.10. Atualizado na 2018.005 v1.20)
    */
-  @RFWMetaBigDecimalField(caption = "Valor do ICMS Próprio do Substituto", minValue = "0", maxValue = "9999999999999.99", scale = 2, required = false)
+  @RFWMetaBigDecimalField(caption = "Valor do ICMS Próprio do Substituto", minValue = "0", maxValue = "9999999999999.99", scale = 0, scaleMax = 2, required = false)
   private BigDecimal vicmsSubstituto = null;
 
   /**
@@ -946,7 +946,7 @@ public class ICMSVO extends RFWVO {
    * N27 vICMSSTRet Valor do ICMS ST retido E N25.1 N 1-1 13v2<br>
    * Valor do ICMS ST cobrado anteriormente por ST (v2.0). O valor pode ser omitido quando a legislação não exigir a sua informação. (NT 2011/004)
    */
-  @RFWMetaBigDecimalField(caption = "Valor do ICMS ST Retido", minValue = "0", maxValue = "9999999999999.99", scale = 2, required = false)
+  @RFWMetaBigDecimalField(caption = "Valor do ICMS ST Retido", minValue = "0", maxValue = "9999999999999.99", scale = 0, scaleMax = 2, required = false)
   private BigDecimal vicmsSTRet = null;
 
   /**
@@ -962,7 +962,7 @@ public class ICMSVO extends RFWVO {
    * N27a vBCFCPSTRet Valor da Base de Cálculo do FCP retido anteriormente E N27.1 N 1-1 13v2<br>
    * Informar o valor da Base de Cálculo do FCP retido anteriormente por ST
    */
-  @RFWMetaBigDecimalField(caption = "BC do FCP Retido Anteriormente", minValue = "0", maxValue = "0", scale = 2, required = false)
+  @RFWMetaBigDecimalField(caption = "BC do FCP Retido Anteriormente", minValue = "0", maxValue = "9999999999999.99", scale = 0, scaleMax = 2, required = false)
   private BigDecimal vbcFCPSTRet = null;
 
   /**
@@ -978,7 +978,7 @@ public class ICMSVO extends RFWVO {
    * N27b pFCPSTRet Percentual do FCP retido anteriormente por Substituição Tributária E N27.1 N 1-1 3v2-4<br>
    * Percentual relativo ao Fundo de Combate à Pobreza (FCP)
    */
-  @RFWMetaBigDecimalField(caption = "Percentual do FCP Retido Anteriormente por ST", minValue = "0", maxValue = "999.9999", scale = 2, scaleMax = 4, required = false)
+  @RFWMetaBigDecimalField(caption = "Percentual do FCP Retido Anteriormente por ST", minValue = "0", maxValue = "999.9999", scale = 0, scaleMax = 4, required = false)
   private BigDecimal pfcpSTRet = null;
 
   /**
@@ -994,7 +994,7 @@ public class ICMSVO extends RFWVO {
    * N27d vFCPSTRet Valor do FCP retido anteriormente por Substituição Tributária E N27.1 N 1-1 13v2<br>
    * Valor do ICMS relativo ao Fundo de Combate à Pobreza (FCP) retido por substituição tributária.
    */
-  @RFWMetaBigDecimalField(caption = "Valor do FCP Retido por ST", minValue = "0", maxValue = "9999999999999.99", scale = 2, required = false)
+  @RFWMetaBigDecimalField(caption = "Valor do FCP Retido por ST", minValue = "0", maxValue = "9999999999999.99", scale = 0, scaleMax = 2, required = false)
   private BigDecimal vfcpSTRet = null;
 
   /**
@@ -1012,7 +1012,7 @@ public class ICMSVO extends RFWVO {
    * Percentual de redução, caso estivesse submetida ao regime comum de tributação, para obtenção da base de cálculo efetiva (vBCEfet). <br>
    * Obs.: opcional a critério da UF
    */
-  @RFWMetaBigDecimalField(caption = "Percentual da Redução da Base de Cálculo Efetiva", minValue = "0", maxValue = "999.9999", scale = 2, scaleMax = 4, required = false)
+  @RFWMetaBigDecimalField(caption = "Percentual da Redução da Base de Cálculo Efetiva", minValue = "0", maxValue = "999.9999", scale = 0, scaleMax = 4, required = false)
   private BigDecimal predBCEfet = null;
 
   /**
@@ -1031,7 +1031,7 @@ public class ICMSVO extends RFWVO {
    * Valor da base de cálculo que seria atribuída à operação própria do contribuinte substituído, caso estivesse submetida ao regime comum de tributação, obtida pelo produto do Vprod por (1- pRedBCEfet). <br>
    * Obs.: opcional a critério da UF.
    */
-  @RFWMetaBigDecimalField(caption = "Valor da BC Efetiva", minValue = "0", maxValue = "9999999999999.99", scale = 2, required = true)
+  @RFWMetaBigDecimalField(caption = "Valor da BC Efetiva", minValue = "0", maxValue = "9999999999999.99", scale = 0, scaleMax = 2, required = false)
   private BigDecimal vbcEfet = null;
 
   /**
@@ -1050,7 +1050,7 @@ public class ICMSVO extends RFWVO {
    * Alíquota do ICMS na operação a consumidor final, caso estivesse submetida ao regime comum de tributação. <br>
    * Obs.: opcional a critério da UF.
    */
-  @RFWMetaBigDecimalField(caption = "Alíquota do ICMS Efetiva", minValue = "0", maxValue = "999.9999", scale = 2, scaleMax = 4, required = false)
+  @RFWMetaBigDecimalField(caption = "Alíquota do ICMS Efetiva", minValue = "0", maxValue = "999.9999", scale = 0, scaleMax = 4, required = false)
   private BigDecimal picmsEfet = null;
 
   /**
@@ -1069,7 +1069,7 @@ public class ICMSVO extends RFWVO {
    * Obtido pelo produto do valor do campo pICMSEfet pelo valor do campo vBCEfet, caso estivesse submetida ao regime comum de tributação.<br>
    * Obs.: opcional a critério da UF.
    */
-  @RFWMetaBigDecimalField(caption = "Valor do ICMS Efetivo", minValue = "0", maxValue = "9999999999999.99", scale = 2, required = false)
+  @RFWMetaBigDecimalField(caption = "Valor do ICMS Efetivo", minValue = "0", maxValue = "9999999999999.99", scale = 0, scaleMax = 2, required = false)
   private BigDecimal vicmsEfet = null;
 
   /**
@@ -1077,7 +1077,7 @@ public class ICMSVO extends RFWVO {
    * N25 pBCOp Percentual da BC operação própria E N10a N 1-1 3v2-4<br>
    * Percentual para determinação do valor da Base de Cálculo da operação própria. (v2.0)
    */
-  @RFWMetaBigDecimalField(caption = "Percentual da BC Operação Própria", minValue = "0", maxValue = "999.9999", scale = 2, scaleMax = 4, required = false)
+  @RFWMetaBigDecimalField(caption = "Percentual da BC Operação Própria", minValue = "0", maxValue = "999.9999", scale = 0, scaleMax = 4, required = false)
   private BigDecimal pbcOp = null;
 
   /**
@@ -1093,7 +1093,7 @@ public class ICMSVO extends RFWVO {
    * N31 vBCSTDest Valor da BC do ICMS ST da UF destino E N10b N 1-1 13v2<br>
    * Informar o valor da BC do ICMS ST da UF destino (v2.0)
    */
-  @RFWMetaBigDecimalField(caption = "Valor da BC do ICMS ST da UF Destino", minValue = "0", maxValue = "9999999999999.99", scale = 2, required = false)
+  @RFWMetaBigDecimalField(caption = "Valor da BC do ICMS ST da UF Destino", minValue = "0", maxValue = "9999999999999.99", scale = 0, scaleMax = 2, required = false)
   private BigDecimal vbcSTDest = null;
 
   /**
@@ -1101,7 +1101,7 @@ public class ICMSVO extends RFWVO {
    * N32 vICMSSTDest Valor do ICMS ST da UF destino E N10b N 1-1 13v2<br>
    * Informar o valor do ICMS ST da UF destino (v2.0)
    */
-  @RFWMetaBigDecimalField(caption = "Valor ICMS ST da UF Destino", minValue = "0", maxValue = "9999999999999.99", scale = 2, required = false)
+  @RFWMetaBigDecimalField(caption = "Valor ICMS ST da UF Destino", minValue = "0", maxValue = "9999999999999.99", scale = 0, scaleMax = 2, required = false)
   private BigDecimal vicmsSTDest = null;
 
   /**
@@ -1117,7 +1117,7 @@ public class ICMSVO extends RFWVO {
    * N29 pCredSN Alíquota aplicável de cálculo do crédito (Simples Nacional). E N27.1 N 1-1 3v2-4<br>
    * (v2.0)
    */
-  @RFWMetaBigDecimalField(caption = "Alíquota Aplicável de Cálculo do Crédito (Simples Nacional)", minValue = "0", maxValue = "999.9999", scale = 2, scaleMax = 4, required = false)
+  @RFWMetaBigDecimalField(caption = "Alíquota Aplicável de Cálculo do Crédito (Simples Nacional)", minValue = "0", maxValue = "999.9999", scale = 0, scaleMax = 4, required = false)
   private BigDecimal pcredSN = null;
 
   /**
@@ -1133,7 +1133,7 @@ public class ICMSVO extends RFWVO {
    * N30 vCredICMSSN Valor crédito do ICMS que pode ser aproveitado nos termos do art. 23 da LC 123/2006 (Simples Nacional) E N27.1 N 1-1 3v2-4<br>
    * (v2.0)
    */
-  @RFWMetaBigDecimalField(caption = "Valor de Crédito do ICMS", minValue = "0", maxValue = "9999999999999.99", scale = 2, required = false)
+  @RFWMetaBigDecimalField(caption = "Valor de Crédito do ICMS", minValue = "0", maxValue = "9999999999999.99", scale = 0, scaleMax = 2, required = false)
   private BigDecimal vcredICMSSN = null;
 
   /**

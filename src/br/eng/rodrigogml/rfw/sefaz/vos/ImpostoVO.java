@@ -64,7 +64,7 @@ public class ImpostoVO extends RFWVO {
    * M02 vTotTrib Valor aproximado total de tributos federais, estaduais e municipais. E M01 N 0-1 13v2<br>
    * (NT 2013/003)
    */
-  @RFWMetaBigDecimalField(caption = "Valor Aproximado dos Tributos", minValue = "0", maxValue = "9999999999999.99", scale = 2, required = false)
+  @RFWMetaBigDecimalField(caption = "Valor Aproximado dos Tributos", minValue = "0", maxValue = "9999999999999.99", scale = 0, scaleMax = 2, required = false)
   private BigDecimal vtotTrib = null;
 
   /**

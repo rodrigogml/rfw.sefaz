@@ -32,9 +32,11 @@ public class IPIVO extends RFWVO {
 
   /**
    * O03 CNPJProd CNPJ do produtor da mercadoria, quando diferente do emitente. Somente para os casos de exportação direta ou indireta. E O01 N 0-1 14<br>
-   * Informar os zeros não significativos
+   * Informar os zeros não significativos <Br>
+   * <Br>
+   * <B>ATENÇÃO:</B> Não esou validando o campo cnpj com o {@link RFWMetaStringCNPJField} por já ter encontrado notas autorizadas pela sefaz com 14 zeros neste campo.
    */
-  @RFWMetaStringCNPJField(caption = "CNPJ do Produtor", required = false)
+  @RFWMetaStringField(caption = "CNPJ do Produtor", minlength = 14, maxLength = 14, required = false, pattern = "\\d{14}")
   private String cnpjProd = null;
 
   /**
@@ -63,7 +65,7 @@ public class IPIVO extends RFWVO {
    * Preenchimento conforme seção 8.9 do MOC – Visão Geral (Tabela do Código de Enquadramento do IPI)
    */
   @RFWMetaIntegerField(caption = "Código de Enquadramento", minvalue = 0, maxvalue = 999, required = false)
-  private Integer cEnq = null;
+  private Integer cenq = null;
 
   /**
    * O09 CST Código da situação tributária do IPI E O07 N 1-1 2<br>
@@ -92,13 +94,13 @@ public class IPIVO extends RFWVO {
   /**
    * O10 vBC Valor da BC do IPI E O09.1 N 1-1 13v2
    */
-  @RFWMetaBigDecimalField(caption = "Valor da BC do IPI", minValue = "0", maxValue = "9999999999999.99", scale = 2, required = false)
+  @RFWMetaBigDecimalField(caption = "Valor da BC do IPI", minValue = "0", maxValue = "9999999999999.99", scale = 0, scaleMax = 2, required = false)
   private BigDecimal vbc = null;
 
   /**
    * O13 pIPI Alíquota do IPI E O09.1 N 1-1 3v2-4
    */
-  @RFWMetaBigDecimalField(caption = "Alíquota do IPI", minValue = "0", maxValue = "999.9999", scale = 2, scaleMax = 4, required = false)
+  @RFWMetaBigDecimalField(caption = "Alíquota do IPI", minValue = "0", maxValue = "999.9999", scale = 0, scaleMax = 4, required = false)
   private BigDecimal pipi = null;
 
   /**
@@ -119,7 +121,7 @@ public class IPIVO extends RFWVO {
    * O14 vIPI Valor do IPI E O07 N 1-1 13v2<br>
    * Informar os campos O11 e O12 se o cálculo do IPI for de valor por unidade.
    */
-  @RFWMetaBigDecimalField(caption = "Valor do IPI", minValue = "0", maxValue = "9999999999999.99", scale = 2, required = false)
+  @RFWMetaBigDecimalField(caption = "Valor do IPI", minValue = "0", maxValue = "9999999999999.99", scale = 0, scaleMax = 2, required = false)
   private BigDecimal vipi = null;
 
   /**
@@ -240,14 +242,6 @@ public class IPIVO extends RFWVO {
    */
   public void setQselo(Long qselo) {
     this.qselo = qselo;
-  }
-
-  public Integer getcEnq() {
-    return cEnq;
-  }
-
-  public void setcEnq(Integer cEnq) {
-    this.cEnq = cEnq;
   }
 
   /**
@@ -380,6 +374,28 @@ public class IPIVO extends RFWVO {
    */
   public void setVipi(BigDecimal vipi) {
     this.vipi = vipi;
+  }
+
+  /**
+   * # o06 cEnq Código de Enquadramento Legal do IPI E O01 N 1-1 1 - 3<br>
+   * Preenchimento conforme seção 8.9 do MOC – Visão Geral (Tabela do Código de Enquadramento do IPI).
+   *
+   * @return # o06 cEnq Código de Enquadramento Legal do IPI E O01 N 1-1 1 - 3<br>
+   *         Preenchimento conforme seção 8
+   */
+  public Integer getCenq() {
+    return cenq;
+  }
+
+  /**
+   * # o06 cEnq Código de Enquadramento Legal do IPI E O01 N 1-1 1 - 3<br>
+   * Preenchimento conforme seção 8.9 do MOC – Visão Geral (Tabela do Código de Enquadramento do IPI).
+   *
+   * @param cenq # o06 cEnq Código de Enquadramento Legal do IPI E O01 N 1-1 1 - 3<br>
+   *          Preenchimento conforme seção 8
+   */
+  public void setCenq(Integer cenq) {
+    this.cenq = cenq;
   }
 
 }

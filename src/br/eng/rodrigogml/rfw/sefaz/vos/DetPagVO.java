@@ -39,6 +39,7 @@ public class DetPagVO extends RFWVO {
    * <li>11=Vale Refeição
    * <li>12=Vale Presente
    * <li>13=Vale Combustível
+   * <li><s>14=Duplicata Mercantil</s> - Excluído na NT2016.002
    * <li>15=Boleto Bancário
    * <li>16=Depósito Bancário
    * <li>17=Pagamento Instantâneo (PIX)
@@ -48,13 +49,13 @@ public class DetPagVO extends RFWVO {
    * <li>99=Outros<Br>
    * (Atualizado na NT2016.002, NT2020.006)
    */
-  @RFWMetaStringField(caption = "Meio de Pagamento", minlength = 2, maxLength = 2, required = true, pattern = "^(01|02|03|04|05|10|11|12|13|15|16|17|18|19|90|99)$")
+  @RFWMetaStringField(caption = "Meio de Pagamento", minlength = 2, maxLength = 2, required = true, pattern = "^(01|02|03|04|05|10|11|12|13|14|15|16|17|18|19|90|99)$")
   private String tpag = null;
 
   /**
    * YA03 vPag Valor do Pagamento E YA01a N 1-1 13v2
    */
-  @RFWMetaBigDecimalField(caption = "Valor do Pagamento", minValue = "0", maxValue = "9999999999999.99", scale = 2, required = true)
+  @RFWMetaBigDecimalField(caption = "Valor do Pagamento", minValue = "0", maxValue = "9999999999999.99", scale = 0, scaleMax = 2, required = true)
   private BigDecimal vpag = null;
 
   /**
@@ -69,9 +70,11 @@ public class DetPagVO extends RFWVO {
   /**
    * YA05 CNPJ CNPJ da instituição de pagamento E YA04 C 0-1 14<br>
    * Informar o CNPJ da instituição de pagamento, adquirente ou subadquirente.<br>
-   * Caso o pagamento seja processado pelo intermediador da transação, informar o CNPJ deste (Atualizado na NT 2020.006)
+   * Caso o pagamento seja processado pelo intermediador da transação, informar o CNPJ deste (Atualizado na NT 2020.006)<Br>
+   * <Br>
+   * <b>ATENÇÃO</b>: Deixei de validar o CNPJ com o {@link RFWMetaStringCNPJField} por ter encontrado notas autorizadas pela sefaz com o valor do campo definido apenas com zeros.
    */
-  @RFWMetaStringCNPJField(caption = "CNPJ", required = false)
+  @RFWMetaStringField(caption = "CNPJ", minlength = 14, maxLength = 14, required = false, pattern = "\\d{14}")
   private String cnpj = null;
 
   /**
@@ -89,7 +92,7 @@ public class DetPagVO extends RFWVO {
    * (Atualizado na NT2016.002)
    */
   @RFWMetaStringField(caption = "Bandeira do Cartão", minlength = 2, maxLength = 2, required = false, pattern = "^(01|02|03|04|05|06|07|08|09|99)$")
-  private String tBand = null;
+  private String tband = null;
 
   /**
    * YA07 cAut Número de autorização da operação cartão de crédito e/ou débito E YA04 C 0-1 1-20<br>
@@ -97,13 +100,6 @@ public class DetPagVO extends RFWVO {
    */
   @RFWMetaStringField(caption = "Número de Autorização", minlength = 1, maxLength = 20, required = false)
   private String caut = null;
-
-  /**
-   * YA09 vTroco Valor do troco E YA01 N 0-1 13v2<bR>
-   * Valor do troco (Incluído na NT2016.002)
-   */
-  @RFWMetaBigDecimalField(caption = "Troco", minValue = "0", maxValue = "9999999999999.99", scale = 2, required = false)
-  private BigDecimal vtroco = null;
 
   /**
    * # yA01b indPag Indicador da Forma de Pagamento E YA01a N 0-1 1<br>
@@ -287,14 +283,6 @@ public class DetPagVO extends RFWVO {
     this.cnpj = cnpj;
   }
 
-  public String gettBand() {
-    return tBand;
-  }
-
-  public void settBand(String tBand) {
-    this.tBand = tBand;
-  }
-
   /**
    * # yA07 cAut Número de autorização da operação cartão de crédito e/ou débito E YA04 C 0-1 1-20<br>
    * Identifica o número da autorização da transação da operação com cartão de crédito e/ou débito.
@@ -318,25 +306,65 @@ public class DetPagVO extends RFWVO {
   }
 
   /**
-   * # yA09 vTroco Valor do troco E YA01 N 0-1 13v2<bR>
-   * Valor do troco (Incluído na NT2016.002).
+   * # yA06 tBand Bandeira da operadora de cartão de crédito e/ou débito E YA04 N 0-1 2<br>
+   * <li>01=Visa
+   * <li>02=Mastercard
+   * <li>03=American Express
+   * <li>04=Sorocred
+   * <li>05=Diners Club
+   * <li>06=Elo
+   * <li>07=Hipercard
+   * <li>08=Aura
+   * <li>09=Cabal
+   * <li>99=Outros <br>
+   * (Atualizado na NT2016.002).
    *
-   * @return # yA09 vTroco Valor do troco E YA01 N 0-1 13v2<bR>
-   *         Valor do troco (Incluído na NT2016
+   * @return # yA06 tBand Bandeira da operadora de cartão de crédito e/ou débito E YA04 N 0-1 2<br>
+   *         <li>01=Visa
+   *         <li>02=Mastercard
+   *         <li>03=American Express
+   *         <li>04=Sorocred
+   *         <li>05=Diners Club
+   *         <li>06=Elo
+   *         <li>07=Hipercard
+   *         <li>08=Aura
+   *         <li>09=Cabal
+   *         <li>99=Outros <br>
+   *         (Atualizado na NT2016
    */
-  public BigDecimal getVtroco() {
-    return vtroco;
+  public String getTband() {
+    return tband;
   }
 
   /**
-   * # yA09 vTroco Valor do troco E YA01 N 0-1 13v2<bR>
-   * Valor do troco (Incluído na NT2016.002).
+   * # yA06 tBand Bandeira da operadora de cartão de crédito e/ou débito E YA04 N 0-1 2<br>
+   * <li>01=Visa
+   * <li>02=Mastercard
+   * <li>03=American Express
+   * <li>04=Sorocred
+   * <li>05=Diners Club
+   * <li>06=Elo
+   * <li>07=Hipercard
+   * <li>08=Aura
+   * <li>09=Cabal
+   * <li>99=Outros <br>
+   * (Atualizado na NT2016.002).
    *
-   * @param vtroco # yA09 vTroco Valor do troco E YA01 N 0-1 13v2<bR>
-   *          Valor do troco (Incluído na NT2016
+   * @param tband # yA06 tBand Bandeira da operadora de cartão de crédito e/ou débito E YA04 N 0-1 2<br>
+   *          <li>01=Visa
+   *          <li>02=Mastercard
+   *          <li>03=American Express
+   *          <li>04=Sorocred
+   *          <li>05=Diners Club
+   *          <li>06=Elo
+   *          <li>07=Hipercard
+   *          <li>08=Aura
+   *          <li>09=Cabal
+   *          <li>99=Outros <br>
+   *          (Atualizado na NT2016
    */
-  public void setVtroco(BigDecimal vtroco) {
-    this.vtroco = vtroco;
+  public void setTband(String tband) {
+    this.tband = tband;
   }
 
 }

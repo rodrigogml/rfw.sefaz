@@ -31,19 +31,19 @@ public class CobrVO extends RFWVO {
   /**
    * Y04 vOrig Valor Original da Fatura E Y02 N 0-1 13v2
    */
-  @RFWMetaBigDecimalField(caption = "Valor Original da Fatura", minValue = "0", maxValue = "9999999999999.99", scale = 2, required = false)
+  @RFWMetaBigDecimalField(caption = "Valor Original da Fatura", minValue = "0", maxValue = "9999999999999.99", scale = 0, scaleMax = 2, required = false)
   private BigDecimal vorig = null;
 
   /**
    * Y05 vDesc Valor do desconto E Y02 N 0-1 13v2
    */
-  @RFWMetaBigDecimalField(caption = "Valor do Desconto", minValue = "0", maxValue = "9999999999999.99", scale = 2, required = false)
+  @RFWMetaBigDecimalField(caption = "Valor do Desconto", minValue = "0", maxValue = "9999999999999.99", scale = 0, scaleMax = 2, required = false)
   private BigDecimal vdesc = null;
 
   /**
    * Y06 vLiq Valor Líquido da Fatura E Y02 N 0-1 13v2
    */
-  @RFWMetaBigDecimalField(caption = "Valor Líquido da Fatura", minValue = "0", maxValue = "9999999999999.99", scale = 2, required = false)
+  @RFWMetaBigDecimalField(caption = "Valor Líquido da Fatura", minValue = "0", maxValue = "9999999999999.99", scale = 0, scaleMax = 2, required = false)
   private BigDecimal vliq = null;
 
   /**

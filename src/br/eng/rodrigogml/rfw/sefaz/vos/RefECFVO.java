@@ -18,11 +18,12 @@ public class RefECFVO extends RFWVO {
   private static final long serialVersionUID = 813216150002840351L;
 
   /**
-   * BA07 mod Modelo do Documento Fiscal E BA03 N 1-1 2
-   * <li>01=modelo 01
-   * <li>02=modelo 02 (incluído na NT2016.002)
+   * BA21 mod Modelo do Documento Fiscal E BA20 C 1-1 2<br>
+   * <li>"2B"=Cupom Fiscal emitido por máquina registradora (não ECF);
+   * <li>"2C"=Cupom Fiscal PDV;
+   * <li>"2D"=Cupom Fiscal (emitido por ECF) (v2.0).
    */
-  @RFWMetaStringField(caption = "Modelo do Documento Fiscal", minlength = 2, maxLength = 2, required = true, pattern = "^(01|02)$")
+  @RFWMetaStringField(caption = "Modelo do Documento Fiscal", minlength = 2, maxLength = 2, required = true, pattern = "^(2B|2C|2D)$")
   private String mod = null;
 
   /**

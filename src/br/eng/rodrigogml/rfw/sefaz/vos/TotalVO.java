@@ -21,148 +21,148 @@ public class TotalVO extends RFWVO {
   /**
    * W03 vBC Base de Cálculo do ICMS E W02 N 1-1 13v2
    */
-  @RFWMetaBigDecimalField(caption = "BC do ICMS", minValue = "0", maxValue = "9999999999999.99", scale = 2, required = true)
+  @RFWMetaBigDecimalField(caption = "BC do ICMS", minValue = "0", maxValue = "9999999999999.99", scale = 0, scaleMax = 2, required = true)
   private BigDecimal vbc = null;
 
   /**
    * W04 vICMS Valor Total do ICMS E W02 N 1-1 13v2
    */
-  @RFWMetaBigDecimalField(caption = "Total do ICMS", minValue = "0", maxValue = "9999999999999.99", scale = 2, required = true)
+  @RFWMetaBigDecimalField(caption = "Total do ICMS", minValue = "0", maxValue = "9999999999999.99", scale = 0, scaleMax = 2, required = true)
   private BigDecimal vicms = null;
 
   /**
    * W04a vICMSDeson Valor Total do ICMS desonerado E W02 N 1-1 13v2
    */
-  @RFWMetaBigDecimalField(caption = "Total ICMS Desonerado", minValue = "0", maxValue = "9999999999999.99", scale = 2, required = true)
+  @RFWMetaBigDecimalField(caption = "Total ICMS Desonerado", minValue = "0", maxValue = "9999999999999.99", scale = 0, scaleMax = 2, required = true)
   private BigDecimal vicmsDeson = null;
 
   /**
    * W04c vFCPUFDest Valor total do ICMS relativo Fundo de Combate à Pobreza (FCP) da UF de destino E W02 N 0-1 13v2<br>
    * Valor total do ICMS relativo ao Fundo de Combate à Pobreza (FCP) para a UF de destino. (Incluído na NT 2015/003)
    */
-  @RFWMetaBigDecimalField(caption = "Total ICMS Relativo FCP", minValue = "0", maxValue = "9999999999999.99", scale = 2, required = false)
+  @RFWMetaBigDecimalField(caption = "Total ICMS Relativo FCP", minValue = "0", maxValue = "9999999999999.99", scale = 0, scaleMax = 2, required = false)
   private BigDecimal vfcpUFDest = null;
 
   /**
    * W04e vICMSUFDest Valor total do ICMS Interestadual para a UF de destino E W02 N 0-1 13v2<br>
    * Valor total do ICMS Interestadual para a UF de destino, já considerando o valor do ICMS relativo ao Fundo de Combate à Pobreza naquela UF. (Incluído na NT 2015/003)
    */
-  @RFWMetaBigDecimalField(caption = "Total ICMS Interstadual UF Destino", minValue = "0", maxValue = "9999999999999.99", scale = 2, required = false)
+  @RFWMetaBigDecimalField(caption = "Total ICMS Interstadual UF Destino", minValue = "0", maxValue = "9999999999999.99", scale = 0, scaleMax = 2, required = false)
   private BigDecimal vicmsUFDest = null;
 
   /**
    * W04g vICMSUFRemet Valor total do ICMS Interestadual para a UF do remetente E W02 N 0-1 13v2<br>
    * Valor total do ICMS Interestadual para a UF do remetente. Nota: A partir de 2019, este valor será zero. (Incluído na NT 2015/003)
    */
-  @RFWMetaBigDecimalField(caption = "Total ICMS Interstadual UF Remetente", minValue = "0", maxValue = "9999999999999.99", scale = 2, required = false)
+  @RFWMetaBigDecimalField(caption = "Total ICMS Interstadual UF Remetente", minValue = "0", maxValue = "9999999999999.99", scale = 0, scaleMax = 2, required = false)
   private BigDecimal vicmsUFRemet = null;
 
   /**
    * W04h vFCP Valor Total do FCP (Fundo de Combate à Pobreza) E W02 N 1-1 13v2<br>
    * Corresponde ao total da soma dos campos id: N17c (Incluído na NT2016.002)
    */
-  @RFWMetaBigDecimalField(caption = "Total FCP", minValue = "0", maxValue = "9999999999999.99", scale = 2, required = true)
+  @RFWMetaBigDecimalField(caption = "Total FCP", minValue = "0", maxValue = "9999999999999.99", scale = 0, scaleMax = 2, required = true)
   private BigDecimal vfcp = null;
 
   /**
    * W05 vBCST Base de Cálculo do ICMS ST E W02 N 1-1 13v2
    */
-  @RFWMetaBigDecimalField(caption = "BC do ICMS ST", minValue = "0", maxValue = "9999999999999.99", scale = 2, required = true)
+  @RFWMetaBigDecimalField(caption = "BC do ICMS ST", minValue = "0", maxValue = "9999999999999.99", scale = 0, scaleMax = 2, required = true)
   private BigDecimal vbcST = null;
 
   /**
    * W06 vST Valor Total do ICMS ST E W02 N 1-1 13v2
    */
-  @RFWMetaBigDecimalField(caption = "Total ICMS ST", minValue = "0", maxValue = "9999999999999.99", scale = 2, required = true)
+  @RFWMetaBigDecimalField(caption = "Total ICMS ST", minValue = "0", maxValue = "9999999999999.99", scale = 0, scaleMax = 2, required = true)
   private BigDecimal vst = null;
 
   /**
    * W06a vFCPST Valor Total do FCP (Fundo de Combate à Pobreza) retido por substituição tributária E W02 N 1-1 13v2<br>
    * Corresponde ao total da soma dos campos id:N23d (Incluído na NT2016.002)
    */
-  @RFWMetaBigDecimalField(caption = "Total FCP Retido por ST", minValue = "0", maxValue = "9999999999999.99", scale = 2, required = true)
+  @RFWMetaBigDecimalField(caption = "Total FCP Retido por ST", minValue = "0", maxValue = "9999999999999.99", scale = 0, scaleMax = 2, required = true)
   private BigDecimal vfcpST = null;
 
   /**
    * W06b vFCPSTRet Valor Total do FCP retido anteriormente por Substituição Tributária E W02 N 1-1 13v2<br>
    * Corresponde ao total da soma dos campos id:N27d (Incluído na NT2016.002)
    */
-  @RFWMetaBigDecimalField(caption = "Total FCP Retido Anteriormente por ST", minValue = "0", maxValue = "9999999999999.99", scale = 2, required = true)
+  @RFWMetaBigDecimalField(caption = "Total FCP Retido Anteriormente por ST", minValue = "0", maxValue = "9999999999999.99", scale = 0, scaleMax = 2, required = true)
   private BigDecimal vfcpSTRet = null;
 
   /**
    * W07 vProd Valor Total dos produtos e serviços E W02 N 1-1 13v2
    */
-  @RFWMetaBigDecimalField(caption = "Total de Produtos e Serviços", minValue = "0", maxValue = "9999999999999.99", scale = 2, required = true)
+  @RFWMetaBigDecimalField(caption = "Total de Produtos e Serviços", minValue = "0", maxValue = "9999999999999.99", scale = 0, scaleMax = 2, required = true)
   private BigDecimal vprod = null;
 
   /**
    * W08 vFrete Valor Total do Frete E W02 N 1-1 13v2
    */
-  @RFWMetaBigDecimalField(caption = "Total do Frete", minValue = "0", maxValue = "9999999999999.99", scale = 2, required = true)
+  @RFWMetaBigDecimalField(caption = "Total do Frete", minValue = "0", maxValue = "9999999999999.99", scale = 0, scaleMax = 2, required = true)
   private BigDecimal vfrete = null;
 
   /**
    * W09 vSeg Valor Total do Seguro E W02 N 1-1 13v2
    */
-  @RFWMetaBigDecimalField(caption = "Total do Seguro", minValue = "0", maxValue = "9999999999999.99", scale = 2, required = true)
+  @RFWMetaBigDecimalField(caption = "Total do Seguro", minValue = "0", maxValue = "9999999999999.99", scale = 0, scaleMax = 2, required = true)
   private BigDecimal vseg = null;
 
   /**
    * W10 vDesc Valor Total do Desconto E W02 N 1-1 13v2
    */
-  @RFWMetaBigDecimalField(caption = "Total do Desconto", minValue = "0", maxValue = "9999999999999.99", scale = 2, required = true)
+  @RFWMetaBigDecimalField(caption = "Total do Desconto", minValue = "0", maxValue = "9999999999999.99", scale = 0, scaleMax = 2, required = true)
   private BigDecimal vdesc = null;
 
   /**
    * W11 vII Valor Total do II E W02 N 1-1 13v2
    */
-  @RFWMetaBigDecimalField(caption = "Total do Imposto de Importação", minValue = "0", maxValue = "9999999999999.99", scale = 2, required = true)
+  @RFWMetaBigDecimalField(caption = "Total do Imposto de Importação", minValue = "0", maxValue = "9999999999999.99", scale = 0, scaleMax = 2, required = true)
   private BigDecimal vii = null;
 
   /**
    * W12 vIPI Valor Total do IPI E W02 N 1-1 13v2
    */
-  @RFWMetaBigDecimalField(caption = "Total do IPI", minValue = "0", maxValue = "9999999999999.99", scale = 2, required = true)
+  @RFWMetaBigDecimalField(caption = "Total do IPI", minValue = "0", maxValue = "9999999999999.99", scale = 0, scaleMax = 2, required = true)
   private BigDecimal vipi = null;
 
   /**
    * W12a vIPIDevol Valor Total do IPI devolvido E W02 N 1-1 13v2<br>
    * Deve ser informado quando preenchido o Grupo Tributos Devolvidos na emissão de nota finNFe=4 (devolução) nas operações com não contribuintes do IPI. Corresponde ao total da soma dos campos id:UA04. (Incluído na NT2016.002)
    */
-  @RFWMetaBigDecimalField(caption = "Total do IPI Devolvido", minValue = "0", maxValue = "9999999999999.99", scale = 2, required = true)
+  @RFWMetaBigDecimalField(caption = "Total do IPI Devolvido", minValue = "0", maxValue = "9999999999999.99", scale = 0, scaleMax = 2, required = true)
   private BigDecimal vipiDevol = null;
 
   /**
    * W13 vPIS Valor do PIS E W02 N 1-1 13v2
    */
-  @RFWMetaBigDecimalField(caption = "Total do PIS", minValue = "0", maxValue = "9999999999999.99", scale = 2, required = true)
+  @RFWMetaBigDecimalField(caption = "Total do PIS", minValue = "0", maxValue = "9999999999999.99", scale = 0, scaleMax = 2, required = true)
   private BigDecimal vpis = null;
 
   /**
    * W14 vCOFINS Valor da COFINS E W02 N 1-1 13v2
    */
-  @RFWMetaBigDecimalField(caption = "Total do COFINS", minValue = "0", maxValue = "9999999999999.99", scale = 2, required = true)
+  @RFWMetaBigDecimalField(caption = "Total do COFINS", minValue = "0", maxValue = "9999999999999.99", scale = 0, scaleMax = 2, required = true)
   private BigDecimal vcofins = null;
 
   /**
    * W15 vOutro Outras Despesas acessórias E W02 N 1-1 13v2
    */
-  @RFWMetaBigDecimalField(caption = "Outras Despesas Acessórias", minValue = "0", maxValue = "9999999999999.99", scale = 2, required = true)
+  @RFWMetaBigDecimalField(caption = "Outras Despesas Acessórias", minValue = "0", maxValue = "9999999999999.99", scale = 0, scaleMax = 2, required = true)
   private BigDecimal voutro = null;
 
   /**
    * W16 vNF Valor Total da NF-e E W02 N 1-1 13v2<br>
    * Vide validação para este campo na regra de validação "W16-xx".
    */
-  @RFWMetaBigDecimalField(caption = "Valor Total da NFe", minValue = "0", maxValue = "9999999999999.99", scale = 2, required = true)
+  @RFWMetaBigDecimalField(caption = "Valor Total da NFe", minValue = "0", maxValue = "9999999999999.99", scale = 0, scaleMax = 2, required = true)
   private BigDecimal vnf = null;
 
   /**
    * W16a vTotTrib Valor aproximado total de tributos federais, estaduais e municipais. E W02 N 0-1 13v2<br>
    * (NT 2013/003)
    */
-  @RFWMetaBigDecimalField(caption = "Valor Aproximado dos Tributos", minValue = "0", maxValue = "9999999999999.99", scale = 2, required = true)
+  @RFWMetaBigDecimalField(caption = "Valor Aproximado dos Tributos", minValue = "0", maxValue = "9999999999999.99", scale = 0, scaleMax = 2, required = false)
   private BigDecimal vtotTrib = null;
 
   /**

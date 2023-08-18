@@ -93,8 +93,11 @@ public class DestVO extends RFWVO {
    * E19 email email E E01 C 0-1 1 - 60<br>
    * Campo pode ser utilizado para informar o e-mail de recepção da NF-e indicada pelo destinatário (v2.0)
    *
+   * <Br>
+   * <br>
+   * <b>ATENÇÃO:</B> A validação do campo de e-mail (utilizando o {@link RFWMetaStringEmailField} foi removida porque a SEFAZ aceita qualquer valor, e houve registro de notas com e-mails inválidos ou mesmo com múltiplos e-mails separados por separadores sem padrão (Encontrei com '|', ';' e ','). Se o sistema validar o campo pode ter problema em aceitar notas que foram autorizadas pela SEFAZ.
    */
-  @RFWMetaStringEmailField(caption = "Email", required = false)
+  @RFWMetaStringField(caption = "Email", minlength = 1, maxLength = 60, required = false)
   private String email = null;
 
   /**
@@ -289,7 +292,9 @@ public class DestVO extends RFWVO {
 
   /**
    * # e19 email email E E01 C 0-1 1 - 60<br>
-   * Campo pode ser utilizado para informar o e-mail de recepção da NF-e indicada pelo destinatário (v2.0).
+   * Campo pode ser utilizado para informar o e-mail de recepção da NF-e indicada pelo destinatário (v2.0) <Br>
+   * <br>
+   * <b>ATENÇÃO:</B> A validação do campo de e-mail (utilizando o {@link RFWMetaStringEmailField} foi removida porque a SEFAZ aceita qualquer valor, e houve registro de notas com e-mails inválidos ou mesmo com múltiplos e-mails separados por separadores sem padrão (Encontrei com '|', ';' e ','). Se o sistema validar o campo pode ter problema em aceitar notas que foram autorizadas pela SEFAZ.
    *
    * @return # e19 email email E E01 C 0-1 1 - 60<br>
    *         Campo pode ser utilizado para informar o e-mail de recepção da NF-e indicada pelo destinatário (v2

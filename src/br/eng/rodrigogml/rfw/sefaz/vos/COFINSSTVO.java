@@ -21,13 +21,13 @@ public class COFINSSTVO extends RFWVO {
   /**
    * T02 vBC Valor da Base de Cálculo da COFINS E T01.1 N 1-1 13v2
    */
-  @RFWMetaBigDecimalField(caption = "Valod BC do COFINS", minValue = "0", maxValue = "9999999999999.99", scale = 2, required = false)
+  @RFWMetaBigDecimalField(caption = "Valod BC do COFINS", minValue = "0", maxValue = "9999999999999.99", scale = 0, scaleMax = 2, required = false)
   private BigDecimal vbc = null;
 
   /**
    * T03 pCOFINS Alíquota da COFINS (em percentual) E T01.1 N 1-1 3v2-4
    */
-  @RFWMetaBigDecimalField(caption = "Alíquota do COFINS (%)", minValue = "0", maxValue = "999.9999", scale = 2, scaleMax = 4, required = false)
+  @RFWMetaBigDecimalField(caption = "Alíquota do COFINS (%)", minValue = "0", maxValue = "999.9999", scale = 0, scaleMax = 4, required = false)
   private BigDecimal pcofins = null;
 
   /**
@@ -45,7 +45,7 @@ public class COFINSSTVO extends RFWVO {
   /**
    * T06 vCOFINS Valor da COFINS E T01 N 1-1 13v2
    */
-  @RFWMetaBigDecimalField(caption = "Valor do COFINS", minValue = "0", maxValue = "9999999999999.99", scale = 2, required = false)
+  @RFWMetaBigDecimalField(caption = "Valor do COFINS", minValue = "0", maxValue = "9999999999999.99", scale = 0, scaleMax = 2, required = false)
   private BigDecimal vcofins = null;
 
   /**
