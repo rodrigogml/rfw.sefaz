@@ -16,12 +16,6 @@
 					<exclude>**/*.java</exclude>
 				</excludes>
 			</resource>
-			<resource>
-				<directory>srcTest</directory>
-				<excludes>
-					<exclude>**/*.java</exclude>
-				</excludes>
-			</resource>
 		</resources>
 		<plugins>
 			<plugin>
@@ -71,6 +65,28 @@
 			<groupId>br.eng.rodrigogml.rfw</groupId>
 			<artifactId>RFW.Kernel</artifactId>
 			<version>1.0</version>
+		</dependency>
+		
+		<dependency>
+	        <groupId>org.apache.axis2</groupId>
+	        <artifactId>axis2-adb</artifactId>
+	        <version>1.8.2</version>
+    	</dependency>
+		<dependency>
+			<groupId>org.apache.axis2</groupId>
+			<artifactId>axis2-xmlbeans</artifactId>
+			<version>1.8.2</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.axis2</groupId>
+			<artifactId>axis2-transport-http</artifactId>
+			<version>1.8.2</version>
+		</dependency>
+		<!-- O pacote abaixo não é necessário para compilar, mas para execução -->
+		<dependency>
+			<groupId>org.apache.axis2</groupId>
+			<artifactId>axis2-transport-local</artifactId>
+			<version>1.8.2</version>
 		</dependency>
 	</dependencies>
 </project>

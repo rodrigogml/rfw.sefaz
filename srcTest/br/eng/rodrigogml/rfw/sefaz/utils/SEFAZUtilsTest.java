@@ -10,7 +10,6 @@ import br.eng.rodrigogml.rfw.kernel.RFW;
 import br.eng.rodrigogml.rfw.kernel.exceptions.RFWException;
 import br.eng.rodrigogml.rfw.kernel.preprocess.PreProcess;
 import br.eng.rodrigogml.rfw.kernel.utils.RUFile;
-import br.eng.rodrigogml.rfw.kernel.validator.RFWValidator;
 import br.eng.rodrigogml.rfw.sefaz.vos.NfeProcVO;
 
 /**
@@ -29,7 +28,7 @@ public class SEFAZUtilsTest {
     PreProcess.requiredNonNullCritical(pathToXML, "O caminho para os arquivos XML de NFe não foi definido! Teste falhou!");
 
     File[] files = RUFile.getFilesFromDirectory(pathToXML);
-    final RFWValidator validator = new RFWValidator();
+    // final RFWValidator validator = new RFWValidator();
 
     int count = 1;
     for (File file : files) {
@@ -37,11 +36,12 @@ public class SEFAZUtilsTest {
       if (file.length() == 1) {
         System.out.println("Excluindo!");
         file.delete();
+        count++;
         continue;
       }
       NfeProcVO nfvo = SEFAZUtils.readXML(RUFile.readFileContentToString(file));
-      validator.validatePersist(NfeProcVO.class, nfvo);
-      file.delete();
+      SEFAZValidator.validateNFeVO(nfvo.getNfe());
+      // file.delete();
       count++;
     }
 
