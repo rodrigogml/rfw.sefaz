@@ -13,10 +13,12 @@ public class SEFAZDefinitions {
   // Ambientes de Produção
   public static final String SP_PRODUCTION_V4_00_CADCONSULTACADASTRO4 = "https://nfe.fazenda.sp.gov.br/ws/cadconsultacadastro4.asmx";
   public static final String SP_PRODUCTION_V4_00_NFEAUTORIZACAO4 = "https://nfe.svrs.rs.gov.br/ws/NfeAutorizacao/NFeAutorizacao4.asmx";
+  public static final String SP_PRODUCTION_V4_00_NFERETAUTORIZACAO4 = "https://nfe.fazenda.sp.gov.br/ws/nferetautorizacao4.asmx";
 
   // Ambientes de Homologação
   public static final String SP_TEST_V4_00_CADCONSULTACADASTRO4 = "https://homologacao.nfe.fazenda.sp.gov.br/ws/cadconsultacadastro4.asmx";
   public static final String SP_TEST_V4_00_NFEAUTORIZACAO4 = "https://homologacao.nfe.fazenda.sp.gov.br/ws/NFeAutorizacao4.asmx";
+  public static final String SP_TEST_V4_00_NFERETAUTORIZACAO4 = "https://homologacao.nfe.fazenda.sp.gov.br/ws/nferetautorizacao4.asmx";
 
   /**
    * Construtor privado para classe totalmente estática.
