@@ -52,7 +52,7 @@ public class SEFAZUtils {
       if (matcher.find()) {
         xml = matcher.group(1);
       } else {
-        throw new RFWCriticalException("Tag <XML-Fragment> não encontrada na resposta!");
+        // Se não encontrou a tag fragment, utiliza o conteúdo recebido;
       }
 
       return (T) um.unmarshal(new StringReader(xml));

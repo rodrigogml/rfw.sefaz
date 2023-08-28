@@ -69,20 +69,20 @@ public class SEFAZDefinitions {
 
   /**
    * Enum que representa os servidores de comunicação da SEFAZ.<br>
-   * <li>Cada estado e DF contém o código do distrito usado no XML;</li><br>
-   * <li>Cada estado incluí também o endereço que o consumidor utilizará para consultar sua NFCe.
+   * <li>Cada estado e DF contém o código do IBGE usado no XML;</li><br>
    */
   public static enum SefazServer {
-    // AC("12", null), AL("27", null), AP("16", null), AM("13", null), BA("29", null), CE("23", null), DF("53", null), ES("32", null), GO("52", null), MA("21", null), MG("31", null), MS("50", null), MT("51", null), PA("15", null), PB("25", null), PE("26", null), PI("22", null), PR("41", null), RJ("33", null), RN("24", null), RO("11", null), RR("14", null), RS("43", null), SC("42", null), SE("28",
-    // null), SP("35", "www.nfce.fazenda.sp.gov.br"), TO("17", null), AN("91", null);
-    SP("35", "www.nfce.fazenda.sp.gov.br");
+    AC("12"), AL("27"), AP("16"), AM("13"), BA("29"), CE("23"), DF("53"), ES("32"), GO("52"), MA("21"), MG("31"), MS("50"), MT("51"), PA("15"), PB("25"), PE("26"), PI("22"), PR("41"), RJ("33"), RN("24"), RO("11"), RR("14"), RS("43"), SC("42"), SE("28"), SP("35"), TO("17"),
+    /**
+     * Sigla do "Ambiente Nacional", código 91<br>
+     * Código especial utilizado para alguns casos específicos.
+     */
+    AN("91");
 
     private String ibgeCode = "";
-    private String checkurl = "";
 
-    SefazServer(String value, String checkurl) {
+    SefazServer(String value) {
       this.ibgeCode = value;
-      this.checkurl = checkurl;
     }
 
     /**
@@ -95,19 +95,16 @@ public class SEFAZDefinitions {
     }
 
     /**
-     * Gets the check URL.
+     * Recupera a Sigla do estado brasileiro de acordo com o código do IBGE utilizado no XML, ou {@link #AN} para ambienda nacional (utilizado em casos especiais).
      *
-     * @return the check URL
+     * @param ibgeCode
+     * @return
      */
-    public String getCheckURL() {
-      return checkurl;
+    public static SefazServer valueOfIBGECode(String ibgeCode) {
+      for (int i = 0; i < SefazServer.values().length; i++)
+        if (ibgeCode.equalsIgnoreCase(SefazServer.values()[i].getIBGECode())) return SefazServer.values()[i];
+      return null;
     }
-
-    // public static SefazServer valueOfIBGECode(String ibgeCode) {
-    // for (int i = 0; i < SefazServer.values().length; i++)
-    // if (ibgeCode.equalsIgnoreCase(SefazServer.values()[i].getIBGECode())) return SefazServer.values()[i];
-    // return null;
-    // }
 
     /**
      * Gets the acronym.
