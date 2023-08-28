@@ -16,8 +16,12 @@ public class SEFAZXMLValidator {
   private SEFAZXMLValidator() {
   }
 
-  public static void validateConsCad_v2_00(String xml) throws RFWException {
+  public static void validateConsCadV200(String xml) throws RFWException {
     SEFAZXMLValidator.validateXMLAgainstSchema(xml, "consCad_v2.00.xsd", "/xsd/");
+  }
+
+  public static void validateEnviNFeV400(String xml) throws RFWException {
+    SEFAZXMLValidator.validateXMLAgainstSchema(xml, "enviNFe_v4.00.xsd", "/xsd/");
   }
 
   /**

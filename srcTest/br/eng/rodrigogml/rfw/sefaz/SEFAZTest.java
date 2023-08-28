@@ -1,9 +1,6 @@
 package br.eng.rodrigogml.rfw.sefaz;
 
-import java.io.StringReader;
-
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.Unmarshaller;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Before;
 import org.junit.FixMethodOrder;
@@ -19,7 +16,7 @@ import br.eng.rodrigogml.rfw.kernel.utils.RUFile;
 import br.eng.rodrigogml.rfw.kernel.utils.RUReflex;
 import br.eng.rodrigogml.rfw.sefaz.SEFAZDefinitions.SefazEnvironment;
 import br.eng.rodrigogml.rfw.sefaz.SEFAZDefinitions.SefazServer;
-import br.eng.rodrigogml.rfw.sefaz.vos.RetConsCadVO;
+import br.eng.rodrigogml.rfw.sefaz.xsdobjects.conscadv200.TRetConsCad;
 
 /**
  * Description: Classe de teste da {@link SEFAZ}.<br>
@@ -95,31 +92,21 @@ public class SEFAZTest {
   public void t00_consultaCadastroCPF() throws RFWException {
     SEFAZ sefaz = new SEFAZ(cert, trust, SefazServer.SP, SefazEnvironment.TEST);
 
-    String ret = sefaz.consultaCadastroByCPF_v2_00("12345678910");
-    System.out.println(ret);
+    final String cpf = "12345678910";
+    TRetConsCad root = sefaz.consultaCadastroV200byCPF(cpf);
+
+    assertEquals(root.getInfCons().getCPF(), cpf);
   }
 
   @Test
   public void t01_consultaCadastroCNPJ() throws RFWException {
     SEFAZ sefaz = new SEFAZ(cert, trust, SefazServer.SP, SefazEnvironment.TEST);
 
-    String ret = sefaz.consultaCadastroByCNPJ_v2_00("45990181000189");
-    System.out.println(ret);
-  }
-
-  @Test
-  public void t02_JAXBTest() throws Exception {
-    // String xml = "<retConsCad versao=\"2.00\" xmlns=\"http://www.portalfiscal.inf.br/nfe\"><infCons><verAplic>SP_NFE_PL009_V4</verAplic><cStat>262</cStat><xMotivo>Rejeição: UF não fornece consulta por CPF</xMotivo><UF>SP</UF><CPF>12345678910</CPF><dhCons>2023-08-25T14:46:34-03:00</dhCons><cUF>35</cUF></infCons></retConsCad>";
-    String xml = "<retConsCad versao=\"2.00\"><infCons><verAplic>SP_NFE_PL009_V4</verAplic><cStat>262</cStat><xMotivo>Rejeição: UF não fornece consulta por CPF</xMotivo><UF>SP</UF><CPF>12345678910</CPF><dhCons>2023-08-25T18:25:21-03:00</dhCons><cUF>35</cUF></infCons></retConsCad>";
-
-    JAXBContext context = JAXBContext.newInstance(RetConsCadVO.class);
-    Unmarshaller um = context.createUnmarshaller();
-    StringReader reader = new StringReader(xml);
-
-    RetConsCadVO vo = (RetConsCadVO) um.unmarshal(reader);
-
-    System.out.println(vo.getInfCons().getcStat());
-    System.out.println(RUReflex.printObject(vo));
+    final String cnpj = "45990181000189";
+    TRetConsCad root = sefaz.consultaCadastroV200byCNPJ(cnpj);
+    assertEquals(root.getInfCons().getCNPJ(), cnpj);
+    assertEquals(root.getInfCons().getInfCad().get(0).getXNome(), "ROBERT BOSCH LIMITADA");
+    System.out.println(RUReflex.printObject(root));
   }
 
 }

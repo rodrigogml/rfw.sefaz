@@ -17,8 +17,6 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
 import org.apache.xmlbeans.XmlObject;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
 
 import br.eng.rodrigogml.rfw.kernel.exceptions.RFWCriticalException;
 import br.eng.rodrigogml.rfw.kernel.exceptions.RFWException;
@@ -27,13 +25,22 @@ import br.eng.rodrigogml.rfw.kernel.interfaces.RFWCertificate;
 import br.eng.rodrigogml.rfw.kernel.logger.RFWLogger;
 import br.eng.rodrigogml.rfw.kernel.preprocess.PreProcess;
 import br.eng.rodrigogml.rfw.kernel.utils.RUCert;
-import br.eng.rodrigogml.rfw.kernel.utils.RUXML;
 import br.eng.rodrigogml.rfw.sefaz.SEFAZDefinitions.SefazContingency;
 import br.eng.rodrigogml.rfw.sefaz.SEFAZDefinitions.SefazEnvironment;
 import br.eng.rodrigogml.rfw.sefaz.SEFAZDefinitions.SefazServer;
+import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZUtils;
 import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZXMLValidator;
+import br.eng.rodrigogml.rfw.sefaz.xsdobjects.conscadv200.TConsCad;
+import br.eng.rodrigogml.rfw.sefaz.xsdobjects.conscadv200.TConsCad.InfCons;
+import br.eng.rodrigogml.rfw.sefaz.xsdobjects.conscadv200.TRetConsCad;
+import br.eng.rodrigogml.rfw.sefaz.xsdobjects.conscadv200.TUfCons;
+import br.eng.rodrigogml.rfw.sefaz.xsdobjects.envinfev400.TEnviNFe;
+import br.eng.rodrigogml.rfw.sefaz.xsdobjects.envinfev400.TRetEnviNFe;
 
 import br.inf.portalfiscal.www.nfe.wsdl.cadconsultacadastro4.CadConsultaCadastro4Stub;
+import br.inf.portalfiscal.www.nfe.wsdl.nfeautorizacao4.NFeAutorizacao4Stub;
+import br.inf.portalfiscal.www.nfe.wsdl.nfeautorizacao4.NfeDadosMsgDocument;
+import br.inf.portalfiscal.www.nfe.wsdl.nfeautorizacao4.NfeResultMsgDocument;
 
 /**
  * Description: Objeto utilizado para abstrair toda a comunicação com o servidor da SEFAZ.<br>
@@ -122,8 +129,9 @@ public class SEFAZ {
    * @return XML da mensagem de retorno do WebService.
    * @throws RFWException
    */
-  public String consultaCadastroByCPF_v2_00(String cpf) throws RFWException {
-    return this.consultaCadastro_v2_00(cpf, null, null);
+  public TRetConsCad consultaCadastroV200byCPF(String cpf) throws RFWException {
+    final TConsCad root = createConsCadV200Message(cpf, null, null);
+    return this.consultaCadastroV200(root);
   }
 
   /**
@@ -133,25 +141,23 @@ public class SEFAZ {
    * @return XML da mensagem de retorno do WebService.
    * @throws RFWException
    */
-  public String consultaCadastroByCNPJ_v2_00(String cnpj) throws RFWException {
-    return this.consultaCadastro_v2_00(null, cnpj, null);
+  public TRetConsCad consultaCadastroV200byCNPJ(String cnpj) throws RFWException {
+    final TConsCad root = createConsCadV200Message(null, cnpj, null);
+    return this.consultaCadastroV200(root);
   }
 
   /**
-   * Chama o método "consultaCadastro" disponibilizado no WebSerice da SEFAZ para consultar o contribuinte. <Br>
-   * Apenas um dos parâmetros deve ser informado. Ao informar múltipls apenas um deles será utilizado, mas mesma ordem em que estão definidos no método.
+   * Chama o método "consultaCadastro v2.00" disponibilizado no WebSerice da SEFAZ para consultar o contribuinte. <Br>
    *
-   * @param cpf CPF a ser consultado.
-   * @param cnpj CNPJ a ser consultado.
-   * @param ie IE a ser consultado
-   * @return XML da mensagem de retorno do WebService.
+   * @param root Objeto representando o XML para envio da requisição.
+   * @return Objeto do XML da mensagem de retorno do WebService.
    * @throws RFWException
    */
-  private String consultaCadastro_v2_00(String cpf, String cnpj, String ie) throws RFWException {
+  public TRetConsCad consultaCadastroV200(TConsCad root) throws RFWException {
     br.inf.portalfiscal.www.nfe.wsdl.cadconsultacadastro4.NfeDadosMsgDocument nfeDadosMsg = br.inf.portalfiscal.www.nfe.wsdl.cadconsultacadastro4.NfeDadosMsgDocument.Factory.newInstance();
     br.inf.portalfiscal.www.nfe.wsdl.cadconsultacadastro4.NfeDadosMsgDocument.NfeDadosMsg req = nfeDadosMsg.addNewNfeDadosMsg();
 
-    String msg = createConsCad_v2_00(cpf, cnpj, ie);
+    String msg = SEFAZUtils.writeXMLFromObject(root);
     try {
       req.set(XmlObject.Factory.parse(msg));
     } catch (Exception e) {
@@ -161,9 +167,16 @@ public class SEFAZ {
     CadConsultaCadastro4Stub stub = createCadConsultaCadastro4Stub(env, server, contingency);
     br.inf.portalfiscal.www.nfe.wsdl.cadconsultacadastro4.NfeResultMsgDocument result = null;
 
+    String xml = null;
     try {
       result = stub.consultaCadastro(nfeDadosMsg);
-      return result.getNfeResultMsg().toString();
+      xml = result.getNfeResultMsg().toString();
+
+      // Valida o XML com o schema antes de tentar a conexão
+      SEFAZXMLValidator.validateConsCadV200(xml);
+
+      // Removemos o namespace do XML para facilitar o trabalho com o JAXB. Mais simples do que configurar filtros ou todos os elementos manualmente.
+      return SEFAZUtils.readXMLToObject(xml, TRetConsCad.class);
     } catch (RemoteException e) {
       if ("Transport error: 403 Error: Forbidden".equals(e.getMessage())) {
         throw new RFWWarningException("Não foi possível comunicar com o servidor da SEFAZ.", e);
@@ -171,8 +184,51 @@ public class SEFAZ {
         throw new RFWWarningException("Não foi possível comunicar com o servidor da SEFAZ.", e);
       } else {
         RFWLogger.logError("Mensagem não mapeada de erro durante comunicação com a SEFAZ: " + e.getMessage());
+        throw new RFWWarningException("Não foi possível comunicar com o servidor da SEFAZ.", e);
       }
-      throw new RFWWarningException("Não foi possível comunicar com o servidor da SEFAZ.", e);
+    }
+  }
+
+  /**
+   * Chama o método "nfeAutorizacaoLote v4.00" disponibilizado no WebSerice da SEFAZ para consultar o contribuinte. <Br>
+   *
+   * @param root Objeto representando o XML para envio da requisição.
+   * @return Objeto do XML da mensagem de retorno do WebService.
+   * @throws RFWException
+   */
+  public TRetEnviNFe nfeAutorizacaoLoteV400(TEnviNFe root) throws RFWException {
+    NfeDadosMsgDocument nfeDadosMsg = NfeDadosMsgDocument.Factory.newInstance();
+    NfeDadosMsgDocument.NfeDadosMsg req = nfeDadosMsg.addNewNfeDadosMsg();
+
+    String msg = SEFAZUtils.writeXMLFromObject(root);
+    try {
+      req.set(XmlObject.Factory.parse(msg));
+    } catch (Exception e) {
+      throw new RFWCriticalException("Falha ao criar mensagem para enviar pelo WebService da SEFAZ.", new String[] { msg }, e);
+    }
+
+    NFeAutorizacao4Stub stub = createNFeAutorizacao4Stub(env, server, contingency);
+    NfeResultMsgDocument result = null;
+
+    String xml = null;
+    try {
+      result = stub.nfeAutorizacaoLote(nfeDadosMsg);
+      xml = result.getNfeResultMsg().toString();
+
+      // Valida o XML com o schema antes de tentar a conexão
+      SEFAZXMLValidator.validateEnviNFeV400(xml);
+
+      // Removemos o namespace do XML para facilitar o trabalho com o JAXB. Mais simples do que configurar filtros ou todos os elementos manualmente.
+      return SEFAZUtils.readXMLToObject(xml, TRetEnviNFe.class);
+    } catch (RemoteException e) {
+      if ("Transport error: 403 Error: Forbidden".equals(e.getMessage())) {
+        throw new RFWWarningException("Não foi possível comunicar com o servidor da SEFAZ.", e);
+      } else if ("Read timed out".equals(e.getMessage())) {
+        throw new RFWWarningException("Não foi possível comunicar com o servidor da SEFAZ.", e);
+      } else {
+        RFWLogger.logError("Mensagem não mapeada de erro durante comunicação com a SEFAZ: " + e.getMessage());
+        throw new RFWWarningException("Não foi possível comunicar com o servidor da SEFAZ.", e);
+      }
     }
   }
 
@@ -186,32 +242,27 @@ public class SEFAZ {
    * @return XML da mensagem de retorno do WebService.
    * @throws RFWException
    */
-  private String createConsCad_v2_00(String cpf, String cnpj, String ie) throws RFWException {
-    final Document doc = RUXML.createNewDocument();
+  private TConsCad createConsCadV200Message(String cpf, String cnpj, String ie) throws RFWException {
+    TConsCad root = new TConsCad();
+    root.setVersao("2.00");
 
-    final Element root = RUXML.createElementTag(doc, "ConsCad", "http://www.portalfiscal.inf.br/nfe");
-    root.setAttribute("versao", "2.00");
-
-    final Element infCons = RUXML.createElementTag(doc, root, "infCons");
-    RUXML.createElementTagWithTextContent(doc, infCons, "xServ", "CONS-CAD");
-    RUXML.createElementTagWithTextContent(doc, infCons, "UF", server.getAcronym());
+    root.setInfCons(new InfCons());
+    root.getInfCons().setXServ("CONS-CAD");
+    root.getInfCons().setUF(TUfCons.valueOf(server.getAcronym()));
 
     if (cpf != null) {
-      RUXML.createElementTagWithTextContent(doc, infCons, "CPF", cpf);
+      root.getInfCons().setCPF(cpf);
     } else if (cnpj != null) {
-      RUXML.createElementTagWithTextContent(doc, infCons, "CNPJ", cnpj);
+      root.getInfCons().setCNPJ(cnpj);
     } else if (ie != null) {
-      RUXML.createElementTagWithTextContent(doc, infCons, "IE", ie);
+      root.getInfCons().setIE(ie);
     }
 
-    String xml = RUXML.writeDOMToString(doc, true);
-    SEFAZXMLValidator.validateConsCad_v2_00(xml);
-
-    return xml;
+    return root;
   }
 
   /**
-   * Cria o STUB de conexão para o serviço NfeConsultaCadastro (método: consultaCadastro).
+   * Cria o STUB de conexão para o serviço NfeConsultaCadastro.
    *
    * @param env ambiente de conexão.
    * @param server Servidor para conexão.
@@ -234,6 +285,45 @@ public class SEFAZ {
         if (server.equals(SefazServer.SP)) {
           if (contingency == null) {
             stub = new CadConsultaCadastro4Stub(SEFAZDefinitions.SP_TEST_V4_00_CADCONSULTACADASTRO4);
+          } else {
+            throw new RFWCriticalException("RFW_000035", new String[] { env.toString(), server.toString(), "" + contingency });
+          }
+        }
+      }
+    } catch (AxisFault e) {
+      throw new RFWCriticalException("Falha ao criar Stub para o ambiente '${0}', UF '${1}', contingência: '${2}'.", new String[] { env.toString(), server.toString(), "" + contingency }, e);
+    }
+    if (stub == null) {
+      throw new RFWCriticalException("Falha ao criar Stub para o ambiente '${0}', UF '${1}', contingência: '${2}'.", new String[] { env.toString(), server.toString(), "" + contingency });
+    }
+    stub._getServiceClient().getOptions().setProperty(HTTPConstants.CACHED_HTTP_CLIENT, this.httpClientCustom);
+    return stub;
+  }
+
+  /**
+   * Cria o STUB de conexão para o serviço NfeAutorizacao.
+   *
+   * @param env ambiente de conexão.
+   * @param server Servidor para conexão.
+   * @param contingency Método de contingência ou null para nenhuma contingência.
+   * @return Stub pronto para conexão.
+   * @throws RFWException
+   */
+  private NFeAutorizacao4Stub createNFeAutorizacao4Stub(SefazEnvironment env, SefazServer server, SefazContingency contingency) throws RFWException {
+    NFeAutorizacao4Stub stub = null;
+    try {
+      if (env.equals(SefazEnvironment.PRODUCTION)) {
+        if (server.equals(SefazServer.SP)) {
+          if (contingency == null) {
+            stub = new NFeAutorizacao4Stub(SEFAZDefinitions.SP_PRODUCTION_V4_00_NFEAUTORIZACAO4);
+          } else {
+            throw new RFWCriticalException("RFW_000035", new String[] { env.toString(), server.toString(), "" + contingency });
+          }
+        }
+      } else if (env.equals(SefazEnvironment.TEST)) {
+        if (server.equals(SefazServer.SP)) {
+          if (contingency == null) {
+            stub = new NFeAutorizacao4Stub(SEFAZDefinitions.SP_TEST_V4_00_NFEAUTORIZACAO4);
           } else {
             throw new RFWCriticalException("RFW_000035", new String[] { env.toString(), server.toString(), "" + contingency });
           }

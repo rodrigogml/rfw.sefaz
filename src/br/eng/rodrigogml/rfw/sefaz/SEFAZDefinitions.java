@@ -10,9 +10,13 @@ import br.eng.rodrigogml.rfw.kernel.RFW;
  */
 public class SEFAZDefinitions {
 
+  // Ambientes de Produção
   public static final String SP_PRODUCTION_V4_00_CADCONSULTACADASTRO4 = "https://nfe.fazenda.sp.gov.br/ws/cadconsultacadastro4.asmx";
+  public static final String SP_PRODUCTION_V4_00_NFEAUTORIZACAO4 = "https://nfe.svrs.rs.gov.br/ws/NfeAutorizacao/NFeAutorizacao4.asmx";
 
+  // Ambientes de Homologação
   public static final String SP_TEST_V4_00_CADCONSULTACADASTRO4 = "https://homologacao.nfe.fazenda.sp.gov.br/ws/cadconsultacadastro4.asmx";
+  public static final String SP_TEST_V4_00_NFEAUTORIZACAO4 = "https://homologacao.nfe.fazenda.sp.gov.br/ws/NFeAutorizacao4.asmx";
 
   /**
    * Construtor privado para classe totalmente estática.
@@ -59,32 +63,6 @@ public class SEFAZDefinitions {
       }
       return null;
     }
-  }
-
-  /**
-   * Define o Status da manifestação do destinatário com a SEFAZ.
-   */
-  public static enum SefazRecipientManifestation {
-    /**
-     * Indica que nenhuma minisfestação foi dada ao SEFAZ.
-     */
-    NONE,
-    /**
-     * Indica que o documento foi sinalizado na SEFAZ como "Conhecimento da Emissão".
-     */
-    EMISSION_KNOWLEDGE,
-    /**
-     * Infica que a operação foi sinalizada como não realizada. Por devolução ou qualquer outro motivo.
-     */
-    UNFINISHED,
-    /**
-     * Indica que a manifestação foi feita indicando a conclusão da operação.
-     */
-    FINISHED,
-    /**
-     * Indica que a nota é desconhecida pela empresa. Ou seja, a empresa não tem conhecimento desta operação.
-     */
-    UNKNOW
   }
 
   /**
@@ -154,10 +132,4 @@ public class SEFAZDefinitions {
     EPEC,
   }
 
-  /**
-   * Define o Regime Tributário da empresa para qual a regra se aplica.<br>
-   */
-  public static enum SefazTaxSystem {
-    SIMPLESNACIONAL, SIMPLESNACIONAL_EXCESSOSUBLIME, LUCROPRESUMIDO, LUCROREAL
-  }
 }
