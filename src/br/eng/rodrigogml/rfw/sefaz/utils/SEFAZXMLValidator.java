@@ -40,7 +40,7 @@ public class SEFAZXMLValidator {
       RFWLogger.logDebug("XML: " + xml);
       RFWLogger.logDebug("schemaPath: " + schemapath);
       RFWLogger.logDebug("basePath: " + basepath);
-      RFWCriticalException ex = new RFWCriticalException("RFW_000035", e);
+      RFWCriticalException ex = new RFWCriticalException("RFW_000035", new String[] { schemapath }, e);
       RFWLogger.logException(ex);
       throw ex;
     }

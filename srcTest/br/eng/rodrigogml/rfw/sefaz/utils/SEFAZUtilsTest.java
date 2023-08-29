@@ -11,7 +11,8 @@ import org.junit.runners.MethodSorters;
 import br.eng.rodrigogml.rfw.kernel.RFW;
 import br.eng.rodrigogml.rfw.kernel.preprocess.PreProcess;
 import br.eng.rodrigogml.rfw.kernel.utils.RUFile;
-import br.eng.rodrigogml.rfw.sefaz.xsdobjects.consrecinfev400.TNfeProc;
+
+import xsdobjects.consrecinfev400.TNfeProc;
 
 /**
  * Description: Classe de testes da classe {@link SEFAZUtils}.<br>
@@ -33,15 +34,21 @@ public class SEFAZUtilsTest {
     for (int i = 0; i < files.length; i++) {
       File file = files[i];
       String xml = RUFile.readFileContentToString(file);
-      System.out.println(file.getAbsolutePath());
       TNfeProc bean = SEFAZUtils.readXMLToObject(xml, TNfeProc.class);
       assertNotNull(bean);
       assertNotNull(bean.getNFe());
       assertNotNull(bean.getNFe().getInfNFe());
       assertNotNull(bean.getNFe().getInfNFe().getId());
-
+      // System.out.println(file.getAbsolutePath());
       // System.out.println(bean.getNFe().getInfNFe().getId());
     }
 
+  }
+
+  public static void main(String[] args) throws Exception {
+    String xml = RUFile.readFileContentToString("c:\\t\\NFesDEV\\nfe31220930698882000171550010000146861909298286.xml");
+    TNfeProc tNfe = SEFAZUtils.readXMLToObject(xml, TNfeProc.class);
+
+    System.out.println(tNfe.getNFe().getInfNFe().getIde().getCMunFG());
   }
 }

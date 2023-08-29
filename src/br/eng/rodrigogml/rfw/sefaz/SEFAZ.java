@@ -30,20 +30,20 @@ import br.eng.rodrigogml.rfw.sefaz.SEFAZDefinitions.SefazEnvironment;
 import br.eng.rodrigogml.rfw.sefaz.SEFAZDefinitions.SefazServer;
 import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZUtils;
 import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZXMLValidator;
-import br.eng.rodrigogml.rfw.sefaz.xsdobjects.conscadv200.TConsCad;
-import br.eng.rodrigogml.rfw.sefaz.xsdobjects.conscadv200.TConsCad.InfCons;
-import br.eng.rodrigogml.rfw.sefaz.xsdobjects.conscadv200.TRetConsCad;
-import br.eng.rodrigogml.rfw.sefaz.xsdobjects.conscadv200.TUfCons;
-import br.eng.rodrigogml.rfw.sefaz.xsdobjects.consrecinfev400.TConsReciNFe;
-import br.eng.rodrigogml.rfw.sefaz.xsdobjects.consrecinfev400.TRetConsReciNFe;
-import br.eng.rodrigogml.rfw.sefaz.xsdobjects.envinfev400.TEnviNFe;
-import br.eng.rodrigogml.rfw.sefaz.xsdobjects.envinfev400.TRetEnviNFe;
 
 import br.inf.portalfiscal.www.nfe.wsdl.cadconsultacadastro4.CadConsultaCadastro4Stub;
 import br.inf.portalfiscal.www.nfe.wsdl.nfeautorizacao4.NFeAutorizacao4Stub;
 import br.inf.portalfiscal.www.nfe.wsdl.nfeautorizacao4.NfeDadosMsgDocument;
 import br.inf.portalfiscal.www.nfe.wsdl.nfeautorizacao4.NfeResultMsgDocument;
 import br.inf.portalfiscal.www.nfe.wsdl.nferetautorizacao4.NFeRetAutorizacao4Stub;
+import xsdobjects.conscadv200.TConsCad;
+import xsdobjects.conscadv200.TConsCad.InfCons;
+import xsdobjects.conscadv200.TRetConsCad;
+import xsdobjects.conscadv200.TUfCons;
+import xsdobjects.consrecinfev400.TConsReciNFe;
+import xsdobjects.consrecinfev400.TRetConsReciNFe;
+import xsdobjects.envinfev400.TEnviNFe;
+import xsdobjects.envinfev400.TRetEnviNFe;
 
 /**
  * Description: Objeto utilizado para abstrair toda a comunicação com o servidor da SEFAZ.<br>
@@ -162,6 +162,10 @@ public class SEFAZ {
 
     String msg = SEFAZUtils.writeXMLFromObject(root);
     try {
+
+      // Valida o XML com o schema antes de tentar a conexão
+      SEFAZXMLValidator.validateConsCadV200(msg);
+
       req.set(XmlObject.Factory.parse(msg));
     } catch (Exception e) {
       throw new RFWCriticalException("Falha ao criar mensagem para enviar pelo WebService da SEFAZ.", new String[] { msg }, e);
@@ -174,9 +178,6 @@ public class SEFAZ {
     try {
       result = stub.consultaCadastro(nfeDadosMsg);
       xml = result.getNfeResultMsg().toString();
-
-      // Valida o XML com o schema antes de tentar a conexão
-      SEFAZXMLValidator.validateConsCadV200(xml);
 
       // Removemos o namespace do XML para facilitar o trabalho com o JAXB. Mais simples do que configurar filtros ou todos os elementos manualmente.
       return SEFAZUtils.readXMLToObject(xml, TRetConsCad.class);

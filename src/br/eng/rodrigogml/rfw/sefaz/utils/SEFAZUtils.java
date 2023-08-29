@@ -13,7 +13,8 @@ import javax.xml.bind.Unmarshaller;
 import br.eng.rodrigogml.rfw.kernel.exceptions.RFWCriticalException;
 import br.eng.rodrigogml.rfw.kernel.exceptions.RFWException;
 import br.eng.rodrigogml.rfw.kernel.preprocess.PreProcess;
-import br.eng.rodrigogml.rfw.sefaz.xsdobjects.consrecinfev400.TNfeProc;
+
+import xsdobjects.consrecinfev400.TNfeProc;
 
 /**
  * Description: Esta classe contém métodos utilitários para processar e trabalhar com o XML (ou objeto) da NFe.<br>
@@ -88,9 +89,10 @@ public class SEFAZUtils {
    *
    * @param xml XML a ser lido
    * @return objeto com o conteúdo do XML
+   * @throws RFWException
    */
-  public static TNfeProc readTNfeProcXML(String xml) {
-    return readTNfeProcXML(xml);
+  public static TNfeProc readTNfeProcXML(String xml) throws RFWException {
+    return readXMLToObject(xml, TNfeProc.class);
   }
 
   /**
