@@ -1,7 +1,7 @@
 <root>
   <facet id="jpt.jaxb">
     <node name="classgen">
-      <attribute name="package" value="br.eng.rodrigogml.rfw.sefaz.xsdobjects.consrecinfev400"/>
+      <attribute name="package" value="br.eng.rodrigogml.rfw.sefaz.xsdobjects.pl_009k_nt2023_001_v120"/>
     </node>
   </facet>
 </root>

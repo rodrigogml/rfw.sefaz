@@ -1,5 +1,7 @@
 package br.eng.rodrigogml.rfw.sefaz.utils;
 
+import static org.junit.Assert.assertNotNull;
+
 import java.io.File;
 
 import org.junit.FixMethodOrder;
@@ -31,8 +33,14 @@ public class SEFAZUtilsTest {
     for (int i = 0; i < files.length; i++) {
       File file = files[i];
       String xml = RUFile.readFileContentToString(file);
+      System.out.println(file.getAbsolutePath());
       TNfeProc bean = SEFAZUtils.readXMLToObject(xml, TNfeProc.class);
-      System.out.println(bean.getNFe().getInfNFe().getId());
+      assertNotNull(bean);
+      assertNotNull(bean.getNFe());
+      assertNotNull(bean.getNFe().getInfNFe());
+      assertNotNull(bean.getNFe().getInfNFe().getId());
+
+      // System.out.println(bean.getNFe().getInfNFe().getId());
     }
 
   }
