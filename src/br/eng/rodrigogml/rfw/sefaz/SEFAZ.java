@@ -27,7 +27,7 @@ import br.eng.rodrigogml.rfw.kernel.preprocess.PreProcess;
 import br.eng.rodrigogml.rfw.kernel.utils.RUCert;
 import br.eng.rodrigogml.rfw.sefaz.SEFAZDefinitions.SefazContingency;
 import br.eng.rodrigogml.rfw.sefaz.SEFAZDefinitions.SefazEnvironment;
-import br.eng.rodrigogml.rfw.sefaz.SEFAZDefinitions.SefazServer;
+import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SefazUF;
 import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZUtils;
 import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZXMLValidator;
 
@@ -58,7 +58,7 @@ public class SEFAZ {
   /**
    * Definição do estado/servidor de comunicação
    */
-  private final SefazServer server;
+  private final SefazUF uf;
 
   /**
    * Definição do ambiente de comunicação (Homologação/Produção).
@@ -81,15 +81,15 @@ public class SEFAZ {
    *
    * @param cert Certificado a ser utilizado nas operações de assinatura e transmissão. Se passado nulo faremos a conexão sem a identificação do certificado cliente. Geralmente um Certificado do Tipo A1.
    * @param trustCert Certificados aceitos como assinatura do servidor da SEFAZ. Geralmente um JKS com os certificados públicos das CAs atuais da SEFAZ.
-   * @param server UF do emitente do documento, utilizado para determinar o ambiente e outros parametros de comunicação.
+   * @param uf UF do emitente do documento, utilizado para determinar o ambiente e outros parametros de comunicação.
    * @param env Ambiente a ser utilizado na emissão de documentos e comunicação.
    * @throws RFWException
    */
-  public SEFAZ(RFWCertificate cert, RFWCertificate trustCert, SefazServer server, SefazEnvironment env) throws RFWException {
-    PreProcess.requiredNonNull(server);
+  public SEFAZ(RFWCertificate cert, RFWCertificate trustCert, SefazUF uf, SefazEnvironment env) throws RFWException {
+    PreProcess.requiredNonNull(uf);
     PreProcess.requiredNonNull(env);
 
-    this.server = server;
+    this.uf = uf;
     this.env = env;
 
     // Inicializa o Certificado do cliente se passado
@@ -171,7 +171,7 @@ public class SEFAZ {
       throw new RFWCriticalException("Falha ao criar mensagem para enviar pelo WebService da SEFAZ.", new String[] { msg }, e);
     }
 
-    CadConsultaCadastro4Stub stub = createCadConsultaCadastro4Stub(env, server, contingency);
+    CadConsultaCadastro4Stub stub = createCadConsultaCadastro4Stub(env, uf, contingency);
     br.inf.portalfiscal.www.nfe.wsdl.cadconsultacadastro4.NfeResultMsgDocument result = null;
 
     String xml = null;
@@ -211,7 +211,7 @@ public class SEFAZ {
       throw new RFWCriticalException("Falha ao criar mensagem para enviar pelo WebService da SEFAZ.", new String[] { msg }, e);
     }
 
-    NFeAutorizacao4Stub stub = createNFeAutorizacao4Stub(env, server, contingency);
+    NFeAutorizacao4Stub stub = createNFeAutorizacao4Stub(env, uf, contingency);
     NfeResultMsgDocument result = null;
 
     String xml = null;
@@ -254,7 +254,7 @@ public class SEFAZ {
       throw new RFWCriticalException("Falha ao criar mensagem para enviar pelo WebService da SEFAZ.", new String[] { msg }, e);
     }
 
-    NFeRetAutorizacao4Stub stub = createNFeRetAutorizacao4Stub(env, server, contingency);
+    NFeRetAutorizacao4Stub stub = createNFeRetAutorizacao4Stub(env, uf, contingency);
     br.inf.portalfiscal.www.nfe.wsdl.nferetautorizacao4.NfeResultMsgDocument result = null;
 
     String xml = null;
@@ -295,7 +295,7 @@ public class SEFAZ {
 
     root.setInfCons(new InfCons());
     root.getInfCons().setXServ("CONS-CAD");
-    root.getInfCons().setUF(TUfCons.valueOf(server.getAcronym()));
+    root.getInfCons().setUF(TUfCons.valueOf(uf.getAcronym()));
 
     if (cpf != null) {
       root.getInfCons().setCPF(cpf);
@@ -312,36 +312,36 @@ public class SEFAZ {
    * Cria o STUB de conexão para o serviço NfeConsultaCadastro.
    *
    * @param env ambiente de conexão.
-   * @param server Servidor para conexão.
+   * @param uf Servidor para conexão.
    * @param contingency Método de contingência ou null para nenhuma contingência.
    * @return Stub pronto para conexão.
    * @throws RFWException
    */
-  private CadConsultaCadastro4Stub createCadConsultaCadastro4Stub(SefazEnvironment env, SefazServer server, SefazContingency contingency) throws RFWException {
+  private CadConsultaCadastro4Stub createCadConsultaCadastro4Stub(SefazEnvironment env, SefazUF uf, SefazContingency contingency) throws RFWException {
     CadConsultaCadastro4Stub stub = null;
     try {
       if (env.equals(SefazEnvironment.PRODUCTION)) {
-        if (server.equals(SefazServer.SP)) {
+        if (uf.equals(SefazUF.SP)) {
           if (contingency == null) {
             stub = new CadConsultaCadastro4Stub(SEFAZDefinitions.SP_PRODUCTION_V4_00_CADCONSULTACADASTRO4);
           } else {
-            throw new RFWCriticalException("RFW_000035", new String[] { env.toString(), server.toString(), "" + contingency });
+            throw new RFWCriticalException("RFW_000035", new String[] { env.toString(), uf.toString(), "" + contingency });
           }
         }
       } else if (env.equals(SefazEnvironment.TEST)) {
-        if (server.equals(SefazServer.SP)) {
+        if (uf.equals(SefazUF.SP)) {
           if (contingency == null) {
             stub = new CadConsultaCadastro4Stub(SEFAZDefinitions.SP_TEST_V4_00_CADCONSULTACADASTRO4);
           } else {
-            throw new RFWCriticalException("RFW_000035", new String[] { env.toString(), server.toString(), "" + contingency });
+            throw new RFWCriticalException("RFW_000035", new String[] { env.toString(), uf.toString(), "" + contingency });
           }
         }
       }
     } catch (AxisFault e) {
-      throw new RFWCriticalException("Falha ao criar Stub para o ambiente '${0}', UF '${1}', contingência: '${2}'.", new String[] { env.toString(), server.toString(), "" + contingency }, e);
+      throw new RFWCriticalException("Falha ao criar Stub para o ambiente '${0}', UF '${1}', contingência: '${2}'.", new String[] { env.toString(), uf.toString(), "" + contingency }, e);
     }
     if (stub == null) {
-      throw new RFWCriticalException("Falha ao criar Stub para o ambiente '${0}', UF '${1}', contingência: '${2}'.", new String[] { env.toString(), server.toString(), "" + contingency });
+      throw new RFWCriticalException("Falha ao criar Stub para o ambiente '${0}', UF '${1}', contingência: '${2}'.", new String[] { env.toString(), uf.toString(), "" + contingency });
     }
     stub._getServiceClient().getOptions().setProperty(HTTPConstants.CACHED_HTTP_CLIENT, this.httpClientCustom);
     return stub;
@@ -351,36 +351,36 @@ public class SEFAZ {
    * Cria o STUB de conexão para o serviço NfeAutorizacao.
    *
    * @param env ambiente de conexão.
-   * @param server Servidor para conexão.
+   * @param uf Servidor para conexão.
    * @param contingency Método de contingência ou null para nenhuma contingência.
    * @return Stub pronto para conexão.
    * @throws RFWException
    */
-  private NFeAutorizacao4Stub createNFeAutorizacao4Stub(SefazEnvironment env, SefazServer server, SefazContingency contingency) throws RFWException {
+  private NFeAutorizacao4Stub createNFeAutorizacao4Stub(SefazEnvironment env, SefazUF uf, SefazContingency contingency) throws RFWException {
     NFeAutorizacao4Stub stub = null;
     try {
       if (env.equals(SefazEnvironment.PRODUCTION)) {
-        if (server.equals(SefazServer.SP)) {
+        if (uf.equals(SefazUF.SP)) {
           if (contingency == null) {
             stub = new NFeAutorizacao4Stub(SEFAZDefinitions.SP_PRODUCTION_V4_00_NFEAUTORIZACAO4);
           } else {
-            throw new RFWCriticalException("RFW_000035", new String[] { env.toString(), server.toString(), "" + contingency });
+            throw new RFWCriticalException("RFW_000035", new String[] { env.toString(), uf.toString(), "" + contingency });
           }
         }
       } else if (env.equals(SefazEnvironment.TEST)) {
-        if (server.equals(SefazServer.SP)) {
+        if (uf.equals(SefazUF.SP)) {
           if (contingency == null) {
             stub = new NFeAutorizacao4Stub(SEFAZDefinitions.SP_TEST_V4_00_NFEAUTORIZACAO4);
           } else {
-            throw new RFWCriticalException("RFW_000035", new String[] { env.toString(), server.toString(), "" + contingency });
+            throw new RFWCriticalException("RFW_000035", new String[] { env.toString(), uf.toString(), "" + contingency });
           }
         }
       }
     } catch (AxisFault e) {
-      throw new RFWCriticalException("Falha ao criar Stub para o ambiente '${0}', UF '${1}', contingência: '${2}'.", new String[] { env.toString(), server.toString(), "" + contingency }, e);
+      throw new RFWCriticalException("Falha ao criar Stub para o ambiente '${0}', UF '${1}', contingência: '${2}'.", new String[] { env.toString(), uf.toString(), "" + contingency }, e);
     }
     if (stub == null) {
-      throw new RFWCriticalException("Falha ao criar Stub para o ambiente '${0}', UF '${1}', contingência: '${2}'.", new String[] { env.toString(), server.toString(), "" + contingency });
+      throw new RFWCriticalException("Falha ao criar Stub para o ambiente '${0}', UF '${1}', contingência: '${2}'.", new String[] { env.toString(), uf.toString(), "" + contingency });
     }
     stub._getServiceClient().getOptions().setProperty(HTTPConstants.CACHED_HTTP_CLIENT, this.httpClientCustom);
     return stub;
@@ -390,36 +390,36 @@ public class SEFAZ {
    * Cria o STUB de conexão para o serviço NfeRetAutorizacao.
    *
    * @param env ambiente de conexão.
-   * @param server Servidor para conexão.
+   * @param uf Servidor para conexão.
    * @param contingency Método de contingência ou null para nenhuma contingência.
    * @return Stub pronto para conexão.
    * @throws RFWException
    */
-  private NFeRetAutorizacao4Stub createNFeRetAutorizacao4Stub(SefazEnvironment env, SefazServer server, SefazContingency contingency) throws RFWException {
+  private NFeRetAutorizacao4Stub createNFeRetAutorizacao4Stub(SefazEnvironment env, SefazUF uf, SefazContingency contingency) throws RFWException {
     NFeRetAutorizacao4Stub stub = null;
     try {
       if (env.equals(SefazEnvironment.PRODUCTION)) {
-        if (server.equals(SefazServer.SP)) {
+        if (uf.equals(SefazUF.SP)) {
           if (contingency == null) {
             stub = new NFeRetAutorizacao4Stub(SEFAZDefinitions.SP_PRODUCTION_V4_00_NFERETAUTORIZACAO4);
           } else {
-            throw new RFWCriticalException("RFW_000035", new String[] { env.toString(), server.toString(), "" + contingency });
+            throw new RFWCriticalException("RFW_000035", new String[] { env.toString(), uf.toString(), "" + contingency });
           }
         }
       } else if (env.equals(SefazEnvironment.TEST)) {
-        if (server.equals(SefazServer.SP)) {
+        if (uf.equals(SefazUF.SP)) {
           if (contingency == null) {
             stub = new NFeRetAutorizacao4Stub(SEFAZDefinitions.SP_TEST_V4_00_NFERETAUTORIZACAO4);
           } else {
-            throw new RFWCriticalException("RFW_000035", new String[] { env.toString(), server.toString(), "" + contingency });
+            throw new RFWCriticalException("RFW_000035", new String[] { env.toString(), uf.toString(), "" + contingency });
           }
         }
       }
     } catch (AxisFault e) {
-      throw new RFWCriticalException("Falha ao criar Stub para o ambiente '${0}', UF '${1}', contingência: '${2}'.", new String[] { env.toString(), server.toString(), "" + contingency }, e);
+      throw new RFWCriticalException("Falha ao criar Stub para o ambiente '${0}', UF '${1}', contingência: '${2}'.", new String[] { env.toString(), uf.toString(), "" + contingency }, e);
     }
     if (stub == null) {
-      throw new RFWCriticalException("Falha ao criar Stub para o ambiente '${0}', UF '${1}', contingência: '${2}'.", new String[] { env.toString(), server.toString(), "" + contingency });
+      throw new RFWCriticalException("Falha ao criar Stub para o ambiente '${0}', UF '${1}', contingência: '${2}'.", new String[] { env.toString(), uf.toString(), "" + contingency });
     }
     stub._getServiceClient().getOptions().setProperty(HTTPConstants.CACHED_HTTP_CLIENT, this.httpClientCustom);
     return stub;
