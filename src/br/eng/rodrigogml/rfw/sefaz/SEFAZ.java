@@ -26,8 +26,8 @@ import br.eng.rodrigogml.rfw.kernel.logger.RFWLogger;
 import br.eng.rodrigogml.rfw.kernel.preprocess.PreProcess;
 import br.eng.rodrigogml.rfw.kernel.utils.RUCert;
 import br.eng.rodrigogml.rfw.sefaz.SEFAZDefinitions.SefazContingency;
-import br.eng.rodrigogml.rfw.sefaz.SEFAZDefinitions.SefazEnvironment;
-import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SefazUF;
+import br.eng.rodrigogml.rfw.sefaz.SEFAZDefinitions.SefazXMLUF;
+import br.eng.rodrigogml.rfw.sefaz.SEFAZDefinitions.SefazXMLtpAmb;
 import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZUtils;
 import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZXMLValidator;
 
@@ -58,12 +58,12 @@ public class SEFAZ {
   /**
    * Definição do estado/servidor de comunicação
    */
-  private final SefazUF uf;
+  private final SefazXMLUF uf;
 
   /**
    * Definição do ambiente de comunicação (Homologação/Produção).
    */
-  private final SefazEnvironment env;
+  private final SefazXMLtpAmb env;
 
   /**
    * Define o tipo de contingência que o sistema está usando no momento.<br>
@@ -85,7 +85,7 @@ public class SEFAZ {
    * @param env Ambiente a ser utilizado na emissão de documentos e comunicação.
    * @throws RFWException
    */
-  public SEFAZ(RFWCertificate cert, RFWCertificate trustCert, SefazUF uf, SefazEnvironment env) throws RFWException {
+  public SEFAZ(RFWCertificate cert, RFWCertificate trustCert, SefazXMLUF uf, SefazXMLtpAmb env) throws RFWException {
     PreProcess.requiredNonNull(uf);
     PreProcess.requiredNonNull(env);
 
@@ -317,19 +317,19 @@ public class SEFAZ {
    * @return Stub pronto para conexão.
    * @throws RFWException
    */
-  private CadConsultaCadastro4Stub createCadConsultaCadastro4Stub(SefazEnvironment env, SefazUF uf, SefazContingency contingency) throws RFWException {
+  private CadConsultaCadastro4Stub createCadConsultaCadastro4Stub(SefazXMLtpAmb env, SefazXMLUF uf, SefazContingency contingency) throws RFWException {
     CadConsultaCadastro4Stub stub = null;
     try {
-      if (env.equals(SefazEnvironment.PRODUCTION)) {
-        if (uf.equals(SefazUF.SP)) {
+      if (env.equals(SefazXMLtpAmb.PRODUCTION)) {
+        if (uf.equals(SefazXMLUF.SP)) {
           if (contingency == null) {
             stub = new CadConsultaCadastro4Stub(SEFAZDefinitions.SP_PRODUCTION_V4_00_CADCONSULTACADASTRO4);
           } else {
             throw new RFWCriticalException("RFW_000035", new String[] { env.toString(), uf.toString(), "" + contingency });
           }
         }
-      } else if (env.equals(SefazEnvironment.TEST)) {
-        if (uf.equals(SefazUF.SP)) {
+      } else if (env.equals(SefazXMLtpAmb.TEST)) {
+        if (uf.equals(SefazXMLUF.SP)) {
           if (contingency == null) {
             stub = new CadConsultaCadastro4Stub(SEFAZDefinitions.SP_TEST_V4_00_CADCONSULTACADASTRO4);
           } else {
@@ -356,19 +356,19 @@ public class SEFAZ {
    * @return Stub pronto para conexão.
    * @throws RFWException
    */
-  private NFeAutorizacao4Stub createNFeAutorizacao4Stub(SefazEnvironment env, SefazUF uf, SefazContingency contingency) throws RFWException {
+  private NFeAutorizacao4Stub createNFeAutorizacao4Stub(SefazXMLtpAmb env, SefazXMLUF uf, SefazContingency contingency) throws RFWException {
     NFeAutorizacao4Stub stub = null;
     try {
-      if (env.equals(SefazEnvironment.PRODUCTION)) {
-        if (uf.equals(SefazUF.SP)) {
+      if (env.equals(SefazXMLtpAmb.PRODUCTION)) {
+        if (uf.equals(SefazXMLUF.SP)) {
           if (contingency == null) {
             stub = new NFeAutorizacao4Stub(SEFAZDefinitions.SP_PRODUCTION_V4_00_NFEAUTORIZACAO4);
           } else {
             throw new RFWCriticalException("RFW_000035", new String[] { env.toString(), uf.toString(), "" + contingency });
           }
         }
-      } else if (env.equals(SefazEnvironment.TEST)) {
-        if (uf.equals(SefazUF.SP)) {
+      } else if (env.equals(SefazXMLtpAmb.TEST)) {
+        if (uf.equals(SefazXMLUF.SP)) {
           if (contingency == null) {
             stub = new NFeAutorizacao4Stub(SEFAZDefinitions.SP_TEST_V4_00_NFEAUTORIZACAO4);
           } else {
@@ -395,19 +395,19 @@ public class SEFAZ {
    * @return Stub pronto para conexão.
    * @throws RFWException
    */
-  private NFeRetAutorizacao4Stub createNFeRetAutorizacao4Stub(SefazEnvironment env, SefazUF uf, SefazContingency contingency) throws RFWException {
+  private NFeRetAutorizacao4Stub createNFeRetAutorizacao4Stub(SefazXMLtpAmb env, SefazXMLUF uf, SefazContingency contingency) throws RFWException {
     NFeRetAutorizacao4Stub stub = null;
     try {
-      if (env.equals(SefazEnvironment.PRODUCTION)) {
-        if (uf.equals(SefazUF.SP)) {
+      if (env.equals(SefazXMLtpAmb.PRODUCTION)) {
+        if (uf.equals(SefazXMLUF.SP)) {
           if (contingency == null) {
             stub = new NFeRetAutorizacao4Stub(SEFAZDefinitions.SP_PRODUCTION_V4_00_NFERETAUTORIZACAO4);
           } else {
             throw new RFWCriticalException("RFW_000035", new String[] { env.toString(), uf.toString(), "" + contingency });
           }
         }
-      } else if (env.equals(SefazEnvironment.TEST)) {
-        if (uf.equals(SefazUF.SP)) {
+      } else if (env.equals(SefazXMLtpAmb.TEST)) {
+        if (uf.equals(SefazXMLUF.SP)) {
           if (contingency == null) {
             stub = new NFeRetAutorizacao4Stub(SEFAZDefinitions.SP_TEST_V4_00_NFERETAUTORIZACAO4);
           } else {
