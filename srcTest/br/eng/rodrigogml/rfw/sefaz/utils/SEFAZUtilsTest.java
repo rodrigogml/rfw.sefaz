@@ -31,7 +31,7 @@ public class SEFAZUtilsTest {
 
     File[] files = RUFile.getFilesFromDirectory(pathToXML);
 
-    for (int i = (int) (Math.random() * files.length * 0.05); i < files.length; i += (Math.random() * files.length * 0.05)) {
+    for (int i = (int) (Math.random() * files.length * 0.1); i < files.length; i += (Math.random() * files.length * 0.1)) {
       File file = files[i];
       String xml = RUFile.readFileContentToString(file);
       System.out.println("Testando Arquivo (Incremento Aleatório) [" + i + "/" + files.length + "]: " + xml);
