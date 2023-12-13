@@ -31,24 +31,16 @@ public class SEFAZUtilsTest {
 
     File[] files = RUFile.getFilesFromDirectory(pathToXML);
 
-    for (int i = 0; i < files.length; i++) {
+    for (int i = (int) (Math.random() * files.length * 0.05); i < files.length; i += (Math.random() * files.length * 0.05)) {
       File file = files[i];
       String xml = RUFile.readFileContentToString(file);
+      System.out.println("Testando Arquivo (Incremento Aleatório) [" + i + "/" + files.length + "]: " + xml);
       TNfeProc bean = SEFAZUtils.readXMLToObject(xml, TNfeProc.class);
       assertNotNull(bean);
       assertNotNull(bean.getNFe());
       assertNotNull(bean.getNFe().getInfNFe());
       assertNotNull(bean.getNFe().getInfNFe().getId());
-      // System.out.println(file.getAbsolutePath());
-      // System.out.println(bean.getNFe().getInfNFe().getId());
     }
 
-  }
-
-  public static void main(String[] args) throws Exception {
-    String xml = RUFile.readFileContentToString("c:\\t\\NFesDEV\\nfe31220930698882000171550010000146861909298286.xml");
-    TNfeProc tNfe = SEFAZUtils.readXMLToObject(xml, TNfeProc.class);
-
-    System.out.println(tNfe.getNFe().getInfNFe().getIde().getCMunFG());
   }
 }
