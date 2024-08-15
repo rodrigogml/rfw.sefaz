@@ -11,7 +11,6 @@ import org.junit.runners.MethodSorters;
 import br.eng.rodrigogml.rfw.kernel.RFW;
 import br.eng.rodrigogml.rfw.kernel.preprocess.PreProcess;
 import br.eng.rodrigogml.rfw.kernel.utils.RUFile;
-
 import xsdobjects.consrecinfev400.TNfeProc;
 
 /**
@@ -41,6 +40,5 @@ public class SEFAZUtilsTest {
       assertNotNull(bean.getNFe().getInfNFe());
       assertNotNull(bean.getNFe().getInfNFe().getId());
     }
-
   }
 }
