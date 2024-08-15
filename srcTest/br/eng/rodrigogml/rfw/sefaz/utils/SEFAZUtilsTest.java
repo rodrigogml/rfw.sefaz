@@ -23,13 +23,18 @@ import xsdobjects.consrecinfev400.TNfeProc;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class SEFAZUtilsTest {
 
+  /**
+   * Se não houver arquivos na pasta indicada pela propriedade de desenvolvimento, o teste não testa nenhum arquivo.
+   * Porém a pasta precisa existir e ser válida para que o teste funciona. Foi mantido desta forma para forçar que ao menos o desenvolvedor tenha ciência de que o teste será anulado se ele criar a pasta e mantivé-la vazia.  
+   * @throws Exception
+   */
   @Test
   public void t00_testUnmarsahllerXMLs() throws Exception {
     String pathToXML = RFW.getDevProperty("rfw.sefaz.pathToNFeXMLToTest");
     PreProcess.requiredNonNull(pathToXML);
 
     File[] files = RUFile.getFilesFromDirectory(pathToXML);
-
+    
     for (int i = (int) (Math.random() * files.length * 0.1); i < files.length; i += (Math.random() * files.length * 0.1)) {
       File file = files[i];
       String xml = RUFile.readFileContentToString(file);
