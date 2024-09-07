@@ -3,7 +3,7 @@ package br.inf.portalfiscal.www.nfe.wsdl.cadconsultacadastro4;
 /*
  *  CadConsultaCadastro4Stub java implementation
  */
-
+@SuppressWarnings({ "rawtypes", "unchecked", "unused" })
 public class CadConsultaCadastro4Stub extends org.apache.axis2.client.Stub {
   protected org.apache.axis2.description.AxisOperation[] _operations;
 
