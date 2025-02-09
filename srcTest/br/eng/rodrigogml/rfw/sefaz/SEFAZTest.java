@@ -13,7 +13,6 @@ import br.eng.rodrigogml.rfw.kernel.exceptions.RFWRunTimeException;
 import br.eng.rodrigogml.rfw.kernel.interfaces.RFWCertificate;
 import br.eng.rodrigogml.rfw.kernel.preprocess.PreProcess;
 import br.eng.rodrigogml.rfw.kernel.utils.RUFile;
-import br.eng.rodrigogml.rfw.kernel.utils.RUReflex;
 import br.eng.rodrigogml.rfw.sefaz.SEFAZDefinitions.SefazXMLUF;
 import br.eng.rodrigogml.rfw.sefaz.SEFAZDefinitions.SefazXMLtpAmb;
 
@@ -107,7 +106,7 @@ public class SEFAZTest {
     TRetConsCad root = sefaz.consultaCadastroV200byCNPJ(cnpj);
     assertEquals(root.getInfCons().getCNPJ(), cnpj);
     assertEquals(root.getInfCons().getInfCad().get(0).getXNome(), "ROBERT BOSCH LIMITADA");
-    System.out.println(RUReflex.printObject(root));
+    // System.out.println(RUReflex.printObject(root));
   }
 
 }
