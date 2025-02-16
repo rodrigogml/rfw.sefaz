@@ -11,7 +11,8 @@ import org.junit.runners.MethodSorters;
 import br.eng.rodrigogml.rfw.kernel.RFW;
 import br.eng.rodrigogml.rfw.kernel.preprocess.PreProcess;
 import br.eng.rodrigogml.rfw.kernel.utils.RUFile;
-import xsdobjects.consrecinfev400.TNfeProc;
+
+import xsdobjects.consReciNFe400.TNfeProc;
 
 /**
  * Description: Classe de testes da classe {@link SEFAZUtils}.<br>
@@ -24,8 +25,8 @@ import xsdobjects.consrecinfev400.TNfeProc;
 public class SEFAZUtilsTest {
 
   /**
-   * Se não houver arquivos na pasta indicada pela propriedade de desenvolvimento, o teste não testa nenhum arquivo.
-   * Porém a pasta precisa existir e ser válida para que o teste funciona. Foi mantido desta forma para forçar que ao menos o desenvolvedor tenha ciência de que o teste será anulado se ele criar a pasta e mantivé-la vazia.  
+   * Se não houver arquivos na pasta indicada pela propriedade de desenvolvimento, o teste não testa nenhum arquivo. Porém a pasta precisa existir e ser válida para que o teste funciona. Foi mantido desta forma para forçar que ao menos o desenvolvedor tenha ciência de que o teste será anulado se ele criar a pasta e mantivé-la vazia.
+   *
    * @throws Exception
    */
   @Test
@@ -34,7 +35,7 @@ public class SEFAZUtilsTest {
     PreProcess.requiredNonNull(pathToXML);
 
     File[] files = RUFile.getFilesFromDirectory(pathToXML);
-    
+
     for (int i = (int) (Math.random() * files.length * 0.1); i < files.length; i += (Math.random() * files.length * 0.1)) {
       File file = files[i];
       String xml = RUFile.readFileContentToString(file);

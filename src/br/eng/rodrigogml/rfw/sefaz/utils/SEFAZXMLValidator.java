@@ -16,12 +16,32 @@ public class SEFAZXMLValidator {
   private SEFAZXMLValidator() {
   }
 
+  public static void validateNfeStatusServicoNFV400(String xml) throws RFWException {
+    SEFAZXMLValidator.validateXMLAgainstSchema(xml, "consStatServ_v4.00.xsd", "/xsd/PL_009p_NT2024_003_v1.02/");
+  }
+
   public static void validateConsCadV200(String xml) throws RFWException {
-    SEFAZXMLValidator.validateXMLAgainstSchema(xml, "consCad_v2.00.xsd", "/xsd/");
+    SEFAZXMLValidator.validateXMLAgainstSchema(xml, "consCad_v2.00.xsd", "/xsd/PL_009k_NT2023_001_v120/");
   }
 
   public static void validateEnviNFeV400(String xml) throws RFWException {
-    SEFAZXMLValidator.validateXMLAgainstSchema(xml, "enviNFe_v4.00.xsd", "/xsd/");
+    SEFAZXMLValidator.validateXMLAgainstSchema(xml, "enviNFe_v4.00.xsd", "/xsd/PL_009p_NT2024_003_v1.02/");
+  }
+
+  public static void validateConsReciNFeV400(String xml) throws RFWException {
+    SEFAZXMLValidator.validateXMLAgainstSchema(xml, "consReciNFe_v4.00.xsd", "/xsd/PL_009p_NT2024_003_v1.02/");
+  }
+
+  public static void validateInutNFeV400(String xml) throws RFWException {
+    SEFAZXMLValidator.validateXMLAgainstSchema(xml, "inutNFe_v4.00.xsd", "/xsd/PL_009p_NT2024_003_v1.02/");
+  }
+
+  public static void validateEnvEventoV100(String xml) throws RFWException {
+    SEFAZXMLValidator.validateXMLAgainstSchema(xml, "envEvento_v1.00.xsd", "/xsd/Evento_Generico_PL_v1.01/");
+  }
+
+  public static void validateConsSitNFeV400(String xml) throws RFWException {
+    SEFAZXMLValidator.validateXMLAgainstSchema(xml, "consSitNFe_v4.00.xsd", "/xsd/PL_009p_NT2024_003_v1.02/");
   }
 
   /**
@@ -40,9 +60,12 @@ public class SEFAZXMLValidator {
       RFWLogger.logDebug("XML: " + xml);
       RFWLogger.logDebug("schemaPath: " + schemapath);
       RFWLogger.logDebug("basePath: " + basepath);
-      RFWCriticalException ex = new RFWCriticalException("RFW_000035", new String[] { schemapath }, e);
+      RFWCriticalException ex = new RFWCriticalException("RFW_000035", new String[] {
+          schemapath
+      }, e);
       RFWLogger.logException(ex);
       throw ex;
     }
   }
+
 }

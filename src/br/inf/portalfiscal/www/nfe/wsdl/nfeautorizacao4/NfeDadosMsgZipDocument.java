@@ -17,7 +17,7 @@ package br.inf.portalfiscal.www.nfe.wsdl.nfeautorizacao4;
 public interface NfeDadosMsgZipDocument extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(NfeDadosMsgZipDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s8DED0296CD1CD46C0464A1E2506C83E8").resolveHandle("nfedadosmsgzip3b22doctype");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(NfeDadosMsgZipDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sB998215DDD9F45FD92EE5B4111D0103F").resolveHandle("nfedadosmsgzip3b22doctype");
     
     /**
      * Gets the "nfeDadosMsgZip" element

@@ -13,10 +13,11 @@ import br.eng.rodrigogml.rfw.kernel.exceptions.RFWRunTimeException;
 import br.eng.rodrigogml.rfw.kernel.interfaces.RFWCertificate;
 import br.eng.rodrigogml.rfw.kernel.preprocess.PreProcess;
 import br.eng.rodrigogml.rfw.kernel.utils.RUFile;
-import br.eng.rodrigogml.rfw.sefaz.SEFAZDefinitions.SefazXMLUF;
+import br.eng.rodrigogml.rfw.sefaz.SEFAZDefinitions.SefazWebServices;
 import br.eng.rodrigogml.rfw.sefaz.SEFAZDefinitions.SefazXMLtpAmb;
 
-import xsdobjects.conscadv200.TRetConsCad;
+import xsdobjects.consCad200.TRetConsCad;
+import xsdobjects.consStatServ400.TRetConsStatServ;
 
 /**
  * Description: Classe de teste da {@link SEFAZ}.<br>
@@ -30,7 +31,7 @@ public class SEFAZTest {
 
   private RFWCertificate cert = null;
 
-  private RFWCertificate trust = null;
+  // private RFWCertificate trust = null;
 
   @Before
   public void initialize() throws RFWException {
@@ -64,33 +65,11 @@ public class SEFAZTest {
         }
       }
     };
-
-    trust = new RFWCertificate() {
-      @Override
-      public CertificateType getType() {
-        return CertificateType.KeyStore;
-      }
-
-      @Override
-      public String getCertificateFilePassword() {
-        return trustPass;
-      }
-
-      @Override
-      public byte[] getCertificateFileContent() {
-        try {
-          return RUFile.readFileContent(trustPath);
-        } catch (RFWException e) {
-          throw new RFWRunTimeException(e);
-        }
-      }
-    };
-
   }
 
   @Test
   public void t00_consultaCadastroCPF() throws RFWException {
-    SEFAZ sefaz = new SEFAZ(cert, trust, SefazXMLUF.SP, SefazXMLtpAmb.TEST);
+    SEFAZ sefaz = new SEFAZ(cert, SefazWebServices.SP, SefazXMLtpAmb.TEST);
 
     final String cpf = "12345678910";
     TRetConsCad root = sefaz.consultaCadastroV200byCPF(cpf);
@@ -100,13 +79,19 @@ public class SEFAZTest {
 
   @Test
   public void t01_consultaCadastroCNPJ() throws RFWException {
-    SEFAZ sefaz = new SEFAZ(cert, trust, SefazXMLUF.SP, SefazXMLtpAmb.TEST);
+    SEFAZ sefaz = new SEFAZ(cert, SefazWebServices.SP, SefazXMLtpAmb.TEST);
 
     final String cnpj = "45990181000189";
     TRetConsCad root = sefaz.consultaCadastroV200byCNPJ(cnpj);
     assertEquals(root.getInfCons().getCNPJ(), cnpj);
     assertEquals(root.getInfCons().getInfCad().get(0).getXNome(), "ROBERT BOSCH LIMITADA");
-    // System.out.println(RUReflex.printObject(root));
   }
 
+  @Test
+  public void t02_consultaCadastroCPF() throws RFWException {
+    SEFAZ sefaz = new SEFAZ(cert, SefazWebServices.SP, SefazXMLtpAmb.TEST);
+
+    TRetConsStatServ root = sefaz.nfeStatusServicoNFV400();
+    assertEquals("107", root.getCStat());
+  }
 }

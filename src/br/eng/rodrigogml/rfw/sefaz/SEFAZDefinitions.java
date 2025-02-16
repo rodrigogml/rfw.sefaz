@@ -11,14 +11,22 @@ import br.eng.rodrigogml.rfw.kernel.RFW;
 public class SEFAZDefinitions {
 
   // Ambientes de Produção
-  public static final String SP_PRODUCTION_V4_00_CADCONSULTACADASTRO4 = "https://nfe.fazenda.sp.gov.br/ws/cadconsultacadastro4.asmx";
-  public static final String SP_PRODUCTION_V4_00_NFEAUTORIZACAO4 = "https://nfe.svrs.rs.gov.br/ws/NfeAutorizacao/NFeAutorizacao4.asmx";
-  public static final String SP_PRODUCTION_V4_00_NFERETAUTORIZACAO4 = "https://nfe.fazenda.sp.gov.br/ws/nferetautorizacao4.asmx";
+  public static final String SP_PRODUCTION_V400_NFEINUTILIZACAO4 = "https://nfe.fazenda.sp.gov.br/ws/nfeinutilizacao4.asmx";
+  public static final String SP_PRODUCTION_V400_CADCONSULTACADASTRO4 = "https://nfe.fazenda.sp.gov.br/ws/cadconsultacadastro4.asmx";
+  public static final String SP_PRODUCTION_V400_NFEAUTORIZACAO4 = "https://nfe.svrs.rs.gov.br/ws/NfeAutorizacao/NFeAutorizacao4.asmx";
+  public static final String SP_PRODUCTION_V400_NFERECEPCAOEVENTO4 = "https://nfe.fazenda.sp.gov.br/ws/nferecepcaoevento4.asmx";
+  public static final String SP_PRODUCTION_V400_NFERETAUTORIZACAO4 = "https://nfe.fazenda.sp.gov.br/ws/nferetautorizacao4.asmx";
+  public static final String SP_PRODUCTION_V400_NFESTATUSSERVICO4 = "https://nfe.fazenda.sp.gov.br/ws/nfestatusservico4.asmx";
+  public static final String SP_PRODUCTION_V400_NFECONSULTAPROTOCOLO4 = "https://nfe.fazenda.sp.gov.br/ws/nfeconsultaprotocolo4.asmx";
 
   // Ambientes de Homologação
-  public static final String SP_TEST_V4_00_CADCONSULTACADASTRO4 = "https://homologacao.nfe.fazenda.sp.gov.br/ws/cadconsultacadastro4.asmx";
-  public static final String SP_TEST_V4_00_NFEAUTORIZACAO4 = "https://homologacao.nfe.fazenda.sp.gov.br/ws/NFeAutorizacao4.asmx";
-  public static final String SP_TEST_V4_00_NFERETAUTORIZACAO4 = "https://homologacao.nfe.fazenda.sp.gov.br/ws/nferetautorizacao4.asmx";
+  public static final String SP_TEST_V400_NFEINUTILIZACAO4 = "https://homologacao.nfe.fazenda.sp.gov.br/ws/nfeinutilizacao4.asmx";
+  public static final String SP_TEST_V400_CADCONSULTACADASTRO4 = "https://homologacao.nfe.fazenda.sp.gov.br/ws/cadconsultacadastro4.asmx";
+  public static final String SP_TEST_V400_NFEAUTORIZACAO4 = "https://homologacao.nfe.fazenda.sp.gov.br/ws/NFeAutorizacao4.asmx";
+  public static final String SP_TEST_V400_NFERECEPCAOEVENTO4 = "https://homologacao.nfe.fazenda.sp.gov.br/ws/nferecepcaoevento4.asmx";
+  public static final String SP_TEST_V400_NFERETAUTORIZACAO4 = "https://homologacao.nfe.fazenda.sp.gov.br/ws/nferetautorizacao4.asmx";
+  public static final String SP_TEST_V400_NFESTATUSSERVICO4 = "https://homologacao.nfe.fazenda.sp.gov.br/ws/nfestatusservico4.asmx";
+  public static final String SP_TEST_V400_NFECONSULTAPROTOCOLO4 = "https://homologacao.nfe.fazenda.sp.gov.br/ws/nfeconsultaprotocolo4.asmx";
 
   /**
    * Construtor privado para classe totalmente estática.
@@ -157,7 +165,9 @@ public class SEFAZDefinitions {
      * @return valores aceitos na tag nfe\infNFe\ide\mod.
      */
     public SefazXMLmod[] values_nfe_infNFe_ide_mod() {
-      return new SefazXMLmod[] { MODEL55, MODEL65 };
+      return new SefazXMLmod[] {
+          MODEL55, MODEL65
+      };
     }
 
     /**
@@ -166,7 +176,9 @@ public class SEFAZDefinitions {
      * @return valores aceitos na tag nfe\infNFe\ide\refECF\mod.
      */
     public SefazXMLmod[] values_nfe_infNFe_ide_NFref_refECF_mod() {
-      return new SefazXMLmod[] { MODEL2B, MODEL2C, MODEL2D };
+      return new SefazXMLmod[] {
+          MODEL2B, MODEL2C, MODEL2D
+      };
     }
 
     /**
@@ -175,7 +187,9 @@ public class SEFAZDefinitions {
      * @return valores aceitos na tag nfe\infNFe\ide\NFref\mod.
      */
     public SefazXMLmod[] values_nfe_infNFe_ide_NFref_refNFP_mod() {
-      return new SefazXMLmod[] { MODEL01, MODEL04 };
+      return new SefazXMLmod[] {
+          MODEL01, MODEL04
+      };
     }
 
     /**
@@ -184,7 +198,9 @@ public class SEFAZDefinitions {
      * @return valores aceitos na tag nfe\infNFe\ide\NFref\mod.
      */
     public SefazXMLmod[] values_nfe_infNFe_ide_NFref_refNF_mod() {
-      return new SefazXMLmod[] { MODEL01, MODEL02 };
+      return new SefazXMLmod[] {
+          MODEL01, MODEL02
+      };
     }
 
   }
@@ -344,6 +360,47 @@ public class SEFAZDefinitions {
     }
   }
 
+  public enum SefazWebServices {
+    AM("13"),
+    BA("29"),
+    GO("52"),
+    MG("31"),
+    MS("50"),
+    MT("51"),
+    PE("26"),
+    PR("41"),
+    RS("43"),
+    SP("35"),
+    SVAN(null),
+    SVRS(null),
+    SVCAN(null),
+    SVCRS(null),
+    AN(null);
+
+    private String ibgeCode;
+
+    SefazWebServices(String ibgeCode) {
+      this.ibgeCode = ibgeCode;
+    }
+
+    public String getIBGECode() {
+      return this.ibgeCode;
+    }
+
+    public static SefazWebServices valueOfIBGECode(String ibgeCode) {
+      for (SefazWebServices service : SefazWebServices.values()) {
+        if (ibgeCode.equalsIgnoreCase(service.getIBGECode())) {
+          return service;
+        }
+      }
+      return null;
+    }
+
+    public String getAcronym() {
+      return this.name();
+    }
+  }
+
   /**
    * Enumeration com as UF e mais alguns códigos extras que são aceitos em alguns campos de UF do XML da SEFAZ.<br>
    * Veja detalhes de onde os códigos adicionais são aceitos na documentação de cada Enum.<br>
@@ -351,64 +408,70 @@ public class SEFAZDefinitions {
    *
    * <Br>
    * Usada nas Tags:
-   * <li>ICMSPart\UFST
+   * <li>ICMSPart\UFST</li>
+   *
+   * <br>
+   * <bR>
+   * <b>Atenção:</b> Não confundir com a relação de webservices / autorizadores da enumeration {@link SefazWebServices}
    */
-  public static enum SefazXMLUF {
-    AC("12"), AL("27"), AP("16"), AM("13"), BA("29"), CE("23"), DF("53"), ES("32"), GO("52"), MA("21"), MG("31"), MS("50"), MT("51"), PA("15"), PB("25"), PE("26"), PI("22"), PR("41"), RJ("33"), RN("24"), RO("11"), RR("14"), RS("43"), SC("42"), SE("28"), SP("35"), TO("17"),
-    /**
-     * Utilizado na Tag ICMSPart\UFST para indicar para qual estado é devido o ICMSST no caso de Exterior.
-     */
-    EX(null);
+  public enum SefazXMLUF {
+    AC("12", "https://nfe.sefaz.ac.gov.br/nfe/services/NFeAutorizacao4"),
+    AL("27", "https://nfe.sefaz.al.gov.br/nfe/services/NFeAutorizacao4"),
+    AP("16", "https://nfe.sefaz.ap.gov.br/nfe/services/NFeAutorizacao4"),
+    AM("13", "https://nfe.sefaz.am.gov.br/services2/services/NfeAutorizacao4"),
+    BA("29", "https://nfe.sefaz.ba.gov.br/webservices/NFeAutorizacao4/NFeAutorizacao4.asmx"),
+    CE("23", "https://nfe.sefaz.ce.gov.br/nfe/services/NFeAutorizacao4"),
+    DF("53", "https://nfe.fazenda.df.gov.br/nfe/services/NFeAutorizacao4"),
+    ES("32", "https://nfe.sefaz.es.gov.br/nfe/services/NFeAutorizacao4"),
+    GO("52", "https://nfe.sefaz.go.gov.br/nfe/services/NFeAutorizacao4?wsdl"),
+    MA("21", "https://nfe.sefaz.ma.gov.br/nfe/services/NFeAutorizacao4"),
+    MG("31", "https://nfe.fazenda.mg.gov.br/nfe2/services/NFeAutorizacao4"),
+    MS("50", "https://nfe.sefaz.ms.gov.br/ws/NFeAutorizacao4"),
+    MT("51", "https://nfe.sefaz.mt.gov.br/nfews/v2/services/NfeAutorizacao4?wsdl"),
+    PA("15", "https://nfe.sefaz.pa.gov.br/nfe/services/NFeAutorizacao4"),
+    PB("25",
+        "https://nfe.receita.pb.gov.br/nfe/services/NFeAutorizacao4"),
+    PE("26", "https://nfe.sefaz.pe.gov.br/nfe-service/services/NFeAutorizacao4"),
+    PI("22", "https://nfe.sefaz.pi.gov.br/nfe/services/NFeAutorizacao4"),
+    PR("41", "https://nfe.sefa.pr.gov.br/nfe/NFeAutorizacao4?wsdl"),
+    RJ("33", "https://nfe.fazenda.rj.gov.br/nfe/services/NFeAutorizacao4"),
+    RN("24", "https://nfe.set.rn.gov.br/nfe/services/NFeAutorizacao4"),
+    RO("11", "https://nfe.sefin.ro.gov.br/nfe/services/NFeAutorizacao4"),
+    RR("14", "https://nfe.sefaz.rr.gov.br/nfe/services/NFeAutorizacao4"),
+    RS("43", "https://nfe.sefazrs.rs.gov.br/ws/NfeAutorizacao/NFeAutorizacao4.asmx"),
+    SC("42", "https://nfe.sef.sc.gov.br/nfe/services/NFeAutorizacao4"),
+    SE("28", "https://nfe.sefaz.se.gov.br/nfe/services/NFeAutorizacao4"),
+    SP("35", "https://nfe.fazenda.sp.gov.br/ws/nfeautorizacao4.asmx"),
+    TO("17", "https://nfe.sefaz.to.gov.br/nfe/services/NFeAutorizacao4"),
+    EX(null, null);
 
-    /**
-     * Código da UF pelo IBGE.
-     */
-    private String ibgeCode = "";
+    private String ibgeCode;
+    private String checkURL;
 
-    SefazXMLUF(String value) {
-      this.ibgeCode = value;
+    SefazXMLUF(String ibgeCode, String checkURL) {
+      this.ibgeCode = ibgeCode;
+      this.checkURL = checkURL;
     }
 
-    /**
-     * Código da UF pelo IBGE.
-     *
-     * @return Código numérico de 2 dígitos.
-     */
     public String getIBGECode() {
       return this.ibgeCode;
     }
 
-    /**
-     * Recupera a Sigla do estado brasileiro de acordo com o código do IBGE passado.
-     *
-     * @param ibgeCode Código da UF ou DF, sempre em String com 2 dígitos e zeros não significativos.
-     * @return Enumeration do estado equivalente, ou null caso não seja reconhecido o código.
-     */
-    public static SefazXMLUF valueOfIBGECode(String ibgeCode) {
-      for (int i = 0; i < SefazXMLUF.values().length; i++)
-        if (ibgeCode.equalsIgnoreCase(SefazXMLUF.values()[i].getIBGECode())) return SefazXMLUF.values()[i];
-      return null;
+    public String getCheckURL() {
+      return this.checkURL;
     }
 
-    /**
-     * Acrônimo da UF do Estado.
-     *
-     * @return Sigla que representa o estado.
-     */
     public String getAcronym() {
-      // Como as enumerações tem o nome do acronym, só chamamos o .toString(). Mas este método existe para que não chamemos o .toString() em vários lugares diferentes do código
-      return toString();
+      return this.name();
     }
 
-    /**
-     * Mesmo que o método {@link #values()}, mas contento apenas os valores do enumeraion que representam uma UF (Estados e DF).
-     *
-     * @return Array somente com as UFs
-     */
-    public SefazXMLUF[] valuesUFOnly() {
-      return new SefazXMLUF[] {
-          AC, AL, AP, AM, BA, CE, DF, ES, GO, MA, MG, MS, MT, PA, PB, PE, PI, PR, RJ, RN, RO, RR, RS, SC, SE, SP, TO
-      };
+    public static SefazXMLUF valueOfIBGECode(String ibgeCode) {
+      for (SefazXMLUF uf : SefazXMLUF.values()) {
+        if (ibgeCode.equalsIgnoreCase(uf.getIBGECode())) {
+          return uf;
+        }
+      }
+      return null;
     }
   }
 
@@ -720,7 +783,16 @@ public class SEFAZDefinitions {
      */
     ICMS_CST_90("90", false, false, false),
 
-    ICMS_CSOSN_101("101", true, false, false), ICMS_CSOSN_102("102", true, false, false), ICMS_CSOSN_103("103", true, false, false), ICMS_CSOSN_201("201", true, true, false), ICMS_CSOSN_202("202", true, true, false), ICMS_CSOSN_203("203", true, true, false), ICMS_CSOSN_300("300", true, false, false), ICMS_CSOSN_400("400", true, false, false), ICMS_CSOSN_500("500", true, true, false), ICMS_CSOSN_900("900", true, false, false);
+    ICMS_CSOSN_101("101", true, false, false),
+    ICMS_CSOSN_102("102", true, false, false),
+    ICMS_CSOSN_103("103", true, false, false),
+    ICMS_CSOSN_201("201", true, true, false),
+    ICMS_CSOSN_202("202", true, true, false),
+    ICMS_CSOSN_203("203", true, true, false),
+    ICMS_CSOSN_300("300", true, false, false),
+    ICMS_CSOSN_400("400", true, false, false),
+    ICMS_CSOSN_500("500", true, true, false),
+    ICMS_CSOSN_900("900", true, false, false);
 
     /**
      * Código da Situação Tributária que representa o
@@ -799,7 +871,10 @@ public class SEFAZDefinitions {
    * Enumeração da Modalidade de determinação da BC do ICMS
    */
   public static enum SefazXMLmodBC {
-    MVA("0"), PAUTA("1"), FIXED_SHEET("2"), OPERATION_VALUE("3");
+    MVA("0"),
+    PAUTA("1"),
+    FIXED_SHEET("2"),
+    OPERATION_VALUE("3");
 
     /**
      * Código que é atribuído na TAG XML da NFe
@@ -830,7 +905,12 @@ public class SEFAZDefinitions {
    * Enumeração da Modalidade de determinação da BC do ICMS ST.
    */
   public static enum SefazXMLmodBCST {
-    FIXED_SHEET("0"), LIST_NEGATIVE("1"), LIST_POSITIVE("2"), LIST_NEUTRAL("3"), MVA("4"), PAUTA("5");
+    FIXED_SHEET("0"),
+    LIST_NEGATIVE("1"),
+    LIST_POSITIVE("2"),
+    LIST_NEUTRAL("3"),
+    MVA("4"),
+    PAUTA("5");
 
     /**
      * Código que é atribuído na TAG XML da NFe.
