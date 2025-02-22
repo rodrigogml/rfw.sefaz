@@ -9,19 +9,14 @@ package br.inf.portalfiscal.www.nfe.wsdl.nferetautorizacao4;
 /*
  *  NFeRetAutorizacao4Stub java implementation
  */
-
+@SuppressWarnings("all")
 public class NFeRetAutorizacao4Stub extends org.apache.axis2.client.Stub {
   protected org.apache.axis2.description.AxisOperation[] _operations;
 
   // hashmaps to keep the fault mapping
-  private java.util.Map<org.apache.axis2.client.FaultMapKey, java.lang.String>
-      faultExceptionNameMap =
-          new java.util.HashMap<org.apache.axis2.client.FaultMapKey, java.lang.String>();
-  private java.util.Map<org.apache.axis2.client.FaultMapKey, java.lang.String>
-      faultExceptionClassNameMap =
-          new java.util.HashMap<org.apache.axis2.client.FaultMapKey, java.lang.String>();
-  private java.util.Map<org.apache.axis2.client.FaultMapKey, java.lang.String> faultMessageMap =
-      new java.util.HashMap<org.apache.axis2.client.FaultMapKey, java.lang.String>();
+  private java.util.Map<org.apache.axis2.client.FaultMapKey, java.lang.String> faultExceptionNameMap = new java.util.HashMap<org.apache.axis2.client.FaultMapKey, java.lang.String>();
+  private java.util.Map<org.apache.axis2.client.FaultMapKey, java.lang.String> faultExceptionClassNameMap = new java.util.HashMap<org.apache.axis2.client.FaultMapKey, java.lang.String>();
+  private java.util.Map<org.apache.axis2.client.FaultMapKey, java.lang.String> faultMessageMap = new java.util.HashMap<org.apache.axis2.client.FaultMapKey, java.lang.String>();
 
   private static int counter = 0;
 
@@ -37,8 +32,7 @@ public class NFeRetAutorizacao4Stub extends org.apache.axis2.client.Stub {
   private void populateAxisService() throws org.apache.axis2.AxisFault {
 
     // creating the Service with a unique name
-    _service =
-        new org.apache.axis2.description.AxisService("NFeRetAutorizacao4" + getUniqueSuffix());
+    _service = new org.apache.axis2.description.AxisService("NFeRetAutorizacao4" + getUniqueSuffix());
     addAnonymousOperations();
 
     // creating the operations
@@ -57,7 +51,8 @@ public class NFeRetAutorizacao4Stub extends org.apache.axis2.client.Stub {
   }
 
   // populates the faults
-  private void populateFaults() {}
+  private void populateFaults() {
+  }
 
   /** Constructor that takes in a configContext */
   public NFeRetAutorizacao4Stub(
@@ -113,20 +108,16 @@ public class NFeRetAutorizacao4Stub extends org.apache.axis2.client.Stub {
   /**
    * Auto generated method signature Consulta Processamento de Lote de NF-e
    *
-   * @see
-   *     br.inf.portalfiscal.www.nfe.wsdl.nferetautorizacao4.NFeRetAutorizacao4#nfeRetAutorizacaoLote
+   * @see br.inf.portalfiscal.www.nfe.wsdl.nferetautorizacao4.NFeRetAutorizacao4#nfeRetAutorizacaoLote
    * @param nfeDadosMsg
    */
-  public br.inf.portalfiscal.www.nfe.wsdl.nferetautorizacao4.NfeResultMsgDocument
-      nfeRetAutorizacaoLote(
-          br.inf.portalfiscal.www.nfe.wsdl.nferetautorizacao4.NfeDadosMsgDocument nfeDadosMsg)
-          throws java.rmi.RemoteException {
+  public br.inf.portalfiscal.www.nfe.wsdl.nferetautorizacao4.NfeResultMsgDocument nfeRetAutorizacaoLote(
+      br.inf.portalfiscal.www.nfe.wsdl.nferetautorizacao4.NfeDadosMsgDocument nfeDadosMsg)
+      throws java.rmi.RemoteException {
 
-    org.apache.axis2.context.MessageContext _messageContext =
-        new org.apache.axis2.context.MessageContext();
+    org.apache.axis2.context.MessageContext _messageContext = new org.apache.axis2.context.MessageContext();
     try {
-      org.apache.axis2.client.OperationClient _operationClient =
-          _serviceClient.createClient(_operations[0].getName());
+      org.apache.axis2.client.OperationClient _operationClient = _serviceClient.createClient(_operations[0].getName());
       _operationClient
           .getOptions()
           .setAction(
@@ -141,16 +132,15 @@ public class NFeRetAutorizacao4Stub extends org.apache.axis2.client.Stub {
       // create SOAP envelope with that payload
       org.apache.axiom.soap.SOAPEnvelope env = null;
 
-      env =
-          toEnvelope(
-              getFactory(_operationClient.getOptions().getSoapVersionURI()),
-              nfeDadosMsg,
-              optimizeContent(
-                  new javax.xml.namespace.QName(
-                      "http://www.portalfiscal.inf.br/nfe/wsdl/NFeRetAutorizacao4",
-                      "nfeRetAutorizacaoLote")),
+      env = toEnvelope(
+          getFactory(_operationClient.getOptions().getSoapVersionURI()),
+          nfeDadosMsg,
+          optimizeContent(
               new javax.xml.namespace.QName(
-                  "http://www.portalfiscal.inf.br/nfe/wsdl/NFeRetAutorizacao4", "nfeDadosMsg"));
+                  "http://www.portalfiscal.inf.br/nfe/wsdl/NFeRetAutorizacao4",
+                  "nfeRetAutorizacaoLote")),
+          new javax.xml.namespace.QName(
+              "http://www.portalfiscal.inf.br/nfe/wsdl/NFeRetAutorizacao4", "nfeDadosMsg"));
 
       // adding SOAP soap_headers
       _serviceClient.addHeadersToEnvelope(env);
@@ -163,16 +153,14 @@ public class NFeRetAutorizacao4Stub extends org.apache.axis2.client.Stub {
       // execute the operation client
       _operationClient.execute(true);
 
-      org.apache.axis2.context.MessageContext _returnMessageContext =
-          _operationClient.getMessageContext(
-              org.apache.axis2.wsdl.WSDLConstants.MESSAGE_LABEL_IN_VALUE);
+      org.apache.axis2.context.MessageContext _returnMessageContext = _operationClient.getMessageContext(
+          org.apache.axis2.wsdl.WSDLConstants.MESSAGE_LABEL_IN_VALUE);
       org.apache.axiom.soap.SOAPEnvelope _returnEnv = _returnMessageContext.getEnvelope();
       _returnEnv.buildWithAttachments();
 
-      java.lang.Object object =
-          fromOM(
-              _returnEnv.getBody().getFirstElement(),
-              br.inf.portalfiscal.www.nfe.wsdl.nferetautorizacao4.NfeResultMsgDocument.class);
+      java.lang.Object object = fromOM(
+          _returnEnv.getBody().getFirstElement(),
+          br.inf.portalfiscal.www.nfe.wsdl.nferetautorizacao4.NfeResultMsgDocument.class);
       org.apache.axis2.kernel.TransportUtils.detachInputStream(_returnMessageContext);
 
       return (br.inf.portalfiscal.www.nfe.wsdl.nferetautorizacao4.NfeResultMsgDocument) object;
@@ -186,24 +174,20 @@ public class NFeRetAutorizacao4Stub extends org.apache.axis2.client.Stub {
                 faultElt.getQName(), "nfeRetAutorizacaoLote"))) {
           // make the fault by reflection
           try {
-            java.lang.String exceptionClassName =
-                faultExceptionClassNameMap.get(
-                    new org.apache.axis2.client.FaultMapKey(
-                        faultElt.getQName(), "nfeRetAutorizacaoLote"));
+            java.lang.String exceptionClassName = faultExceptionClassNameMap.get(
+                new org.apache.axis2.client.FaultMapKey(
+                    faultElt.getQName(), "nfeRetAutorizacaoLote"));
             java.lang.Class exceptionClass = java.lang.Class.forName(exceptionClassName);
-            java.lang.reflect.Constructor constructor =
-                exceptionClass.getConstructor(java.lang.String.class);
+            java.lang.reflect.Constructor constructor = exceptionClass.getConstructor(java.lang.String.class);
             java.lang.Exception ex = (java.lang.Exception) constructor.newInstance(f.getMessage());
             // message class
-            java.lang.String messageClassName =
-                faultMessageMap.get(
-                    new org.apache.axis2.client.FaultMapKey(
-                        faultElt.getQName(), "nfeRetAutorizacaoLote"));
+            java.lang.String messageClassName = faultMessageMap.get(
+                new org.apache.axis2.client.FaultMapKey(
+                    faultElt.getQName(), "nfeRetAutorizacaoLote"));
             java.lang.Class messageClass = java.lang.Class.forName(messageClassName);
             java.lang.Object messageObject = fromOM(faultElt, messageClass);
-            java.lang.reflect.Method m =
-                exceptionClass.getMethod("setFaultMessage", new java.lang.Class[] {messageClass});
-            m.invoke(ex, new java.lang.Object[] {messageObject});
+            java.lang.reflect.Method m = exceptionClass.getMethod("setFaultMessage", new java.lang.Class[] { messageClass });
+            m.invoke(ex, new java.lang.Object[] { messageObject });
 
             throw new java.rmi.RemoteException(ex.getMessage(), ex);
           } catch (java.lang.ClassCastException e) {
@@ -264,8 +248,7 @@ public class NFeRetAutorizacao4Stub extends org.apache.axis2.client.Stub {
   }
 
   /**
-   * Get the {@link org.apache.xmlbeans.XmlOptions} object that the stub uses when serializing
-   * objects to XML.
+   * Get the {@link org.apache.xmlbeans.XmlOptions} object that the stub uses when serializing objects to XML.
    *
    * @return the options used for serialization
    */
@@ -285,11 +268,10 @@ public class NFeRetAutorizacao4Stub extends org.apache.axis2.client.Stub {
       final br.inf.portalfiscal.www.nfe.wsdl.nferetautorizacao4.NfeDadosMsgDocument param)
       throws org.apache.axis2.AxisFault {
 
-    org.apache.axiom.om.OMXMLParserWrapper builder =
-        org.apache.axiom.om.OMXMLBuilderFactory.createOMBuilder(
-            new javax.xml.transform.sax.SAXSource(
-                new org.apache.axis2.xmlbeans.XmlBeansXMLReader(param, _xmlOptions),
-                new org.xml.sax.InputSource()));
+    org.apache.axiom.om.OMXMLParserWrapper builder = org.apache.axiom.om.OMXMLBuilderFactory.createOMBuilder(
+        new javax.xml.transform.sax.SAXSource(
+            new org.apache.axis2.xmlbeans.XmlBeansXMLReader(param, _xmlOptions),
+            new org.xml.sax.InputSource()));
     try {
       return builder.getDocumentElement(true);
     } catch (java.lang.Exception e) {
@@ -309,11 +291,10 @@ public class NFeRetAutorizacao4Stub extends org.apache.axis2.client.Stub {
       final br.inf.portalfiscal.www.nfe.wsdl.nferetautorizacao4.NfeResultMsgDocument param)
       throws org.apache.axis2.AxisFault {
 
-    org.apache.axiom.om.OMXMLParserWrapper builder =
-        org.apache.axiom.om.OMXMLBuilderFactory.createOMBuilder(
-            new javax.xml.transform.sax.SAXSource(
-                new org.apache.axis2.xmlbeans.XmlBeansXMLReader(param, _xmlOptions),
-                new org.xml.sax.InputSource()));
+    org.apache.axiom.om.OMXMLParserWrapper builder = org.apache.axiom.om.OMXMLBuilderFactory.createOMBuilder(
+        new javax.xml.transform.sax.SAXSource(
+            new org.apache.axis2.xmlbeans.XmlBeansXMLReader(param, _xmlOptions),
+            new org.xml.sax.InputSource()));
     try {
       return builder.getDocumentElement(true);
     } catch (java.lang.Exception e) {
@@ -345,8 +326,7 @@ public class NFeRetAutorizacao4Stub extends org.apache.axis2.client.Stub {
 
       if (br.inf.portalfiscal.www.nfe.wsdl.nferetautorizacao4.NfeDadosMsgDocument.class.equals(
           type)) {
-        org.apache.axiom.om.OMXMLStreamReaderConfiguration configuration =
-            new org.apache.axiom.om.OMXMLStreamReaderConfiguration();
+        org.apache.axiom.om.OMXMLStreamReaderConfiguration configuration = new org.apache.axiom.om.OMXMLStreamReaderConfiguration();
         configuration.setPreserveNamespaceContext(true);
         return br.inf.portalfiscal.www.nfe.wsdl.nferetautorizacao4.NfeDadosMsgDocument.Factory
             .parse(param.getXMLStreamReader(false, configuration));
@@ -354,8 +334,7 @@ public class NFeRetAutorizacao4Stub extends org.apache.axis2.client.Stub {
 
       if (br.inf.portalfiscal.www.nfe.wsdl.nferetautorizacao4.NfeResultMsgDocument.class.equals(
           type)) {
-        org.apache.axiom.om.OMXMLStreamReaderConfiguration configuration =
-            new org.apache.axiom.om.OMXMLStreamReaderConfiguration();
+        org.apache.axiom.om.OMXMLStreamReaderConfiguration configuration = new org.apache.axiom.om.OMXMLStreamReaderConfiguration();
         configuration.setPreserveNamespaceContext(true);
         return br.inf.portalfiscal.www.nfe.wsdl.nferetautorizacao4.NfeResultMsgDocument.Factory
             .parse(param.getXMLStreamReader(false, configuration));
