@@ -23,8 +23,8 @@ import br.eng.rodrigogml.rfw.kernel.exceptions.RFWException;
 import br.eng.rodrigogml.rfw.kernel.exceptions.RFWValidationException;
 import br.eng.rodrigogml.rfw.kernel.interfaces.RFWCertificate;
 import br.eng.rodrigogml.rfw.kernel.preprocess.PreProcess;
-import br.eng.rodrigogml.rfw.kernel.utils.RUDateTime;
 import br.eng.rodrigogml.rfw.kernel.utils.RUString;
+import br.eng.rodrigogml.rfw.kernel.utils.RUTypes;
 import br.eng.rodrigogml.rfw.kernel.utils.RUXML;
 import br.eng.rodrigogml.rfw.sefaz.SEFAZDefinitions.SefazWebServices;
 import br.eng.rodrigogml.rfw.sefaz.SEFAZDefinitions.SefazXMLUF;
@@ -392,7 +392,7 @@ public class SEFAZUtils {
    * @throws RFWException
    */
   public static Date parseDate(String date) throws RFWException {
-    return RUDateTime.parseDate(date);
+    return RUTypes.parseDate(date);
   }
 
   /**
@@ -414,7 +414,7 @@ public class SEFAZUtils {
    * @throws RFWException Se o formato da data não for reconhecido ou se ocorrer um erro de conversão.
    */
   public static LocalDateTime parseLocalDateTime(String date) throws RFWException {
-    return RUDateTime.parseLocalDateTime(date);
+    return RUTypes.parseLocalDateTime(date);
   }
 
   /**
