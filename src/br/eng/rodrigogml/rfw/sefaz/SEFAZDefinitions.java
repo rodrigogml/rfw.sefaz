@@ -13,7 +13,7 @@ public class SEFAZDefinitions {
   // Ambientes de Produção
   public static final String SP_PRODUCTION_V400_NFEINUTILIZACAO4 = "https://nfe.fazenda.sp.gov.br/ws/nfeinutilizacao4.asmx";
   public static final String SP_PRODUCTION_V400_CADCONSULTACADASTRO4 = "https://nfe.fazenda.sp.gov.br/ws/cadconsultacadastro4.asmx";
-  public static final String SP_PRODUCTION_V400_NFEAUTORIZACAO4 = "https://nfe.svrs.rs.gov.br/ws/NfeAutorizacao/NFeAutorizacao4.asmx";
+  public static final String SP_PRODUCTION_V400_NFEAUTORIZACAO4 = "https://nfe.fazenda.sp.gov.br/ws/nfeautorizacao4.asmx";
   public static final String SP_PRODUCTION_V400_NFERECEPCAOEVENTO4 = "https://nfe.fazenda.sp.gov.br/ws/nferecepcaoevento4.asmx";
   public static final String SP_PRODUCTION_V400_NFERETAUTORIZACAO4 = "https://nfe.fazenda.sp.gov.br/ws/nferetautorizacao4.asmx";
   public static final String SP_PRODUCTION_V400_NFESTATUSSERVICO4 = "https://nfe.fazenda.sp.gov.br/ws/nfestatusservico4.asmx";
@@ -361,21 +361,7 @@ public class SEFAZDefinitions {
   }
 
   public enum SefazWebServices {
-    AM("13"),
-    BA("29"),
-    GO("52"),
-    MG("31"),
-    MS("50"),
-    MT("51"),
-    PE("26"),
-    PR("41"),
-    RS("43"),
-    SP("35"),
-    SVAN(null),
-    SVRS(null),
-    SVCAN(null),
-    SVCRS(null),
-    AN(null);
+    AM("13"), BA("29"), GO("52"), MG("31"), MS("50"), MT("51"), PE("26"), PR("41"), RS("43"), SP("35"), SVAN(null), SVRS(null), SVCAN(null), SVCRS(null), AN(null);
 
     private String ibgeCode;
 
@@ -415,35 +401,8 @@ public class SEFAZDefinitions {
    * <b>Atenção:</b> Não confundir com a relação de webservices / autorizadores da enumeration {@link SefazWebServices}
    */
   public enum SefazXMLUF {
-    AC("12", "https://nfe.sefaz.ac.gov.br/nfe/services/NFeAutorizacao4"),
-    AL("27", "https://nfe.sefaz.al.gov.br/nfe/services/NFeAutorizacao4"),
-    AP("16", "https://nfe.sefaz.ap.gov.br/nfe/services/NFeAutorizacao4"),
-    AM("13", "https://nfe.sefaz.am.gov.br/services2/services/NfeAutorizacao4"),
-    BA("29", "https://nfe.sefaz.ba.gov.br/webservices/NFeAutorizacao4/NFeAutorizacao4.asmx"),
-    CE("23", "https://nfe.sefaz.ce.gov.br/nfe/services/NFeAutorizacao4"),
-    DF("53", "https://nfe.fazenda.df.gov.br/nfe/services/NFeAutorizacao4"),
-    ES("32", "https://nfe.sefaz.es.gov.br/nfe/services/NFeAutorizacao4"),
-    GO("52", "https://nfe.sefaz.go.gov.br/nfe/services/NFeAutorizacao4?wsdl"),
-    MA("21", "https://nfe.sefaz.ma.gov.br/nfe/services/NFeAutorizacao4"),
-    MG("31", "https://nfe.fazenda.mg.gov.br/nfe2/services/NFeAutorizacao4"),
-    MS("50", "https://nfe.sefaz.ms.gov.br/ws/NFeAutorizacao4"),
-    MT("51", "https://nfe.sefaz.mt.gov.br/nfews/v2/services/NfeAutorizacao4?wsdl"),
-    PA("15", "https://nfe.sefaz.pa.gov.br/nfe/services/NFeAutorizacao4"),
-    PB("25",
-        "https://nfe.receita.pb.gov.br/nfe/services/NFeAutorizacao4"),
-    PE("26", "https://nfe.sefaz.pe.gov.br/nfe-service/services/NFeAutorizacao4"),
-    PI("22", "https://nfe.sefaz.pi.gov.br/nfe/services/NFeAutorizacao4"),
-    PR("41", "https://nfe.sefa.pr.gov.br/nfe/NFeAutorizacao4?wsdl"),
-    RJ("33", "https://nfe.fazenda.rj.gov.br/nfe/services/NFeAutorizacao4"),
-    RN("24", "https://nfe.set.rn.gov.br/nfe/services/NFeAutorizacao4"),
-    RO("11", "https://nfe.sefin.ro.gov.br/nfe/services/NFeAutorizacao4"),
-    RR("14", "https://nfe.sefaz.rr.gov.br/nfe/services/NFeAutorizacao4"),
-    RS("43", "https://nfe.sefazrs.rs.gov.br/ws/NfeAutorizacao/NFeAutorizacao4.asmx"),
-    SC("42", "https://nfe.sef.sc.gov.br/nfe/services/NFeAutorizacao4"),
-    SE("28", "https://nfe.sefaz.se.gov.br/nfe/services/NFeAutorizacao4"),
-    SP("35", "https://nfe.fazenda.sp.gov.br/ws/nfeautorizacao4.asmx"),
-    TO("17", "https://nfe.sefaz.to.gov.br/nfe/services/NFeAutorizacao4"),
-    EX(null, null);
+    AC("12", "https://nfe.sefaz.ac.gov.br/nfe/services/NFeAutorizacao4"), AL("27", "https://nfe.sefaz.al.gov.br/nfe/services/NFeAutorizacao4"), AP("16", "https://nfe.sefaz.ap.gov.br/nfe/services/NFeAutorizacao4"), AM("13", "https://nfe.sefaz.am.gov.br/services2/services/NfeAutorizacao4"), BA("29", "https://nfe.sefaz.ba.gov.br/webservices/NFeAutorizacao4/NFeAutorizacao4.asmx"), CE("23", "https://nfe.sefaz.ce.gov.br/nfe/services/NFeAutorizacao4"), DF("53", "https://nfe.fazenda.df.gov.br/nfe/services/NFeAutorizacao4"), ES("32", "https://nfe.sefaz.es.gov.br/nfe/services/NFeAutorizacao4"), GO("52", "https://nfe.sefaz.go.gov.br/nfe/services/NFeAutorizacao4?wsdl"), MA("21", "https://nfe.sefaz.ma.gov.br/nfe/services/NFeAutorizacao4"), MG("31", "https://nfe.fazenda.mg.gov.br/nfe2/services/NFeAutorizacao4"), MS("50", "https://nfe.sefaz.ms.gov.br/ws/NFeAutorizacao4"), MT("51", "https://nfe.sefaz.mt.gov.br/nfews/v2/services/NfeAutorizacao4?wsdl"), PA("15", "https://nfe.sefaz.pa.gov.br/nfe/services/NFeAutorizacao4"), PB("25",
+        "https://nfe.receita.pb.gov.br/nfe/services/NFeAutorizacao4"), PE("26", "https://nfe.sefaz.pe.gov.br/nfe-service/services/NFeAutorizacao4"), PI("22", "https://nfe.sefaz.pi.gov.br/nfe/services/NFeAutorizacao4"), PR("41", "https://nfe.sefa.pr.gov.br/nfe/NFeAutorizacao4?wsdl"), RJ("33", "https://nfe.fazenda.rj.gov.br/nfe/services/NFeAutorizacao4"), RN("24", "https://nfe.set.rn.gov.br/nfe/services/NFeAutorizacao4"), RO("11", "https://nfe.sefin.ro.gov.br/nfe/services/NFeAutorizacao4"), RR("14", "https://nfe.sefaz.rr.gov.br/nfe/services/NFeAutorizacao4"), RS("43", "https://nfe.sefazrs.rs.gov.br/ws/NfeAutorizacao/NFeAutorizacao4.asmx"), SC("42", "https://nfe.sef.sc.gov.br/nfe/services/NFeAutorizacao4"), SE("28", "https://nfe.sefaz.se.gov.br/nfe/services/NFeAutorizacao4"), SP("35", "https://nfe.fazenda.sp.gov.br/ws/nfeautorizacao4.asmx"), TO("17", "https://nfe.sefaz.to.gov.br/nfe/services/NFeAutorizacao4"), EX(null, null);
 
     private String ibgeCode;
     private String checkURL;
@@ -783,16 +742,7 @@ public class SEFAZDefinitions {
      */
     ICMS_CST_90("90", false, false, false),
 
-    ICMS_CSOSN_101("101", true, false, false),
-    ICMS_CSOSN_102("102", true, false, false),
-    ICMS_CSOSN_103("103", true, false, false),
-    ICMS_CSOSN_201("201", true, true, false),
-    ICMS_CSOSN_202("202", true, true, false),
-    ICMS_CSOSN_203("203", true, true, false),
-    ICMS_CSOSN_300("300", true, false, false),
-    ICMS_CSOSN_400("400", true, false, false),
-    ICMS_CSOSN_500("500", true, true, false),
-    ICMS_CSOSN_900("900", true, false, false);
+    ICMS_CSOSN_101("101", true, false, false), ICMS_CSOSN_102("102", true, false, false), ICMS_CSOSN_103("103", true, false, false), ICMS_CSOSN_201("201", true, true, false), ICMS_CSOSN_202("202", true, true, false), ICMS_CSOSN_203("203", true, true, false), ICMS_CSOSN_300("300", true, false, false), ICMS_CSOSN_400("400", true, false, false), ICMS_CSOSN_500("500", true, true, false), ICMS_CSOSN_900("900", true, false, false);
 
     /**
      * Código da Situação Tributária que representa o
@@ -871,10 +821,7 @@ public class SEFAZDefinitions {
    * Enumeração da Modalidade de determinação da BC do ICMS
    */
   public static enum SefazXMLmodBC {
-    MVA("0"),
-    PAUTA("1"),
-    FIXED_SHEET("2"),
-    OPERATION_VALUE("3");
+    MVA("0"), PAUTA("1"), FIXED_SHEET("2"), OPERATION_VALUE("3");
 
     /**
      * Código que é atribuído na TAG XML da NFe
@@ -905,12 +852,7 @@ public class SEFAZDefinitions {
    * Enumeração da Modalidade de determinação da BC do ICMS ST.
    */
   public static enum SefazXMLmodBCST {
-    FIXED_SHEET("0"),
-    LIST_NEGATIVE("1"),
-    LIST_POSITIVE("2"),
-    LIST_NEUTRAL("3"),
-    MVA("4"),
-    PAUTA("5");
+    FIXED_SHEET("0"), LIST_NEGATIVE("1"), LIST_POSITIVE("2"), LIST_NEUTRAL("3"), MVA("4"), PAUTA("5");
 
     /**
      * Código que é atribuído na TAG XML da NFe.
