@@ -1,6 +1,7 @@
 package br.eng.rodrigogml.rfw.sefaz;
 
 import br.eng.rodrigogml.rfw.kernel.RFW;
+import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums;
 
 /**
  * Description: Classe de definições do módulo. Apresenta funcionalidade similar a CLasse {@link RFW} do módulo principal.<br>
@@ -82,7 +83,10 @@ public class SEFAZDefinitions {
    * <li>nfe\infNFe\ide\NFref\refNF\mod
    * <li>nfe\infNFe\ide\NFref\refNFP\mod
    * <li>nfe\infNFe\ide\NFref\refECF\mod
+   *
+   * @deprecated Enumerações estão sendo concentradas na classe {@link SEFAZEnums}, com nova convenção de nomes e formato.
    */
+  @Deprecated
   public static enum SefazXMLmod {
     /**
      * Modelo de Notas Fiscais de talão.<br>
@@ -165,9 +169,7 @@ public class SEFAZDefinitions {
      * @return valores aceitos na tag nfe\infNFe\ide\mod.
      */
     public SefazXMLmod[] values_nfe_infNFe_ide_mod() {
-      return new SefazXMLmod[] {
-          MODEL55, MODEL65
-      };
+      return new SefazXMLmod[] { MODEL55, MODEL65 };
     }
 
     /**
@@ -176,9 +178,7 @@ public class SEFAZDefinitions {
      * @return valores aceitos na tag nfe\infNFe\ide\refECF\mod.
      */
     public SefazXMLmod[] values_nfe_infNFe_ide_NFref_refECF_mod() {
-      return new SefazXMLmod[] {
-          MODEL2B, MODEL2C, MODEL2D
-      };
+      return new SefazXMLmod[] { MODEL2B, MODEL2C, MODEL2D };
     }
 
     /**
@@ -187,9 +187,7 @@ public class SEFAZDefinitions {
      * @return valores aceitos na tag nfe\infNFe\ide\NFref\mod.
      */
     public SefazXMLmod[] values_nfe_infNFe_ide_NFref_refNFP_mod() {
-      return new SefazXMLmod[] {
-          MODEL01, MODEL04
-      };
+      return new SefazXMLmod[] { MODEL01, MODEL04 };
     }
 
     /**
@@ -198,9 +196,7 @@ public class SEFAZDefinitions {
      * @return valores aceitos na tag nfe\infNFe\ide\NFref\mod.
      */
     public SefazXMLmod[] values_nfe_infNFe_ide_NFref_refNF_mod() {
-      return new SefazXMLmod[] {
-          MODEL01, MODEL02
-      };
+      return new SefazXMLmod[] { MODEL01, MODEL02 };
     }
 
   }
@@ -260,7 +256,10 @@ public class SEFAZDefinitions {
    * <br>
    * Usado em:
    * <li>nfe\infNFe\ide\finNFe
+   *
+   * @deprecated Enumerações estão sendo concentradas na classe {@link SEFAZEnums}, com nova convenção de nomes e formato.
    */
+  @Deprecated
   public static enum SefazXMLfinNFe {
 
     /**
@@ -318,7 +317,10 @@ public class SEFAZDefinitions {
    * De acordo com o fluxo da marcadoria no fluxo do emitente da NF.<br>
    * Usado em:
    * <li>nfe\infNFe\ide\tpNF
+   *
+   * @deprecated Enumerações estão sendo concentradas na classe {@link SEFAZEnums}, com nova convenção de nomes e formato.
    */
+  @Deprecated
   public static enum SefazXMLtpNF {
     /**
      * Define que é uma nota de entrada de mercadorias em relação ao emitente da NFe.
@@ -401,8 +403,14 @@ public class SEFAZDefinitions {
    * <b>Atenção:</b> Não confundir com a relação de webservices / autorizadores da enumeration {@link SefazWebServices}
    */
   public enum SefazXMLUF {
-    AC("12", "https://nfe.sefaz.ac.gov.br/nfe/services/NFeAutorizacao4"), AL("27", "https://nfe.sefaz.al.gov.br/nfe/services/NFeAutorizacao4"), AP("16", "https://nfe.sefaz.ap.gov.br/nfe/services/NFeAutorizacao4"), AM("13", "https://nfe.sefaz.am.gov.br/services2/services/NfeAutorizacao4"), BA("29", "https://nfe.sefaz.ba.gov.br/webservices/NFeAutorizacao4/NFeAutorizacao4.asmx"), CE("23", "https://nfe.sefaz.ce.gov.br/nfe/services/NFeAutorizacao4"), DF("53", "https://nfe.fazenda.df.gov.br/nfe/services/NFeAutorizacao4"), ES("32", "https://nfe.sefaz.es.gov.br/nfe/services/NFeAutorizacao4"), GO("52", "https://nfe.sefaz.go.gov.br/nfe/services/NFeAutorizacao4?wsdl"), MA("21", "https://nfe.sefaz.ma.gov.br/nfe/services/NFeAutorizacao4"), MG("31", "https://nfe.fazenda.mg.gov.br/nfe2/services/NFeAutorizacao4"), MS("50", "https://nfe.sefaz.ms.gov.br/ws/NFeAutorizacao4"), MT("51", "https://nfe.sefaz.mt.gov.br/nfews/v2/services/NfeAutorizacao4?wsdl"), PA("15", "https://nfe.sefaz.pa.gov.br/nfe/services/NFeAutorizacao4"), PB("25",
-        "https://nfe.receita.pb.gov.br/nfe/services/NFeAutorizacao4"), PE("26", "https://nfe.sefaz.pe.gov.br/nfe-service/services/NFeAutorizacao4"), PI("22", "https://nfe.sefaz.pi.gov.br/nfe/services/NFeAutorizacao4"), PR("41", "https://nfe.sefa.pr.gov.br/nfe/NFeAutorizacao4?wsdl"), RJ("33", "https://nfe.fazenda.rj.gov.br/nfe/services/NFeAutorizacao4"), RN("24", "https://nfe.set.rn.gov.br/nfe/services/NFeAutorizacao4"), RO("11", "https://nfe.sefin.ro.gov.br/nfe/services/NFeAutorizacao4"), RR("14", "https://nfe.sefaz.rr.gov.br/nfe/services/NFeAutorizacao4"), RS("43", "https://nfe.sefazrs.rs.gov.br/ws/NfeAutorizacao/NFeAutorizacao4.asmx"), SC("42", "https://nfe.sef.sc.gov.br/nfe/services/NFeAutorizacao4"), SE("28", "https://nfe.sefaz.se.gov.br/nfe/services/NFeAutorizacao4"), SP("35", "https://nfe.fazenda.sp.gov.br/ws/nfeautorizacao4.asmx"), TO("17", "https://nfe.sefaz.to.gov.br/nfe/services/NFeAutorizacao4"), EX(null, null);
+    AC("12", "https://nfe.sefaz.ac.gov.br/nfe/services/NFeAutorizacao4"), AL("27", "https://nfe.sefaz.al.gov.br/nfe/services/NFeAutorizacao4"), AP("16", "https://nfe.sefaz.ap.gov.br/nfe/services/NFeAutorizacao4"), AM("13", "https://nfe.sefaz.am.gov.br/services2/services/NfeAutorizacao4"), BA("29",
+        "https://nfe.sefaz.ba.gov.br/webservices/NFeAutorizacao4/NFeAutorizacao4.asmx"), CE("23", "https://nfe.sefaz.ce.gov.br/nfe/services/NFeAutorizacao4"), DF("53", "https://nfe.fazenda.df.gov.br/nfe/services/NFeAutorizacao4"), ES("32",
+            "https://nfe.sefaz.es.gov.br/nfe/services/NFeAutorizacao4"), GO("52", "https://nfe.sefaz.go.gov.br/nfe/services/NFeAutorizacao4?wsdl"), MA("21", "https://nfe.sefaz.ma.gov.br/nfe/services/NFeAutorizacao4"), MG("31", "https://nfe.fazenda.mg.gov.br/nfe2/services/NFeAutorizacao4"), MS("50",
+                "https://nfe.sefaz.ms.gov.br/ws/NFeAutorizacao4"), MT("51", "https://nfe.sefaz.mt.gov.br/nfews/v2/services/NfeAutorizacao4?wsdl"), PA("15", "https://nfe.sefaz.pa.gov.br/nfe/services/NFeAutorizacao4"), PB("25",
+                    "https://nfe.receita.pb.gov.br/nfe/services/NFeAutorizacao4"), PE("26", "https://nfe.sefaz.pe.gov.br/nfe-service/services/NFeAutorizacao4"), PI("22", "https://nfe.sefaz.pi.gov.br/nfe/services/NFeAutorizacao4"), PR("41",
+                        "https://nfe.sefa.pr.gov.br/nfe/NFeAutorizacao4?wsdl"), RJ("33", "https://nfe.fazenda.rj.gov.br/nfe/services/NFeAutorizacao4"), RN("24", "https://nfe.set.rn.gov.br/nfe/services/NFeAutorizacao4"), RO("11", "https://nfe.sefin.ro.gov.br/nfe/services/NFeAutorizacao4"), RR("14",
+                            "https://nfe.sefaz.rr.gov.br/nfe/services/NFeAutorizacao4"), RS("43", "https://nfe.sefazrs.rs.gov.br/ws/NfeAutorizacao/NFeAutorizacao4.asmx"), SC("42", "https://nfe.sef.sc.gov.br/nfe/services/NFeAutorizacao4"), SE("28",
+                                "https://nfe.sefaz.se.gov.br/nfe/services/NFeAutorizacao4"), SP("35", "https://nfe.fazenda.sp.gov.br/ws/nfeautorizacao4.asmx"), TO("17", "https://nfe.sefaz.to.gov.br/nfe/services/NFeAutorizacao4"), EX(null, null);
 
     private String ibgeCode;
     private String checkURL;
@@ -438,7 +446,10 @@ public class SEFAZDefinitions {
    * Define o ambiente em que a classe SESFAZWS vai trabalhar.<br>
    * Utilizado em:<br>
    * <li>nfe\infNFe\ide\tpAmb
+   *
+   * @deprecated Enumerações estão sendo concentradas na classe {@link SEFAZEnums}, com nova convenção de nomes e formato.
    */
+  @Deprecated
   public static enum SefazXMLtpAmb {
     /**
      * Ambiente de teste de desenvolvimento e emissão de documentos. Sem valor juridico/fiscal.
@@ -487,7 +498,10 @@ public class SEFAZDefinitions {
    * Indicador de presença do comprador no estabelecimento comercial no momento da operação.<br>
    * Utilizado em:<br>
    * <li>nfe\infNFe\ide\indPres
+   *
+   * @deprecated Enumerações estão sendo concentradas na classe {@link SEFAZEnums}, com nova convenção de nomes e formato.
    */
+  @Deprecated
   public enum SefazXMLindPres {
     /**
      * Não se aplica para o tipo de operação da NF.
@@ -549,7 +563,10 @@ public class SEFAZDefinitions {
   /**
    * Define o tipo de operação desta NF. Utilizado em:<br>
    * <li>nfe\infNFe\ide\idDest
+   *
+   * @deprecated Enumerações estão sendo concentradas na classe {@link SEFAZEnums}, com nova convenção de nomes e formato.
    */
+  @Deprecated
   public enum SefazXMLidDest {
     /**
      * Operação interna (ao estado).
@@ -601,7 +618,10 @@ public class SEFAZDefinitions {
    * Define a origem da mercadoria.<br>
    * Utilizado nas tags:
    * <li>ICMS\**\orig
+   *
+   * @deprecated Enumerações estão sendo concentradas na classe {@link SEFAZEnums}, com nova convenção de nomes e formato.
    */
+  @Deprecated
   public static enum SefazXMLorig {
     /**
      * 0 - Produto de origem nacional, exceto as indicadas nos códigos 3 a 5.
@@ -687,15 +707,17 @@ public class SEFAZDefinitions {
      */
     public static SefazXMLorig valueOfXmlCode(String xmlCode) {
       for (SefazXMLorig v : values())
-        if (v.getXmlCode().equals(xmlCode))
-          return v;
+        if (v.getXmlCode().equals(xmlCode)) return v;
       return null;
     }
   }
 
   /**
    * Definições dos códigos de CST que podem ser utilizados para preenchimento de documento fiscal.
+   *
+   * @deprecated Enumerações estão sendo concentradas na classe {@link SEFAZEnums}, com nova convenção de nomes e formato.
    */
+  @Deprecated
   public static enum SefazXMLCST {
     /**
      * Tributada integralmente
@@ -742,7 +764,8 @@ public class SEFAZDefinitions {
      */
     ICMS_CST_90("90", false, false, false),
 
-    ICMS_CSOSN_101("101", true, false, false), ICMS_CSOSN_102("102", true, false, false), ICMS_CSOSN_103("103", true, false, false), ICMS_CSOSN_201("201", true, true, false), ICMS_CSOSN_202("202", true, true, false), ICMS_CSOSN_203("203", true, true, false), ICMS_CSOSN_300("300", true, false, false), ICMS_CSOSN_400("400", true, false, false), ICMS_CSOSN_500("500", true, true, false), ICMS_CSOSN_900("900", true, false, false);
+    ICMS_CSOSN_101("101", true, false, false), ICMS_CSOSN_102("102", true, false, false), ICMS_CSOSN_103("103", true, false, false), ICMS_CSOSN_201("201", true, true, false), ICMS_CSOSN_202("202", true, true, false), ICMS_CSOSN_203("203", true, true, false), ICMS_CSOSN_300("300", true, false,
+        false), ICMS_CSOSN_400("400", true, false, false), ICMS_CSOSN_500("500", true, true, false), ICMS_CSOSN_900("900", true, false, false);
 
     /**
      * Código da Situação Tributária que representa o
@@ -819,7 +842,10 @@ public class SEFAZDefinitions {
 
   /**
    * Enumeração da Modalidade de determinação da BC do ICMS
+   *
+   * @deprecated Enumerações estão sendo concentradas na classe {@link SEFAZEnums}, com nova convenção de nomes e formato.
    */
+  @Deprecated
   public static enum SefazXMLmodBC {
     MVA("0"), PAUTA("1"), FIXED_SHEET("2"), OPERATION_VALUE("3");
 
@@ -850,7 +876,10 @@ public class SEFAZDefinitions {
 
   /**
    * Enumeração da Modalidade de determinação da BC do ICMS ST.
+   *
+   * @deprecated Enumerações estão sendo concentradas na classe {@link SEFAZEnums}, com nova convenção de nomes e formato.
    */
+  @Deprecated
   public static enum SefazXMLmodBCST {
     FIXED_SHEET("0"), LIST_NEGATIVE("1"), LIST_POSITIVE("2"), LIST_NEUTRAL("3"), MVA("4"), PAUTA("5");
 
@@ -881,7 +910,10 @@ public class SEFAZDefinitions {
 
   /**
    * Define o motivo da desoneração do ICMS
+   *
+   * @deprecated Enumerações estão sendo concentradas na classe {@link SEFAZEnums}, com nova convenção de nomes e formato.
    */
+  @Deprecated
   public static enum SefazXMLmotDesICMS {
     /**
      * Define o motivo da desoneração por: 1 - Táxi

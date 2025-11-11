@@ -66,6 +66,11 @@
 			<artifactId>RFW.Kernel</artifactId>
 			<version>1.0</version>
 		</dependency>
+		<dependency>
+			<groupId>br.eng.rodrigogml.rfw</groupId>
+			<artifactId>RFW.ORM</artifactId>
+			<version>1.0</version>
+		</dependency>
 		
 		<dependency>
 	        <groupId>org.apache.axis2</groupId>

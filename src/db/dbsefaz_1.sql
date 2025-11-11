@@ -1,0 +1,4 @@
+-- ----------------------------
+-- Script para criação das tabelas 'sefaz_' oferecidas pelo RFW.SEFAZ
+-- ----------------------------
+-- [1]
