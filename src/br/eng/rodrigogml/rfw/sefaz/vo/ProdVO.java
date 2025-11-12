@@ -7,8 +7,8 @@ import br.eng.rodrigogml.rfw.kernel.rfwmeta.RFWMetaEnumField;
 import br.eng.rodrigogml.rfw.kernel.rfwmeta.RFWMetaStringField;
 import br.eng.rodrigogml.rfw.kernel.vo.RFWVO;
 import br.eng.rodrigogml.rfw.orm.dao.annotations.dao.RFWDAOAnnotation;
-import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZIndicadorEscalaRelevante;
-import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZIndicadorTotalItem;
+import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_indEscala;
+import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_indTot;
 
 /**
  * Classe que representa a tag <b>prod</b> (Detalhamento de Produtos e Serviços) do XML da SEFAZ.<br>
@@ -71,7 +71,7 @@ public class ProdVO extends RFWVO {
    * Preenchimento obrigatório para produtos com NCM relacionado no Anexo XXVII do Convênio 52/2017.
    */
   @RFWMetaEnumField(caption = "Escala relevante", required = false)
-  private SEFAZIndicadorEscalaRelevante indEscala = null;
+  private SEFAZ_indEscala indEscala = null;
 
   /**
    * ID: I05e — CNPJFab.<br>
@@ -192,7 +192,7 @@ public class ProdVO extends RFWVO {
    * Valores: 0=Não compõe; 1=Compõe. (Versão 2.0)
    */
   @RFWMetaEnumField(caption = "Totaliza NF-e", required = false)
-  private SEFAZIndicadorTotalItem indTot = null;
+  private SEFAZ_indTot indTot = null;
 
   /**
    * # iD: I02 — cProd.<br>
@@ -328,7 +328,7 @@ public class ProdVO extends RFWVO {
    *
    * @return the iD: I05d — indEscala
    */
-  public SEFAZIndicadorEscalaRelevante getIndEscala() {
+  public SEFAZ_indEscala getIndEscala() {
     return indEscala;
   }
 
@@ -340,7 +340,7 @@ public class ProdVO extends RFWVO {
    *
    * @param indEscala the new iD: I05d — indEscala
    */
-  public void setIndEscala(SEFAZIndicadorEscalaRelevante indEscala) {
+  public void setIndEscala(SEFAZ_indEscala indEscala) {
     this.indEscala = indEscala;
   }
 
@@ -671,7 +671,7 @@ public class ProdVO extends RFWVO {
    *
    * @return the iD: I17b — indTot
    */
-  public SEFAZIndicadorTotalItem getIndTot() {
+  public SEFAZ_indTot getIndTot() {
     return indTot;
   }
 
@@ -682,7 +682,7 @@ public class ProdVO extends RFWVO {
    *
    * @param indTot the new iD: I17b — indTot
    */
-  public void setIndTot(SEFAZIndicadorTotalItem indTot) {
+  public void setIndTot(SEFAZ_indTot indTot) {
     this.indTot = indTot;
   }
 

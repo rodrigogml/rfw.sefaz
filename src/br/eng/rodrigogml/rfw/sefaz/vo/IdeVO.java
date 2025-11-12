@@ -10,17 +10,17 @@ import br.eng.rodrigogml.rfw.kernel.rfwmeta.RFWMetaEnumField;
 import br.eng.rodrigogml.rfw.kernel.rfwmeta.RFWMetaStringField;
 import br.eng.rodrigogml.rfw.kernel.vo.RFWVO;
 import br.eng.rodrigogml.rfw.orm.dao.annotations.dao.RFWDAOAnnotation;
-import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZAmbiente;
-import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZDestinoOperacao;
-import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZFinalidadeNFe;
-import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZFormatoImpressao;
-import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZIndicadorConsumidorFinal;
-import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZIndicadorIntermediador;
-import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZIndicadorPresenca;
-import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZModeloDocumento;
-import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZProcessoEmissao;
-import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZTipoEmissao;
-import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZTipoOperacao;
+import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_tpAmb;
+import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_finNFe;
+import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_indFinal;
+import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_indIntermed;
+import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_indPres;
+import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_mod;
+import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_procEmi;
+import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_tpNF;
+import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_idDest;
+import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_tpEmis;
+import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_tpImp;
 
 /**
  * Classe que representa a estrutura da tag <b>ide</b> (Grupo de Identificação da NF-e) do XML da SEFAZ.<br>
@@ -65,7 +65,7 @@ public class IdeVO extends RFWVO {
    * Valores: 55=NF-e; 65=NFC-e.
    */
   @RFWMetaEnumField(caption = "Modelo", required = false)
-  private SEFAZModeloDocumento mod = null;
+  private SEFAZ_mod mod = null;
 
   /**
    * ID: <b>B07</b> – Série do documento (serie).<br>
@@ -101,14 +101,14 @@ public class IdeVO extends RFWVO {
    * 0=Entrada; 1=Saída.
    */
   @RFWMetaEnumField(caption = "Tipo de operação", required = false)
-  private SEFAZTipoOperacao tpNF = null;
+  private SEFAZ_tpNF tpNF = null;
 
   /**
    * ID: <b>B11a</b> – Destino da operação (idDest).<br>
    * 1=Interna; 2=Interestadual; 3=Exterior.
    */
   @RFWMetaEnumField(caption = "Destino", required = false)
-  private SEFAZDestinoOperacao idDest = null;
+  private SEFAZ_idDest idDest = null;
 
   /**
    * ID: <b>B12</b> – Município do fato gerador (cMunFG).<br>
@@ -122,14 +122,14 @@ public class IdeVO extends RFWVO {
    * 0=Sem DANFE; 1=Retrato; 2=Paisagem; 3=Simplificado; 4=NFC-e; 5=NFC-e por mensagem eletrônica.
    */
   @RFWMetaEnumField(caption = "Formato de impressão", required = false)
-  private SEFAZFormatoImpressao tpImp = null;
+  private SEFAZ_tpImp tpImp = null;
 
   /**
    * ID: <b>B22</b> – Tipo de emissão (tpEmis).<br>
    * Para NFC-e: válida a 9 (Off-line) e, a critério da UF, 4 (EPEC).
    */
   @RFWMetaEnumField(caption = "Tipo de emissão", required = false)
-  private SEFAZTipoEmissao tpEmis = null;
+  private SEFAZ_tpEmis tpEmis = null;
 
   /**
    * ID: <b>B23</b> – Dígito verificador da chave (cDV).<br>
@@ -143,42 +143,42 @@ public class IdeVO extends RFWVO {
    * 1=Produção; 2=Homologação.
    */
   @RFWMetaEnumField(caption = "Ambiente", required = false)
-  private SEFAZAmbiente tpAmb = null;
+  private SEFAZ_tpAmb tpAmb = null;
 
   /**
    * ID: <b>B25</b> – Finalidade da emissão (finNFe).<br>
    * 1=Normal; 2=Complementar; 3=Ajuste; 4=Devolução.
    */
   @RFWMetaEnumField(caption = "Finalidade", required = false)
-  private SEFAZFinalidadeNFe finNFe = null;
+  private SEFAZ_finNFe finNFe = null;
 
   /**
    * ID: <b>B25a</b> – Indicador de consumidor final (indFinal).<br>
    * 0=Não; 1=Sim.
    */
   @RFWMetaEnumField(caption = "Consumidor final", required = false)
-  private SEFAZIndicadorConsumidorFinal indFinal = null;
+  private SEFAZ_indFinal indFinal = null;
 
   /**
    * ID: <b>B25b</b> – Indicador de presença do comprador (indPres).<br>
    * 0=Não se aplica; 1=Presencial; 2=Internet; 3=Teleatendimento; 4=Entrega a domicílio; 5=Presencial fora do estabelecimento; 9=Outros.
    */
   @RFWMetaEnumField(caption = "Presença do comprador", required = false)
-  private SEFAZIndicadorPresenca indPres = null;
+  private SEFAZ_indPres indPres = null;
 
   /**
    * ID: <b>B25c</b> – Indicador de intermediador/marketplace (indIntermed).<br>
    * 0=Sem intermediador; 1=Com intermediador.
    */
   @RFWMetaEnumField(caption = "Intermediador", required = false)
-  private SEFAZIndicadorIntermediador indIntermed = null;
+  private SEFAZ_indIntermed indIntermed = null;
 
   /**
    * ID: <b>B26</b> – Processo de emissão (procEmi).<br>
    * 0=Aplicativo do contribuinte; 1=Avulsa pelo Fisco; 2=Avulsa pelo contribuinte no site do Fisco; 3=Aplicativo do Fisco.
    */
   @RFWMetaEnumField(caption = "Processo de emissão", required = false)
-  private SEFAZProcessoEmissao procEmi = null;
+  private SEFAZ_procEmi procEmi = null;
 
   /**
    * ID: <b>B27</b> – Versão do aplicativo emissor (verProc).<br>
@@ -267,7 +267,7 @@ public class IdeVO extends RFWVO {
    *
    * @return the iD: <b>B06</b> – Modelo do Documento Fiscal (mod)
    */
-  public SEFAZModeloDocumento getMod() {
+  public SEFAZ_mod getMod() {
     return mod;
   }
 
@@ -277,7 +277,7 @@ public class IdeVO extends RFWVO {
    *
    * @param mod the new iD: <b>B06</b> – Modelo do Documento Fiscal (mod)
    */
-  public void setMod(SEFAZModeloDocumento mod) {
+  public void setMod(SEFAZ_mod mod) {
     this.mod = mod;
   }
 
@@ -369,7 +369,7 @@ public class IdeVO extends RFWVO {
    *
    * @return the iD: <b>B11</b> – Tipo de operação (tpNF)
    */
-  public SEFAZTipoOperacao getTpNF() {
+  public SEFAZ_tpNF getTpNF() {
     return tpNF;
   }
 
@@ -379,7 +379,7 @@ public class IdeVO extends RFWVO {
    *
    * @param tpNF the new iD: <b>B11</b> – Tipo de operação (tpNF)
    */
-  public void setTpNF(SEFAZTipoOperacao tpNF) {
+  public void setTpNF(SEFAZ_tpNF tpNF) {
     this.tpNF = tpNF;
   }
 
@@ -389,7 +389,7 @@ public class IdeVO extends RFWVO {
    *
    * @return the iD: <b>B11a</b> – Destino da operação (idDest)
    */
-  public SEFAZDestinoOperacao getIdDest() {
+  public SEFAZ_idDest getIdDest() {
     return idDest;
   }
 
@@ -399,7 +399,7 @@ public class IdeVO extends RFWVO {
    *
    * @param idDest the new iD: <b>B11a</b> – Destino da operação (idDest)
    */
-  public void setIdDest(SEFAZDestinoOperacao idDest) {
+  public void setIdDest(SEFAZ_idDest idDest) {
     this.idDest = idDest;
   }
 
@@ -429,7 +429,7 @@ public class IdeVO extends RFWVO {
    *
    * @return the iD: <b>B21</b> – Formato de impressão do DANFE (tpImp)
    */
-  public SEFAZFormatoImpressao getTpImp() {
+  public SEFAZ_tpImp getTpImp() {
     return tpImp;
   }
 
@@ -439,7 +439,7 @@ public class IdeVO extends RFWVO {
    *
    * @param tpImp the new iD: <b>B21</b> – Formato de impressão do DANFE (tpImp)
    */
-  public void setTpImp(SEFAZFormatoImpressao tpImp) {
+  public void setTpImp(SEFAZ_tpImp tpImp) {
     this.tpImp = tpImp;
   }
 
@@ -449,7 +449,7 @@ public class IdeVO extends RFWVO {
    *
    * @return the iD: <b>B22</b> – Tipo de emissão (tpEmis)
    */
-  public SEFAZTipoEmissao getTpEmis() {
+  public SEFAZ_tpEmis getTpEmis() {
     return tpEmis;
   }
 
@@ -459,7 +459,7 @@ public class IdeVO extends RFWVO {
    *
    * @param tpEmis the new iD: <b>B22</b> – Tipo de emissão (tpEmis)
    */
-  public void setTpEmis(SEFAZTipoEmissao tpEmis) {
+  public void setTpEmis(SEFAZ_tpEmis tpEmis) {
     this.tpEmis = tpEmis;
   }
 
@@ -489,7 +489,7 @@ public class IdeVO extends RFWVO {
    *
    * @return the iD: <b>B24</b> – Ambiente (tpAmb)
    */
-  public SEFAZAmbiente getTpAmb() {
+  public SEFAZ_tpAmb getTpAmb() {
     return tpAmb;
   }
 
@@ -499,7 +499,7 @@ public class IdeVO extends RFWVO {
    *
    * @param tpAmb the new iD: <b>B24</b> – Ambiente (tpAmb)
    */
-  public void setTpAmb(SEFAZAmbiente tpAmb) {
+  public void setTpAmb(SEFAZ_tpAmb tpAmb) {
     this.tpAmb = tpAmb;
   }
 
@@ -509,7 +509,7 @@ public class IdeVO extends RFWVO {
    *
    * @return the iD: <b>B25</b> – Finalidade da emissão (finNFe)
    */
-  public SEFAZFinalidadeNFe getFinNFe() {
+  public SEFAZ_finNFe getFinNFe() {
     return finNFe;
   }
 
@@ -519,7 +519,7 @@ public class IdeVO extends RFWVO {
    *
    * @param finNFe the new iD: <b>B25</b> – Finalidade da emissão (finNFe)
    */
-  public void setFinNFe(SEFAZFinalidadeNFe finNFe) {
+  public void setFinNFe(SEFAZ_finNFe finNFe) {
     this.finNFe = finNFe;
   }
 
@@ -529,7 +529,7 @@ public class IdeVO extends RFWVO {
    *
    * @return the iD: <b>B25a</b> – Indicador de consumidor final (indFinal)
    */
-  public SEFAZIndicadorConsumidorFinal getIndFinal() {
+  public SEFAZ_indFinal getIndFinal() {
     return indFinal;
   }
 
@@ -539,7 +539,7 @@ public class IdeVO extends RFWVO {
    *
    * @param indFinal the new iD: <b>B25a</b> – Indicador de consumidor final (indFinal)
    */
-  public void setIndFinal(SEFAZIndicadorConsumidorFinal indFinal) {
+  public void setIndFinal(SEFAZ_indFinal indFinal) {
     this.indFinal = indFinal;
   }
 
@@ -549,7 +549,7 @@ public class IdeVO extends RFWVO {
    *
    * @return the iD: <b>B25b</b> – Indicador de presença do comprador (indPres)
    */
-  public SEFAZIndicadorPresenca getIndPres() {
+  public SEFAZ_indPres getIndPres() {
     return indPres;
   }
 
@@ -559,7 +559,7 @@ public class IdeVO extends RFWVO {
    *
    * @param indPres the new iD: <b>B25b</b> – Indicador de presença do comprador (indPres)
    */
-  public void setIndPres(SEFAZIndicadorPresenca indPres) {
+  public void setIndPres(SEFAZ_indPres indPres) {
     this.indPres = indPres;
   }
 
@@ -569,7 +569,7 @@ public class IdeVO extends RFWVO {
    *
    * @return the iD: <b>B25c</b> – Indicador de intermediador/marketplace (indIntermed)
    */
-  public SEFAZIndicadorIntermediador getIndIntermed() {
+  public SEFAZ_indIntermed getIndIntermed() {
     return indIntermed;
   }
 
@@ -579,7 +579,7 @@ public class IdeVO extends RFWVO {
    *
    * @param indIntermed the new iD: <b>B25c</b> – Indicador de intermediador/marketplace (indIntermed)
    */
-  public void setIndIntermed(SEFAZIndicadorIntermediador indIntermed) {
+  public void setIndIntermed(SEFAZ_indIntermed indIntermed) {
     this.indIntermed = indIntermed;
   }
 
@@ -589,7 +589,7 @@ public class IdeVO extends RFWVO {
    *
    * @return the iD: <b>B26</b> – Processo de emissão (procEmi)
    */
-  public SEFAZProcessoEmissao getProcEmi() {
+  public SEFAZ_procEmi getProcEmi() {
     return procEmi;
   }
 
@@ -599,7 +599,7 @@ public class IdeVO extends RFWVO {
    *
    * @param procEmi the new iD: <b>B26</b> – Processo de emissão (procEmi)
    */
-  public void setProcEmi(SEFAZProcessoEmissao procEmi) {
+  public void setProcEmi(SEFAZ_procEmi procEmi) {
     this.procEmi = procEmi;
   }
 

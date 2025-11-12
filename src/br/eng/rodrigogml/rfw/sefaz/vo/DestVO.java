@@ -7,7 +7,7 @@ import br.eng.rodrigogml.rfw.kernel.rfwmeta.RFWMetaEnumField;
 import br.eng.rodrigogml.rfw.kernel.rfwmeta.RFWMetaStringField;
 import br.eng.rodrigogml.rfw.kernel.vo.RFWVO;
 import br.eng.rodrigogml.rfw.orm.dao.annotations.dao.RFWDAOAnnotation;
-import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZIndicadorIEDest;
+import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_indIEDest;
 
 /**
  * Tag: <b>dest</b> — Identificação do Destinatário da NF-e (Grupo E01).<br>
@@ -46,7 +46,7 @@ public class DestVO extends RFWVO {
    * ID: E16a — Indicador da IE do Destinatário (N, 1). 1=Contribuinte; 2=Isento; 9=Não contribuinte.
    */
   @RFWMetaEnumField(caption = "Indicador IE", required = false)
-  private SEFAZIndicadorIEDest indIEDest = null;
+  private SEFAZ_indIEDest indIEDest = null;
 
   /**
    * ID: E17 — IE do destinatário (C, 2–14). Não informar quando indIEDest=2 ou 9.
@@ -149,7 +149,7 @@ public class DestVO extends RFWVO {
    *
    * @return the iD: E16a — Indicador da IE do Destinatário (N, 1)
    */
-  public SEFAZIndicadorIEDest getIndIEDest() {
+  public SEFAZ_indIEDest getIndIEDest() {
     return indIEDest;
   }
 
@@ -158,7 +158,7 @@ public class DestVO extends RFWVO {
    *
    * @param indIEDest the new iD: E16a — Indicador da IE do Destinatário (N, 1)
    */
-  public void setIndIEDest(SEFAZIndicadorIEDest indIEDest) {
+  public void setIndIEDest(SEFAZ_indIEDest indIEDest) {
     this.indIEDest = indIEDest;
   }
 

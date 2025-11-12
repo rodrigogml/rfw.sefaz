@@ -26,6 +26,12 @@ public class NFeVO extends RFWVO {
   private NFeProcVO nfeProcVO = null;
 
   /**
+   * TAG infNFe
+   */
+  @RFWMetaRelationshipField(caption = "infNFe", relationship = RelationshipTypes.COMPOSITION, required = true, columnMapped = "idsefaz_nfe")
+  private InfNFeVO infNFeVO = null;
+
+  /**
    * # tAG nfeProc.
    *
    * @return the tAG nfeProc

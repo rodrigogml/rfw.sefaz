@@ -6,11 +6,12 @@ import br.eng.rodrigogml.rfw.kernel.rfwmeta.RFWMetaBigDecimalField;
 import br.eng.rodrigogml.rfw.kernel.rfwmeta.RFWMetaEnumField;
 import br.eng.rodrigogml.rfw.kernel.vo.RFWVO;
 import br.eng.rodrigogml.rfw.orm.dao.annotations.dao.RFWDAOAnnotation;
-import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZICMSCST;
-import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZModalidadeBaseCalculoICMS;
-import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZModalidadeBaseCalculoICMSST;
-import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZMotivoDesoneracaoICMS;
-import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZOrigemMercadoria;
+import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_CSOSN;
+import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_CST_ICMS;
+import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_modBC;
+import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_modBCST;
+import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_motDesICMS;
+import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_orig;
 
 /**
  * Description: Informações de ICMS da operação própria e ST (TAG {@code ICMS}, ID N01).<br>
@@ -29,37 +30,37 @@ public class ICMSVO extends RFWVO {
    * ID: N11<br>
    * Origem da mercadoria.<br>
    * Utilizado em todos os grupos de ICMS do item (ICMS00, ICMS10, ICMS20, ICMS30 e ICMS40).<br>
-   * Valores conforme {@link SEFAZOrigemMercadoria}.
+   * Valores conforme {@link SEFAZ_orig}.
    */
   @RFWMetaEnumField(caption = "Origem da mercadoria", required = false)
-  private SEFAZOrigemMercadoria orig = null;
+  private SEFAZ_orig orig = null;
 
   /**
    * ID: N12<br>
    * Código de Situação Tributária do ICMS do item.<br>
    * Determina qual conjunto de campos deste grupo será utilizado (ICMS00, ICMS10, ICMS20, ICMS30 ou ICMS40).<br>
-   * Valores conforme {@link SEFAZICMSCST}.
+   * Valores conforme {@link SEFAZ_CST_ICMS}.
    */
   @RFWMetaEnumField(caption = "Situação tributária ICMS", required = false)
-  private SEFAZICMSCST cst = null;
+  private SEFAZ_CST_ICMS cst = null;
 
   /**
    * ID: N13<br>
    * Modalidade de determinação da Base de Cálculo do ICMS (BC própria).<br>
    * Utilizada nos grupos ICMS00, ICMS10 e ICMS20.<br>
-   * Valores conforme {@link SEFAZModalidadeBaseCalculoICMS}.
+   * Valores conforme {@link SEFAZ_modBC}.
    */
   @RFWMetaEnumField(caption = "Modalidade da BC do ICMS", required = false)
-  private SEFAZModalidadeBaseCalculoICMS modBC = null;
+  private SEFAZ_modBC modBC = null;
 
   /**
    * ID: N18<br>
    * Modalidade de determinação da Base de Cálculo do ICMS ST (BC de substituição).<br>
    * Utilizada principalmente nos grupos ICMS10 e ICMS30.<br>
-   * Valores conforme {@link SEFAZModalidadeBaseCalculoICMSST}.
+   * Valores conforme {@link SEFAZ_modBCST}.
    */
   @RFWMetaEnumField(caption = "Modalidade da BC do ICMS ST", required = false)
-  private SEFAZModalidadeBaseCalculoICMSST modBCST = null;
+  private SEFAZ_modBCST modBCST = null;
 
   /**
    * ID: N15<br>
@@ -202,11 +203,11 @@ public class ICMSVO extends RFWVO {
   /**
    * ID: N28 (grupo N27.1 – ICMS20/ICMS30/ICMS40)<br>
    * Motivo da desoneração do ICMS (motDesICMS).<br>
-   * Valores conforme {@link SEFAZMotivoDesoneracaoICMS}.<br>
+   * Valores conforme {@link SEFAZ_motDesICMS}.<br>
    * Preenchido apenas quando houver valor em {@link #vICMSDeson}.
    */
   @RFWMetaEnumField(caption = "Motivo da desoneração", required = false)
-  private SEFAZMotivoDesoneracaoICMS motDesICMS = null;
+  private SEFAZ_motDesICMS motDesICMS = null;
 
   /**
    * ID: N21 (ICMS51)<br>
@@ -278,15 +279,40 @@ public class ICMSVO extends RFWVO {
   private BigDecimal vICMSEfet = null;
 
   /**
+   * ID: N12a<br>
+   * Código de Situação da Operação no Simples Nacional (CSOSN).<br>
+   * Utilizado nos grupos ICMSSN* (Simples Nacional), por exemplo ICMSSN102 quando o contribuinte está no CRT=1.<br>
+   * Valores conforme {@link SEFAZ_CSOSN}.
+   */
+  @RFWMetaEnumField(caption = "CSOSN (Simples Nacional)", required = false)
+  private SEFAZ_CSOSN csosn = null;
+
+  /**
+   * ID: (grupo ICMSSN101/ICMSSN201/ICMSSN900 – pCredSN)<br>
+   * Percentual de crédito do ICMS permitido no Simples Nacional.<br>
+   * Tamanho: 3v2-4.
+   */
+  @RFWMetaBigDecimalField(caption = "Percentual de crédito SN", required = false, scale = 2, scaleMax = 4, absolute = true)
+  private BigDecimal pCredSN = null;
+
+  /**
+   * ID: (grupo ICMSSN101/ICMSSN201/ICMSSN900 – vCredICMSSN)<br>
+   * Valor do crédito de ICMS permitido no Simples Nacional.<br>
+   * Tamanho: 13v2.
+   */
+  @RFWMetaBigDecimalField(caption = "Valor do crédito ICMS SN", required = false, scale = 2, absolute = true)
+  private BigDecimal vCredICMSSN = null;
+
+  /**
    * # iD: N11<br>
    * Origem da mercadoria.<br>
    * Utilizado em todos os grupos de ICMS do item (ICMS00, ICMS10, ICMS20, ICMS30 e ICMS40).<br>
-   * Valores conforme {@link SEFAZOrigemMercadoria}.
+   * Valores conforme {@link SEFAZ_orig}.
    *
    * @return the iD: N11<br>
    *         Origem da mercadoria
    */
-  public SEFAZOrigemMercadoria getOrig() {
+  public SEFAZ_orig getOrig() {
     return orig;
   }
 
@@ -294,12 +320,12 @@ public class ICMSVO extends RFWVO {
    * # iD: N11<br>
    * Origem da mercadoria.<br>
    * Utilizado em todos os grupos de ICMS do item (ICMS00, ICMS10, ICMS20, ICMS30 e ICMS40).<br>
-   * Valores conforme {@link SEFAZOrigemMercadoria}.
+   * Valores conforme {@link SEFAZ_orig}.
    *
    * @param orig the new iD: N11<br>
    *          Origem da mercadoria
    */
-  public void setOrig(SEFAZOrigemMercadoria orig) {
+  public void setOrig(SEFAZ_orig orig) {
     this.orig = orig;
   }
 
@@ -307,12 +333,12 @@ public class ICMSVO extends RFWVO {
    * # iD: N12<br>
    * Código de Situação Tributária do ICMS do item.<br>
    * Determina qual conjunto de campos deste grupo será utilizado (ICMS00, ICMS10, ICMS20, ICMS30 ou ICMS40).<br>
-   * Valores conforme {@link SEFAZICMSCST}.
+   * Valores conforme {@link SEFAZ_CST_ICMS}.
    *
    * @return the iD: N12<br>
    *         Código de Situação Tributária do ICMS do item
    */
-  public SEFAZICMSCST getCst() {
+  public SEFAZ_CST_ICMS getCst() {
     return cst;
   }
 
@@ -320,12 +346,12 @@ public class ICMSVO extends RFWVO {
    * # iD: N12<br>
    * Código de Situação Tributária do ICMS do item.<br>
    * Determina qual conjunto de campos deste grupo será utilizado (ICMS00, ICMS10, ICMS20, ICMS30 ou ICMS40).<br>
-   * Valores conforme {@link SEFAZICMSCST}.
+   * Valores conforme {@link SEFAZ_CST_ICMS}.
    *
    * @param cst the new iD: N12<br>
    *          Código de Situação Tributária do ICMS do item
    */
-  public void setCst(SEFAZICMSCST cst) {
+  public void setCst(SEFAZ_CST_ICMS cst) {
     this.cst = cst;
   }
 
@@ -333,12 +359,12 @@ public class ICMSVO extends RFWVO {
    * # iD: N13<br>
    * Modalidade de determinação da Base de Cálculo do ICMS (BC própria).<br>
    * Utilizada nos grupos ICMS00, ICMS10 e ICMS20.<br>
-   * Valores conforme {@link SEFAZModalidadeBaseCalculoICMS}.
+   * Valores conforme {@link SEFAZ_modBC}.
    *
    * @return the iD: N13<br>
    *         Modalidade de determinação da Base de Cálculo do ICMS (BC própria)
    */
-  public SEFAZModalidadeBaseCalculoICMS getModBC() {
+  public SEFAZ_modBC getModBC() {
     return modBC;
   }
 
@@ -346,12 +372,12 @@ public class ICMSVO extends RFWVO {
    * # iD: N13<br>
    * Modalidade de determinação da Base de Cálculo do ICMS (BC própria).<br>
    * Utilizada nos grupos ICMS00, ICMS10 e ICMS20.<br>
-   * Valores conforme {@link SEFAZModalidadeBaseCalculoICMS}.
+   * Valores conforme {@link SEFAZ_modBC}.
    *
    * @param modBC the new iD: N13<br>
    *          Modalidade de determinação da Base de Cálculo do ICMS (BC própria)
    */
-  public void setModBC(SEFAZModalidadeBaseCalculoICMS modBC) {
+  public void setModBC(SEFAZ_modBC modBC) {
     this.modBC = modBC;
   }
 
@@ -359,12 +385,12 @@ public class ICMSVO extends RFWVO {
    * # iD: N18<br>
    * Modalidade de determinação da Base de Cálculo do ICMS ST (BC de substituição).<br>
    * Utilizada principalmente nos grupos ICMS10 e ICMS30.<br>
-   * Valores conforme {@link SEFAZModalidadeBaseCalculoICMSST}.
+   * Valores conforme {@link SEFAZ_modBCST}.
    *
    * @return the iD: N18<br>
    *         Modalidade de determinação da Base de Cálculo do ICMS ST (BC de substituição)
    */
-  public SEFAZModalidadeBaseCalculoICMSST getModBCST() {
+  public SEFAZ_modBCST getModBCST() {
     return modBCST;
   }
 
@@ -372,12 +398,12 @@ public class ICMSVO extends RFWVO {
    * # iD: N18<br>
    * Modalidade de determinação da Base de Cálculo do ICMS ST (BC de substituição).<br>
    * Utilizada principalmente nos grupos ICMS10 e ICMS30.<br>
-   * Valores conforme {@link SEFAZModalidadeBaseCalculoICMSST}.
+   * Valores conforme {@link SEFAZ_modBCST}.
    *
    * @param modBCST the new iD: N18<br>
    *          Modalidade de determinação da Base de Cálculo do ICMS ST (BC de substituição)
    */
-  public void setModBCST(SEFAZModalidadeBaseCalculoICMSST modBCST) {
+  public void setModBCST(SEFAZ_modBCST modBCST) {
     this.modBCST = modBCST;
   }
 
@@ -774,24 +800,24 @@ public class ICMSVO extends RFWVO {
   /**
    * # iD: N28 (grupo N27.1 – ICMS20/ICMS30/ICMS40)<br>
    * Motivo da desoneração do ICMS (motDesICMS).<br>
-   * Valores conforme {@link SEFAZMotivoDesoneracaoICMS}.<br>
+   * Valores conforme {@link SEFAZ_motDesICMS}.<br>
    * Preenchido apenas quando houver valor em {@link #vICMSDeson}.
    *
    * @return the iD: N28 (grupo N27
    */
-  public SEFAZMotivoDesoneracaoICMS getMotDesICMS() {
+  public SEFAZ_motDesICMS getMotDesICMS() {
     return motDesICMS;
   }
 
   /**
    * # iD: N28 (grupo N27.1 – ICMS20/ICMS30/ICMS40)<br>
    * Motivo da desoneração do ICMS (motDesICMS).<br>
-   * Valores conforme {@link SEFAZMotivoDesoneracaoICMS}.<br>
+   * Valores conforme {@link SEFAZ_motDesICMS}.<br>
    * Preenchido apenas quando houver valor em {@link #vICMSDeson}.
    *
    * @param motDesICMS the new iD: N28 (grupo N27
    */
-  public void setMotDesICMS(SEFAZMotivoDesoneracaoICMS motDesICMS) {
+  public void setMotDesICMS(SEFAZ_motDesICMS motDesICMS) {
     this.motDesICMS = motDesICMS;
   }
 
@@ -1011,6 +1037,32 @@ public class ICMSVO extends RFWVO {
    */
   public void setVICMSEfet(BigDecimal vICMSEfet) {
     this.vICMSEfet = vICMSEfet;
+  }
+
+  /**
+   * # iD: N12a<br>
+   * Código de Situação da Operação no Simples Nacional (CSOSN).<br>
+   * Utilizado nos grupos ICMSSN* (Simples Nacional), por exemplo ICMSSN102 quando o contribuinte está no CRT=1.<br>
+   * Valores conforme {@link SEFAZ_CSOSN}.
+   *
+   * @return the iD: N12a<br>
+   *         Código de Situação da Operação no Simples Nacional (CSOSN)
+   */
+  public SEFAZ_CSOSN getCsosn() {
+    return csosn;
+  }
+
+  /**
+   * # iD: N12a<br>
+   * Código de Situação da Operação no Simples Nacional (CSOSN).<br>
+   * Utilizado nos grupos ICMSSN* (Simples Nacional), por exemplo ICMSSN102 quando o contribuinte está no CRT=1.<br>
+   * Valores conforme {@link SEFAZ_CSOSN}.
+   *
+   * @param csosn the new iD: N12a<br>
+   *          Código de Situação da Operação no Simples Nacional (CSOSN)
+   */
+  public void setCsosn(SEFAZ_CSOSN csosn) {
+    this.csosn = csosn;
   }
 
 }
