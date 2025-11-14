@@ -3,795 +3,597 @@ package br.eng.rodrigogml.rfw.sefaz.vo;
 import java.math.BigDecimal;
 
 import br.eng.rodrigogml.rfw.kernel.rfwmeta.RFWMetaBigDecimalField;
+import br.eng.rodrigogml.rfw.kernel.rfwmeta.RFWMetaRelationshipField;
+import br.eng.rodrigogml.rfw.kernel.rfwmeta.RFWMetaRelationshipField.RelationshipTypes;
 import br.eng.rodrigogml.rfw.kernel.vo.RFWVO;
 import br.eng.rodrigogml.rfw.orm.dao.annotations.dao.RFWDAOAnnotation;
 
 /**
- * Description: Totais referentes ao ICMS e valores globais da NF-e (TAG {@code ICMSTot}, ID W02).<br>
- * Este grupo consolida os totais monetários calculados a partir dos itens da NF-e, incluindo:
- * <ul>
- * <li>Base de cálculo e valor do ICMS próprio e do ICMS-ST;</li>
- * <li>ICMS desonerado e valores relacionados ao FCP (Fundo de Combate à Pobreza);</li>
- * <li>Totais de produtos/serviços, frete, seguro, descontos, II, IPI, PIS e COFINS;</li>
- * <li>Valor total da NF-e e valor aproximado de tributos ({@code vTotTrib}).</li>
- * </ul>
- * Todos os campos seguem o layout da NF-e – MOC 7.0 – Anexo I, seção de totais (ID W02 a W16a).
- *
- * @author BIS DEVil
- * @since (11 de nov. de 2025)
+ * Grupo W02 - ICMSTot: Totais referentes ao ICMS.
+ * <p>
+ * Ocorre 1-1 dentro do grupo W01 (total da NF-e).
+ * <p>
+ * O grupo de valores totais da NF-e deve ser informado com o somatório do campo correspondente dos itens.
  */
 @RFWDAOAnnotation(schema = "_RFW.SEFAZ", table = "sefaz_icmstot")
 public class ICMSTotVO extends RFWVO {
 
-  private static final long serialVersionUID = 5925518140468169540L;
+  private static final long serialVersionUID = -2397540062424958813L;
 
   /**
-   * ID: W03 – {@code vBC}<br>
-   * Base de cálculo do ICMS próprio da NF-e.<br>
-   * Corresponde ao somatório das bases de cálculo de ICMS dos itens (tag N15).<br>
-   * Tamanho: 13v2 – valor monetário não negativo.
+   * {@link TotalVO}
    */
-  @RFWMetaBigDecimalField(caption = "BC ICMS", required = false, scale = 2, minValue = "0", absolute = true)
-  private BigDecimal vBC = null;
+  @RFWMetaRelationshipField(caption = "Total", relationship = RelationshipTypes.PARENT_ASSOCIATION, required = true, column = "idsefaz_total")
+  private TotalVO totalVO = null;
 
   /**
-   * ID: W04 – {@code vICMS}<br>
-   * Valor total do ICMS próprio da NF-e.<br>
-   * Corresponde ao somatório dos valores de ICMS dos itens (tag N17).<br>
-   * Tamanho: 13v2 – valor monetário não negativo.
+   * W03 - vBC: Base de Cálculo do ICMS. Tipo: N, Tamanho: 13v2, Ocorrência: 1-1 (obrigatório na estrutura).
    */
-  @RFWMetaBigDecimalField(caption = "ICMS total", required = false, scale = 2, minValue = "0", absolute = true)
-  private BigDecimal vICMS = null;
+  @RFWMetaBigDecimalField(caption = "vBC", required = false, unique = false, maxValue = "", minValue = "", scale = 2, absolute = false)
+  private BigDecimal vbc;
 
   /**
-   * ID: W04a – {@code vICMSDeson}<br>
-   * Valor total do ICMS desonerado na NF-e.<br>
-   * Somatório dos valores de ICMS desonerado informados por item (tag N28a).<br>
-   * Tamanho: 13v2 – valor monetário não negativo.
+   * W04 - vICMS: Valor Total do ICMS. Tipo: N, Tamanho: 13v2, Ocorrência: 1-1 (obrigatório na estrutura).
    */
-  @RFWMetaBigDecimalField(caption = "ICMS desonerado", required = false, scale = 2, minValue = "0", absolute = true)
-  private BigDecimal vICMSDeson = null;
+  @RFWMetaBigDecimalField(caption = "vICMS", required = false, unique = false, maxValue = "", minValue = "", scale = 2, absolute = false)
+  private BigDecimal vicms;
 
   /**
-   * ID: W04c – {@code vFCPUFDest}<br>
-   * Valor total do FCP devido à UF de destino.<br>
-   * Somatório dos valores de FCP-UF destino calculados por item (tags N17c / N23d, conforme o tipo de ICMS).<br>
-   * Tamanho: 13v2 – valor monetário não negativo.
+   * W04a - vICMSDeson: Valor Total do ICMS desonerado. Tipo: N, Tamanho: 13v2, Ocorrência: 1-1 (obrigatório na estrutura).
    */
-  @RFWMetaBigDecimalField(caption = "FCP UF destino", required = false, scale = 2, minValue = "0", absolute = true)
-  private BigDecimal vFCPUFDest = null;
+  @RFWMetaBigDecimalField(caption = "vICMSDeson", required = false, unique = false, maxValue = "", minValue = "", scale = 2, absolute = false)
+  private BigDecimal vicmsDeson;
 
   /**
-   * ID: W04e – {@code vICMSUFDest}<br>
-   * Valor total do ICMS relativo à UF de destino.<br>
-   * Utilizado nas operações interestaduais com partilha de ICMS para consumidor final.<br>
-   * Tamanho: 13v2 – valor monetário não negativo.
+   * W04c - vFCPUFDest: Valor total do ICMS relativo ao FCP da UF de destino. Tipo: N, Tamanho: 13v2, Ocorrência: 0-1 (campo opcional). Incluído na NT 2015/003.
    */
-  @RFWMetaBigDecimalField(caption = "ICMS UF destino", required = false, scale = 2, minValue = "0", absolute = true)
-  private BigDecimal vICMSUFDest = null;
+  @RFWMetaBigDecimalField(caption = "vFCPUFDest", required = false, unique = false, maxValue = "", minValue = "", scale = 2, absolute = false)
+  private BigDecimal vfcpUFDest;
 
   /**
-   * ID: W04g – {@code vICMSUFRemet}<br>
-   * Valor total do ICMS relativo à UF de origem/remetente.<br>
-   * Complementa a partilha de ICMS nas operações interestaduais com consumidor final.<br>
-   * Tamanho: 13v2 – valor monetário não negativo.
+   * W04e - vICMSUFDest: Valor total do ICMS Interestadual para a UF de destino. Tipo: N, Tamanho: 13v2, Ocorrência: 0-1 (campo opcional). Já considera o valor do ICMS relativo ao FCP na UF de destino. Incluído na NT 2015/003.
    */
-  @RFWMetaBigDecimalField(caption = "ICMS UF remetente", required = false, scale = 2, minValue = "0", absolute = true)
-  private BigDecimal vICMSUFRemet = null;
+  @RFWMetaBigDecimalField(caption = "vICMSUFDest", required = false, unique = false, maxValue = "", minValue = "", scale = 2, absolute = false)
+  private BigDecimal vicmsUFDest;
 
   /**
-   * ID: W05 – {@code vBCST}<br>
-   * Base de cálculo do ICMS ST (substituição tributária) da NF-e.<br>
-   * Somatório das bases de cálculo de ICMS-ST dos itens (tag N21).<br>
-   * Tamanho: 13v2 – valor monetário não negativo.
+   * W04g - vICMSUFRemet: Valor total do ICMS Interestadual para a UF do remetente. Tipo: N, Tamanho: 13v2, Ocorrência: 0-1 (campo opcional). A partir de 2019 este valor será zero. Incluído na NT 2015/003.
    */
-  @RFWMetaBigDecimalField(caption = "BC ICMS ST", required = false, scale = 2, minValue = "0", absolute = true)
-  private BigDecimal vBCST = null;
+  @RFWMetaBigDecimalField(caption = "vICMSUFRemet", required = false, unique = false, maxValue = "", minValue = "", scale = 2, absolute = false)
+  private BigDecimal vicmsUFRemet;
 
   /**
-   * ID: W06 – {@code vST}<br>
-   * Valor total do ICMS ST da NF-e.<br>
-   * Somatório dos valores de ICMS-ST dos itens (tag N23).<br>
-   * Tamanho: 13v2 – valor monetário não negativo.
+   * W04h - vFCP: Valor Total do FCP (Fundo de Combate à Pobreza). Tipo: N, Tamanho: 13v2, Ocorrência: 1-1 (obrigatório na estrutura). Corresponde ao total da soma dos campos id:N17c. Incluído na NT 2016.002.
    */
-  @RFWMetaBigDecimalField(caption = "ICMS ST total", required = false, scale = 2, minValue = "0", absolute = true)
-  private BigDecimal vST = null;
+  @RFWMetaBigDecimalField(caption = "vFCP", required = false, unique = false, maxValue = "", minValue = "", scale = 2, absolute = false)
+  private BigDecimal vfcp;
 
   /**
-   * ID: W06a – {@code vFCPST}<br>
-   * Valor total do FCP retido por substituição tributária.<br>
-   * Corresponde ao somatório dos valores de FCP-ST dos itens (tag N23d).<br>
-   * Tamanho: 13v2 – valor monetário não negativo.
+   * W05 - vBCST: Base de Cálculo do ICMS ST. Tipo: N, Tamanho: 13v2, Ocorrência: 1-1 (obrigatório na estrutura).
    */
-  @RFWMetaBigDecimalField(caption = "FCP ST", required = false, scale = 2, minValue = "0", absolute = true)
-  private BigDecimal vFCPST = null;
+  @RFWMetaBigDecimalField(caption = "vBCST", required = false, unique = false, maxValue = "", minValue = "", scale = 2, absolute = false)
+  private BigDecimal vbcST;
 
   /**
-   * ID: W06b – {@code vFCPSTRet}<br>
-   * Valor total do FCP-ST retido anteriormente por substituição tributária.<br>
-   * Somatório de {@code vFCPSTRet} informados nos itens (tag N27d).<br>
-   * Tamanho: 13v2 – valor monetário não negativo.
+   * W06 - vST: Valor Total do ICMS ST. Tipo: N, Tamanho: 13v2, Ocorrência: 1-1 (obrigatório na estrutura).
    */
-  @RFWMetaBigDecimalField(caption = "FCP ST retido ant.", required = false, scale = 2, minValue = "0", absolute = true)
-  private BigDecimal vFCPSTRet = null;
+  @RFWMetaBigDecimalField(caption = "vST", required = false, unique = false, maxValue = "", minValue = "", scale = 2, absolute = false)
+  private BigDecimal vst;
 
   /**
-   * ID: W07 – {@code vProd}<br>
-   * Valor total bruto dos produtos e serviços da NF-e.<br>
-   * Somatório dos valores {@code vProd} de cada item (tag I11).<br>
-   * Tamanho: 13v2 – valor monetário não negativo.
+   * W06a - vFCPST: Valor Total do FCP retido por substituição tributária. Tipo: N, Tamanho: 13v2, Ocorrência: 1-1 (obrigatório na estrutura). Corresponde ao total da soma dos campos id:N23d. Incluído na NT 2016.002.
    */
-  @RFWMetaBigDecimalField(caption = "Total produtos/serviços", required = false, scale = 2, minValue = "0", absolute = true)
-  private BigDecimal vProd = null;
+  @RFWMetaBigDecimalField(caption = "vFCPST", required = false, unique = false, maxValue = "", minValue = "", scale = 2, absolute = false)
+  private BigDecimal vfcpST;
 
   /**
-   * ID: W08 – {@code vFrete}<br>
-   * Valor total do frete da NF-e.<br>
-   * Somatório dos valores de frete atribuídos por item ou informados em nível de documento.<br>
-   * Tamanho: 13v2 – valor monetário não negativo.
+   * W06b - vFCPSTRet: Valor Total do FCP retido anteriormente por ST. Tipo: N, Tamanho: 13v2, Ocorrência: 1-1 (obrigatório na estrutura). Corresponde ao total da soma dos campos id:N27d. Incluído na NT 2016.002.
    */
-  @RFWMetaBigDecimalField(caption = "Total frete", required = false, scale = 2, minValue = "0", absolute = true)
-  private BigDecimal vFrete = null;
+  @RFWMetaBigDecimalField(caption = "vFCPSTRet", required = false, unique = false, maxValue = "", minValue = "", scale = 2, absolute = false)
+  private BigDecimal vfcpSTRet;
 
   /**
-   * ID: W09 – {@code vSeg}<br>
-   * Valor total do seguro da NF-e.<br>
-   * Somatório dos valores de seguro relacionados aos itens ou ao documento.<br>
-   * Tamanho: 13v2 – valor monetário não negativo.
+   * W07 - vProd: Valor Total dos produtos e serviços. Tipo: N, Tamanho: 13v2, Ocorrência: 1-1 (obrigatório).
    */
-  @RFWMetaBigDecimalField(caption = "Total seguro", required = false, scale = 2, minValue = "0", absolute = true)
-  private BigDecimal vSeg = null;
+  @RFWMetaBigDecimalField(caption = "vProd", required = false, unique = false, maxValue = "", minValue = "", scale = 2, absolute = false)
+  private BigDecimal vprod;
 
   /**
-   * ID: W10 – {@code vDesc}<br>
-   * Valor total dos descontos concedidos na NF-e.<br>
-   * Somatório dos descontos informados por item (tag I17) e/ou em nível de documento.<br>
-   * Tamanho: 13v2 – valor monetário não negativo.
+   * W08 - vFrete: Valor Total do Frete. Tipo: N, Tamanho: 13v2, Ocorrência: 1-1 (obrigatório).
    */
-  @RFWMetaBigDecimalField(caption = "Total descontos", required = false, scale = 2, minValue = "0", absolute = true)
-  private BigDecimal vDesc = null;
+  @RFWMetaBigDecimalField(caption = "vFrete", required = false, unique = false, maxValue = "", minValue = "", scale = 2, absolute = false)
+  private BigDecimal vfrete;
 
   /**
-   * ID: W11 – {@code vII}<br>
-   * Valor total do Imposto de Importação agregado à NF-e.<br>
-   * Somatório dos valores de II dos itens importados.<br>
-   * Tamanho: 13v2 – valor monetário não negativo.
+   * W09 - vSeg: Valor Total do Seguro. Tipo: N, Tamanho: 13v2, Ocorrência: 1-1 (obrigatório).
    */
-  @RFWMetaBigDecimalField(caption = "Total II", required = false, scale = 2, minValue = "0", absolute = true)
-  private BigDecimal vII = null;
+  @RFWMetaBigDecimalField(caption = "vSeg", required = false, unique = false, maxValue = "", minValue = "", scale = 2, absolute = false)
+  private BigDecimal vseg;
 
   /**
-   * ID: W12 – {@code vIPI}<br>
-   * Valor total do IPI na NF-e.<br>
-   * Somatório dos valores de IPI próprios dos itens (tags O14/O25, conforme enquadramento).<br>
-   * Tamanho: 13v2 – valor monetário não negativo.
+   * W10 - vDesc: Valor Total do Desconto. Tipo: N, Tamanho: 13v2, Ocorrência: 1-1 (obrigatório).
    */
-  @RFWMetaBigDecimalField(caption = "Total IPI", required = false, scale = 2, minValue = "0", absolute = true)
-  private BigDecimal vIPI = null;
+  @RFWMetaBigDecimalField(caption = "vDesc", required = false, unique = false, maxValue = "", minValue = "", scale = 2, absolute = false)
+  private BigDecimal vdesc;
 
   /**
-   * ID: W12a – {@code vIPIDevol}<br>
-   * Valor total do IPI devolvido.<br>
-   * Deve ser informado quando preenchido o grupo de tributos devolvidos na operação (finNFe = 4, devolução de mercadoria).<br>
-   * Tamanho: 13v2 – valor monetário não negativo.
+   * W11 - vII: Valor Total do Imposto de Importação (II). Tipo: N, Tamanho: 13v2, Ocorrência: 1-1 (obrigatório).
    */
-  @RFWMetaBigDecimalField(caption = "Total IPI devolvido", required = false, scale = 2, minValue = "0", absolute = true)
-  private BigDecimal vIPIDevol = null;
+  @RFWMetaBigDecimalField(caption = "vII", required = false, unique = false, maxValue = "", minValue = "", scale = 2, absolute = false)
+  private BigDecimal vii;
 
   /**
-   * ID: W13 – {@code vPIS}<br>
-   * Valor total do PIS na NF-e.<br>
-   * Somatório dos valores de PIS dos itens (tags R03/R06, conforme tipo de cálculo).<br>
-   * Tamanho: 13v2 – valor monetário não negativo.
+   * W12 - vIPI: Valor Total do IPI. Tipo: N, Tamanho: 13v2, Ocorrência: 1-1 (obrigatório).
    */
-  @RFWMetaBigDecimalField(caption = "Total PIS", required = false, scale = 2, minValue = "0", absolute = true)
-  private BigDecimal vPIS = null;
+  @RFWMetaBigDecimalField(caption = "vIPI", required = false, unique = false, maxValue = "", minValue = "", scale = 2, absolute = false)
+  private BigDecimal vipi;
 
   /**
-   * ID: W14 – {@code vCOFINS}<br>
-   * Valor total da COFINS na NF-e.<br>
-   * Somatório dos valores de COFINS dos itens (tags S03/S06, conforme tipo de cálculo).<br>
-   * Tamanho: 13v2 – valor monetário não negativo.
+   * W12a - vIPIDevol: Valor Total do IPI devolvido. Tipo: N, Tamanho: 13v2, Ocorrência: 1-1 (obrigatório na estrutura quando usado). Deve ser informado quando preenchido o Grupo Tributos Devolvidos na emissão de NF-e de devolução (finNFe=4) em operações com não contribuintes do IPI. Corresponde ao total da soma dos campos id:UA04. Incluído na NT 2016.002.
    */
-  @RFWMetaBigDecimalField(caption = "Total COFINS", required = false, scale = 2, minValue = "0", absolute = true)
-  private BigDecimal vCOFINS = null;
+  @RFWMetaBigDecimalField(caption = "vIPIDevol", required = false, unique = false, maxValue = "", minValue = "", scale = 2, absolute = false)
+  private BigDecimal vipiDevol;
 
   /**
-   * ID: W15 – {@code vOutro}<br>
-   * Valor total de outras despesas acessórias da NF-e.<br>
-   * Utilizado para valores que não se enquadram em frete, seguro ou descontos, mas compõem o valor total da nota.<br>
-   * Tamanho: 13v2 – valor monetário não negativo.
+   * W13 - vPIS: Valor do PIS. Tipo: N, Tamanho: 13v2, Ocorrência: 1-1 (obrigatório).
    */
-  @RFWMetaBigDecimalField(caption = "Outras despesas", required = false, scale = 2, minValue = "0", absolute = true)
-  private BigDecimal vOutro = null;
+  @RFWMetaBigDecimalField(caption = "vPIS", required = false, unique = false, maxValue = "", minValue = "", scale = 2, absolute = false)
+  private BigDecimal vpis;
 
   /**
-   * ID: W16 – {@code vNF}<br>
-   * Valor total da NF-e.<br>
-   * Composto por: {@code vProd + vFrete + vSeg + vOutro + vII + vIPI - vDesc} e outros componentes definidos pela legislação, incluindo ICMS-ST e FCP, quando aplicável.<br>
-   * Tamanho: 13v2 – valor monetário não negativo.
+   * W14 - vCOFINS: Valor da COFINS. Tipo: N, Tamanho: 13v2, Ocorrência: 1-1 (obrigatório).
    */
-  @RFWMetaBigDecimalField(caption = "Valor total da NF-e", required = false, scale = 2, minValue = "0", absolute = true)
-  private BigDecimal vNF = null;
+  @RFWMetaBigDecimalField(caption = "vCOFINS", required = false, unique = false, maxValue = "", minValue = "", scale = 2, absolute = false)
+  private BigDecimal vcofins;
 
   /**
-   * ID: W16a – {@code vTotTrib}<br>
-   * Valor aproximado total de tributos federais, estaduais e municipais.<br>
-   * Informado de acordo com a Lei da Transparência dos Tributos (Lei nº 12.741/2012) e legislação estadual/municipal pertinente.<br>
-   * Tamanho: 13v2 – valor monetário não negativo.
+   * W15 - vOutro: Outras Despesas acessórias. Tipo: N, Tamanho: 13v2, Ocorrência: 1-1 (obrigatório).
    */
-  @RFWMetaBigDecimalField(caption = "Valor aprox. tributos", required = false, scale = 2, minValue = "0", absolute = true)
-  private BigDecimal vTotTrib = null;
+  @RFWMetaBigDecimalField(caption = "vOutro", required = false, unique = false, maxValue = "", minValue = "", scale = 2, absolute = false)
+  private BigDecimal voutro;
 
   /**
-   * # iD: W03 – {@code vBC}<br>
-   * Base de cálculo do ICMS próprio da NF-e.<br>
-   * Corresponde ao somatório das bases de cálculo de ICMS dos itens (tag N15).<br>
-   * Tamanho: 13v2 – valor monetário não negativo.
+   * W16 - vNF: Valor Total da NF-e. Tipo: N, Tamanho: 13v2, Ocorrência: 1-1 (obrigatório). Vide regras de validação W16-xx no MOC.
+   */
+  @RFWMetaBigDecimalField(caption = "vNF", required = false, unique = false, maxValue = "", minValue = "", scale = 2, absolute = false)
+  private BigDecimal vnf;
+
+  /**
+   * W16a - vTotTrib: Valor aproximado total de tributos federais, estaduais e municipais. Tipo: N, Tamanho: 13v2, Ocorrência: 0-1 (campo opcional). Incluído na NT 2013/003.
+   */
+  @RFWMetaBigDecimalField(caption = "vTotTrib", required = false, unique = false, maxValue = "", minValue = "", scale = 2, absolute = false)
+  private BigDecimal vtotTrib;
+
+  /**
+   * # {@link TotalVO}.
    *
-   * @return the iD: W03 – {@code vBC}<br>
-   *         Base de cálculo do ICMS próprio da NF-e
+   * @return the {@link TotalVO}
    */
-  public BigDecimal getVBC() {
-    return vBC;
+  public TotalVO getTotalVO() {
+    return totalVO;
   }
 
   /**
-   * # iD: W03 – {@code vBC}<br>
-   * Base de cálculo do ICMS próprio da NF-e.<br>
-   * Corresponde ao somatório das bases de cálculo de ICMS dos itens (tag N15).<br>
-   * Tamanho: 13v2 – valor monetário não negativo.
+   * # {@link TotalVO}.
    *
-   * @param vBC the new iD: W03 – {@code vBC}<br>
-   *          Base de cálculo do ICMS próprio da NF-e
+   * @param totalVO the new {@link TotalVO}
    */
-  public void setVBC(BigDecimal vBC) {
-    this.vBC = vBC;
+  public void setTotalVO(TotalVO totalVO) {
+    this.totalVO = totalVO;
   }
 
   /**
-   * # iD: W04 – {@code vICMS}<br>
-   * Valor total do ICMS próprio da NF-e.<br>
-   * Corresponde ao somatório dos valores de ICMS dos itens (tag N17).<br>
-   * Tamanho: 13v2 – valor monetário não negativo.
+   * # w03 - vBC: Base de Cálculo do ICMS. Tipo: N, Tamanho: 13v2, Ocorrência: 1-1 (obrigatório na estrutura).
    *
-   * @return the iD: W04 – {@code vICMS}<br>
-   *         Valor total do ICMS próprio da NF-e
+   * @return the w03 - vBC: Base de Cálculo do ICMS
    */
-  public BigDecimal getVICMS() {
-    return vICMS;
+  public BigDecimal getVbc() {
+    return vbc;
   }
 
   /**
-   * # iD: W04 – {@code vICMS}<br>
-   * Valor total do ICMS próprio da NF-e.<br>
-   * Corresponde ao somatório dos valores de ICMS dos itens (tag N17).<br>
-   * Tamanho: 13v2 – valor monetário não negativo.
+   * # w03 - vBC: Base de Cálculo do ICMS. Tipo: N, Tamanho: 13v2, Ocorrência: 1-1 (obrigatório na estrutura).
    *
-   * @param vICMS the new iD: W04 – {@code vICMS}<br>
-   *          Valor total do ICMS próprio da NF-e
+   * @param vbc the new w03 - vBC: Base de Cálculo do ICMS
    */
-  public void setVICMS(BigDecimal vICMS) {
-    this.vICMS = vICMS;
+  public void setVbc(BigDecimal vbc) {
+    this.vbc = vbc;
   }
 
   /**
-   * # iD: W04a – {@code vICMSDeson}<br>
-   * Valor total do ICMS desonerado na NF-e.<br>
-   * Somatório dos valores de ICMS desonerado informados por item (tag N28a).<br>
-   * Tamanho: 13v2 – valor monetário não negativo.
+   * # w04 - vICMS: Valor Total do ICMS. Tipo: N, Tamanho: 13v2, Ocorrência: 1-1 (obrigatório na estrutura).
    *
-   * @return the iD: W04a – {@code vICMSDeson}<br>
-   *         Valor total do ICMS desonerado na NF-e
+   * @return the w04 - vICMS: Valor Total do ICMS
    */
-  public BigDecimal getVICMSDeson() {
-    return vICMSDeson;
+  public BigDecimal getVicms() {
+    return vicms;
   }
 
   /**
-   * # iD: W04a – {@code vICMSDeson}<br>
-   * Valor total do ICMS desonerado na NF-e.<br>
-   * Somatório dos valores de ICMS desonerado informados por item (tag N28a).<br>
-   * Tamanho: 13v2 – valor monetário não negativo.
+   * # w04 - vICMS: Valor Total do ICMS. Tipo: N, Tamanho: 13v2, Ocorrência: 1-1 (obrigatório na estrutura).
    *
-   * @param vICMSDeson the new iD: W04a – {@code vICMSDeson}<br>
-   *          Valor total do ICMS desonerado na NF-e
+   * @param vicms the new w04 - vICMS: Valor Total do ICMS
    */
-  public void setVICMSDeson(BigDecimal vICMSDeson) {
-    this.vICMSDeson = vICMSDeson;
+  public void setVicms(BigDecimal vicms) {
+    this.vicms = vicms;
   }
 
   /**
-   * # iD: W04c – {@code vFCPUFDest}<br>
-   * Valor total do FCP devido à UF de destino.<br>
-   * Somatório dos valores de FCP-UF destino calculados por item (tags N17c / N23d, conforme o tipo de ICMS).<br>
-   * Tamanho: 13v2 – valor monetário não negativo.
+   * # w04a - vICMSDeson: Valor Total do ICMS desonerado. Tipo: N, Tamanho: 13v2, Ocorrência: 1-1 (obrigatório na estrutura).
    *
-   * @return the iD: W04c – {@code vFCPUFDest}<br>
-   *         Valor total do FCP devido à UF de destino
+   * @return the w04a - vICMSDeson: Valor Total do ICMS desonerado
    */
-  public BigDecimal getVFCPUFDest() {
-    return vFCPUFDest;
+  public BigDecimal getVicmsDeson() {
+    return vicmsDeson;
   }
 
   /**
-   * # iD: W04c – {@code vFCPUFDest}<br>
-   * Valor total do FCP devido à UF de destino.<br>
-   * Somatório dos valores de FCP-UF destino calculados por item (tags N17c / N23d, conforme o tipo de ICMS).<br>
-   * Tamanho: 13v2 – valor monetário não negativo.
+   * # w04a - vICMSDeson: Valor Total do ICMS desonerado. Tipo: N, Tamanho: 13v2, Ocorrência: 1-1 (obrigatório na estrutura).
    *
-   * @param vFCPUFDest the new iD: W04c – {@code vFCPUFDest}<br>
-   *          Valor total do FCP devido à UF de destino
+   * @param vicmsDeson the new w04a - vICMSDeson: Valor Total do ICMS desonerado
    */
-  public void setVFCPUFDest(BigDecimal vFCPUFDest) {
-    this.vFCPUFDest = vFCPUFDest;
+  public void setVicmsDeson(BigDecimal vicmsDeson) {
+    this.vicmsDeson = vicmsDeson;
   }
 
   /**
-   * # iD: W04e – {@code vICMSUFDest}<br>
-   * Valor total do ICMS relativo à UF de destino.<br>
-   * Utilizado nas operações interestaduais com partilha de ICMS para consumidor final.<br>
-   * Tamanho: 13v2 – valor monetário não negativo.
+   * # w04c - vFCPUFDest: Valor total do ICMS relativo ao FCP da UF de destino. Tipo: N, Tamanho: 13v2, Ocorrência: 0-1 (campo opcional). Incluído na NT 2015/003.
    *
-   * @return the iD: W04e – {@code vICMSUFDest}<br>
-   *         Valor total do ICMS relativo à UF de destino
+   * @return the w04c - vFCPUFDest: Valor total do ICMS relativo ao FCP da UF de destino
    */
-  public BigDecimal getVICMSUFDest() {
-    return vICMSUFDest;
+  public BigDecimal getVfcpUFDest() {
+    return vfcpUFDest;
   }
 
   /**
-   * # iD: W04e – {@code vICMSUFDest}<br>
-   * Valor total do ICMS relativo à UF de destino.<br>
-   * Utilizado nas operações interestaduais com partilha de ICMS para consumidor final.<br>
-   * Tamanho: 13v2 – valor monetário não negativo.
+   * # w04c - vFCPUFDest: Valor total do ICMS relativo ao FCP da UF de destino. Tipo: N, Tamanho: 13v2, Ocorrência: 0-1 (campo opcional). Incluído na NT 2015/003.
    *
-   * @param vICMSUFDest the new iD: W04e – {@code vICMSUFDest}<br>
-   *          Valor total do ICMS relativo à UF de destino
+   * @param vfcpUFDest the new w04c - vFCPUFDest: Valor total do ICMS relativo ao FCP da UF de destino
    */
-  public void setVICMSUFDest(BigDecimal vICMSUFDest) {
-    this.vICMSUFDest = vICMSUFDest;
+  public void setVfcpUFDest(BigDecimal vfcpUFDest) {
+    this.vfcpUFDest = vfcpUFDest;
   }
 
   /**
-   * # iD: W04g – {@code vICMSUFRemet}<br>
-   * Valor total do ICMS relativo à UF de origem/remetente.<br>
-   * Complementa a partilha de ICMS nas operações interestaduais com consumidor final.<br>
-   * Tamanho: 13v2 – valor monetário não negativo.
+   * # w04e - vICMSUFDest: Valor total do ICMS Interestadual para a UF de destino. Tipo: N, Tamanho: 13v2, Ocorrência: 0-1 (campo opcional). Já considera o valor do ICMS relativo ao FCP na UF de destino. Incluído na NT 2015/003.
    *
-   * @return the iD: W04g – {@code vICMSUFRemet}<br>
-   *         Valor total do ICMS relativo à UF de origem/remetente
+   * @return the w04e - vICMSUFDest: Valor total do ICMS Interestadual para a UF de destino
    */
-  public BigDecimal getVICMSUFRemet() {
-    return vICMSUFRemet;
+  public BigDecimal getVicmsUFDest() {
+    return vicmsUFDest;
   }
 
   /**
-   * # iD: W04g – {@code vICMSUFRemet}<br>
-   * Valor total do ICMS relativo à UF de origem/remetente.<br>
-   * Complementa a partilha de ICMS nas operações interestaduais com consumidor final.<br>
-   * Tamanho: 13v2 – valor monetário não negativo.
+   * # w04e - vICMSUFDest: Valor total do ICMS Interestadual para a UF de destino. Tipo: N, Tamanho: 13v2, Ocorrência: 0-1 (campo opcional). Já considera o valor do ICMS relativo ao FCP na UF de destino. Incluído na NT 2015/003.
    *
-   * @param vICMSUFRemet the new iD: W04g – {@code vICMSUFRemet}<br>
-   *          Valor total do ICMS relativo à UF de origem/remetente
+   * @param vicmsUFDest the new w04e - vICMSUFDest: Valor total do ICMS Interestadual para a UF de destino
    */
-  public void setVICMSUFRemet(BigDecimal vICMSUFRemet) {
-    this.vICMSUFRemet = vICMSUFRemet;
+  public void setVicmsUFDest(BigDecimal vicmsUFDest) {
+    this.vicmsUFDest = vicmsUFDest;
   }
 
   /**
-   * # iD: W05 – {@code vBCST}<br>
-   * Base de cálculo do ICMS ST (substituição tributária) da NF-e.<br>
-   * Somatório das bases de cálculo de ICMS-ST dos itens (tag N21).<br>
-   * Tamanho: 13v2 – valor monetário não negativo.
+   * # w04g - vICMSUFRemet: Valor total do ICMS Interestadual para a UF do remetente. Tipo: N, Tamanho: 13v2, Ocorrência: 0-1 (campo opcional). A partir de 2019 este valor será zero. Incluído na NT 2015/003.
    *
-   * @return the iD: W05 – {@code vBCST}<br>
-   *         Base de cálculo do ICMS ST (substituição tributária) da NF-e
+   * @return the w04g - vICMSUFRemet: Valor total do ICMS Interestadual para a UF do remetente
    */
-  public BigDecimal getVBCST() {
-    return vBCST;
+  public BigDecimal getVicmsUFRemet() {
+    return vicmsUFRemet;
   }
 
   /**
-   * # iD: W05 – {@code vBCST}<br>
-   * Base de cálculo do ICMS ST (substituição tributária) da NF-e.<br>
-   * Somatório das bases de cálculo de ICMS-ST dos itens (tag N21).<br>
-   * Tamanho: 13v2 – valor monetário não negativo.
+   * # w04g - vICMSUFRemet: Valor total do ICMS Interestadual para a UF do remetente. Tipo: N, Tamanho: 13v2, Ocorrência: 0-1 (campo opcional). A partir de 2019 este valor será zero. Incluído na NT 2015/003.
    *
-   * @param vBCST the new iD: W05 – {@code vBCST}<br>
-   *          Base de cálculo do ICMS ST (substituição tributária) da NF-e
+   * @param vicmsUFRemet the new w04g - vICMSUFRemet: Valor total do ICMS Interestadual para a UF do remetente
    */
-  public void setVBCST(BigDecimal vBCST) {
-    this.vBCST = vBCST;
+  public void setVicmsUFRemet(BigDecimal vicmsUFRemet) {
+    this.vicmsUFRemet = vicmsUFRemet;
   }
 
   /**
-   * # iD: W06 – {@code vST}<br>
-   * Valor total do ICMS ST da NF-e.<br>
-   * Somatório dos valores de ICMS-ST dos itens (tag N23).<br>
-   * Tamanho: 13v2 – valor monetário não negativo.
+   * # w04h - vFCP: Valor Total do FCP (Fundo de Combate à Pobreza). Tipo: N, Tamanho: 13v2, Ocorrência: 1-1 (obrigatório na estrutura). Corresponde ao total da soma dos campos id:N17c. Incluído na NT 2016.002.
    *
-   * @return the iD: W06 – {@code vST}<br>
-   *         Valor total do ICMS ST da NF-e
+   * @return the w04h - vFCP: Valor Total do FCP (Fundo de Combate à Pobreza)
    */
-  public BigDecimal getVST() {
-    return vST;
+  public BigDecimal getVfcp() {
+    return vfcp;
   }
 
   /**
-   * # iD: W06 – {@code vST}<br>
-   * Valor total do ICMS ST da NF-e.<br>
-   * Somatório dos valores de ICMS-ST dos itens (tag N23).<br>
-   * Tamanho: 13v2 – valor monetário não negativo.
+   * # w04h - vFCP: Valor Total do FCP (Fundo de Combate à Pobreza). Tipo: N, Tamanho: 13v2, Ocorrência: 1-1 (obrigatório na estrutura). Corresponde ao total da soma dos campos id:N17c. Incluído na NT 2016.002.
    *
-   * @param vST the new iD: W06 – {@code vST}<br>
-   *          Valor total do ICMS ST da NF-e
+   * @param vfcp the new w04h - vFCP: Valor Total do FCP (Fundo de Combate à Pobreza)
    */
-  public void setVST(BigDecimal vST) {
-    this.vST = vST;
+  public void setVfcp(BigDecimal vfcp) {
+    this.vfcp = vfcp;
   }
 
   /**
-   * # iD: W06a – {@code vFCPST}<br>
-   * Valor total do FCP retido por substituição tributária.<br>
-   * Corresponde ao somatório dos valores de FCP-ST dos itens (tag N23d).<br>
-   * Tamanho: 13v2 – valor monetário não negativo.
+   * # w05 - vBCST: Base de Cálculo do ICMS ST. Tipo: N, Tamanho: 13v2, Ocorrência: 1-1 (obrigatório na estrutura).
    *
-   * @return the iD: W06a – {@code vFCPST}<br>
-   *         Valor total do FCP retido por substituição tributária
+   * @return the w05 - vBCST: Base de Cálculo do ICMS ST
    */
-  public BigDecimal getVFCPST() {
-    return vFCPST;
+  public BigDecimal getVbcST() {
+    return vbcST;
   }
 
   /**
-   * # iD: W06a – {@code vFCPST}<br>
-   * Valor total do FCP retido por substituição tributária.<br>
-   * Corresponde ao somatório dos valores de FCP-ST dos itens (tag N23d).<br>
-   * Tamanho: 13v2 – valor monetário não negativo.
+   * # w05 - vBCST: Base de Cálculo do ICMS ST. Tipo: N, Tamanho: 13v2, Ocorrência: 1-1 (obrigatório na estrutura).
    *
-   * @param vFCPST the new iD: W06a – {@code vFCPST}<br>
-   *          Valor total do FCP retido por substituição tributária
+   * @param vbcST the new w05 - vBCST: Base de Cálculo do ICMS ST
    */
-  public void setVFCPST(BigDecimal vFCPST) {
-    this.vFCPST = vFCPST;
+  public void setVbcST(BigDecimal vbcST) {
+    this.vbcST = vbcST;
   }
 
   /**
-   * # iD: W06b – {@code vFCPSTRet}<br>
-   * Valor total do FCP-ST retido anteriormente por substituição tributária.<br>
-   * Somatório de {@code vFCPSTRet} informados nos itens (tag N27d).<br>
-   * Tamanho: 13v2 – valor monetário não negativo.
+   * # w06 - vST: Valor Total do ICMS ST. Tipo: N, Tamanho: 13v2, Ocorrência: 1-1 (obrigatório na estrutura).
    *
-   * @return the iD: W06b – {@code vFCPSTRet}<br>
-   *         Valor total do FCP-ST retido anteriormente por substituição tributária
+   * @return the w06 - vST: Valor Total do ICMS ST
    */
-  public BigDecimal getVFCPSTRet() {
-    return vFCPSTRet;
+  public BigDecimal getVst() {
+    return vst;
   }
 
   /**
-   * # iD: W06b – {@code vFCPSTRet}<br>
-   * Valor total do FCP-ST retido anteriormente por substituição tributária.<br>
-   * Somatório de {@code vFCPSTRet} informados nos itens (tag N27d).<br>
-   * Tamanho: 13v2 – valor monetário não negativo.
+   * # w06 - vST: Valor Total do ICMS ST. Tipo: N, Tamanho: 13v2, Ocorrência: 1-1 (obrigatório na estrutura).
    *
-   * @param vFCPSTRet the new iD: W06b – {@code vFCPSTRet}<br>
-   *          Valor total do FCP-ST retido anteriormente por substituição tributária
+   * @param vst the new w06 - vST: Valor Total do ICMS ST
    */
-  public void setVFCPSTRet(BigDecimal vFCPSTRet) {
-    this.vFCPSTRet = vFCPSTRet;
+  public void setVst(BigDecimal vst) {
+    this.vst = vst;
   }
 
   /**
-   * # iD: W07 – {@code vProd}<br>
-   * Valor total bruto dos produtos e serviços da NF-e.<br>
-   * Somatório dos valores {@code vProd} de cada item (tag I11).<br>
-   * Tamanho: 13v2 – valor monetário não negativo.
+   * # w06a - vFCPST: Valor Total do FCP retido por substituição tributária. Tipo: N, Tamanho: 13v2, Ocorrência: 1-1 (obrigatório na estrutura). Corresponde ao total da soma dos campos id:N23d. Incluído na NT 2016.002.
    *
-   * @return the iD: W07 – {@code vProd}<br>
-   *         Valor total bruto dos produtos e serviços da NF-e
+   * @return the w06a - vFCPST: Valor Total do FCP retido por substituição tributária
    */
-  public BigDecimal getVProd() {
-    return vProd;
+  public BigDecimal getVfcpST() {
+    return vfcpST;
   }
 
   /**
-   * # iD: W07 – {@code vProd}<br>
-   * Valor total bruto dos produtos e serviços da NF-e.<br>
-   * Somatório dos valores {@code vProd} de cada item (tag I11).<br>
-   * Tamanho: 13v2 – valor monetário não negativo.
+   * # w06a - vFCPST: Valor Total do FCP retido por substituição tributária. Tipo: N, Tamanho: 13v2, Ocorrência: 1-1 (obrigatório na estrutura). Corresponde ao total da soma dos campos id:N23d. Incluído na NT 2016.002.
    *
-   * @param vProd the new iD: W07 – {@code vProd}<br>
-   *          Valor total bruto dos produtos e serviços da NF-e
+   * @param vfcpST the new w06a - vFCPST: Valor Total do FCP retido por substituição tributária
    */
-  public void setVProd(BigDecimal vProd) {
-    this.vProd = vProd;
+  public void setVfcpST(BigDecimal vfcpST) {
+    this.vfcpST = vfcpST;
   }
 
   /**
-   * # iD: W08 – {@code vFrete}<br>
-   * Valor total do frete da NF-e.<br>
-   * Somatório dos valores de frete atribuídos por item ou informados em nível de documento.<br>
-   * Tamanho: 13v2 – valor monetário não negativo.
+   * # w06b - vFCPSTRet: Valor Total do FCP retido anteriormente por ST. Tipo: N, Tamanho: 13v2, Ocorrência: 1-1 (obrigatório na estrutura). Corresponde ao total da soma dos campos id:N27d. Incluído na NT 2016.002.
    *
-   * @return the iD: W08 – {@code vFrete}<br>
-   *         Valor total do frete da NF-e
+   * @return the w06b - vFCPSTRet: Valor Total do FCP retido anteriormente por ST
    */
-  public BigDecimal getVFrete() {
-    return vFrete;
+  public BigDecimal getVfcpSTRet() {
+    return vfcpSTRet;
   }
 
   /**
-   * # iD: W08 – {@code vFrete}<br>
-   * Valor total do frete da NF-e.<br>
-   * Somatório dos valores de frete atribuídos por item ou informados em nível de documento.<br>
-   * Tamanho: 13v2 – valor monetário não negativo.
+   * # w06b - vFCPSTRet: Valor Total do FCP retido anteriormente por ST. Tipo: N, Tamanho: 13v2, Ocorrência: 1-1 (obrigatório na estrutura). Corresponde ao total da soma dos campos id:N27d. Incluído na NT 2016.002.
    *
-   * @param vFrete the new iD: W08 – {@code vFrete}<br>
-   *          Valor total do frete da NF-e
+   * @param vfcpSTRet the new w06b - vFCPSTRet: Valor Total do FCP retido anteriormente por ST
    */
-  public void setVFrete(BigDecimal vFrete) {
-    this.vFrete = vFrete;
+  public void setVfcpSTRet(BigDecimal vfcpSTRet) {
+    this.vfcpSTRet = vfcpSTRet;
   }
 
   /**
-   * # iD: W09 – {@code vSeg}<br>
-   * Valor total do seguro da NF-e.<br>
-   * Somatório dos valores de seguro relacionados aos itens ou ao documento.<br>
-   * Tamanho: 13v2 – valor monetário não negativo.
+   * # w07 - vProd: Valor Total dos produtos e serviços. Tipo: N, Tamanho: 13v2, Ocorrência: 1-1 (obrigatório).
    *
-   * @return the iD: W09 – {@code vSeg}<br>
-   *         Valor total do seguro da NF-e
+   * @return the w07 - vProd: Valor Total dos produtos e serviços
    */
-  public BigDecimal getVSeg() {
-    return vSeg;
+  public BigDecimal getVprod() {
+    return vprod;
   }
 
   /**
-   * # iD: W09 – {@code vSeg}<br>
-   * Valor total do seguro da NF-e.<br>
-   * Somatório dos valores de seguro relacionados aos itens ou ao documento.<br>
-   * Tamanho: 13v2 – valor monetário não negativo.
+   * # w07 - vProd: Valor Total dos produtos e serviços. Tipo: N, Tamanho: 13v2, Ocorrência: 1-1 (obrigatório).
    *
-   * @param vSeg the new iD: W09 – {@code vSeg}<br>
-   *          Valor total do seguro da NF-e
+   * @param vprod the new w07 - vProd: Valor Total dos produtos e serviços
    */
-  public void setVSeg(BigDecimal vSeg) {
-    this.vSeg = vSeg;
+  public void setVprod(BigDecimal vprod) {
+    this.vprod = vprod;
   }
 
   /**
-   * # iD: W10 – {@code vDesc}<br>
-   * Valor total dos descontos concedidos na NF-e.<br>
-   * Somatório dos descontos informados por item (tag I17) e/ou em nível de documento.<br>
-   * Tamanho: 13v2 – valor monetário não negativo.
+   * # w08 - vFrete: Valor Total do Frete. Tipo: N, Tamanho: 13v2, Ocorrência: 1-1 (obrigatório).
    *
-   * @return the iD: W10 – {@code vDesc}<br>
-   *         Valor total dos descontos concedidos na NF-e
+   * @return the w08 - vFrete: Valor Total do Frete
    */
-  public BigDecimal getVDesc() {
-    return vDesc;
+  public BigDecimal getVfrete() {
+    return vfrete;
   }
 
   /**
-   * # iD: W10 – {@code vDesc}<br>
-   * Valor total dos descontos concedidos na NF-e.<br>
-   * Somatório dos descontos informados por item (tag I17) e/ou em nível de documento.<br>
-   * Tamanho: 13v2 – valor monetário não negativo.
+   * # w08 - vFrete: Valor Total do Frete. Tipo: N, Tamanho: 13v2, Ocorrência: 1-1 (obrigatório).
    *
-   * @param vDesc the new iD: W10 – {@code vDesc}<br>
-   *          Valor total dos descontos concedidos na NF-e
+   * @param vfrete the new w08 - vFrete: Valor Total do Frete
    */
-  public void setVDesc(BigDecimal vDesc) {
-    this.vDesc = vDesc;
+  public void setVfrete(BigDecimal vfrete) {
+    this.vfrete = vfrete;
   }
 
   /**
-   * # iD: W11 – {@code vII}<br>
-   * Valor total do Imposto de Importação agregado à NF-e.<br>
-   * Somatório dos valores de II dos itens importados.<br>
-   * Tamanho: 13v2 – valor monetário não negativo.
+   * # w09 - vSeg: Valor Total do Seguro. Tipo: N, Tamanho: 13v2, Ocorrência: 1-1 (obrigatório).
    *
-   * @return the iD: W11 – {@code vII}<br>
-   *         Valor total do Imposto de Importação agregado à NF-e
+   * @return the w09 - vSeg: Valor Total do Seguro
    */
-  public BigDecimal getVII() {
-    return vII;
+  public BigDecimal getVseg() {
+    return vseg;
   }
 
   /**
-   * # iD: W11 – {@code vII}<br>
-   * Valor total do Imposto de Importação agregado à NF-e.<br>
-   * Somatório dos valores de II dos itens importados.<br>
-   * Tamanho: 13v2 – valor monetário não negativo.
+   * # w09 - vSeg: Valor Total do Seguro. Tipo: N, Tamanho: 13v2, Ocorrência: 1-1 (obrigatório).
    *
-   * @param vII the new iD: W11 – {@code vII}<br>
-   *          Valor total do Imposto de Importação agregado à NF-e
+   * @param vseg the new w09 - vSeg: Valor Total do Seguro
    */
-  public void setVII(BigDecimal vII) {
-    this.vII = vII;
+  public void setVseg(BigDecimal vseg) {
+    this.vseg = vseg;
   }
 
   /**
-   * # iD: W12 – {@code vIPI}<br>
-   * Valor total do IPI na NF-e.<br>
-   * Somatório dos valores de IPI próprios dos itens (tags O14/O25, conforme enquadramento).<br>
-   * Tamanho: 13v2 – valor monetário não negativo.
+   * # w10 - vDesc: Valor Total do Desconto. Tipo: N, Tamanho: 13v2, Ocorrência: 1-1 (obrigatório).
    *
-   * @return the iD: W12 – {@code vIPI}<br>
-   *         Valor total do IPI na NF-e
+   * @return the w10 - vDesc: Valor Total do Desconto
    */
-  public BigDecimal getVIPI() {
-    return vIPI;
+  public BigDecimal getVdesc() {
+    return vdesc;
   }
 
   /**
-   * # iD: W12 – {@code vIPI}<br>
-   * Valor total do IPI na NF-e.<br>
-   * Somatório dos valores de IPI próprios dos itens (tags O14/O25, conforme enquadramento).<br>
-   * Tamanho: 13v2 – valor monetário não negativo.
+   * # w10 - vDesc: Valor Total do Desconto. Tipo: N, Tamanho: 13v2, Ocorrência: 1-1 (obrigatório).
    *
-   * @param vIPI the new iD: W12 – {@code vIPI}<br>
-   *          Valor total do IPI na NF-e
+   * @param vdesc the new w10 - vDesc: Valor Total do Desconto
    */
-  public void setVIPI(BigDecimal vIPI) {
-    this.vIPI = vIPI;
+  public void setVdesc(BigDecimal vdesc) {
+    this.vdesc = vdesc;
   }
 
   /**
-   * # iD: W12a – {@code vIPIDevol}<br>
-   * Valor total do IPI devolvido.<br>
-   * Deve ser informado quando preenchido o grupo de tributos devolvidos na operação (finNFe = 4, devolução de mercadoria).<br>
-   * Tamanho: 13v2 – valor monetário não negativo.
+   * # w11 - vII: Valor Total do Imposto de Importação (II). Tipo: N, Tamanho: 13v2, Ocorrência: 1-1 (obrigatório).
    *
-   * @return the iD: W12a – {@code vIPIDevol}<br>
-   *         Valor total do IPI devolvido
+   * @return the w11 - vII: Valor Total do Imposto de Importação (II)
    */
-  public BigDecimal getVIPIDevol() {
-    return vIPIDevol;
+  public BigDecimal getVii() {
+    return vii;
   }
 
   /**
-   * # iD: W12a – {@code vIPIDevol}<br>
-   * Valor total do IPI devolvido.<br>
-   * Deve ser informado quando preenchido o grupo de tributos devolvidos na operação (finNFe = 4, devolução de mercadoria).<br>
-   * Tamanho: 13v2 – valor monetário não negativo.
+   * # w11 - vII: Valor Total do Imposto de Importação (II). Tipo: N, Tamanho: 13v2, Ocorrência: 1-1 (obrigatório).
    *
-   * @param vIPIDevol the new iD: W12a – {@code vIPIDevol}<br>
-   *          Valor total do IPI devolvido
+   * @param vii the new w11 - vII: Valor Total do Imposto de Importação (II)
    */
-  public void setVIPIDevol(BigDecimal vIPIDevol) {
-    this.vIPIDevol = vIPIDevol;
+  public void setVii(BigDecimal vii) {
+    this.vii = vii;
   }
 
   /**
-   * # iD: W13 – {@code vPIS}<br>
-   * Valor total do PIS na NF-e.<br>
-   * Somatório dos valores de PIS dos itens (tags R03/R06, conforme tipo de cálculo).<br>
-   * Tamanho: 13v2 – valor monetário não negativo.
+   * # w12 - vIPI: Valor Total do IPI. Tipo: N, Tamanho: 13v2, Ocorrência: 1-1 (obrigatório).
    *
-   * @return the iD: W13 – {@code vPIS}<br>
-   *         Valor total do PIS na NF-e
+   * @return the w12 - vIPI: Valor Total do IPI
    */
-  public BigDecimal getVPIS() {
-    return vPIS;
+  public BigDecimal getVipi() {
+    return vipi;
   }
 
   /**
-   * # iD: W13 – {@code vPIS}<br>
-   * Valor total do PIS na NF-e.<br>
-   * Somatório dos valores de PIS dos itens (tags R03/R06, conforme tipo de cálculo).<br>
-   * Tamanho: 13v2 – valor monetário não negativo.
+   * # w12 - vIPI: Valor Total do IPI. Tipo: N, Tamanho: 13v2, Ocorrência: 1-1 (obrigatório).
    *
-   * @param vPIS the new iD: W13 – {@code vPIS}<br>
-   *          Valor total do PIS na NF-e
+   * @param vipi the new w12 - vIPI: Valor Total do IPI
    */
-  public void setVPIS(BigDecimal vPIS) {
-    this.vPIS = vPIS;
+  public void setVipi(BigDecimal vipi) {
+    this.vipi = vipi;
   }
 
   /**
-   * # iD: W14 – {@code vCOFINS}<br>
-   * Valor total da COFINS na NF-e.<br>
-   * Somatório dos valores de COFINS dos itens (tags S03/S06, conforme tipo de cálculo).<br>
-   * Tamanho: 13v2 – valor monetário não negativo.
+   * # w12a - vIPIDevol: Valor Total do IPI devolvido. Tipo: N, Tamanho: 13v2, Ocorrência: 1-1 (obrigatório na estrutura quando usado). Deve ser informado quando preenchido o Grupo Tributos Devolvidos na emissão de NF-e de devolução (finNFe=4) em operações com não contribuintes do IPI. Corresponde ao total da soma dos campos id:UA04. Incluído na NT 2016.002.
    *
-   * @return the iD: W14 – {@code vCOFINS}<br>
-   *         Valor total da COFINS na NF-e
+   * @return the w12a - vIPIDevol: Valor Total do IPI devolvido
    */
-  public BigDecimal getVCOFINS() {
-    return vCOFINS;
+  public BigDecimal getVipiDevol() {
+    return vipiDevol;
   }
 
   /**
-   * # iD: W14 – {@code vCOFINS}<br>
-   * Valor total da COFINS na NF-e.<br>
-   * Somatório dos valores de COFINS dos itens (tags S03/S06, conforme tipo de cálculo).<br>
-   * Tamanho: 13v2 – valor monetário não negativo.
+   * # w12a - vIPIDevol: Valor Total do IPI devolvido. Tipo: N, Tamanho: 13v2, Ocorrência: 1-1 (obrigatório na estrutura quando usado). Deve ser informado quando preenchido o Grupo Tributos Devolvidos na emissão de NF-e de devolução (finNFe=4) em operações com não contribuintes do IPI. Corresponde ao total da soma dos campos id:UA04. Incluído na NT 2016.002.
    *
-   * @param vCOFINS the new iD: W14 – {@code vCOFINS}<br>
-   *          Valor total da COFINS na NF-e
+   * @param vipiDevol the new w12a - vIPIDevol: Valor Total do IPI devolvido
    */
-  public void setVCOFINS(BigDecimal vCOFINS) {
-    this.vCOFINS = vCOFINS;
+  public void setVipiDevol(BigDecimal vipiDevol) {
+    this.vipiDevol = vipiDevol;
   }
 
   /**
-   * # iD: W15 – {@code vOutro}<br>
-   * Valor total de outras despesas acessórias da NF-e.<br>
-   * Utilizado para valores que não se enquadram em frete, seguro ou descontos, mas compõem o valor total da nota.<br>
-   * Tamanho: 13v2 – valor monetário não negativo.
+   * # w13 - vPIS: Valor do PIS. Tipo: N, Tamanho: 13v2, Ocorrência: 1-1 (obrigatório).
    *
-   * @return the iD: W15 – {@code vOutro}<br>
-   *         Valor total de outras despesas acessórias da NF-e
+   * @return the w13 - vPIS: Valor do PIS
    */
-  public BigDecimal getVOutro() {
-    return vOutro;
+  public BigDecimal getVpis() {
+    return vpis;
   }
 
   /**
-   * # iD: W15 – {@code vOutro}<br>
-   * Valor total de outras despesas acessórias da NF-e.<br>
-   * Utilizado para valores que não se enquadram em frete, seguro ou descontos, mas compõem o valor total da nota.<br>
-   * Tamanho: 13v2 – valor monetário não negativo.
+   * # w13 - vPIS: Valor do PIS. Tipo: N, Tamanho: 13v2, Ocorrência: 1-1 (obrigatório).
    *
-   * @param vOutro the new iD: W15 – {@code vOutro}<br>
-   *          Valor total de outras despesas acessórias da NF-e
+   * @param vpis the new w13 - vPIS: Valor do PIS
    */
-  public void setVOutro(BigDecimal vOutro) {
-    this.vOutro = vOutro;
+  public void setVpis(BigDecimal vpis) {
+    this.vpis = vpis;
   }
 
   /**
-   * # iD: W16 – {@code vNF}<br>
-   * Valor total da NF-e.<br>
-   * Composto por: {@code vProd + vFrete + vSeg + vOutro + vII + vIPI - vDesc} e outros componentes definidos pela legislação, incluindo ICMS-ST e FCP, quando aplicável.<br>
-   * Tamanho: 13v2 – valor monetário não negativo.
+   * # w14 - vCOFINS: Valor da COFINS. Tipo: N, Tamanho: 13v2, Ocorrência: 1-1 (obrigatório).
    *
-   * @return the iD: W16 – {@code vNF}<br>
-   *         Valor total da NF-e
+   * @return the w14 - vCOFINS: Valor da COFINS
    */
-  public BigDecimal getVNF() {
-    return vNF;
+  public BigDecimal getVcofins() {
+    return vcofins;
   }
 
   /**
-   * # iD: W16 – {@code vNF}<br>
-   * Valor total da NF-e.<br>
-   * Composto por: {@code vProd + vFrete + vSeg + vOutro + vII + vIPI - vDesc} e outros componentes definidos pela legislação, incluindo ICMS-ST e FCP, quando aplicável.<br>
-   * Tamanho: 13v2 – valor monetário não negativo.
+   * # w14 - vCOFINS: Valor da COFINS. Tipo: N, Tamanho: 13v2, Ocorrência: 1-1 (obrigatório).
    *
-   * @param vNF the new iD: W16 – {@code vNF}<br>
-   *          Valor total da NF-e
+   * @param vcofins the new w14 - vCOFINS: Valor da COFINS
    */
-  public void setVNF(BigDecimal vNF) {
-    this.vNF = vNF;
+  public void setVcofins(BigDecimal vcofins) {
+    this.vcofins = vcofins;
   }
 
   /**
-   * # iD: W16a – {@code vTotTrib}<br>
-   * Valor aproximado total de tributos federais, estaduais e municipais.<br>
-   * Informado de acordo com a Lei da Transparência dos Tributos (Lei nº 12.741/2012) e legislação estadual/municipal pertinente.<br>
-   * Tamanho: 13v2 – valor monetário não negativo.
+   * # w15 - vOutro: Outras Despesas acessórias. Tipo: N, Tamanho: 13v2, Ocorrência: 1-1 (obrigatório).
    *
-   * @return the iD: W16a – {@code vTotTrib}<br>
-   *         Valor aproximado total de tributos federais, estaduais e municipais
+   * @return the w15 - vOutro: Outras Despesas acessórias
    */
-  public BigDecimal getVTotTrib() {
-    return vTotTrib;
+  public BigDecimal getVoutro() {
+    return voutro;
   }
 
   /**
-   * # iD: W16a – {@code vTotTrib}<br>
-   * Valor aproximado total de tributos federais, estaduais e municipais.<br>
-   * Informado de acordo com a Lei da Transparência dos Tributos (Lei nº 12.741/2012) e legislação estadual/municipal pertinente.<br>
-   * Tamanho: 13v2 – valor monetário não negativo.
+   * # w15 - vOutro: Outras Despesas acessórias. Tipo: N, Tamanho: 13v2, Ocorrência: 1-1 (obrigatório).
    *
-   * @param vTotTrib the new iD: W16a – {@code vTotTrib}<br>
-   *          Valor aproximado total de tributos federais, estaduais e municipais
+   * @param voutro the new w15 - vOutro: Outras Despesas acessórias
    */
-  public void setVTotTrib(BigDecimal vTotTrib) {
-    this.vTotTrib = vTotTrib;
+  public void setVoutro(BigDecimal voutro) {
+    this.voutro = voutro;
   }
+
+  /**
+   * # w16 - vNF: Valor Total da NF-e. Tipo: N, Tamanho: 13v2, Ocorrência: 1-1 (obrigatório). Vide regras de validação W16-xx no MOC.
+   *
+   * @return the w16 - vNF: Valor Total da NF-e
+   */
+  public BigDecimal getVnf() {
+    return vnf;
+  }
+
+  /**
+   * # w16 - vNF: Valor Total da NF-e. Tipo: N, Tamanho: 13v2, Ocorrência: 1-1 (obrigatório). Vide regras de validação W16-xx no MOC.
+   *
+   * @param vnf the new w16 - vNF: Valor Total da NF-e
+   */
+  public void setVnf(BigDecimal vnf) {
+    this.vnf = vnf;
+  }
+
+  /**
+   * # w16a - vTotTrib: Valor aproximado total de tributos federais, estaduais e municipais. Tipo: N, Tamanho: 13v2, Ocorrência: 0-1 (campo opcional). Incluído na NT 2013/003.
+   *
+   * @return the w16a - vTotTrib: Valor aproximado total de tributos federais, estaduais e municipais
+   */
+  public BigDecimal getVtotTrib() {
+    return vtotTrib;
+  }
+
+  /**
+   * # w16a - vTotTrib: Valor aproximado total de tributos federais, estaduais e municipais. Tipo: N, Tamanho: 13v2, Ocorrência: 0-1 (campo opcional). Incluído na NT 2013/003.
+   *
+   * @param vtotTrib the new w16a - vTotTrib: Valor aproximado total de tributos federais, estaduais e municipais
+   */
+  public void setVtotTrib(BigDecimal vtotTrib) {
+    this.vtotTrib = vtotTrib;
+  }
+
 }

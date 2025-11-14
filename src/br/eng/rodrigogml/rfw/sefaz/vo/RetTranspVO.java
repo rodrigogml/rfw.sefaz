@@ -2,201 +2,188 @@ package br.eng.rodrigogml.rfw.sefaz.vo;
 
 import java.math.BigDecimal;
 
+import br.eng.rodrigogml.rfw.kernel.preprocess.PreProcess.PreProcessOption;
 import br.eng.rodrigogml.rfw.kernel.rfwmeta.RFWMetaBigDecimalField;
+import br.eng.rodrigogml.rfw.kernel.rfwmeta.RFWMetaRelationshipField;
+import br.eng.rodrigogml.rfw.kernel.rfwmeta.RFWMetaRelationshipField.RelationshipTypes;
 import br.eng.rodrigogml.rfw.kernel.rfwmeta.RFWMetaStringField;
 import br.eng.rodrigogml.rfw.kernel.vo.RFWVO;
 import br.eng.rodrigogml.rfw.orm.dao.annotations.dao.RFWDAOAnnotation;
 
 /**
- * Grupo de retenção de ICMS no transporte (TAG {@code retTransp}, ID X11).<br>
- * Utilizado para informar valores de retenção do ICMS incidente sobre o serviço de transporte, quando aplicável.
+ * Grupo X11 - retTransp: Retenção ICMS transporte.
  */
-@RFWDAOAnnotation(schema = "_RFW.SEFAZ", table = "sefaz_ret_transp")
-class RetTranspVO extends RFWVO {
+@RFWDAOAnnotation(schema = "_RFW.SEFAZ", table = "sefaz_rettransp")
+public class RetTranspVO extends RFWVO {
 
-  private static final long serialVersionUID = -5063432764183925607L;
+  private static final long serialVersionUID = -1036600007842468280L;
 
   /**
-   * ID: X12 – Campo {@code vServ}.<br>
-   * Valor total do serviço de transporte sobre o qual incidirá o ICMS retido.<br>
-   * Ocorrência 0-1, tamanho 13v2.
+   * {@link TranspVO}
    */
-  @RFWMetaBigDecimalField(caption = "Valor do serviço", required = false, scale = 2, absolute = true)
-  private BigDecimal vServ = null;
+  @RFWMetaRelationshipField(caption = "Transp", relationship = RelationshipTypes.PARENT_ASSOCIATION, required = true, column = "idsefaz_transp")
+  private TranspVO transpVO = null;
 
   /**
-   * ID: X13 – Campo {@code vBCRet}.<br>
-   * Base de cálculo do ICMS retido na prestação de serviço de transporte.<br>
-   * Ocorrência 0-1, tamanho 13v2.
+   * X12 - vServ: Valor do Serviço. Tipo: N, Tamanho: 13v2, Ocorrência: 1-1.
    */
-  @RFWMetaBigDecimalField(caption = "Base de cálculo ICMS retido", required = false, scale = 2, absolute = true)
-  private BigDecimal vBCRet = null;
+  @RFWMetaBigDecimalField(caption = "vServ", required = false, unique = false, maxValue = "", minValue = "", scale = 2, absolute = false)
+  private BigDecimal vserv;
 
   /**
-   * ID: X14 – Campo {@code pICMSRet}.<br>
-   * Alíquota do ICMS aplicada sobre a base de cálculo do serviço de transporte.<br>
-   * Ocorrência 0-1, tamanho 3v2-4.
+   * X13 - vBCRet: BC da Retenção do ICMS. Tipo: N, Tamanho: 13v2, Ocorrência: 1-1.
    */
-  @RFWMetaBigDecimalField(caption = "Alíquota ICMS retido", required = false, scale = 2, scaleMax = 4, absolute = true)
-  private BigDecimal pICMSRet = null;
+  @RFWMetaBigDecimalField(caption = "vBCRet", required = false, unique = false, maxValue = "", minValue = "", scale = 2, absolute = false)
+  private BigDecimal vbcret;
 
   /**
-   * ID: X15 – Campo {@code vICMSRet}.<br>
-   * Valor do ICMS efetivamente retido do serviço de transporte.<br>
-   * Ocorrência 0-1, tamanho 13v2.
+   * X14 - pICMSRet: Alíquota da Retenção. Tipo: N, Tamanho: 3v2-4, Ocorrência: 1-1.
    */
-  @RFWMetaBigDecimalField(caption = "Valor ICMS retido", required = false, scale = 2, absolute = true)
-  private BigDecimal vICMSRet = null;
+  @RFWMetaBigDecimalField(caption = "pICMSRet", required = false, unique = false, maxValue = "", minValue = "", scale = 2, scaleMax = 4, absolute = false)
+  private BigDecimal picmsRet;
 
   /**
-   * ID: X16 – Campo {@code CFOP}.<br>
-   * Código Fiscal de Operações e Prestações aplicável ao serviço de transporte.<br>
-   * Ocorrência 0-1, tamanho 4 (tabela de CFOP específica para serviço de transporte).
+   * X15 - vICMSRet: Valor do ICMS Retido. Tipo: N, Tamanho: 13v2, Ocorrência: 1-1.
    */
-  @RFWMetaStringField(caption = "CFOP do transporte", required = false, maxLength = 4)
-  private String cfop = null;
+  @RFWMetaBigDecimalField(caption = "vICMSRet", required = false, unique = false, maxValue = "", minValue = "", scale = 2, absolute = false)
+  private BigDecimal vicmsRet;
 
   /**
-   * ID: X17 – Campo {@code cMunFG}.<br>
-   * Código do município de ocorrência do fato gerador do ICMS do transporte.<br>
-   * Preenchido com o código IBGE do município (7 dígitos).<br>
-   * Ocorrência 0-1.
+   * X16 - CFOP: CFOP de Serviço de Transporte. Tipo: N, Tamanho: 4, Ocorrência: 1-1.
    */
-  @RFWMetaStringField(caption = "Município do fato gerador", required = false, maxLength = 7)
-  private String cMunFG = null;
+  @RFWMetaStringField(caption = "CFOP", required = false, unique = false, maxLength = 4, minLength = 4, pattern = "^[0-9]{4}$", preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
+  private String cfop;
 
   /**
-   * # iD: X12 – Campo {@code vServ}.<br>
-   * Valor total do serviço de transporte sobre o qual incidirá o ICMS retido.<br>
-   * Ocorrência 0-1, tamanho 13v2.
+   * X17 - cMunFG: Código do município do fato gerador do ICMS do transporte. Tipo: N, Tamanho: 7, Ocorrência: 1-1. Utilizar tabela IBGE.
+   */
+  @RFWMetaStringField(caption = "cMunFG", required = false, unique = false, maxLength = 7, minLength = 7, pattern = "^[0-9]{7}$", preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
+  private String cmunFg;
+
+  /**
+   * # {@link TranspVO}.
    *
-   * @return the iD: X12 – Campo {@code vServ}
+   * @return the {@link TranspVO}
    */
-  public BigDecimal getVServ() {
-    return vServ;
+  public TranspVO getTranspVO() {
+    return transpVO;
   }
 
   /**
-   * # iD: X12 – Campo {@code vServ}.<br>
-   * Valor total do serviço de transporte sobre o qual incidirá o ICMS retido.<br>
-   * Ocorrência 0-1, tamanho 13v2.
+   * # {@link TranspVO}.
    *
-   * @param vServ the new iD: X12 – Campo {@code vServ}
+   * @param transpVO the new {@link TranspVO}
    */
-  public void setVServ(BigDecimal vServ) {
-    this.vServ = vServ;
+  public void setTranspVO(TranspVO transpVO) {
+    this.transpVO = transpVO;
   }
 
   /**
-   * # iD: X13 – Campo {@code vBCRet}.<br>
-   * Base de cálculo do ICMS retido na prestação de serviço de transporte.<br>
-   * Ocorrência 0-1, tamanho 13v2.
+   * # x12 - vServ: Valor do Serviço. Tipo: N, Tamanho: 13v2, Ocorrência: 1-1.
    *
-   * @return the iD: X13 – Campo {@code vBCRet}
+   * @return the x12 - vServ: Valor do Serviço
    */
-  public BigDecimal getVBCRet() {
-    return vBCRet;
+  public BigDecimal getVserv() {
+    return vserv;
   }
 
   /**
-   * # iD: X13 – Campo {@code vBCRet}.<br>
-   * Base de cálculo do ICMS retido na prestação de serviço de transporte.<br>
-   * Ocorrência 0-1, tamanho 13v2.
+   * # x12 - vServ: Valor do Serviço. Tipo: N, Tamanho: 13v2, Ocorrência: 1-1.
    *
-   * @param vBCRet the new iD: X13 – Campo {@code vBCRet}
+   * @param vserv the new x12 - vServ: Valor do Serviço
    */
-  public void setVBCRet(BigDecimal vBCRet) {
-    this.vBCRet = vBCRet;
+  public void setVserv(BigDecimal vserv) {
+    this.vserv = vserv;
   }
 
   /**
-   * # iD: X14 – Campo {@code pICMSRet}.<br>
-   * Alíquota do ICMS aplicada sobre a base de cálculo do serviço de transporte.<br>
-   * Ocorrência 0-1, tamanho 3v2-4.
+   * # x13 - vBCRet: BC da Retenção do ICMS. Tipo: N, Tamanho: 13v2, Ocorrência: 1-1.
    *
-   * @return the iD: X14 – Campo {@code pICMSRet}
+   * @return the x13 - vBCRet: BC da Retenção do ICMS
    */
-  public BigDecimal getPICMSRet() {
-    return pICMSRet;
+  public BigDecimal getVbcret() {
+    return vbcret;
   }
 
   /**
-   * # iD: X14 – Campo {@code pICMSRet}.<br>
-   * Alíquota do ICMS aplicada sobre a base de cálculo do serviço de transporte.<br>
-   * Ocorrência 0-1, tamanho 3v2-4.
+   * # x13 - vBCRet: BC da Retenção do ICMS. Tipo: N, Tamanho: 13v2, Ocorrência: 1-1.
    *
-   * @param pICMSRet the new iD: X14 – Campo {@code pICMSRet}
+   * @param vbcret the new x13 - vBCRet: BC da Retenção do ICMS
    */
-  public void setPICMSRet(BigDecimal pICMSRet) {
-    this.pICMSRet = pICMSRet;
+  public void setVbcret(BigDecimal vbcret) {
+    this.vbcret = vbcret;
   }
 
   /**
-   * # iD: X15 – Campo {@code vICMSRet}.<br>
-   * Valor do ICMS efetivamente retido do serviço de transporte.<br>
-   * Ocorrência 0-1, tamanho 13v2.
+   * # x14 - pICMSRet: Alíquota da Retenção. Tipo: N, Tamanho: 3v2-4, Ocorrência: 1-1.
    *
-   * @return the iD: X15 – Campo {@code vICMSRet}
+   * @return the x14 - pICMSRet: Alíquota da Retenção
    */
-  public BigDecimal getVICMSRet() {
-    return vICMSRet;
+  public BigDecimal getPicmsRet() {
+    return picmsRet;
   }
 
   /**
-   * # iD: X15 – Campo {@code vICMSRet}.<br>
-   * Valor do ICMS efetivamente retido do serviço de transporte.<br>
-   * Ocorrência 0-1, tamanho 13v2.
+   * # x14 - pICMSRet: Alíquota da Retenção. Tipo: N, Tamanho: 3v2-4, Ocorrência: 1-1.
    *
-   * @param vICMSRet the new iD: X15 – Campo {@code vICMSRet}
+   * @param picmsRet the new x14 - pICMSRet: Alíquota da Retenção
    */
-  public void setVICMSRet(BigDecimal vICMSRet) {
-    this.vICMSRet = vICMSRet;
+  public void setPicmsRet(BigDecimal picmsRet) {
+    this.picmsRet = picmsRet;
   }
 
   /**
-   * # iD: X16 – Campo {@code CFOP}.<br>
-   * Código Fiscal de Operações e Prestações aplicável ao serviço de transporte.<br>
-   * Ocorrência 0-1, tamanho 4 (tabela de CFOP específica para serviço de transporte).
+   * # x15 - vICMSRet: Valor do ICMS Retido. Tipo: N, Tamanho: 13v2, Ocorrência: 1-1.
    *
-   * @return the iD: X16 – Campo {@code CFOP}
+   * @return the x15 - vICMSRet: Valor do ICMS Retido
+   */
+  public BigDecimal getVicmsRet() {
+    return vicmsRet;
+  }
+
+  /**
+   * # x15 - vICMSRet: Valor do ICMS Retido. Tipo: N, Tamanho: 13v2, Ocorrência: 1-1.
+   *
+   * @param vicmsRet the new x15 - vICMSRet: Valor do ICMS Retido
+   */
+  public void setVicmsRet(BigDecimal vicmsRet) {
+    this.vicmsRet = vicmsRet;
+  }
+
+  /**
+   * # x16 - CFOP: CFOP de Serviço de Transporte. Tipo: N, Tamanho: 4, Ocorrência: 1-1.
+   *
+   * @return the x16 - CFOP: CFOP de Serviço de Transporte
    */
   public String getCfop() {
     return cfop;
   }
 
   /**
-   * # iD: X16 – Campo {@code CFOP}.<br>
-   * Código Fiscal de Operações e Prestações aplicável ao serviço de transporte.<br>
-   * Ocorrência 0-1, tamanho 4 (tabela de CFOP específica para serviço de transporte).
+   * # x16 - CFOP: CFOP de Serviço de Transporte. Tipo: N, Tamanho: 4, Ocorrência: 1-1.
    *
-   * @param cfop the new iD: X16 – Campo {@code CFOP}
+   * @param cfop the new x16 - CFOP: CFOP de Serviço de Transporte
    */
   public void setCfop(String cfop) {
     this.cfop = cfop;
   }
 
   /**
-   * # iD: X17 – Campo {@code cMunFG}.<br>
-   * Código do município de ocorrência do fato gerador do ICMS do transporte.<br>
-   * Preenchido com o código IBGE do município (7 dígitos).<br>
-   * Ocorrência 0-1.
+   * # x17 - cMunFG: Código do município do fato gerador do ICMS do transporte. Tipo: N, Tamanho: 7, Ocorrência: 1-1. Utilizar tabela IBGE.
    *
-   * @return the iD: X17 – Campo {@code cMunFG}
+   * @return the x17 - cMunFG: Código do município do fato gerador do ICMS do transporte
    */
-  public String getCMunFG() {
-    return cMunFG;
+  public String getCmunFg() {
+    return cmunFg;
   }
 
   /**
-   * # iD: X17 – Campo {@code cMunFG}.<br>
-   * Código do município de ocorrência do fato gerador do ICMS do transporte.<br>
-   * Preenchido com o código IBGE do município (7 dígitos).<br>
-   * Ocorrência 0-1.
+   * # x17 - cMunFG: Código do município do fato gerador do ICMS do transporte. Tipo: N, Tamanho: 7, Ocorrência: 1-1. Utilizar tabela IBGE.
    *
-   * @param cMunFG the new iD: X17 – Campo {@code cMunFG}
+   * @param cmunFg the new x17 - cMunFG: Código do município do fato gerador do ICMS do transporte
    */
-  public void setCMunFG(String cMunFG) {
-    this.cMunFG = cMunFG;
+  public void setCmunFg(String cmunFg) {
+    this.cmunFg = cmunFg;
   }
 
 }

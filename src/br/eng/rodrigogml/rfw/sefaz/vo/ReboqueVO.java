@@ -1,106 +1,113 @@
 package br.eng.rodrigogml.rfw.sefaz.vo;
 
+import br.eng.rodrigogml.rfw.kernel.preprocess.PreProcess.PreProcessOption;
+import br.eng.rodrigogml.rfw.kernel.rfwmeta.RFWMetaRelationshipField;
+import br.eng.rodrigogml.rfw.kernel.rfwmeta.RFWMetaRelationshipField.RelationshipTypes;
 import br.eng.rodrigogml.rfw.kernel.rfwmeta.RFWMetaStringField;
 import br.eng.rodrigogml.rfw.kernel.vo.RFWVO;
 import br.eng.rodrigogml.rfw.orm.dao.annotations.dao.RFWDAOAnnotation;
 
 /**
- * Dados de reboque do transporte (TAG {@code reboque}, ID X22).<br>
- * Grupo repetível para identificação de veículos reboque ligados ao veículo principal no transporte da NF-e.
+ * Grupo X22 - reboque: Reboque/Dolly.
  */
 @RFWDAOAnnotation(schema = "_RFW.SEFAZ", table = "sefaz_reboque")
-class ReboqueVO extends RFWVO {
+public class ReboqueVO extends RFWVO {
 
-  private static final long serialVersionUID = 7405187342578914352L;
+  private static final long serialVersionUID = -1278985381808176642L;
 
   /**
-   * ID: X23 – Campo {@code placa}.<br>
-   * Placa do veículo reboque, no formato previsto na legislação de trânsito.<br>
-   * Ocorrência 0-1, tamanho 7.
+   * {@link TranspVO}
    */
-  @RFWMetaStringField(caption = "Placa do reboque", required = false, maxLength = 7)
-  private String placa = null;
+  @RFWMetaRelationshipField(caption = "Transp", relationship = RelationshipTypes.PARENT_ASSOCIATION, required = true, column = "idsefaz_transp")
+  private TranspVO transpVO = null;
 
   /**
-   * ID: X24 – Campo {@code UF}.<br>
-   * Sigla da UF de licenciamento do reboque.<br>
-   * Ocorrência 0-1, tamanho 2, podendo ser "EX" para exterior.
+   * X23 - placa: Placa do Veículo. Tipo: C, Tamanho: 7, Ocorrência: 1-1.
    */
-  @RFWMetaStringField(caption = "UF do reboque", required = false, maxLength = 2)
-  private String uf = null;
+  @RFWMetaStringField(caption = "placa", required = false, unique = false, maxLength = 7, minLength = 7, preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
+  private String placa;
 
   /**
-   * ID: X25 – Campo {@code RNTC}.<br>
-   * Registro Nacional de Transportador de Carga (ANTT) do veículo reboque, quando exigido.<br>
-   * Ocorrência 0-1, tamanho 20.
+   * X24 - UF: Sigla da UF. Tipo: C, Tamanho: 2, Ocorrência: 1-1. Informar "EX" se exterior.
    */
-  @RFWMetaStringField(caption = "RNTC (ANTT) reboque", required = false, maxLength = 20)
-  private String rntc = null;
+  @RFWMetaStringField(caption = "UF", required = false, unique = false, maxLength = 2, minLength = 2, preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
+  private String uf;
 
   /**
-   * # iD: X23 – Campo {@code placa}.<br>
-   * Placa do veículo reboque, no formato previsto na legislação de trânsito.<br>
-   * Ocorrência 0-1, tamanho 7.
+   * X25 - RNTC: Registro Nacional do Transportador de Carga (ANTT). Tipo: C, Tamanho: 1-20, Ocorrência: 0-1.
+   */
+  @RFWMetaStringField(caption = "RNTC", required = false, unique = false, maxLength = 20, minLength = 1, preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
+  private String rntc;
+
+  /**
+   * # {@link TranspVO}.
    *
-   * @return the iD: X23 – Campo {@code placa}
+   * @return the {@link TranspVO}
+   */
+  public TranspVO getTranspVO() {
+    return transpVO;
+  }
+
+  /**
+   * # {@link TranspVO}.
+   *
+   * @param transpVO the new {@link TranspVO}
+   */
+  public void setTranspVO(TranspVO transpVO) {
+    this.transpVO = transpVO;
+  }
+
+  /**
+   * # x23 - placa: Placa do Veículo. Tipo: C, Tamanho: 7, Ocorrência: 1-1.
+   *
+   * @return the x23 - placa: Placa do Veículo
    */
   public String getPlaca() {
     return placa;
   }
 
   /**
-   * # iD: X23 – Campo {@code placa}.<br>
-   * Placa do veículo reboque, no formato previsto na legislação de trânsito.<br>
-   * Ocorrência 0-1, tamanho 7.
+   * # x23 - placa: Placa do Veículo. Tipo: C, Tamanho: 7, Ocorrência: 1-1.
    *
-   * @param placa the new iD: X23 – Campo {@code placa}
+   * @param placa the new x23 - placa: Placa do Veículo
    */
   public void setPlaca(String placa) {
     this.placa = placa;
   }
 
   /**
-   * # iD: X24 – Campo {@code UF}.<br>
-   * Sigla da UF de licenciamento do reboque.<br>
-   * Ocorrência 0-1, tamanho 2, podendo ser "EX" para exterior.
+   * # x24 - UF: Sigla da UF. Tipo: C, Tamanho: 2, Ocorrência: 1-1. Informar "EX" se exterior.
    *
-   * @return the iD: X24 – Campo {@code UF}
+   * @return the x24 - UF: Sigla da UF
    */
   public String getUf() {
     return uf;
   }
 
   /**
-   * # iD: X24 – Campo {@code UF}.<br>
-   * Sigla da UF de licenciamento do reboque.<br>
-   * Ocorrência 0-1, tamanho 2, podendo ser "EX" para exterior.
+   * # x24 - UF: Sigla da UF. Tipo: C, Tamanho: 2, Ocorrência: 1-1. Informar "EX" se exterior.
    *
-   * @param uf the new iD: X24 – Campo {@code UF}
+   * @param uf the new x24 - UF: Sigla da UF
    */
   public void setUf(String uf) {
     this.uf = uf;
   }
 
   /**
-   * # iD: X25 – Campo {@code RNTC}.<br>
-   * Registro Nacional de Transportador de Carga (ANTT) do veículo reboque, quando exigido.<br>
-   * Ocorrência 0-1, tamanho 20.
+   * # x25 - RNTC: Registro Nacional do Transportador de Carga (ANTT). Tipo: C, Tamanho: 1-20, Ocorrência: 0-1.
    *
-   * @return the iD: X25 – Campo {@code RNTC}
+   * @return the x25 - RNTC: Registro Nacional do Transportador de Carga (ANTT)
    */
   public String getRntc() {
     return rntc;
   }
 
   /**
-   * # iD: X25 – Campo {@code RNTC}.<br>
-   * Registro Nacional de Transportador de Carga (ANTT) do veículo reboque, quando exigido.<br>
-   * Ocorrência 0-1, tamanho 20.
+   * # x25 - RNTC: Registro Nacional do Transportador de Carga (ANTT). Tipo: C, Tamanho: 1-20, Ocorrência: 0-1.
    *
-   * @param rntc the new iD: X25 – Campo {@code RNTC}
+   * @param rntc the new x25 - RNTC: Registro Nacional do Transportador de Carga (ANTT)
    */
   public void setRntc(String rntc) {
     this.rntc = rntc;
   }
-
 }

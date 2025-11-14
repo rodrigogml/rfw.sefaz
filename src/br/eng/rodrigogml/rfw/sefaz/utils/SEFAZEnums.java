@@ -1538,4 +1538,1168 @@ public class SEFAZEnums {
     }
   }
 
+  /**
+   * Enumeração da Tributação do IPI (CST) utilizada no XML da NF-e.
+   * <p>
+   * Contempla os códigos do campo CST do IPI para os grupos:
+   * <ul>
+   * <li>O09 (grupo O07 - IPITrib): 00, 49, 50, 99;</li>
+   * <li>O09b (grupo O08 - IPINT): 01, 02, 03, 04, 05, 51, 52, 53, 54, 55.</li>
+   * </ul>
+   */
+  public enum SEFAZ_CST_IPI {
+
+    /** 00 = Entrada com recuperação de crédito. */
+    CST_00_ENTRADA_RECUPERACAO_CREDITO("00", false),
+
+    /** 49 = Outras entradas. */
+    CST_49_OUTRAS_ENTRADAS("49", false),
+
+    /** 50 = Saída tributada. */
+    CST_50_SAIDA_TRIBUTADA("50", false),
+
+    /** 99 = Outras saídas. */
+    CST_99_OUTRAS_SAIDAS("99", false),
+
+    /** 01 = Entrada tributada com alíquota zero. */
+    CST_01_ENTRADA_TRIBUTADA_ALIQUOTA_ZERO("01", false),
+
+    /** 02 = Entrada isenta. */
+    CST_02_ENTRADA_ISENTA("02", false),
+
+    /** 03 = Entrada não-tributada. */
+    CST_03_ENTRADA_NAO_TRIBUTADA("03", false),
+
+    /** 04 = Entrada imune. */
+    CST_04_ENTRADA_IMUNE("04", false),
+
+    /** 05 = Entrada com suspensão. */
+    CST_05_ENTRADA_COM_SUSPENSAO("05", false),
+
+    /** 51 = Saída tributada com alíquota zero. */
+    CST_51_SAIDA_TRIBUTADA_ALIQUOTA_ZERO("51", false),
+
+    /** 52 = Saída isenta. */
+    CST_52_SAIDA_ISENTA("52", false),
+
+    /** 53 = Saída não tributada. */
+    CST_53_SAIDA_NAO_TRIBUTADA("53", false),
+
+    /** 54 = Saída imune. */
+    CST_54_SAIDA_IMUNE("54", false),
+
+    /** 55 = Saída com suspensão. */
+    CST_55_SAIDA_COM_SUSPENSAO("55", false);
+
+    /** Valor exato gravado/lido no XML (campo CST). */
+    private final String xmlData;
+
+    /** Indica se o tipo está obsoleto/descontinuado para uso atual. */
+    private final boolean deprecated;
+
+    SEFAZ_CST_IPI(String xmlData, boolean deprecated) {
+      this.xmlData = xmlData;
+      this.deprecated = deprecated;
+    }
+
+    /** Retorna o valor utilizado no XML (campo CST). */
+    public String getXMLData() {
+      return this.xmlData;
+    }
+
+    /** Indica se o tipo está obsoleto. */
+    public boolean isDeprecated() {
+      return this.deprecated;
+    }
+
+    /**
+     * Converte o valor do XML para a enum correspondente.
+     *
+     * @param xmlValue Valor do XML (ex.: "00", "49", "50", "99", "01", "02", "03", "04", "05", "51", "52", "53", "54", "55").
+     * @return Enum correspondente.
+     * @throws IllegalArgumentException Se for nulo, vazio ou desconhecido.
+     */
+    public static SEFAZ_CST_IPI valueOfXMLData(String xmlValue) {
+      if (xmlValue == null) {
+        throw new IllegalArgumentException("O valor de 'CST' do IPI no XML não pode ser nulo.");
+      }
+      final String v = xmlValue.trim();
+      if (v.isEmpty()) {
+        throw new IllegalArgumentException("O valor de 'CST' do IPI no XML não pode ser vazio.");
+      }
+      for (SEFAZ_CST_IPI e : SEFAZ_CST_IPI.values()) {
+        if (e.xmlData.equals(v)) {
+          return e;
+        }
+      }
+      throw new IllegalArgumentException("Valor XML desconhecido para 'CST' do IPI: '" + xmlValue + "'.");
+    }
+  }
+
+  /**
+   * Enumeração da Tributação do PIS (CST) utilizada no XML da NF-e.
+   * <p>
+   * Contempla todos os códigos do campo CST do PIS nos grupos:
+   * <ul>
+   * <li>Q02 - PISAliq (CST 01, 02);</li>
+   * <li>Q03 - PISQtde (CST 03);</li>
+   * <li>Q04 - PISNT (CST 04, 05, 06, 07, 08, 09);</li>
+   * <li>Q05 - PISOutr (CST 49, 50–56, 60–67, 70–75, 98, 99).</li>
+   * </ul>
+   */
+  public enum SEFAZ_CST_PIS {
+
+    /** 01 = Operação Tributável (base de cálculo = valor da operação, alíquota normal). */
+    CST_01_OPERACAO_TRIBUTAVEL_BC_VALOR_ALIQUOTA_NORMAL("01", false),
+
+    /** 02 = Operação Tributável (base de cálculo = valor da operação, alíquota diferenciada). */
+    CST_02_OPERACAO_TRIBUTAVEL_BC_VALOR_ALIQUOTA_DIFERENCIADA("02", false),
+
+    /** 03 = Operação Tributável (base de cálculo = quantidade vendida × alíquota por unidade de produto). */
+    CST_03_OPERACAO_TRIBUTAVEL_BC_QTDE_ALIQUOTA_POR_UNIDADE("03", false),
+
+    /** 04 = Operação Tributável (tributação monofásica, alíquota zero). */
+    CST_04_OPERACAO_TRIBUTAVEL_MONOFASICA_ALIQUOTA_ZERO("04", false),
+
+    /** 05 = Operação Tributável (Substituição Tributária). */
+    CST_05_OPERACAO_TRIBUTAVEL_SUBSTITUICAO_TRIBUTARIA("05", false),
+
+    /** 06 = Operação Tributável (alíquota zero). */
+    CST_06_OPERACAO_TRIBUTAVEL_ALIQUOTA_ZERO("06", false),
+
+    /** 07 = Operação Isenta da Contribuição. */
+    CST_07_OPERACAO_ISENTA("07", false),
+
+    /** 08 = Operação Sem Incidência da Contribuição. */
+    CST_08_OPERACAO_SEM_INCIDENCIA("08", false),
+
+    /** 09 = Operação com Suspensão da Contribuição. */
+    CST_09_OPERACAO_COM_SUSPENSAO("09", false),
+
+    /** 49 = Outras Operações de Saída. */
+    CST_49_OUTRAS_OPERACOES_SAIDA("49", false),
+
+    /** 50 = Operação com Direito a Crédito – Vinculada Exclusivamente a Receita Tributada no Mercado Interno. */
+    CST_50_DIREITO_CREDITO_VINCULADA_EXCLUSIVA_RECEITA_TRIBUTADA_INTERNA("50", false),
+
+    /** 51 = Operação com Direito a Crédito – Vinculada Exclusivamente a Receita Não Tributada no Mercado Interno. */
+    CST_51_DIREITO_CREDITO_VINCULADA_EXCLUSIVA_RECEITA_NAO_TRIBUTADA_INTERNA("51", false),
+
+    /** 52 = Operação com Direito a Crédito – Vinculada Exclusivamente a Receita de Exportação. */
+    CST_52_DIREITO_CREDITO_VINCULADA_EXCLUSIVA_RECEITA_EXPORTACAO("52", false),
+
+    /** 53 = Operação com Direito a Crédito – Vinculada a Receitas Tributadas e Não-Tributadas no Mercado Interno. */
+    CST_53_DIREITO_CREDITO_RECEITAS_TRIBUTADAS_E_NAO_TRIBUTADAS_INTERNA("53", false),
+
+    /** 54 = Operação com Direito a Crédito – Vinculada a Receitas Tributadas no Mercado Interno e de Exportação. */
+    CST_54_DIREITO_CREDITO_RECEITAS_TRIBUTADAS_INTERNA_E_EXPORTACAO("54", false),
+
+    /** 55 = Operação com Direito a Crédito – Vinculada a Receitas Não-Tributadas no Mercado Interno e de Exportação. */
+    CST_55_DIREITO_CREDITO_RECEITAS_NAO_TRIBUTADAS_INTERNA_E_EXPORTACAO("55", false),
+
+    /** 56 = Operação com Direito a Crédito – Vinculada a Receitas Tributadas e Não-Tributadas no Mercado Interno e de Exportação. */
+    CST_56_DIREITO_CREDITO_RECEITAS_TRIBUTADAS_E_NAO_TRIBUTADAS_INTERNA_E_EXPORTACAO("56", false),
+
+    /** 60 = Crédito Presumido – Operação de Aquisição Vinculada Exclusivamente a Receita Tributada no Mercado Interno. */
+    CST_60_CREDITO_PRESUMIDO_AQUISICAO_EXCLUSIVA_RECEITA_TRIBUTADA_INTERNA("60", false),
+
+    /** 61 = Crédito Presumido – Operação de Aquisição Exclusivamente Receita Não-Tributada Mercado Interno. */
+    CST_61_CREDITO_PRESUMIDO_AQUISICAO_EXCLUSIVA_RECEITA_NAO_TRIBUTADA_INTERNA("61", false),
+
+    /** 62 = Crédito Presumido – Aquisição Vinculada Exclusivamente a Receita de Exportação. */
+    CST_62_CREDITO_PRESUMIDO_AQUISICAO_EXCLUSIVA_RECEITA_EXPORTACAO("62", false),
+
+    /** 63 = Crédito Presumido – Operação de Aquisição Vinculada a Receitas Tributadas e Não-Tributadas no Mercado Interno. */
+    CST_63_CREDITO_PRESUMIDO_AQUISICAO_RECEITAS_TRIBUTADAS_E_NAO_TRIBUTADAS_INTERNA("63", false),
+
+    /** 64 = Crédito Presumido – Operação de Aquisição Vinculada a Receitas Tributadas no Mercado Interno e de Exportação. */
+    CST_64_CREDITO_PRESUMIDO_AQUISICAO_RECEITAS_TRIBUTADAS_INTERNA_E_EXPORTACAO("64", false),
+
+    /** 65 = Crédito Presumido – Operação de Aquisição Vinculada a Receitas Não-Tributadas no Mercado Interno e de Exportação. */
+    CST_65_CREDITO_PRESUMIDO_AQUISICAO_RECEITAS_NAO_TRIBUTADAS_INTERNA_E_EXPORTACAO("65", false),
+
+    /** 66 = Crédito Presumido – Operação de Aquisição Vinculada a Receitas Tributadas e Não-Tributadas no Mercado Interno. */
+    CST_66_CREDITO_PRESUMIDO_AQUISICAO_RECEITAS_TRIBUTADAS_E_NAO_TRIBUTADAS_INTERNA("66", false),
+
+    /** 67 = Crédito Presumido – Outras Operações. */
+    CST_67_CREDITO_PRESUMIDO_OUTRAS_OPERACOES("67", false),
+
+    /** 70 = Operação de Aquisição com Direito a Crédito. */
+    CST_70_AQUISICAO_COM_DIREITO_A_CREDITO("70", false),
+
+    /** 71 = Operação de Aquisição com Isenção. */
+    CST_71_AQUISICAO_COM_ISENCAO("71", false),
+
+    /** 72 = Operação de Aquisição com Suspensão. */
+    CST_72_AQUISICAO_COM_SUSPENSAO("72", false),
+
+    /** 73 = Operação de Aquisição – Alíquota Zero. */
+    CST_73_AQUISICAO_ALIQUOTA_ZERO("73", false),
+
+    /** 74 = Operação de Aquisição – Sem Incidência da Contribuição. */
+    CST_74_AQUISICAO_SEM_INCIDENCIA("74", false),
+
+    /** 75 = Operação de Aquisição por Substituição Tributária. */
+    CST_75_AQUISICAO_POR_SUBSTITUICAO_TRIBUTARIA("75", false),
+
+    /** 98 = Outras Operações de Entrada. */
+    CST_98_OUTRAS_OPERACOES_ENTRADA("98", false),
+
+    /** 99 = Outras Operações. */
+    CST_99_OUTRAS_OPERACOES("99", false);
+
+    /** Valor exato gravado/lido no XML (campo CST). */
+    private final String xmlData;
+
+    /** Indica se o tipo está obsoleto/descontinuado para uso atual. */
+    private final boolean deprecated;
+
+    SEFAZ_CST_PIS(String xmlData, boolean deprecated) {
+      this.xmlData = xmlData;
+      this.deprecated = deprecated;
+    }
+
+    /** Retorna o valor utilizado no XML (campo CST). */
+    public String getXMLData() {
+      return this.xmlData;
+    }
+
+    /** Indica se o tipo está obsoleto. */
+    public boolean isDeprecated() {
+      return this.deprecated;
+    }
+
+    /**
+     * Converte o valor do XML para a enum correspondente.
+     *
+     * @param xmlValue Valor do XML (ex.: "01", "02", "03", "04", "05", "06", "07", "08", "09", "49", "50"–"56", "60"–"67", "70"–"75", "98", "99").
+     * @return Enum correspondente.
+     * @throws IllegalArgumentException Se for nulo, vazio ou desconhecido.
+     */
+    public static SEFAZ_CST_PIS valueOfXMLData(String xmlValue) {
+      if (xmlValue == null) {
+        throw new IllegalArgumentException("O valor de 'CST' do PIS no XML não pode ser nulo.");
+      }
+      final String v = xmlValue.trim();
+      if (v.isEmpty()) {
+        throw new IllegalArgumentException("O valor de 'CST' do PIS no XML não pode ser vazio.");
+      }
+      for (SEFAZ_CST_PIS e : SEFAZ_CST_PIS.values()) {
+        if (e.xmlData.equals(v)) {
+          return e;
+        }
+      }
+      throw new IllegalArgumentException("Valor XML desconhecido para 'CST' do PIS: '" + xmlValue + "'.");
+    }
+  }
+
+  /**
+   * Enumeração da Tributação da COFINS (CST) utilizada no XML da NF-e.
+   *
+   * Contempla todos os códigos do campo CST da COFINS nos grupos: - S02 - COFINSAliq (CST 01, 02); - S03 - COFINSQtde (CST 03); - S04 - COFINSNT (CST 04, 05, 06, 07, 08, 09); - S05 - COFINSOutr (CST 49, 50, 51, 52, 53, 54, 55, 56, 61–67, 70–73, 98, 99).
+   */
+  public enum SEFAZ_CST_COFINS {
+
+    /** 01 = Operação Tributável (base de cálculo = valor da operação alíquota normal (cumulativo/não cumulativo)). */
+    CST_01_OPERACAO_TRIBUTAVEL_BC_VALOR_ALIQUOTA_NORMAL("01", false),
+
+    /** 02 = Operação Tributável (base de cálculo = valor da operação (alíquota diferenciada)). */
+    CST_02_OPERACAO_TRIBUTAVEL_BC_VALOR_ALIQUOTA_DIFERENCIADA("02", false),
+
+    /** 03 = Operação Tributável (base de cálculo = quantidade vendida × alíquota por unidade de produto). */
+    CST_03_OPERACAO_TRIBUTAVEL_BC_QTDE_ALIQUOTA_POR_UNIDADE("03", false),
+
+    /** 04 = Operação Tributável (tributação monofásica, alíquota zero). */
+    CST_04_OPERACAO_TRIBUTAVEL_MONOFASICA_ALIQUOTA_ZERO("04", false),
+
+    /** 05 = Operação Tributável (Substituição Tributária). */
+    CST_05_OPERACAO_TRIBUTAVEL_SUBSTITUICAO_TRIBUTARIA("05", false),
+
+    /** 06 = Operação Tributável (alíquota zero). */
+    CST_06_OPERACAO_TRIBUTAVEL_ALIQUOTA_ZERO("06", false),
+
+    /** 07 = Operação Isenta da Contribuição. */
+    CST_07_OPERACAO_ISENTA("07", false),
+
+    /** 08 = Operação Sem Incidência da Contribuição. */
+    CST_08_OPERACAO_SEM_INCIDENCIA("08", false),
+
+    /** 09 = Operação com Suspensão da Contribuição. */
+    CST_09_OPERACAO_COM_SUSPENSAO("09", false),
+
+    /** 49 = Outras Operações de Saída. */
+    CST_49_OUTRAS_OPERACOES_SAIDA("49", false),
+
+    /** 50 = Operação com Direito a Crédito – Vinculada exclusivamente a Receita Tributada no Mercado Interno. */
+    CST_50_DIREITO_CREDITO_VINCULADA_EXCLUSIVA_RECEITA_TRIBUTADA_INTERNA("50", false),
+
+    /** 51 = Operação com Direito a Crédito – Vinculada exclusivamente a Receita Não-Tributada no Mercado Interno. */
+    CST_51_DIREITO_CREDITO_VINCULADA_EXCLUSIVA_RECEITA_NAO_TRIBUTADA_INTERNA("51", false),
+
+    /** 52 = Operação com Direito a Crédito – Vinculada exclusivamente a Receita de Exportação. */
+    CST_52_DIREITO_CREDITO_VINCULADA_EXCLUSIVA_RECEITA_EXPORTACAO("52", false),
+
+    /** 53 = Operação com Direito a Crédito – Vinculada a Receitas Tributadas e Não-Tributadas no Mercado Interno. */
+    CST_53_DIREITO_CREDITO_RECEITAS_TRIBUTADAS_E_NAO_TRIBUTADAS_INTERNA("53", false),
+
+    /** 54 = Operação com Direito a Crédito – Vinculada a Receitas Tributadas no Mercado Interno e de Exportação. */
+    CST_54_DIREITO_CREDITO_RECEITAS_TRIBUTADAS_INTERNA_E_EXPORTACAO("54", false),
+
+    /** 55 = Operação com Direito a Crédito – Vinculada a Receitas Não-Tributadas no Mercado Interno e de Exportação. */
+    CST_55_DIREITO_CREDITO_RECEITAS_NAO_TRIBUTADAS_INTERNA_E_EXPORTACAO("55", false),
+
+    /** 56 = Crédito Presumido – Operação de Aquisição Vinculada exclusivamente a Receita Tributada no Mercado Interno. */
+    CST_56_CREDITO_PRESUMIDO_AQUISICAO_EXCLUSIVA_RECEITA_TRIBUTADA_INTERNA("56", false),
+
+    /** 61 = Crédito Presumido – Operação de Aquisição Vinculada exclusivamente a Receita Não-Tributada no Mercado Interno. */
+    CST_61_CREDITO_PRESUMIDO_AQUISICAO_EXCLUSIVA_RECEITA_NAO_TRIBUTADA_INTERNA("61", false),
+
+    /** 62 = Crédito Presumido – Operação de Aquisição Vinculada exclusivamente a Receita de Exportação. */
+    CST_62_CREDITO_PRESUMIDO_AQUISICAO_EXCLUSIVA_RECEITA_EXPORTACAO("62", false),
+
+    /** 63 = Crédito Presumido – Operação Vinculada a Receitas Tributadas e Não-Tributadas no Mercado Interno. */
+    CST_63_CREDITO_PRESUMIDO_OPERACAO_RECEITAS_TRIBUTADAS_E_NAO_TRIBUTADAS_INTERNA("63", false),
+
+    /** 64 = Crédito Presumido – Operação de Aquisição Vinculada a Receitas Tributadas no Mercado Interno e de Exportação. */
+    CST_64_CREDITO_PRESUMIDO_AQUISICAO_RECEITAS_TRIBUTADAS_INTERNA_E_EXPORTACAO("64", false),
+
+    /** 65 = Crédito Presumido – Operação de Aquisição Vinculada a Receitas Não-Tributadas no Mercado Interno e de Exportação. */
+    CST_65_CREDITO_PRESUMIDO_AQUISICAO_RECEITAS_NAO_TRIBUTADAS_INTERNA_E_EXPORTACAO("65", false),
+
+    /** 66 = Crédito Presumido – Operação de Aquisição Vinculada a Receitas Tributadas e Não-Tributadas no Mercado Interno e de Exportação. */
+    CST_66_CREDITO_PRESUMIDO_AQUISICAO_RECEITAS_TRIBUTADAS_E_NAO_TRIBUTADAS_INTERNA_E_EXPORTACAO("66", false),
+
+    /** 67 = Crédito Presumido – Outras Operações. */
+    CST_67_CREDITO_PRESUMIDO_OUTRAS_OPERACOES("67", false),
+
+    /** 70 = Operação de Aquisição com Suspensão. */
+    CST_70_AQUISICAO_COM_SUSPENSAO("70", false),
+
+    /** 71 = Operação de Aquisição com Alíquota Zero. */
+    CST_71_AQUISICAO_ALIQUOTA_ZERO("71", false),
+
+    /** 72 = Operação de Aquisição sem Incidência da Contribuição. */
+    CST_72_AQUISICAO_SEM_INCIDENCIA("72", false),
+
+    /** 73 = Operação de Aquisição por Substituição Tributária. */
+    CST_73_AQUISICAO_POR_SUBSTITUICAO_TRIBUTARIA("73", false),
+
+    /** 98 = Outras Operações de Entrada. */
+    CST_98_OUTRAS_OPERACOES_ENTRADA("98", false),
+
+    /** 99 = Outras Operações. */
+    CST_99_OUTRAS_OPERACOES("99", false);
+
+    /** Valor exato gravado/lido no XML (campo CST). */
+    private final String xmlData;
+
+    /** Indica se o tipo está obsoleto/descontinuado para uso atual. */
+    private final boolean deprecated;
+
+    SEFAZ_CST_COFINS(String xmlData, boolean deprecated) {
+      this.xmlData = xmlData;
+      this.deprecated = deprecated;
+    }
+
+    /** Retorna o valor utilizado no XML (campo CST). */
+    public String getXMLData() {
+      return this.xmlData;
+    }
+
+    /** Indica se o tipo está obsoleto. */
+    public boolean isDeprecated() {
+      return this.deprecated;
+    }
+
+    /**
+     * Converte o valor do XML para a enum correspondente.
+     *
+     * @param xmlValue Valor do XML (ex.: \"01\", \"02\", \"03\", \"04\", \"05\", \"06\", \"07\", \"08\", \"09\", \"49\", \"50\", \"51\", \"52\", \"53\", \"54\", \"55\", \"56\", \"61\"–\"67\", \"70\"–\"73\", \"98\", \"99\").
+     * @return Enum correspondente.
+     * @throws IllegalArgumentException Se for nulo, vazio ou desconhecido.
+     */
+    public static SEFAZ_CST_COFINS valueOfXMLData(String xmlValue) {
+      if (xmlValue == null) {
+        throw new IllegalArgumentException("O valor de 'CST' da COFINS no XML não pode ser nulo.");
+      }
+      final String v = xmlValue.trim();
+      if (v.isEmpty()) {
+        throw new IllegalArgumentException("O valor de 'CST' da COFINS no XML não pode ser vazio.");
+      }
+      for (SEFAZ_CST_COFINS e : SEFAZ_CST_COFINS.values()) {
+        if (e.xmlData.equals(v)) {
+          return e;
+        }
+      }
+      throw new IllegalArgumentException("Valor XML desconhecido para 'CST' da COFINS: '" + xmlValue + "'.");
+    }
+  }
+
+  /**
+   * Enumeração do Código do Regime Especial de Tributação (cRegTrib) do ISSQN no grupo W17 - ISSQNtot da NF-e.
+   *
+   * Valores: 1 = Microempresa Municipal 2 = Estimativa 3 = Sociedade de Profissionais 4 = Cooperativa 5 = Microempresário Individual (MEI) 6 = Microempresário e Empresa de Pequeno Porte
+   */
+  public enum SEFAZ_cRegTrib {
+
+    /** 1 = Microempresa Municipal. */
+    MICROEMPRESA_MUNICIPAL("1", false),
+
+    /** 2 = Estimativa. */
+    ESTIMATIVA("2", false),
+
+    /** 3 = Sociedade de Profissionais. */
+    SOCIEDADE_PROFISSIONAIS("3", false),
+
+    /** 4 = Cooperativa. */
+    COOPERATIVA("4", false),
+
+    /** 5 = Microempresário Individual (MEI). */
+    MEI("5", false),
+
+    /** 6 = Microempresário e Empresa de Pequeno Porte. */
+    ME_EPP("6", false);
+
+    /** Valor exato gravado/lido no XML (campo cRegTrib). */
+    private final String xmlData;
+
+    /** Indica se o tipo está obsoleto/descontinuado para uso atual. */
+    private final boolean deprecated;
+
+    SEFAZ_cRegTrib(String xmlData, boolean deprecated) {
+      this.xmlData = xmlData;
+      this.deprecated = deprecated;
+    }
+
+    /** Retorna o valor utilizado no XML (campo cRegTrib). */
+    public String getXMLData() {
+      return this.xmlData;
+    }
+
+    /** Indica se o tipo está obsoleto. */
+    public boolean isDeprecated() {
+      return this.deprecated;
+    }
+
+    /**
+     * Converte o valor do XML para a enum correspondente.
+     *
+     * @param xmlValue Valor do XML (ex.: "1", "2", "3", "4", "5", "6").
+     * @return Enum correspondente.
+     * @throws IllegalArgumentException Se for nulo, vazio ou desconhecido.
+     */
+    public static SEFAZ_cRegTrib valueOfXMLData(String xmlValue) {
+      if (xmlValue == null) {
+        throw new IllegalArgumentException("O valor de 'cRegTrib' no XML não pode ser nulo.");
+      }
+      final String v = xmlValue.trim();
+      if (v.isEmpty()) {
+        throw new IllegalArgumentException("O valor de 'cRegTrib' no XML não pode ser vazio.");
+      }
+      for (SEFAZ_cRegTrib e : SEFAZ_cRegTrib.values()) {
+        if (e.xmlData.equals(v)) {
+          return e;
+        }
+      }
+      throw new IllegalArgumentException("Valor XML desconhecido para 'cRegTrib': '" + xmlValue + "'.");
+    }
+  }
+
+  /**
+   * Enumeração da Modalidade do Frete (modFrete) utilizada no XML da NF-e.
+   *
+   * Valores: 0 = Contratação do Frete por conta do Remetente (CIF) 1 = Contratação do Frete por conta do Destinatário (FOB) 2 = Contratação do Frete por conta de Terceiros 3 = Transporte Próprio por conta do Remetente 4 = Transporte Próprio por conta do Destinatário 9 = Sem Ocorrência de Transporte
+   */
+  public enum SEFAZ_modFrete {
+
+    /** 0 = Contratação do Frete por conta do Remetente (CIF). */
+    REMETENTE_CIF("0", false),
+
+    /** 1 = Contratação do Frete por conta do Destinatário (FOB). */
+    DESTINATARIO_FOB("1", false),
+
+    /** 2 = Contratação do Frete por conta de Terceiros. */
+    TERCEIROS("2", false),
+
+    /** 3 = Transporte Próprio por conta do Remetente. */
+    TRANSP_PROPRIO_REMETENTE("3", false),
+
+    /** 4 = Transporte Próprio por conta do Destinatário. */
+    TRANSP_PROPRIO_DESTINATARIO("4", false),
+
+    /** 9 = Sem Ocorrência de Transporte. */
+    SEM_OCORRENCIA("9", false);
+
+    /** Valor exato gravado/lido no XML (campo modFrete). */
+    private final String xmlData;
+
+    /** Indica se o tipo está obsoleto/descontinuado para uso atual. */
+    private final boolean deprecated;
+
+    SEFAZ_modFrete(String xmlData, boolean deprecated) {
+      this.xmlData = xmlData;
+      this.deprecated = deprecated;
+    }
+
+    /** Retorna o valor utilizado no XML (campo modFrete). */
+    public String getXMLData() {
+      return this.xmlData;
+    }
+
+    /** Indica se o tipo está obsoleto. */
+    public boolean isDeprecated() {
+      return this.deprecated;
+    }
+
+    /**
+     * Converte o valor do XML para a enum correspondente.
+     *
+     * @param xmlValue Valor do XML (ex.: "0", "1", "2", "3", "4", "9").
+     * @return Enum correspondente.
+     * @throws IllegalArgumentException Se for nulo, vazio ou desconhecido.
+     */
+    public static SEFAZ_modFrete valueOfXMLData(String xmlValue) {
+      if (xmlValue == null) {
+        throw new IllegalArgumentException("O valor de 'modFrete' no XML não pode ser nulo.");
+      }
+      final String v = xmlValue.trim();
+      if (v.isEmpty()) {
+        throw new IllegalArgumentException("O valor de 'modFrete' no XML não pode ser vazio.");
+      }
+      for (SEFAZ_modFrete e : SEFAZ_modFrete.values()) {
+        if (e.xmlData.equals(v)) {
+          return e;
+        }
+      }
+      throw new IllegalArgumentException("Valor XML desconhecido para 'modFrete': '" + xmlValue + "'.");
+    }
+  }
+
+  /**
+   * Enumeração do Indicador da Forma de Pagamento (indPag).
+   *
+   * Valores: 0 = Pagamento à Vista 1 = Pagamento à Prazo
+   */
+  public enum SEFAZ_indPag {
+
+    /** 0 = Pagamento à Vista. */
+    A_VISTA("0", false),
+
+    /** 1 = Pagamento à Prazo. */
+    A_PRAZO("1", false);
+
+    /** Valor exato gravado/lido no XML (campo indPag). */
+    private final String xmlData;
+
+    /** Indica se o tipo está obsoleto/descontinuado para uso atual. */
+    private final boolean deprecated;
+
+    SEFAZ_indPag(String xmlData, boolean deprecated) {
+      this.xmlData = xmlData;
+      this.deprecated = deprecated;
+    }
+
+    /** Retorna o valor utilizado no XML (campo indPag). */
+    public String getXMLData() {
+      return this.xmlData;
+    }
+
+    /** Indica se o tipo está obsoleto. */
+    public boolean isDeprecated() {
+      return this.deprecated;
+    }
+
+    /**
+     * Converte o valor do XML para a enum correspondente.
+     *
+     * @param xmlValue Valor do XML (ex.: "0", "1").
+     * @return Enum correspondente.
+     * @throws IllegalArgumentException Se for nulo, vazio ou desconhecido.
+     */
+    public static SEFAZ_indPag valueOfXMLData(String xmlValue) {
+      if (xmlValue == null) {
+        throw new IllegalArgumentException("O valor de 'indPag' no XML não pode ser nulo.");
+      }
+      final String v = xmlValue.trim();
+      if (v.isEmpty()) {
+        throw new IllegalArgumentException("O valor de 'indPag' no XML não pode ser vazio.");
+      }
+      for (SEFAZ_indPag e : SEFAZ_indPag.values()) {
+        if (e.xmlData.equals(v)) {
+          return e;
+        }
+      }
+      throw new IllegalArgumentException("Valor XML desconhecido para 'indPag': '" + xmlValue + "'.");
+    }
+  }
+
+  /**
+   * Enumeração do Meio de Pagamento (tPag).
+   *
+   * Valores: 01 = Dinheiro 02 = Cheque 03 = Cartão de Crédito 04 = Cartão de Débito 05 = Crédito Loja 10 = Vale Alimentação 11 = Vale Refeição 12 = Vale Presente 13 = Vale Combustível 15 = Boleto Bancário 16 = Depósito Bancário 17 = Pagamento Instantâneo (PIX) 18 = Transferência bancária, Carteira Digital 19 = Programa de fidelidade, Cashback, Crédito Virtual 90 = Sem pagamento 99 = Outros
+   */
+  public enum SEFAZ_tPag {
+
+    /** 01 = Dinheiro. */
+    DINHEIRO("01", false),
+
+    /** 02 = Cheque. */
+    CHEQUE("02", false),
+
+    /** 03 = Cartão de Crédito. */
+    CARTAO_CREDITO("03", false),
+
+    /** 04 = Cartão de Débito. */
+    CARTAO_DEBITO("04", false),
+
+    /** 05 = Crédito Loja. */
+    CREDITO_LOJA("05", false),
+
+    /** 10 = Vale Alimentação. */
+    VALE_ALIMENTACAO("10", false),
+
+    /** 11 = Vale Refeição. */
+    VALE_REFEICAO("11", false),
+
+    /** 12 = Vale Presente. */
+    VALE_PRESENTE("12", false),
+
+    /** 13 = Vale Combustível. */
+    VALE_COMBUSTIVEL("13", false),
+
+    /** 15 = Boleto Bancário. */
+    BOLETO_BANCARIO("15", false),
+
+    /** 16 = Depósito Bancário. */
+    DEPOSITO_BANCARIO("16", false),
+
+    /** 17 = Pagamento Instantâneo (PIX). */
+    PIX("17", false),
+
+    /** 18 = Transferência bancária, Carteira Digital. */
+    TRANSFERENCIA_OU_CARTEIRA_DIGITAL("18", false),
+
+    /** 19 = Programa de fidelidade, Cashback, Crédito Virtual. */
+    FIDELIDADE_CASHBACK_CREDITO_VIRTUAL("19", false),
+
+    /** 90 = Sem pagamento. */
+    SEM_PAGAMENTO("90", false),
+
+    /** 99 = Outros. */
+    OUTROS("99", false);
+
+    /** Valor exato gravado/lido no XML (campo tPag). */
+    private final String xmlData;
+
+    /** Indica se o tipo está obsoleto/descontinuado para uso atual. */
+    private final boolean deprecated;
+
+    SEFAZ_tPag(String xmlData, boolean deprecated) {
+      this.xmlData = xmlData;
+      this.deprecated = deprecated;
+    }
+
+    /** Retorna o valor utilizado no XML (campo tPag). */
+    public String getXMLData() {
+      return this.xmlData;
+    }
+
+    /** Indica se o tipo está obsoleto. */
+    public boolean isDeprecated() {
+      return this.deprecated;
+    }
+
+    /**
+     * Converte o valor do XML para a enum correspondente.
+     *
+     * @param xmlValue Valor do XML (ex.: "01", "02", "03", ..., "90", "99").
+     * @return Enum correspondente.
+     * @throws IllegalArgumentException Se for nulo, vazio ou desconhecido.
+     */
+    public static SEFAZ_tPag valueOfXMLData(String xmlValue) {
+      if (xmlValue == null) {
+        throw new IllegalArgumentException("O valor de 'tPag' no XML não pode ser nulo.");
+      }
+      final String v = xmlValue.trim();
+      if (v.isEmpty()) {
+        throw new IllegalArgumentException("O valor de 'tPag' no XML não pode ser vazio.");
+      }
+      for (SEFAZ_tPag e : SEFAZ_tPag.values()) {
+        if (e.xmlData.equals(v)) {
+          return e;
+        }
+      }
+      throw new IllegalArgumentException("Valor XML desconhecido para 'tPag': '" + xmlValue + "'.");
+    }
+  }
+
+  /**
+   * Enumeração do Tipo de Integração para pagamento (tpIntegra).
+   *
+   * Valores: 1 = Pagamento integrado com o sistema de automação da empresa 2 = Pagamento não integrado com o sistema de automação da empresa
+   */
+  public enum SEFAZ_tpIntegra {
+
+    /** 1 = Pagamento integrado com o sistema de automação da empresa. */
+    INTEGRADO_AUTOMACAO("1", false),
+
+    /** 2 = Pagamento não integrado com o sistema de automação da empresa. */
+    NAO_INTEGRADO_AUTOMACAO("2", false);
+
+    /** Valor exato gravado/lido no XML (campo tpIntegra). */
+    private final String xmlData;
+
+    /** Indica se o tipo está obsoleto/descontinuado para uso atual. */
+    private final boolean deprecated;
+
+    SEFAZ_tpIntegra(String xmlData, boolean deprecated) {
+      this.xmlData = xmlData;
+      this.deprecated = deprecated;
+    }
+
+    /** Retorna o valor utilizado no XML (campo tpIntegra). */
+    public String getXMLData() {
+      return this.xmlData;
+    }
+
+    /** Indica se o tipo está obsoleto. */
+    public boolean isDeprecated() {
+      return this.deprecated;
+    }
+
+    /**
+     * Converte o valor do XML para a enum correspondente.
+     *
+     * @param xmlValue Valor do XML (ex.: "1", "2").
+     * @return Enum correspondente.
+     * @throws IllegalArgumentException Se for nulo, vazio ou desconhecido.
+     */
+    public static SEFAZ_tpIntegra valueOfXMLData(String xmlValue) {
+      if (xmlValue == null) {
+        throw new IllegalArgumentException("O valor de 'tpIntegra' no XML não pode ser nulo.");
+      }
+      final String v = xmlValue.trim();
+      if (v.isEmpty()) {
+        throw new IllegalArgumentException("O valor de 'tpIntegra' no XML não pode ser vazio.");
+      }
+      for (SEFAZ_tpIntegra e : SEFAZ_tpIntegra.values()) {
+        if (e.xmlData.equals(v)) {
+          return e;
+        }
+      }
+      throw new IllegalArgumentException("Valor XML desconhecido para 'tpIntegra': '" + xmlValue + "'.");
+    }
+  }
+
+  /**
+   * Enumeração da Bandeira da operadora de cartão (tBand).
+   *
+   * Valores: 01 = Visa 02 = Mastercard 03 = American Express 04 = Sorocred 05 = Diners Club 06 = Elo 07 = Hipercard 08 = Aura 09 = Cabal 99 = Outros
+   */
+  public enum SEFAZ_tBand {
+
+    /** 01 = Visa. */
+    VISA("01", false),
+
+    /** 02 = Mastercard. */
+    MASTERCARD("02", false),
+
+    /** 03 = American Express. */
+    AMERICAN_EXPRESS("03", false),
+
+    /** 04 = Sorocred. */
+    SOROCRED("04", false),
+
+    /** 05 = Diners Club. */
+    DINERS_CLUB("05", false),
+
+    /** 06 = Elo. */
+    ELO("06", false),
+
+    /** 07 = Hipercard. */
+    HIPERCARD("07", false),
+
+    /** 08 = Aura. */
+    AURA("08", false),
+
+    /** 09 = Cabal. */
+    CABAL("09", false),
+
+    /** 99 = Outros. */
+    OUTROS("99", false);
+
+    /** Valor exato gravado/lido no XML (campo tBand). */
+    private final String xmlData;
+
+    /** Indica se o tipo está obsoleto/descontinuado para uso atual. */
+    private final boolean deprecated;
+
+    SEFAZ_tBand(String xmlData, boolean deprecated) {
+      this.xmlData = xmlData;
+      this.deprecated = deprecated;
+    }
+
+    /** Retorna o valor utilizado no XML (campo tBand). */
+    public String getXMLData() {
+      return this.xmlData;
+    }
+
+    /** Indica se o tipo está obsoleto. */
+    public boolean isDeprecated() {
+      return this.deprecated;
+    }
+
+    /**
+     * Converte o valor do XML para a enum correspondente.
+     *
+     * @param xmlValue Valor do XML (ex.: "01", "02", ..., "09", "99").
+     * @return Enum correspondente.
+     * @throws IllegalArgumentException Se for nulo, vazio ou desconhecido.
+     */
+    public static SEFAZ_tBand valueOfXMLData(String xmlValue) {
+      if (xmlValue == null) {
+        throw new IllegalArgumentException("O valor de 'tBand' no XML não pode ser nulo.");
+      }
+      final String v = xmlValue.trim();
+      if (v.isEmpty()) {
+        throw new IllegalArgumentException("O valor de 'tBand' no XML não pode ser vazio.");
+      }
+      for (SEFAZ_tBand e : SEFAZ_tBand.values()) {
+        if (e.xmlData.equals(v)) {
+          return e;
+        }
+      }
+      throw new IllegalArgumentException("Valor XML desconhecido para 'tBand': '" + xmlValue + "'.");
+    }
+  }
+
+  /**
+   * Enumeração SEFAZ_indProc — Indicador da Origem do Processo (campo Z12 da NF-e).
+   *
+   * <p>
+   * Esta enumeração representa os valores aceitos no campo {@code indProc} do grupo Z10 - procRef (Processo Referenciado), conforme especificação oficial da NF-e.
+   * </p>
+   *
+   * <p>
+   * <b>Origem do Processo (Z12 – indProc):</b>
+   * </p>
+   * <ul>
+   * <li><b>0 – SEFAZ:</b> Processo originado na Secretaria da Fazenda estadual.</li>
+   * <li><b>1 – Justiça Federal:</b> Processo administrativo ou judicial originado em órgão federal.</li>
+   * <li><b>2 – Justiça Estadual:</b> Processo originado no âmbito judicial estadual.</li>
+   * <li><b>3 – Secex/RFB:</b> Processo originado na Secretaria de Comércio Exterior ou Receita Federal do Brasil.</li>
+   * <li><b>9 – Outros:</b> Qualquer outra origem não contemplada nos códigos anteriores.</li>
+   * </ul>
+   *
+   * <p>
+   * Tamanho: 1 dígito numérico. Ocorrência: 1-1 dentro de {@code procRef}.
+   * </p>
+   *
+   * <p>
+   * A enum segue o padrão geral do sistema, contendo:
+   * </p>
+   * <ul>
+   * <li>valor exato gravado/lido no XML ({@code xmlData});</li>
+   * <li>indicador de descontinuação ({@code deprecated});</li>
+   * <li>métodos: {@code getXMLData()}, {@code isDeprecated()}, {@code valueOfXMLData()}.</li>
+   * </ul>
+   */
+  public enum SEFAZ_indProc {
+
+    /**
+     * 0 – SEFAZ.
+     * <p>
+     * Indica que o processo ou ato concessório foi originado na Secretaria da Fazenda estadual.
+     * </p>
+     */
+    SEFAZ("0", false),
+
+    /**
+     * 1 – Justiça Federal.
+     * <p>
+     * Processo administrativo ou judicial cuja origem está no âmbito da Justiça Federal.
+     * </p>
+     */
+    JUSTICA_FEDERAL("1", false),
+
+    /**
+     * 2 – Justiça Estadual.
+     * <p>
+     * Processo administrativo ou judicial de origem na Justiça Estadual.
+     * </p>
+     */
+    JUSTICA_ESTADUAL("2", false),
+
+    /**
+     * 3 – Secex/RFB.
+     * <p>
+     * Processo originado na Secretaria de Comércio Exterior (Secex) ou na Receita Federal do Brasil (RFB).
+     * </p>
+     */
+    SECEX_RFB("3", false),
+
+    /**
+     * 9 – Outros.
+     * <p>
+     * Qualquer outra origem não contemplada nas opções anteriores.
+     * </p>
+     */
+    OUTROS("9", false);
+
+    /** Valor gravado/lido exatamente como aparece no XML. */
+    private final String xmlData;
+
+    /** Indica se este código está obsoleto/descontinuado. */
+    private final boolean deprecated;
+
+    SEFAZ_indProc(String xmlData, boolean deprecated) {
+      this.xmlData = xmlData;
+      this.deprecated = deprecated;
+    }
+
+    /**
+     * Retorna o valor exato utilizado no XML, conforme o leiaute da NF-e.
+     *
+     * @return String contendo o valor correspondente no XML.
+     */
+    public String getXMLData() {
+      return this.xmlData;
+    }
+
+    /**
+     * Informa se o código está obsoleto ou descontinuado para uso atual.
+     *
+     * @return {@code true} se o código estiver obsoleto; {@code false} caso contrário.
+     */
+    public boolean isDeprecated() {
+      return this.deprecated;
+    }
+
+    /**
+     * Converte o valor do XML para a enum correspondente.
+     *
+     * @param xmlValue valor bruto do XML — não pode ser nulo ou vazio.
+     * @return a enum SEFAZ_indProc correspondente.
+     * @throws IllegalArgumentException se {@code xmlValue} for nulo, vazio ou não corresponder a nenhum valor permitido.
+     */
+    public static SEFAZ_indProc valueOfXMLData(String xmlValue) {
+      if (xmlValue == null) {
+        throw new IllegalArgumentException("O valor de 'indProc' no XML não pode ser nulo.");
+      }
+      final String v = xmlValue.trim();
+      if (v.isEmpty()) {
+        throw new IllegalArgumentException("O valor de 'indProc' no XML não pode ser vazio.");
+      }
+      for (SEFAZ_indProc e : SEFAZ_indProc.values()) {
+        if (e.xmlData.equals(v)) {
+          return e;
+        }
+      }
+      throw new IllegalArgumentException("Valor XML desconhecido para 'indProc': '" + xmlValue + "'.");
+    }
+  }
+
+  /**
+   * Enumeração SEFAZ_indIncentivo — Indicador de Incentivo Fiscal (campo U17).
+   *
+   * <p>
+   * Campo U17 – indIncentivo (Indicador de Incentivo Fiscal) pertencente ao grupo U01.
+   * </p>
+   *
+   * <p>
+   * <b>Valores permitidos:</b>
+   * </p>
+   * <ul>
+   * <li><b>1 = Sim</b> — Existe incentivo fiscal vinculado ao item.</li>
+   * <li><b>2 = Não</b> — Não há incentivo fiscal associado.</li>
+   * </ul>
+   *
+   * <p>
+   * Tipo: N Tamanho: 1 Ocorrência: 1-1
+   * </p>
+   *
+   * <p>
+   * Segue o padrão geral das enumerações do sistema, contendo:
+   * </p>
+   * <ul>
+   * <li>valor XML exato ({@code xmlData});</li>
+   * <li>indicador de descontinuação ({@code deprecated});</li>
+   * <li>métodos utilitários: {@code getXMLData()}, {@code isDeprecated()}, {@code valueOfXMLData()}.</li>
+   * </ul>
+   */
+  public enum SEFAZ_indIncentivo {
+
+    /**
+     * 1 – Sim.
+     * <p>
+     * Indica que o item possui incentivo fiscal.
+     * </p>
+     */
+    SIM("1", false),
+
+    /**
+     * 2 – Não.
+     * <p>
+     * Indica que não há incentivo fiscal relacionado ao item.
+     * </p>
+     */
+    NAO("2", false);
+
+    /** Valor gravado/lido exatamente como aparece no XML. */
+    private final String xmlData;
+
+    /** Indica se o código está obsoleto ou descontinuado. */
+    private final boolean deprecated;
+
+    SEFAZ_indIncentivo(String xmlData, boolean deprecated) {
+      this.xmlData = xmlData;
+      this.deprecated = deprecated;
+    }
+
+    /**
+     * Retorna o valor exato utilizado no XML.
+     *
+     * @return valor XML correspondente ao código da enum.
+     */
+    public String getXMLData() {
+      return this.xmlData;
+    }
+
+    /**
+     * Retorna se este código está obsoleto/descontinuado.
+     *
+     * @return true se obsoleto; false caso contrário.
+     */
+    public boolean isDeprecated() {
+      return this.deprecated;
+    }
+
+    /**
+     * Converte o valor recebido do XML para a enum correspondente.
+     *
+     * @param xmlValue valor bruto do XML.
+     * @return enum correspondente.
+     * @throws IllegalArgumentException se for nulo, vazio ou inválido.
+     */
+    public static SEFAZ_indIncentivo valueOfXMLData(String xmlValue) {
+      if (xmlValue == null) {
+        throw new IllegalArgumentException("O valor de 'indIncentivo' no XML não pode ser nulo.");
+      }
+      final String v = xmlValue.trim();
+      if (v.isEmpty()) {
+        throw new IllegalArgumentException("O valor de 'indIncentivo' no XML não pode ser vazio.");
+      }
+      for (SEFAZ_indIncentivo e : SEFAZ_indIncentivo.values()) {
+        if (e.xmlData.equals(v)) {
+          return e;
+        }
+      }
+      throw new IllegalArgumentException("Valor XML desconhecido para 'indIncentivo': '" + xmlValue + "'.");
+    }
+  }
+
+  /**
+   * Enumeração SEFAZ_indISS — Indicador da Exigibilidade do ISS (campo U12).
+   *
+   * <p>
+   * Campo U12 – indISS (Indicador da Exigibilidade do ISS) pertencente ao grupo U01.
+   * </p>
+   *
+   * <p>
+   * <b>Valores permitidos:</b>
+   * </p>
+   * <ul>
+   * <li><b>1 = Exigível</b></li>
+   * <li><b>2 = Não incidência</b></li>
+   * <li><b>3 = Isenção</b></li>
+   * <li><b>4 = Exportação</b></li>
+   * <li><b>5 = Imunidade</b></li>
+   * <li><b>6 = Exigibilidade suspensa por decisão judicial</b></li>
+   * <li><b>7 = Exigibilidade suspensa por processo administrativo</b></li>
+   * </ul>
+   *
+   * <p>
+   * Tipo: N Tamanho: 2 Ocorrência: 1-1
+   * </p>
+   *
+   * <p>
+   * Implementada conforme o padrão das enumerações SEFAZ do sistema, contendo:
+   * </p>
+   * <ul>
+   * <li>valor XML exato ({@code xmlData});</li>
+   * <li>flag de descontinuação ({@code deprecated});</li>
+   * <li>métodos obrigatórios: {@code getXMLData()}, {@code isDeprecated()}, {@code valueOfXMLData()}.</li>
+   * </ul>
+   */
+  public enum SEFAZ_indISS {
+
+    /** 1 – Exigível. */
+    EXIGIVEL("1", false),
+
+    /** 2 – Não incidência. */
+    NAO_INCIDENCIA("2", false),
+
+    /** 3 – Isenção. */
+    ISENCAO("3", false),
+
+    /** 4 – Exportação. */
+    EXPORTACAO("4", false),
+
+    /** 5 – Imunidade. */
+    IMUNIDADE("5", false),
+
+    /** 6 – Exigibilidade suspensa por decisão judicial. */
+    SUSPENSA_DECISAO_JUDICIAL("6", false),
+
+    /** 7 – Exigibilidade suspensa por processo administrativo. */
+    SUSPENSA_PROCESSO_ADMINISTRATIVO("7", false);
+
+    /** Valor utilizado exatamente no XML. */
+    private final String xmlData;
+
+    /** Indica se o valor está obsoleto/descontinuado. */
+    private final boolean deprecated;
+
+    SEFAZ_indISS(String xmlData, boolean deprecated) {
+      this.xmlData = xmlData;
+      this.deprecated = deprecated;
+    }
+
+    /** Retorna o valor utilizado no XML. */
+    public String getXMLData() {
+      return this.xmlData;
+    }
+
+    /** Indica se o valor está obsoleto/descontinuado. */
+    public boolean isDeprecated() {
+      return this.deprecated;
+    }
+
+    /**
+     * Converte o valor do XML para o enum correspondente.
+     *
+     * @param xmlValue valor bruto do XML.
+     * @return enum correspondente.
+     * @throws IllegalArgumentException se for nulo, vazio ou desconhecido.
+     */
+    public static SEFAZ_indISS valueOfXMLData(String xmlValue) {
+      if (xmlValue == null) {
+        throw new IllegalArgumentException("O valor de 'indISS' no XML não pode ser nulo.");
+      }
+
+      final String v = xmlValue.trim();
+      if (v.isEmpty()) {
+        throw new IllegalArgumentException("O valor de 'indISS' no XML não pode ser vazio.");
+      }
+
+      for (SEFAZ_indISS e : SEFAZ_indISS.values()) {
+        if (e.xmlData.equals(v)) {
+          return e;
+        }
+      }
+
+      throw new IllegalArgumentException("Valor XML desconhecido para 'indISS': '" + xmlValue + "'.");
+    }
+  }
+
 }

@@ -1,124 +1,132 @@
 package br.eng.rodrigogml.rfw.sefaz.vo;
 
 import java.math.BigDecimal;
+import java.util.Date;
 
+import br.eng.rodrigogml.rfw.kernel.preprocess.PreProcess.PreProcessOption;
 import br.eng.rodrigogml.rfw.kernel.rfwmeta.RFWMetaBigDecimalField;
+import br.eng.rodrigogml.rfw.kernel.rfwmeta.RFWMetaDateField;
+import br.eng.rodrigogml.rfw.kernel.rfwmeta.RFWMetaRelationshipField;
+import br.eng.rodrigogml.rfw.kernel.rfwmeta.RFWMetaRelationshipField.RelationshipTypes;
 import br.eng.rodrigogml.rfw.kernel.rfwmeta.RFWMetaStringField;
 import br.eng.rodrigogml.rfw.kernel.vo.RFWVO;
 import br.eng.rodrigogml.rfw.orm.dao.annotations.dao.RFWDAOAnnotation;
 
 /**
- * Grupo de Parcelas da Fatura (TAG {@code dup}, ID Y07).<br>
- * Contém informações individuais de cada parcela da cobrança.<br>
- * <br>
- *
- * Ocorrência no grupo Y01: 0–120.
+ * Grupo Y07 - dup: Parcelas (duplicatas).
+ * <p>
+ * Ocorre 0-120 vezes dentro do grupo Y01 (cobr). Cada instância representa uma parcela da fatura.
  */
-@RFWDAOAnnotation(schema = "_RFW.SEFAZ", table = "sefaz_parcela")
+@RFWDAOAnnotation(schema = "_RFW.SEFAZ", table = "sefaz_dup")
 public class DupVO extends RFWVO {
 
-  private static final long serialVersionUID = -7833270006195929397L;
+  private static final long serialVersionUID = -5357160685563910049L;
 
   /**
-   * ID: Y08 – Campo {@code nDup}.<br>
-   * Número da parcela com 3 algarismos, sequenciais e consecutivos.<br>
-   * Exemplos: "001", "002", "003"...<br>
-   * Ocorrência: 0-1.<br>
-   * Tamanho: 1–60 (SEFAZ exige padrão de 3 algarismos).
+   * {@link CobrVO}
    */
-  @RFWMetaStringField(caption = "Número da parcela", required = false, maxLength = 60)
-  private String nDup = null;
+  @RFWMetaRelationshipField(caption = "Cobr", relationship = RelationshipTypes.PARENT_ASSOCIATION, required = true, column = "idsefaz_cobr")
+  private CobrVO cobrVO = null;
 
   /**
-   * ID: Y09 – Campo {@code dVenc}.<br>
-   * Data de vencimento da parcela.<br>
-   * Formato: "AAAA-MM-DD".<br>
-   * Ocorrência: 0-1.
+   * Y08 - nDup: Número da Parcela. Tipo: C, Tamanho: 1-60, Ocorrência: 0-1 (campo opcional).
+   * <p>
+   * Recomenda-se numeração com 3 algarismos, sequenciais e consecutivos (ex.: "001", "002", "003"...), obrigatória a partir de 03/09/2018 conforme NT.
    */
-  @RFWMetaStringField(caption = "Data de vencimento", required = false, maxLength = 10)
-  private String dVenc = null;
+  @RFWMetaStringField(caption = "nDup", required = false, unique = false, maxLength = 60, minLength = 1, preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
+  private String ndup;
 
   /**
-   * ID: Y10 – Campo {@code vDup}.<br>
-   * Valor da parcela.<br>
-   * Ocorrência: 1-1.<br>
-   * Formato: 13v2.
+   * Y09 - dVenc: Data de vencimento. Tipo: D (data), Formato: “AAAA-MM-DD”, Ocorrência: 0-1 (campo opcional).
+   * <p>
+   * As datas de vencimento devem ser informadas em ordem crescente.
    */
-  @RFWMetaBigDecimalField(caption = "Valor da parcela", required = false, scale = 2, absolute = true)
-  private BigDecimal vDup = null;
+  @RFWMetaDateField(caption = "dVenc", required = false, unique = false)
+  private Date dvenc;
 
   /**
-   * # iD: Y08 – Campo {@code nDup}.<br>
-   * Número da parcela com 3 algarismos, sequenciais e consecutivos.<br>
-   * Exemplos: "001", "002", "003"..<br>
-   * Ocorrência: 0-1.<br>
-   * Tamanho: 1–60 (SEFAZ exige padrão de 3 algarismos).
+   * Y10 - vDup: Valor da Parcela. Tipo: N, Tamanho: 13v2, Ocorrência: 1-1 (obrigatório na estrutura da parcela).
+   */
+  @RFWMetaBigDecimalField(caption = "vDup", required = false, unique = false, maxValue = "", minValue = "", scale = 2, absolute = false)
+  private BigDecimal vdup;
+
+  /**
+   * # {@link CobrVO}.
    *
-   * @return the iD: Y08 – Campo {@code nDup}
+   * @return the {@link CobrVO}
    */
-  public String getNDup() {
-    return nDup;
+  public CobrVO getCobrVO() {
+    return cobrVO;
   }
 
   /**
-   * # iD: Y08 – Campo {@code nDup}.<br>
-   * Número da parcela com 3 algarismos, sequenciais e consecutivos.<br>
-   * Exemplos: "001", "002", "003"..<br>
-   * Ocorrência: 0-1.<br>
-   * Tamanho: 1–60 (SEFAZ exige padrão de 3 algarismos).
+   * # {@link CobrVO}.
    *
-   * @param nDup the new iD: Y08 – Campo {@code nDup}
+   * @param cobrVO the new {@link CobrVO}
    */
-  public void setNDup(String nDup) {
-    this.nDup = nDup;
+  public void setCobrVO(CobrVO cobrVO) {
+    this.cobrVO = cobrVO;
   }
 
   /**
-   * # iD: Y09 – Campo {@code dVenc}.<br>
-   * Data de vencimento da parcela.<br>
-   * Formato: "AAAA-MM-DD".<br>
-   * Ocorrência: 0-1.
+   * # y08 - nDup: Número da Parcela. Tipo: C, Tamanho: 1-60, Ocorrência: 0-1 (campo opcional).
+   * <p>
+   * Recomenda-se numeração com 3 algarismos, sequenciais e consecutivos (ex.: "001", "002", "003"..), obrigatória a partir de 03/09/2018 conforme NT.
    *
-   * @return the iD: Y09 – Campo {@code dVenc}
+   * @return the y08 - nDup: Número da Parcela
    */
-  public String getDVenc() {
-    return dVenc;
+  public String getNdup() {
+    return ndup;
   }
 
   /**
-   * # iD: Y09 – Campo {@code dVenc}.<br>
-   * Data de vencimento da parcela.<br>
-   * Formato: "AAAA-MM-DD".<br>
-   * Ocorrência: 0-1.
+   * # y08 - nDup: Número da Parcela. Tipo: C, Tamanho: 1-60, Ocorrência: 0-1 (campo opcional).
+   * <p>
+   * Recomenda-se numeração com 3 algarismos, sequenciais e consecutivos (ex.: "001", "002", "003"..), obrigatória a partir de 03/09/2018 conforme NT.
    *
-   * @param dVenc the new iD: Y09 – Campo {@code dVenc}
+   * @param ndup the new y08 - nDup: Número da Parcela
    */
-  public void setDVenc(String dVenc) {
-    this.dVenc = dVenc;
+  public void setNdup(String ndup) {
+    this.ndup = ndup;
   }
 
   /**
-   * # iD: Y10 – Campo {@code vDup}.<br>
-   * Valor da parcela.<br>
-   * Ocorrência: 1-1.<br>
-   * Formato: 13v2.
+   * # y09 - dVenc: Data de vencimento. Tipo: D (data), Formato: “AAAA-MM-DD”, Ocorrência: 0-1 (campo opcional).
+   * <p>
+   * As datas de vencimento devem ser informadas em ordem crescente.
    *
-   * @return the iD: Y10 – Campo {@code vDup}
+   * @return the y09 - dVenc: Data de vencimento
    */
-  public BigDecimal getVDup() {
-    return vDup;
+  public Date getDvenc() {
+    return dvenc;
   }
 
   /**
-   * # iD: Y10 – Campo {@code vDup}.<br>
-   * Valor da parcela.<br>
-   * Ocorrência: 1-1.<br>
-   * Formato: 13v2.
+   * # y09 - dVenc: Data de vencimento. Tipo: D (data), Formato: “AAAA-MM-DD”, Ocorrência: 0-1 (campo opcional).
+   * <p>
+   * As datas de vencimento devem ser informadas em ordem crescente.
    *
-   * @param vDup the new iD: Y10 – Campo {@code vDup}
+   * @param dvenc the new y09 - dVenc: Data de vencimento
    */
-  public void setVDup(BigDecimal vDup) {
-    this.vDup = vDup;
+  public void setDvenc(Date dvenc) {
+    this.dvenc = dvenc;
   }
 
+  /**
+   * # y10 - vDup: Valor da Parcela. Tipo: N, Tamanho: 13v2, Ocorrência: 1-1 (obrigatório na estrutura da parcela).
+   *
+   * @return the y10 - vDup: Valor da Parcela
+   */
+  public BigDecimal getVdup() {
+    return vdup;
+  }
+
+  /**
+   * # y10 - vDup: Valor da Parcela. Tipo: N, Tamanho: 13v2, Ocorrência: 1-1 (obrigatório na estrutura da parcela).
+   *
+   * @param vdup the new y10 - vDup: Valor da Parcela
+   */
+  public void setVdup(BigDecimal vdup) {
+    this.vdup = vdup;
+  }
 }

@@ -4,228 +4,304 @@ import java.math.BigDecimal;
 
 import br.eng.rodrigogml.rfw.kernel.rfwmeta.RFWMetaBigDecimalField;
 import br.eng.rodrigogml.rfw.kernel.rfwmeta.RFWMetaEnumField;
+import br.eng.rodrigogml.rfw.kernel.rfwmeta.RFWMetaRelationshipField;
+import br.eng.rodrigogml.rfw.kernel.rfwmeta.RFWMetaRelationshipField.RelationshipTypes;
 import br.eng.rodrigogml.rfw.kernel.vo.RFWVO;
 import br.eng.rodrigogml.rfw.orm.dao.annotations.dao.RFWDAOAnnotation;
 import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_CST_PIS;
-import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_orig;
 
 /**
- * Description: Grupo PIS do item (TAG {@code PIS}, ID Q01).<br>
- * Este VO agrega os campos dos subgrupos: PISAliq (Q02), PISQtde (Q03), PISNT (Q04) e PISOutr (Q05).<br>
- * A escolha do conjunto de preenchimento é determinada pelo {@link #cst}.
- *
- * @author BIS DEVil
- * @since (11 de nov. de 2025)
+ * Grupo Q01 - PIS (Grupo PIS).
+ * <p>
+ * Ocorre 0-1 dentro do grupo M01 (imposto do item). Deve ser informado apenas quando o item for sujeito ao PIS.
+ * <p>
+ * Estrutura que concentra todos os campos dos subgrupos de PIS do leiaute da NF-e:
+ * <ul>
+ * <li>Q02 - PISAliq: PIS tributado pela alíquota (CST 01, 02, com base em valor e alíquota percentual);</li>
+ * <li>Q03 - PISQtde: PIS tributado por quantidade (CST 03, com base em quantidade × alíquota em reais);</li>
+ * <li>Q04 - PISNT: PIS não tributado (CST 04, 05, 06, 07, 08, 09);</li>
+ * <li>Q05 - PISOutr: PIS outras operações (CST 49, 50–56, 60–67, 70–75, 98, 99).</li>
+ * </ul>
+ * Na estrutura XML original apenas um dos grupos Q02, Q03, Q04 ou Q05 é informado por item, conforme o valor atribuído ao campo Q06 – CST do PIS. Neste VO, os campos necessários para todos os cenários foram unificados.
  */
 @RFWDAOAnnotation(schema = "_RFW.SEFAZ", table = "sefaz_pis")
 public class PISVO extends RFWVO {
 
-  private static final long serialVersionUID = -3779892123456678901L;
+  private static final long serialVersionUID = 6234263367530348602L;
 
   /**
-   * ID: N11 (referência cruzada, caso seu fluxo utilize origem também no PIS).<br>
-   * Origem da mercadoria (quando aplicável no fluxo do emissor).
+   * {@link ImpostoVO}
    */
-  @RFWMetaEnumField(caption = "Origem da mercadoria", required = false)
-  private SEFAZ_orig orig = null;
+  @RFWMetaRelationshipField(caption = "Imposto", relationship = RelationshipTypes.PARENT_ASSOCIATION, required = true, column = "idsefaz_imposto")
+  private ImpostoVO impostoVO = null;
 
   /**
-   * ID: Q06<br>
-   * Código de Situação Tributária do PIS. Define o conjunto de cálculo (alíquota %, por quantidade, não tributado ou “Outras”).<br>
-   * Valores conforme {@link SEFAZ_CST_PIS}.
+   * Q06 - Código de Situação Tributária do PIS (CST). Tipo: N, Tamanho: 2, Ocorrência: 1-1 (campo obrigatório na estrutura da NF-e).
+   * <p>
+   * Utiliza a enumeração SEFAZ_CST_PIS, contemplando os códigos das situações tributáveis por alíquota, por quantidade, não tributadas e outras operações (PISAliq, PISQtde, PISNT, PISOutr).
    */
-  @RFWMetaEnumField(caption = "Situação tributária PIS", required = false)
-  private SEFAZ_CST_PIS cst = null;
+  @RFWMetaEnumField(caption = "CST", required = false)
+  private SEFAZ_CST_PIS cst;
 
   /**
-   * ID: Q07<br>
-   * Base de cálculo do PIS (13v2).
+   * Q07 - Valor da Base de Cálculo do PIS (vBC). Tipo: N, Tamanho: 13v2, Ocorrência: 1-1 nos cenários em que o cálculo do PIS é em percentual.
+   * <p>
+   * Utilização na estrutura XML:
+   * <ul>
+   * <li>Grupo Q02 - PISAliq (PIS tributado pela alíquota em percentual);</li>
+   * <li>Grupo Q05 - PISOutr, quando o cálculo for em percentual (sequência Q06.1).</li>
+   * </ul>
    */
-  @RFWMetaBigDecimalField(caption = "Base de cálculo PIS", required = false, scale = 2, absolute = true)
-  private BigDecimal vBC = null;
+  @RFWMetaBigDecimalField(caption = "vBC", required = false, unique = false, maxValue = "", minValue = "", scale = 2, absolute = false)
+  private BigDecimal vbc;
 
   /**
-   * ID: Q08<br>
-   * Alíquota do PIS em percentual (3v2–4).
+   * Q08 - Alíquota do PIS em percentual (pPIS). Tipo: N, Tamanho: 3v2-4, Ocorrência: 1-1 nos cenários em que o cálculo do PIS é em percentual.
+   * <p>
+   * Utilização na estrutura XML:
+   * <ul>
+   * <li>Grupo Q02 - PISAliq;</li>
+   * <li>Grupo Q05 - PISOutr, quando o cálculo for em percentual (sequência Q06.1).</li>
+   * </ul>
    */
-  @RFWMetaBigDecimalField(caption = "Alíquota PIS (%)", required = false, scale = 2, scaleMax = 4, absolute = true)
-  private BigDecimal pPIS = null;
+  @RFWMetaBigDecimalField(caption = "pPIS", required = false, unique = false, maxValue = "", minValue = "", scale = 2, scaleMax = 4, absolute = false)
+  private BigDecimal ppis;
 
   /**
-   * ID: Q09<br>
-   * Valor do PIS (13v2).
+   * Q09 - Valor do PIS (vPIS). Tipo: N, Tamanho: 13v2, Ocorrência: 1-1 nos grupos de PIS com cálculo de imposto.
+   * <p>
+   * Utilização na estrutura XML:
+   * <ul>
+   * <li>Grupo Q02 - PISAliq (Q09 - vPIS);</li>
+   * <li>Grupo Q03 - PISQtde (Q09 - vPIS).</li>
+   * </ul>
+   * No caso do grupo PISOutr (Q05), o valor do PIS também é determinado a partir da base e alíquota (percentual ou em valor) e gravado neste mesmo campo vPIS no XML.
    */
-  @RFWMetaBigDecimalField(caption = "Valor do PIS", required = false, scale = 2, absolute = true)
-  private BigDecimal vPIS = null;
-
-  // ====== Campos para cálculo por QUANTIDADE – PISQtde (Q03) e PISOutr (Q05) ======
+  @RFWMetaBigDecimalField(caption = "vPIS", required = false, unique = false, maxValue = "", minValue = "", scale = 2, absolute = false)
+  private BigDecimal vpis;
 
   /**
-   * ID: Q10<br>
-   * Quantidade vendida para fins de cálculo (12v0–4).
+   * Q10 - Quantidade Vendida (qBCProd). Tipo: N, Tamanho: 12v0-4, Ocorrência: 1-1 nos cenários em que o cálculo do PIS é por quantidade.
+   * <p>
+   * Utilização na estrutura XML:
+   * <ul>
+   * <li>Grupo Q03 - PISQtde (PIS tributado por quantidade);</li>
+   * <li>Grupo Q05 - PISOutr, quando o cálculo for em valor por unidade (sequência Q08.1).</li>
+   * </ul>
    */
-  @RFWMetaBigDecimalField(caption = "Quantidade para cálculo", required = false, scale = 0, scaleMax = 4, absolute = true)
-  private BigDecimal qBCProd = null;
+  @RFWMetaBigDecimalField(caption = "qBCProd", required = false, unique = false, maxValue = "", minValue = "", scale = 0, scaleMax = 4, absolute = false)
+  private BigDecimal qbcProd;
 
   /**
-   * ID: Q11<br>
-   * Alíquota em reais por unidade de produto (11v0–4).
+   * Q11 - Alíquota do PIS em reais (vAliqProd). Tipo: N, Tamanho: 11v0-4, Ocorrência: 1-1 nos cenários em que o cálculo do PIS é por quantidade (valor por unidade).
+   * <p>
+   * Utilização na estrutura XML:
+   * <ul>
+   * <li>Grupo Q03 - PISQtde;</li>
+   * <li>Grupo Q05 - PISOutr, quando o cálculo for em valor por unidade (sequência Q08.1).</li>
+   * </ul>
    */
-  @RFWMetaBigDecimalField(caption = "Alíquota por unidade (R$)", required = false, scale = 0, scaleMax = 4, absolute = true)
-  private BigDecimal vAliqProd = null;
+  @RFWMetaBigDecimalField(caption = "vAliqProd", required = false, unique = false, maxValue = "", minValue = "", scale = 0, scaleMax = 4, absolute = false)
+  private BigDecimal valiqProd;
 
   /**
-   * # iD: N11 (referência cruzada, caso seu fluxo utilize origem também no PIS).<br>
-   * Origem da mercadoria (quando aplicável no fluxo do emissor).
+   * # q06 - Código de Situação Tributária do PIS (CST). Tipo: N, Tamanho: 2, Ocorrência: 1-1 (campo obrigatório na estrutura da NF-e).
+   * <p>
+   * Utiliza a enumeração SEFAZ_CST_PIS, contemplando os códigos das situações tributáveis por alíquota, por quantidade, não tributadas e outras operações (PISAliq, PISQtde, PISNT, PISOutr).
    *
-   * @return the iD: N11 (referência cruzada, caso seu fluxo utilize origem também no PIS)
-   */
-  public SEFAZ_orig getOrig() {
-    return orig;
-  }
-
-  /**
-   * # iD: N11 (referência cruzada, caso seu fluxo utilize origem também no PIS).<br>
-   * Origem da mercadoria (quando aplicável no fluxo do emissor).
-   *
-   * @param orig the new iD: N11 (referência cruzada, caso seu fluxo utilize origem também no PIS)
-   */
-  public void setOrig(SEFAZ_orig orig) {
-    this.orig = orig;
-  }
-
-  /**
-   * # iD: Q06<br>
-   * Código de Situação Tributária do PIS. Define o conjunto de cálculo (alíquota %, por quantidade, não tributado ou “Outras”).<br>
-   * Valores conforme {@link SEFAZ_CST_PIS}.
-   *
-   * @return the iD: Q06<br>
-   *         Código de Situação Tributária do PIS
+   * @return the q06 - Código de Situação Tributária do PIS (CST)
    */
   public SEFAZ_CST_PIS getCst() {
     return cst;
   }
 
   /**
-   * # iD: Q06<br>
-   * Código de Situação Tributária do PIS. Define o conjunto de cálculo (alíquota %, por quantidade, não tributado ou “Outras”).<br>
-   * Valores conforme {@link SEFAZ_CST_PIS}.
+   * # q06 - Código de Situação Tributária do PIS (CST). Tipo: N, Tamanho: 2, Ocorrência: 1-1 (campo obrigatório na estrutura da NF-e).
+   * <p>
+   * Utiliza a enumeração SEFAZ_CST_PIS, contemplando os códigos das situações tributáveis por alíquota, por quantidade, não tributadas e outras operações (PISAliq, PISQtde, PISNT, PISOutr).
    *
-   * @param cst the new iD: Q06<br>
-   *          Código de Situação Tributária do PIS
+   * @param cst the new q06 - Código de Situação Tributária do PIS (CST)
    */
   public void setCst(SEFAZ_CST_PIS cst) {
     this.cst = cst;
   }
 
   /**
-   * # iD: Q07<br>
-   * Base de cálculo do PIS (13v2).
+   * # q07 - Valor da Base de Cálculo do PIS (vBC). Tipo: N, Tamanho: 13v2, Ocorrência: 1-1 nos cenários em que o cálculo do PIS é em percentual.
+   * <p>
+   * Utilização na estrutura XML:
+   * <ul>
+   * <li>Grupo Q02 - PISAliq (PIS tributado pela alíquota em percentual);</li>
+   * <li>Grupo Q05 - PISOutr, quando o cálculo for em percentual (sequência Q06.1).</li>
+   * </ul>
+   * .
    *
-   * @return the iD: Q07<br>
-   *         Base de cálculo do PIS (13v2)
+   * @return the q07 - Valor da Base de Cálculo do PIS (vBC)
    */
-  public BigDecimal getVBC() {
-    return vBC;
+  public BigDecimal getVbc() {
+    return vbc;
   }
 
   /**
-   * # iD: Q07<br>
-   * Base de cálculo do PIS (13v2).
+   * # q07 - Valor da Base de Cálculo do PIS (vBC). Tipo: N, Tamanho: 13v2, Ocorrência: 1-1 nos cenários em que o cálculo do PIS é em percentual.
+   * <p>
+   * Utilização na estrutura XML:
+   * <ul>
+   * <li>Grupo Q02 - PISAliq (PIS tributado pela alíquota em percentual);</li>
+   * <li>Grupo Q05 - PISOutr, quando o cálculo for em percentual (sequência Q06.1).</li>
+   * </ul>
+   * .
    *
-   * @param vBC the new iD: Q07<br>
-   *          Base de cálculo do PIS (13v2)
+   * @param vbc the new q07 - Valor da Base de Cálculo do PIS (vBC)
    */
-  public void setVBC(BigDecimal vBC) {
-    this.vBC = vBC;
+  public void setVbc(BigDecimal vbc) {
+    this.vbc = vbc;
   }
 
   /**
-   * # iD: Q08<br>
-   * Alíquota do PIS em percentual (3v2–4).
+   * # q08 - Alíquota do PIS em percentual (pPIS). Tipo: N, Tamanho: 3v2-4, Ocorrência: 1-1 nos cenários em que o cálculo do PIS é em percentual.
+   * <p>
+   * Utilização na estrutura XML:
+   * <ul>
+   * <li>Grupo Q02 - PISAliq;</li>
+   * <li>Grupo Q05 - PISOutr, quando o cálculo for em percentual (sequência Q06.1).</li>
+   * </ul>
+   * .
    *
-   * @return the iD: Q08<br>
-   *         Alíquota do PIS em percentual (3v2–4)
+   * @return the q08 - Alíquota do PIS em percentual (pPIS)
    */
-  public BigDecimal getPPIS() {
-    return pPIS;
+  public BigDecimal getPpis() {
+    return ppis;
   }
 
   /**
-   * # iD: Q08<br>
-   * Alíquota do PIS em percentual (3v2–4).
+   * # q08 - Alíquota do PIS em percentual (pPIS). Tipo: N, Tamanho: 3v2-4, Ocorrência: 1-1 nos cenários em que o cálculo do PIS é em percentual.
+   * <p>
+   * Utilização na estrutura XML:
+   * <ul>
+   * <li>Grupo Q02 - PISAliq;</li>
+   * <li>Grupo Q05 - PISOutr, quando o cálculo for em percentual (sequência Q06.1).</li>
+   * </ul>
+   * .
    *
-   * @param pPIS the new iD: Q08<br>
-   *          Alíquota do PIS em percentual (3v2–4)
+   * @param ppis the new q08 - Alíquota do PIS em percentual (pPIS)
    */
-  public void setPPIS(BigDecimal pPIS) {
-    this.pPIS = pPIS;
+  public void setPpis(BigDecimal ppis) {
+    this.ppis = ppis;
   }
 
   /**
-   * # iD: Q09<br>
-   * Valor do PIS (13v2).
+   * # q09 - Valor do PIS (vPIS). Tipo: N, Tamanho: 13v2, Ocorrência: 1-1 nos grupos de PIS com cálculo de imposto.
+   * <p>
+   * Utilização na estrutura XML:
+   * <ul>
+   * <li>Grupo Q02 - PISAliq (Q09 - vPIS);</li>
+   * <li>Grupo Q03 - PISQtde (Q09 - vPIS).</li>
+   * </ul>
+   * No caso do grupo PISOutr (Q05), o valor do PIS também é determinado a partir da base e alíquota (percentual ou em valor) e gravado neste mesmo campo vPIS no XML.
    *
-   * @return the iD: Q09<br>
-   *         Valor do PIS (13v2)
+   * @return the q09 - Valor do PIS (vPIS)
    */
-  public BigDecimal getVPIS() {
-    return vPIS;
+  public BigDecimal getVpis() {
+    return vpis;
   }
 
   /**
-   * # iD: Q09<br>
-   * Valor do PIS (13v2).
+   * # q09 - Valor do PIS (vPIS). Tipo: N, Tamanho: 13v2, Ocorrência: 1-1 nos grupos de PIS com cálculo de imposto.
+   * <p>
+   * Utilização na estrutura XML:
+   * <ul>
+   * <li>Grupo Q02 - PISAliq (Q09 - vPIS);</li>
+   * <li>Grupo Q03 - PISQtde (Q09 - vPIS).</li>
+   * </ul>
+   * No caso do grupo PISOutr (Q05), o valor do PIS também é determinado a partir da base e alíquota (percentual ou em valor) e gravado neste mesmo campo vPIS no XML.
    *
-   * @param vPIS the new iD: Q09<br>
-   *          Valor do PIS (13v2)
+   * @param vpis the new q09 - Valor do PIS (vPIS)
    */
-  public void setVPIS(BigDecimal vPIS) {
-    this.vPIS = vPIS;
+  public void setVpis(BigDecimal vpis) {
+    this.vpis = vpis;
   }
 
   /**
-   * # iD: Q10<br>
-   * Quantidade vendida para fins de cálculo (12v0–4).
+   * # q10 - Quantidade Vendida (qBCProd). Tipo: N, Tamanho: 12v0-4, Ocorrência: 1-1 nos cenários em que o cálculo do PIS é por quantidade.
+   * <p>
+   * Utilização na estrutura XML:
+   * <ul>
+   * <li>Grupo Q03 - PISQtde (PIS tributado por quantidade);</li>
+   * <li>Grupo Q05 - PISOutr, quando o cálculo for em valor por unidade (sequência Q08.1).</li>
+   * </ul>
+   * .
    *
-   * @return the iD: Q10<br>
-   *         Quantidade vendida para fins de cálculo (12v0–4)
+   * @return the q10 - Quantidade Vendida (qBCProd)
    */
-  public BigDecimal getQBCProd() {
-    return qBCProd;
+  public BigDecimal getQbcProd() {
+    return qbcProd;
   }
 
   /**
-   * # iD: Q10<br>
-   * Quantidade vendida para fins de cálculo (12v0–4).
+   * # q10 - Quantidade Vendida (qBCProd). Tipo: N, Tamanho: 12v0-4, Ocorrência: 1-1 nos cenários em que o cálculo do PIS é por quantidade.
+   * <p>
+   * Utilização na estrutura XML:
+   * <ul>
+   * <li>Grupo Q03 - PISQtde (PIS tributado por quantidade);</li>
+   * <li>Grupo Q05 - PISOutr, quando o cálculo for em valor por unidade (sequência Q08.1).</li>
+   * </ul>
+   * .
    *
-   * @param qBCProd the new iD: Q10<br>
-   *          Quantidade vendida para fins de cálculo (12v0–4)
+   * @param qbcProd the new q10 - Quantidade Vendida (qBCProd)
    */
-  public void setQBCProd(BigDecimal qBCProd) {
-    this.qBCProd = qBCProd;
+  public void setQbcProd(BigDecimal qbcProd) {
+    this.qbcProd = qbcProd;
   }
 
   /**
-   * # iD: Q11<br>
-   * Alíquota em reais por unidade de produto (11v0–4).
+   * # q11 - Alíquota do PIS em reais (vAliqProd). Tipo: N, Tamanho: 11v0-4, Ocorrência: 1-1 nos cenários em que o cálculo do PIS é por quantidade (valor por unidade).
+   * <p>
+   * Utilização na estrutura XML:
+   * <ul>
+   * <li>Grupo Q03 - PISQtde;</li>
+   * <li>Grupo Q05 - PISOutr, quando o cálculo for em valor por unidade (sequência Q08.1).</li>
+   * </ul>
+   * .
    *
-   * @return the iD: Q11<br>
-   *         Alíquota em reais por unidade de produto (11v0–4)
+   * @return the q11 - Alíquota do PIS em reais (vAliqProd)
    */
-  public BigDecimal getVAliqProd() {
-    return vAliqProd;
+  public BigDecimal getValiqProd() {
+    return valiqProd;
   }
 
   /**
-   * # iD: Q11<br>
-   * Alíquota em reais por unidade de produto (11v0–4).
+   * # q11 - Alíquota do PIS em reais (vAliqProd). Tipo: N, Tamanho: 11v0-4, Ocorrência: 1-1 nos cenários em que o cálculo do PIS é por quantidade (valor por unidade).
+   * <p>
+   * Utilização na estrutura XML:
+   * <ul>
+   * <li>Grupo Q03 - PISQtde;</li>
+   * <li>Grupo Q05 - PISOutr, quando o cálculo for em valor por unidade (sequência Q08.1).</li>
+   * </ul>
+   * .
    *
-   * @param vAliqProd the new iD: Q11<br>
-   *          Alíquota em reais por unidade de produto (11v0–4)
+   * @param valiqProd the new q11 - Alíquota do PIS em reais (vAliqProd)
    */
-  public void setVAliqProd(BigDecimal vAliqProd) {
-    this.vAliqProd = vAliqProd;
+  public void setValiqProd(BigDecimal valiqProd) {
+    this.valiqProd = valiqProd;
+  }
+
+  /**
+   * # {@link ImpostoVO}.
+   *
+   * @return the {@link ImpostoVO}
+   */
+  public ImpostoVO getImpostoVO() {
+    return impostoVO;
+  }
+
+  /**
+   * # {@link ImpostoVO}.
+   *
+   * @param impostoVO the new {@link ImpostoVO}
+   */
+  public void setImpostoVO(ImpostoVO impostoVO) {
+    this.impostoVO = impostoVO;
   }
 
 }

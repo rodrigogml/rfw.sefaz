@@ -34,6 +34,30 @@ public class ImpostoVO extends RFWVO implements Serializable {
   private ICMSVO icmsVO = null;
 
   /**
+   * {@link ICMSUFDestVO}
+   */
+  @RFWMetaRelationshipField(caption = "ICMSUFDest", relationship = RelationshipTypes.COMPOSITION, required = false, columnMapped = "idsefaz_icmsufdest")
+  private IPIVO ipiVO = null;
+
+  /**
+   * {@link PISVO}
+   */
+  @RFWMetaRelationshipField(caption = "PIS", relationship = RelationshipTypes.COMPOSITION, required = false, columnMapped = "idsefaz_pis")
+  private PISVO pisVO = null;
+
+  /**
+   * {@link COFINSVO}
+   */
+  @RFWMetaRelationshipField(caption = "COFINS", relationship = RelationshipTypes.COMPOSITION, required = false, columnMapped = "idsefaz_cofins")
+  private COFINSVO cofinsVO = null;
+
+  /**
+   * {@link IPIVO}
+   */
+  @RFWMetaRelationshipField(caption = "IPI", relationship = RelationshipTypes.COMPOSITION, required = false, columnMapped = "idsefaz_ipi")
+  private ICMSUFDestVO icmsUFDestVO = null;
+
+  /**
    * M02 - vTotTrib. Valor aproximado total de tributos federais, estaduais e municipais. (NT 2013/003)
    *
    * Ocor.: 0–1 / Tam.: 13v2 / Tipo: N. No MOC o campo é opcional.
@@ -77,11 +101,58 @@ public class ImpostoVO extends RFWVO implements Serializable {
     this.vtotTrib = vtotTrib;
   }
 
+  /**
+   * # {@link ICMSVO}.
+   *
+   * @return the {@link ICMSVO}
+   */
   public ICMSVO getIcmsVO() {
     return icmsVO;
   }
 
+  /**
+   * # {@link ICMSVO}.
+   *
+   * @param icmsVO the new {@link ICMSVO}
+   */
   public void setIcmsVO(ICMSVO icmsVO) {
     this.icmsVO = icmsVO;
   }
+
+  /**
+   * # {@link ICMSUFDestVO}.
+   *
+   * @return the {@link ICMSUFDestVO}
+   */
+  public ICMSUFDestVO getIcmsUFDestVO() {
+    return icmsUFDestVO;
+  }
+
+  /**
+   * # {@link ICMSUFDestVO}.
+   *
+   * @param icmsUFDestVO the new {@link ICMSUFDestVO}
+   */
+  public void setIcmsUFDestVO(ICMSUFDestVO icmsUFDestVO) {
+    this.icmsUFDestVO = icmsUFDestVO;
+  }
+
+  /**
+   * # {@link ICMSUFDestVO}.
+   *
+   * @return the {@link ICMSUFDestVO}
+   */
+  public IPIVO getIpiVO() {
+    return ipiVO;
+  }
+
+  /**
+   * # {@link ICMSUFDestVO}.
+   *
+   * @param ipiVO the new {@link ICMSUFDestVO}
+   */
+  public void setIpiVO(IPIVO ipiVO) {
+    this.ipiVO = ipiVO;
+  }
+
 }

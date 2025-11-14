@@ -1,401 +1,362 @@
+/*
+ *
+ */
 package br.eng.rodrigogml.rfw.sefaz.vo;
 
 import java.math.BigDecimal;
+import java.util.Date;
 
 import br.eng.rodrigogml.rfw.kernel.rfwmeta.RFWMetaBigDecimalField;
+import br.eng.rodrigogml.rfw.kernel.rfwmeta.RFWMetaDateField;
 import br.eng.rodrigogml.rfw.kernel.rfwmeta.RFWMetaEnumField;
-import br.eng.rodrigogml.rfw.kernel.rfwmeta.RFWMetaStringField;
+import br.eng.rodrigogml.rfw.kernel.rfwmeta.RFWMetaRelationshipField;
+import br.eng.rodrigogml.rfw.kernel.rfwmeta.RFWMetaRelationshipField.RelationshipTypes;
 import br.eng.rodrigogml.rfw.kernel.vo.RFWVO;
 import br.eng.rodrigogml.rfw.orm.dao.annotations.dao.RFWDAOAnnotation;
 import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_cRegTrib;
 
 /**
- * Description: Totais referentes ao ISSQN da NF-e (TAG {@code ISSQNtot}, ID W17).<br>
- * O grupo é opcional (ocorrência 0-1) e deve ser informado quando houver retenção ou apuração de ISSQN na nota, consolidando os valores dos serviços prestados e dos tributos incidentes sobre ISS.
- *
- * Campos mapeados (MOC 7.0 – Anexo I):
- * <ul>
- * <li>W18 – {@code vServ}: Valor total dos serviços sob não incidência ou não tributados pelo ICMS.</li>
- * <li>W19 – {@code vBC}: Valor total da base de cálculo do ISS.</li>
- * <li>W20 – {@code vISS}: Valor total do ISS.</li>
- * <li>W21 – {@code vPIS}: Valor total do PIS sobre serviços.</li>
- * <li>W22 – {@code vCOFINS}: Valor total da COFINS sobre serviços.</li>
- * <li>W22a – {@code dCompet}: Data de competência / prestação do serviço (formato AAAA-MM-DD).</li>
- * <li>W22b – {@code vDeducao}: Valor total da dedução para redução da base de cálculo do ISS.</li>
- * <li>W22c – {@code vOutro}: Valor total de outras retenções.</li>
- * <li>W22d – {@code vDescIncond}: Valor total de descontos incondicionados.</li>
- * <li>W22e – {@code vDescCond}: Valor total de descontos condicionados.</li>
- * <li>W22f – {@code vISSRet}: Valor total do ISS retido.</li>
- * <li>W22g – {@code cRegTrib}: Código do Regime Especial de Tributação do ISSQN, conforme {@link SEFAZ_cRegTrib}.</li>
- * </ul>
- *
- * @author BIS DEVil
- * @since (11 de nov. de 2025)
+ * Grupo W17 - ISSQNtot: Totais referentes ao ISSQN.
+ * <p>
+ * Ocorre 0-1 dentro do grupo W01 (total da NF-e).
+ * <p>
+ * Campos de totais de serviços não sujeitos ao ICMS, base de cálculo, ISS, PIS/COFINS sobre serviços, descontos, deduções, retenções e regime especial de tributação.
  */
-@RFWDAOAnnotation(schema = "_RFW.SEFAZ", table = "sefaz_issqn_tot")
+@RFWDAOAnnotation(schema = "_RFW.SEFAZ", table = "sefaz_issqntot")
 public class ISSQNTotVO extends RFWVO {
 
-  private static final long serialVersionUID = 8183923063568799912L;
+  private static final long serialVersionUID = 2572495866482114588L;
 
   /**
-   * ID: W18 – {@code vServ}.<br>
-   * Valor total dos serviços sob não incidência ou não tributados pelo ICMS.<br>
-   * Tamanho: 13v2.
+   * {@link TotalVO}
    */
-  @RFWMetaBigDecimalField(caption = "Valor total serviços (ISSQN)", required = false, scale = 2, absolute = true)
-  private BigDecimal vServ = null;
+  @RFWMetaRelationshipField(caption = "Total", relationship = RelationshipTypes.PARENT_ASSOCIATION, required = true, column = "idsefaz_total")
+  private TotalVO totalVO = null;
 
   /**
-   * ID: W19 – {@code vBC}.<br>
-   * Valor total da base de cálculo do ISS.<br>
-   * Tamanho: 13v2.
+   * W18 - vServ: Valor total dos serviços sob não incidência ou não tributados pelo ICMS. Tipo: N, Tamanho: 13v2, Ocorrência: 0-1 (campo opcional).
    */
-  @RFWMetaBigDecimalField(caption = "Base de cálculo total ISS", required = false, scale = 2, absolute = true)
-  private BigDecimal vBC = null;
+  @RFWMetaBigDecimalField(caption = "vServ", required = false, unique = false, maxValue = "", minValue = "", scale = 2, absolute = false)
+  private BigDecimal vserv;
 
   /**
-   * ID: W20 – {@code vISS}.<br>
-   * Valor total do ISS.<br>
-   * Tamanho: 13v2.
+   * W19 - vBC: Valor total da Base de Cálculo do ISS. Tipo: N, Tamanho: 13v2, Ocorrência: 0-1 (campo opcional).
    */
-  @RFWMetaBigDecimalField(caption = "Valor total ISS", required = false, scale = 2, absolute = true)
-  private BigDecimal vISS = null;
+  @RFWMetaBigDecimalField(caption = "vBC", required = false, unique = false, maxValue = "", minValue = "", scale = 2, absolute = false)
+  private BigDecimal vbc;
 
   /**
-   * ID: W21 – {@code vPIS}.<br>
-   * Valor total do PIS incidente sobre os serviços (quando houver).<br>
-   * Tamanho: 13v2.
+   * W20 - vISS: Valor total do ISS. Tipo: N, Tamanho: 13v2, Ocorrência: 0-1 (campo opcional).
    */
-  @RFWMetaBigDecimalField(caption = "Valor total PIS sobre serviços", required = false, scale = 2, absolute = true)
-  private BigDecimal vPIS = null;
+  @RFWMetaBigDecimalField(caption = "vISS", required = false, unique = false, maxValue = "", minValue = "", scale = 2, absolute = false)
+  private BigDecimal viss;
 
   /**
-   * ID: W22 – {@code vCOFINS}.<br>
-   * Valor total da COFINS incidente sobre os serviços (quando houver).<br>
-   * Tamanho: 13v2.
+   * W21 - vPIS: Valor total do PIS sobre serviços. Tipo: N, Tamanho: 13v2, Ocorrência: 0-1 (campo opcional).
    */
-  @RFWMetaBigDecimalField(caption = "Valor total COFINS sobre serviços", required = false, scale = 2, absolute = true)
-  private BigDecimal vCOFINS = null;
+  @RFWMetaBigDecimalField(caption = "vPIS", required = false, unique = false, maxValue = "", minValue = "", scale = 2, absolute = false)
+  private BigDecimal vpis;
 
   /**
-   * ID: W22a – {@code dCompet}.<br>
-   * Data da prestação do serviço / competência do ISSQN.<br>
-   * Formato: {@code AAAA-MM-DD}. Tamanho: 8 (no MOC) – aqui armazenado como string com 10 caracteres incluindo separadores.<br>
-   * Recomenda-se seguir o padrão ISO {@code yyyy-MM-dd}.
+   * W22 - vCOFINS: Valor total da COFINS sobre serviços. Tipo: N, Tamanho: 13v2, Ocorrência: 0-1 (campo opcional).
    */
-  @RFWMetaStringField(caption = "Data de competência ISSQN", required = false, maxLength = 10, pattern = "\\d{4}-\\d{2}-\\d{2}")
-  private String dCompet = null;
+  @RFWMetaBigDecimalField(caption = "vCOFINS", required = false, unique = false, maxValue = "", minValue = "", scale = 2, absolute = false)
+  private BigDecimal vcofins;
 
   /**
-   * ID: W22b – {@code vDeducao}.<br>
-   * Valor total das deduções utilizadas para redução da base de cálculo do ISS.<br>
-   * Tamanho: 13v2.
+   * W22a - dCompet: Data da prestação do serviço. Tipo: N (data AAAA-MM-DD), Tamanho: 8, Ocorrência: 1-1 (obrigatório na estrutura).
    */
-  @RFWMetaBigDecimalField(caption = "Valor total dedução BC ISS", required = false, scale = 2, absolute = true)
-  private BigDecimal vDeducao = null;
+  @RFWMetaDateField(caption = "dCompet", required = false, unique = false)
+  private Date dcompet;
 
   /**
-   * ID: W22c – {@code vOutro}.<br>
-   * Valor total de outras retenções relacionadas ao ISSQN.<br>
-   * Tamanho: 13v2.
+   * W22b - vDeducao: Valor total dedução para redução da Base de Cálculo. Tipo: N, Tamanho: 13v2, Ocorrência: 0-1 (campo opcional).
    */
-  @RFWMetaBigDecimalField(caption = "Valor total outras retenções ISS", required = false, scale = 2, absolute = true)
-  private BigDecimal vOutro = null;
+  @RFWMetaBigDecimalField(caption = "vDeducao", required = false, unique = false, maxValue = "", minValue = "", scale = 2, absolute = false)
+  private BigDecimal vdeducao;
 
   /**
-   * ID: W22d – {@code vDescIncond}.<br>
-   * Valor total de descontos incondicionados sobre os serviços.<br>
-   * Tamanho: 13v2.
+   * W22c - vOutro: Valor total outras retenções (valor declaratório). Tipo: N, Tamanho: 13v2, Ocorrência: 0-1 (campo opcional).
    */
-  @RFWMetaBigDecimalField(caption = "Descontos incondicionados ISS", required = false, scale = 2, absolute = true)
-  private BigDecimal vDescIncond = null;
+  @RFWMetaBigDecimalField(caption = "vOutro", required = false, unique = false, maxValue = "", minValue = "", scale = 2, absolute = false)
+  private BigDecimal voutro;
 
   /**
-   * ID: W22e – {@code vDescCond}.<br>
-   * Valor total de descontos condicionados sobre os serviços.<br>
-   * Tamanho: 13v2.
+   * W22d - vDescIncond: Valor total desconto incondicionado. Tipo: N, Tamanho: 13v2, Ocorrência: 0-1 (campo opcional).
    */
-  @RFWMetaBigDecimalField(caption = "Descontos condicionados ISS", required = false, scale = 2, absolute = true)
-  private BigDecimal vDescCond = null;
+  @RFWMetaBigDecimalField(caption = "vDescIncond", required = false, unique = false, maxValue = "", minValue = "", scale = 2, absolute = false)
+  private BigDecimal vdescIncond;
 
   /**
-   * ID: W22f – {@code vISSRet}.<br>
-   * Valor total do ISS retido na fonte (quando aplicável).<br>
-   * Tamanho: 13v2.
+   * W22e - vDescCond: Valor total desconto condicionado. Tipo: N, Tamanho: 13v2, Ocorrência: 0-1 (campo opcional).
    */
-  @RFWMetaBigDecimalField(caption = "Valor total ISS retido", required = false, scale = 2, absolute = true)
-  private BigDecimal vISSRet = null;
+  @RFWMetaBigDecimalField(caption = "vDescCond", required = false, unique = false, maxValue = "", minValue = "", scale = 2, absolute = false)
+  private BigDecimal vdescCond;
 
   /**
-   * ID: W22g – {@code cRegTrib}.<br>
-   * Código do Regime Especial de Tributação do ISSQN, conforme enumeração {@link SEFAZ_cRegTrib}.<br>
-   * Tamanho: 2.
+   * W22f - vISSRet: Valor total retenção ISS. Tipo: N, Tamanho: 13v2, Ocorrência: 0-1 (campo opcional).
    */
-  @RFWMetaEnumField(caption = "Regime especial de tributação ISS", required = false)
-  private SEFAZ_cRegTrib cRegTrib = null;
+  @RFWMetaBigDecimalField(caption = "vISSRet", required = false, unique = false, maxValue = "", minValue = "", scale = 2, absolute = false)
+  private BigDecimal vissRet;
 
   /**
-   * # iD: W18 – {@code vServ}.<br>
-   * Valor total dos serviços sob não incidência ou não tributados pelo ICMS.<br>
-   * Tamanho: 13v2.
+   * W22g - cRegTrib: Código do Regime Especial de Tributação. Tipo: N, Tamanho: 2, Ocorrência: 0-1 (campo opcional).
+   * <p>
+   * Valores: 1 = Microempresa Municipal<br>
+   * 2 = Estimativa<br>
+   * 3 = Sociedade de Profissionais<br>
+   * 4 = Cooperativa<br>
+   * 5 = Microempresário Individual (MEI)<br>
+   * 6 = Microempresário e Empresa de Pequeno Porte.
+   */
+  @RFWMetaEnumField(caption = "cRegTrib", required = false)
+  private SEFAZ_cRegTrib cregTrib;
+
+  /**
+   * # {@link TotalVO}.
    *
-   * @return the iD: W18 – {@code vServ}
+   * @return the {@link TotalVO}
    */
-  public BigDecimal getVServ() {
-    return vServ;
+  public TotalVO getTotalVO() {
+    return totalVO;
   }
 
   /**
-   * # iD: W18 – {@code vServ}.<br>
-   * Valor total dos serviços sob não incidência ou não tributados pelo ICMS.<br>
-   * Tamanho: 13v2.
+   * # {@link TotalVO}.
    *
-   * @param vServ the new iD: W18 – {@code vServ}
+   * @param totalVO the new {@link TotalVO}
    */
-  public void setVServ(BigDecimal vServ) {
-    this.vServ = vServ;
+  public void setTotalVO(TotalVO totalVO) {
+    this.totalVO = totalVO;
   }
 
   /**
-   * # iD: W19 – {@code vBC}.<br>
-   * Valor total da base de cálculo do ISS.<br>
-   * Tamanho: 13v2.
+   * # w18 - vServ: Valor total dos serviços sob não incidência ou não tributados pelo ICMS. Tipo: N, Tamanho: 13v2, Ocorrência: 0-1 (campo opcional).
    *
-   * @return the iD: W19 – {@code vBC}
+   * @return the w18 - vServ: Valor total dos serviços sob não incidência ou não tributados pelo ICMS
    */
-  public BigDecimal getVBC() {
-    return vBC;
+  public BigDecimal getVserv() {
+    return vserv;
   }
 
   /**
-   * # iD: W19 – {@code vBC}.<br>
-   * Valor total da base de cálculo do ISS.<br>
-   * Tamanho: 13v2.
+   * # w18 - vServ: Valor total dos serviços sob não incidência ou não tributados pelo ICMS. Tipo: N, Tamanho: 13v2, Ocorrência: 0-1 (campo opcional).
    *
-   * @param vBC the new iD: W19 – {@code vBC}
+   * @param vserv the new w18 - vServ: Valor total dos serviços sob não incidência ou não tributados pelo ICMS
    */
-  public void setVBC(BigDecimal vBC) {
-    this.vBC = vBC;
+  public void setVserv(BigDecimal vserv) {
+    this.vserv = vserv;
   }
 
   /**
-   * # iD: W20 – {@code vISS}.<br>
-   * Valor total do ISS.<br>
-   * Tamanho: 13v2.
+   * # w19 - vBC: Valor total da Base de Cálculo do ISS. Tipo: N, Tamanho: 13v2, Ocorrência: 0-1 (campo opcional).
    *
-   * @return the iD: W20 – {@code vISS}
+   * @return the w19 - vBC: Valor total da Base de Cálculo do ISS
    */
-  public BigDecimal getVISS() {
-    return vISS;
+  public BigDecimal getVbc() {
+    return vbc;
   }
 
   /**
-   * # iD: W20 – {@code vISS}.<br>
-   * Valor total do ISS.<br>
-   * Tamanho: 13v2.
+   * # w19 - vBC: Valor total da Base de Cálculo do ISS. Tipo: N, Tamanho: 13v2, Ocorrência: 0-1 (campo opcional).
    *
-   * @param vISS the new iD: W20 – {@code vISS}
+   * @param vbc the new w19 - vBC: Valor total da Base de Cálculo do ISS
    */
-  public void setVISS(BigDecimal vISS) {
-    this.vISS = vISS;
+  public void setVbc(BigDecimal vbc) {
+    this.vbc = vbc;
   }
 
   /**
-   * # iD: W21 – {@code vPIS}.<br>
-   * Valor total do PIS incidente sobre os serviços (quando houver).<br>
-   * Tamanho: 13v2.
+   * # w20 - vISS: Valor total do ISS. Tipo: N, Tamanho: 13v2, Ocorrência: 0-1 (campo opcional).
    *
-   * @return the iD: W21 – {@code vPIS}
+   * @return the w20 - vISS: Valor total do ISS
    */
-  public BigDecimal getVPIS() {
-    return vPIS;
+  public BigDecimal getViss() {
+    return viss;
   }
 
   /**
-   * # iD: W21 – {@code vPIS}.<br>
-   * Valor total do PIS incidente sobre os serviços (quando houver).<br>
-   * Tamanho: 13v2.
+   * # w20 - vISS: Valor total do ISS. Tipo: N, Tamanho: 13v2, Ocorrência: 0-1 (campo opcional).
    *
-   * @param vPIS the new iD: W21 – {@code vPIS}
+   * @param viss the new w20 - vISS: Valor total do ISS
    */
-  public void setVPIS(BigDecimal vPIS) {
-    this.vPIS = vPIS;
+  public void setViss(BigDecimal viss) {
+    this.viss = viss;
   }
 
   /**
-   * # iD: W22 – {@code vCOFINS}.<br>
-   * Valor total da COFINS incidente sobre os serviços (quando houver).<br>
-   * Tamanho: 13v2.
+   * # w21 - vPIS: Valor total do PIS sobre serviços. Tipo: N, Tamanho: 13v2, Ocorrência: 0-1 (campo opcional).
    *
-   * @return the iD: W22 – {@code vCOFINS}
+   * @return the w21 - vPIS: Valor total do PIS sobre serviços
    */
-  public BigDecimal getVCOFINS() {
-    return vCOFINS;
+  public BigDecimal getVpis() {
+    return vpis;
   }
 
   /**
-   * # iD: W22 – {@code vCOFINS}.<br>
-   * Valor total da COFINS incidente sobre os serviços (quando houver).<br>
-   * Tamanho: 13v2.
+   * # w21 - vPIS: Valor total do PIS sobre serviços. Tipo: N, Tamanho: 13v2, Ocorrência: 0-1 (campo opcional).
    *
-   * @param vCOFINS the new iD: W22 – {@code vCOFINS}
+   * @param vpis the new w21 - vPIS: Valor total do PIS sobre serviços
    */
-  public void setVCOFINS(BigDecimal vCOFINS) {
-    this.vCOFINS = vCOFINS;
+  public void setVpis(BigDecimal vpis) {
+    this.vpis = vpis;
   }
 
   /**
-   * # iD: W22a – {@code dCompet}.<br>
-   * Data da prestação do serviço / competência do ISSQN.<br>
-   * Formato: {@code AAAA-MM-DD}. Tamanho: 8 (no MOC) – aqui armazenado como string com 10 caracteres incluindo separadores.<br>
-   * Recomenda-se seguir o padrão ISO {@code yyyy-MM-dd}.
+   * # w22 - vCOFINS: Valor total da COFINS sobre serviços. Tipo: N, Tamanho: 13v2, Ocorrência: 0-1 (campo opcional).
    *
-   * @return the iD: W22a – {@code dCompet}
+   * @return the w22 - vCOFINS: Valor total da COFINS sobre serviços
    */
-  public String getDCompet() {
-    return dCompet;
+  public BigDecimal getVcofins() {
+    return vcofins;
   }
 
   /**
-   * # iD: W22a – {@code dCompet}.<br>
-   * Data da prestação do serviço / competência do ISSQN.<br>
-   * Formato: {@code AAAA-MM-DD}. Tamanho: 8 (no MOC) – aqui armazenado como string com 10 caracteres incluindo separadores.<br>
-   * Recomenda-se seguir o padrão ISO {@code yyyy-MM-dd}.
+   * # w22 - vCOFINS: Valor total da COFINS sobre serviços. Tipo: N, Tamanho: 13v2, Ocorrência: 0-1 (campo opcional).
    *
-   * @param dCompet the new iD: W22a – {@code dCompet}
+   * @param vcofins the new w22 - vCOFINS: Valor total da COFINS sobre serviços
    */
-  public void setDCompet(String dCompet) {
-    this.dCompet = dCompet;
+  public void setVcofins(BigDecimal vcofins) {
+    this.vcofins = vcofins;
   }
 
   /**
-   * # iD: W22b – {@code vDeducao}.<br>
-   * Valor total das deduções utilizadas para redução da base de cálculo do ISS.<br>
-   * Tamanho: 13v2.
+   * # w22a - dCompet: Data da prestação do serviço. Tipo: N (data AAAA-MM-DD), Tamanho: 8, Ocorrência: 1-1 (obrigatório na estrutura).
    *
-   * @return the iD: W22b – {@code vDeducao}
+   * @return the w22a - dCompet: Data da prestação do serviço
    */
-  public BigDecimal getVDeducao() {
-    return vDeducao;
+  public Date getDcompet() {
+    return dcompet;
   }
 
   /**
-   * # iD: W22b – {@code vDeducao}.<br>
-   * Valor total das deduções utilizadas para redução da base de cálculo do ISS.<br>
-   * Tamanho: 13v2.
+   * # w22a - dCompet: Data da prestação do serviço. Tipo: N (data AAAA-MM-DD), Tamanho: 8, Ocorrência: 1-1 (obrigatório na estrutura).
    *
-   * @param vDeducao the new iD: W22b – {@code vDeducao}
+   * @param dcompet the new w22a - dCompet: Data da prestação do serviço
    */
-  public void setVDeducao(BigDecimal vDeducao) {
-    this.vDeducao = vDeducao;
+  public void setDcompet(Date dcompet) {
+    this.dcompet = dcompet;
   }
 
   /**
-   * # iD: W22c – {@code vOutro}.<br>
-   * Valor total de outras retenções relacionadas ao ISSQN.<br>
-   * Tamanho: 13v2.
+   * # w22b - vDeducao: Valor total dedução para redução da Base de Cálculo. Tipo: N, Tamanho: 13v2, Ocorrência: 0-1 (campo opcional).
    *
-   * @return the iD: W22c – {@code vOutro}
+   * @return the w22b - vDeducao: Valor total dedução para redução da Base de Cálculo
    */
-  public BigDecimal getVOutro() {
-    return vOutro;
+  public BigDecimal getVdeducao() {
+    return vdeducao;
   }
 
   /**
-   * # iD: W22c – {@code vOutro}.<br>
-   * Valor total de outras retenções relacionadas ao ISSQN.<br>
-   * Tamanho: 13v2.
+   * # w22b - vDeducao: Valor total dedução para redução da Base de Cálculo. Tipo: N, Tamanho: 13v2, Ocorrência: 0-1 (campo opcional).
    *
-   * @param vOutro the new iD: W22c – {@code vOutro}
+   * @param vdeducao the new w22b - vDeducao: Valor total dedução para redução da Base de Cálculo
    */
-  public void setVOutro(BigDecimal vOutro) {
-    this.vOutro = vOutro;
+  public void setVdeducao(BigDecimal vdeducao) {
+    this.vdeducao = vdeducao;
   }
 
   /**
-   * # iD: W22d – {@code vDescIncond}.<br>
-   * Valor total de descontos incondicionados sobre os serviços.<br>
-   * Tamanho: 13v2.
+   * # w22c - vOutro: Valor total outras retenções (valor declaratório). Tipo: N, Tamanho: 13v2, Ocorrência: 0-1 (campo opcional).
    *
-   * @return the iD: W22d – {@code vDescIncond}
+   * @return the w22c - vOutro: Valor total outras retenções (valor declaratório)
    */
-  public BigDecimal getVDescIncond() {
-    return vDescIncond;
+  public BigDecimal getVoutro() {
+    return voutro;
   }
 
   /**
-   * # iD: W22d – {@code vDescIncond}.<br>
-   * Valor total de descontos incondicionados sobre os serviços.<br>
-   * Tamanho: 13v2.
+   * # w22c - vOutro: Valor total outras retenções (valor declaratório). Tipo: N, Tamanho: 13v2, Ocorrência: 0-1 (campo opcional).
    *
-   * @param vDescIncond the new iD: W22d – {@code vDescIncond}
+   * @param voutro the new w22c - vOutro: Valor total outras retenções (valor declaratório)
    */
-  public void setVDescIncond(BigDecimal vDescIncond) {
-    this.vDescIncond = vDescIncond;
+  public void setVoutro(BigDecimal voutro) {
+    this.voutro = voutro;
   }
 
   /**
-   * Gets the desc cond.
+   * # w22d - vDescIncond: Valor total desconto incondicionado. Tipo: N, Tamanho: 13v2, Ocorrência: 0-1 (campo opcional).
    *
-   * @return the desc cond
+   * @return the w22d - vDescIncond: Valor total desconto incondicionado
    */
-  public BigDecimal getDescCond() {
-    return vDescCond;
+  public BigDecimal getVdescIncond() {
+    return vdescIncond;
   }
 
   /**
-   * # iD: W22e – {@code vDescCond}.<br>
-   * Valor total de descontos condicionados sobre os serviços.<br>
-   * Tamanho: 13v2.
+   * # w22d - vDescIncond: Valor total desconto incondicionado. Tipo: N, Tamanho: 13v2, Ocorrência: 0-1 (campo opcional).
    *
-   * @param vDescCond the new iD: W22e – {@code vDescCond}
+   * @param vdescIncond the new w22d - vDescIncond: Valor total desconto incondicionado
    */
-  public void setVDescCond(BigDecimal vDescCond) {
-    this.vDescCond = vDescCond;
+  public void setVdescIncond(BigDecimal vdescIncond) {
+    this.vdescIncond = vdescIncond;
   }
 
   /**
-   * # iD: W22f – {@code vISSRet}.<br>
-   * Valor total do ISS retido na fonte (quando aplicável).<br>
-   * Tamanho: 13v2.
+   * # w22e - vDescCond: Valor total desconto condicionado. Tipo: N, Tamanho: 13v2, Ocorrência: 0-1 (campo opcional).
    *
-   * @return the iD: W22f – {@code vISSRet}
+   * @return the w22e - vDescCond: Valor total desconto condicionado
    */
-  public BigDecimal getVISSRet() {
-    return vISSRet;
+  public BigDecimal getVdescCond() {
+    return vdescCond;
   }
 
   /**
-   * # iD: W22f – {@code vISSRet}.<br>
-   * Valor total do ISS retido na fonte (quando aplicável).<br>
-   * Tamanho: 13v2.
+   * # w22e - vDescCond: Valor total desconto condicionado. Tipo: N, Tamanho: 13v2, Ocorrência: 0-1 (campo opcional).
    *
-   * @param vISSRet the new iD: W22f – {@code vISSRet}
+   * @param vdescCond the new w22e - vDescCond: Valor total desconto condicionado
    */
-  public void setVISSRet(BigDecimal vISSRet) {
-    this.vISSRet = vISSRet;
+  public void setVdescCond(BigDecimal vdescCond) {
+    this.vdescCond = vdescCond;
   }
 
   /**
-   * # iD: W22g – {@code cRegTrib}.<br>
-   * Código do Regime Especial de Tributação do ISSQN, conforme enumeração {@link SEFAZ_cRegTrib}.<br>
-   * Tamanho: 2.
+   * # w22f - vISSRet: Valor total retenção ISS. Tipo: N, Tamanho: 13v2, Ocorrência: 0-1 (campo opcional).
    *
-   * @return the iD: W22g – {@code cRegTrib}
+   * @return the w22f - vISSRet: Valor total retenção ISS
    */
-  public SEFAZ_cRegTrib getCRegTrib() {
-    return cRegTrib;
+  public BigDecimal getVissRet() {
+    return vissRet;
   }
 
   /**
-   * # iD: W22g – {@code cRegTrib}.<br>
-   * Código do Regime Especial de Tributação do ISSQN, conforme enumeração {@link SEFAZ_cRegTrib}.<br>
-   * Tamanho: 2.
+   * # w22f - vISSRet: Valor total retenção ISS. Tipo: N, Tamanho: 13v2, Ocorrência: 0-1 (campo opcional).
    *
-   * @param cRegTrib the new iD: W22g – {@code cRegTrib}
+   * @param vissRet the new w22f - vISSRet: Valor total retenção ISS
    */
-  public void setCRegTrib(SEFAZ_cRegTrib cRegTrib) {
-    this.cRegTrib = cRegTrib;
+  public void setVissRet(BigDecimal vissRet) {
+    this.vissRet = vissRet;
   }
 
+  /**
+   * # w22g - cRegTrib: Código do Regime Especial de Tributação. Tipo: N, Tamanho: 2, Ocorrência: 0-1 (campo opcional).
+   * <p>
+   * Valores: 1 = Microempresa Municipal<br>
+   * 2 = Estimativa<br>
+   * 3 = Sociedade de Profissionais<br>
+   * 4 = Cooperativa<br>
+   * 5 = Microempresário Individual (MEI)<br>
+   * 6 = Microempresário e Empresa de Pequeno Porte.
+   *
+   * @return the w22g - cRegTrib: Código do Regime Especial de Tributação
+   */
+  public SEFAZ_cRegTrib getCregTrib() {
+    return cregTrib;
+  }
+
+  /**
+   * # w22g - cRegTrib: Código do Regime Especial de Tributação. Tipo: N, Tamanho: 2, Ocorrência: 0-1 (campo opcional).
+   * <p>
+   * Valores: 1 = Microempresa Municipal<br>
+   * 2 = Estimativa<br>
+   * 3 = Sociedade de Profissionais<br>
+   * 4 = Cooperativa<br>
+   * 5 = Microempresário Individual (MEI)<br>
+   * 6 = Microempresário e Empresa de Pequeno Porte.
+   *
+   * @param cregTrib the new w22g - cRegTrib: Código do Regime Especial de Tributação
+   */
+  public void setCregTrib(SEFAZ_cRegTrib cregTrib) {
+    this.cregTrib = cregTrib;
+  }
 }

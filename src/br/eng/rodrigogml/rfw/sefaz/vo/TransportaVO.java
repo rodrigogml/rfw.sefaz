@@ -1,230 +1,212 @@
 package br.eng.rodrigogml.rfw.sefaz.vo;
 
+import br.eng.rodrigogml.rfw.kernel.preprocess.PreProcess.PreProcessOption;
+import br.eng.rodrigogml.rfw.kernel.rfwmeta.RFWMetaRelationshipField;
+import br.eng.rodrigogml.rfw.kernel.rfwmeta.RFWMetaRelationshipField.RelationshipTypes;
+import br.eng.rodrigogml.rfw.kernel.rfwmeta.RFWMetaStringCNPJField;
+import br.eng.rodrigogml.rfw.kernel.rfwmeta.RFWMetaStringCPFField;
 import br.eng.rodrigogml.rfw.kernel.rfwmeta.RFWMetaStringField;
+import br.eng.rodrigogml.rfw.kernel.rfwmeta.RFWMetaStringIEField;
 import br.eng.rodrigogml.rfw.kernel.vo.RFWVO;
 import br.eng.rodrigogml.rfw.orm.dao.annotations.dao.RFWDAOAnnotation;
 
 /**
- * Dados do transportador da NF-e (TAG {@code transporta}, ID X03).<br>
- * Grupo filho de {@code transp} (X01) contendo a identificação básica do transportador responsável pelo frete.
- *
- * <p>
- * É utilizado tanto para operações em que há transportador externo quanto para transporte próprio por conta do destinatário ou remetente, conforme definido em {@code modFrete}.
- * </p>
+ * Grupo X03 - transporta: Transportador.
  */
 @RFWDAOAnnotation(schema = "_RFW.SEFAZ", table = "sefaz_transporta")
 public class TransportaVO extends RFWVO {
 
-  private static final long serialVersionUID = 8598842812365473201L;
+  private static final long serialVersionUID = 97092921533698272L;
 
   /**
-   * ID: X04 – Campo {@code CNPJ}.<br>
-   * CNPJ do transportador, quando pessoa jurídica.<br>
-   * Preenchido com 14 dígitos numéricos, incluindo zeros não significativos. Ocorrência 0-1 (alternativo ao CPF {@link #cpf}).
+   * {@link TranspVO}
    */
-  @RFWMetaStringField(caption = "CNPJ do transportador", required = false, maxLength = 14)
-  private String cnpj = null;
+  @RFWMetaRelationshipField(caption = "Transp", relationship = RelationshipTypes.PARENT_ASSOCIATION, required = true, column = "idsefaz_transp")
+  private TranspVO transpVO = null;
 
   /**
-   * ID: X05 – Campo {@code CPF}.<br>
-   * CPF do transportador, quando pessoa física.<br>
-   * Preenchido com 11 dígitos numéricos, incluindo zeros não significativos. Ocorrência 0-1 (alternativo ao CNPJ {@link #cnpj}).
+   * X04 - CNPJ: CNPJ do Transportador. Tipo: N, Tamanho: 14, Ocorrência: 0-1. Preencher com zeros não significativos.
    */
-  @RFWMetaStringField(caption = "CPF do transportador", required = false, maxLength = 11)
-  private String cpf = null;
+  @RFWMetaStringCNPJField(caption = "CNPJ", required = false, unique = false)
+  private String cnpj;
 
   /**
-   * ID: X06 – Campo {@code xNome}.<br>
-   * Razão social ou nome do transportador informado na NF-e.<br>
-   * Ocorrência 0-1, tamanho de 2 a 60 caracteres.
+   * X05 - CPF: CPF do Transportador. Tipo: N, Tamanho: 11, Ocorrência: 0-1.
    */
-  @RFWMetaStringField(caption = "Nome do transportador", required = false, maxLength = 60)
-  private String xNome = null;
+  @RFWMetaStringCPFField(caption = "CPF", required = false, unique = false)
+  private String cpf;
 
   /**
-   * ID: X07 – Campo {@code IE}.<br>
-   * Inscrição Estadual do transportador contribuinte de ICMS, sem caracteres de formatação.<br>
-   * Ocorrência 0-1, tamanho de 2 a 14 caracteres.
+   * X06 - xNome: Razão Social ou nome. Tipo: C, Tamanho: 2-60, Ocorrência: 0-1.
    */
-  @RFWMetaStringField(caption = "Inscrição estadual", required = false, maxLength = 14)
-  private String ie = null;
+  @RFWMetaStringField(caption = "xNome", required = false, unique = false, maxLength = 60, minLength = 2, preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
+  private String xnome;
 
   /**
-   * ID: X08 – Campo {@code xEnder}.<br>
-   * Endereço completo (logradouro e complemento) do transportador.<br>
-   * Ocorrência 0-1, tamanho de 2 a 60 caracteres.
+   * X07 - IE: Inscrição Estadual do Transportador. Tipo: C, Tamanho: 2-14, Ocorrência: 0-1. Informar “ISENTO” se isento. A UF deve ser informada se informada uma IE.
    */
-  @RFWMetaStringField(caption = "Endereço do transportador", required = false, maxLength = 60)
-  private String xEnder = null;
+  @RFWMetaStringIEField(caption = "IE", required = false, unique = false)
+  private String ie;
 
   /**
-   * ID: X09 – Campo {@code xMun}.<br>
-   * Nome do município do transportador.<br>
-   * Ocorrência 0-1, tamanho de 2 a 60 caracteres.
+   * X08 - xEnder: Endereço completo. Tipo: C, Tamanho: 1-60, Ocorrência: 0-1.
    */
-  @RFWMetaStringField(caption = "Município do transportador", required = false, maxLength = 60)
-  private String xMun = null;
+  @RFWMetaStringField(caption = "xEnder", required = false, unique = false, maxLength = 60, minLength = 1, preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
+  private String xender;
 
   /**
-   * ID: X10 – Campo {@code UF}.<br>
-   * Sigla da Unidade da Federação do transportador.<br>
-   * Ocorrência 0-1, tamanho 2 (tabela de UF do IBGE).
+   * X09 - xMun: Nome do município. Tipo: C, Tamanho: 1-60, Ocorrência: 0-1.
    */
-  @RFWMetaStringField(caption = "UF do transportador", required = false, maxLength = 2)
-  private String uf = null;
+  @RFWMetaStringField(caption = "xMun", required = false, unique = false, maxLength = 60, minLength = 1, preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
+  private String xmun;
 
   /**
-   * # iD: X04 – Campo {@code CNPJ}.<br>
-   * CNPJ do transportador, quando pessoa jurídica.<br>
-   * Preenchido com 14 dígitos numéricos, incluindo zeros não significativos. Ocorrência 0-1 (alternativo ao CPF {@link #cpf}).
+   * X10 - UF: Sigla da UF. Tipo: C, Tamanho: 2, Ocorrência: 0-1. Informar "EX" para exterior.
+   */
+  @RFWMetaStringField(caption = "UF", required = false, unique = false, maxLength = 2, minLength = 2, preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
+  private String uf;
+
+  /**
+   * # {@link TranspVO}.
    *
-   * @return the iD: X04 – Campo {@code CNPJ}
+   * @return the {@link TranspVO}
+   */
+  public TranspVO getTranspVO() {
+    return transpVO;
+  }
+
+  /**
+   * # {@link TranspVO}.
+   *
+   * @param transpVO the new {@link TranspVO}
+   */
+  public void setTranspVO(TranspVO transpVO) {
+    this.transpVO = transpVO;
+  }
+
+  /**
+   * # x04 - CNPJ: CNPJ do Transportador. Tipo: N, Tamanho: 14, Ocorrência: 0-1. Preencher com zeros não significativos.
+   *
+   * @return the x04 - CNPJ: CNPJ do Transportador
    */
   public String getCnpj() {
     return cnpj;
   }
 
   /**
-   * # iD: X04 – Campo {@code CNPJ}.<br>
-   * CNPJ do transportador, quando pessoa jurídica.<br>
-   * Preenchido com 14 dígitos numéricos, incluindo zeros não significativos. Ocorrência 0-1 (alternativo ao CPF {@link #cpf}).
+   * # x04 - CNPJ: CNPJ do Transportador. Tipo: N, Tamanho: 14, Ocorrência: 0-1. Preencher com zeros não significativos.
    *
-   * @param cnpj the new iD: X04 – Campo {@code CNPJ}
+   * @param cnpj the new x04 - CNPJ: CNPJ do Transportador
    */
   public void setCnpj(String cnpj) {
     this.cnpj = cnpj;
   }
 
   /**
-   * # iD: X05 – Campo {@code CPF}.<br>
-   * CPF do transportador, quando pessoa física.<br>
-   * Preenchido com 11 dígitos numéricos, incluindo zeros não significativos. Ocorrência 0-1 (alternativo ao CNPJ {@link #cnpj}).
+   * # x05 - CPF: CPF do Transportador. Tipo: N, Tamanho: 11, Ocorrência: 0-1.
    *
-   * @return the iD: X05 – Campo {@code CPF}
+   * @return the x05 - CPF: CPF do Transportador
    */
   public String getCpf() {
     return cpf;
   }
 
   /**
-   * # iD: X05 – Campo {@code CPF}.<br>
-   * CPF do transportador, quando pessoa física.<br>
-   * Preenchido com 11 dígitos numéricos, incluindo zeros não significativos. Ocorrência 0-1 (alternativo ao CNPJ {@link #cnpj}).
+   * # x05 - CPF: CPF do Transportador. Tipo: N, Tamanho: 11, Ocorrência: 0-1.
    *
-   * @param cpf the new iD: X05 – Campo {@code CPF}
+   * @param cpf the new x05 - CPF: CPF do Transportador
    */
   public void setCpf(String cpf) {
     this.cpf = cpf;
   }
 
   /**
-   * # iD: X06 – Campo {@code xNome}.<br>
-   * Razão social ou nome do transportador informado na NF-e.<br>
-   * Ocorrência 0-1, tamanho de 2 a 60 caracteres.
+   * # x06 - xNome: Razão Social ou nome. Tipo: C, Tamanho: 2-60, Ocorrência: 0-1.
    *
-   * @return the iD: X06 – Campo {@code xNome}
+   * @return the x06 - xNome: Razão Social ou nome
    */
-  public String getXNome() {
-    return xNome;
+  public String getXnome() {
+    return xnome;
   }
 
   /**
-   * # iD: X06 – Campo {@code xNome}.<br>
-   * Razão social ou nome do transportador informado na NF-e.<br>
-   * Ocorrência 0-1, tamanho de 2 a 60 caracteres.
+   * # x06 - xNome: Razão Social ou nome. Tipo: C, Tamanho: 2-60, Ocorrência: 0-1.
    *
-   * @param xNome the new iD: X06 – Campo {@code xNome}
+   * @param xnome the new x06 - xNome: Razão Social ou nome
    */
-  public void setXNome(String xNome) {
-    this.xNome = xNome;
+  public void setXnome(String xnome) {
+    this.xnome = xnome;
   }
 
   /**
-   * # iD: X07 – Campo {@code IE}.<br>
-   * Inscrição Estadual do transportador contribuinte de ICMS, sem caracteres de formatação.<br>
-   * Ocorrência 0-1, tamanho de 2 a 14 caracteres.
+   * # x07 - IE: Inscrição Estadual do Transportador. Tipo: C, Tamanho: 2-14, Ocorrência: 0-1. Informar “ISENTO” se isento. A UF deve ser informada se informada uma IE.
    *
-   * @return the iD: X07 – Campo {@code IE}
+   * @return the x07 - IE: Inscrição Estadual do Transportador
    */
   public String getIe() {
     return ie;
   }
 
   /**
-   * # iD: X07 – Campo {@code IE}.<br>
-   * Inscrição Estadual do transportador contribuinte de ICMS, sem caracteres de formatação.<br>
-   * Ocorrência 0-1, tamanho de 2 a 14 caracteres.
+   * # x07 - IE: Inscrição Estadual do Transportador. Tipo: C, Tamanho: 2-14, Ocorrência: 0-1. Informar “ISENTO” se isento. A UF deve ser informada se informada uma IE.
    *
-   * @param ie the new iD: X07 – Campo {@code IE}
+   * @param ie the new x07 - IE: Inscrição Estadual do Transportador
    */
   public void setIe(String ie) {
     this.ie = ie;
   }
 
   /**
-   * # iD: X08 – Campo {@code xEnder}.<br>
-   * Endereço completo (logradouro e complemento) do transportador.<br>
-   * Ocorrência 0-1, tamanho de 2 a 60 caracteres.
+   * # x08 - xEnder: Endereço completo. Tipo: C, Tamanho: 1-60, Ocorrência: 0-1.
    *
-   * @return the iD: X08 – Campo {@code xEnder}
+   * @return the x08 - xEnder: Endereço completo
    */
-  public String getXEnder() {
-    return xEnder;
+  public String getXender() {
+    return xender;
   }
 
   /**
-   * # iD: X08 – Campo {@code xEnder}.<br>
-   * Endereço completo (logradouro e complemento) do transportador.<br>
-   * Ocorrência 0-1, tamanho de 2 a 60 caracteres.
+   * # x08 - xEnder: Endereço completo. Tipo: C, Tamanho: 1-60, Ocorrência: 0-1.
    *
-   * @param xEnder the new iD: X08 – Campo {@code xEnder}
+   * @param xender the new x08 - xEnder: Endereço completo
    */
-  public void setXEnder(String xEnder) {
-    this.xEnder = xEnder;
+  public void setXender(String xender) {
+    this.xender = xender;
   }
 
   /**
-   * # iD: X09 – Campo {@code xMun}.<br>
-   * Nome do município do transportador.<br>
-   * Ocorrência 0-1, tamanho de 2 a 60 caracteres.
+   * # x09 - xMun: Nome do município. Tipo: C, Tamanho: 1-60, Ocorrência: 0-1.
    *
-   * @return the iD: X09 – Campo {@code xMun}
+   * @return the x09 - xMun: Nome do município
    */
-  public String getXMun() {
-    return xMun;
+  public String getXmun() {
+    return xmun;
   }
 
   /**
-   * # iD: X09 – Campo {@code xMun}.<br>
-   * Nome do município do transportador.<br>
-   * Ocorrência 0-1, tamanho de 2 a 60 caracteres.
+   * # x09 - xMun: Nome do município. Tipo: C, Tamanho: 1-60, Ocorrência: 0-1.
    *
-   * @param xMun the new iD: X09 – Campo {@code xMun}
+   * @param xmun the new x09 - xMun: Nome do município
    */
-  public void setXMun(String xMun) {
-    this.xMun = xMun;
+  public void setXmun(String xmun) {
+    this.xmun = xmun;
   }
 
   /**
-   * # iD: X10 – Campo {@code UF}.<br>
-   * Sigla da Unidade da Federação do transportador.<br>
-   * Ocorrência 0-1, tamanho 2 (tabela de UF do IBGE).
+   * # x10 - UF: Sigla da UF. Tipo: C, Tamanho: 2, Ocorrência: 0-1. Informar "EX" para exterior.
    *
-   * @return the iD: X10 – Campo {@code UF}
+   * @return the x10 - UF: Sigla da UF
    */
   public String getUf() {
     return uf;
   }
 
   /**
-   * # iD: X10 – Campo {@code UF}.<br>
-   * Sigla da Unidade da Federação do transportador.<br>
-   * Ocorrência 0-1, tamanho 2 (tabela de UF do IBGE).
+   * # x10 - UF: Sigla da UF. Tipo: C, Tamanho: 2, Ocorrência: 0-1. Informar "EX" para exterior.
    *
-   * @param uf the new iD: X10 – Campo {@code UF}
+   * @param uf the new x10 - UF: Sigla da UF
    */
   public void setUf(String uf) {
     this.uf = uf;
   }
-
 }

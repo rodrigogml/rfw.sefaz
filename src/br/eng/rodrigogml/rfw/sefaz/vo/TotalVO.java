@@ -6,57 +6,91 @@ import br.eng.rodrigogml.rfw.kernel.vo.RFWVO;
 import br.eng.rodrigogml.rfw.orm.dao.annotations.dao.RFWDAOAnnotation;
 
 /**
- * Description: Grupo de totais da NF-e (TAG {@code total}, ID W01).<br>
- * Este VO consolida os totais da nota fiscal, começando pelos totais de ICMS informados no subgrupo {@code ICMSTot} (ID W02).<br>
- * <br>
- * Estrutura principal:
+ * Grupo W01 - total: Totais da NF-e.
+ * <p>
+ * Ocorre 1-1 dentro do grupo A01 (infNFe). O grupo de valores totais da NF-e deve ser informado com o somatório do campo correspondente dos itens.
+ * <p>
+ * Contém:
  * <ul>
- * <li>W01 – {@code total}: grupo de totais da NF-e.</li>
- * <li>W02 – {@code ICMSTot}: totais referentes ao ICMS e valores globais da NF-e.</li>
+ * <li>W02 - ICMSTot: Totais referentes ao ICMS (mapeado em {@link ICMSTotVO});</li>
+ * <li>W17 - ISSQNtot: Totais referentes ao ISSQN (campos abaixo neste mesmo VO).</li>
  * </ul>
- *
- * A NF-e deve possuir exatamente um grupo {@code total} por documento autorizado.
- *
- * @author BIS DEVil
- * @since (11 de nov. de 2025)
  */
 @RFWDAOAnnotation(schema = "_RFW.SEFAZ", table = "sefaz_total")
 public class TotalVO extends RFWVO {
 
-  private static final long serialVersionUID = -2109042558504329217L;
+  private static final long serialVersionUID = -8582574194460781124L;
 
   /**
-   * ID: W02<br>
-   * Grupo de totais referentes ao ICMS ({@code ICMSTot}).<br>
-   * Reúne os totais de ICMS próprio, ICMS-ST, FCP, valores globais de produtos, frete, seguro, descontos, tributos e o valor total da NF-e.<br>
-   * Deve refletir o somatório dos respectivos campos dos itens da NF-e.
+   * {@link InfNFeVO}
    */
-  @RFWMetaRelationshipField(caption = "Totais de ICMS e da NF-e", required = false, relationship = RelationshipTypes.COMPOSITION, column = "id_icmstot")
-  private ICMSTotVO icmsTot = null;
+  @RFWMetaRelationshipField(caption = "InfNFe", relationship = RelationshipTypes.PARENT_ASSOCIATION, required = true, column = "idsefaz_infnfe")
+  private InfNFeVO infNFeVO = null;
 
   /**
-   * # iD: W02<br>
-   * Grupo de totais referentes ao ICMS ({@code ICMSTot}).<br>
-   * Reúne os totais de ICMS próprio, ICMS-ST, FCP, valores globais de produtos, frete, seguro, descontos, tributos e o valor total da NF-e.<br>
-   * Deve refletir o somatório dos respectivos campos dos itens da NF-e.
+   * {@link ICMSTotVO}
+   */
+  @RFWMetaRelationshipField(caption = "ICMSTot", relationship = RelationshipTypes.COMPOSITION, required = false, columnMapped = "idsefaz_icmstot")
+  private ICMSTotVO icmsTotVO = null;
+
+  /**
+   * {@link ISSQNTotVO}
+   */
+  @RFWMetaRelationshipField(caption = "ISSQNTot", relationship = RelationshipTypes.COMPOSITION, required = false, columnMapped = "idsefaz_issqntot")
+  private ISSQNTotVO issqnTotVO = null;
+
+  /**
+   * # {@link InfNFeVO}.
    *
-   * @return the iD: W02<br>
-   *         Grupo de totais referentes ao ICMS ({@code ICMSTot})
+   * @return the {@link InfNFeVO}
    */
-  public ICMSTotVO getIcmsTot() {
-    return icmsTot;
+  public InfNFeVO getInfNFeVO() {
+    return infNFeVO;
   }
 
   /**
-   * # iD: W02<br>
-   * Grupo de totais referentes ao ICMS ({@code ICMSTot}).<br>
-   * Reúne os totais de ICMS próprio, ICMS-ST, FCP, valores globais de produtos, frete, seguro, descontos, tributos e o valor total da NF-e.<br>
-   * Deve refletir o somatório dos respectivos campos dos itens da NF-e.
+   * # {@link InfNFeVO}.
    *
-   * @param icmsTot the new iD: W02<br>
-   *          Grupo de totais referentes ao ICMS ({@code ICMSTot})
+   * @param infNFeVO the new {@link InfNFeVO}
    */
-  public void setIcmsTot(ICMSTotVO icmsTot) {
-    this.icmsTot = icmsTot;
+  public void setInfNFeVO(InfNFeVO infNFeVO) {
+    this.infNFeVO = infNFeVO;
   }
+
+  /**
+   * # {@link ICMSTotVO}.
+   *
+   * @return the {@link ICMSTotVO}
+   */
+  public ICMSTotVO getIcmsTotVO() {
+    return icmsTotVO;
+  }
+
+  /**
+   * # {@link ICMSTotVO}.
+   *
+   * @param icmsTotVO the new {@link ICMSTotVO}
+   */
+  public void setIcmsTotVO(ICMSTotVO icmsTotVO) {
+    this.icmsTotVO = icmsTotVO;
+  }
+
+  /**
+   * # {@link ISSQNTotVO}.
+   *
+   * @return the {@link ISSQNTotVO}
+   */
+  public ISSQNTotVO getIssqnTotVO() {
+    return issqnTotVO;
+  }
+
+  /**
+   * # {@link ISSQNTotVO}.
+   *
+   * @param issqnTotVO the new {@link ISSQNTotVO}
+   */
+  public void setIssqnTotVO(ISSQNTotVO issqnTotVO) {
+    this.issqnTotVO = issqnTotVO;
+  }
+
 }

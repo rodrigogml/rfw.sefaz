@@ -2,153 +2,141 @@ package br.eng.rodrigogml.rfw.sefaz.vo;
 
 import java.math.BigDecimal;
 
+import br.eng.rodrigogml.rfw.kernel.preprocess.PreProcess.PreProcessOption;
 import br.eng.rodrigogml.rfw.kernel.rfwmeta.RFWMetaBigDecimalField;
+import br.eng.rodrigogml.rfw.kernel.rfwmeta.RFWMetaRelationshipField;
+import br.eng.rodrigogml.rfw.kernel.rfwmeta.RFWMetaRelationshipField.RelationshipTypes;
 import br.eng.rodrigogml.rfw.kernel.rfwmeta.RFWMetaStringField;
 import br.eng.rodrigogml.rfw.kernel.vo.RFWVO;
 import br.eng.rodrigogml.rfw.orm.dao.annotations.dao.RFWDAOAnnotation;
 
 /**
- * Grupo Fatura (TAG {@code fat}, ID Y02).<br>
- * Representa a fatura vinculada à cobrança da NF-e.<br>
- * <br>
- *
- * Ocorrência: 0-1 no grupo de cobrança Y01.
+ * Grupo Y02 - fat: Fatura.
+ * <p>
+ * Ocorre 0-1 dentro do grupo Y01 (cobr).
  */
-@RFWDAOAnnotation(schema = "_RFW.SEFAZ", table = "sefaz_fatura")
+@RFWDAOAnnotation(schema = "_RFW.SEFAZ", table = "sefaz_fat")
 public class FatVO extends RFWVO {
 
-  private static final long serialVersionUID = -5851469825579343906L;
+  private static final long serialVersionUID = 6959556491669725299L;
 
   /**
-   * ID: Y03 – Campo {@code nFat}.<br>
-   * Número da fatura.<br>
-   * Ocorrência: 0-1.<br>
-   * Tamanho: 1–60 caracteres.
+   * {@link CobrVO}
    */
-  @RFWMetaStringField(caption = "Número da fatura", required = false, maxLength = 60)
-  private String nFat = null;
+  @RFWMetaRelationshipField(caption = "Cobr", relationship = RelationshipTypes.PARENT_ASSOCIATION, required = true, column = "idsefaz_cobr")
+  private CobrVO cobrVO = null;
 
   /**
-   * ID: Y04 – Campo {@code vOrig}.<br>
-   * Valor original da fatura antes de descontos.<br>
-   * Ocorrência: 0-1.<br>
-   * Formato: 13v2.
+   * Y03 - nFat: Número da Fatura. Tipo: C, Tamanho: 1-60, Ocorrência: 0-1 (campo opcional).
    */
-  @RFWMetaBigDecimalField(caption = "Valor original", required = false, scale = 2, absolute = true)
-  private BigDecimal vOrig = null;
+  @RFWMetaStringField(caption = "nFat", required = false, unique = false, maxLength = 60, minLength = 1, preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
+  private String nfat;
 
   /**
-   * ID: Y05 – Campo {@code vDesc}.<br>
-   * Valor total de descontos concedidos.<br>
-   * Ocorrência: 0-1.<br>
-   * Formato: 13v2.
+   * Y04 - vOrig: Valor Original da Fatura. Tipo: N, Tamanho: 13v2, Ocorrência: 0-1 (campo opcional).
    */
-  @RFWMetaBigDecimalField(caption = "Valor desconto", required = false, scale = 2, absolute = true)
-  private BigDecimal vDesc = null;
+  @RFWMetaBigDecimalField(caption = "vOrig", required = false, unique = false, maxValue = "", minValue = "", scale = 2, absolute = false)
+  private BigDecimal vorig;
 
   /**
-   * ID: Y06 – Campo {@code vLiq}.<br>
-   * Valor líquido da fatura após desconto.<br>
-   * Ocorrência: 0-1.<br>
-   * Formato: 13v2.
+   * Y05 - vDesc: Valor do desconto. Tipo: N, Tamanho: 13v2, Ocorrência: 0-1 (campo opcional).
    */
-  @RFWMetaBigDecimalField(caption = "Valor líquido", required = false, scale = 2, absolute = true)
-  private BigDecimal vLiq = null;
+  @RFWMetaBigDecimalField(caption = "vDesc", required = false, unique = false, maxValue = "", minValue = "", scale = 2, absolute = false)
+  private BigDecimal vdesc;
 
   /**
-   * # iD: Y03 – Campo {@code nFat}.<br>
-   * Número da fatura.<br>
-   * Ocorrência: 0-1.<br>
-   * Tamanho: 1–60 caracteres.
+   * Y06 - vLiq: Valor Líquido da Fatura. Tipo: N, Tamanho: 13v2, Ocorrência: 0-1 (campo opcional).
+   */
+  @RFWMetaBigDecimalField(caption = "vLiq", required = false, unique = false, maxValue = "", minValue = "", scale = 2, absolute = false)
+  private BigDecimal vliq;
+
+  /**
+   * # {@link CobrVO}.
    *
-   * @return the iD: Y03 – Campo {@code nFat}
+   * @return the {@link CobrVO}
    */
-  public String getNFat() {
-    return nFat;
+  public CobrVO getCobrVO() {
+    return cobrVO;
   }
 
   /**
-   * # iD: Y03 – Campo {@code nFat}.<br>
-   * Número da fatura.<br>
-   * Ocorrência: 0-1.<br>
-   * Tamanho: 1–60 caracteres.
+   * # {@link CobrVO}.
    *
-   * @param nFat the new iD: Y03 – Campo {@code nFat}
+   * @param cobrVO the new {@link CobrVO}
    */
-  public void setNFat(String nFat) {
-    this.nFat = nFat;
+  public void setCobrVO(CobrVO cobrVO) {
+    this.cobrVO = cobrVO;
   }
 
   /**
-   * # iD: Y04 – Campo {@code vOrig}.<br>
-   * Valor original da fatura antes de descontos.<br>
-   * Ocorrência: 0-1.<br>
-   * Formato: 13v2.
+   * # y03 - nFat: Número da Fatura. Tipo: C, Tamanho: 1-60, Ocorrência: 0-1 (campo opcional).
    *
-   * @return the iD: Y04 – Campo {@code vOrig}
+   * @return the y03 - nFat: Número da Fatura
    */
-  public BigDecimal getVOrig() {
-    return vOrig;
+  public String getNfat() {
+    return nfat;
   }
 
   /**
-   * # iD: Y04 – Campo {@code vOrig}.<br>
-   * Valor original da fatura antes de descontos.<br>
-   * Ocorrência: 0-1.<br>
-   * Formato: 13v2.
+   * # y03 - nFat: Número da Fatura. Tipo: C, Tamanho: 1-60, Ocorrência: 0-1 (campo opcional).
    *
-   * @param vOrig the new iD: Y04 – Campo {@code vOrig}
+   * @param nfat the new y03 - nFat: Número da Fatura
    */
-  public void setVOrig(BigDecimal vOrig) {
-    this.vOrig = vOrig;
+  public void setNfat(String nfat) {
+    this.nfat = nfat;
   }
 
   /**
-   * # iD: Y05 – Campo {@code vDesc}.<br>
-   * Valor total de descontos concedidos.<br>
-   * Ocorrência: 0-1.<br>
-   * Formato: 13v2.
+   * # y04 - vOrig: Valor Original da Fatura. Tipo: N, Tamanho: 13v2, Ocorrência: 0-1 (campo opcional).
    *
-   * @return the iD: Y05 – Campo {@code vDesc}
+   * @return the y04 - vOrig: Valor Original da Fatura
    */
-  public BigDecimal getVDesc() {
-    return vDesc;
+  public BigDecimal getVorig() {
+    return vorig;
   }
 
   /**
-   * # iD: Y05 – Campo {@code vDesc}.<br>
-   * Valor total de descontos concedidos.<br>
-   * Ocorrência: 0-1.<br>
-   * Formato: 13v2.
+   * # y04 - vOrig: Valor Original da Fatura. Tipo: N, Tamanho: 13v2, Ocorrência: 0-1 (campo opcional).
    *
-   * @param vDesc the new iD: Y05 – Campo {@code vDesc}
+   * @param vorig the new y04 - vOrig: Valor Original da Fatura
    */
-  public void setVDesc(BigDecimal vDesc) {
-    this.vDesc = vDesc;
+  public void setVorig(BigDecimal vorig) {
+    this.vorig = vorig;
   }
 
   /**
-   * # iD: Y06 – Campo {@code vLiq}.<br>
-   * Valor líquido da fatura após desconto.<br>
-   * Ocorrência: 0-1.<br>
-   * Formato: 13v2.
+   * # y05 - vDesc: Valor do desconto. Tipo: N, Tamanho: 13v2, Ocorrência: 0-1 (campo opcional).
    *
-   * @return the iD: Y06 – Campo {@code vLiq}
+   * @return the y05 - vDesc: Valor do desconto
    */
-  public BigDecimal getVLiq() {
-    return vLiq;
+  public BigDecimal getVdesc() {
+    return vdesc;
   }
 
   /**
-   * # iD: Y06 – Campo {@code vLiq}.<br>
-   * Valor líquido da fatura após desconto.<br>
-   * Ocorrência: 0-1.<br>
-   * Formato: 13v2.
+   * # y05 - vDesc: Valor do desconto. Tipo: N, Tamanho: 13v2, Ocorrência: 0-1 (campo opcional).
    *
-   * @param vLiq the new iD: Y06 – Campo {@code vLiq}
+   * @param vdesc the new y05 - vDesc: Valor do desconto
    */
-  public void setVLiq(BigDecimal vLiq) {
-    this.vLiq = vLiq;
+  public void setVdesc(BigDecimal vdesc) {
+    this.vdesc = vdesc;
   }
 
+  /**
+   * # y06 - vLiq: Valor Líquido da Fatura. Tipo: N, Tamanho: 13v2, Ocorrência: 0-1 (campo opcional).
+   *
+   * @return the y06 - vLiq: Valor Líquido da Fatura
+   */
+  public BigDecimal getVliq() {
+    return vliq;
+  }
+
+  /**
+   * # y06 - vLiq: Valor Líquido da Fatura. Tipo: N, Tamanho: 13v2, Ocorrência: 0-1 (campo opcional).
+   *
+   * @param vliq the new y06 - vLiq: Valor Líquido da Fatura
+   */
+  public void setVliq(BigDecimal vliq) {
+    this.vliq = vliq;
+  }
 }

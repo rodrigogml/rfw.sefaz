@@ -1,106 +1,113 @@
 package br.eng.rodrigogml.rfw.sefaz.vo;
 
+import br.eng.rodrigogml.rfw.kernel.preprocess.PreProcess.PreProcessOption;
+import br.eng.rodrigogml.rfw.kernel.rfwmeta.RFWMetaRelationshipField;
+import br.eng.rodrigogml.rfw.kernel.rfwmeta.RFWMetaRelationshipField.RelationshipTypes;
 import br.eng.rodrigogml.rfw.kernel.rfwmeta.RFWMetaStringField;
 import br.eng.rodrigogml.rfw.kernel.vo.RFWVO;
 import br.eng.rodrigogml.rfw.orm.dao.annotations.dao.RFWDAOAnnotation;
 
 /**
- * Informação do veículo de transporte (TAG {@code veicTransp}, ID X18).<br>
- * Grupo utilizado para identificação do veículo transportador principal (veículo trator) da NF-e.
+ * Grupo X18 - veicTransp: Veículo de Transporte (veículo trator).
  */
-@RFWDAOAnnotation(schema = "_RFW.SEFAZ", table = "sefaz_veic_transp")
-class VeicTranspVO extends RFWVO {
+@RFWDAOAnnotation(schema = "_RFW.SEFAZ", table = "sefaz_veictransp")
+public class VeicTranspVO extends RFWVO {
 
-  private static final long serialVersionUID = -6698407146508327413L;
+  private static final long serialVersionUID = -1958540280138152475L;
 
   /**
-   * ID: X19 – Campo {@code placa}.<br>
-   * Placa do veículo de transporte, no formato exigido pela legislação de trânsito.<br>
-   * Ocorrência 0-1, tamanho 7 (complementações podem ser informadas nas observações da NF-e quando necessário).
+   * {@link TranspVO}
    */
-  @RFWMetaStringField(caption = "Placa do veículo", required = false, maxLength = 7)
-  private String placa = null;
+  @RFWMetaRelationshipField(caption = "Transp", relationship = RelationshipTypes.PARENT_ASSOCIATION, required = true, column = "idsefaz_transp")
+  private TranspVO transpVO = null;
 
   /**
-   * ID: X20 – Campo {@code UF}.<br>
-   * Sigla da UF onde o veículo está licenciado.<br>
-   * Ocorrência 0-1, tamanho 2 (tabela de UF). Deve ser preenchida com "EX" para exterior.
+   * X19 - placa: Placa do Veículo. Tipo: C, Tamanho: 7, Ocorrência: 1-1.
    */
-  @RFWMetaStringField(caption = "UF do veículo", required = false, maxLength = 2)
-  private String uf = null;
+  @RFWMetaStringField(caption = "placa", required = false, unique = false, maxLength = 7, minLength = 7, preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
+  private String placa;
 
   /**
-   * ID: X21 – Campo {@code RNTC}.<br>
-   * Registro Nacional de Transportador de Carga (ANTT) do veículo trator.<br>
-   * Ocorrência 0-1, tamanho 20.
+   * X20 - UF: Sigla da UF. Tipo: C, Tamanho: 2, Ocorrência: 1-1. Informar "EX" se exterior.
    */
-  @RFWMetaStringField(caption = "RNTC (ANTT) veículo", required = false, maxLength = 20)
-  private String rntc = null;
+  @RFWMetaStringField(caption = "UF", required = false, unique = false, maxLength = 2, minLength = 2, preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
+  private String uf;
 
   /**
-   * # iD: X19 – Campo {@code placa}.<br>
-   * Placa do veículo de transporte, no formato exigido pela legislação de trânsito.<br>
-   * Ocorrência 0-1, tamanho 7 (complementações podem ser informadas nas observações da NF-e quando necessário).
+   * X21 - RNTC: Registro Nacional de Transportador de Carga (ANTT). Tipo: C, Tamanho: 1-20, Ocorrência: 0-1.
+   */
+  @RFWMetaStringField(caption = "RNTC", required = false, unique = false, maxLength = 20, minLength = 1, preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
+  private String rntc;
+
+  /**
+   * # {@link TranspVO}.
    *
-   * @return the iD: X19 – Campo {@code placa}
+   * @return the {@link TranspVO}
+   */
+  public TranspVO getTranspVO() {
+    return transpVO;
+  }
+
+  /**
+   * # {@link TranspVO}.
+   *
+   * @param transpVO the new {@link TranspVO}
+   */
+  public void setTranspVO(TranspVO transpVO) {
+    this.transpVO = transpVO;
+  }
+
+  /**
+   * # x19 - placa: Placa do Veículo. Tipo: C, Tamanho: 7, Ocorrência: 1-1.
+   *
+   * @return the x19 - placa: Placa do Veículo
    */
   public String getPlaca() {
     return placa;
   }
 
   /**
-   * # iD: X19 – Campo {@code placa}.<br>
-   * Placa do veículo de transporte, no formato exigido pela legislação de trânsito.<br>
-   * Ocorrência 0-1, tamanho 7 (complementações podem ser informadas nas observações da NF-e quando necessário).
+   * # x19 - placa: Placa do Veículo. Tipo: C, Tamanho: 7, Ocorrência: 1-1.
    *
-   * @param placa the new iD: X19 – Campo {@code placa}
+   * @param placa the new x19 - placa: Placa do Veículo
    */
   public void setPlaca(String placa) {
     this.placa = placa;
   }
 
   /**
-   * # iD: X20 – Campo {@code UF}.<br>
-   * Sigla da UF onde o veículo está licenciado.<br>
-   * Ocorrência 0-1, tamanho 2 (tabela de UF). Deve ser preenchida com "EX" para exterior.
+   * # x20 - UF: Sigla da UF. Tipo: C, Tamanho: 2, Ocorrência: 1-1. Informar "EX" se exterior.
    *
-   * @return the iD: X20 – Campo {@code UF}
+   * @return the x20 - UF: Sigla da UF
    */
   public String getUf() {
     return uf;
   }
 
   /**
-   * # iD: X20 – Campo {@code UF}.<br>
-   * Sigla da UF onde o veículo está licenciado.<br>
-   * Ocorrência 0-1, tamanho 2 (tabela de UF). Deve ser preenchida com "EX" para exterior.
+   * # x20 - UF: Sigla da UF. Tipo: C, Tamanho: 2, Ocorrência: 1-1. Informar "EX" se exterior.
    *
-   * @param uf the new iD: X20 – Campo {@code UF}
+   * @param uf the new x20 - UF: Sigla da UF
    */
   public void setUf(String uf) {
     this.uf = uf;
   }
 
   /**
-   * # iD: X21 – Campo {@code RNTC}.<br>
-   * Registro Nacional de Transportador de Carga (ANTT) do veículo trator.<br>
-   * Ocorrência 0-1, tamanho 20.
+   * # x21 - RNTC: Registro Nacional de Transportador de Carga (ANTT). Tipo: C, Tamanho: 1-20, Ocorrência: 0-1.
    *
-   * @return the iD: X21 – Campo {@code RNTC}
+   * @return the x21 - RNTC: Registro Nacional de Transportador de Carga (ANTT)
    */
   public String getRntc() {
     return rntc;
   }
 
   /**
-   * # iD: X21 – Campo {@code RNTC}.<br>
-   * Registro Nacional de Transportador de Carga (ANTT) do veículo trator.<br>
-   * Ocorrência 0-1, tamanho 20.
+   * # x21 - RNTC: Registro Nacional de Transportador de Carga (ANTT). Tipo: C, Tamanho: 1-20, Ocorrência: 0-1.
    *
-   * @param rntc the new iD: X21 – Campo {@code RNTC}
+   * @param rntc the new x21 - RNTC: Registro Nacional de Transportador de Carga (ANTT)
    */
   public void setRntc(String rntc) {
     this.rntc = rntc;
   }
-
 }

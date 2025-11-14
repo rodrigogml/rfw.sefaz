@@ -49,6 +49,12 @@ public class InfNFeVO extends RFWVO {
   private DetVO detVO = null;
 
   /**
+   * {@link TranspVO}
+   */
+  @RFWMetaRelationshipField(caption = "Transp", relationship = RelationshipTypes.COMPOSITION, required = false, columnMapped = "idsefaz_transp")
+  private TranspVO transpVO = null;
+
+  /**
    * Versão do leiaute da NF-e.
    *
    * <p>
@@ -226,6 +232,24 @@ public class InfNFeVO extends RFWVO {
    */
   public void setDetVO(DetVO detVO) {
     this.detVO = detVO;
+  }
+
+  /**
+   * # {@link TranspVO}.
+   *
+   * @return the {@link TranspVO}
+   */
+  public TranspVO getTranspVO() {
+    return transpVO;
+  }
+
+  /**
+   * # {@link TranspVO}.
+   *
+   * @param transpVO the new {@link TranspVO}
+   */
+  public void setTranspVO(TranspVO transpVO) {
+    this.transpVO = transpVO;
   }
 
 }
