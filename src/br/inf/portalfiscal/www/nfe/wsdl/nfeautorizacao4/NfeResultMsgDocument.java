@@ -17,7 +17,7 @@ package br.inf.portalfiscal.www.nfe.wsdl.nfeautorizacao4;
 public interface NfeResultMsgDocument extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(NfeResultMsgDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sB998215DDD9F45FD92EE5B4111D0103F").resolveHandle("nferesultmsg0ddbdoctype");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(NfeResultMsgDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s98FF35AE5AB5E38245F0BABFDADAE80B").resolveHandle("nferesultmsg0ddbdoctype");
     
     /**
      * Gets the "nfeResultMsg" element
@@ -42,7 +42,7 @@ public interface NfeResultMsgDocument extends org.apache.xmlbeans.XmlObject
     public interface NfeResultMsg extends org.apache.xmlbeans.XmlObject
     {
         public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(NfeResultMsg.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sB998215DDD9F45FD92EE5B4111D0103F").resolveHandle("nferesultmsg06e8elemtype");
+            org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(NfeResultMsg.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s98FF35AE5AB5E38245F0BABFDADAE80B").resolveHandle("nferesultmsg06e8elemtype");
         
         /**
          * A factory class with static methods for creating instances

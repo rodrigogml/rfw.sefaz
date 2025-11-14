@@ -12,22 +12,24 @@ import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums;
 public class SEFAZDefinitions {
 
   // Ambientes de Produção
-  public static final String SP_PRODUCTION_V400_NFEINUTILIZACAO4 = "https://nfe.fazenda.sp.gov.br/ws/nfeinutilizacao4.asmx";
-  public static final String SP_PRODUCTION_V400_CADCONSULTACADASTRO4 = "https://nfe.fazenda.sp.gov.br/ws/cadconsultacadastro4.asmx";
-  public static final String SP_PRODUCTION_V400_NFEAUTORIZACAO4 = "https://nfe.fazenda.sp.gov.br/ws/nfeautorizacao4.asmx";
-  public static final String SP_PRODUCTION_V400_NFERECEPCAOEVENTO4 = "https://nfe.fazenda.sp.gov.br/ws/nferecepcaoevento4.asmx";
-  public static final String SP_PRODUCTION_V400_NFERETAUTORIZACAO4 = "https://nfe.fazenda.sp.gov.br/ws/nferetautorizacao4.asmx";
-  public static final String SP_PRODUCTION_V400_NFESTATUSSERVICO4 = "https://nfe.fazenda.sp.gov.br/ws/nfestatusservico4.asmx";
-  public static final String SP_PRODUCTION_V400_NFECONSULTAPROTOCOLO4 = "https://nfe.fazenda.sp.gov.br/ws/nfeconsultaprotocolo4.asmx";
+  public static final String NFE_SP_PRODUCTION_V400_NFEAUTORIZACAO4 = "https://nfe.fazenda.sp.gov.br/ws/nfeautorizacao4.asmx";
+  public static final String NFE_SP_PRODUCTION_V400_NFEINUTILIZACAO4 = "https://nfe.fazenda.sp.gov.br/ws/nfeinutilizacao4.asmx";
+  public static final String NFE_SP_PRODUCTION_V400_CADCONSULTACADASTRO4 = "https://nfe.fazenda.sp.gov.br/ws/cadconsultacadastro4.asmx";
+  public static final String NFE_SP_PRODUCTION_V400_NFERECEPCAOEVENTO4 = "https://nfe.fazenda.sp.gov.br/ws/nferecepcaoevento4.asmx";
+  public static final String NFE_SP_PRODUCTION_V400_NFERETAUTORIZACAO4 = "https://nfe.fazenda.sp.gov.br/ws/nferetautorizacao4.asmx";
+  public static final String NFE_SP_PRODUCTION_V400_NFESTATUSSERVICO4 = "https://nfe.fazenda.sp.gov.br/ws/nfestatusservico4.asmx";
+  public static final String NFE_SP_PRODUCTION_V400_NFECONSULTAPROTOCOLO4 = "https://nfe.fazenda.sp.gov.br/ws/nfeconsultaprotocolo4.asmx";
+  public static final String NFCE_SP_PRODUCTION_V400_NFEAUTORIZACAO4 = "https://nfce.fazenda.sp.gov.br/ws/NFeAutorizacao4.asmx";
 
   // Ambientes de Homologação
-  public static final String SP_TEST_V400_NFEINUTILIZACAO4 = "https://homologacao.nfe.fazenda.sp.gov.br/ws/nfeinutilizacao4.asmx";
-  public static final String SP_TEST_V400_CADCONSULTACADASTRO4 = "https://homologacao.nfe.fazenda.sp.gov.br/ws/cadconsultacadastro4.asmx";
-  public static final String SP_TEST_V400_NFEAUTORIZACAO4 = "https://homologacao.nfe.fazenda.sp.gov.br/ws/NFeAutorizacao4.asmx";
-  public static final String SP_TEST_V400_NFERECEPCAOEVENTO4 = "https://homologacao.nfe.fazenda.sp.gov.br/ws/nferecepcaoevento4.asmx";
-  public static final String SP_TEST_V400_NFERETAUTORIZACAO4 = "https://homologacao.nfe.fazenda.sp.gov.br/ws/nferetautorizacao4.asmx";
-  public static final String SP_TEST_V400_NFESTATUSSERVICO4 = "https://homologacao.nfe.fazenda.sp.gov.br/ws/nfestatusservico4.asmx";
-  public static final String SP_TEST_V400_NFECONSULTAPROTOCOLO4 = "https://homologacao.nfe.fazenda.sp.gov.br/ws/nfeconsultaprotocolo4.asmx";
+  public static final String NFE_SP_TEST_V400_NFEAUTORIZACAO4 = "https://homologacao.nfe.fazenda.sp.gov.br/ws/NFeAutorizacao4.asmx";
+  public static final String NFE_SP_TEST_V400_NFEINUTILIZACAO4 = "https://homologacao.nfe.fazenda.sp.gov.br/ws/nfeinutilizacao4.asmx";
+  public static final String NFE_SP_TEST_V400_CADCONSULTACADASTRO4 = "https://homologacao.nfe.fazenda.sp.gov.br/ws/cadconsultacadastro4.asmx";
+  public static final String NFE_SP_TEST_V400_NFERECEPCAOEVENTO4 = "https://homologacao.nfe.fazenda.sp.gov.br/ws/nferecepcaoevento4.asmx";
+  public static final String NFE_SP_TEST_V400_NFERETAUTORIZACAO4 = "https://homologacao.nfe.fazenda.sp.gov.br/ws/nferetautorizacao4.asmx";
+  public static final String NFE_SP_TEST_V400_NFESTATUSSERVICO4 = "https://homologacao.nfe.fazenda.sp.gov.br/ws/nfestatusservico4.asmx";
+  public static final String NFE_SP_TEST_V400_NFECONSULTAPROTOCOLO4 = "https://homologacao.nfe.fazenda.sp.gov.br/ws/nfeconsultaprotocolo4.asmx";
+  public static final String NFCE_SP_TEST_V400_NFEAUTORIZACAO4 = "https://homologacao.nfce.fazenda.sp.gov.br/ws/NFeAutorizacao4.asmx";
 
   /**
    * Construtor privado para classe totalmente estática.
@@ -205,7 +207,10 @@ public class SEFAZDefinitions {
    * Define o Regime Tributário da empresa para qual a regra se aplica.<br>
    * Utilizado nas Tags:<br>
    * <li>nfe\infNFe\emit\CRT
+   *
+   * @deprecated Enumerações estão sendo concentradas na classe {@link SEFAZEnums}, com nova convenção de nomes e formato.
    */
+  @Deprecated
   public static enum SefazXMLCRT {
     /**
      * Simples Nacional
@@ -437,58 +442,6 @@ public class SEFAZDefinitions {
         if (ibgeCode.equalsIgnoreCase(uf.getIBGECode())) {
           return uf;
         }
-      }
-      return null;
-    }
-  }
-
-  /**
-   * Define o ambiente em que a classe SESFAZWS vai trabalhar.<br>
-   * Utilizado em:<br>
-   * <li>nfe\infNFe\ide\tpAmb
-   *
-   * @deprecated Enumerações estão sendo concentradas na classe {@link SEFAZEnums}, com nova convenção de nomes e formato.
-   */
-  @Deprecated
-  public static enum SefazXMLtpAmb {
-    /**
-     * Ambiente de teste de desenvolvimento e emissão de documentos. Sem valor juridico/fiscal.
-     */
-    TEST("2"),
-
-    /**
-     * Servidores do ambiente de produção. Ambiente com valor juridico/fiscal.<br>
-     * CUIDADO AO USAR ESTE AMBIENTE.
-     */
-    PRODUCTION("1");
-
-    /**
-     * Valor a ser utilizado no XML da NFe.
-     */
-    private String xmlCode;
-
-    SefazXMLtpAmb(String value) {
-      this.xmlCode = value;
-    }
-
-    /**
-     * # código de identificação do modelo do documento. (Catálogo utilizado na NFe.).
-     *
-     * @return # código de identificação do modelo do documento
-     */
-    public String getXmlCode() {
-      return xmlCode;
-    }
-
-    /**
-     * Recupera o item da Enumeration de acordo com o código no XML.
-     *
-     * @param xmlCode Valor encontrado no XML
-     * @return Item da enumeração encontrato, null caso o valor não seja encontrado.
-     */
-    public static SefazXMLtpAmb valueOfXmlCode(String xmlCode) {
-      for (SefazXMLtpAmb env : SefazXMLtpAmb.values()) {
-        if (env.getXmlCode().equals(xmlCode)) return env;
       }
       return null;
     }

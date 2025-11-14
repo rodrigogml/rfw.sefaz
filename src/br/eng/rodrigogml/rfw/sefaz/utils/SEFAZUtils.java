@@ -28,7 +28,7 @@ import br.eng.rodrigogml.rfw.kernel.utils.RUTypes;
 import br.eng.rodrigogml.rfw.kernel.utils.RUXML;
 import br.eng.rodrigogml.rfw.sefaz.SEFAZDefinitions.SefazWebServices;
 import br.eng.rodrigogml.rfw.sefaz.SEFAZDefinitions.SefazXMLUF;
-import br.eng.rodrigogml.rfw.sefaz.SEFAZDefinitions.SefazXMLtpAmb;
+import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_tpAmb;
 
 import xsdobjects.consCad200.TConsCad;
 import xsdobjects.consCad200.TConsCad.InfCons;
@@ -106,9 +106,7 @@ public class SEFAZUtils {
       marshaller.marshal(root, stringWriter);
       return stringWriter.toString();
     } catch (JAXBException e) {
-      throw new RFWCriticalException("Falha o criar o XML a partir do Objeto!", new String[] {
-          root.getClass().getCanonicalName()
-      }, e);
+      throw new RFWCriticalException("Falha o criar o XML a partir do Objeto!", new String[] { root.getClass().getCanonicalName() }, e);
     }
   }
 
@@ -120,10 +118,10 @@ public class SEFAZUtils {
    * @return
    * @throws RFWException
    */
-  public static TConsReciNFe mountNFeRetAutorizacaoV400MessageFromNRec(SefazXMLtpAmb env, String nRec) throws RFWException {
+  public static TConsReciNFe mountNFeRetAutorizacaoV400MessageFromNRec(SEFAZ_tpAmb env, String nRec) throws RFWException {
     TConsReciNFe root = new TConsReciNFe();
     root.setVersao("4.00");
-    root.setTpAmb(env.getXmlCode());
+    root.setTpAmb(env.getXMLData());
     root.setNRec(nRec);
     return root;
   }
@@ -136,10 +134,10 @@ public class SEFAZUtils {
    * @return XML da mensagem de retorno do WebService.
    * @throws RFWException
    */
-  public static TConsStatServ mountNfeStatusServicoNFV400Message(SefazXMLtpAmb env, SefazWebServices ws) throws RFWException {
+  public static TConsStatServ mountNfeStatusServicoNFV400Message(SEFAZ_tpAmb env, SefazWebServices ws) throws RFWException {
     TConsStatServ root = new TConsStatServ();
     root.setVersao("4.00");
-    root.setTpAmb(env.getXmlCode());
+    root.setTpAmb(env.getXMLData());
     root.setCUF(ws.getIBGECode());
     root.setXServ("STATUS");
     return root;
@@ -217,9 +215,7 @@ public class SEFAZUtils {
     value = PreProcess.processStringToNull(value);
     if (value != null) {
       if (!value.matches("[0-9]+((\\.)?[0-9]+)?")) {
-        throw new RFWValidationException("RFW_000051", new String[] {
-            value
-        });
+        throw new RFWValidationException("RFW_000051", new String[] { value });
       }
       return new BigDecimal(value);
     }
@@ -259,7 +255,7 @@ public class SEFAZUtils {
    *
    * @return
    */
-  public static String generateQRCodeData(SefazXMLUF uf, SefazXMLtpAmb env, String chave, String destCPFCNPJ, LocalDateTime dhEmi, BigDecimal vNF, BigDecimal vICMS, byte[] digestValue, String tokenID, String token) throws RFWException {
+  public static String generateQRCodeData(SefazXMLUF uf, SEFAZ_tpAmb env, String chave, String destCPFCNPJ, LocalDateTime dhEmi, BigDecimal vNF, BigDecimal vICMS, byte[] digestValue, String tokenID, String token) throws RFWException {
     return generateQRCodeData(uf, env, chave, destCPFCNPJ, SEFAZUtils.formatDateUTC(dhEmi), vNF, vICMS, digestValue, tokenID, token);
   }
 
@@ -279,7 +275,7 @@ public class SEFAZUtils {
    *
    * @return
    */
-  public static String generateQRCodeData(SefazXMLUF uf, SefazXMLtpAmb env, String chave, String destCPFCNPJ, Date dhEmi, BigDecimal vNF, BigDecimal vICMS, byte[] digestValue, String tokenID, String token) throws RFWException {
+  public static String generateQRCodeData(SefazXMLUF uf, SEFAZ_tpAmb env, String chave, String destCPFCNPJ, Date dhEmi, BigDecimal vNF, BigDecimal vICMS, byte[] digestValue, String tokenID, String token) throws RFWException {
     return generateQRCodeData(uf, env, chave, destCPFCNPJ, SEFAZUtils.formatDateUTC(dhEmi), vNF, vICMS, digestValue, tokenID, token);
   }
 
@@ -299,35 +295,33 @@ public class SEFAZUtils {
    *
    * @return
    */
-  public static String generateQRCodeData(SefazXMLUF uf, SefazXMLtpAmb env, String chave, String destCPFCNPJ, String dhEmi, BigDecimal vNF, BigDecimal vICMS, byte[] digestValue, String tokenID, String token) throws RFWException {
+  public static String generateQRCodeData(SefazXMLUF uf, SEFAZ_tpAmb env, String chave, String destCPFCNPJ, String dhEmi, BigDecimal vNF, BigDecimal vICMS, byte[] digestValue, String tokenID, String token) throws RFWException {
     // Parte 1: Endereço de consulta
     String address = null;
     if (uf == SefazXMLUF.SP) {
-      if (env == SefazXMLtpAmb.TEST) {
+      if (env == SEFAZ_tpAmb.HOMOLOGACAO) {
         address = "https://www.homologacao.nfce.fazenda.sp.gov.br/NFCeConsultaPublica/Paginas/ConsultaQRCode.aspx?";
-      } else if (env == SefazXMLtpAmb.PRODUCTION) {
+      } else if (env == SEFAZ_tpAmb.PRODUCAO) {
         address = "https://www.nfce.fazenda.sp.gov.br/NFCeConsultaPublica/Paginas/ConsultaQRCode.aspx?";
       }
     } else if (uf == SefazXMLUF.RS) {
-      if (env == SefazXMLtpAmb.TEST) {
+      if (env == SEFAZ_tpAmb.HOMOLOGACAO) {
         address = "https://www.sefaz.rs.gov.br/NFCE/NFCE-COM.aspx?";
-      } else if (env == SefazXMLtpAmb.PRODUCTION) {
+      } else if (env == SEFAZ_tpAmb.PRODUCAO) {
         address = "https://www.sefaz.rs.gov.br/NFCE/NFCE-COM.aspx?";
       }
     }
 
     // Valida se temos um endereço
     if (address == null) {
-      throw new RFWCriticalException("BISModules_000095", new String[] {
-          "" + uf, "" + env
-      });
+      throw new RFWCriticalException("BISModules_000095", new String[] { "" + uf, "" + env });
     }
 
     // Parte 2: Parametros
     final StringBuilder buff = new StringBuilder();
     buff.append("chNFe=").append(chave);
     buff.append("&nVersao=100");
-    buff.append("&tpAmb=").append(env.getXmlCode());
+    buff.append("&tpAmb=").append(env.getXMLData());
     if (destCPFCNPJ != null) buff.append("&cDest=").append(destCPFCNPJ);
     buff.append("&dhEmi=").append(RUString.toHex(dhEmi));
     buff.append("&vNF=").append(vNF.toString());

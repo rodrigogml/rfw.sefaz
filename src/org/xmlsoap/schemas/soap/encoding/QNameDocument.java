@@ -17,7 +17,7 @@ package org.xmlsoap.schemas.soap.encoding;
 public interface QNameDocument extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(QNameDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.sEFCDAED2C0E05766DBBB52445BF22916").resolveHandle("qname0340doctype");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(QNameDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s98FF35AE5AB5E38245F0BABFDADAE80B").resolveHandle("qname0340doctype");
     
     /**
      * Gets the "QName" element

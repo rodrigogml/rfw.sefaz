@@ -14,7 +14,7 @@ import br.eng.rodrigogml.rfw.kernel.interfaces.RFWCertificate;
 import br.eng.rodrigogml.rfw.kernel.preprocess.PreProcess;
 import br.eng.rodrigogml.rfw.kernel.utils.RUFile;
 import br.eng.rodrigogml.rfw.sefaz.SEFAZDefinitions.SefazWebServices;
-import br.eng.rodrigogml.rfw.sefaz.SEFAZDefinitions.SefazXMLtpAmb;
+import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_tpAmb;
 
 import xsdobjects.consCad200.TRetConsCad;
 import xsdobjects.consStatServ400.TRetConsStatServ;
@@ -69,7 +69,7 @@ public class SEFAZTest {
 
   @Test
   public void t00_consultaCadastroCPF() throws RFWException {
-    SEFAZ sefaz = new SEFAZ(cert, SefazWebServices.SP, SefazXMLtpAmb.TEST);
+    SEFAZ sefaz = new SEFAZ(cert, SefazWebServices.SP, SEFAZ_tpAmb.HOMOLOGACAO);
 
     final String cpf = "12345678910";
     TRetConsCad root = sefaz.consultaCadastroV200byCPF(cpf);
@@ -79,7 +79,7 @@ public class SEFAZTest {
 
   @Test
   public void t01_consultaCadastroCNPJ() throws RFWException {
-    SEFAZ sefaz = new SEFAZ(cert, SefazWebServices.SP, SefazXMLtpAmb.TEST);
+    SEFAZ sefaz = new SEFAZ(cert, SefazWebServices.SP, SEFAZ_tpAmb.HOMOLOGACAO);
 
     final String cnpj = "45990181000189";
     TRetConsCad root = sefaz.consultaCadastroV200byCNPJ(cnpj);
@@ -89,7 +89,7 @@ public class SEFAZTest {
 
   @Test
   public void t02_consultaCadastroCPF() throws RFWException {
-    SEFAZ sefaz = new SEFAZ(cert, SefazWebServices.SP, SefazXMLtpAmb.TEST);
+    SEFAZ sefaz = new SEFAZ(cert, SefazWebServices.SP, SEFAZ_tpAmb.HOMOLOGACAO);
 
     TRetConsStatServ root = sefaz.nfeStatusServicoNFV400();
     assertEquals("107", root.getCStat());
