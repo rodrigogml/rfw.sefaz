@@ -1,509 +1,497 @@
-/*
- *
- */
 package br.eng.rodrigogml.rfw.sefaz.vo;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 import br.eng.rodrigogml.rfw.kernel.rfwmeta.RFWMetaBigDecimalField;
 import br.eng.rodrigogml.rfw.kernel.rfwmeta.RFWMetaEnumField;
+import br.eng.rodrigogml.rfw.kernel.rfwmeta.RFWMetaRelationshipField;
+import br.eng.rodrigogml.rfw.kernel.rfwmeta.RFWMetaRelationshipField.RelationshipTypes;
 import br.eng.rodrigogml.rfw.kernel.vo.RFWVO;
 import br.eng.rodrigogml.rfw.orm.dao.annotations.dao.RFWDAOAnnotation;
-import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_CSOSN;
 import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_CST_ICMS;
 import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_orig;
 
 /**
- * Representa o grupo {@code ICMSST} (ID N10b) da NF-e.
- * <p>
- * Grupo de repasse do ICMS ST retido anteriormente em operações interestaduais com repasses através do Substituto Tributário.
- * </p>
- * <p>
- * Baseado no MOC 7.0 - Anexo I (versão 3.10, NT 2018.005 v1.0)
- * </p>
+ * Grupo N10b - ICMSST.
  *
- * @author BIS DEVil
- * @since 1.0.0
+ * Grupo de repasse de ICMS ST retido anteriormente em operações interestaduais com repasses através do Substituto Tributário (tag ICMSST / N10b).
+ * <p>
+ * Representa o ICMS ST devido para a UF de destino nas operações interestaduais de produtos que tiveram retenção antecipada de ICMS por ST na UF do remetente, com repasse via substituto tributário (v2.0 e NT 2018.005).
+ *
+ * Observação: nas annotations o atributo {@code required} é sempre definido como false conforme solicitado, mesmo que o MOC defina obrigatoriedade.
  */
 @RFWDAOAnnotation(schema = "_RFW.SEFAZ", table = "sefaz_icmsst")
-public class ICMSSTVO extends RFWVO {
+public class ICMSSTVO extends RFWVO implements Serializable {
 
-  private static final long serialVersionUID = -3412928360482758310L;
+  private static final long serialVersionUID = 1L;
 
   /**
-   * ID: N11<br>
-   * Campo: orig<br>
-   * Descrição: Origem da mercadoria.
+   * Relação com o ICMS da operação (tag ICMS / N01). Associação pai para o grupo ICMSST.
    */
-  @RFWMetaEnumField(caption = "Origem da mercadoria", required = false)
-  private SEFAZ_orig orig = null;
+  @RFWMetaRelationshipField(caption = "ICMS", relationship = RelationshipTypes.PARENT_ASSOCIATION, required = true, column = "idsefaz_icms")
+  private ICMSVO icmsVO = null;
 
   /**
-   * ID: N12<br>
-   * Campo: CST<br>
-   * Descrição: Situação tributária do ICMS.<br>
-   * Valores válidos para este grupo: 41 = Não tributada; 60 = ICMS cobrado anteriormente por substituição tributária.
+   * N11 - orig. Origem da mercadoria. Ocor.: 1–1 / Tam.: 1 / Tipo: N. Ver valores em {@link SEFAZ_orig}. <br>
+   * Utilizada no contexto do repasse de ICMS ST retido anteriormente, em operações interestaduais com substituto tributário.
    */
-  @RFWMetaEnumField(caption = "Situação tributária ICMS", required = false)
-  private SEFAZ_CST_ICMS cst = null;
+  @RFWMetaEnumField(caption = "Origem da mercadoria (ICMS ST)", required = false)
+  private SEFAZ_orig orig;
 
   /**
-   * ID: N26<br>
-   * Campo: vBCSTRet<br>
-   * Descrição: Valor da base de cálculo do ICMS ST retido na UF remetente.
+   * N12 - CST. Tributação do ICMS. Ocor.: 1–1 / Tam.: 2 / Tipo: N. <br>
+   * Valores permitidos para ICMSST: <br>
+   * 41 – Não tributada; <br>
+   * 60 – Cobrado anteriormente por substituição tributária. <br>
+   * Mapeado para {@link SEFAZ_CST_ICMS}.
    */
-  @RFWMetaBigDecimalField(caption = "Base de cálculo ICMS ST retido UF remetente", required = false, maxValue = "9999999999999.99", minValue = "0", scale = 2, absolute = true)
-  private BigDecimal vBCSTRet = null;
+  @RFWMetaEnumField(caption = "CST do ICMS (ICMS ST)", required = false)
+  private SEFAZ_CST_ICMS cst;
 
   /**
-   * ID: N26a<br>
-   * Campo: pST<br>
-   * Descrição: Alíquota suportada pelo consumidor final (%).
+   * N26 - vBCSTRet. Valor da base de cálculo do ICMS ST retido na UF remetente. <br>
+   * Ocor.: 1–1 / Tam.: 13v2 / Tipo: N. <br>
+   * Informar o valor da BC do ICMS ST que foi retido antecipadamente na UF de origem.
    */
-  @RFWMetaBigDecimalField(caption = "Alíquota suportada pelo consumidor final (%)", required = false, maxValue = "999.9999", minValue = "0", scale = 2, scaleMax = 4, absolute = true)
-  private BigDecimal pST = null;
+  @RFWMetaBigDecimalField(caption = "BC do ICMS ST retido na UF remetente", required = false, unique = false, scale = 2, absolute = true)
+  private BigDecimal vbcSTRet;
 
   /**
-   * ID: N26b<br>
-   * Campo: vICMSSubstituto<br>
-   * Descrição: Valor do ICMS próprio do substituto.
+   * N26a - pST. Alíquota suportada pelo consumidor final. Ocor.: 0–1 / Tam.: 3v2–4 / Tipo: N. <br>
+   * Deve ser informada a alíquota do cálculo do ICMS-ST, já incluindo o FCP quando incidir sobre a mercadoria. Ex.: 18% ICMS + 2% FCP informar 20%.
    */
-  @RFWMetaBigDecimalField(caption = "Valor ICMS próprio do substituto", required = false, maxValue = "9999999999999.99", minValue = "0", scale = 2, absolute = true)
-  private BigDecimal vICMSSubstituto = null;
+  @RFWMetaBigDecimalField(caption = "Alíquota suportada pelo consumidor final (pST)", required = false, unique = false, scaleMax = 4, absolute = true)
+  private BigDecimal pst;
 
   /**
-   * ID: N27<br>
-   * Campo: vICMSSTRet<br>
-   * Descrição: Valor do ICMS ST retido na UF remetente.
+   * N26b - vICMSSubstituto. Valor do ICMS próprio do substituto. Ocor.: 0–1 / Tam.: 13v2 / Tipo: N. <br>
+   * Valor do ICMS próprio do substituto tributário cobrado em operação anterior.
    */
-  @RFWMetaBigDecimalField(caption = "Valor ICMS ST retido UF remetente", required = false, maxValue = "9999999999999.99", minValue = "0", scale = 2, absolute = true)
-  private BigDecimal vICMSSTRet = null;
+  @RFWMetaBigDecimalField(caption = "Valor do ICMS próprio do substituto", required = false, unique = false, scale = 2, absolute = true)
+  private BigDecimal vicmsSubstituto;
 
   /**
-   * ID: N27b<br>
-   * Campo: vBCFCPSTRet<br>
-   * Descrição: Valor da base de cálculo do FCP retido anteriormente por substituição tributária.
+   * N27 - vICMSSTRet. Valor do ICMS ST retido na UF remetente. Ocor.: 1–1 / Tam.: 13v2 / Tipo: N. <br>
+   * Informar o valor do ICMS ST retido antecipadamente na UF de origem.
    */
-  @RFWMetaBigDecimalField(caption = "Base de cálculo FCP retido anteriormente ST", required = false, maxValue = "9999999999999.99", minValue = "0", scale = 2, absolute = true)
-  private BigDecimal vBCFCPSTRet = null;
+  @RFWMetaBigDecimalField(caption = "Valor do ICMS ST retido na UF remetente", required = false, unique = false, scale = 2, absolute = true)
+  private BigDecimal vicmsSTRet;
 
   /**
-   * ID: N27c<br>
-   * Campo: pFCPSTRet<br>
-   * Descrição: Percentual do FCP retido anteriormente por substituição tributária.
+   * N27a - vBCFCPSTRet. Valor da base de cálculo do FCP retido anteriormente por ST. <br>
+   * Ocor.: 1–1 / Tam.: 13v2 / Tipo: N. <br>
+   * Informar o valor da BC do FCP-ST retido anteriormente na UF remetente.
    */
-  @RFWMetaBigDecimalField(caption = "Percentual FCP retido anteriormente ST (%)", required = false, maxValue = "999.9999", minValue = "0", scale = 2, scaleMax = 4, absolute = true)
-  private BigDecimal pFCPSTRet = null;
+  @RFWMetaBigDecimalField(caption = "BC do FCP ST retido anteriormente", required = false, unique = false, scale = 2, absolute = true)
+  private BigDecimal vbcFCPSTRet;
 
   /**
-   * ID: N27d<br>
-   * Campo: vFCPSTRet<br>
-   * Descrição: Valor do FCP retido por substituição tributária.
+   * N27b - pFCPSTRet. Percentual do FCP retido anteriormente por substituição tributária. <br>
+   * Ocor.: 1–1 / Tam.: 3v2–4 / Tipo: N. <br>
+   * Percentual relativo ao Fundo de Combate à Pobreza (FCP) retido por ST.
    */
-  @RFWMetaBigDecimalField(caption = "Valor FCP retido ST", required = false, maxValue = "9999999999999.99", minValue = "0", scale = 2, absolute = true)
-  private BigDecimal vFCPSTRet = null;
+  @RFWMetaBigDecimalField(caption = "Percentual do FCP ST retido anteriormente", required = false, unique = false, scaleMax = 4, absolute = true)
+  private BigDecimal pfcpSTRet;
 
   /**
-   * ID: N31<br>
-   * Campo: vBCSTDest<br>
-   * Descrição: Valor da base de cálculo do ICMS ST da UF destino.
+   * N27d - vFCPSTRet. Valor do FCP retido por substituição tributária. <br>
+   * Ocor.: 1–1 / Tam.: 13v2 / Tipo: N. <br>
+   * Valor do ICMS relativo ao FCP retido anteriormente por ST.
    */
-  @RFWMetaBigDecimalField(caption = "Base de cálculo ICMS ST UF destino", required = false, maxValue = "9999999999999.99", minValue = "0", scale = 2, absolute = true)
-  private BigDecimal vBCSTDest = null;
+  @RFWMetaBigDecimalField(caption = "Valor do FCP ST retido anteriormente", required = false, unique = false, scale = 2, absolute = true)
+  private BigDecimal vfcpSTRet;
 
   /**
-   * ID: N32<br>
-   * Campo: vICMSSTDest<br>
-   * Descrição: Valor do ICMS ST da UF destino.
+   * N31 - vBCSTDest. Valor da base de cálculo do ICMS ST da UF de destino. <br>
+   * Ocor.: 1–1 / Tam.: 13v2 / Tipo: N. <br>
+   * Base de cálculo do ICMS ST considerada para a UF de destino na operação interestadual.
    */
-  @RFWMetaBigDecimalField(caption = "Valor ICMS ST UF destino", required = false, maxValue = "9999999999999.99", minValue = "0", scale = 2, absolute = true)
-  private BigDecimal vICMSSTDest = null;
+  @RFWMetaBigDecimalField(caption = "BC do ICMS ST da UF destino", required = false, unique = false, scale = 2, absolute = true)
+  private BigDecimal vbcSTDest;
 
   /**
-   * ID: N12a<br>
-   * Código de Situação da Operação – Simples Nacional (CSOSN).<br>
-   * Utilizado apenas quando o contribuinte está no regime do Simples Nacional (grupos ICMSSN101, ICMSSN102, ICMSSN201, ICMSSN202, ICMSSN500 e ICMSSN900).<br>
-   * Valores conforme {@link SEFAZ_CSOSN}.
+   * N32 - vICMSSTDest. Valor do ICMS ST da UF de destino. <br>
+   * Ocor.: 1–1 / Tam.: 13v2 / Tipo: N. <br>
+   * Valor do ICMS ST devido à UF de destino na operação interestadual.
    */
-  @RFWMetaEnumField(caption = "Situação operação SN", required = false)
-  private SEFAZ_CSOSN csosn = null;
+  @RFWMetaBigDecimalField(caption = "Valor do ICMS ST da UF destino", required = false, unique = false, scale = 2, absolute = true)
+  private BigDecimal vicmsSTDest;
 
   /**
-   * ID: N29 (ICMSSN101 / ICMSSN201 / ICMSSN202 / ICMSSN900)<br>
-   * Alíquota aplicável de cálculo do crédito no Simples Nacional (pCredSN).<br>
-   * Tamanho 3v2-4.
+   * N34 - pRedBCEfet. Percentual de redução da base de cálculo efetiva. <br>
+   * Ocor.: 1–1 / Tam.: 3v2–4 / Tipo: N. <br>
+   * Percentual de redução que seria aplicado caso a operação estivesse submetida ao regime comum, para obtenção da base de cálculo efetiva (vBCEfet). Campo opcional, a critério da UF.
    */
-  @RFWMetaBigDecimalField(caption = "Alíquota crédito SN", required = false, minValue = "0", scale = 2, scaleMax = 4, absolute = true)
-  private BigDecimal pCredSN = null;
+  @RFWMetaBigDecimalField(caption = "Percentual de redução da BC efetiva (ICMS ST)", required = false, unique = false, scaleMax = 4, absolute = true)
+  private BigDecimal predBCEfet;
 
   /**
-   * ID: N30 (ICMSSN101 / ICMSSN201 / ICMSSN202 / ICMSSN900)<br>
-   * Valor de crédito do ICMS no Simples Nacional (vCredICMSSN).<br>
-   * Tamanho 13v2.
+   * N35 - vBCEfet. Valor da base de cálculo efetiva. <br>
+   * Ocor.: 1–1 / Tam.: 13v2 / Tipo: N. <br>
+   * Valor da base que seria atribuída à operação própria do contribuinte substituto, caso estivesse no regime comum, obtida por vProd × (1 - pRedBCEfet). Campo opcional, a critério da UF.
    */
-  @RFWMetaBigDecimalField(caption = "Crédito ICMS SN", required = false, minValue = "0", scale = 2, absolute = true)
-  private BigDecimal vCredICMSSN = null;
+  @RFWMetaBigDecimalField(caption = "Base de cálculo efetiva (ICMS ST)", required = false, unique = false, scale = 2, absolute = true)
+  private BigDecimal vbcfet;
 
   /**
-   * # iD: N11<br>
-   * Campo: orig<br>
-   * Descrição: Origem da mercadoria.
+   * N36 - pICMSEfet. Alíquota efetiva do ICMS. <br>
+   * Ocor.: 1–1 / Tam.: 3v2–4 / Tipo: N. <br>
+   * Alíquota que seria aplicada à operação a consumidor final, caso estivesse submetida ao regime comum de tributação. Campo opcional, a critério da UF.
+   */
+  @RFWMetaBigDecimalField(caption = "Alíquota efetiva do ICMS (ICMS ST)", required = false, unique = false, scaleMax = 4, absolute = true)
+  private BigDecimal picmsEfet;
+
+  /**
+   * N37 - vICMSEfet. Valor do ICMS efetivo. <br>
+   * Ocor.: 1–1 / Tam.: 13v2 / Tipo: N. <br>
+   * Obtido pelo produto de vBCEfet por pICMSEfet, simulando a tributação no regime comum. Campo opcional, a critério da UF.
+   */
+  @RFWMetaBigDecimalField(caption = "Valor do ICMS efetivo (ICMS ST)", required = false, unique = false, scale = 2, absolute = true)
+  private BigDecimal vicmsEfet;
+
+  /**
+   * # relação com o ICMS da operação (tag ICMS / N01). Associação pai para o grupo ICMSST.
    *
-   * @return the iD: N11<br>
-   *         Campo: orig<br>
-   *         Descrição: Origem da mercadoria
+   * @return the relação com o ICMS da operação (tag ICMS / N01)
+   */
+  public ICMSVO getIcmsVO() {
+    return icmsVO;
+  }
+
+  /**
+   * # relação com o ICMS da operação (tag ICMS / N01). Associação pai para o grupo ICMSST.
+   *
+   * @param icmsVO the new relação com o ICMS da operação (tag ICMS / N01)
+   */
+  public void setIcmsVO(ICMSVO icmsVO) {
+    this.icmsVO = icmsVO;
+  }
+
+  /**
+   * # n11 - orig. Origem da mercadoria. Ocor.: 1–1 / Tam.: 1 / Tipo: N. Ver valores em {@link SEFAZ_orig}. <br>
+   * Utilizada no contexto do repasse de ICMS ST retido anteriormente, em operações interestaduais com substituto tributário.
+   *
+   * @return the n11 - orig
    */
   public SEFAZ_orig getOrig() {
     return orig;
   }
 
   /**
-   * # iD: N11<br>
-   * Campo: orig<br>
-   * Descrição: Origem da mercadoria.
+   * # n11 - orig. Origem da mercadoria. Ocor.: 1–1 / Tam.: 1 / Tipo: N. Ver valores em {@link SEFAZ_orig}. <br>
+   * Utilizada no contexto do repasse de ICMS ST retido anteriormente, em operações interestaduais com substituto tributário.
    *
-   * @param orig the new iD: N11<br>
-   *          Campo: orig<br>
-   *          Descrição: Origem da mercadoria
+   * @param orig the new n11 - orig
    */
   public void setOrig(SEFAZ_orig orig) {
     this.orig = orig;
   }
 
   /**
-   * # iD: N12<br>
-   * Campo: CST<br>
-   * Descrição: Situação tributária do ICMS.<br>
-   * Valores válidos para este grupo: 41 = Não tributada; 60 = ICMS cobrado anteriormente por substituição tributária.
+   * # n12 - CST. Tributação do ICMS. Ocor.: 1–1 / Tam.: 2 / Tipo: N. <br>
+   * Valores permitidos para ICMSST: <br>
+   * 41 – Não tributada; <br>
+   * 60 – Cobrado anteriormente por substituição tributária. <br>
+   * Mapeado para {@link SEFAZ_CST_ICMS}.
    *
-   * @return the iD: N12<br>
-   *         Campo: CST<br>
-   *         Descrição: Situação tributária do ICMS
+   * @return the n12 - CST
    */
   public SEFAZ_CST_ICMS getCst() {
     return cst;
   }
 
   /**
-   * # iD: N12<br>
-   * Campo: CST<br>
-   * Descrição: Situação tributária do ICMS.<br>
-   * Valores válidos para este grupo: 41 = Não tributada; 60 = ICMS cobrado anteriormente por substituição tributária.
+   * # n12 - CST. Tributação do ICMS. Ocor.: 1–1 / Tam.: 2 / Tipo: N. <br>
+   * Valores permitidos para ICMSST: <br>
+   * 41 – Não tributada; <br>
+   * 60 – Cobrado anteriormente por substituição tributária. <br>
+   * Mapeado para {@link SEFAZ_CST_ICMS}.
    *
-   * @param cst the new iD: N12<br>
-   *          Campo: CST<br>
-   *          Descrição: Situação tributária do ICMS
+   * @param cst the new n12 - CST
    */
   public void setCst(SEFAZ_CST_ICMS cst) {
     this.cst = cst;
   }
 
   /**
-   * # iD: N26<br>
-   * Campo: vBCSTRet<br>
-   * Descrição: Valor da base de cálculo do ICMS ST retido na UF remetente.
+   * # n26 - vBCSTRet. Valor da base de cálculo do ICMS ST retido na UF remetente. <br>
+   * Ocor.: 1–1 / Tam.: 13v2 / Tipo: N. <br>
+   * Informar o valor da BC do ICMS ST que foi retido antecipadamente na UF de origem.
    *
-   * @return the iD: N26<br>
-   *         Campo: vBCSTRet<br>
-   *         Descrição: Valor da base de cálculo do ICMS ST retido na UF remetente
+   * @return the n26 - vBCSTRet
    */
-  public BigDecimal getVBCSTRet() {
-    return vBCSTRet;
+  public BigDecimal getVbcSTRet() {
+    return vbcSTRet;
   }
 
   /**
-   * # iD: N26<br>
-   * Campo: vBCSTRet<br>
-   * Descrição: Valor da base de cálculo do ICMS ST retido na UF remetente.
+   * # n26 - vBCSTRet. Valor da base de cálculo do ICMS ST retido na UF remetente. <br>
+   * Ocor.: 1–1 / Tam.: 13v2 / Tipo: N. <br>
+   * Informar o valor da BC do ICMS ST que foi retido antecipadamente na UF de origem.
    *
-   * @param vBCSTRet the new iD: N26<br>
-   *          Campo: vBCSTRet<br>
-   *          Descrição: Valor da base de cálculo do ICMS ST retido na UF remetente
+   * @param vbcSTRet the new n26 - vBCSTRet
    */
-  public void setVBCSTRet(BigDecimal vBCSTRet) {
-    this.vBCSTRet = vBCSTRet;
+  public void setVbcSTRet(BigDecimal vbcSTRet) {
+    this.vbcSTRet = vbcSTRet;
   }
 
   /**
-   * # iD: N26a<br>
-   * Campo: pST<br>
-   * Descrição: Alíquota suportada pelo consumidor final (%).
+   * # n26a - pST. Alíquota suportada pelo consumidor final. Ocor.: 0–1 / Tam.: 3v2–4 / Tipo: N. <br>
+   * Deve ser informada a alíquota do cálculo do ICMS-ST, já incluindo o FCP quando incidir sobre a mercadoria. Ex.: 18% ICMS + 2% FCP informar 20%.
    *
-   * @return the iD: N26a<br>
-   *         Campo: pST<br>
-   *         Descrição: Alíquota suportada pelo consumidor final (%)
+   * @return the n26a - pST
    */
-  public BigDecimal getPST() {
-    return pST;
+  public BigDecimal getPst() {
+    return pst;
   }
 
   /**
-   * # iD: N26a<br>
-   * Campo: pST<br>
-   * Descrição: Alíquota suportada pelo consumidor final (%).
+   * # n26a - pST. Alíquota suportada pelo consumidor final. Ocor.: 0–1 / Tam.: 3v2–4 / Tipo: N. <br>
+   * Deve ser informada a alíquota do cálculo do ICMS-ST, já incluindo o FCP quando incidir sobre a mercadoria. Ex.: 18% ICMS + 2% FCP informar 20%.
    *
-   * @param pST the new iD: N26a<br>
-   *          Campo: pST<br>
-   *          Descrição: Alíquota suportada pelo consumidor final (%)
+   * @param pst the new n26a - pST
    */
-  public void setPST(BigDecimal pST) {
-    this.pST = pST;
+  public void setPst(BigDecimal pst) {
+    this.pst = pst;
   }
 
   /**
-   * # iD: N26b<br>
-   * Campo: vICMSSubstituto<br>
-   * Descrição: Valor do ICMS próprio do substituto.
+   * # n26b - vICMSSubstituto. Valor do ICMS próprio do substituto. Ocor.: 0–1 / Tam.: 13v2 / Tipo: N. <br>
+   * Valor do ICMS próprio do substituto tributário cobrado em operação anterior.
    *
-   * @return the iD: N26b<br>
-   *         Campo: vICMSSubstituto<br>
-   *         Descrição: Valor do ICMS próprio do substituto
+   * @return the n26b - vICMSSubstituto
    */
-  public BigDecimal getVICMSSubstituto() {
-    return vICMSSubstituto;
+  public BigDecimal getVicmsSubstituto() {
+    return vicmsSubstituto;
   }
 
   /**
-   * # iD: N26b<br>
-   * Campo: vICMSSubstituto<br>
-   * Descrição: Valor do ICMS próprio do substituto.
+   * # n26b - vICMSSubstituto. Valor do ICMS próprio do substituto. Ocor.: 0–1 / Tam.: 13v2 / Tipo: N. <br>
+   * Valor do ICMS próprio do substituto tributário cobrado em operação anterior.
    *
-   * @param vICMSSubstituto the new iD: N26b<br>
-   *          Campo: vICMSSubstituto<br>
-   *          Descrição: Valor do ICMS próprio do substituto
+   * @param vicmsSubstituto the new n26b - vICMSSubstituto
    */
-  public void setVICMSSubstituto(BigDecimal vICMSSubstituto) {
-    this.vICMSSubstituto = vICMSSubstituto;
+  public void setVicmsSubstituto(BigDecimal vicmsSubstituto) {
+    this.vicmsSubstituto = vicmsSubstituto;
   }
 
   /**
-   * # iD: N27<br>
-   * Campo: vICMSSTRet<br>
-   * Descrição: Valor do ICMS ST retido na UF remetente.
+   * # n27 - vICMSSTRet. Valor do ICMS ST retido na UF remetente. Ocor.: 1–1 / Tam.: 13v2 / Tipo: N. <br>
+   * Informar o valor do ICMS ST retido antecipadamente na UF de origem.
    *
-   * @return the iD: N27<br>
-   *         Campo: vICMSSTRet<br>
-   *         Descrição: Valor do ICMS ST retido na UF remetente
+   * @return the n27 - vICMSSTRet
    */
-  public BigDecimal getVICMSSTRet() {
-    return vICMSSTRet;
+  public BigDecimal getVicmsSTRet() {
+    return vicmsSTRet;
   }
 
   /**
-   * # iD: N27<br>
-   * Campo: vICMSSTRet<br>
-   * Descrição: Valor do ICMS ST retido na UF remetente.
+   * # n27 - vICMSSTRet. Valor do ICMS ST retido na UF remetente. Ocor.: 1–1 / Tam.: 13v2 / Tipo: N. <br>
+   * Informar o valor do ICMS ST retido antecipadamente na UF de origem.
    *
-   * @param vICMSSTRet the new iD: N27<br>
-   *          Campo: vICMSSTRet<br>
-   *          Descrição: Valor do ICMS ST retido na UF remetente
+   * @param vicmsSTRet the new n27 - vICMSSTRet
    */
-  public void setVICMSSTRet(BigDecimal vICMSSTRet) {
-    this.vICMSSTRet = vICMSSTRet;
+  public void setVicmsSTRet(BigDecimal vicmsSTRet) {
+    this.vicmsSTRet = vicmsSTRet;
   }
 
   /**
-   * # iD: N27b<br>
-   * Campo: vBCFCPSTRet<br>
-   * Descrição: Valor da base de cálculo do FCP retido anteriormente por substituição tributária.
+   * # n27a - vBCFCPSTRet. Valor da base de cálculo do FCP retido anteriormente por ST. <br>
+   * Ocor.: 1–1 / Tam.: 13v2 / Tipo: N. <br>
+   * Informar o valor da BC do FCP-ST retido anteriormente na UF remetente.
    *
-   * @return the iD: N27b<br>
-   *         Campo: vBCFCPSTRet<br>
-   *         Descrição: Valor da base de cálculo do FCP retido anteriormente por substituição tributária
+   * @return the n27a - vBCFCPSTRet
    */
-  public BigDecimal getVBCFCPSTRet() {
-    return vBCFCPSTRet;
+  public BigDecimal getVbcFCPSTRet() {
+    return vbcFCPSTRet;
   }
 
   /**
-   * # iD: N27b<br>
-   * Campo: vBCFCPSTRet<br>
-   * Descrição: Valor da base de cálculo do FCP retido anteriormente por substituição tributária.
+   * # n27a - vBCFCPSTRet. Valor da base de cálculo do FCP retido anteriormente por ST. <br>
+   * Ocor.: 1–1 / Tam.: 13v2 / Tipo: N. <br>
+   * Informar o valor da BC do FCP-ST retido anteriormente na UF remetente.
    *
-   * @param vBCFCPSTRet the new iD: N27b<br>
-   *          Campo: vBCFCPSTRet<br>
-   *          Descrição: Valor da base de cálculo do FCP retido anteriormente por substituição tributária
+   * @param vbcFCPSTRet the new n27a - vBCFCPSTRet
    */
-  public void setVBCFCPSTRet(BigDecimal vBCFCPSTRet) {
-    this.vBCFCPSTRet = vBCFCPSTRet;
+  public void setVbcFCPSTRet(BigDecimal vbcFCPSTRet) {
+    this.vbcFCPSTRet = vbcFCPSTRet;
   }
 
   /**
-   * # iD: N27c<br>
-   * Campo: pFCPSTRet<br>
-   * Descrição: Percentual do FCP retido anteriormente por substituição tributária.
+   * # n27b - pFCPSTRet. Percentual do FCP retido anteriormente por substituição tributária. <br>
+   * Ocor.: 1–1 / Tam.: 3v2–4 / Tipo: N. <br>
+   * Percentual relativo ao Fundo de Combate à Pobreza (FCP) retido por ST.
    *
-   * @return the iD: N27c<br>
-   *         Campo: pFCPSTRet<br>
-   *         Descrição: Percentual do FCP retido anteriormente por substituição tributária
+   * @return the n27b - pFCPSTRet
    */
-  public BigDecimal getPFCPSTRet() {
-    return pFCPSTRet;
+  public BigDecimal getPfcpSTRet() {
+    return pfcpSTRet;
   }
 
   /**
-   * # iD: N27c<br>
-   * Campo: pFCPSTRet<br>
-   * Descrição: Percentual do FCP retido anteriormente por substituição tributária.
+   * # n27b - pFCPSTRet. Percentual do FCP retido anteriormente por substituição tributária. <br>
+   * Ocor.: 1–1 / Tam.: 3v2–4 / Tipo: N. <br>
+   * Percentual relativo ao Fundo de Combate à Pobreza (FCP) retido por ST.
    *
-   * @param pFCPSTRet the new iD: N27c<br>
-   *          Campo: pFCPSTRet<br>
-   *          Descrição: Percentual do FCP retido anteriormente por substituição tributária
+   * @param pfcpSTRet the new n27b - pFCPSTRet
    */
-  public void setPFCPSTRet(BigDecimal pFCPSTRet) {
-    this.pFCPSTRet = pFCPSTRet;
+  public void setPfcpSTRet(BigDecimal pfcpSTRet) {
+    this.pfcpSTRet = pfcpSTRet;
   }
 
   /**
-   * # iD: N27d<br>
-   * Campo: vFCPSTRet<br>
-   * Descrição: Valor do FCP retido por substituição tributária.
+   * # n27d - vFCPSTRet. Valor do FCP retido por substituição tributária. <br>
+   * Ocor.: 1–1 / Tam.: 13v2 / Tipo: N. <br>
+   * Valor do ICMS relativo ao FCP retido anteriormente por ST.
    *
-   * @return the iD: N27d<br>
-   *         Campo: vFCPSTRet<br>
-   *         Descrição: Valor do FCP retido por substituição tributária
+   * @return the n27d - vFCPSTRet
    */
-  public BigDecimal getVFCPSTRet() {
-    return vFCPSTRet;
+  public BigDecimal getVfcpSTRet() {
+    return vfcpSTRet;
   }
 
   /**
-   * # iD: N27d<br>
-   * Campo: vFCPSTRet<br>
-   * Descrição: Valor do FCP retido por substituição tributária.
+   * # n27d - vFCPSTRet. Valor do FCP retido por substituição tributária. <br>
+   * Ocor.: 1–1 / Tam.: 13v2 / Tipo: N. <br>
+   * Valor do ICMS relativo ao FCP retido anteriormente por ST.
    *
-   * @param vFCPSTRet the new iD: N27d<br>
-   *          Campo: vFCPSTRet<br>
-   *          Descrição: Valor do FCP retido por substituição tributária
+   * @param vfcpSTRet the new n27d - vFCPSTRet
    */
-  public void setVFCPSTRet(BigDecimal vFCPSTRet) {
-    this.vFCPSTRet = vFCPSTRet;
+  public void setVfcpSTRet(BigDecimal vfcpSTRet) {
+    this.vfcpSTRet = vfcpSTRet;
   }
 
   /**
-   * # iD: N31<br>
-   * Campo: vBCSTDest<br>
-   * Descrição: Valor da base de cálculo do ICMS ST da UF destino.
+   * # n31 - vBCSTDest. Valor da base de cálculo do ICMS ST da UF de destino. <br>
+   * Ocor.: 1–1 / Tam.: 13v2 / Tipo: N. <br>
+   * Base de cálculo do ICMS ST considerada para a UF de destino na operação interestadual.
    *
-   * @return the iD: N31<br>
-   *         Campo: vBCSTDest<br>
-   *         Descrição: Valor da base de cálculo do ICMS ST da UF destino
+   * @return the n31 - vBCSTDest
    */
-  public BigDecimal getVBCSTDest() {
-    return vBCSTDest;
+  public BigDecimal getVbcSTDest() {
+    return vbcSTDest;
   }
 
   /**
-   * # iD: N31<br>
-   * Campo: vBCSTDest<br>
-   * Descrição: Valor da base de cálculo do ICMS ST da UF destino.
+   * # n31 - vBCSTDest. Valor da base de cálculo do ICMS ST da UF de destino. <br>
+   * Ocor.: 1–1 / Tam.: 13v2 / Tipo: N. <br>
+   * Base de cálculo do ICMS ST considerada para a UF de destino na operação interestadual.
    *
-   * @param vBCSTDest the new iD: N31<br>
-   *          Campo: vBCSTDest<br>
-   *          Descrição: Valor da base de cálculo do ICMS ST da UF destino
+   * @param vbcSTDest the new n31 - vBCSTDest
    */
-  public void setVBCSTDest(BigDecimal vBCSTDest) {
-    this.vBCSTDest = vBCSTDest;
+  public void setVbcSTDest(BigDecimal vbcSTDest) {
+    this.vbcSTDest = vbcSTDest;
   }
 
   /**
-   * # iD: N32<br>
-   * Campo: vICMSSTDest<br>
-   * Descrição: Valor do ICMS ST da UF destino.
+   * # n32 - vICMSSTDest. Valor do ICMS ST da UF de destino. <br>
+   * Ocor.: 1–1 / Tam.: 13v2 / Tipo: N. <br>
+   * Valor do ICMS ST devido à UF de destino na operação interestadual.
    *
-   * @return the iD: N32<br>
-   *         Campo: vICMSSTDest<br>
-   *         Descrição: Valor do ICMS ST da UF destino
+   * @return the n32 - vICMSSTDest
    */
-  public BigDecimal getVICMSSTDest() {
-    return vICMSSTDest;
+  public BigDecimal getVicmsSTDest() {
+    return vicmsSTDest;
   }
 
   /**
-   * # iD: N32<br>
-   * Campo: vICMSSTDest<br>
-   * Descrição: Valor do ICMS ST da UF destino.
+   * # n32 - vICMSSTDest. Valor do ICMS ST da UF de destino. <br>
+   * Ocor.: 1–1 / Tam.: 13v2 / Tipo: N. <br>
+   * Valor do ICMS ST devido à UF de destino na operação interestadual.
    *
-   * @param vICMSSTDest the new iD: N32<br>
-   *          Campo: vICMSSTDest<br>
-   *          Descrição: Valor do ICMS ST da UF destino
+   * @param vicmsSTDest the new n32 - vICMSSTDest
    */
-  public void setVICMSSTDest(BigDecimal vICMSSTDest) {
-    this.vICMSSTDest = vICMSSTDest;
+  public void setVicmsSTDest(BigDecimal vicmsSTDest) {
+    this.vicmsSTDest = vicmsSTDest;
   }
 
   /**
-   * # iD: N12a<br>
-   * Código de Situação da Operação – Simples Nacional (CSOSN).<br>
-   * Utilizado apenas quando o contribuinte está no regime do Simples Nacional (grupos ICMSSN101, ICMSSN102, ICMSSN201, ICMSSN202, ICMSSN500 e ICMSSN900).<br>
-   * Valores conforme {@link SEFAZ_CSOSN}.
+   * # n34 - pRedBCEfet. Percentual de redução da base de cálculo efetiva. <br>
+   * Ocor.: 1–1 / Tam.: 3v2–4 / Tipo: N. <br>
+   * Percentual de redução que seria aplicado caso a operação estivesse submetida ao regime comum, para obtenção da base de cálculo efetiva (vBCEfet). Campo opcional, a critério da UF.
    *
-   * @return the iD: N12a<br>
-   *         Código de Situação da Operação – Simples Nacional (CSOSN)
+   * @return the n34 - pRedBCEfet
    */
-  public SEFAZ_CSOSN getCsosn() {
-    return csosn;
+  public BigDecimal getPredBCEfet() {
+    return predBCEfet;
   }
 
   /**
-   * # iD: N12a<br>
-   * Código de Situação da Operação – Simples Nacional (CSOSN).<br>
-   * Utilizado apenas quando o contribuinte está no regime do Simples Nacional (grupos ICMSSN101, ICMSSN102, ICMSSN201, ICMSSN202, ICMSSN500 e ICMSSN900).<br>
-   * Valores conforme {@link SEFAZ_CSOSN}.
+   * # n34 - pRedBCEfet. Percentual de redução da base de cálculo efetiva. <br>
+   * Ocor.: 1–1 / Tam.: 3v2–4 / Tipo: N. <br>
+   * Percentual de redução que seria aplicado caso a operação estivesse submetida ao regime comum, para obtenção da base de cálculo efetiva (vBCEfet). Campo opcional, a critério da UF.
    *
-   * @param csosn the new iD: N12a<br>
-   *          Código de Situação da Operação – Simples Nacional (CSOSN)
+   * @param predBCEfet the new n34 - pRedBCEfet
    */
-  public void setCsosn(SEFAZ_CSOSN csosn) {
-    this.csosn = csosn;
+  public void setPredBCEfet(BigDecimal predBCEfet) {
+    this.predBCEfet = predBCEfet;
   }
 
   /**
-   * # iD: N29 (ICMSSN101 / ICMSSN201 / ICMSSN202 / ICMSSN900)<br>
-   * Alíquota aplicável de cálculo do crédito no Simples Nacional (pCredSN).<br>
-   * Tamanho 3v2-4.
+   * # n35 - vBCEfet. Valor da base de cálculo efetiva. <br>
+   * Ocor.: 1–1 / Tam.: 13v2 / Tipo: N. <br>
+   * Valor da base que seria atribuída à operação própria do contribuinte substituto, caso estivesse no regime comum, obtida por vProd × (1 - pRedBCEfet). Campo opcional, a critério da UF.
    *
-   * @return the iD: N29 (ICMSSN101 / ICMSSN201 / ICMSSN202 / ICMSSN900)<br>
-   *         Alíquota aplicável de cálculo do crédito no Simples Nacional (pCredSN)
+   * @return the n35 - vBCEfet
    */
-  public BigDecimal getPCredSN() {
-    return pCredSN;
+  public BigDecimal getVbcfet() {
+    return vbcfet;
   }
 
   /**
-   * # iD: N29 (ICMSSN101 / ICMSSN201 / ICMSSN202 / ICMSSN900)<br>
-   * Alíquota aplicável de cálculo do crédito no Simples Nacional (pCredSN).<br>
-   * Tamanho 3v2-4.
+   * # n35 - vBCEfet. Valor da base de cálculo efetiva. <br>
+   * Ocor.: 1–1 / Tam.: 13v2 / Tipo: N. <br>
+   * Valor da base que seria atribuída à operação própria do contribuinte substituto, caso estivesse no regime comum, obtida por vProd × (1 - pRedBCEfet). Campo opcional, a critério da UF.
    *
-   * @param pCredSN the new iD: N29 (ICMSSN101 / ICMSSN201 / ICMSSN202 / ICMSSN900)<br>
-   *          Alíquota aplicável de cálculo do crédito no Simples Nacional (pCredSN)
+   * @param vbcfet the new n35 - vBCEfet
    */
-  public void setPCredSN(BigDecimal pCredSN) {
-    this.pCredSN = pCredSN;
+  public void setVbcfet(BigDecimal vbcfet) {
+    this.vbcfet = vbcfet;
   }
 
   /**
-   * # iD: N30 (ICMSSN101 / ICMSSN201 / ICMSSN202 / ICMSSN900)<br>
-   * Valor de crédito do ICMS no Simples Nacional (vCredICMSSN).<br>
-   * Tamanho 13v2.
+   * # n36 - pICMSEfet. Alíquota efetiva do ICMS. <br>
+   * Ocor.: 1–1 / Tam.: 3v2–4 / Tipo: N. <br>
+   * Alíquota que seria aplicada à operação a consumidor final, caso estivesse submetida ao regime comum de tributação. Campo opcional, a critério da UF.
    *
-   * @return the iD: N30 (ICMSSN101 / ICMSSN201 / ICMSSN202 / ICMSSN900)<br>
-   *         Valor de crédito do ICMS no Simples Nacional (vCredICMSSN)
+   * @return the n36 - pICMSEfet
    */
-  public BigDecimal getVCredICMSSN() {
-    return vCredICMSSN;
+  public BigDecimal getPicmsEfet() {
+    return picmsEfet;
   }
 
   /**
-   * # iD: N30 (ICMSSN101 / ICMSSN201 / ICMSSN202 / ICMSSN900)<br>
-   * Valor de crédito do ICMS no Simples Nacional (vCredICMSSN).<br>
-   * Tamanho 13v2.
+   * # n36 - pICMSEfet. Alíquota efetiva do ICMS. <br>
+   * Ocor.: 1–1 / Tam.: 3v2–4 / Tipo: N. <br>
+   * Alíquota que seria aplicada à operação a consumidor final, caso estivesse submetida ao regime comum de tributação. Campo opcional, a critério da UF.
    *
-   * @param vCredICMSSN the new iD: N30 (ICMSSN101 / ICMSSN201 / ICMSSN202 / ICMSSN900)<br>
-   *          Valor de crédito do ICMS no Simples Nacional (vCredICMSSN)
+   * @param picmsEfet the new n36 - pICMSEfet
    */
-  public void setVCredICMSSN(BigDecimal vCredICMSSN) {
-    this.vCredICMSSN = vCredICMSSN;
+  public void setPicmsEfet(BigDecimal picmsEfet) {
+    this.picmsEfet = picmsEfet;
+  }
+
+  /**
+   * # n37 - vICMSEfet. Valor do ICMS efetivo. <br>
+   * Ocor.: 1–1 / Tam.: 13v2 / Tipo: N. <br>
+   * Obtido pelo produto de vBCEfet por pICMSEfet, simulando a tributação no regime comum. Campo opcional, a critério da UF.
+   *
+   * @return the n37 - vICMSEfet
+   */
+  public BigDecimal getVicmsEfet() {
+    return vicmsEfet;
+  }
+
+  /**
+   * # n37 - vICMSEfet. Valor do ICMS efetivo. <br>
+   * Ocor.: 1–1 / Tam.: 13v2 / Tipo: N. <br>
+   * Obtido pelo produto de vBCEfet por pICMSEfet, simulando a tributação no regime comum. Campo opcional, a critério da UF.
+   *
+   * @param vicmsEfet the new n37 - vICMSEfet
+   */
+  public void setVicmsEfet(BigDecimal vicmsEfet) {
+    this.vicmsEfet = vicmsEfet;
   }
 
 }

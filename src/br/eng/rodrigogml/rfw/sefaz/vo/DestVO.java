@@ -1,237 +1,294 @@
 package br.eng.rodrigogml.rfw.sefaz.vo;
 
-import java.math.BigDecimal;
+import java.io.Serializable;
 
-import br.eng.rodrigogml.rfw.kernel.rfwmeta.RFWMetaBigDecimalField;
+import br.eng.rodrigogml.rfw.kernel.preprocess.PreProcess.PreProcessOption;
 import br.eng.rodrigogml.rfw.kernel.rfwmeta.RFWMetaEnumField;
+import br.eng.rodrigogml.rfw.kernel.rfwmeta.RFWMetaRelationshipField;
+import br.eng.rodrigogml.rfw.kernel.rfwmeta.RFWMetaRelationshipField.RelationshipTypes;
+import br.eng.rodrigogml.rfw.kernel.rfwmeta.RFWMetaStringCNPJField;
+import br.eng.rodrigogml.rfw.kernel.rfwmeta.RFWMetaStringCPFField;
+import br.eng.rodrigogml.rfw.kernel.rfwmeta.RFWMetaStringEmailField;
 import br.eng.rodrigogml.rfw.kernel.rfwmeta.RFWMetaStringField;
+import br.eng.rodrigogml.rfw.kernel.rfwmeta.RFWMetaStringIEField;
 import br.eng.rodrigogml.rfw.kernel.vo.RFWVO;
 import br.eng.rodrigogml.rfw.orm.dao.annotations.dao.RFWDAOAnnotation;
-import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_indIEDest;
+import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.IndIEDestEnum;
 
 /**
- * Tag: <b>dest</b> — Identificação do Destinatário da NF-e (Grupo E01).<br>
- * Campos principais (E02..E19). O subgrupo <b>enderDest</b> (E05) é modelado em VO próprio.
+ * Grupo E - Identificação do Destinatário da NF-e (tag dest / E01). Grupo obrigatório para a NF-e (modelo 55).
+ *
+ * Observação: a obrigatoriedade dos campos segue o MOC, mas nas annotations o atributo {@code required} é sempre definido como false conforme solicitado.
  */
 @RFWDAOAnnotation(schema = "_RFW.SEFAZ", table = "sefaz_dest")
-public class DestVO extends RFWVO {
+public class DestVO extends RFWVO implements Serializable {
 
   private static final long serialVersionUID = 1L;
 
   /**
-   * ID: E02 — CNPJ do destinatário (N, 14). Informar com zeros não significativos.
+   * {@link InfNFeVO}
    */
-  @RFWMetaBigDecimalField(caption = "CNPJ", maxValue = "99999999999999", minValue = "0", scale = 0, required = false, absolute = true)
-  private BigDecimal CNPJ = null;
+  @RFWMetaRelationshipField(caption = "InfNFe", relationship = RelationshipTypes.PARENT_ASSOCIATION, required = true, column = "idsefaz_infnfe")
+  private InfNFeVO infNFeVO = null;
 
   /**
-   * ID: E03 — CPF do destinatário (N, 11). Alternativo ao CNPJ.
+   * {@link EnderDestVO}
    */
-  @RFWMetaBigDecimalField(caption = "CPF", maxValue = "99999999999", minValue = "0", scale = 0, required = false, absolute = true)
-  private BigDecimal CPF = null;
+  @RFWMetaRelationshipField(caption = "EnderDest", relationship = RelationshipTypes.COMPOSITION, required = false, columnMapped = "idsefaz_dest")
+  private EnderDestVO enderDestVO = null;
 
   /**
-   * ID: E03a — idEstrangeiro (C, até 20). Número de passaporte ou documento válido para comprador estrangeiro. Aceita algarismos, letras (maiúsculas/minúsculas) e os caracteres [: . + - / ( )].
+   * E02 - CNPJ do destinatário. Condicional ao CPF/idEstrangeiro: informar CNPJ ou CPF do destinatário, preenchendo os zeros não significativos. No caso de operação com o exterior, ou para comprador estrangeiro, informar a tag idEstrangeiro. Ocor.: 1-1 / Tam.: 14 / Tipo: N.
    */
-  @RFWMetaStringField(caption = "Documento estrangeiro", maxLength = 20, minlength = 0, required = false, pattern = "[A-Za-z0-9:\\.\\+\\-/\\(\\)]{0,20}")
-  private String idEstrangeiro = null;
+  @RFWMetaStringCNPJField(caption = "CNPJ do destinatário", required = false, unique = false)
+  private String cnpj;
 
   /**
-   * ID: E04 — Razão Social ou nome do destinatário (C, 2–60). Obrigatório para NF-e (modelo 55) e opcional para NFC-e.
+   * E03 - CPF do destinatário. Condicional ao CNPJ/idEstrangeiro: informar CPF do destinatário quando não houver CNPJ, conforme regras da SEFAZ. Ocor.: 1-1 / Tam.: 11 / Tipo: N.
    */
-  @RFWMetaStringField(caption = "Nome/Razão Social", maxLength = 60, minlength = 2, required = false)
-  private String xNome = null;
+  @RFWMetaStringCPFField(caption = "CPF do destinatário", required = false, unique = false)
+  private String cpf;
 
   /**
-   * ID: E16a — Indicador da IE do Destinatário (N, 1). 1=Contribuinte; 2=Isento; 9=Não contribuinte.
+   * E03a - idEstrangeiro. Identificação do destinatário no caso de comprador estrangeiro. Informar no caso de operação com o exterior ou para comprador estrangeiro. Informar número do passaporte ou outro documento legal (campo aceita valor nulo). Ocor.: 1-1 / Tam.: 0,5-20 / Tipo: C. Aceita algarismos, letras (maiúsculas e minúsculas) e caracteres: [: . + - / ( )].
    */
-  @RFWMetaEnumField(caption = "Indicador IE", required = false)
-  private SEFAZ_indIEDest indIEDest = null;
+  @RFWMetaStringField(caption = "Identificação destinatário estrangeiro", required = false, unique = false, maxLength = 20, preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
+  private String idEstrangeiro;
 
   /**
-   * ID: E17 — IE do destinatário (C, 2–14). Não informar quando indIEDest=2 ou 9.
+   * E04 - xNome. Razão Social ou nome do destinatário. Tag obrigatória para a NF-e (modelo 55) e opcional para a NFC-e. Ocor.: 0-1 / Tam.: 2-60 / Tipo: C.
    */
-  @RFWMetaStringField(caption = "Inscrição Estadual", maxLength = 14, minlength = 2, required = false)
-  private String IE = null;
+  @RFWMetaStringField(caption = "Nome/Razão Social do destinatário", required = false, unique = false, maxLength = 60, preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
+  private String xnome;
 
   /**
-   * ID: E18 — ISUF (N, 8–9). Obrigatório quando houver benefícios fiscais nas áreas da SUFRAMA.
+   * E16a - indIEDest. Indicador da IE do Destinatário. Valores: 1 = Contribuinte ICMS (informar a IE do destinatário); 2 = Contribuinte isento de Inscrição no cadastro de Contribuintes; 9 = Não Contribuinte, que pode ou não possuir IE. Notas: - NFC-e: indIEDest=9 e não informar IE; - Operação com exterior: indIEDest=9 e não informar IE; - Contribuinte isento (indIEDest=2): não informar IE. Ocor.:
+   * 1-1 / Tam.: 1 / Tipo: N.
    */
-  @RFWMetaBigDecimalField(caption = "Inscrição SUFRAMA", maxValue = "999999999", minValue = "0", scale = 0, required = false, absolute = true)
-  private BigDecimal ISUF = null;
+  @RFWMetaEnumField(caption = "Indicador da IE do destinatário", required = false)
+  private IndIEDestEnum indIEDest;
 
   /**
-   * ID: E18a — IM (C, 1–15). Inscrição Municipal do Tomador do Serviço (NF-e conjugada).
+   * E17 - IE. Inscrição Estadual do destinatário. Campo opcional. Informar somente algarismos, sem caracteres de formatação. Ocor.: 0-1 / Tam.: 2-14 / Tipo: N.
    */
-  @RFWMetaStringField(caption = "Inscrição Municipal", maxLength = 15, minlength = 1, required = false)
-  private String IM = null;
+  @RFWMetaStringIEField(caption = "Inscrição Estadual do destinatário", required = false, unique = false)
+  private String ie;
 
   /**
-   * ID: E19 — email (C, 1–60). E-mail de recepção da NF-e informado pelo destinatário (v2.0).
+   * E18 - ISUF. Inscrição na SUFRAMA. Obrigatório nas operações com incentivos fiscais em áreas sob controle da SUFRAMA. Ocor.: 0-1 / Tam.: 8-9 / Tipo: N.
    */
-  @RFWMetaStringField(caption = "E-mail", maxLength = 60, minlength = 1, required = false)
-  private String email = null;
+  @RFWMetaStringField(caption = "Inscrição SUFRAMA", required = false, unique = false, maxLength = 9, minLength = 8, pattern = "^[0-9]{8,9}$", preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
+  private String isuf;
 
   /**
-   * Gets the cnpj.
+   * E18a - IM. Inscrição Municipal do Tomador do Serviço. Campo opcional, pode ser informado em NF-e conjugada. Ocor.: 0-1 / Tam.: 1-15 / Tipo: C.
+   */
+  @RFWMetaStringField(caption = "Inscrição Municipal", required = false, unique = false, maxLength = 15, minLength = 1, preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
+  private String im;
+
+  /**
+   * E19 - email. E-mail de recepção da NF-e indicado pelo destinatário. Campo opcional. Ocor.: 0-1 / Tam.: 1-60 / Tipo: C.
+   */
+  @RFWMetaStringEmailField(caption = "E-mail do destinatário", required = false, maxLength = 60, unique = false, preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL, useRFC822 = false)
+  private String email;
+
+  /**
+   * # {@link InfNFeVO}.
    *
-   * @return the cnpj
+   * @return the {@link InfNFeVO}
    */
-  public BigDecimal getCNPJ() {
-    return CNPJ;
+  public InfNFeVO getInfNFeVO() {
+    return infNFeVO;
   }
 
   /**
-   * Sets the cnpj.
+   * # {@link InfNFeVO}.
    *
-   * @param cNPJ the new cnpj
+   * @param infNFeVO the new {@link InfNFeVO}
    */
-  public void setCNPJ(BigDecimal cNPJ) {
-    CNPJ = cNPJ;
+  public void setInfNFeVO(InfNFeVO infNFeVO) {
+    this.infNFeVO = infNFeVO;
   }
 
   /**
-   * Gets the cpf.
+   * # e02 - CNPJ do destinatário. Condicional ao CPF/idEstrangeiro: informar CNPJ ou CPF do destinatário, preenchendo os zeros não significativos. No caso de operação com o exterior, ou para comprador estrangeiro, informar a tag idEstrangeiro. Ocor.: 1-1 / Tam.: 14 / Tipo: N.
    *
-   * @return the cpf
+   * @return the e02 - CNPJ do destinatário
    */
-  public BigDecimal getCPF() {
-    return CPF;
+  public String getCnpj() {
+    return cnpj;
   }
 
   /**
-   * Sets the cpf.
+   * # e02 - CNPJ do destinatário. Condicional ao CPF/idEstrangeiro: informar CNPJ ou CPF do destinatário, preenchendo os zeros não significativos. No caso de operação com o exterior, ou para comprador estrangeiro, informar a tag idEstrangeiro. Ocor.: 1-1 / Tam.: 14 / Tipo: N.
    *
-   * @param cPF the new cpf
+   * @param cnpj the new e02 - CNPJ do destinatário
    */
-  public void setCPF(BigDecimal cPF) {
-    CPF = cPF;
+  public void setCnpj(String cnpj) {
+    this.cnpj = cnpj;
   }
 
   /**
-   * # iD: E03a — idEstrangeiro (C, até 20). Número de passaporte ou documento válido para comprador estrangeiro. Aceita algarismos, letras (maiúsculas/minúsculas) e os caracteres [: . + - / ( )].
+   * # e03 - CPF do destinatário. Condicional ao CNPJ/idEstrangeiro: informar CPF do destinatário quando não houver CNPJ, conforme regras da SEFAZ. Ocor.: 1-1 / Tam.: 11 / Tipo: N.
    *
-   * @return the iD: E03a — idEstrangeiro (C, até 20)
+   * @return the e03 - CPF do destinatário
+   */
+  public String getCpf() {
+    return cpf;
+  }
+
+  /**
+   * # e03 - CPF do destinatário. Condicional ao CNPJ/idEstrangeiro: informar CPF do destinatário quando não houver CNPJ, conforme regras da SEFAZ. Ocor.: 1-1 / Tam.: 11 / Tipo: N.
+   *
+   * @param cpf the new e03 - CPF do destinatário
+   */
+  public void setCpf(String cpf) {
+    this.cpf = cpf;
+  }
+
+  /**
+   * # e03a - idEstrangeiro. Identificação do destinatário no caso de comprador estrangeiro. Informar no caso de operação com o exterior ou para comprador estrangeiro. Informar número do passaporte ou outro documento legal (campo aceita valor nulo). Ocor.: 1-1 / Tam.: 0,5-20 / Tipo: C. Aceita algarismos, letras (maiúsculas e minúsculas) e caracteres: [: . + - / ( )].
+   *
+   * @return the e03a - idEstrangeiro
    */
   public String getIdEstrangeiro() {
     return idEstrangeiro;
   }
 
   /**
-   * # iD: E03a — idEstrangeiro (C, até 20). Número de passaporte ou documento válido para comprador estrangeiro. Aceita algarismos, letras (maiúsculas/minúsculas) e os caracteres [: . + - / ( )].
+   * # e03a - idEstrangeiro. Identificação do destinatário no caso de comprador estrangeiro. Informar no caso de operação com o exterior ou para comprador estrangeiro. Informar número do passaporte ou outro documento legal (campo aceita valor nulo). Ocor.: 1-1 / Tam.: 0,5-20 / Tipo: C. Aceita algarismos, letras (maiúsculas e minúsculas) e caracteres: [: . + - / ( )].
    *
-   * @param idEstrangeiro the new iD: E03a — idEstrangeiro (C, até 20)
+   * @param idEstrangeiro the new e03a - idEstrangeiro
    */
   public void setIdEstrangeiro(String idEstrangeiro) {
     this.idEstrangeiro = idEstrangeiro;
   }
 
   /**
-   * # iD: E04 — Razão Social ou nome do destinatário (C, 2–60). Obrigatório para NF-e (modelo 55) e opcional para NFC-e.
+   * # e04 - xNome. Razão Social ou nome do destinatário. Tag obrigatória para a NF-e (modelo 55) e opcional para a NFC-e. Ocor.: 0-1 / Tam.: 2-60 / Tipo: C.
    *
-   * @return the iD: E04 — Razão Social ou nome do destinatário (C, 2–60)
+   * @return the e04 - xNome
    */
-  public String getXNome() {
-    return xNome;
+  public String getXnome() {
+    return xnome;
   }
 
   /**
-   * # iD: E04 — Razão Social ou nome do destinatário (C, 2–60). Obrigatório para NF-e (modelo 55) e opcional para NFC-e.
+   * # e04 - xNome. Razão Social ou nome do destinatário. Tag obrigatória para a NF-e (modelo 55) e opcional para a NFC-e. Ocor.: 0-1 / Tam.: 2-60 / Tipo: C.
    *
-   * @param xNome the new iD: E04 — Razão Social ou nome do destinatário (C, 2–60)
+   * @param xnome the new e04 - xNome
    */
-  public void setXNome(String xNome) {
-    this.xNome = xNome;
+  public void setXnome(String xnome) {
+    this.xnome = xnome;
   }
 
   /**
-   * # iD: E16a — Indicador da IE do Destinatário (N, 1). 1=Contribuinte; 2=Isento; 9=Não contribuinte.
+   * # e16a - indIEDest. Indicador da IE do Destinatário. Valores: 1 = Contribuinte ICMS (informar a IE do destinatário); 2 = Contribuinte isento de Inscrição no cadastro de Contribuintes; 9 = Não Contribuinte, que pode ou não possuir IE. Notas: - NFC-e: indIEDest=9 e não informar IE; - Operação com exterior: indIEDest=9 e não informar IE; - Contribuinte isento (indIEDest=2): não informar IE.
+   * Ocor.: 1-1 / Tam.: 1 / Tipo: N.
    *
-   * @return the iD: E16a — Indicador da IE do Destinatário (N, 1)
+   * @return the e16a - indIEDest
    */
-  public SEFAZ_indIEDest getIndIEDest() {
+  public IndIEDestEnum getIndIEDest() {
     return indIEDest;
   }
 
   /**
-   * # iD: E16a — Indicador da IE do Destinatário (N, 1). 1=Contribuinte; 2=Isento; 9=Não contribuinte.
+   * # e16a - indIEDest. Indicador da IE do Destinatário. Valores: 1 = Contribuinte ICMS (informar a IE do destinatário); 2 = Contribuinte isento de Inscrição no cadastro de Contribuintes; 9 = Não Contribuinte, que pode ou não possuir IE. Notas: - NFC-e: indIEDest=9 e não informar IE; - Operação com exterior: indIEDest=9 e não informar IE; - Contribuinte isento (indIEDest=2): não informar IE.
+   * Ocor.: 1-1 / Tam.: 1 / Tipo: N.
    *
-   * @param indIEDest the new iD: E16a — Indicador da IE do Destinatário (N, 1)
+   * @param indIEDest the new e16a - indIEDest
    */
-  public void setIndIEDest(SEFAZ_indIEDest indIEDest) {
+  public void setIndIEDest(IndIEDestEnum indIEDest) {
     this.indIEDest = indIEDest;
   }
 
   /**
-   * Gets the ie.
+   * # e17 - IE. Inscrição Estadual do destinatário. Campo opcional. Informar somente algarismos, sem caracteres de formatação. Ocor.: 0-1 / Tam.: 2-14 / Tipo: N.
    *
-   * @return the ie
+   * @return the e17 - IE
    */
-  public String getIE() {
-    return IE;
+  public String getIe() {
+    return ie;
   }
 
   /**
-   * Sets the ie.
+   * # e17 - IE. Inscrição Estadual do destinatário. Campo opcional. Informar somente algarismos, sem caracteres de formatação. Ocor.: 0-1 / Tam.: 2-14 / Tipo: N.
    *
-   * @param iE the new ie
+   * @param ie the new e17 - IE
    */
-  public void setIE(String iE) {
-    IE = iE;
+  public void setIe(String ie) {
+    this.ie = ie;
   }
 
   /**
-   * Gets the isuf.
+   * # e18 - ISUF. Inscrição na SUFRAMA. Obrigatório nas operações com incentivos fiscais em áreas sob controle da SUFRAMA. Ocor.: 0-1 / Tam.: 8-9 / Tipo: N.
    *
-   * @return the isuf
+   * @return the e18 - ISUF
    */
-  public BigDecimal getISUF() {
-    return ISUF;
+  public String getIsuf() {
+    return isuf;
   }
 
   /**
-   * Sets the isuf.
+   * # e18 - ISUF. Inscrição na SUFRAMA. Obrigatório nas operações com incentivos fiscais em áreas sob controle da SUFRAMA. Ocor.: 0-1 / Tam.: 8-9 / Tipo: N.
    *
-   * @param iSUF the new isuf
+   * @param isuf the new e18 - ISUF
    */
-  public void setISUF(BigDecimal iSUF) {
-    ISUF = iSUF;
+  public void setIsuf(String isuf) {
+    this.isuf = isuf;
   }
 
   /**
-   * Gets the im.
+   * # e18a - IM. Inscrição Municipal do Tomador do Serviço. Campo opcional, pode ser informado em NF-e conjugada. Ocor.: 0-1 / Tam.: 1-15 / Tipo: C.
    *
-   * @return the im
+   * @return the e18a - IM
    */
-  public String getIM() {
-    return IM;
+  public String getIm() {
+    return im;
   }
 
   /**
-   * Sets the im.
+   * # e18a - IM. Inscrição Municipal do Tomador do Serviço. Campo opcional, pode ser informado em NF-e conjugada. Ocor.: 0-1 / Tam.: 1-15 / Tipo: C.
    *
-   * @param iM the new im
+   * @param im the new e18a - IM
    */
-  public void setIM(String iM) {
-    IM = iM;
+  public void setIm(String im) {
+    this.im = im;
   }
 
   /**
-   * # iD: E19 — email (C, 1–60). E-mail de recepção da NF-e informado pelo destinatário (v2.0).
+   * # e19 - email. E-mail de recepção da NF-e indicado pelo destinatário. Campo opcional. Ocor.: 0-1 / Tam.: 1-60 / Tipo: C.
    *
-   * @return the iD: E19 — email (C, 1–60)
+   * @return the e19 - email
    */
   public String getEmail() {
     return email;
   }
 
   /**
-   * # iD: E19 — email (C, 1–60). E-mail de recepção da NF-e informado pelo destinatário (v2.0).
+   * # e19 - email. E-mail de recepção da NF-e indicado pelo destinatário. Campo opcional. Ocor.: 0-1 / Tam.: 1-60 / Tipo: C.
    *
-   * @param email the new iD: E19 — email (C, 1–60)
+   * @param email the new e19 - email
    */
   public void setEmail(String email) {
     this.email = email;
   }
 
+  /**
+   * # {@link EnderDestVO}.
+   *
+   * @return the {@link EnderDestVO}
+   */
+  public EnderDestVO getEnderDestVO() {
+    return enderDestVO;
+  }
+
+  /**
+   * # {@link EnderDestVO}.
+   *
+   * @param enderDestVO the new {@link EnderDestVO}
+   */
+  public void setEnderDestVO(EnderDestVO enderDestVO) {
+    this.enderDestVO = enderDestVO;
+  }
 }

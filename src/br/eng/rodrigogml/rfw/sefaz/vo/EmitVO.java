@@ -1,212 +1,363 @@
 package br.eng.rodrigogml.rfw.sefaz.vo;
 
-import java.math.BigDecimal;
-
-import br.eng.rodrigogml.rfw.kernel.rfwmeta.RFWMetaBigDecimalField;
+import br.eng.rodrigogml.rfw.kernel.preprocess.PreProcess.PreProcessOption;
+import br.eng.rodrigogml.rfw.kernel.rfwmeta.RFWMetaEnumField;
+import br.eng.rodrigogml.rfw.kernel.rfwmeta.RFWMetaRelationshipField;
+import br.eng.rodrigogml.rfw.kernel.rfwmeta.RFWMetaRelationshipField.RelationshipTypes;
+import br.eng.rodrigogml.rfw.kernel.rfwmeta.RFWMetaStringCNPJField;
+import br.eng.rodrigogml.rfw.kernel.rfwmeta.RFWMetaStringCPFField;
 import br.eng.rodrigogml.rfw.kernel.rfwmeta.RFWMetaStringField;
+import br.eng.rodrigogml.rfw.kernel.rfwmeta.RFWMetaStringIEField;
 import br.eng.rodrigogml.rfw.kernel.vo.RFWVO;
 import br.eng.rodrigogml.rfw.orm.dao.annotations.dao.RFWDAOAnnotation;
+import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_CRT;
 
 /**
- * Classe que representa a tag <b>emit</b> (Identificação do emitente da NF-e) do XML da SEFAZ.
+ * VO da tag {@code <emit>} (Grupo C - Identificação do Emitente da NF-e).
  * <p>
- * Grupo C01 — campos principais do emitente. O endereço (C05: {@code enderEmit}) é um subgrupo e não deve ser implementado aqui.
- * </p>
- *
- * <ul>
- * <li><b>C01 emit</b> — Grupo de identificação do emitente (ocorrência 1-1).</li>
- * <li><b>C02 CNPJ</b> — CNPJ do emitente (N, 14). Em NF-e avulsa, usar dados do remetente. Informar com zeros não significativos.</li>
- * <li><b>C02a CPF</b> — CPF do remetente (N, 11). Alternativo ao CNPJ em casos específicos previstos no MOC.</li>
- * <li><b>C03 xNome</b> — Razão Social ou Nome do emitente (C, 2–60).</li>
- * <li><b>C04 xFant</b> — Nome fantasia (C, 1–60) — opcional.</li>
- * <li><b>C17 IE</b> — Inscrição Estadual do Emitente (C, 2–14).</li>
- * <li><b>C18 IEST</b> — IE do Substituto Tributário (N, 2–14) — opcional.</li>
- * </ul>
- *
+ * Representa os dados cadastrais do emitente/remetente da NF-e, incluindo CNPJ/CPF, razão social, inscrições estadual/municipal e regime tributário.
  * <p>
- * <b>Observações:</b> CNPJ/CPF são excludentes conforme o cenário fiscal; este VO não realiza validação cruzada entre eles.
- * </p>
- *
- * @author BIS DEVil
- * @since (11 de nov. de 2025)
+ * Observação sobre obrigatoriedade: embora a documentação da NF-e indique a obrigatoriedade de vários campos (através das colunas "Ele" e "Ocor."), neste VO todos os atributos estão marcados com {@code required = false} nas anotações de metadados, por solicitação explícita.
  */
 @RFWDAOAnnotation(schema = "_RFW.SEFAZ", table = "sefaz_emit")
 public class EmitVO extends RFWVO {
 
-  private static final long serialVersionUID = 4862178032097446409L;
+  private static final long serialVersionUID = 6617711221629429771L;
 
   /**
-   * ID: C02<br>
-   * CNPJ do emitente (N, 14). Informar com zeros não significativos. Em emissão avulsa pelo Fisco, os dados do remetente são informados neste grupo. Ocorrência: 1-1.
+   * {@link InfNFeVO}
    */
-  @RFWMetaBigDecimalField(caption = "CNPJ", maxValue = "99999999999999", minValue = "0", scale = 0, required = false, absolute = true)
-  private BigDecimal cnpj = null;
+  @RFWMetaRelationshipField(caption = "InfNFe", relationship = RelationshipTypes.PARENT_ASSOCIATION, required = true, column = "idsefaz_infnfe")
+  private InfNFeVO infNFeVO = null;
 
   /**
-   * ID: C02a<br>
-   * CPF do remetente (N, 11). Alternativo ao CNPJ em cenários específicos. Ocorrência: 1-1.
+   * {@link EnderEmitVO}
    */
-  @RFWMetaBigDecimalField(caption = "CPF", maxValue = "99999999999", minValue = "0", scale = 0, required = false, absolute = true)
-  private BigDecimal cpf = null;
+  @RFWMetaRelationshipField(caption = "EnderEmit", relationship = RelationshipTypes.COMPOSITION, required = false, columnMapped = "idsefaz_enderemit")
+  private EnderEmitVO enderEmitVO = null;
 
   /**
-   * ID: C03<br>
-   * Razão Social ou Nome do emitente (C, 2–60). Ocorrência: 1-1.
+   * CNPJ do emitente (id: C02).
+   * <p>
+   * Tipo: N, tamanho: 14, ocorrência: 1-1, Ele: CE (condicional). Informar o CNPJ do emitente com zeros não significativos. Na emissão de NF-e avulsa pelo Fisco, as informações do remetente são informadas neste grupo.
    */
-  @RFWMetaStringField(caption = "Razão Social / Nome", maxLength = 60, minlength = 2, required = false)
-  private String xNome = null;
+  @RFWMetaStringCNPJField(caption = "CNPJ do emitente", required = false)
+  private String cnpj;
 
   /**
-   * ID: C04<br>
-   * Nome fantasia (C, 1–60). Ocorrência: 0-1.
+   * CPF do remetente (id: C02a).
+   * <p>
+   * Tipo: N, tamanho: 11, ocorrência: 1-1, Ele: CE (condicional). CPF somente com dígitos e zeros não significativos quando aplicável.
    */
-  @RFWMetaStringField(caption = "Nome Fantasia", maxLength = 60, minlength = 1, required = false)
-  private String xFant = null;
+  @RFWMetaStringCPFField(caption = "CPF do remetente", required = false)
+  private String cpf;
 
   /**
-   * ID: C17<br>
-   * Inscrição Estadual do Emitente (C, 2–14). Ocorrência: 1-1.
+   * Razão Social ou Nome do emitente (id: C03).
+   * <p>
+   * Tipo: C, tamanho: 2-60, ocorrência: 1-1, Ele: E (obrigatório).
    */
-  @RFWMetaStringField(caption = "Inscrição Estadual", maxLength = 14, minlength = 2, required = false)
-  private String ie = null;
+  @RFWMetaStringField(caption = "Razão social ou nome do emitente", required = false, maxLength = 60, minLength = 2, preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
+  private String xnome;
 
   /**
-   * ID: C18<br>
-   * IE do Substituto Tributário (N, 2–14). Ocorrência: 0-1.
+   * Nome fantasia do emitente (id: C04).
+   * <p>
+   * Tipo: C, tamanho: 2-60, ocorrência: 0-1, Ele: E (obrigatório quando existir).
    */
-  @RFWMetaBigDecimalField(caption = "IE do Substituto Tributário", maxValue = "99999999999999", minValue = "0", scale = 0, required = false, absolute = true)
-  private BigDecimal iest = null;
+  @RFWMetaStringField(caption = "Nome fantasia do emitente", required = false, maxLength = 60, minLength = 2, preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
+  private String xfant;
 
   /**
-   * # iD: C02<br>
-   * CNPJ do emitente (N, 14). Informar com zeros não significativos. Em emissão avulsa pelo Fisco, os dados do remetente são informados neste grupo. Ocorrência: 1-1.
+   * Inscrição Estadual do emitente (id: C17).
+   * <p>
+   * Tipo: C, tamanho: 2-14, ocorrência: 1-1, Ele: E (obrigatório).
+   */
+  @RFWMetaStringIEField(caption = "Inscrição Estadual do emitente", required = false)
+  private String ie;
+
+  /**
+   * Inscrição Estadual do Substituto Tributário (id: C18).
+   * <p>
+   * Tipo: N, tamanho: 2-14, ocorrência: 0-1, Ele: E (obrigatório quando houver retenção de ICMS-ST para UF de destino). Representa a IE do Substituto Tributário da UF de destino da mercadoria.
+   */
+  @RFWMetaStringIEField(caption = "IE do Substituto Tributário", required = false)
+  private String iest;
+
+  /**
+   * Inscrição Municipal do prestador de serviço (id: C19).
+   * <p>
+   * Tipo: C, tamanho: 1-15, ocorrência: 1-1 dentro do grupo opcional -x- (id: C18.1), Ele: E (obrigatório quando o grupo for informado).
+   * <p>
+   * Campo do grupo "-x-" definido diretamente na classe pai, conforme instrução.
+   */
+  @RFWMetaStringField(caption = "Inscrição Municipal do prestador de serviço", required = false, maxLength = 15, minLength = 1, preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
+  private String im;
+
+  /**
+   * CNAE fiscal (id: C20). Agora representado como String.
+   */
+  @RFWMetaStringField(caption = "CNAE fiscal", required = false, maxLength = 8, preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
+  private String cnae;
+
+  /**
+   * Código de Regime Tributário (CRT) (id: C21).
+   * <p>
+   * Tipo: N (1 dígito), ocorrência: 1-1, Ele: E (obrigatório).
+   * <ul>
+   * <li>1 = Simples Nacional</li>
+   * <li>2 = Simples Nacional, excesso sublimite de receita bruta</li>
+   * <li>3 = Regime Normal</li>
+   * </ul>
+   * Representado pela enumeração {@link SEFAZ_CRT}.
+   */
+  @RFWMetaEnumField(caption = "Código de regime tributário", required = false)
+  private SEFAZ_CRT crt;
+
+  /**
+   * # {@link InfNFeVO}.
    *
-   * @return the iD: C02<br>
-   *         CNPJ do emitente (N, 14)
+   * @return the {@link InfNFeVO}
    */
-  public BigDecimal getCnpj() {
+  public InfNFeVO getInfNFeVO() {
+    return infNFeVO;
+  }
+
+  /**
+   * # {@link InfNFeVO}.
+   *
+   * @param infNFeVO the new {@link InfNFeVO}
+   */
+  public void setInfNFeVO(InfNFeVO infNFeVO) {
+    this.infNFeVO = infNFeVO;
+  }
+
+  /**
+   * # cNPJ do emitente (id: C02).
+   * <p>
+   * Tipo: N, tamanho: 14, ocorrência: 1-1, Ele: CE (condicional). Informar o CNPJ do emitente com zeros não significativos. Na emissão de NF-e avulsa pelo Fisco, as informações do remetente são informadas neste grupo.
+   *
+   * @return the cNPJ do emitente (id: C02)
+   */
+  public String getCnpj() {
     return cnpj;
   }
 
   /**
-   * # iD: C02<br>
-   * CNPJ do emitente (N, 14). Informar com zeros não significativos. Em emissão avulsa pelo Fisco, os dados do remetente são informados neste grupo. Ocorrência: 1-1.
+   * # cNPJ do emitente (id: C02).
+   * <p>
+   * Tipo: N, tamanho: 14, ocorrência: 1-1, Ele: CE (condicional). Informar o CNPJ do emitente com zeros não significativos. Na emissão de NF-e avulsa pelo Fisco, as informações do remetente são informadas neste grupo.
    *
-   * @param cnpj the new iD: C02<br>
-   *          CNPJ do emitente (N, 14)
+   * @param cnpj the new cNPJ do emitente (id: C02)
    */
-  public void setCnpj(BigDecimal cnpj) {
+  public void setCnpj(String cnpj) {
     this.cnpj = cnpj;
   }
 
   /**
-   * # iD: C02a<br>
-   * CPF do remetente (N, 11). Alternativo ao CNPJ em cenários específicos. Ocorrência: 1-1.
+   * # cPF do remetente (id: C02a).
+   * <p>
+   * Tipo: N, tamanho: 11, ocorrência: 1-1, Ele: CE (condicional). CPF somente com dígitos e zeros não significativos quando aplicável.
    *
-   * @return the iD: C02a<br>
-   *         CPF do remetente (N, 11)
+   * @return the cPF do remetente (id: C02a)
    */
-  public BigDecimal getCpf() {
+  public String getCpf() {
     return cpf;
   }
 
   /**
-   * # iD: C02a<br>
-   * CPF do remetente (N, 11). Alternativo ao CNPJ em cenários específicos. Ocorrência: 1-1.
+   * # cPF do remetente (id: C02a).
+   * <p>
+   * Tipo: N, tamanho: 11, ocorrência: 1-1, Ele: CE (condicional). CPF somente com dígitos e zeros não significativos quando aplicável.
    *
-   * @param cpf the new iD: C02a<br>
-   *          CPF do remetente (N, 11)
+   * @param cpf the new cPF do remetente (id: C02a)
    */
-  public void setCpf(BigDecimal cpf) {
+  public void setCpf(String cpf) {
     this.cpf = cpf;
   }
 
   /**
-   * # iD: C03<br>
-   * Razão Social ou Nome do emitente (C, 2–60). Ocorrência: 1-1.
+   * # razão Social ou Nome do emitente (id: C03).
+   * <p>
+   * Tipo: C, tamanho: 2-60, ocorrência: 1-1, Ele: E (obrigatório).
    *
-   * @return the iD: C03<br>
-   *         Razão Social ou Nome do emitente (C, 2–60)
+   * @return the razão Social ou Nome do emitente (id: C03)
    */
-  public String getXNome() {
-    return xNome;
+  public String getXnome() {
+    return xnome;
   }
 
   /**
-   * # iD: C03<br>
-   * Razão Social ou Nome do emitente (C, 2–60). Ocorrência: 1-1.
+   * # razão Social ou Nome do emitente (id: C03).
+   * <p>
+   * Tipo: C, tamanho: 2-60, ocorrência: 1-1, Ele: E (obrigatório).
    *
-   * @param xNome the new iD: C03<br>
-   *          Razão Social ou Nome do emitente (C, 2–60)
+   * @param xnome the new razão Social ou Nome do emitente (id: C03)
    */
-  public void setXNome(String xNome) {
-    this.xNome = xNome;
+  public void setXnome(String xnome) {
+    this.xnome = xnome;
   }
 
   /**
-   * # iD: C04<br>
-   * Nome fantasia (C, 1–60). Ocorrência: 0-1.
+   * # nome fantasia do emitente (id: C04).
+   * <p>
+   * Tipo: C, tamanho: 2-60, ocorrência: 0-1, Ele: E (obrigatório quando existir).
    *
-   * @return the iD: C04<br>
-   *         Nome fantasia (C, 1–60)
+   * @return the nome fantasia do emitente (id: C04)
    */
-  public String getXFant() {
-    return xFant;
+  public String getXfant() {
+    return xfant;
   }
 
   /**
-   * # iD: C04<br>
-   * Nome fantasia (C, 1–60). Ocorrência: 0-1.
+   * # nome fantasia do emitente (id: C04).
+   * <p>
+   * Tipo: C, tamanho: 2-60, ocorrência: 0-1, Ele: E (obrigatório quando existir).
    *
-   * @param xFant the new iD: C04<br>
-   *          Nome fantasia (C, 1–60)
+   * @param xfant the new nome fantasia do emitente (id: C04)
    */
-  public void setXFant(String xFant) {
-    this.xFant = xFant;
+  public void setXfant(String xfant) {
+    this.xfant = xfant;
   }
 
   /**
-   * # iD: C17<br>
-   * Inscrição Estadual do Emitente (C, 2–14). Ocorrência: 1-1.
+   * # inscrição Estadual do emitente (id: C17).
+   * <p>
+   * Tipo: C, tamanho: 2-14, ocorrência: 1-1, Ele: E (obrigatório).
    *
-   * @return the iD: C17<br>
-   *         Inscrição Estadual do Emitente (C, 2–14)
+   * @return the inscrição Estadual do emitente (id: C17)
    */
   public String getIe() {
     return ie;
   }
 
   /**
-   * # iD: C17<br>
-   * Inscrição Estadual do Emitente (C, 2–14). Ocorrência: 1-1.
+   * # inscrição Estadual do emitente (id: C17).
+   * <p>
+   * Tipo: C, tamanho: 2-14, ocorrência: 1-1, Ele: E (obrigatório).
    *
-   * @param ie the new iD: C17<br>
-   *          Inscrição Estadual do Emitente (C, 2–14)
+   * @param ie the new inscrição Estadual do emitente (id: C17)
    */
   public void setIe(String ie) {
     this.ie = ie;
   }
 
   /**
-   * # iD: C18<br>
-   * IE do Substituto Tributário (N, 2–14). Ocorrência: 0-1.
+   * # inscrição Estadual do Substituto Tributário (id: C18).
+   * <p>
+   * Tipo: N, tamanho: 2-14, ocorrência: 0-1, Ele: E (obrigatório quando houver retenção de ICMS-ST para UF de destino). Representa a IE do Substituto Tributário da UF de destino da mercadoria.
    *
-   * @return the iD: C18<br>
-   *         IE do Substituto Tributário (N, 2–14)
+   * @return the inscrição Estadual do Substituto Tributário (id: C18)
    */
-  public BigDecimal getIest() {
+  public String getIest() {
     return iest;
   }
 
   /**
-   * # iD: C18<br>
-   * IE do Substituto Tributário (N, 2–14). Ocorrência: 0-1.
+   * # inscrição Estadual do Substituto Tributário (id: C18).
+   * <p>
+   * Tipo: N, tamanho: 2-14, ocorrência: 0-1, Ele: E (obrigatório quando houver retenção de ICMS-ST para UF de destino). Representa a IE do Substituto Tributário da UF de destino da mercadoria.
    *
-   * @param iest the new iD: C18<br>
-   *          IE do Substituto Tributário (N, 2–14)
+   * @param iest the new inscrição Estadual do Substituto Tributário (id: C18)
    */
-  public void setIest(BigDecimal iest) {
+  public void setIest(String iest) {
     this.iest = iest;
+  }
+
+  /**
+   * # inscrição Municipal do prestador de serviço (id: C19).
+   * <p>
+   * Tipo: C, tamanho: 1-15, ocorrência: 1-1 dentro do grupo opcional -x- (id: C18.1), Ele: E (obrigatório quando o grupo for informado).
+   * <p>
+   * Campo do grupo "-x-" definido diretamente na classe pai, conforme instrução.
+   *
+   * @return the inscrição Municipal do prestador de serviço (id: C19)
+   */
+  public String getIm() {
+    return im;
+  }
+
+  /**
+   * # inscrição Municipal do prestador de serviço (id: C19).
+   * <p>
+   * Tipo: C, tamanho: 1-15, ocorrência: 1-1 dentro do grupo opcional -x- (id: C18.1), Ele: E (obrigatório quando o grupo for informado).
+   * <p>
+   * Campo do grupo "-x-" definido diretamente na classe pai, conforme instrução.
+   *
+   * @param im the new inscrição Municipal do prestador de serviço (id: C19)
+   */
+  public void setIm(String im) {
+    this.im = im;
+  }
+
+  /**
+   * # cNAE fiscal (id: C20). Agora representado como String.
+   *
+   * @return the cNAE fiscal (id: C20)
+   */
+  public String getCnae() {
+    return cnae;
+  }
+
+  /**
+   * # cNAE fiscal (id: C20). Agora representado como String.
+   *
+   * @param cnae the new cNAE fiscal (id: C20)
+   */
+  public void setCnae(String cnae) {
+    this.cnae = cnae;
+  }
+
+  /**
+   * # código de Regime Tributário (CRT) (id: C21).
+   * <p>
+   * Tipo: N (1 dígito), ocorrência: 1-1, Ele: E (obrigatório).
+   * <ul>
+   * <li>1 = Simples Nacional</li>
+   * <li>2 = Simples Nacional, excesso sublimite de receita bruta</li>
+   * <li>3 = Regime Normal</li>
+   * </ul>
+   * Representado pela enumeração {@link SEFAZ_CRT}.
+   *
+   * @return the código de Regime Tributário (CRT) (id: C21)
+   */
+  public SEFAZ_CRT getCrt() {
+    return crt;
+  }
+
+  /**
+   * # código de Regime Tributário (CRT) (id: C21).
+   * <p>
+   * Tipo: N (1 dígito), ocorrência: 1-1, Ele: E (obrigatório).
+   * <ul>
+   * <li>1 = Simples Nacional</li>
+   * <li>2 = Simples Nacional, excesso sublimite de receita bruta</li>
+   * <li>3 = Regime Normal</li>
+   * </ul>
+   * Representado pela enumeração {@link SEFAZ_CRT}.
+   *
+   * @param crt the new código de Regime Tributário (CRT) (id: C21)
+   */
+  public void setCrt(SEFAZ_CRT crt) {
+    this.crt = crt;
+  }
+
+  /**
+   * # {@link EnderEmitVO}.
+   *
+   * @return the {@link EnderEmitVO}
+   */
+  public EnderEmitVO getEnderEmitVO() {
+    return enderEmitVO;
+  }
+
+  /**
+   * # {@link EnderEmitVO}.
+   *
+   * @param enderEmitVO the new {@link EnderEmitVO}
+   */
+  public void setEnderEmitVO(EnderEmitVO enderEmitVO) {
+    this.enderEmitVO = enderEmitVO;
   }
 
 }

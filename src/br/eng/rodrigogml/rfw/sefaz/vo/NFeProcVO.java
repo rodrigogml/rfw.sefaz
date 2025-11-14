@@ -1,12 +1,11 @@
 package br.eng.rodrigogml.rfw.sefaz.vo;
 
-import java.math.BigDecimal;
-
-import br.eng.rodrigogml.rfw.kernel.rfwmeta.RFWMetaBigDecimalField;
+import br.eng.rodrigogml.rfw.kernel.rfwmeta.RFWMetaEnumField;
 import br.eng.rodrigogml.rfw.kernel.rfwmeta.RFWMetaRelationshipField;
 import br.eng.rodrigogml.rfw.kernel.rfwmeta.RFWMetaRelationshipField.RelationshipTypes;
 import br.eng.rodrigogml.rfw.kernel.vo.RFWVO;
 import br.eng.rodrigogml.rfw.orm.dao.annotations.dao.RFWDAOAnnotation;
+import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_versao;
 
 /**
  * Description: Classe que representa a estrutura da tag nfeProc (TAG raiz do processo da NF-e). Contém a NFe assinada e o protocolo de autorização/denegação. <br>
@@ -30,36 +29,36 @@ public class NFeProcVO extends RFWVO {
   /**
    * ID: #XR02 | Campo: versao | Ele: A | Pai: XR01 | Tipo: N | Ocor.: 1-1 | Tam.: 1-2v2 <br>
    * Descrição: Define a versão do XML do nfeProc. <br>
-   * Mapeamento: numérico com 2 casas decimais; intervalo 0 a 99,99 (não negativo).
+   * Mapeamento: Enumeration com as versões suportadas.
    */
-  @RFWMetaBigDecimalField(caption = "Versão", minValue = "0", maxValue = "99.99", scale = 2, absolute = true, required = true)
-  private BigDecimal versao;
+  @RFWMetaEnumField(caption = "Versão", required = true)
+  private SEFAZ_versao versao;
 
   /**
-   * TAG NFe
+   * {@link NFeVO}
    */
-  @RFWMetaRelationshipField(caption = "NFe", relationship = RelationshipTypes.COMPOSITION, columnMapped = "idsefaz_nfeproc", required = true)
+  @RFWMetaRelationshipField(caption = "NFe", relationship = RelationshipTypes.COMPOSITION, columnMapped = "idsefaz_nfeproc", required = false)
   private NFeVO nfeVO = null;
 
   /**
    * # iD: #XR02 | Campo: versao | Ele: A | Pai: XR01 | Tipo: N | Ocor.: 1-1 | Tam.: 1-2v2 <br>
    * Descrição: Define a versão do XML do nfeProc. <br>
-   * Mapeamento: numérico com 2 casas decimais; intervalo 0 a 99,99 (não negativo).
+   * Mapeamento: Enumeration com as versões suportadas.
    *
    * @return the iD: #XR02 | Campo: versao | Ele: A | Pai: XR01 | Tipo: N | Ocor
    */
-  public BigDecimal getVersao() {
+  public SEFAZ_versao getVersao() {
     return versao;
   }
 
   /**
    * # iD: #XR02 | Campo: versao | Ele: A | Pai: XR01 | Tipo: N | Ocor.: 1-1 | Tam.: 1-2v2 <br>
    * Descrição: Define a versão do XML do nfeProc. <br>
-   * Mapeamento: numérico com 2 casas decimais; intervalo 0 a 99,99 (não negativo).
+   * Mapeamento: Enumeration com as versões suportadas.
    *
    * @param versao the new iD: #XR02 | Campo: versao | Ele: A | Pai: XR01 | Tipo: N | Ocor
    */
-  public void setVersao(BigDecimal versao) {
+  public void setVersao(SEFAZ_versao versao) {
     this.versao = versao;
   }
 

@@ -7,101 +7,70 @@ import br.eng.rodrigogml.rfw.kernel.vo.RFWVO;
 import br.eng.rodrigogml.rfw.orm.dao.annotations.dao.RFWDAOAnnotation;
 
 /**
- * Description: Grupo de informações do ICMS Interestadual para consumidor final não contribuinte (TAG {@code ICMSUFDest}, ID NA01).<br>
- * Criado pela NT 2015/003 e atualizado em versões posteriores do MOC 7.0.<br>
- * <br>
- *
- * Este grupo é utilizado em operações interestaduais com partilha do ICMS devido entre as UFs de origem e de destino (ou UF definida em legislação).<br>
- * <b>Não deve ser utilizado nas operações com veículos automotores novos</b> que possuam grupo próprio (ICMSPart).<br>
- *
- * @author BIS DEVil
- * @since (11 de nov. de 2025)
+ * Grupo NA01 - ICMSUFDest: Informação do ICMS Interestadual.
+ * <p>
+ * Ocorre 0-1 dentro do grupo M01 (ICMS do item). Deve ser informado nas vendas interestaduais para consumidor final, não contribuinte do ICMS.
+ * <p>
+ * Observação: este grupo não deve ser utilizado nas operações com veículos automotores novos efetuadas por meio de faturamento direto para o consumidor (Convênio ICMS 51/00), que utilizam o grupo específico ICMSPart.
+ * <p>
+ * Grupo criado na NT 2015/003. Campos relativos ao FCP incluídos/atualizados na NT 2016/002.
  */
 @RFWDAOAnnotation(schema = "_RFW.SEFAZ", table = "sefaz_icmsufdest")
 public class ICMSUFDestVO extends RFWVO {
 
-  private static final long serialVersionUID = 1054876659154076543L;
+  private static final long serialVersionUID = 7072708775854053977L;
 
   /**
-   * ID: NA03<br>
-   * Valor da Base de Cálculo do ICMS na UF de destino (vBCUFDest).<br>
-   * Tamanho 13v2.
+   * NA03 - Valor da BC do ICMS na UF de destino (vBCUFDest). Tipo: N, Tamanho: 13v2. Ocorrência: 1-1 (campo obrigatório dentro de ICMSUFDest). Descrição: Valor da Base de Cálculo do ICMS na UF de destino.
    */
-  @RFWMetaBigDecimalField(caption = "BC ICMS UF Destino", required = false, scale = 2, absolute = true)
-  private BigDecimal vBCUFDest = null;
+  @RFWMetaBigDecimalField(caption = "vBCUFDest", required = false, unique = false, maxValue = "", minValue = "", scale = 2, absolute = false)
+  private BigDecimal vbcufDest;
 
   /**
-   * ID: NA04<br>
-   * Valor da Base de Cálculo do FCP na UF de destino (vBCFCPUFDest).<br>
-   * Tamanho 13v2.
+   * NA04 - Valor da BC FCP na UF de destino (vBCFCPUFDest). Tipo: N, Tamanho: 13v2. Ocorrência: 1-1 (campo obrigatório dentro de ICMSUFDest). Descrição: Valor da Base de Cálculo do FCP na UF de destino. Observação: Campo incluído na NT 2016.002.
    */
-  @RFWMetaBigDecimalField(caption = "BC FCP UF Destino", required = false, scale = 2, absolute = true)
-  private BigDecimal vBCFCPUFDest = null;
+  @RFWMetaBigDecimalField(caption = "vBCFCPUFDest", required = false, unique = false, maxValue = "", minValue = "", scale = 2, absolute = false)
+  private BigDecimal vbcfcpufDest;
 
   /**
-   * ID: NA05<br>
-   * Percentual do ICMS relativo ao Fundo de Combate à Pobreza (FCP) na UF de destino (pFCPUFDest).<br>
-   * Percentual máximo de 2%, conforme legislação vigente.<br>
-   * Tamanho 3v2-4.
+   * NA05 - Percentual do ICMS relativo ao Fundo de Combate à Pobreza (FCP) na UF de destino (pFCPUFDest). Tipo: N, Tamanho: 3v2-4. Ocorrência: 0-1 (campo opcional dentro de ICMSUFDest). Descrição: Percentual adicional inserido na alíquota interna da UF de destino, relativo ao FCP naquela UF. Observação: percentual máximo de 2%, conforme legislação.
    */
-  @RFWMetaBigDecimalField(caption = "Perc. FCP UF Destino", required = false, scale = 2, scaleMax = 4, absolute = true)
-  private BigDecimal pFCPUFDest = null;
+  @RFWMetaBigDecimalField(caption = "pFCPUFDest", required = false, unique = false, maxValue = "", minValue = "", scale = 2, scaleMax = 4, absolute = false)
+  private BigDecimal pfcpufDest;
 
   /**
-   * ID: NA07<br>
-   * Alíquota interna da UF de destino (pICMSUFDest).<br>
-   * Tamanho 3v2-4.
+   * NA07 - Alíquota interna da UF de destino (pICMSUFDest). Tipo: N, Tamanho: 3v2-4. Ocorrência: 1-1 (campo obrigatório dentro de ICMSUFDest). Descrição: Alíquota adotada nas operações internas na UF de destino para o produto/mercadoria. Observação: a alíquota do FCP, se existente, deve ser informada em pFCPUFDest, não sendo somada a esta alíquota interna.
    */
-  @RFWMetaBigDecimalField(caption = "Alíquota interna UF Destino", required = false, scale = 2, scaleMax = 4, absolute = true)
-  private BigDecimal pICMSUFDest = null;
+  @RFWMetaBigDecimalField(caption = "pICMSUFDest", required = false, unique = false, maxValue = "", minValue = "", scale = 2, scaleMax = 4, absolute = false)
+  private BigDecimal picmsufDest;
 
   /**
-   * ID: NA09<br>
-   * Alíquota interestadual das UF envolvidas (pICMSInter).<br>
-   * Valores usuais: 4%, 7% ou 12%, conforme origem/destino.<br>
-   * Tamanho 3v2-4.
+   * NA09 - Alíquota interestadual das UF envolvidas (pICMSInter). Tipo: N, Tamanho: 2v2. Ocorrência: 1-1 (campo obrigatório dentro de ICMSUFDest). Descrição: Alíquota interestadual aplicável conforme legislação: - 4% para produtos importados; - 7% para operações de Estados do Sul e Sudeste (exceto ES) para Estados do Norte, Nordeste, Centro-Oeste e Espírito Santo; - 12% para as demais operações.
    */
-  @RFWMetaBigDecimalField(caption = "Alíquota interestadual", required = false, scale = 2, scaleMax = 4, absolute = true)
-  private BigDecimal pICMSInter = null;
+  @RFWMetaBigDecimalField(caption = "pICMSInter", required = false, unique = false, maxValue = "", minValue = "", scale = 2, absolute = false)
+  private BigDecimal picmsInter;
 
   /**
-   * ID: NA11<br>
-   * Percentual provisório de partilha do ICMS Interestadual (pICMSInterPart).<br>
-   * Percentuais variáveis conforme o ano:
-   * <ul>
-   * <li>40% em 2016</li>
-   * <li>60% em 2017</li>
-   * <li>80% em 2018</li>
-   * <li>100% a partir de 2019</li>
-   * </ul>
-   * Tamanho 3v2-4.
+   * NA11 - Percentual provisório de partilha do ICMS Interestadual (pICMSInterPart). Tipo: N, Tamanho: 3v2-4. Ocorrência: 1-1 (campo obrigatório dentro de ICMSUFDest). Descrição: Percentual provisório de partilha do ICMS Interestadual entre UF de origem e UF de destino, conforme período de transição: - 40% em 2016; - 60% em 2017; - 80% em 2018; - 100% a partir de 2019.
    */
-  @RFWMetaBigDecimalField(caption = "Perc. partilha ICMS Inter", required = false, scale = 2, scaleMax = 4, absolute = true)
-  private BigDecimal pICMSInterPart = null;
+  @RFWMetaBigDecimalField(caption = "pICMSInterPart", required = false, unique = false, maxValue = "", minValue = "", scale = 2, scaleMax = 4, absolute = false)
+  private BigDecimal picmsInterPart;
 
   /**
-   * ID: NA13<br>
-   * Valor do ICMS relativo ao Fundo de Combate à Pobreza (FCP) da UF de destino (vFCPUFDest).<br>
-   * Tamanho 13v2.
+   * NA13 - Valor do ICMS relativo ao Fundo de Combate à Pobreza (FCP) da UF de destino (vFCPUFDest). Tipo: N, Tamanho: 13v2. Ocorrência: 0-1 (campo opcional dentro de ICMSUFDest). Descrição: Valor do ICMS relativo ao FCP da UF de destino. Observação: campo atualizado na NT 2016.002.
    */
-  @RFWMetaBigDecimalField(caption = "Valor FCP UF Destino", required = false, scale = 2, absolute = true)
-  private BigDecimal vFCPUFDest = null;
+  @RFWMetaBigDecimalField(caption = "vFCPUFDest", required = false, unique = false, maxValue = "", minValue = "", scale = 2, absolute = false)
+  private BigDecimal vfcpufDest;
 
   /**
-   * ID: NA15<br>
-   * Valor do ICMS Interestadual para a UF de destino (vICMSUFDest).<br>
-   * Corresponde ao valor do ICMS a ser recolhido para a UF de destino.<br>
-   * Tamanho 13v2.
+   * NA15 - Valor do ICMS Interestadual para a UF de destino (vICMSUFDest). Tipo: N, Tamanho: 13v2. Ocorrência: 1-1 (campo obrigatório dentro de ICMSUFDest). Descrição: Valor do ICMS Interestadual para a UF de destino, já considerando o valor do ICMS relativo ao Fundo de Combate à Pobreza (FCP) naquela UF.
    */
-  @RFWMetaBigDecimalField(caption = "Valor ICMS UF Destino", required = false, scale = 2, absolute = true)
-  private BigDecimal vICMSUFDest = null;
+  @RFWMetaBigDecimalField(caption = "vICMSUFDest", required = false, unique = false, maxValue = "", minValue = "", scale = 2, absolute = false)
+  private BigDecimal vicmsufDest;
 
   /**
-   * ID: NA17<br>
-   * Valor do ICMS Interestadual para a UF de origem (vICMSUFRemet).<br>
-   * Tamanho 13v2.
+   * NA17 - Valor do ICMS Interestadual para a UF do remetente (vICMSUFRemet). Tipo: N, Tamanho: 13v2. Ocorrência: 1-1 (campo obrigatório dentro de ICMSUFDest). Descrição: Valor do ICMS Interestadual para a UF do remetente. Observação: a partir de 2019, este valor será zero.
    */
-  @RFWMetaBigDecimalField(caption = "Valor ICMS UF Remetente", required = false, scale = 2, absolute = true)
-  private BigDecimal vICMSUFRemet = null;
-
+  @RFWMetaBigDecimalField(caption = "vICMSUFRemet", required = false, unique = false, maxValue = "", minValue = "", scale = 2, absolute = false)
+  private BigDecimal vicmsufRemet;
 }

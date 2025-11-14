@@ -1,689 +1,627 @@
 package br.eng.rodrigogml.rfw.sefaz.vo;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
+import br.eng.rodrigogml.rfw.kernel.preprocess.PreProcess.PreProcessOption;
 import br.eng.rodrigogml.rfw.kernel.rfwmeta.RFWMetaBigDecimalField;
 import br.eng.rodrigogml.rfw.kernel.rfwmeta.RFWMetaEnumField;
+import br.eng.rodrigogml.rfw.kernel.rfwmeta.RFWMetaRelationshipField;
+import br.eng.rodrigogml.rfw.kernel.rfwmeta.RFWMetaRelationshipField.RelationshipTypes;
+import br.eng.rodrigogml.rfw.kernel.rfwmeta.RFWMetaStringCNPJField;
 import br.eng.rodrigogml.rfw.kernel.rfwmeta.RFWMetaStringField;
 import br.eng.rodrigogml.rfw.kernel.vo.RFWVO;
 import br.eng.rodrigogml.rfw.orm.dao.annotations.dao.RFWDAOAnnotation;
-import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_indEscala;
 import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_indTot;
 
 /**
- * Classe que representa a tag <b>prod</b> (Detalhamento de Produtos e Serviços) do XML da SEFAZ.<br>
- * Grupo I01 — informações comerciais e tributárias do item da NF-e/NFC-e.
+ * Grupo I - Detalhamento de Produtos e Serviços (tag prod / I01). Detalhamento de Produtos e Serviços do item da NF-e.
+ *
+ * Observação: a obrigatoriedade dos campos segue o MOC, mas nas annotations o atributo {@code required} é sempre definido como false conforme solicitado.
  */
 @RFWDAOAnnotation(schema = "_RFW.SEFAZ", table = "sefaz_prod")
-public class ProdVO extends RFWVO {
+public class ProdVO extends RFWVO implements Serializable {
 
-  private static final long serialVersionUID = 1905057902132069425L;
+  private static final long serialVersionUID = 1L;
 
   /**
-   * ID: I02 — cProd.<br>
-   * Código do produto ou serviço. Quando não houver codificação própria, utilizar o CFOP para itens não relacionados a mercadorias/produtos. Tamanho: 1–60.
+   * {@link DetVO}
    */
-  @RFWMetaStringField(caption = "Código do produto", maxLength = 60, minlength = 1, required = false)
-  private String cProd = null;
+  @RFWMetaRelationshipField(caption = "Det", relationship = RelationshipTypes.PARENT_ASSOCIATION, required = true, column = "idsefaz_det")
+  private DetVO detVO = null;
 
   /**
-   * ID: I03 — cEAN.<br>
-   * GTIN (código de barras) do produto. Preencher com GTIN-8, GTIN-12, GTIN-13 ou GTIN-14. Para produtos sem GTIN, informar o literal “SEM GTIN”. Tamanhos permitidos: 0, 8, 12, 13 ou 14.
+   * I02 - cProd. Código do produto ou serviço. Quando itens não relacionados com mercadorias/produtos e sem codificação própria, preencher com CFOP no formato: "CFOP9999". Ocor.: 1–1 / Tam.: 1–60 / Tipo: C.
    */
-  @RFWMetaStringField(caption = "GTIN do produto", maxLength = 14, minlength = 0, required = false, pattern = "(^$)|(^[0-9]{8}$)|(^[0-9]{12}$)|(^[0-9]{13}$)|(^[0-9]{14}$)|(^SEM GTIN$)")
-  private String cEAN = null;
+  @RFWMetaStringField(caption = "Código do produto ou serviço", required = false, unique = false, maxLength = 60, minLength = 1, preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
+  private String cprod;
 
   /**
-   * ID: I04 — xProd.<br>
-   * Descrição do produto ou serviço. Tamanho: 1–120.
+   * I03 - cEAN. GTIN (Global Trade Item Number) do produto, antigo código EAN ou código de barras. Preencher com GTIN-8, GTIN-12, GTIN-13 ou GTIN-14. Produtos sem GTIN: informar “SEM GTIN”. Ocor.: 1–1 / Tam.: 0, 8, 12, 13, 14 / Tipo: N (campo pode conter texto “SEM GTIN”).
    */
-  @RFWMetaStringField(caption = "Descrição do produto", maxLength = 120, minlength = 1, required = false)
-  private String xProd = null;
+  @RFWMetaStringField(caption = "GTIN do produto (cEAN)", required = false, unique = false, maxLength = 14, preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
+  private String cean;
 
   /**
-   * ID: I05 — NCM.<br>
-   * Código NCM (8 dígitos). Em alguns casos de serviço ou itens sem produto, pode ser utilizado “00”. Tamanho: 2 ou 8.
+   * I04 - xProd. Descrição do produto ou serviço. Ocor.: 1–1 / Tam.: 1–120 / Tipo: C.
    */
-  @RFWMetaBigDecimalField(caption = "NCM", maxValue = "99999999", minValue = "0", scale = 0, required = false, absolute = true)
-  private BigDecimal ncm = null;
+  @RFWMetaStringField(caption = "Descrição do produto ou serviço", required = false, unique = false, maxLength = 120, minLength = 1, preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
+  private String xprod;
 
   /**
-   * ID: I05a — NVE.<br>
-   * Codificação NVE (Nomenclatura de Valor Aduaneiro e Estatística).<br>
-   * Formato: duas letras maiúsculas e quatro algarismos (ex.: "AB1234").<br>
-   * Tamanho: 6. Ocorrência: até 8 repetições (tratado aqui como um único valor).
+   * I05 - NCM. Código NCM com 8 dígitos. Obrigatória para produtos; para serviços, informar “00”. Ocor.: 1–1 / Tam.: 8 / Tipo: N.
    */
-  @RFWMetaStringField(caption = "NVE", maxLength = 6, minlength = 6, required = false, pattern = "[A-Z]{2}[0-9]{4}")
-  private String nve = null;
+  @RFWMetaStringField(caption = "Código NCM", required = false, unique = false, maxLength = 8, pattern = "^[0-9]{2}([0-9]{6}|0{6})$", preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
+  private String ncm;
 
   /**
-   * ID: I05c — CEST.<br>
-   * Código Especificador da Substituição Tributária (CEST).<br>
-   * Tamanho: 7.
+   * I05a - NVE. Codificação NVE – Nomenclatura de Valor Aduaneiro e Estatística. Codificação opcional que detalha alguns NCM. Ocor.: 0–8 / Tam.: 6 / Tipo: C.
    */
-  @RFWMetaBigDecimalField(caption = "CEST", maxValue = "9999999", minValue = "0", scale = 0, required = false, absolute = true)
-  private BigDecimal cest = null;
+  @RFWMetaStringField(caption = "Codificação NVE", required = false, unique = false, maxLength = 6, minLength = 6, preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
+  private String nve;
 
   /**
-   * ID: I05d — indEscala.<br>
-   * Indicador de Produção em Escala Relevante, conforme Cláusula 23 do Convênio ICMS 52/2017.<br>
-   * Valores: S=Produzido em Escala Relevante; N=Produzido em Escala NÃO Relevante.<br>
-   * Preenchimento obrigatório para produtos com NCM relacionado no Anexo XXVII do Convênio 52/2017.
+   * I05c - CEST. Código CEST (ICMS-ST). Ocor.: 1–1 / Tam.: 7 / Tipo: N. Campo originalmente em grupo de sequência XML (I05b), aqui trazido para o VO principal.
    */
-  @RFWMetaEnumField(caption = "Escala relevante", required = false)
-  private SEFAZ_indEscala indEscala = null;
+  @RFWMetaStringField(caption = "Código CEST", required = false, unique = false, maxLength = 7, pattern = "^[0-9]{7}$", preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
+  private String cest;
 
   /**
-   * ID: I05e — CNPJFab.<br>
-   * CNPJ do fabricante da mercadoria, obrigatório para produto em escala NÃO relevante. Tamanho: 14.
+   * I05d - indEscala. Indicador de Escala Relevante, conforme Ajuste SINIEF 23/2016. Ocor.: 0–1 / Tam.: 1 / Tipo: C. Campo originalmente em grupo de sequência XML (I05b), aqui trazido para o VO principal.
    */
-  @RFWMetaBigDecimalField(caption = "CNPJ do fabricante", maxValue = "99999999999999", minValue = "0", scale = 0, required = false, absolute = true)
-  private BigDecimal cnpjFab = null;
+  @RFWMetaStringField(caption = "Indicador de Escala Relevante", required = false, unique = false, maxLength = 1, minLength = 1, preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
+  private String indescala;
 
   /**
-   * ID: I05f — cBenef.<br>
-   * Código de Benefício Fiscal na UF aplicado ao item, conforme legislação estadual. Tamanho: 8 ou 10.
+   * I05e - CNPJFab. CNPJ do Fabricante da Mercadoria. Informar quando indEscala = "S". Ocor.: 0–1 / Tam.: 14 / Tipo: C (CNPJ somente dígitos). Campo originalmente em grupo de sequência XML (I05b), aqui trazido para o VO principal.
    */
-  @RFWMetaStringField(caption = "Benefício fiscal", maxLength = 10, minlength = 8, required = false)
-  private String cBenef = null;
+  @RFWMetaStringCNPJField(caption = "CNPJ do fabricante da mercadoria", required = false, unique = false)
+  private String cnpjFab;
 
   /**
-   * ID: I06 — EXTIPI.<br>
-   * Código EX-TIPI conforme legislação. Tamanho: 2–3.
+   * I05f - cBenef. Código de Benefício Fiscal na UF aplicado ao item. Código do benefício fiscal. Ocor.: 0–1 / Tam.: 8 / Tipo: C. Campo originalmente em grupo de sequência XML (I05b), aqui trazido para o VO principal.
    */
-  @RFWMetaBigDecimalField(caption = "EX-TIPI", maxValue = "999", minValue = "0", scale = 0, required = false, absolute = true)
-  private BigDecimal extipi = null;
+  @RFWMetaStringField(caption = "Código de benefício fiscal (UF)", required = false, unique = false, maxLength = 8, minLength = 1, preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
+  private String cbenef;
 
   /**
-   * ID: I08 — CFOP.<br>
-   * Código Fiscal de Operações e Prestações. Tamanho: 4.
+   * I06 - EXTIPI. EX_TIPI. Ocor.: 0–1 / Tam.: 3 / Tipo: N.
    */
-  @RFWMetaBigDecimalField(caption = "CFOP", maxValue = "9999", minValue = "0", scale = 0, required = false, absolute = true)
-  private BigDecimal CFOP = null;
+  @RFWMetaStringField(caption = "EX TIPI", required = false, unique = false, maxLength = 3, minLength = 3, pattern = "^[0-9]{3}$", preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
+  private String extipi;
 
   /**
-   * ID: I09 — uCom.<br>
-   * Unidade comercial do produto. Tamanho: 1–6.
+   * I07 - CFOP. Código Fiscal de Operações e Prestações. Utilizar tabela de CFOP. Ocor.: 1–1 / Tam.: 4 / Tipo: N.
    */
-  @RFWMetaStringField(caption = "Unidade comercial", maxLength = 6, minlength = 1, required = false)
-  private String uCom = null;
+  @RFWMetaStringField(caption = "CFOP", required = false, unique = false, maxLength = 4, minLength = 4, pattern = "^[0-9]{4}$", preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
+  private String cfop;
 
   /**
-   * ID: I10 — qCom.<br>
-   * Quantidade comercial. Formato: até 11 dígitos com 0–4 casas decimais (11v0–4).
+   * I08 - uCom. Unidade Comercial. Unidade de comercialização. Ocor.: 1–1 / Tam.: 1–6 / Tipo: C.
    */
-  @RFWMetaBigDecimalField(caption = "Quantidade comercial", maxValue = "99999999999.9999", minValue = "0", scaleMax = 4, required = false, absolute = true)
-  private BigDecimal qCom = null;
+  @RFWMetaStringField(caption = "Unidade comercial", required = false, unique = false, maxLength = 6, minLength = 1, preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
+  private String ucom;
 
   /**
-   * ID: I10a — vUnCom.<br>
-   * Valor unitário de comercialização do produto. Formato: até 11 dígitos com 0–10 casas decimais (11v0–10).
+   * I09 - qCom. Quantidade Comercial. Quantidade comercializada. Ocor.: 1–1 / Tam.: 11v0–4 / Tipo: N.
    */
-  @RFWMetaBigDecimalField(caption = "Valor unitário", maxValue = "99999999999.9999999999", minValue = "0", scaleMax = 10, required = false, absolute = true)
-  private BigDecimal vUnCom = null;
+  @RFWMetaBigDecimalField(caption = "Quantidade comercial", required = false, unique = false, scaleMax = 4, absolute = true)
+  private BigDecimal qcom;
 
   /**
-   * ID: I11 — vProd.<br>
-   * Valor total bruto dos produtos ou serviços. Formato: 13v2.
+   * I10 - vUnCom. Valor Unitário de Comercialização. Valor unitário. Ocor.: 1–1 / Tam.: 11v0–10 / Tipo: N.
    */
-  @RFWMetaBigDecimalField(caption = "Valor bruto do item", maxValue = "9999999999999.99", minValue = "0", scale = 2, scaleMax = 2, required = false, absolute = true)
-  private BigDecimal vProd = null;
+  @RFWMetaBigDecimalField(caption = "Valor unitário de comercialização", required = false, unique = false, scaleMax = 10, absolute = true)
+  private BigDecimal vunCom;
 
   /**
-   * ID: I12 — cEANTrib.<br>
-   * GTIN da unidade tributável. Mesmos critérios do cEAN (I03).<br>
-   * Para produtos sem GTIN, informar “SEM GTIN”.
+   * I11 - vProd. Valor Total Bruto dos Produtos ou Serviços. Ocor.: 1–1 / Tam.: 13v2 (conforme MOC) / Tipo: N.
    */
-  @RFWMetaStringField(caption = "GTIN tributável", maxLength = 14, minlength = 0, required = false, pattern = "(^$)|(^[0-9]{8}$)|(^[0-9]{12}$)|(^[0-9]{13}$)|(^[0-9]{14}$)|(^SEM GTIN$)")
-  private String cEANTrib = null;
+  @RFWMetaBigDecimalField(caption = "Valor total bruto dos produtos/serviços", required = false, unique = false, scale = 2, absolute = true)
+  private BigDecimal vprod;
 
   /**
-   * ID: I13 — uTrib.<br>
-   * Unidade tributável. Tamanho: 1–6.
+   * I12 - cEANTrib. GTIN tributável da unidade tributável; se inexistente: “SEM GTIN”. Ocor.: 1–1 / Tam.: 0, 8, 12, 13, 14 / Tipo: C.
    */
-  @RFWMetaStringField(caption = "Unidade tributável", maxLength = 6, minlength = 1, required = false)
-  private String uTrib = null;
+  @RFWMetaStringField(caption = "GTIN tributável (cEANTrib)", required = false, unique = false, maxLength = 14, preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
+  private String ceanTrib;
 
   /**
-   * ID: I14 — qTrib.<br>
-   * Quantidade tributável. Formato: até 11 dígitos com 0–4 casas decimais (11v0–4).
+   * I13 - uTrib. Unidade Tributável. Unidade tributável. Ocor.: 1–1 / Tam.: 1–6 / Tipo: C.
    */
-  @RFWMetaBigDecimalField(caption = "Quantidade tributável", maxValue = "99999999999.9999", minValue = "0", scaleMax = 4, required = false, absolute = true)
-  private BigDecimal qTrib = null;
+  @RFWMetaStringField(caption = "Unidade tributável", required = false, unique = false, maxLength = 6, minLength = 1, preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
+  private String utrib;
 
   /**
-   * ID: I14a — vUnTrib.<br>
-   * Valor unitário de tributação da unidade tributável. Formato: 11v0–10.
+   * I14 - qTrib. Quantidade Tributável. Quantidade tributável. Ocor.: 1–1 / Tam.: 11v0–4 / Tipo: N.
    */
-  @RFWMetaBigDecimalField(caption = "Valor unitário tributação", maxValue = "99999999999.9999999999", minValue = "0", scaleMax = 10, required = false, absolute = true)
-  private BigDecimal vUnTrib = null;
+  @RFWMetaBigDecimalField(caption = "Quantidade tributável", required = false, unique = false, scaleMax = 4, absolute = true)
+  private BigDecimal qtrib;
 
   /**
-   * ID: I15 — vFrete.<br>
-   * Valor total do frete do item. Formato: 13v2.
+   * I14a - vUnTrib. Valor Unitário de Tributação. Valor unitário tributável. Ocor.: 1–1 / Tam.: 11v0–10 / Tipo: N.
    */
-  @RFWMetaBigDecimalField(caption = "Valor do frete", maxValue = "9999999999999.99", minValue = "0", scale = 2, scaleMax = 2, required = false, absolute = true)
-  private BigDecimal vFrete = null;
+  @RFWMetaBigDecimalField(caption = "Valor unitário de tributação", required = false, unique = false, scaleMax = 10, absolute = true)
+  private BigDecimal vunTrib;
 
   /**
-   * ID: I16 — vSeg.<br>
-   * Valor total do seguro do item. Formato: 13v2.
+   * I15 - vFrete. Valor Total do Frete. Ocor.: 0–1 / Tam.: 13v2 / Tipo: N.
    */
-  @RFWMetaBigDecimalField(caption = "Valor do seguro", maxValue = "9999999999999.99", minValue = "0", scale = 2, scaleMax = 2, required = false, absolute = true)
-  private BigDecimal vSeg = null;
+  @RFWMetaBigDecimalField(caption = "Valor total do frete", required = false, unique = false, scale = 2, absolute = true)
+  private BigDecimal vfrete;
 
   /**
-   * ID: I17 — vDesc.<br>
-   * Valor do desconto do item. Formato: 13v2.
+   * I16 - vSeg. Valor Total do Seguro. Ocor.: 0–1 / Tam.: 13v2 / Tipo: N.
    */
-  @RFWMetaBigDecimalField(caption = "Valor do desconto", maxValue = "9999999999999.99", minValue = "0", scale = 2, scaleMax = 2, required = false, absolute = true)
-  private BigDecimal vDesc = null;
+  @RFWMetaBigDecimalField(caption = "Valor total do seguro", required = false, unique = false, scale = 2, absolute = true)
+  private BigDecimal vseg;
 
   /**
-   * ID: I17a — vOutro.<br>
-   * Outras despesas acessórias do item. Formato: 13v2 (v2.0).
+   * I17 - vDesc. Valor do Desconto. Ocor.: 0–1 / Tam.: 13v2 / Tipo: N.
    */
-  @RFWMetaBigDecimalField(caption = "Outras despesas", maxValue = "9999999999999.99", minValue = "0", scale = 2, scaleMax = 2, required = false, absolute = true)
-  private BigDecimal vOutro = null;
+  @RFWMetaBigDecimalField(caption = "Valor do desconto", required = false, unique = false, scale = 2, absolute = true)
+  private BigDecimal vdesc;
 
   /**
-   * ID: I17b — indTot.<br>
-   * Indica se o valor do item (vProd) compõe o valor total da NF-e (vProd).<br>
-   * Valores: 0=Não compõe; 1=Compõe. (Versão 2.0)
+   * I17a - vOutro. Outras despesas acessórias. Ocor.: 0–1 / Tam.: 13v2 / Tipo: N.
    */
-  @RFWMetaEnumField(caption = "Totaliza NF-e", required = false)
-  private SEFAZ_indTot indTot = null;
+  @RFWMetaBigDecimalField(caption = "Outras despesas acessórias", required = false, unique = false, scale = 2, absolute = true)
+  private BigDecimal voutro;
 
   /**
-   * # iD: I02 — cProd.<br>
-   * Código do produto ou serviço. Quando não houver codificação própria, utilizar o CFOP para itens não relacionados a mercadorias/produtos. Tamanho: 1–60.
+   * I17b - indTot. Indica se valor do item compõe o total da NF-e (vProd). 0 = não compõe; 1 = compõe. Ocor.: 1–1 / Tam.: 1 / Tipo: N.
+   */
+  @RFWMetaEnumField(caption = "Indicador se compõe o total da NF-e", required = false)
+  private SEFAZ_indTot indTot;
+
+  /**
+   * # i02 - cProd. Código do produto ou serviço. Quando itens não relacionados com mercadorias/produtos e sem codificação própria, preencher com CFOP no formato: "CFOP9999". Ocor.: 1–1 / Tam.: 1–60 / Tipo: C.
    *
-   * @return the iD: I02 — cProd
+   * @return the i02 - cProd
    */
-  public String getCProd() {
-    return cProd;
+  public String getCprod() {
+    return cprod;
   }
 
   /**
-   * # iD: I02 — cProd.<br>
-   * Código do produto ou serviço. Quando não houver codificação própria, utilizar o CFOP para itens não relacionados a mercadorias/produtos. Tamanho: 1–60.
+   * # i02 - cProd. Código do produto ou serviço. Quando itens não relacionados com mercadorias/produtos e sem codificação própria, preencher com CFOP no formato: "CFOP9999". Ocor.: 1–1 / Tam.: 1–60 / Tipo: C.
    *
-   * @param cProd the new iD: I02 — cProd
+   * @param cprod the new i02 - cProd
    */
-  public void setCProd(String cProd) {
-    this.cProd = cProd;
+  public void setCprod(String cprod) {
+    this.cprod = cprod;
   }
 
   /**
-   * # iD: I03 — cEAN.<br>
-   * GTIN (código de barras) do produto. Preencher com GTIN-8, GTIN-12, GTIN-13 ou GTIN-14. Para produtos sem GTIN, informar o literal “SEM GTIN”. Tamanhos permitidos: 0, 8, 12, 13 ou 14.
+   * # i03 - cEAN. GTIN (Global Trade Item Number) do produto, antigo código EAN ou código de barras. Preencher com GTIN-8, GTIN-12, GTIN-13 ou GTIN-14. Produtos sem GTIN: informar “SEM GTIN”. Ocor.: 1–1 / Tam.: 0, 8, 12, 13, 14 / Tipo: N (campo pode conter texto “SEM GTIN”).
    *
-   * @return the iD: I03 — cEAN
+   * @return the i03 - cEAN
    */
-  public String getCEAN() {
-    return cEAN;
+  public String getCean() {
+    return cean;
   }
 
   /**
-   * # iD: I03 — cEAN.<br>
-   * GTIN (código de barras) do produto. Preencher com GTIN-8, GTIN-12, GTIN-13 ou GTIN-14. Para produtos sem GTIN, informar o literal “SEM GTIN”. Tamanhos permitidos: 0, 8, 12, 13 ou 14.
+   * # i03 - cEAN. GTIN (Global Trade Item Number) do produto, antigo código EAN ou código de barras. Preencher com GTIN-8, GTIN-12, GTIN-13 ou GTIN-14. Produtos sem GTIN: informar “SEM GTIN”. Ocor.: 1–1 / Tam.: 0, 8, 12, 13, 14 / Tipo: N (campo pode conter texto “SEM GTIN”).
    *
-   * @param cEAN the new iD: I03 — cEAN
+   * @param cean the new i03 - cEAN
    */
-  public void setCEAN(String cEAN) {
-    this.cEAN = cEAN;
+  public void setCean(String cean) {
+    this.cean = cean;
   }
 
   /**
-   * # iD: I04 — xProd.<br>
-   * Descrição do produto ou serviço. Tamanho: 1–120.
+   * # i04 - xProd. Descrição do produto ou serviço. Ocor.: 1–1 / Tam.: 1–120 / Tipo: C.
    *
-   * @return the iD: I04 — xProd
+   * @return the i04 - xProd
    */
-  public String getXProd() {
-    return xProd;
+  public String getXprod() {
+    return xprod;
   }
 
   /**
-   * # iD: I04 — xProd.<br>
-   * Descrição do produto ou serviço. Tamanho: 1–120.
+   * # i04 - xProd. Descrição do produto ou serviço. Ocor.: 1–1 / Tam.: 1–120 / Tipo: C.
    *
-   * @param xProd the new iD: I04 — xProd
+   * @param xprod the new i04 - xProd
    */
-  public void setXProd(String xProd) {
-    this.xProd = xProd;
+  public void setXprod(String xprod) {
+    this.xprod = xprod;
   }
 
   /**
-   * # iD: I05 — NCM.<br>
-   * Código NCM (8 dígitos). Em alguns casos de serviço ou itens sem produto, pode ser utilizado “00”. Tamanho: 2 ou 8.
+   * # i05 - NCM. Código NCM com 8 dígitos. Obrigatória para produtos; para serviços, informar “00”. Ocor.: 1–1 / Tam.: 8 / Tipo: N.
    *
-   * @return the iD: I05 — NCM
+   * @return the i05 - NCM
    */
-  public BigDecimal getNcm() {
+  public String getNcm() {
     return ncm;
   }
 
   /**
-   * # iD: I05 — NCM.<br>
-   * Código NCM (8 dígitos). Em alguns casos de serviço ou itens sem produto, pode ser utilizado “00”. Tamanho: 2 ou 8.
+   * # i05 - NCM. Código NCM com 8 dígitos. Obrigatória para produtos; para serviços, informar “00”. Ocor.: 1–1 / Tam.: 8 / Tipo: N.
    *
-   * @param ncm the new iD: I05 — NCM
+   * @param ncm the new i05 - NCM
    */
-  public void setNcm(BigDecimal ncm) {
+  public void setNcm(String ncm) {
     this.ncm = ncm;
   }
 
   /**
-   * # iD: I05a — NVE.<br>
-   * Codificação NVE (Nomenclatura de Valor Aduaneiro e Estatística).<br>
-   * Formato: duas letras maiúsculas e quatro algarismos (ex.: "AB1234").<br>
-   * Tamanho: 6. Ocorrência: até 8 repetições (tratado aqui como um único valor).
+   * # i05a - NVE. Codificação NVE – Nomenclatura de Valor Aduaneiro e Estatística. Codificação opcional que detalha alguns NCM. Ocor.: 0–8 / Tam.: 6 / Tipo: C.
    *
-   * @return the iD: I05a — NVE
+   * @return the i05a - NVE
    */
   public String getNve() {
     return nve;
   }
 
   /**
-   * # iD: I05a — NVE.<br>
-   * Codificação NVE (Nomenclatura de Valor Aduaneiro e Estatística).<br>
-   * Formato: duas letras maiúsculas e quatro algarismos (ex.: "AB1234").<br>
-   * Tamanho: 6. Ocorrência: até 8 repetições (tratado aqui como um único valor).
+   * # i05a - NVE. Codificação NVE – Nomenclatura de Valor Aduaneiro e Estatística. Codificação opcional que detalha alguns NCM. Ocor.: 0–8 / Tam.: 6 / Tipo: C.
    *
-   * @param nve the new iD: I05a — NVE
+   * @param nve the new i05a - NVE
    */
   public void setNve(String nve) {
     this.nve = nve;
   }
 
   /**
-   * # iD: I05c — CEST.<br>
-   * Código Especificador da Substituição Tributária (CEST).<br>
-   * Tamanho: 7.
+   * # i05c - CEST. Código CEST (ICMS-ST). Ocor.: 1–1 / Tam.: 7 / Tipo: N. Campo originalmente em grupo de sequência XML (I05b), aqui trazido para o VO principal.
    *
-   * @return the iD: I05c — CEST
+   * @return the i05c - CEST
    */
-  public BigDecimal getCest() {
+  public String getCest() {
     return cest;
   }
 
   /**
-   * # iD: I05c — CEST.<br>
-   * Código Especificador da Substituição Tributária (CEST).<br>
-   * Tamanho: 7.
+   * # i05c - CEST. Código CEST (ICMS-ST). Ocor.: 1–1 / Tam.: 7 / Tipo: N. Campo originalmente em grupo de sequência XML (I05b), aqui trazido para o VO principal.
    *
-   * @param cest the new iD: I05c — CEST
+   * @param cest the new i05c - CEST
    */
-  public void setCest(BigDecimal cest) {
+  public void setCest(String cest) {
     this.cest = cest;
   }
 
   /**
-   * # iD: I05d — indEscala.<br>
-   * Indicador de Produção em Escala Relevante, conforme Cláusula 23 do Convênio ICMS 52/2017.<br>
-   * Valores: S=Produzido em Escala Relevante; N=Produzido em Escala NÃO Relevante.<br>
-   * Preenchimento obrigatório para produtos com NCM relacionado no Anexo XXVII do Convênio 52/2017.
+   * # i05d - indEscala. Indicador de Escala Relevante, conforme Ajuste SINIEF 23/2016. Ocor.: 0–1 / Tam.: 1 / Tipo: C. Campo originalmente em grupo de sequência XML (I05b), aqui trazido para o VO principal.
    *
-   * @return the iD: I05d — indEscala
+   * @return the i05d - indEscala
    */
-  public SEFAZ_indEscala getIndEscala() {
-    return indEscala;
+  public String getIndescala() {
+    return indescala;
   }
 
   /**
-   * # iD: I05d — indEscala.<br>
-   * Indicador de Produção em Escala Relevante, conforme Cláusula 23 do Convênio ICMS 52/2017.<br>
-   * Valores: S=Produzido em Escala Relevante; N=Produzido em Escala NÃO Relevante.<br>
-   * Preenchimento obrigatório para produtos com NCM relacionado no Anexo XXVII do Convênio 52/2017.
+   * # i05d - indEscala. Indicador de Escala Relevante, conforme Ajuste SINIEF 23/2016. Ocor.: 0–1 / Tam.: 1 / Tipo: C. Campo originalmente em grupo de sequência XML (I05b), aqui trazido para o VO principal.
    *
-   * @param indEscala the new iD: I05d — indEscala
+   * @param indescala the new i05d - indEscala
    */
-  public void setIndEscala(SEFAZ_indEscala indEscala) {
-    this.indEscala = indEscala;
+  public void setIndescala(String indescala) {
+    this.indescala = indescala;
   }
 
   /**
-   * # iD: I05e — CNPJFab.<br>
-   * CNPJ do fabricante da mercadoria, obrigatório para produto em escala NÃO relevante. Tamanho: 14.
+   * # i05e - CNPJFab. CNPJ do Fabricante da Mercadoria. Informar quando indEscala = "S". Ocor.: 0–1 / Tam.: 14 / Tipo: C (CNPJ somente dígitos). Campo originalmente em grupo de sequência XML (I05b), aqui trazido para o VO principal.
    *
-   * @return the iD: I05e — CNPJFab
+   * @return the i05e - CNPJFab
    */
-  public BigDecimal getCnpjFab() {
+  public String getCnpjFab() {
     return cnpjFab;
   }
 
   /**
-   * # iD: I05e — CNPJFab.<br>
-   * CNPJ do fabricante da mercadoria, obrigatório para produto em escala NÃO relevante. Tamanho: 14.
+   * # i05e - CNPJFab. CNPJ do Fabricante da Mercadoria. Informar quando indEscala = "S". Ocor.: 0–1 / Tam.: 14 / Tipo: C (CNPJ somente dígitos). Campo originalmente em grupo de sequência XML (I05b), aqui trazido para o VO principal.
    *
-   * @param cnpjFab the new iD: I05e — CNPJFab
+   * @param cnpjFab the new i05e - CNPJFab
    */
-  public void setCnpjFab(BigDecimal cnpjFab) {
+  public void setCnpjFab(String cnpjFab) {
     this.cnpjFab = cnpjFab;
   }
 
   /**
-   * # iD: I05f — cBenef.<br>
-   * Código de Benefício Fiscal na UF aplicado ao item, conforme legislação estadual. Tamanho: 8 ou 10.
+   * # i05f - cBenef. Código de Benefício Fiscal na UF aplicado ao item. Código do benefício fiscal. Ocor.: 0–1 / Tam.: 8 / Tipo: C. Campo originalmente em grupo de sequência XML (I05b), aqui trazido para o VO principal.
    *
-   * @return the iD: I05f — cBenef
+   * @return the i05f - cBenef
    */
-  public String getCBenef() {
-    return cBenef;
+  public String getCbenef() {
+    return cbenef;
   }
 
   /**
-   * # iD: I05f — cBenef.<br>
-   * Código de Benefício Fiscal na UF aplicado ao item, conforme legislação estadual. Tamanho: 8 ou 10.
+   * # i05f - cBenef. Código de Benefício Fiscal na UF aplicado ao item. Código do benefício fiscal. Ocor.: 0–1 / Tam.: 8 / Tipo: C. Campo originalmente em grupo de sequência XML (I05b), aqui trazido para o VO principal.
    *
-   * @param cBenef the new iD: I05f — cBenef
+   * @param cbenef the new i05f - cBenef
    */
-  public void setCBenef(String cBenef) {
-    this.cBenef = cBenef;
+  public void setCbenef(String cbenef) {
+    this.cbenef = cbenef;
   }
 
   /**
-   * # iD: I06 — EXTIPI.<br>
-   * Código EX-TIPI conforme legislação. Tamanho: 2–3.
+   * # i06 - EXTIPI. EX_TIPI. Ocor.: 0–1 / Tam.: 3 / Tipo: N.
    *
-   * @return the iD: I06 — EXTIPI
+   * @return the i06 - EXTIPI
    */
-  public BigDecimal getExtipi() {
+  public String getExtipi() {
     return extipi;
   }
 
   /**
-   * # iD: I06 — EXTIPI.<br>
-   * Código EX-TIPI conforme legislação. Tamanho: 2–3.
+   * # i06 - EXTIPI. EX_TIPI. Ocor.: 0–1 / Tam.: 3 / Tipo: N.
    *
-   * @param extipi the new iD: I06 — EXTIPI
+   * @param extipi the new i06 - EXTIPI
    */
-  public void setExtipi(BigDecimal extipi) {
+  public void setExtipi(String extipi) {
     this.extipi = extipi;
   }
 
   /**
-   * Gets the cfop.
+   * # i07 - CFOP. Código Fiscal de Operações e Prestações. Utilizar tabela de CFOP. Ocor.: 1–1 / Tam.: 4 / Tipo: N.
    *
-   * @return the cfop
+   * @return the i07 - CFOP
    */
-  public BigDecimal getCFOP() {
-    return CFOP;
+  public String getCfop() {
+    return cfop;
   }
 
   /**
-   * Sets the cfop.
+   * # i07 - CFOP. Código Fiscal de Operações e Prestações. Utilizar tabela de CFOP. Ocor.: 1–1 / Tam.: 4 / Tipo: N.
    *
-   * @param cFOP the new cfop
+   * @param cfop the new i07 - CFOP
    */
-  public void setCFOP(BigDecimal cFOP) {
-    CFOP = cFOP;
+  public void setCfop(String cfop) {
+    this.cfop = cfop;
   }
 
   /**
-   * # iD: I09 — uCom.<br>
-   * Unidade comercial do produto. Tamanho: 1–6.
+   * # i08 - uCom. Unidade Comercial. Unidade de comercialização. Ocor.: 1–1 / Tam.: 1–6 / Tipo: C.
    *
-   * @return the iD: I09 — uCom
+   * @return the i08 - uCom
    */
-  public String getUCom() {
-    return uCom;
+  public String getUcom() {
+    return ucom;
   }
 
   /**
-   * # iD: I09 — uCom.<br>
-   * Unidade comercial do produto. Tamanho: 1–6.
+   * # i08 - uCom. Unidade Comercial. Unidade de comercialização. Ocor.: 1–1 / Tam.: 1–6 / Tipo: C.
    *
-   * @param uCom the new iD: I09 — uCom
+   * @param ucom the new i08 - uCom
    */
-  public void setUCom(String uCom) {
-    this.uCom = uCom;
+  public void setUcom(String ucom) {
+    this.ucom = ucom;
   }
 
   /**
-   * # iD: I10 — qCom.<br>
-   * Quantidade comercial. Formato: até 11 dígitos com 0–4 casas decimais (11v0–4).
+   * # i09 - qCom. Quantidade Comercial. Quantidade comercializada. Ocor.: 1–1 / Tam.: 11v0–4 / Tipo: N.
    *
-   * @return the iD: I10 — qCom
+   * @return the i09 - qCom
    */
-  public BigDecimal getQCom() {
-    return qCom;
+  public BigDecimal getQcom() {
+    return qcom;
   }
 
   /**
-   * # iD: I10 — qCom.<br>
-   * Quantidade comercial. Formato: até 11 dígitos com 0–4 casas decimais (11v0–4).
+   * # i09 - qCom. Quantidade Comercial. Quantidade comercializada. Ocor.: 1–1 / Tam.: 11v0–4 / Tipo: N.
    *
-   * @param qCom the new iD: I10 — qCom
+   * @param qcom the new i09 - qCom
    */
-  public void setQCom(BigDecimal qCom) {
-    this.qCom = qCom;
+  public void setQcom(BigDecimal qcom) {
+    this.qcom = qcom;
   }
 
   /**
-   * # iD: I10a — vUnCom.<br>
-   * Valor unitário de comercialização do produto. Formato: até 11 dígitos com 0–10 casas decimais (11v0–10).
+   * # i10 - vUnCom. Valor Unitário de Comercialização. Valor unitário. Ocor.: 1–1 / Tam.: 11v0–10 / Tipo: N.
    *
-   * @return the iD: I10a — vUnCom
+   * @return the i10 - vUnCom
    */
-  public BigDecimal getVUnCom() {
-    return vUnCom;
+  public BigDecimal getVunCom() {
+    return vunCom;
   }
 
   /**
-   * # iD: I10a — vUnCom.<br>
-   * Valor unitário de comercialização do produto. Formato: até 11 dígitos com 0–10 casas decimais (11v0–10).
+   * # i10 - vUnCom. Valor Unitário de Comercialização. Valor unitário. Ocor.: 1–1 / Tam.: 11v0–10 / Tipo: N.
    *
-   * @param vUnCom the new iD: I10a — vUnCom
+   * @param vunCom the new i10 - vUnCom
    */
-  public void setVUnCom(BigDecimal vUnCom) {
-    this.vUnCom = vUnCom;
+  public void setVunCom(BigDecimal vunCom) {
+    this.vunCom = vunCom;
   }
 
   /**
-   * # iD: I11 — vProd.<br>
-   * Valor total bruto dos produtos ou serviços. Formato: 13v2.
+   * # i11 - vProd. Valor Total Bruto dos Produtos ou Serviços. Ocor.: 1–1 / Tam.: 13v2 (conforme MOC) / Tipo: N.
    *
-   * @return the iD: I11 — vProd
+   * @return the i11 - vProd
    */
-  public BigDecimal getVProd() {
-    return vProd;
+  public BigDecimal getVprod() {
+    return vprod;
   }
 
   /**
-   * # iD: I11 — vProd.<br>
-   * Valor total bruto dos produtos ou serviços. Formato: 13v2.
+   * # i11 - vProd. Valor Total Bruto dos Produtos ou Serviços. Ocor.: 1–1 / Tam.: 13v2 (conforme MOC) / Tipo: N.
    *
-   * @param vProd the new iD: I11 — vProd
+   * @param vprod the new i11 - vProd
    */
-  public void setVProd(BigDecimal vProd) {
-    this.vProd = vProd;
+  public void setVprod(BigDecimal vprod) {
+    this.vprod = vprod;
   }
 
   /**
-   * # iD: I12 — cEANTrib.<br>
-   * GTIN da unidade tributável. Mesmos critérios do cEAN (I03).<br>
-   * Para produtos sem GTIN, informar “SEM GTIN”.
+   * # i12 - cEANTrib. GTIN tributável da unidade tributável; se inexistente: “SEM GTIN”. Ocor.: 1–1 / Tam.: 0, 8, 12, 13, 14 / Tipo: C.
    *
-   * @return the iD: I12 — cEANTrib
+   * @return the i12 - cEANTrib
    */
-  public String getCEANTrib() {
-    return cEANTrib;
+  public String getCeanTrib() {
+    return ceanTrib;
   }
 
   /**
-   * # iD: I12 — cEANTrib.<br>
-   * GTIN da unidade tributável. Mesmos critérios do cEAN (I03).<br>
-   * Para produtos sem GTIN, informar “SEM GTIN”.
+   * # i12 - cEANTrib. GTIN tributável da unidade tributável; se inexistente: “SEM GTIN”. Ocor.: 1–1 / Tam.: 0, 8, 12, 13, 14 / Tipo: C.
    *
-   * @param cEANTrib the new iD: I12 — cEANTrib
+   * @param ceanTrib the new i12 - cEANTrib
    */
-  public void setCEANTrib(String cEANTrib) {
-    this.cEANTrib = cEANTrib;
+  public void setCeanTrib(String ceanTrib) {
+    this.ceanTrib = ceanTrib;
   }
 
   /**
-   * # iD: I13 — uTrib.<br>
-   * Unidade tributável. Tamanho: 1–6.
+   * # i13 - uTrib. Unidade Tributável. Unidade tributável. Ocor.: 1–1 / Tam.: 1–6 / Tipo: C.
    *
-   * @return the iD: I13 — uTrib
+   * @return the i13 - uTrib
    */
-  public String getUTrib() {
-    return uTrib;
+  public String getUtrib() {
+    return utrib;
   }
 
   /**
-   * # iD: I13 — uTrib.<br>
-   * Unidade tributável. Tamanho: 1–6.
+   * # i13 - uTrib. Unidade Tributável. Unidade tributável. Ocor.: 1–1 / Tam.: 1–6 / Tipo: C.
    *
-   * @param uTrib the new iD: I13 — uTrib
+   * @param utrib the new i13 - uTrib
    */
-  public void setUTrib(String uTrib) {
-    this.uTrib = uTrib;
+  public void setUtrib(String utrib) {
+    this.utrib = utrib;
   }
 
   /**
-   * # iD: I14 — qTrib.<br>
-   * Quantidade tributável. Formato: até 11 dígitos com 0–4 casas decimais (11v0–4).
+   * # i14 - qTrib. Quantidade Tributável. Quantidade tributável. Ocor.: 1–1 / Tam.: 11v0–4 / Tipo: N.
    *
-   * @return the iD: I14 — qTrib
+   * @return the i14 - qTrib
    */
-  public BigDecimal getQTrib() {
-    return qTrib;
+  public BigDecimal getQtrib() {
+    return qtrib;
   }
 
   /**
-   * # iD: I14 — qTrib.<br>
-   * Quantidade tributável. Formato: até 11 dígitos com 0–4 casas decimais (11v0–4).
+   * # i14 - qTrib. Quantidade Tributável. Quantidade tributável. Ocor.: 1–1 / Tam.: 11v0–4 / Tipo: N.
    *
-   * @param qTrib the new iD: I14 — qTrib
+   * @param qtrib the new i14 - qTrib
    */
-  public void setQTrib(BigDecimal qTrib) {
-    this.qTrib = qTrib;
+  public void setQtrib(BigDecimal qtrib) {
+    this.qtrib = qtrib;
   }
 
   /**
-   * # iD: I14a — vUnTrib.<br>
-   * Valor unitário de tributação da unidade tributável. Formato: 11v0–10.
+   * # i14a - vUnTrib. Valor Unitário de Tributação. Valor unitário tributável. Ocor.: 1–1 / Tam.: 11v0–10 / Tipo: N.
    *
-   * @return the iD: I14a — vUnTrib
+   * @return the i14a - vUnTrib
    */
-  public BigDecimal getVUnTrib() {
-    return vUnTrib;
+  public BigDecimal getVunTrib() {
+    return vunTrib;
   }
 
   /**
-   * # iD: I14a — vUnTrib.<br>
-   * Valor unitário de tributação da unidade tributável. Formato: 11v0–10.
+   * # i14a - vUnTrib. Valor Unitário de Tributação. Valor unitário tributável. Ocor.: 1–1 / Tam.: 11v0–10 / Tipo: N.
    *
-   * @param vUnTrib the new iD: I14a — vUnTrib
+   * @param vunTrib the new i14a - vUnTrib
    */
-  public void setVUnTrib(BigDecimal vUnTrib) {
-    this.vUnTrib = vUnTrib;
+  public void setVunTrib(BigDecimal vunTrib) {
+    this.vunTrib = vunTrib;
   }
 
   /**
-   * # iD: I15 — vFrete.<br>
-   * Valor total do frete do item. Formato: 13v2.
+   * # i15 - vFrete. Valor Total do Frete. Ocor.: 0–1 / Tam.: 13v2 / Tipo: N.
    *
-   * @return the iD: I15 — vFrete
+   * @return the i15 - vFrete
    */
-  public BigDecimal getVFrete() {
-    return vFrete;
+  public BigDecimal getVfrete() {
+    return vfrete;
   }
 
   /**
-   * # iD: I15 — vFrete.<br>
-   * Valor total do frete do item. Formato: 13v2.
+   * # i15 - vFrete. Valor Total do Frete. Ocor.: 0–1 / Tam.: 13v2 / Tipo: N.
    *
-   * @param vFrete the new iD: I15 — vFrete
+   * @param vfrete the new i15 - vFrete
    */
-  public void setVFrete(BigDecimal vFrete) {
-    this.vFrete = vFrete;
+  public void setVfrete(BigDecimal vfrete) {
+    this.vfrete = vfrete;
   }
 
   /**
-   * # iD: I16 — vSeg.<br>
-   * Valor total do seguro do item. Formato: 13v2.
+   * # i16 - vSeg. Valor Total do Seguro. Ocor.: 0–1 / Tam.: 13v2 / Tipo: N.
    *
-   * @return the iD: I16 — vSeg
+   * @return the i16 - vSeg
    */
-  public BigDecimal getVSeg() {
-    return vSeg;
+  public BigDecimal getVseg() {
+    return vseg;
   }
 
   /**
-   * # iD: I16 — vSeg.<br>
-   * Valor total do seguro do item. Formato: 13v2.
+   * # i16 - vSeg. Valor Total do Seguro. Ocor.: 0–1 / Tam.: 13v2 / Tipo: N.
    *
-   * @param vSeg the new iD: I16 — vSeg
+   * @param vseg the new i16 - vSeg
    */
-  public void setVSeg(BigDecimal vSeg) {
-    this.vSeg = vSeg;
+  public void setVseg(BigDecimal vseg) {
+    this.vseg = vseg;
   }
 
   /**
-   * # iD: I17 — vDesc.<br>
-   * Valor do desconto do item. Formato: 13v2.
+   * # i17 - vDesc. Valor do Desconto. Ocor.: 0–1 / Tam.: 13v2 / Tipo: N.
    *
-   * @return the iD: I17 — vDesc
+   * @return the i17 - vDesc
    */
-  public BigDecimal getVDesc() {
-    return vDesc;
+  public BigDecimal getVdesc() {
+    return vdesc;
   }
 
   /**
-   * # iD: I17 — vDesc.<br>
-   * Valor do desconto do item. Formato: 13v2.
+   * # i17 - vDesc. Valor do Desconto. Ocor.: 0–1 / Tam.: 13v2 / Tipo: N.
    *
-   * @param vDesc the new iD: I17 — vDesc
+   * @param vdesc the new i17 - vDesc
    */
-  public void setVDesc(BigDecimal vDesc) {
-    this.vDesc = vDesc;
+  public void setVdesc(BigDecimal vdesc) {
+    this.vdesc = vdesc;
   }
 
   /**
-   * # iD: I17a — vOutro.<br>
-   * Outras despesas acessórias do item. Formato: 13v2 (v2.0).
+   * # i17a - vOutro. Outras despesas acessórias. Ocor.: 0–1 / Tam.: 13v2 / Tipo: N.
    *
-   * @return the iD: I17a — vOutro
+   * @return the i17a - vOutro
    */
-  public BigDecimal getVOutro() {
-    return vOutro;
+  public BigDecimal getVoutro() {
+    return voutro;
   }
 
   /**
-   * # iD: I17a — vOutro.<br>
-   * Outras despesas acessórias do item. Formato: 13v2 (v2.0).
+   * # i17a - vOutro. Outras despesas acessórias. Ocor.: 0–1 / Tam.: 13v2 / Tipo: N.
    *
-   * @param vOutro the new iD: I17a — vOutro
+   * @param voutro the new i17a - vOutro
    */
-  public void setVOutro(BigDecimal vOutro) {
-    this.vOutro = vOutro;
+  public void setVoutro(BigDecimal voutro) {
+    this.voutro = voutro;
   }
 
   /**
-   * # iD: I17b — indTot.<br>
-   * Indica se o valor do item (vProd) compõe o valor total da NF-e (vProd).<br>
-   * Valores: 0=Não compõe; 1=Compõe. (Versão 2.0).
+   * # i17b - indTot. Indica se valor do item compõe o total da NF-e (vProd). 0 = não compõe; 1 = compõe. Ocor.: 1–1 / Tam.: 1 / Tipo: N.
    *
-   * @return the iD: I17b — indTot
+   * @return the i17b - indTot
    */
   public SEFAZ_indTot getIndTot() {
     return indTot;
   }
 
   /**
-   * # iD: I17b — indTot.<br>
-   * Indica se o valor do item (vProd) compõe o valor total da NF-e (vProd).<br>
-   * Valores: 0=Não compõe; 1=Compõe. (Versão 2.0).
+   * # i17b - indTot. Indica se valor do item compõe o total da NF-e (vProd). 0 = não compõe; 1 = compõe. Ocor.: 1–1 / Tam.: 1 / Tipo: N.
    *
-   * @param indTot the new iD: I17b — indTot
+   * @param indTot the new i17b - indTot
    */
   public void setIndTot(SEFAZ_indTot indTot) {
     this.indTot = indTot;
+  }
+
+  /**
+   * # {@link DetVO}.
+   *
+   * @return the {@link DetVO}
+   */
+  public DetVO getDetVO() {
+    return detVO;
+  }
+
+  /**
+   * # {@link DetVO}.
+   *
+   * @param detVO the new {@link DetVO}
+   */
+  public void setDetVO(DetVO detVO) {
+    this.detVO = detVO;
   }
 
 }

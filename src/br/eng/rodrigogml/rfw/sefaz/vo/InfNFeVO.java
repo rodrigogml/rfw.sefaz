@@ -1,114 +1,231 @@
 package br.eng.rodrigogml.rfw.sefaz.vo;
 
+import br.eng.rodrigogml.rfw.kernel.rfwmeta.RFWMetaEnumField;
 import br.eng.rodrigogml.rfw.kernel.rfwmeta.RFWMetaRelationshipField;
 import br.eng.rodrigogml.rfw.kernel.rfwmeta.RFWMetaRelationshipField.RelationshipTypes;
 import br.eng.rodrigogml.rfw.kernel.rfwmeta.RFWMetaStringField;
 import br.eng.rodrigogml.rfw.kernel.vo.RFWVO;
 import br.eng.rodrigogml.rfw.orm.dao.annotations.dao.RFWDAOAnnotation;
+import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_versao;
 
 /**
- * Description: Classe que representa a estrutura da tag infNFe (Informações da NF-e).<br>
- * Tabela de referência (SEFAZ):
- * <ul>
- * <li>#A01 | Campo: infNFe | Ele: G | Pai: Raiz | Ocor.: 1-1 | Grupo que contém as informações da NF-e</li>
- * <li>#A02 | Campo: versao | Ele: A | Pai: A01 | Tipo: C | Ocor.: 1-1 | Tam.: 1-4 | Versão do leiaute (4.00)</li>
- * <li>#A03 | Campo: Id | Ele: ID| Pai: A01 | Tipo: C | Ocor.: 1-1 | Tam.: 47 | Identificador da TAG a ser assinada (prefixo 'NFe' + chave de 44 dígitos)</li>
- * <li>#A04 | Campo: pk_nItem | Ele: RC | (regra de controle do Schema; não é campo a ser modelado)</li>
- * </ul>
- * Observação: elementos/grupos filhos serão modelados em VOs próprios.
+ * Grupo A (infNFe) - Informações da NF-e.
  *
- * @author Rodrigo Leitão
- * @since (11 de nov. de 2025)
+ * <p>
+ * Grupo que contém as informações da NF-e conforme especificação da NF-e.
+ * </p>
+ *
+ * <p>
+ * Elemento: A01 (infNFe) - Pai: Raiz - Ocorrência: 1-1.
+ * </p>
  */
 @RFWDAOAnnotation(schema = "_RFW.SEFAZ", table = "sefaz_infnfe")
 public class InfNFeVO extends RFWVO {
 
-  private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = -8323509530326069450L;
 
   /**
-   * ID: #A02 | Campo: versao | Ele: A | Pai: A01 | Tipo: C | Ocor.: 1-1 | Tam.: 1-4 <br>
-   * Descrição: Versão do leiaute (ex.: "4.00").
+   * {@link NFeVO}
    */
-  @RFWMetaStringField(caption = "Versão do Leiaute", maxLength = 4, minlength = 1, required = false)
-  private String versao;
+  @RFWMetaRelationshipField(caption = "NFe", relationship = RelationshipTypes.PARENT_ASSOCIATION, required = true, column = "idsefaz_nfe")
+  private NFeVO nfeVO = null;
 
   /**
-   * ID: #A03 | Campo: Id | Ele: ID | Pai: A01 | Tipo: C | Ocor.: 1-1 | Tam.: 47 <br>
-   * Descrição: Identificador da TAG a ser assinada. Informar a Chave de Acesso precedida do literal 'NFe'. <br>
-   * Exemplo de formato: NFe + 44 dígitos (regex: {@code NFe\\d{44}}).
-   *
-   * <br>
-   * <b>Observação:</b> o nome do atributo no XML é apenas Id, mas por conflitos com o id herdado de RFWVO, foi rebatizado como idTag.
+   * {@link IdeVO}
    */
-  @RFWMetaStringField(caption = "Identificador da TAG (Id)", maxLength = 47, minlength = 47, pattern = "NFe\\d{44}", required = false, unique = true)
-  private String idTag;
+  @RFWMetaRelationshipField(caption = "Ide", relationship = RelationshipTypes.COMPOSITION, required = false, columnMapped = "idsefaz_infnfe")
+  private IdeVO ideVO = null;
 
   /**
-   * TAG: EmitVO
+   * {@link EmitVO}
    */
-  @RFWMetaRelationshipField(caption = "emit", relationship = RelationshipTypes.COMPOSITION, columnMapped = "idsefaz_infnfe", required = false)
+  @RFWMetaRelationshipField(caption = "Emit", relationship = RelationshipTypes.COMPOSITION, required = false, columnMapped = "idsefaz_infnfe")
   private EmitVO emitVO = null;
 
   /**
-   * # iD: #A02 | Campo: versao | Ele: A | Pai: A01 | Tipo: C | Ocor.: 1-1 | Tam.: 1-4 <br>
-   * Descrição: Versão do leiaute (ex.: "4.00").
-   *
-   * @return the iD: #A02 | Campo: versao | Ele: A | Pai: A01 | Tipo: C | Ocor
+   * {@link DetVO}
    */
-  public String getVersao() {
+  @RFWMetaRelationshipField(caption = "Det", relationship = RelationshipTypes.COMPOSITION, required = false, columnMapped = "idsefaz_infnfe")
+  private DetVO detVO = null;
+
+  /**
+   * Versão do leiaute da NF-e.
+   *
+   * <p>
+   * ID: A02 - Campo: versao - Tipo: C - Ocorrência: 1-1 - Tamanho: 1-4.
+   * </p>
+   * <p>
+   * Descrição: Versão do leiaute.
+   * </p>
+   * <p>
+   * Observação: Versão do leiaute.
+   * </p>
+   */
+  @RFWMetaEnumField(caption = "Versão", required = true)
+  private SEFAZ_versao versao;
+
+  /**
+   * Identificador da TAG a ser assinada.
+   *
+   * <p>
+   * ID: A03 - Campo: Id - Tipo: C - Ocorrência: 1-1 - Tamanho: 47.
+   * </p>
+   * <p>
+   * Descrição: Identificador da TAG a ser assinada.
+   * </p>
+   * <p>
+   * Observação: Informar a Chave de Acesso precedida do literal 'NFe'.
+   * </p>
+   */
+  @RFWMetaStringField(caption = "Identificador da TAG a ser assinada", required = true, maxLength = 47, minLength = 47)
+  private String idXML;
+
+  /**
+   * # versão do leiaute da NF-e.
+   * <p>
+   * ID: A02 - Campo: versao - Tipo: C - Ocorrência: 1-1 - Tamanho: 1-4.
+   * </p>
+   * <p>
+   * Descrição: Versão do leiaute.
+   * </p>
+   * <p>
+   * Observação: Versão do leiaute.
+   * </p>
+   * .
+   *
+   * @return the versão do leiaute da NF-e
+   */
+  public SEFAZ_versao getVersao() {
     return versao;
   }
 
   /**
-   * # iD: #A02 | Campo: versao | Ele: A | Pai: A01 | Tipo: C | Ocor.: 1-1 | Tam.: 1-4 <br>
-   * Descrição: Versão do leiaute (ex.: "4.00").
+   * # versão do leiaute da NF-e.
+   * <p>
+   * ID: A02 - Campo: versao - Tipo: C - Ocorrência: 1-1 - Tamanho: 1-4.
+   * </p>
+   * <p>
+   * Descrição: Versão do leiaute.
+   * </p>
+   * <p>
+   * Observação: Versão do leiaute.
+   * </p>
+   * .
    *
-   * @param versao the new iD: #A02 | Campo: versao | Ele: A | Pai: A01 | Tipo: C | Ocor
+   * @param versao the new versão do leiaute da NF-e
    */
-  public void setVersao(String versao) {
+  public void setVersao(SEFAZ_versao versao) {
     this.versao = versao;
   }
 
   /**
-   * # iD: #A03 | Campo: Id | Ele: ID | Pai: A01 | Tipo: C | Ocor.: 1-1 | Tam.: 47 <br>
-   * Descrição: Identificador da TAG a ser assinada. Informar a Chave de Acesso precedida do literal 'NFe'. <br>
-   * Exemplo de formato: NFe + 44 dígitos (regex: {@code NFe\\d{44}}). <br>
-   * <b>Observação:</b> o nome do atributo no XML é apenas Id, mas por conflitos com o id herdado de RFWVO, foi rebatizado como idTag.
+   * # identificador da TAG a ser assinada.
+   * <p>
+   * ID: A03 - Campo: Id - Tipo: C - Ocorrência: 1-1 - Tamanho: 47.
+   * </p>
+   * <p>
+   * Descrição: Identificador da TAG a ser assinada.
+   * </p>
+   * <p>
+   * Observação: Informar a Chave de Acesso precedida do literal 'NFe'.
+   * </p>
+   * .
    *
-   * @return the iD: #A03 | Campo: Id | Ele: ID | Pai: A01 | Tipo: C | Ocor
+   * @return the identificador da TAG a ser assinada
    */
-  public String getIdTag() {
-    return idTag;
+  public String getIdXML() {
+    return idXML;
   }
 
   /**
-   * # iD: #A03 | Campo: Id | Ele: ID | Pai: A01 | Tipo: C | Ocor.: 1-1 | Tam.: 47 <br>
-   * Descrição: Identificador da TAG a ser assinada. Informar a Chave de Acesso precedida do literal 'NFe'. <br>
-   * Exemplo de formato: NFe + 44 dígitos (regex: {@code NFe\\d{44}}). <br>
-   * <b>Observação:</b> o nome do atributo no XML é apenas Id, mas por conflitos com o id herdado de RFWVO, foi rebatizado como idTag.
+   * # identificador da TAG a ser assinada.
+   * <p>
+   * ID: A03 - Campo: Id - Tipo: C - Ocorrência: 1-1 - Tamanho: 47.
+   * </p>
+   * <p>
+   * Descrição: Identificador da TAG a ser assinada.
+   * </p>
+   * <p>
+   * Observação: Informar a Chave de Acesso precedida do literal 'NFe'.
+   * </p>
+   * .
    *
-   * @param idTag the new iD: #A03 | Campo: Id | Ele: ID | Pai: A01 | Tipo: C | Ocor
+   * @param idXML the new identificador da TAG a ser assinada
    */
-  public void setIdTag(String idTag) {
-    this.idTag = idTag;
+  public void setIdXML(String idXML) {
+    this.idXML = idXML;
   }
 
   /**
-   * # tAG: EmitVO.
+   * # tAG NFeVO.
    *
-   * @return the tAG: EmitVO
+   * @return the tAG NFeVO
+   */
+  public NFeVO getNfeVO() {
+    return nfeVO;
+  }
+
+  /**
+   * # tAG NFeVO.
+   *
+   * @param nfeVO the new tAG NFeVO
+   */
+  public void setNfeVO(NFeVO nfeVO) {
+    this.nfeVO = nfeVO;
+  }
+
+  /**
+   * # {@link IdeVO}.
+   *
+   * @return the {@link IdeVO}
+   */
+  public IdeVO getIdeVO() {
+    return ideVO;
+  }
+
+  /**
+   * # {@link IdeVO}.
+   *
+   * @param ideVO the new {@link IdeVO}
+   */
+  public void setIdeVO(IdeVO ideVO) {
+    this.ideVO = ideVO;
+  }
+
+  /**
+   * # {@link EmitVO}.
+   *
+   * @return the {@link EmitVO}
    */
   public EmitVO getEmitVO() {
     return emitVO;
   }
 
   /**
-   * # tAG: EmitVO.
+   * # {@link EmitVO}.
    *
-   * @param emitVO the new tAG: EmitVO
+   * @param emitVO the new {@link EmitVO}
    */
   public void setEmitVO(EmitVO emitVO) {
     this.emitVO = emitVO;
+  }
+
+  /**
+   * # {@link DetVO}.
+   *
+   * @return the {@link DetVO}
+   */
+  public DetVO getDetVO() {
+    return detVO;
+  }
+
+  /**
+   * # {@link DetVO}.
+   *
+   * @param detVO the new {@link DetVO}
+   */
+  public void setDetVO(DetVO detVO) {
+    this.detVO = detVO;
   }
 
 }

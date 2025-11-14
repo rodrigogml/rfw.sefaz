@@ -1,48 +1,81 @@
 package br.eng.rodrigogml.rfw.sefaz.vo;
 
-import java.math.BigDecimal;
+import java.io.Serializable;
 
-import br.eng.rodrigogml.rfw.kernel.rfwmeta.RFWMetaBigDecimalField;
+import br.eng.rodrigogml.rfw.kernel.rfwmeta.RFWMetaIntegerField;
+import br.eng.rodrigogml.rfw.kernel.rfwmeta.RFWMetaRelationshipField;
+import br.eng.rodrigogml.rfw.kernel.rfwmeta.RFWMetaRelationshipField.RelationshipTypes;
 import br.eng.rodrigogml.rfw.kernel.vo.RFWVO;
 import br.eng.rodrigogml.rfw.orm.dao.annotations.dao.RFWDAOAnnotation;
 
 /**
- * Classe que representa a tag <b>det</b> (Detalhamento de Produtos e Serviços) do XML da SEFAZ.<br>
- * ID: H01 — Grupo de detalhamento dos itens da NF-e.
+ * Grupo H - Detalhamento de Produtos e Serviços (tag det / H01). Detalhamento de Produtos e Serviços da NF-e. Múltiplas ocorrências (1–990) para cada NF-e.
+ *
+ * Observação: a obrigatoriedade dos campos segue o MOC, mas nas annotations o atributo {@code required} é sempre definido como false conforme solicitado.
  */
 @RFWDAOAnnotation(schema = "_RFW.SEFAZ", table = "sefaz_det")
-public class DetVO extends RFWVO {
+public class DetVO extends RFWVO implements Serializable {
 
-  private static final long serialVersionUID = -9048704109273818892L;
+  private static final long serialVersionUID = 1L;
 
   /**
-   * ID: H02 — nItem.<br>
-   * Número sequencial do item na NF-e.<br>
-   * Tipo: N — Tamanho: 1–3 — Intervalo: 1–990.
+   * {@link InfNFeVO}
    */
-  @RFWMetaBigDecimalField(caption = "Número do item", required = false, unique = false, minValue = "1", maxValue = "990", scale = 0, absolute = true)
-  private BigDecimal nItem = null;
+  @RFWMetaRelationshipField(caption = "InfNFe", relationship = RelationshipTypes.PARENT_ASSOCIATION, required = true, column = "idsefaz_infnfe")
+  private InfNFeVO infNFeVO = null;
 
   /**
-   * # iD: H02 — nItem.<br>
-   * Número sequencial do item na NF-e.<br>
-   * Tipo: N — Tamanho: 1–3 — Intervalo: 1–990.
+   * {@link ProdVO}
+   */
+  @RFWMetaRelationshipField(caption = "Prod", relationship = RelationshipTypes.COMPOSITION, required = false, columnMapped = "idsefaz_det")
+  private ProdVO prodVO = null;
+
+  /**
+   * {@link ImpostoVO}
+   */
+  @RFWMetaRelationshipField(caption = "Imposto", relationship = RelationshipTypes.COMPOSITION, required = false, columnMapped = "idsefaz_det")
+  private ImpostoVO impostoVO = null;
+
+  /**
+   * H02 - nItem. Número do item na NF-e. Contador sequencial do item (1–990). Ocor.: 1–1 / Tam.: 1–3 / Tipo: N.
+   */
+  @RFWMetaIntegerField(caption = "Número do item", required = false, unique = false, minValue = 1, maxValue = 990)
+  private Integer nitem;
+
+  /**
+   * # h02 - nItem. Número do item na NF-e. Contador sequencial do item (1–990). Ocor.: 1–1 / Tam.: 1–3 / Tipo: N.
    *
-   * @return the iD: H02 — nItem
+   * @return the h02 - nItem
    */
-  public BigDecimal getNItem() {
-    return nItem;
+  public Integer getNitem() {
+    return nitem;
   }
 
   /**
-   * # iD: H02 — nItem.<br>
-   * Número sequencial do item na NF-e.<br>
-   * Tipo: N — Tamanho: 1–3 — Intervalo: 1–990.
+   * # h02 - nItem. Número do item na NF-e. Contador sequencial do item (1–990). Ocor.: 1–1 / Tam.: 1–3 / Tipo: N.
    *
-   * @param nItem the new iD: H02 — nItem
+   * @param nitem the new h02 - nItem
    */
-  public void setNItem(BigDecimal nItem) {
-    this.nItem = nItem;
+  public void setNitem(Integer nitem) {
+    this.nitem = nitem;
+  }
+
+  /**
+   * # {@link ImpostoVO}.
+   *
+   * @return the {@link ImpostoVO}
+   */
+  public ImpostoVO getImpostoVO() {
+    return impostoVO;
+  }
+
+  /**
+   * # {@link ImpostoVO}.
+   *
+   * @param impostoVO the new {@link ImpostoVO}
+   */
+  public void setImpostoVO(ImpostoVO impostoVO) {
+    this.impostoVO = impostoVO;
   }
 
 }

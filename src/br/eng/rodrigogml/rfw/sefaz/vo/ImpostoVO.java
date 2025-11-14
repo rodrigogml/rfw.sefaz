@@ -1,67 +1,87 @@
 package br.eng.rodrigogml.rfw.sefaz.vo;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 import br.eng.rodrigogml.rfw.kernel.rfwmeta.RFWMetaBigDecimalField;
+import br.eng.rodrigogml.rfw.kernel.rfwmeta.RFWMetaRelationshipField;
+import br.eng.rodrigogml.rfw.kernel.rfwmeta.RFWMetaRelationshipField.RelationshipTypes;
 import br.eng.rodrigogml.rfw.kernel.vo.RFWVO;
 import br.eng.rodrigogml.rfw.orm.dao.annotations.dao.RFWDAOAnnotation;
 
 /**
- * Classe que representa a tag <b>imposto</b> (Tributos incidentes no Produto ou Serviço) do XML da SEFAZ.<br>
- * Grupo <b>M01</b> — contém informações de tributos federais, estaduais e municipais referentes ao item da NF-e/NFC-e.<br>
- * Observação: O grupo ISSQN é mutuamente exclusivo com os grupos ICMS e II. Ou seja, caso ISSQN seja informado, ICMS e II não devem ser incluídos (e vice-versa).
+ * Grupo M - Tributos incidentes no Produto ou Serviço (tag imposto / M01). Grupo de tributos do item da NF-e.
  *
- * <p>
- * <b>Fonte:</b> Tabela NT 2013/003.
- * </p>
+ * Grupo ISSQN mutuamente exclusivo com os grupos ICMS e II. Se o grupo ISSQN for informado, os grupos ICMS e II não serão informados e vice-versa.
  *
- * @author BIS DEVil
- * @since 1.0.0
+ * Observação: a obrigatoriedade dos campos segue o MOC, mas nas annotations o atributo {@code required} é sempre definido como false conforme solicitado.
  */
 @RFWDAOAnnotation(schema = "_RFW.SEFAZ", table = "sefaz_imposto")
-public class ImpostoVO extends RFWVO {
+public class ImpostoVO extends RFWVO implements Serializable {
 
-  private static final long serialVersionUID = 621095716071205212L;
+  private static final long serialVersionUID = 1L;
 
   /**
-   * ID: M02 — vTotTrib.<br>
-   * Valor aproximado total dos tributos federais, estaduais e municipais incidentes sobre o item. Campo opcional.<br>
-   * Formato: 13v2.
-   * <p>
-   * Referência: NT 2013/003.
-   * </p>
+   * {@link DetVO}
    */
-  @RFWMetaBigDecimalField(caption = "Valor total de tributos", maxValue = "9999999999999.99", minValue = "0", scale = 2, scaleMax = 2, required = false, absolute = true)
-  private BigDecimal vTotTrib = null;
+  @RFWMetaRelationshipField(caption = "Det", relationship = RelationshipTypes.PARENT_ASSOCIATION, required = true, column = "idsefaz_det")
+  private DetVO detVO = null;
 
   /**
-   * # iD: M02 — vTotTrib.<br>
-   * Valor aproximado total dos tributos federais, estaduais e municipais incidentes sobre o item. Campo opcional.<br>
-   * Formato: 13v2.
-   * <p>
-   * Referência: NT 2013/003.
-   * </p>
-   * .
+   * {@link ICMSVO}
+   */
+  @RFWMetaRelationshipField(caption = "ICMS", relationship = RelationshipTypes.COMPOSITION, required = false, columnMapped = "idsefaz_imposto")
+  private ICMSVO icmsVO = null;
+
+  /**
+   * M02 - vTotTrib. Valor aproximado total de tributos federais, estaduais e municipais. (NT 2013/003)
    *
-   * @return the iD: M02 — vTotTrib
+   * Ocor.: 0–1 / Tam.: 13v2 / Tipo: N. No MOC o campo é opcional.
    */
-  public BigDecimal getVTotTrib() {
-    return vTotTrib;
+  @RFWMetaBigDecimalField(caption = "Valor aproximado total de tributos", required = false, unique = false, scale = 2, absolute = true)
+  private BigDecimal vtotTrib;
+
+  /**
+   * # {@link DetVO}.
+   *
+   * @return the {@link DetVO}
+   */
+  public DetVO getDetVO() {
+    return detVO;
   }
 
   /**
-   * # iD: M02 — vTotTrib.<br>
-   * Valor aproximado total dos tributos federais, estaduais e municipais incidentes sobre o item. Campo opcional.<br>
-   * Formato: 13v2.
-   * <p>
-   * Referência: NT 2013/003.
-   * </p>
-   * .
+   * # {@link DetVO}.
    *
-   * @param vTotTrib the new iD: M02 — vTotTrib
+   * @param detVO the new {@link DetVO}
    */
-  public void setVTotTrib(BigDecimal vTotTrib) {
-    this.vTotTrib = vTotTrib;
+  public void setDetVO(DetVO detVO) {
+    this.detVO = detVO;
   }
 
+  /**
+   * # m02 - vTotTrib. Valor aproximado total de tributos federais, estaduais e municipais. (NT 2013/003) Ocor.: 0–1 / Tam.: 13v2 / Tipo: N. No MOC o campo é opcional.
+   *
+   * @return the m02 - vTotTrib
+   */
+  public BigDecimal getVtotTrib() {
+    return vtotTrib;
+  }
+
+  /**
+   * # m02 - vTotTrib. Valor aproximado total de tributos federais, estaduais e municipais. (NT 2013/003) Ocor.: 0–1 / Tam.: 13v2 / Tipo: N. No MOC o campo é opcional.
+   *
+   * @param vtotTrib the new m02 - vTotTrib
+   */
+  public void setVtotTrib(BigDecimal vtotTrib) {
+    this.vtotTrib = vtotTrib;
+  }
+
+  public ICMSVO getIcmsVO() {
+    return icmsVO;
+  }
+
+  public void setIcmsVO(ICMSVO icmsVO) {
+    this.icmsVO = icmsVO;
+  }
 }

@@ -1,257 +1,291 @@
 package br.eng.rodrigogml.rfw.sefaz.vo;
 
-import java.math.BigDecimal;
+import java.io.Serializable;
 
-import br.eng.rodrigogml.rfw.kernel.rfwmeta.RFWMetaBigDecimalField;
+import br.eng.rodrigogml.rfw.kernel.preprocess.PreProcess.PreProcessOption;
+import br.eng.rodrigogml.rfw.kernel.rfwmeta.RFWMetaRelationshipField;
+import br.eng.rodrigogml.rfw.kernel.rfwmeta.RFWMetaRelationshipField.RelationshipTypes;
 import br.eng.rodrigogml.rfw.kernel.rfwmeta.RFWMetaStringField;
 import br.eng.rodrigogml.rfw.kernel.vo.RFWVO;
 import br.eng.rodrigogml.rfw.orm.dao.annotations.dao.RFWDAOAnnotation;
 
 /**
- * Tag: <b>enderDest</b> — Endereço do Destinatário (Grupo E05).<br>
- * Campos E06..E16.
+ * Grupo E05 - enderDest. Endereço do Destinatário da NF-e. Grupo obrigatório para a NF-e (modelo 55).
+ *
+ * Observação: a obrigatoriedade dos campos segue o MOC, mas nas annotations o atributo {@code required} é sempre definido como false conforme solicitado.
  */
 @RFWDAOAnnotation(schema = "_RFW.SEFAZ", table = "sefaz_enderdest")
-public class EnderDestVO extends RFWVO {
+public class EnderDestVO extends RFWVO implements Serializable {
 
   private static final long serialVersionUID = 1L;
 
-  /** ID: E06 — xLgr (C, 2–60). Logradouro. */
-  @RFWMetaStringField(caption = "Logradouro", maxLength = 60, minlength = 2, required = false)
-  private String xLgr = null;
-
-  /** ID: E07 — nro (C, 1–60). Número. */
-  @RFWMetaStringField(caption = "Número", maxLength = 60, minlength = 1, required = false)
-  private String nro = null;
-
-  /** ID: E08 — xCpl (C, 0–1, 1–60). Complemento. */
-  @RFWMetaStringField(caption = "Complemento", maxLength = 60, minlength = 1, required = false)
-  private String xCpl = null;
-
-  /** ID: E09 — xBairro (C, 2–60). Bairro. */
-  @RFWMetaStringField(caption = "Bairro", maxLength = 60, minlength = 2, required = false)
-  private String xBairro = null;
-
-  /** ID: E10 — cMun (N, 7). Código do município (IBGE). */
-  @RFWMetaBigDecimalField(caption = "Código do município (IBGE)", minValue = "0", maxValue = "9999999", scale = 0, absolute = true, required = false)
-  private BigDecimal cMun = null;
-
-  /** ID: E11 — xMun (C, 2–60). Nome do município (usar “EXTERIOR” para operações com o exterior). */
-  @RFWMetaStringField(caption = "Município", maxLength = 60, minlength = 2, required = false)
-  private String xMun = null;
-
-  /** ID: E12 — UF (C, 2). Sigla da UF (usar “EX” para operações com o exterior). */
-  @RFWMetaStringField(caption = "UF", maxLength = 2, minlength = 2, required = false)
-  private String UF = null;
-
-  /** ID: E13 — CEP (N, 8). Zeros não significativos. */
-  @RFWMetaBigDecimalField(caption = "CEP", minValue = "0", maxValue = "99999999", scale = 0, absolute = true, required = false)
-  private BigDecimal CEP = null;
-
-  /** ID: E14 — cPais (N, 2–4). Código do país (BACEN). */
-  @RFWMetaBigDecimalField(caption = "Código do país", minValue = "0", maxValue = "9999", scale = 0, absolute = true, required = false)
-  private BigDecimal cPais = null;
-
-  /** ID: E15 — xPais (C, 2–60). Nome do país. */
-  @RFWMetaStringField(caption = "País", maxLength = 60, minlength = 2, required = false)
-  private String xPais = null;
-
   /**
-   * ID: E16 — fone (N, 6–14). DDD+telefone. Em operações com exterior pode conter código do país + código da localidade + número (sem formatação).
+   * {@link DestVO}
    */
-  @RFWMetaBigDecimalField(caption = "Telefone", minValue = "0", maxValue = "99999999999999", scale = 0, absolute = true, required = false)
-  private BigDecimal fone = null;
+  @RFWMetaRelationshipField(caption = "Dest", relationship = RelationshipTypes.PARENT_ASSOCIATION, required = true, column = "idsefaz_dest")
+  private DestVO destVO = null;
 
   /**
-   * # iD: E06 — xLgr (C, 2–60). Logradouro.
+   * E06 - xLgr. Logradouro do endereço do destinatário. Ocor.: 1-1 / Tam.: 2-60 / Tipo: C.
+   */
+  @RFWMetaStringField(caption = "Logradouro", required = false, unique = false, maxLength = 60, preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
+  private String xlgr;
+
+  /**
+   * E07 - nro. Número do endereço. Ocor.: 1-1 / Tam.: 1-60 / Tipo: C.
+   */
+  @RFWMetaStringField(caption = "Número", required = false, unique = false, maxLength = 60, minLength = 1, preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
+  private String nro;
+
+  /**
+   * E08 - xCpl. Complemento do endereço. Ocor.: 0-1 / Tam.: 1-60 / Tipo: C.
+   */
+  @RFWMetaStringField(caption = "Complemento", required = false, unique = false, maxLength = 60, minLength = 1, preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
+  private String xcpl;
+
+  /**
+   * E09 - xBairro. Bairro do endereço do destinatário. Ocor.: 1-1 / Tam.: 2-60 / Tipo: C.
+   */
+  @RFWMetaStringField(caption = "Bairro", required = false, unique = false, maxLength = 60, preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
+  private String xbairro;
+
+  /**
+   * E10 - cMun. Código do município do endereço do destinatário. Utilizar a Tabela do IBGE. Ocor.: 1-1 / Tam.: 7 / Tipo: N.
+   */
+  @RFWMetaStringField(caption = "Código do município (IBGE)", required = false, unique = false, maxLength = 7, pattern = "^[0-9]{7}$", preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
+  private String cmun;
+
+  /**
+   * E11 - xMun. Nome do município. Informar “EXTERIOR” para operações com o exterior. Ocor.: 1-1 / Tam.: 2-60 / Tipo: C.
+   */
+  @RFWMetaStringField(caption = "Nome do município", required = false, unique = false, maxLength = 60, preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
+  private String xmun;
+
+  /**
+   * E12 - UF. Sigla da UF. Informar “EX” para operações com o exterior. Ocor.: 1-1 / Tam.: 2 / Tipo: C.
+   */
+  @RFWMetaStringField(caption = "UF", required = false, unique = false, maxLength = 2, preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
+  private String uf;
+
+  /**
+   * E13 - CEP. Código do CEP, com zeros não significativos. Ocor.: 0-1 / Tam.: 8 / Tipo: N.
+   */
+  @RFWMetaStringField(caption = "CEP", required = false, unique = false, maxLength = 8, pattern = "^[0-9]{8}$", preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
+  private String cep;
+
+  /**
+   * E14 - cPais. Código do País, conforme Tabela do BACEN. Ocor.: 0-1 / Tam.: 2-4 / Tipo: N.
+   */
+  @RFWMetaStringField(caption = "Código do país (BACEN)", required = false, unique = false, maxLength = 4, minLength = 2, pattern = "^[0-9]{2,4}$", preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
+  private String cpais;
+
+  /**
+   * E15 - xPais. Nome do País. Ocor.: 0-1 / Tam.: 2-60 / Tipo: C.
+   */
+  @RFWMetaStringField(caption = "Nome do país", required = false, unique = false, maxLength = 60, preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
+  private String xpais;
+
+  /**
+   * E16 - fone. Telefone do destinatário. Preencher com Código DDD + número ou, em operações com exterior, código do país + código da localidade + número do telefone. Ocor.: 0-1 / Tam.: 6-14 / Tipo: N.
+   */
+  @RFWMetaStringField(caption = "Telefone", required = false, unique = false, maxLength = 14, minLength = 6, pattern = "^[0-9]{6,14}$", preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
+  private String fone;
+
+  /**
+   * # e06 - xLgr. Logradouro do endereço do destinatário. Ocor.: 1-1 / Tam.: 2-60 / Tipo: C.
    *
-   * @return the iD: E06 — xLgr (C, 2–60)
+   * @return the e06 - xLgr
    */
-  public String getXLgr() {
-    return xLgr;
+  public String getXlgr() {
+    return xlgr;
   }
 
   /**
-   * # iD: E06 — xLgr (C, 2–60). Logradouro.
+   * # e06 - xLgr. Logradouro do endereço do destinatário. Ocor.: 1-1 / Tam.: 2-60 / Tipo: C.
    *
-   * @param xLgr the new iD: E06 — xLgr (C, 2–60)
+   * @param xlgr the new e06 - xLgr
    */
-  public void setXLgr(String xLgr) {
-    this.xLgr = xLgr;
+  public void setXlgr(String xlgr) {
+    this.xlgr = xlgr;
   }
 
   /**
-   * # iD: E07 — nro (C, 1–60). Número.
+   * # e07 - nro. Número do endereço. Ocor.: 1-1 / Tam.: 1-60 / Tipo: C.
    *
-   * @return the iD: E07 — nro (C, 1–60)
+   * @return the e07 - nro
    */
   public String getNro() {
     return nro;
   }
 
   /**
-   * # iD: E07 — nro (C, 1–60). Número.
+   * # e07 - nro. Número do endereço. Ocor.: 1-1 / Tam.: 1-60 / Tipo: C.
    *
-   * @param nro the new iD: E07 — nro (C, 1–60)
+   * @param nro the new e07 - nro
    */
   public void setNro(String nro) {
     this.nro = nro;
   }
 
   /**
-   * # iD: E08 — xCpl (C, 0–1, 1–60). Complemento.
+   * # e08 - xCpl. Complemento do endereço. Ocor.: 0-1 / Tam.: 1-60 / Tipo: C.
    *
-   * @return the iD: E08 — xCpl (C, 0–1, 1–60)
+   * @return the e08 - xCpl
    */
-  public String getXCpl() {
-    return xCpl;
+  public String getXcpl() {
+    return xcpl;
   }
 
   /**
-   * # iD: E08 — xCpl (C, 0–1, 1–60). Complemento.
+   * # e08 - xCpl. Complemento do endereço. Ocor.: 0-1 / Tam.: 1-60 / Tipo: C.
    *
-   * @param xCpl the new iD: E08 — xCpl (C, 0–1, 1–60)
+   * @param xcpl the new e08 - xCpl
    */
-  public void setXCpl(String xCpl) {
-    this.xCpl = xCpl;
+  public void setXcpl(String xcpl) {
+    this.xcpl = xcpl;
   }
 
   /**
-   * # iD: E09 — xBairro (C, 2–60). Bairro.
+   * # e09 - xBairro. Bairro do endereço do destinatário. Ocor.: 1-1 / Tam.: 2-60 / Tipo: C.
    *
-   * @return the iD: E09 — xBairro (C, 2–60)
+   * @return the e09 - xBairro
    */
-  public String getXBairro() {
-    return xBairro;
+  public String getXbairro() {
+    return xbairro;
   }
 
   /**
-   * # iD: E09 — xBairro (C, 2–60). Bairro.
+   * # e09 - xBairro. Bairro do endereço do destinatário. Ocor.: 1-1 / Tam.: 2-60 / Tipo: C.
    *
-   * @param xBairro the new iD: E09 — xBairro (C, 2–60)
+   * @param xbairro the new e09 - xBairro
    */
-  public void setXBairro(String xBairro) {
-    this.xBairro = xBairro;
+  public void setXbairro(String xbairro) {
+    this.xbairro = xbairro;
   }
 
   /**
-   * # iD: E10 — cMun (N, 7). Código do município (IBGE).
+   * # e10 - cMun. Código do município do endereço do destinatário. Utilizar a Tabela do IBGE. Ocor.: 1-1 / Tam.: 7 / Tipo: N.
    *
-   * @return the iD: E10 — cMun (N, 7)
+   * @return the e10 - cMun
    */
-  public BigDecimal getCMun() {
-    return cMun;
+  public String getCmun() {
+    return cmun;
   }
 
   /**
-   * # iD: E10 — cMun (N, 7). Código do município (IBGE).
+   * # e10 - cMun. Código do município do endereço do destinatário. Utilizar a Tabela do IBGE. Ocor.: 1-1 / Tam.: 7 / Tipo: N.
    *
-   * @param cMun the new iD: E10 — cMun (N, 7)
+   * @param cmun the new e10 - cMun
    */
-  public void setCMun(BigDecimal cMun) {
-    this.cMun = cMun;
+  public void setCmun(String cmun) {
+    this.cmun = cmun;
   }
 
   /**
-   * # iD: E11 — xMun (C, 2–60). Nome do município (usar “EXTERIOR” para operações com o exterior).
+   * # e11 - xMun. Nome do município. Informar “EXTERIOR” para operações com o exterior. Ocor.: 1-1 / Tam.: 2-60 / Tipo: C.
    *
-   * @return the iD: E11 — xMun (C, 2–60)
+   * @return the e11 - xMun
    */
-  public String getXMun() {
-    return xMun;
+  public String getXmun() {
+    return xmun;
   }
 
   /**
-   * # iD: E11 — xMun (C, 2–60). Nome do município (usar “EXTERIOR” para operações com o exterior).
+   * # e11 - xMun. Nome do município. Informar “EXTERIOR” para operações com o exterior. Ocor.: 1-1 / Tam.: 2-60 / Tipo: C.
    *
-   * @param xMun the new iD: E11 — xMun (C, 2–60)
+   * @param xmun the new e11 - xMun
    */
-  public void setXMun(String xMun) {
-    this.xMun = xMun;
+  public void setXmun(String xmun) {
+    this.xmun = xmun;
   }
 
   /**
-   * Gets the uf.
+   * # e12 - UF. Sigla da UF. Informar “EX” para operações com o exterior. Ocor.: 1-1 / Tam.: 2 / Tipo: C.
    *
-   * @return the uf
+   * @return the e12 - UF
    */
-  public String getUF() {
-    return UF;
+  public String getUf() {
+    return uf;
   }
 
   /**
-   * Sets the uf.
+   * # e12 - UF. Sigla da UF. Informar “EX” para operações com o exterior. Ocor.: 1-1 / Tam.: 2 / Tipo: C.
    *
-   * @param uF the new uf
+   * @param uf the new e12 - UF
    */
-  public void setUF(String uF) {
-    UF = uF;
+  public void setUf(String uf) {
+    this.uf = uf;
   }
 
   /**
-   * Gets the cep.
+   * # e13 - CEP. Código do CEP, com zeros não significativos. Ocor.: 0-1 / Tam.: 8 / Tipo: N.
    *
-   * @return the cep
+   * @return the e13 - CEP
    */
-  public BigDecimal getCEP() {
-    return CEP;
+  public String getCep() {
+    return cep;
   }
 
   /**
-   * Sets the cep.
+   * # e13 - CEP. Código do CEP, com zeros não significativos. Ocor.: 0-1 / Tam.: 8 / Tipo: N.
    *
-   * @param cEP the new cep
+   * @param cep the new e13 - CEP
    */
-  public void setCEP(BigDecimal cEP) {
-    CEP = cEP;
+  public void setCep(String cep) {
+    this.cep = cep;
   }
 
   /**
-   * # iD: E14 — cPais (N, 2–4). Código do país (BACEN).
+   * # e14 - cPais. Código do País, conforme Tabela do BACEN. Ocor.: 0-1 / Tam.: 2-4 / Tipo: N.
    *
-   * @return the iD: E14 — cPais (N, 2–4)
+   * @return the e14 - cPais
    */
-  public BigDecimal getCPais() {
-    return cPais;
+  public String getCpais() {
+    return cpais;
   }
 
   /**
-   * # iD: E14 — cPais (N, 2–4). Código do país (BACEN).
+   * # e14 - cPais. Código do País, conforme Tabela do BACEN. Ocor.: 0-1 / Tam.: 2-4 / Tipo: N.
    *
-   * @param cPais the new iD: E14 — cPais (N, 2–4)
+   * @param cpais the new e14 - cPais
    */
-  public void setCPais(BigDecimal cPais) {
-    this.cPais = cPais;
+  public void setCpais(String cpais) {
+    this.cpais = cpais;
   }
 
   /**
-   * # iD: E15 — xPais (C, 2–60). Nome do país.
+   * # e15 - xPais. Nome do País. Ocor.: 0-1 / Tam.: 2-60 / Tipo: C.
    *
-   * @return the iD: E15 — xPais (C, 2–60)
+   * @return the e15 - xPais
    */
-  public String getXPais() {
-    return xPais;
-  }
-
-  public void setXPais(String xPais) {
-    this.xPais = xPais;
+  public String getXpais() {
+    return xpais;
   }
 
   /**
-   * # iD: E16 — fone (N, 6–14). DDD+telefone. Em operações com exterior pode conter código do país + código da localidade + número (sem formatação).
+   * # e15 - xPais. Nome do País. Ocor.: 0-1 / Tam.: 2-60 / Tipo: C.
    *
-   * @return the iD: E16 — fone (N, 6–14)
+   * @param xpais the new e15 - xPais
    */
-  public BigDecimal getFone() {
+  public void setXpais(String xpais) {
+    this.xpais = xpais;
+  }
+
+  /**
+   * # e16 - fone. Telefone do destinatário. Preencher com Código DDD + número ou, em operações com exterior, código do país + código da localidade + número do telefone. Ocor.: 0-1 / Tam.: 6-14 / Tipo: N.
+   *
+   * @return the e16 - fone
+   */
+  public String getFone() {
     return fone;
   }
 
   /**
-   * # iD: E16 — fone (N, 6–14). DDD+telefone. Em operações com exterior pode conter código do país + código da localidade + número (sem formatação).
+   * # e16 - fone. Telefone do destinatário. Preencher com Código DDD + número ou, em operações com exterior, código do país + código da localidade + número do telefone. Ocor.: 0-1 / Tam.: 6-14 / Tipo: N.
    *
-   * @param fone the new iD: E16 — fone (N, 6–14)
+   * @param fone the new e16 - fone
    */
-  public void setFone(BigDecimal fone) {
+  public void setFone(String fone) {
     this.fone = fone;
   }
 

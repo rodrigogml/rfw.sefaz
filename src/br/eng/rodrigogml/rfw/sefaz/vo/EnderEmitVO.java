@@ -1,283 +1,352 @@
 package br.eng.rodrigogml.rfw.sefaz.vo;
 
-import java.math.BigDecimal;
-
-import br.eng.rodrigogml.rfw.kernel.rfwmeta.RFWMetaBigDecimalField;
+import br.eng.rodrigogml.rfw.kernel.preprocess.PreProcess.PreProcessOption;
+import br.eng.rodrigogml.rfw.kernel.rfwmeta.RFWMetaRelationshipField;
+import br.eng.rodrigogml.rfw.kernel.rfwmeta.RFWMetaRelationshipField.RelationshipTypes;
 import br.eng.rodrigogml.rfw.kernel.rfwmeta.RFWMetaStringField;
 import br.eng.rodrigogml.rfw.kernel.vo.RFWVO;
 import br.eng.rodrigogml.rfw.orm.dao.annotations.dao.RFWDAOAnnotation;
 
 /**
- * Tag: <b>enderEmit</b> — Endereço do emitente da NF-e (Grupo C05).<br>
- * Campos conforme MOC 4.0 (IDs C06..C16).
+ * VO da tag {@code <enderEmit>} (Grupo C - Endereço do Emitente da NF-e).
+ * <p>
+ * Representa o endereço completo do emitente, incluindo logradouro, número, complemento, bairro, município, UF, CEP, país e telefone.
+ * <p>
+ * Observação sobre obrigatoriedade: embora a documentação da NF-e indique a obrigatoriedade de vários campos (através das colunas "Ele" e "Ocor."), neste VO todos os atributos estão marcados com {@code required = false} nas anotações de metadados, por solicitação explícita.
  */
 @RFWDAOAnnotation(schema = "_RFW.SEFAZ", table = "sefaz_enderemit")
 public class EnderEmitVO extends RFWVO {
 
-  private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = -1937552470508130304L;
 
   /**
-   * ID: C06 — xLgr (C, 1-1, 2–60). Logradouro.
+   * {@link EmitVO}
    */
-  @RFWMetaStringField(caption = "Logradouro", maxLength = 60, minlength = 2, required = false)
-  private String xLgr = null;
+  @RFWMetaRelationshipField(caption = "Emit", relationship = RelationshipTypes.PARENT_ASSOCIATION, required = true, column = "idsefaz_emitvo")
+  private EmitVO emitVO = null;
 
   /**
-   * ID: C07 — nro (C, 1-1, 1–60). Número.
+   * Logradouro (id: C06).
+   * <p>
+   * Tipo: C, tamanho: 2-60, ocorrência: 1-1, Ele: E (obrigatório).
    */
-  @RFWMetaStringField(caption = "Número", maxLength = 60, minlength = 1, required = false)
-  private String nro = null;
+  @RFWMetaStringField(caption = "Logradouro do emitente", required = false, maxLength = 60, minLength = 2, preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
+  private String xlgr;
 
   /**
-   * ID: C08 — xCpl (C, 0-1, 1–60). Complemento.
+   * Número (id: C07).
+   * <p>
+   * Tipo: C, tamanho: 1-60, ocorrência: 1-1, Ele: E (obrigatório).
    */
-  @RFWMetaStringField(caption = "Complemento", maxLength = 60, minlength = 1, required = false)
-  private String xCpl = null;
+  @RFWMetaStringField(caption = "Número do endereço do emitente", required = false, maxLength = 60, minLength = 1, preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
+  private String nro;
 
   /**
-   * ID: C09 — xBairro (C, 1-1, 2–60). Bairro.
+   * Complemento (id: C08).
+   * <p>
+   * Tipo: C, tamanho: 1-60, ocorrência: 0-1, Ele: E (opcional).
    */
-  @RFWMetaStringField(caption = "Bairro", maxLength = 60, minlength = 2, required = false)
-  private String xBairro = null;
+  @RFWMetaStringField(caption = "Complemento do endereço do emitente", required = false, maxLength = 60, minLength = 1, preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
+  private String xcpl;
 
   /**
-   * ID: C10 — cMun (N, 1-1, 7). Código do município (IBGE).
+   * Bairro (id: C09).
+   * <p>
+   * Tipo: C, tamanho: 2-60, ocorrência: 1-1, Ele: E (obrigatório).
    */
-  @RFWMetaBigDecimalField(caption = "Código do município (IBGE)", minValue = "0", maxValue = "9999999", scale = 0, absolute = true, required = false)
-  private BigDecimal cMun = null;
+  @RFWMetaStringField(caption = "Bairro do emitente", required = false, maxLength = 60, minLength = 2, preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
+  private String xbairro;
 
   /**
-   * ID: C11 — xMun (C, 1-1, 2–60). Município.
+   * Nome do município (id: C11).
+   * <p>
+   * Tipo: C, tamanho: 2-60, ocorrência: 1-1, Ele: E (obrigatório).
    */
-  @RFWMetaStringField(caption = "Município", maxLength = 60, minlength = 2, required = false)
-  private String xMun = null;
+  @RFWMetaStringField(caption = "Nome do município", required = false, maxLength = 60, minLength = 2, preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
+  private String xmun;
 
   /**
-   * ID: C12 — UF (C, 1-1, 2). Sigla da UF.
+   * Sigla da UF (id: C12).
+   * <p>
+   * Tipo: C, tamanho: 2, ocorrência: 1-1, Ele: E (obrigatório).
    */
-  @RFWMetaStringField(caption = "UF", maxLength = 2, minlength = 2, required = false)
-  private String UF = null;
+  @RFWMetaStringField(caption = "UF do emitente", required = false, maxLength = 2, minLength = 2, preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
+  private String uf;
 
   /**
-   * ID: C13 — CEP (N, 0-1, 8). CEP (apenas dígitos; zeros não significativos).
+   * Código do município (id: C10). Agora representado como String com validação de dígitos.
    */
-  @RFWMetaBigDecimalField(caption = "CEP", minValue = "0", maxValue = "99999999", scale = 0, absolute = true, required = false)
-  private BigDecimal CEP = null;
+  @RFWMetaStringField(caption = "Código do município (IBGE)", required = false, maxLength = 7, pattern = "^[0-9]{7}$", preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
+  private String cmun;
 
   /**
-   * ID: C14 — cPais (N, 0-1, 4). Código do país (ex.: 1058=Brasil).
+   * CEP do emitente (id: C13). Agora representado como String com validação numérica.
    */
-  @RFWMetaBigDecimalField(caption = "Código do país", minValue = "0", maxValue = "9999", scale = 0, absolute = true, required = false)
-  private BigDecimal cPais = null;
+  @RFWMetaStringField(caption = "CEP do emitente", required = false, maxLength = 8, pattern = "^[0-9]{8}$", preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
+  private String cep;
 
   /**
-   * ID: C15 — xPais (C, 0-1, 1–60). Nome do país (ex.: Brasil/BRASIL).
+   * Código do país (id: C14). Agora representado como String com validação numérica.
    */
-  @RFWMetaStringField(caption = "País", maxLength = 60, minlength = 1, required = false)
-  private String xPais = null;
+  @RFWMetaStringField(caption = "Código do país", required = false, maxLength = 4, pattern = "^[0-9]{1,4}$", preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
+  private String cpais;
 
   /**
-   * ID: C16 — fone (N, 0-1, 6–14). Telefone (apenas dígitos; DDD+Número; com exterior pode incluir código do país e localidade).
+   * Telefone do emitente (id: C16). Agora representado como String com validação numérica.
    */
-  @RFWMetaBigDecimalField(caption = "Telefone", minValue = "0", maxValue = "99999999999999", scale = 0, absolute = true, required = false)
-  private BigDecimal fone = null;
+  @RFWMetaStringField(caption = "Telefone do emitente", required = false, maxLength = 14, pattern = "^[0-9]{6,14}$", preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
+  private String fone;
 
   /**
-   * # iD: C06 — xLgr (C, 1-1, 2–60). Logradouro.
+   * Nome do país (id: C15).
+   * <p>
+   * Tipo: C, tamanho: 1-60, ocorrência: 0-1, Ele: E (opcional). Normalmente preenchido como "Brasil" ou "BRASIL".
+   */
+  @RFWMetaStringField(caption = "Nome do país", required = false, maxLength = 60, minLength = 1, preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
+  private String xpais;
+
+  /**
+   * # logradouro (id: C06).
+   * <p>
+   * Tipo: C, tamanho: 2-60, ocorrência: 1-1, Ele: E (obrigatório).
    *
-   * @return the iD: C06 — xLgr (C, 1-1, 2–60)
+   * @return the logradouro (id: C06)
    */
-  public String getXLgr() {
-    return xLgr;
+  public String getXlgr() {
+    return xlgr;
   }
 
   /**
-   * # iD: C06 — xLgr (C, 1-1, 2–60). Logradouro.
+   * # logradouro (id: C06).
+   * <p>
+   * Tipo: C, tamanho: 2-60, ocorrência: 1-1, Ele: E (obrigatório).
    *
-   * @param xLgr the new iD: C06 — xLgr (C, 1-1, 2–60)
+   * @param xlgr the new logradouro (id: C06)
    */
-  public void setXLgr(String xLgr) {
-    this.xLgr = xLgr;
+  public void setXlgr(String xlgr) {
+    this.xlgr = xlgr;
   }
 
   /**
-   * # iD: C07 — nro (C, 1-1, 1–60). Número.
+   * # número (id: C07).
+   * <p>
+   * Tipo: C, tamanho: 1-60, ocorrência: 1-1, Ele: E (obrigatório).
    *
-   * @return the iD: C07 — nro (C, 1-1, 1–60)
+   * @return the número (id: C07)
    */
   public String getNro() {
     return nro;
   }
 
   /**
-   * # iD: C07 — nro (C, 1-1, 1–60). Número.
+   * # número (id: C07).
+   * <p>
+   * Tipo: C, tamanho: 1-60, ocorrência: 1-1, Ele: E (obrigatório).
    *
-   * @param nro the new iD: C07 — nro (C, 1-1, 1–60)
+   * @param nro the new número (id: C07)
    */
   public void setNro(String nro) {
     this.nro = nro;
   }
 
   /**
-   * # iD: C08 — xCpl (C, 0-1, 1–60). Complemento.
+   * # complemento (id: C08).
+   * <p>
+   * Tipo: C, tamanho: 1-60, ocorrência: 0-1, Ele: E (opcional).
    *
-   * @return the iD: C08 — xCpl (C, 0-1, 1–60)
+   * @return the complemento (id: C08)
    */
-  public String getXCpl() {
-    return xCpl;
+  public String getXcpl() {
+    return xcpl;
   }
 
   /**
-   * # iD: C08 — xCpl (C, 0-1, 1–60). Complemento.
+   * # complemento (id: C08).
+   * <p>
+   * Tipo: C, tamanho: 1-60, ocorrência: 0-1, Ele: E (opcional).
    *
-   * @param xCpl the new iD: C08 — xCpl (C, 0-1, 1–60)
+   * @param xcpl the new complemento (id: C08)
    */
-  public void setXCpl(String xCpl) {
-    this.xCpl = xCpl;
+  public void setXcpl(String xcpl) {
+    this.xcpl = xcpl;
   }
 
   /**
-   * # iD: C09 — xBairro (C, 1-1, 2–60). Bairro.
+   * # bairro (id: C09).
+   * <p>
+   * Tipo: C, tamanho: 2-60, ocorrência: 1-1, Ele: E (obrigatório).
    *
-   * @return the iD: C09 — xBairro (C, 1-1, 2–60)
+   * @return the bairro (id: C09)
    */
-  public String getXBairro() {
-    return xBairro;
+  public String getXbairro() {
+    return xbairro;
   }
 
   /**
-   * # iD: C09 — xBairro (C, 1-1, 2–60). Bairro.
+   * # bairro (id: C09).
+   * <p>
+   * Tipo: C, tamanho: 2-60, ocorrência: 1-1, Ele: E (obrigatório).
    *
-   * @param xBairro the new iD: C09 — xBairro (C, 1-1, 2–60)
+   * @param xbairro the new bairro (id: C09)
    */
-  public void setXBairro(String xBairro) {
-    this.xBairro = xBairro;
+  public void setXbairro(String xbairro) {
+    this.xbairro = xbairro;
   }
 
   /**
-   * # iD: C10 — cMun (N, 1-1, 7). Código do município (IBGE).
+   * # nome do município (id: C11).
+   * <p>
+   * Tipo: C, tamanho: 2-60, ocorrência: 1-1, Ele: E (obrigatório).
    *
-   * @return the iD: C10 — cMun (N, 1-1, 7)
+   * @return the nome do município (id: C11)
    */
-  public BigDecimal getCMun() {
-    return cMun;
+  public String getXmun() {
+    return xmun;
   }
 
   /**
-   * # iD: C10 — cMun (N, 1-1, 7). Código do município (IBGE).
+   * # nome do município (id: C11).
+   * <p>
+   * Tipo: C, tamanho: 2-60, ocorrência: 1-1, Ele: E (obrigatório).
    *
-   * @param cMun the new iD: C10 — cMun (N, 1-1, 7)
+   * @param xmun the new nome do município (id: C11)
    */
-  public void setCMun(BigDecimal cMun) {
-    this.cMun = cMun;
+  public void setXmun(String xmun) {
+    this.xmun = xmun;
   }
 
   /**
-   * # iD: C11 — xMun (C, 1-1, 2–60). Município.
+   * # sigla da UF (id: C12).
+   * <p>
+   * Tipo: C, tamanho: 2, ocorrência: 1-1, Ele: E (obrigatório).
    *
-   * @return the iD: C11 — xMun (C, 1-1, 2–60)
+   * @return the sigla da UF (id: C12)
    */
-  public String getXMun() {
-    return xMun;
+  public String getUf() {
+    return uf;
   }
 
   /**
-   * # iD: C11 — xMun (C, 1-1, 2–60). Município.
+   * # sigla da UF (id: C12).
+   * <p>
+   * Tipo: C, tamanho: 2, ocorrência: 1-1, Ele: E (obrigatório).
    *
-   * @param xMun the new iD: C11 — xMun (C, 1-1, 2–60)
+   * @param uf the new sigla da UF (id: C12)
    */
-  public void setXMun(String xMun) {
-    this.xMun = xMun;
+  public void setUf(String uf) {
+    this.uf = uf;
   }
 
   /**
-   * Gets the uf.
+   * # código do município (id: C10). Agora representado como String com validação de dígitos.
    *
-   * @return the uf
+   * @return the código do município (id: C10)
    */
-  public String getUF() {
-    return UF;
+  public String getCmun() {
+    return cmun;
   }
 
   /**
-   * Sets the uf.
+   * # código do município (id: C10). Agora representado como String com validação de dígitos.
    *
-   * @param uF the new uf
+   * @param cmun the new código do município (id: C10)
    */
-  public void setUF(String uF) {
-    UF = uF;
+  public void setCmun(String cmun) {
+    this.cmun = cmun;
   }
 
   /**
-   * Gets the cep.
+   * # cEP do emitente (id: C13). Agora representado como String com validação numérica.
    *
-   * @return the cep
+   * @return the cEP do emitente (id: C13)
    */
-  public BigDecimal getCEP() {
-    return CEP;
+  public String getCep() {
+    return cep;
   }
 
   /**
-   * Sets the cep.
+   * # cEP do emitente (id: C13). Agora representado como String com validação numérica.
    *
-   * @param cEP the new cep
+   * @param cep the new cEP do emitente (id: C13)
    */
-  public void setCEP(BigDecimal cEP) {
-    CEP = cEP;
+  public void setCep(String cep) {
+    this.cep = cep;
   }
 
   /**
-   * # iD: C14 — cPais (N, 0-1, 4). Código do país (ex.: 1058=Brasil).
+   * # código do país (id: C14). Agora representado como String com validação numérica.
    *
-   * @return the iD: C14 — cPais (N, 0-1, 4)
+   * @return the código do país (id: C14)
    */
-  public BigDecimal getCPais() {
-    return cPais;
+  public String getCpais() {
+    return cpais;
   }
 
   /**
-   * # iD: C14 — cPais (N, 0-1, 4). Código do país (ex.: 1058=Brasil).
+   * # código do país (id: C14). Agora representado como String com validação numérica.
    *
-   * @param cPais the new iD: C14 — cPais (N, 0-1, 4)
+   * @param cpais the new código do país (id: C14)
    */
-  public void setCPais(BigDecimal cPais) {
-    this.cPais = cPais;
+  public void setCpais(String cpais) {
+    this.cpais = cpais;
   }
 
   /**
-   * # iD: C15 — xPais (C, 0-1, 1–60). Nome do país (ex.: Brasil/BRASIL).
+   * # telefone do emitente (id: C16). Agora representado como String com validação numérica.
    *
-   * @return the iD: C15 — xPais (C, 0-1, 1–60)
+   * @return the telefone do emitente (id: C16)
    */
-  public String getXPais() {
-    return xPais;
-  }
-
-  /**
-   * # iD: C15 — xPais (C, 0-1, 1–60). Nome do país (ex.: Brasil/BRASIL).
-   *
-   * @param xPais the new iD: C15 — xPais (C, 0-1, 1–60)
-   */
-  public void setXPais(String xPais) {
-    this.xPais = xPais;
-  }
-
-  /**
-   * # iD: C16 — fone (N, 0-1, 6–14). Telefone (apenas dígitos; DDD+Número; com exterior pode incluir código do país e localidade).
-   *
-   * @return the iD: C16 — fone (N, 0-1, 6–14)
-   */
-  public BigDecimal getFone() {
+  public String getFone() {
     return fone;
   }
 
   /**
-   * # iD: C16 — fone (N, 0-1, 6–14). Telefone (apenas dígitos; DDD+Número; com exterior pode incluir código do país e localidade).
+   * # telefone do emitente (id: C16). Agora representado como String com validação numérica.
    *
-   * @param fone the new iD: C16 — fone (N, 0-1, 6–14)
+   * @param fone the new telefone do emitente (id: C16)
    */
-  public void setFone(BigDecimal fone) {
+  public void setFone(String fone) {
     this.fone = fone;
+  }
+
+  /**
+   * # nome do país (id: C15).
+   * <p>
+   * Tipo: C, tamanho: 1-60, ocorrência: 0-1, Ele: E (opcional). Normalmente preenchido como "Brasil" ou "BRASIL".
+   *
+   * @return the nome do país (id: C15)
+   */
+  public String getXpais() {
+    return xpais;
+  }
+
+  /**
+   * # nome do país (id: C15).
+   * <p>
+   * Tipo: C, tamanho: 1-60, ocorrência: 0-1, Ele: E (opcional). Normalmente preenchido como "Brasil" ou "BRASIL".
+   *
+   * @param xpais the new nome do país (id: C15)
+   */
+  public void setXpais(String xpais) {
+    this.xpais = xpais;
+  }
+
+  /**
+   * # {@link EmitVO}.
+   *
+   * @return the {@link EmitVO}
+   */
+  public EmitVO getEmitVO() {
+    return emitVO;
+  }
+
+  /**
+   * # {@link EmitVO}.
+   *
+   * @param emitVO the new {@link EmitVO}
+   */
+  public void setEmitVO(EmitVO emitVO) {
+    this.emitVO = emitVO;
   }
 
 }

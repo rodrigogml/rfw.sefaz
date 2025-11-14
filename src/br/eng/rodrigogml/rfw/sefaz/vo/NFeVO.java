@@ -20,15 +20,15 @@ public class NFeVO extends RFWVO {
   private static final long serialVersionUID = 4806153254587565490L;
 
   /**
-   * TAG nfeProc.
+   * {@link NFeProcVO}.
    */
   @RFWMetaRelationshipField(caption = "nfeProc", relationship = RelationshipTypes.PARENT_ASSOCIATION, required = true, column = "idsefaz_nfeproc")
   private NFeProcVO nfeProcVO = null;
 
   /**
-   * TAG infNFe
+   * {@link InfNFeVO}
    */
-  @RFWMetaRelationshipField(caption = "infNFe", relationship = RelationshipTypes.COMPOSITION, required = true, columnMapped = "idsefaz_nfe")
+  @RFWMetaRelationshipField(caption = "infNFe", relationship = RelationshipTypes.COMPOSITION, required = false, columnMapped = "idsefaz_nfe")
   private InfNFeVO infNFeVO = null;
 
   /**
@@ -47,6 +47,24 @@ public class NFeVO extends RFWVO {
    */
   public void setNfeProcVO(NFeProcVO nfeProcVO) {
     this.nfeProcVO = nfeProcVO;
+  }
+
+  /**
+   * # tAG infNFe.
+   *
+   * @return the tAG infNFe
+   */
+  public InfNFeVO getInfNFeVO() {
+    return infNFeVO;
+  }
+
+  /**
+   * # tAG infNFe.
+   *
+   * @param infNFeVO the new tAG infNFe
+   */
+  public void setInfNFeVO(InfNFeVO infNFeVO) {
+    this.infNFeVO = infNFeVO;
   }
 
 }
