@@ -1,11 +1,28 @@
 package br.eng.rodrigogml.rfw.sefaz;
 
+import java.io.ByteArrayInputStream;
+import java.io.StringWriter;
+import java.nio.charset.StandardCharsets;
 import java.rmi.RemoteException;
 import java.security.KeyStore;
+import java.util.Iterator;
 
 import javax.net.ssl.KeyManager;
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.TrustManager;
+import javax.xml.XMLConstants;
+import javax.xml.namespace.NamespaceContext;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+import javax.xml.xpath.XPath;
+import javax.xml.xpath.XPathConstants;
+import javax.xml.xpath.XPathExpressionException;
+import javax.xml.xpath.XPathFactory;
 
 import org.apache.axis2.AxisFault;
 import org.apache.axis2.kernel.http.HTTPConstants;
@@ -17,8 +34,13 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
 import org.apache.xmlbeans.XmlObject;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 import br.eng.rodrigogml.rfw.kernel.RFW;
+import br.eng.rodrigogml.rfw.kernel.bundle.RFWBundle;
 import br.eng.rodrigogml.rfw.kernel.exceptions.RFWCriticalException;
 import br.eng.rodrigogml.rfw.kernel.exceptions.RFWException;
 import br.eng.rodrigogml.rfw.kernel.exceptions.RFWRunTimeException;
@@ -56,6 +78,7 @@ import xsdobjects.consStatServ400.TRetConsStatServ;
 import xsdobjects.envEvento100.TEnvEvento;
 import xsdobjects.envEvento100.TRetEnvEvento;
 import xsdobjects.enviNFe400.TEnviNFe;
+import xsdobjects.enviNFe400.TNFe;
 import xsdobjects.enviNFe400.TRetEnviNFe;
 import xsdobjects.inutNFe400.TInutNFe;
 import xsdobjects.inutNFe400.TRetInutNFe;
@@ -95,6 +118,48 @@ public class SEFAZ {
    * HttpClient criado com o SSLContext personalizado com o certificado de assinatura do cliente e os certificados confiáveis do servidor da SEFAZ.
    */
   private final CloseableHttpClient httpClientCustom;
+
+  // /**
+  // * Código de Segurança do Contribuinte (CSC).
+  // *
+  // * <p>
+  // * O CSC é um código secreto, gerado e fornecido pela SEFAZ do estado para o contribuinte emissor de NFC-e. Ele é utilizado exclusivamente para a geração do QR-Code da NFC-e, compondo o cálculo do "cHashQRCode".
+  // *
+  // * <p>
+  // * Este valor NÃO pode ser inventado, nem reutilizado entre ambientes. A SEFAZ fornece dois conjuntos distintos:
+  // * <ul>
+  // * <li>Um CSC válido para o ambiente de **Homologação**</li>
+  // * <li>Outro CSC distinto para o ambiente de **Produção**</li>
+  // * </ul>
+  // *
+  // * <p>
+  // * Portanto, o CSC configurado nesta classe deve sempre corresponder exatamente ao ambiente em que a NFC-e está sendo emitida, caso contrário a SEFAZ rejeitará a nota (erro de QR-Code inválido).
+  // *
+  // * <p>
+  // * O contribuinte obtém o CSC acessando o portal da SEFAZ do estado, entrando no menu de gerenciamento de CSC e gerando/ativando um código vinculado ao seu CNPJ.
+  // */
+  // private String csc;
+
+  // /**
+  // * Identificador do Código de Segurança do Contribuinte (ID do CSC).
+  // *
+  // * <p>
+  // * Além do próprio CSC, a SEFAZ fornece um identificador numérico (geralmente com 6 dírafos) associado ao CSC ativo. Esse identificador também é obrigatório na composição do QR-Code da NFC-e, sendo informado no parâmetro <code>cIdToken</code>.
+  // *
+  // * <p>
+  // * Da mesma forma que o CSC, o ID do CSC é específico para cada ambiente:
+  // * <ul>
+  // * <li>Um IdCSC válido para **Homologação**</li>
+  // * <li>Outro IdCSC distinto para **Produção**</li>
+  // * </ul>
+  // *
+  // * <p>
+  // * O valor informado aqui deve estar sempre sincronizado com o CSC utilizado e deve corresponder exatamente ao ambiente configurado. Se o IdCSC utilizado não for compatível com o CSC do ambiente, o QR-Code gerado será rejeitado pela SEFAZ.
+  // *
+  // * <p>
+  // * O contribuinte obtém este ID no mesmo local onde obtém o CSC, no portal da SEFAZ do estado.
+  // */
+  // private Integer cscId;
 
   /**
    * Instancia o objeto para comunicação com o WS da SEFAZ.<br>
@@ -334,10 +399,39 @@ public class SEFAZ {
    * @throws RFWException
    */
   public String[] nfeAutorizacaoLoteV400asXML(TEnviNFe root) throws RFWException {
+    SEFAZ_mod mod = null;
+    try {
+      String value = root.getNFe().get(0).getInfNFe().getIde().getMod();
+      mod = SEFAZ_mod.valueOfXMLData(value);
+    } catch (Exception e) {
+    }
+    if (mod == null) throw new RFWCriticalException("Falha ao detectar o modelo da NF!");
+
+    if (!SEFAZ_mod.NFE_MODELO_55.equals(mod) && !SEFAZ_mod.NFCE_MODELO_65.equals(mod)) {
+      throw new RFWCriticalException("Este método só permite a emissão de documentos fo tipo NFe ou NFCe (não simultâneamente). Documento inválido: '${0}'.", new String[] { RFWBundle.get(mod) });
+    }
+
+    for (int i = 1; i < root.getNFe().size(); i++) {
+      TNFe tNFe = root.getNFe().get(i);
+      try {
+        if (!mod.getXMLData().equals(tNFe.getInfNFe().getIde().getMod())) {
+          throw new RFWCriticalException("Não é permitido misturar diferentes modelos de documentos no mesmo Lote para Autorização! Modelo do primeiro documento: '${0}'.", new String[] { RFWBundle.get(mod) });
+        }
+      } catch (Exception e) {
+        throw new RFWCriticalException("Falha ao identificar o modelo do documento. Index: '${0}'.", new String[] { "" + i }, e);
+      }
+    }
+
     NfeDadosMsgDocument nfeDadosMsg = NfeDadosMsgDocument.Factory.newInstance();
     NfeDadosMsgDocument.NfeDadosMsg req = nfeDadosMsg.addNewNfeDadosMsg();
 
     String msg = SEFAZUtils.signNfeAutorizacaoLoteV400Message(cert, root);
+
+    if (mod == SEFAZ_mod.NFCE_MODELO_65) {
+      // Inserir tag infNFeSupl diretamente no XML "msg" (enviNFe assinado)
+      msg = preencherInfNFeSuplComQRCode(msg);
+    }
+
     SEFAZXMLValidator.validateEnviNFeV400(msg);
 
     if (RFW.getDevProperty("rfw.sefaz.pathToLogCommunicationXML") != null) {
@@ -348,14 +442,6 @@ public class SEFAZ {
     } catch (Exception e) {
       throw new RFWCriticalException("Falha ao criar mensagem para enviar pelo WebService da SEFAZ.", new String[] { msg }, e);
     }
-
-    SEFAZ_mod mod = null;
-    try {
-      String value = root.getNFe().get(0).getInfNFe().getIde().getMod();
-      mod = SEFAZ_mod.valueOfXMLData(value);
-    } catch (Exception e) {
-    }
-    if (mod == null) throw new RFWCriticalException("Falha ao detectar o modelo da NF!");
 
     NFeAutorizacao4Stub stub = createNFeAutorizacao4Stub(mod, env, ws, contingency);
     try {
@@ -376,6 +462,405 @@ public class SEFAZ {
       }
     }
   }
+
+  /**
+   * Gera e insere a tag <infNFeSupl> com o QR-Code versão 3 da NFC-e diretamente no XML já assinado (tag <Signature> já presente).
+   *
+   * - Emissão normal (tpEmis = "1"): QR-Code v3 ONLINE: p = <chave_acesso>|3|<tpAmb>
+   *
+   * - Emissão em contingência offline (tpEmis = "9"): QR-Code v3 OFFLINE: p = <chave_acesso>|3|<tpAmb>|<dia_data_emissao>|<vNF>|<tp_idDest>|<idDest>|<assinatura> A assinatura é RSA-SHA1 em Base64 da concatenação dos parâmetros de 1 a 7, mantendo os separadores "|", usando o mesmo certificado que assina a NFC-e.
+   *
+   * A <infNFeSupl> é inserida logo após <infNFe> e antes de <Signature>.
+   *
+   * @param msg XML de envio (<enviNFe>) já assinado.
+   * @return XML com as tags <infNFeSupl> preenchidas para cada NFC-e (modelo 65).
+   * @throws RFWException Em caso de falha na montagem ou manipulação do XML.
+   */
+  private String preencherInfNFeSuplComQRCode(String msg) throws RFWException {
+    final String NFE_NS = "http://www.portalfiscal.inf.br/nfe";
+    final String DS_NS = "http://www.w3.org/2000/09/xmldsig#";
+
+    try {
+      // Parse do XML assinado
+      DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+      dbf.setNamespaceAware(true);
+      DocumentBuilder db = dbf.newDocumentBuilder();
+      Document doc = db.parse(new ByteArrayInputStream(msg.getBytes(StandardCharsets.UTF_8)));
+
+      // XPath com namespaces
+      XPathFactory xpf = XPathFactory.newInstance();
+      XPath xpath = xpf.newXPath();
+      xpath.setNamespaceContext(new NamespaceContext() {
+        @Override
+        public String getNamespaceURI(String prefix) {
+          if ("nfe".equals(prefix)) return NFE_NS;
+          if ("ds".equals(prefix)) return DS_NS;
+          return XMLConstants.NULL_NS_URI;
+        }
+
+        @Override
+        public String getPrefix(String namespaceURI) {
+          return null;
+        }
+
+        @Override
+        public Iterator<String> getPrefixes(String namespaceURI) {
+          return null;
+        }
+      });
+
+      // Percorre todas as <NFe> dentro de <enviNFe>
+      NodeList nfeList = doc.getElementsByTagNameNS(NFE_NS, "NFe");
+      for (int i = 0; i < nfeList.getLength(); i++) {
+        Element nfeEl = (Element) nfeList.item(i);
+
+        // Não aceitar infNFeSupl pré-preenchida
+        Element existingSupl = (Element) nfeEl.getElementsByTagNameNS(NFE_NS, "infNFeSupl").item(0);
+        if (existingSupl != null) {
+          throw new RFWCriticalException("Não é esperado que a tag 'infNFeSupl' esteja preenchida na NFCe. Ela será gerada automaticamente após a assinatura do XML.");
+        }
+
+        // <infNFe>
+        Element infNFeEl = (Element) nfeEl.getElementsByTagNameNS(NFE_NS, "infNFe").item(0);
+        if (infNFeEl == null) {
+          throw new RFWCriticalException("Falha ao encontrar a tag 'infNFe' no XML para montagem do QR-Code.");
+        }
+
+        // Id -> chave
+        String id = infNFeEl.getAttribute("Id"); // ex: NFe3525...
+        if (id == null || id.isEmpty()) {
+          throw new RFWCriticalException("Tag infNFe sem atributo 'Id' para montagem do QR-Code.");
+        }
+        String chave = id.startsWith("NFe") ? id.substring(3) : id;
+
+        // Ambiente
+        String tpAmb = getTextContent(xpath, infNFeEl, "nfe:ide/nfe:tpAmb");
+        if (tpAmb == null || tpAmb.isEmpty()) {
+          throw new RFWCriticalException("Campo tpAmb não encontrado na NFCe para montagem do QR-Code.");
+        }
+
+        // Tipo de emissão
+        String tpEmis = getTextContent(xpath, infNFeEl, "nfe:ide/nfe:tpEmis");
+        if (tpEmis == null || tpEmis.isEmpty()) {
+          throw new RFWCriticalException("Campo tpEmis não encontrado na NFCe para montagem do QR-Code.");
+        }
+
+        // Versão do QR-Code
+        final String versaoQR = "3";
+
+        // URL base de consulta do QR-Code e da chave, por ambiente (SP)
+        final String baseQrUrl;
+        final String urlChave;
+
+        if ("2".equals(tpAmb)) {
+          // Homologação SP
+          baseQrUrl = "https://www.homologacao.nfce.fazenda.sp.gov.br/qrcode";
+          urlChave = "https://www.homologacao.nfce.fazenda.sp.gov.br/consulta";
+        } else {
+          // Produção SP
+          baseQrUrl = "https://www.nfce.fazenda.sp.gov.br/qrcode";
+          urlChave = "https://www.nfce.fazenda.sp.gov.br/NFCeConsultaPublica";
+        }
+
+        final String p;
+        if ("1".equals(tpEmis)) {
+          // -----------------------------
+          // EMISSÃO NORMAL – ONLINE (v3)
+          // p = chave|3|tpAmb
+          // -----------------------------
+          StringBuilder sb = new StringBuilder();
+          sb.append(chave).append('|').append(versaoQR).append('|').append(tpAmb);
+          p = sb.toString();
+        } else if ("9".equals(tpEmis)) {
+          // ----------------------------------------
+          // CONTINGÊNCIA OFFLINE – v3 (esqueleto)
+          // p = chave|3|tpAmb|dia|vNF|tp_idDest|idDest|assinatura
+          // ----------------------------------------
+
+          // dhEmi (ISO 8601) – usamos apenas o dia (dois dígitos)
+          String dhEmi = getTextContent(xpath, infNFeEl, "nfe:ide/nfe:dhEmi");
+          if (dhEmi == null || dhEmi.length() < 10) {
+            throw new RFWCriticalException("Campo dhEmi inválido para emissão em contingência (QR-Code v3).");
+          }
+          String diaEmissao = dhEmi.substring(8, 10); // yyyy-MM-dd...
+
+          // vNF total
+          String vNF = getTextContent(xpath, infNFeEl, "nfe:total/nfe:ICMSTot/nfe:vNF");
+          if (vNF == null || vNF.isEmpty()) {
+            throw new RFWCriticalException("Campo vNF não encontrado para montagem do QR-Code v3 offline.");
+          }
+
+          // Destinatário
+          String tpIdDest = "";
+          String idDest = "";
+          Element destEl = (Element) infNFeEl.getElementsByTagNameNS(NFE_NS, "dest").item(0);
+          if (destEl != null) {
+            String cnpj = null;
+            String cpf = null;
+            String idEstrangeiro = null;
+
+            NodeList cnpjList = destEl.getElementsByTagNameNS(NFE_NS, "CNPJ");
+            if (cnpjList != null && cnpjList.getLength() > 0) {
+              cnpj = cnpjList.item(0).getTextContent();
+            }
+            NodeList cpfList = destEl.getElementsByTagNameNS(NFE_NS, "CPF");
+            if (cpfList != null && cpfList.getLength() > 0) {
+              cpf = cpfList.item(0).getTextContent();
+            }
+            NodeList idEstList = destEl.getElementsByTagNameNS(NFE_NS, "idEstrangeiro");
+            if (idEstList != null && idEstList.getLength() > 0) {
+              idEstrangeiro = idEstList.item(0).getTextContent();
+            }
+
+            if (cnpj != null && !cnpj.isEmpty()) {
+              tpIdDest = "1";
+              idDest = cnpj.replaceAll("\\D", "");
+            } else if (cpf != null && !cpf.isEmpty()) {
+              tpIdDest = "2";
+              idDest = cpf.replaceAll("\\D", "");
+            } else if (idEstrangeiro != null && !idEstrangeiro.isEmpty()) {
+              tpIdDest = "3";
+              idDest = idEstrangeiro.trim();
+            }
+          }
+
+          // Monta string base (parâmetros 1..7)
+          StringBuilder payload = new StringBuilder();
+          payload.append(chave).append('|').append(versaoQR).append('|').append(tpAmb).append('|').append(diaEmissao).append('|').append(vNF).append('|');
+
+          if (tpIdDest.isEmpty() || idDest.isEmpty()) {
+            // Destinatário não identificado -> apenas separadores
+            payload.append('|').append('|');
+          } else {
+            payload.append(tpIdDest).append('|').append(idDest);
+          }
+
+          // Assinatura digital RSA-SHA1 em Base64 do payload (1..7)
+          String assinatura = null;
+          try {
+            assinatura = RUCert.signTextSHA1withRSA(payload.toString(), this.cert);
+          } catch (Exception e) {
+            throw new RFWCriticalException("Falha ao assinar o payload do QR-Code v3 OFFLINE da NFC-e.", e);
+          }
+
+          // Monta p completo (1..8)
+          payload.append('|').append(assinatura);
+          p = payload.toString();
+        } else {
+          // Outros tipos de emissão não tratados ainda para QR-Code v3
+          throw new RFWCriticalException("tpEmis '" + tpEmis + "' não suportado para geração do QR-Code v3 da NFC-e.");
+        }
+
+        // Monta URL final do QR-Code
+        String qrCode = baseQrUrl + "?p=" + p;
+
+        // Cria <infNFeSupl>
+        Element infNFeSuplEl = doc.createElementNS(NFE_NS, "infNFeSupl");
+
+        Element qrCodeEl = doc.createElementNS(NFE_NS, "qrCode");
+        qrCodeEl.setTextContent(qrCode);
+        infNFeSuplEl.appendChild(qrCodeEl);
+
+        Element urlChaveEl = doc.createElementNS(NFE_NS, "urlChave");
+        urlChaveEl.setTextContent(urlChave);
+        infNFeSuplEl.appendChild(urlChaveEl);
+
+        // Inserir ANTES de <Signature>
+        Node signatureChild = null;
+        NodeList children = nfeEl.getChildNodes();
+        for (int c = 0; c < children.getLength(); c++) {
+          Node n = children.item(c);
+          if (n.getNodeType() == Node.ELEMENT_NODE) {
+            String local = n.getLocalName();
+            String ns = n.getNamespaceURI();
+            if ("Signature".equals(local) && DS_NS.equals(ns)) {
+              signatureChild = n;
+              break;
+            }
+          }
+        }
+
+        if (signatureChild != null) {
+          nfeEl.insertBefore(infNFeSuplEl, signatureChild);
+        } else {
+          // fallback: não achou Signature (caso anormal)
+          nfeEl.appendChild(infNFeSuplEl);
+        }
+      }
+
+      // Serializa de volta para String
+      TransformerFactory tf = TransformerFactory.newInstance();
+      Transformer transformer = tf.newTransformer();
+      transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "no");
+      transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
+      transformer.setOutputProperty(OutputKeys.INDENT, "no");
+
+      StringWriter sw = new StringWriter();
+      transformer.transform(new DOMSource(doc), new StreamResult(sw));
+      return sw.toString();
+
+    } catch (RFWException e) {
+      throw e;
+    } catch (Exception e) {
+      throw new RFWCriticalException("Falha ao incluir a tag infNFeSupl com o QR-Code v3 na NFCe.", e);
+    }
+  }
+
+  /**
+   * Helper simples para ler texto via XPath relativo ao nó de contexto.
+   */
+  private String getTextContent(XPath xpath, Element context, String expr) throws XPathExpressionException {
+    String value = (String) xpath.evaluate(expr, context, XPathConstants.STRING);
+    return (value != null) ? value.trim() : null;
+  }
+
+  // private String preencherInfNFeSuplComQRCode(String msg) throws RFWException {
+  // try {
+  // // Parse do XML assinado
+  // DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+  // dbf.setNamespaceAware(true);
+  // DocumentBuilder db = dbf.newDocumentBuilder();
+  // Document doc = db.parse(new ByteArrayInputStream(msg.getBytes(StandardCharsets.UTF_8)));
+  //
+  // XPathFactory xpf = XPathFactory.newInstance();
+  // XPath xpath = xpf.newXPath();
+  // xpath.setNamespaceContext(new NamespaceContext() {
+  // @Override
+  // public String getNamespaceURI(String prefix) {
+  // if ("ds".equals(prefix)) return "http://www.w3.org/2000/09/xmldsig#";
+  // if ("nfe".equals(prefix)) return "http://www.portalfiscal.inf.br/nfe";
+  // return XMLConstants.NULL_NS_URI;
+  // }
+  //
+  // @Override
+  // public String getPrefix(String namespaceURI) {
+  // return null;
+  // }
+  //
+  // @Override
+  // public Iterator<String> getPrefixes(String namespaceURI) {
+  // return null;
+  // }
+  // });
+  //
+  // final String NFE_NS = "http://www.portalfiscal.inf.br/nfe";
+  // final String DS_NS = "http://www.w3.org/2000/09/xmldsig#";
+  //
+  // // Lista de NFe dentro do enviNFe
+  // NodeList nfeList = doc.getElementsByTagNameNS(NFE_NS, "NFe");
+  // for (int i = 0; i < nfeList.getLength(); i++) {
+  // Element nfeEl = (Element) nfeList.item(i);
+  //
+  // // infNFe
+  // Element infNFeEl = (Element) nfeEl.getElementsByTagNameNS(NFE_NS, "infNFe").item(0);
+  // if (infNFeEl == null) continue;
+  //
+  // // tpEMis
+  // String tpEmis = getTextContent(xpath, infNFeEl, "nfe:ide/nfe:tpEmis");
+  // // Somente layout ONLINE (tpEmis = 1). Offline é outro layout.
+  // if (!SEFAZ_tpEmis.EMISSAO_NORMAL.getXMLData().equals(tpEmis)) {
+  // throw new RFWCriticalException("Tipo de emissão não suportada para NFCe!");
+  // }
+  //
+  // // tpAmb
+  // String tpAmb = getTextContent(xpath, infNFeEl, "nfe:ide/nfe:tpAmb");
+  //
+  // String id = infNFeEl.getAttribute("Id"); // ex: "NFe3525..."
+  // if (id == null || id.isEmpty()) continue;
+  // String chave = id.startsWith("NFe") ? id.substring(3) : id;
+  //
+  // String versaoQR = "2";
+  //
+  // // Passo 1: concatena campos com "|"
+  // StringBuilder sb = new StringBuilder();
+  // sb.append(chave).append('|').append(versaoQR).append('|').append(tpAmb).append('|').append(getCscId());
+  //
+  // // Passo 2: adiciona CSC no final
+  // String conteudoHash = sb.toString() + getCsc();
+  //
+  // // Passo 3: SHA-1 em hexa (40 caracteres)
+  // String cHashQRCode = RUString.calcSHA1ToHex(conteudoHash, StandardCharsets.UTF_8);
+  //
+  // // Parâmetro "p"
+  // String p = chave + "|" + versaoQR + "|" + tpAmb + "|" + getCscId() + "|" + cHashQRCode;
+  //
+  // // URLs por ambiente
+  // String baseQrUrl;
+  // String urlChave;
+  // if ("2".equals(tpAmb)) {
+  // // Homologação SP
+  // // baseQrUrl = "https://www.homologacao.nfce.fazenda.sp.gov.br/NFCeConsultaPublica/Paginas/ConsultaQRCode.aspx";
+  // baseQrUrl = "https://www.homologacao.nfce.fazenda.sp.gov.br/qrcode";
+  // // urlChave = "https://www.homologacao.nfce.fazenda.sp.gov.br/NFCeConsultaPublica";
+  // urlChave = "https://www.homologacao.nfce.fazenda.sp.gov.br/consulta";
+  // } else {
+  // // Produção SP
+  // // baseQrUrl = "https://www.nfce.fazenda.sp.gov.br/NFCeConsultaPublica/Paginas/ConsultaQRCode.aspx";
+  // baseQrUrl = "https://www.nfce.fazenda.sp.gov.br/qrcode";
+  // // urlChave = "https://www.nfce.fazenda.sp.gov.br/NFCeConsultaPublica/Paginas/ConsultaNFCe.aspx";
+  // urlChave = "https://www.nfce.fazenda.sp.gov.br/NFCeConsultaPublica";
+  // }
+  //
+  // String qrCode = baseQrUrl + "?p=" + p;
+  //
+  // // --------- Cria infNFeSupl / qrCode / urlChave -----------
+  // Element infNFeSuplEl = doc.createElementNS(NFE_NS, "infNFeSupl");
+  //
+  // Element qrCodeEl = doc.createElementNS(NFE_NS, "qrCode");
+  // qrCodeEl.setTextContent(qrCode);
+  // infNFeSuplEl.appendChild(qrCodeEl);
+  //
+  // Element urlChaveEl = doc.createElementNS(NFE_NS, "urlChave");
+  // urlChaveEl.setTextContent(urlChave);
+  // infNFeSuplEl.appendChild(urlChaveEl);
+  //
+  // // --------- Inserir infNFeSupl ANTES de <Signature> ---------
+  // // Ordem correta no NFe: infNFe, infNFeSupl (NFC-e), Signature
+  // Node signatureChild = null;
+  // NodeList children = nfeEl.getChildNodes();
+  // for (int c = 0; c < children.getLength(); c++) {
+  // Node n = children.item(c);
+  // if (n.getNodeType() == Node.ELEMENT_NODE) {
+  // String local = n.getLocalName();
+  // String ns = n.getNamespaceURI();
+  // if ("Signature".equals(local) && DS_NS.equals(ns)) {
+  // signatureChild = n;
+  // break;
+  // }
+  // }
+  // }
+  //
+  // if (signatureChild != null) {
+  // // Insere imediatamente antes da assinatura
+  // nfeEl.insertBefore(infNFeSuplEl, signatureChild);
+  // } else {
+  // // Caso improvável: ainda não exista Signature
+  // nfeEl.appendChild(infNFeSuplEl);
+  // }
+  // }
+  //
+  // // Transformar de volta para String
+  // TransformerFactory tf = TransformerFactory.newInstance();
+  // Transformer transformer = tf.newTransformer();
+  // transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "no");
+  // transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
+  // transformer.setOutputProperty(OutputKeys.INDENT, "no");
+  //
+  // StringWriter sw = new StringWriter();
+  // transformer.transform(new DOMSource(doc), new StreamResult(sw));
+  // return sw.toString();
+  //
+  // } catch (RFWException e) {
+  // throw e;
+  // } catch (Exception e) {
+  // throw new RFWCriticalException("Falha ao incluir a tag infNFeSupl com o QRCode na NFCe.", e);
+  // }
+  // }
+
+  // private String getTextContent(XPath xpath, Element context, String expr) throws XPathExpressionException {
+  // String v = (String) xpath.evaluate(expr, context, XPathConstants.STRING);
+  // return (v != null) ? v.trim() : null;
+  // }
 
   /**
    * Chama o método "nfeRetAutorizacao v4.00" disponibilizado no WebSerice da SEFAZ para consultar o contribuinte passando um recibo de consulta.<Br>
@@ -926,4 +1411,5 @@ public class SEFAZ {
     stub._getServiceClient().getOptions().setProperty(HTTPConstants.CACHED_HTTP_CLIENT, this.httpClientCustom);
     return stub;
   }
+
 }

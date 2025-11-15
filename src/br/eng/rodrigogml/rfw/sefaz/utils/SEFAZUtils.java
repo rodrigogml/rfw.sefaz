@@ -329,7 +329,7 @@ public class SEFAZUtils {
 
     // Parte 3 - Calculamos a Hash com base nos parametros concatenados na parte 2 e a chave de segurança. Do resultado é criado o parmetro hashQRCode e concatenado no final.
     String tosha = buff.toString() + token; // String da qual precisamos calcular a hash sha1
-    String hash = RUString.calcSHA1(tosha);
+    String hash = RUString.calcSHA1ToHex(tosha);
     buff.append("&cHashQRCode=").append(hash);
 
     // Por fim retornamos o endereço base, os parametros da parte 2 (e 3 que foi includo no buffer da parte 2)
