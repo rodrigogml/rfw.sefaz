@@ -2,22 +2,56 @@ package br.eng.rodrigogml.rfw.sefaz;
 
 import static org.junit.Assert.assertEquals;
 
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Locale;
+
 import org.junit.Before;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
 import br.eng.rodrigogml.rfw.kernel.RFW;
+import br.eng.rodrigogml.rfw.kernel.exceptions.RFWCriticalException;
 import br.eng.rodrigogml.rfw.kernel.exceptions.RFWException;
 import br.eng.rodrigogml.rfw.kernel.exceptions.RFWRunTimeException;
 import br.eng.rodrigogml.rfw.kernel.interfaces.RFWCertificate;
 import br.eng.rodrigogml.rfw.kernel.preprocess.PreProcess;
 import br.eng.rodrigogml.rfw.kernel.utils.RUFile;
+import br.eng.rodrigogml.rfw.kernel.utils.RUString;
+import br.eng.rodrigogml.rfw.kernel.utils.RUTypes;
+import br.eng.rodrigogml.rfw.kernel.utils.RUValueValidation;
 import br.eng.rodrigogml.rfw.sefaz.SEFAZDefinitions.SefazWebServices;
+import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_CRT;
+import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_CST_COFINS;
+import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_CST_PIS;
+import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_finNFe;
+import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_idDest;
+import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_indFinal;
+import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_indIntermed;
+import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_indPres;
+import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_indSinc;
+import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_mod;
+import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_procEmi;
 import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_tpAmb;
+import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_tpEmis;
+import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_tpImp;
+import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_tpNF;
+import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_versao;
+import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZUtils;
 
 import xsdobjects.consCad200.TRetConsCad;
 import xsdobjects.consStatServ400.TRetConsStatServ;
+import xsdobjects.enviNFe400.TEnderEmi;
+import xsdobjects.enviNFe400.TEndereco;
+import xsdobjects.enviNFe400.TEnviNFe;
+import xsdobjects.enviNFe400.TNFe;
+import xsdobjects.enviNFe400.TRetEnviNFe;
+import xsdobjects.enviNFe400.TUf;
+import xsdobjects.enviNFe400.TUfEmi;
 
 /**
  * Description: Classe de teste da {@link SEFAZ}.<br>
@@ -69,7 +103,7 @@ public class SEFAZTest {
 
   @Test
   public void t00_consultaCadastroCPF() throws RFWException {
-    SEFAZ sefaz = new SEFAZ(cert, SefazWebServices.SP, SEFAZ_tpAmb.HOMOLOGACAO);
+    SEFAZ sefaz = new SEFAZ(cert, SefazWebServices.SP, SEFAZ_tpAmb.PRODUCAO);
 
     final String cpf = "12345678910";
     TRetConsCad root = sefaz.consultaCadastroV200byCPF(cpf);
@@ -79,7 +113,7 @@ public class SEFAZTest {
 
   @Test
   public void t01_consultaCadastroCNPJ() throws RFWException {
-    SEFAZ sefaz = new SEFAZ(cert, SefazWebServices.SP, SEFAZ_tpAmb.HOMOLOGACAO);
+    SEFAZ sefaz = new SEFAZ(cert, SefazWebServices.SP, SEFAZ_tpAmb.PRODUCAO);
 
     final String cnpj = "45990181000189";
     TRetConsCad root = sefaz.consultaCadastroV200byCNPJ(cnpj);
@@ -93,5 +127,244 @@ public class SEFAZTest {
 
     TRetConsStatServ root = sefaz.nfeStatusServicoNFV400();
     assertEquals("107", root.getCStat());
+  }
+
+  @Test
+  public void t01_enviaNFCe_Homologacao_SP() throws RFWException {
+    SEFAZ sefaz = new SEFAZ(cert, SefazWebServices.SP, SEFAZ_tpAmb.HOMOLOGACAO);
+    TEnviNFe tNFe = mountSampleNFCeHomologationMessage();
+
+    Object[] ret = sefaz.nfeAutorizacaoLoteV400(tNFe);
+    TRetEnviNFe env = (TRetEnviNFe) ret[1];
+    System.out.println(ret[0]);
+  }
+
+  /**
+   * Monta um objeto de exemplo de NFC-e vlida para ambiente de homologao.
+   *
+   * @return Objeto pronto para assinatura e envio ao webservice de autorizao.
+   * @throws RFWException Caso ocorra falha ao calcular informaes derivadas (ex.: hashes).
+   */
+  public static TEnviNFe mountSampleNFCeHomologationMessage() throws RFWException {
+    final LocalDateTime emissionDate = RFW.getDateTime();
+    final String cUF = "35";
+    final String emitCnpj = "46992285000195";
+    final int serie = 1;
+    final int numero = 1;
+    final String cNF = "87654321";
+    final SEFAZ_tpAmb tpAmb = SEFAZ_tpAmb.HOMOLOGACAO;
+    final String tpEmis = SEFAZ_tpEmis.EMISSAO_NORMAL.getXMLData();
+    final DateTimeFormatter aammFormatter = DateTimeFormatter.ofPattern("yyMM", RFW.getLocale());
+    final String aamm = emissionDate.atZone(RFW.getZoneId()).format(aammFormatter);
+    final String chaveSemDV = cUF + aamm + emitCnpj + SEFAZ_mod.NFCE_MODELO_65.getXMLData() + String.format(RFW.getLocale(), "%03d", serie) + String.format(Locale.ROOT, "%09d", numero) + tpEmis + cNF;
+    final String dv = RUValueValidation.calcDVDANFeV400(chaveSemDV);
+    final String chave = chaveSemDV + dv;
+    final String cMunFG = "3509502";
+
+    TEnviNFe enviNFe = new TEnviNFe();
+    enviNFe.setVersao(SEFAZ_versao.VERSAO_4_00.getXMLData());
+    enviNFe.setIdLote("000000000000001");
+    enviNFe.setIndSinc(SEFAZ_indSinc.SOLICITA_SINCRONO.getXMLData());
+
+    TNFe nfe = new TNFe();
+    enviNFe.getNFe().add(nfe);
+
+    TNFe.InfNFe infNFe = new TNFe.InfNFe();
+    infNFe.setVersao(SEFAZ_versao.VERSAO_4_00.getXMLData());
+    infNFe.setId("NFe" + chave);
+    nfe.setInfNFe(infNFe);
+
+    String dhEmiUtc = RUTypes.formatToyyyy_MM_dd_T_HH_mm_ssXXX(emissionDate, RFW.getZoneId());
+
+    TNFe.InfNFe.Ide ide = new TNFe.InfNFe.Ide();
+    ide.setCUF(cUF);
+    ide.setCNF(cNF);
+    ide.setNatOp("VENDA AO CONSUMIDOR");
+    ide.setMod(SEFAZ_mod.NFCE_MODELO_65.getXMLData());
+    ide.setSerie(Integer.toString(serie));
+    ide.setNNF(Integer.toString(numero));
+    ide.setDhEmi(dhEmiUtc);
+    ide.setTpNF(SEFAZ_tpNF.SAIDA.getXMLData());
+    ide.setIdDest(SEFAZ_idDest.OPERACAO_INTERNA.getXMLData());
+    ide.setCMunFG(cMunFG);
+    ide.setTpImp(SEFAZ_tpImp.DANFE_NFCE.getXMLData());
+    ide.setTpEmis(tpEmis);
+    ide.setCDV(dv);
+    ide.setTpAmb(tpAmb.getXMLData());
+    ide.setFinNFe(SEFAZ_finNFe.NFE_NORMAL.getXMLData());
+    ide.setIndFinal(SEFAZ_indFinal.CONSUMIDOR_FINAL.getXMLData());
+    ide.setIndPres(SEFAZ_indPres.OPERACAO_PRESENCIAL.getXMLData());
+    ide.setIndIntermed(SEFAZ_indIntermed.SEM_INTERMEDIADOR.getXMLData());
+    ide.setProcEmi(SEFAZ_procEmi.EMISSAO_CONTRIBUINTE.getXMLData());
+    ide.setVerProc("RFW-TESTE 1.0.0");
+    infNFe.setIde(ide);
+
+    TEnderEmi emitAddress = new TEnderEmi();
+    emitAddress.setXLgr("Rua das Flores");
+    emitAddress.setNro("100");
+    emitAddress.setXBairro("Centro");
+    emitAddress.setCMun(cMunFG);
+    emitAddress.setXMun("Campinas");
+    emitAddress.setUF(TUfEmi.SP);
+    emitAddress.setCEP("13013177");
+    emitAddress.setCPais("1058");
+    emitAddress.setXPais("Brasil");
+    emitAddress.setFone("1130000000");
+
+    TNFe.InfNFe.Emit emit = new TNFe.InfNFe.Emit();
+    emit.setCNPJ(emitCnpj);
+    emit.setXNome("Empresa Exemplo LTDA");
+    emit.setXFant("Empresa Exemplo");
+    emit.setEnderEmit(emitAddress);
+    emit.setIE("123456789012");
+    emit.setCRT(SEFAZ_CRT.REGIME_NORMAL.getXMLData());
+    infNFe.setEmit(emit);
+
+    TNFe.InfNFe.Dest dest = new TNFe.InfNFe.Dest();
+    final String destCpf = "01234567890";
+    dest.setCPF(destCpf);
+    dest.setXNome("Consumidor de Teste");
+    dest.setIndIEDest("9");
+    dest.setEmail("cliente@exemplo.com");
+    infNFe.setDest(dest);
+
+    TEndereco destAddress = new TEndereco();
+    destAddress.setXLgr("Rua Exemplo");
+    destAddress.setNro("200");
+    destAddress.setXBairro("Bairro Centro");
+    destAddress.setCMun(cMunFG);
+    destAddress.setXMun("Sao Paulo");
+    destAddress.setUF(TUf.SP);
+    destAddress.setCEP("01001000");
+    destAddress.setCPais("1058");
+    destAddress.setXPais("Brasil");
+    destAddress.setFone("11999999999");
+    dest.setEnderDest(destAddress);
+
+    TNFe.InfNFe.Det det = new TNFe.InfNFe.Det();
+    det.setNItem("1");
+
+    TNFe.InfNFe.Det.Prod prod = new TNFe.InfNFe.Det.Prod();
+    prod.setCProd("SKU001");
+    prod.setCEAN("SEM GTIN");
+    prod.setXProd("Produto de Exemplo NFC-e");
+    prod.setNCM("61091000");
+    prod.setCFOP("5102");
+    prod.setUCom("UN");
+    prod.setQCom("1.0000");
+    prod.setVUnCom("10.00");
+    prod.setVProd("10.00");
+    prod.setCEANTrib("SEM GTIN");
+    prod.setUTrib("UN");
+    prod.setQTrib("1.0000");
+    prod.setVUnTrib("10.00");
+    prod.setIndTot("1");
+    det.setProd(prod);
+
+    TNFe.InfNFe.Det.Imposto imposto = new TNFe.InfNFe.Det.Imposto();
+    imposto.getContent().add(SEFAZUtils.auxCreateJAXBElement("vTotTrib", "0.00"));
+
+    TNFe.InfNFe.Det.Imposto.ICMS icms = new TNFe.InfNFe.Det.Imposto.ICMS();
+    TNFe.InfNFe.Det.Imposto.ICMS.ICMSSN102 icmssn102 = new TNFe.InfNFe.Det.Imposto.ICMS.ICMSSN102();
+    icmssn102.setOrig("0");
+    icmssn102.setCSOSN("102");
+    icms.setICMSSN102(icmssn102);
+    imposto.getContent().add(SEFAZUtils.auxCreateJAXBElement("ICMS", icms));
+
+    TNFe.InfNFe.Det.Imposto.PIS pis = new TNFe.InfNFe.Det.Imposto.PIS();
+    TNFe.InfNFe.Det.Imposto.PIS.PISNT pisnt = new TNFe.InfNFe.Det.Imposto.PIS.PISNT();
+    pisnt.setCST(SEFAZ_CST_PIS.CST_04_OPERACAO_TRIBUTAVEL_MONOFASICA_ALIQUOTA_ZERO.getXMLData());
+    pis.setPISNT(pisnt);
+    imposto.getContent().add(SEFAZUtils.auxCreateJAXBElement("PIS", pis));
+
+    TNFe.InfNFe.Det.Imposto.COFINS cofins = new TNFe.InfNFe.Det.Imposto.COFINS();
+    TNFe.InfNFe.Det.Imposto.COFINS.COFINSNT cofinsnt = new TNFe.InfNFe.Det.Imposto.COFINS.COFINSNT();
+    cofinsnt.setCST(SEFAZ_CST_COFINS.CST_04_OPERACAO_TRIBUTAVEL_MONOFASICA_ALIQUOTA_ZERO.getXMLData());
+    cofins.setCOFINSNT(cofinsnt);
+    imposto.getContent().add(SEFAZUtils.auxCreateJAXBElement("COFINS", cofins));
+    det.setImposto(imposto);
+
+    infNFe.getDet().add(det);
+
+    TNFe.InfNFe.Total total = new TNFe.InfNFe.Total();
+    TNFe.InfNFe.Total.ICMSTot icmsTot = new TNFe.InfNFe.Total.ICMSTot();
+    icmsTot.setVBC("0.00");
+    icmsTot.setVICMS("0.00");
+    icmsTot.setVICMSDeson("0.00");
+    icmsTot.setVFCP("0.00");
+    icmsTot.setVBCST("0.00");
+    icmsTot.setVST("0.00");
+    icmsTot.setVFCPST("0.00");
+    icmsTot.setVFCPSTRet("0.00");
+    icmsTot.setVProd("10.00");
+    icmsTot.setVFrete("0.00");
+    icmsTot.setVSeg("0.00");
+    icmsTot.setVDesc("0.00");
+    icmsTot.setVII("0.00");
+    icmsTot.setVIPI("0.00");
+    icmsTot.setVIPIDevol("0.00");
+    icmsTot.setVPIS("0.00");
+    icmsTot.setVCOFINS("0.00");
+    icmsTot.setVOutro("0.00");
+    icmsTot.setVNF("10.00");
+    icmsTot.setVTotTrib("0.00");
+    total.setICMSTot(icmsTot);
+    infNFe.setTotal(total);
+
+    TNFe.InfNFe.Transp transp = new TNFe.InfNFe.Transp();
+    transp.setModFrete("9");
+    infNFe.setTransp(transp);
+
+    TNFe.InfNFe.Pag pag = new TNFe.InfNFe.Pag();
+    TNFe.InfNFe.Pag.DetPag detPag = new TNFe.InfNFe.Pag.DetPag();
+    detPag.setIndPag("0");
+    detPag.setTPag("01");
+    detPag.setVPag("10.00");
+    pag.getDetPag().add(detPag);
+    pag.setVTroco("0.00");
+    infNFe.setPag(pag);
+
+    TNFe.InfNFe.InfAdic infAdic = new TNFe.InfNFe.InfAdic();
+    infAdic.setInfCpl("DOCUMENTO EMITIDO EM AMBIENTE DE HOMOLOGACAO - SEM VALOR FISCAL");
+    infNFe.setInfAdic(infAdic);
+
+    final String tokenId = "000001";
+    final String token = "1234567890ABCDEF1234567890ABCDEF12345678";
+    final String digVal = RUString.calcSHA1("NFe" + chave, StandardCharsets.UTF_8);
+    final String digVal2 = sha1Hex("NFe" + chave);
+
+    final String qrParams = "chNFe=" + chave + "&nVersao=100" + "&tpAmb=" + tpAmb.getXMLData() + "&cDest=" + destCpf + "&dhEmi=" + RUString.toHex(dhEmiUtc, StandardCharsets.UTF_8) + "&vNF=10.00" + "&vICMS=0.00" + "&digVal=" + digVal + "&cIdToken=" + tokenId;
+    final String cHashQRCode = RUString.calcSHA1(qrParams + token, StandardCharsets.UTF_8);
+    final String cHashQRCode2 = sha1Hex(qrParams + token);
+    final String qrCode = "https://www.homologacao.nfce.fazenda.sp.gov.br/NFCeConsultaPublica/Paginas/ConsultaQRCode.aspx?" + qrParams + "&cHashQRCode=" + cHashQRCode;
+
+    TNFe.InfNFeSupl supl = new TNFe.InfNFeSupl();
+    supl.setQrCode(qrCode);
+    supl.setUrlChave("https://www.homologacao.nfce.fazenda.sp.gov.br/NFCeConsultaPublica/Paginas/ConsultaNFCe.aspx");
+    nfe.setInfNFeSupl(supl);
+
+    return enviNFe;
+  }
+
+  private static String sha1Hex(String value) throws RFWException {
+    try {
+      MessageDigest digest = MessageDigest.getInstance("SHA-1");
+      byte[] hash = digest.digest(value.getBytes(StandardCharsets.UTF_8));
+      return toHex(hash);
+    } catch (NoSuchAlgorithmException e) {
+      throw new RFWCriticalException("Algoritmo SHA-1 indisponvel no ambiente atual.", new String[] { value }, e);
+    }
+  }
+
+  private static String toHex(String value) {
+    return toHex(value.getBytes(StandardCharsets.UTF_8));
+  }
+
+  private static String toHex(byte[] bytes) {
+    StringBuilder builder = new StringBuilder(bytes.length * 2);
+    for (byte b : bytes) {
+      builder.append(String.format(Locale.ROOT, "%02X", b));
+    }
+    return builder.toString();
   }
 }

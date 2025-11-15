@@ -3,10 +3,7 @@ package br.eng.rodrigogml.rfw.sefaz.utils;
 import java.io.StringReader;
 import java.io.StringWriter;
 import java.math.BigDecimal;
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
-import java.time.ZoneOffset;
-import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -16,6 +13,7 @@ import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
+import javax.xml.namespace.QName;
 
 import br.eng.rodrigogml.rfw.kernel.RFW;
 import br.eng.rodrigogml.rfw.kernel.exceptions.RFWCriticalException;
@@ -256,7 +254,7 @@ public class SEFAZUtils {
    * @return
    */
   public static String generateQRCodeData(SefazXMLUF uf, SEFAZ_tpAmb env, String chave, String destCPFCNPJ, LocalDateTime dhEmi, BigDecimal vNF, BigDecimal vICMS, byte[] digestValue, String tokenID, String token) throws RFWException {
-    return generateQRCodeData(uf, env, chave, destCPFCNPJ, SEFAZUtils.formatDateUTC(dhEmi), vNF, vICMS, digestValue, tokenID, token);
+    return generateQRCodeData(uf, env, chave, destCPFCNPJ, RUTypes.formatToyyyy_MM_dd_T_HH_mm_ssXXX(dhEmi), vNF, vICMS, digestValue, tokenID, token);
   }
 
   /**
@@ -276,7 +274,7 @@ public class SEFAZUtils {
    * @return
    */
   public static String generateQRCodeData(SefazXMLUF uf, SEFAZ_tpAmb env, String chave, String destCPFCNPJ, Date dhEmi, BigDecimal vNF, BigDecimal vICMS, byte[] digestValue, String tokenID, String token) throws RFWException {
-    return generateQRCodeData(uf, env, chave, destCPFCNPJ, SEFAZUtils.formatDateUTC(dhEmi), vNF, vICMS, digestValue, tokenID, token);
+    return generateQRCodeData(uf, env, chave, destCPFCNPJ, RUTypes.formatToyyyy_MM_dd_T_HH_mm_ssXXX(dhEmi), vNF, vICMS, digestValue, tokenID, token);
   }
 
   /**
@@ -339,43 +337,6 @@ public class SEFAZUtils {
   }
 
   /**
-   * Formata a data recebida no formato esperado pela especificação da NFe. Padrão UTC: "yyyy-MM-dd'T'HH:mm:ssXXX".
-   *
-   * @param date
-   * @return
-   * @throws RFWException
-   */
-  public static String formatDateUTC(Date date) throws RFWException {
-    final SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssXXX");
-    return df.format(date);
-  }
-
-  /**
-   * Formata um {@link LocalDateTime} no padrão ISO com offset ("yyyy-MM-dd'T'HH:mm:ssXXX") em UTC. Converte a data/hora para o offset UTC antes de formatar.
-   *
-   * @param dateTime o {@link LocalDateTime} a ser formatado (não nulo)
-   * @return a data/hora formatada como {@link String} no fuso UTC
-   * @throws NullPointerException se {@code dateTime} for nulo
-   */
-  public static String formatDateUTC(LocalDateTime dateTime) {
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ssXXX");
-    return dateTime.atOffset(ZoneOffset.UTC).format(formatter);
-  }
-
-  /**
-   * Formata um {@link LocalDateTime} no padrão ISO com offset ("yyyy-MM-dd'T'HH:mm:ssXXX"), permitindo informar o {@link ZoneOffset} desejado.
-   *
-   * @param dateTime o {@link LocalDateTime} a ser formatado (não nulo)
-   * @param zoneOffset o offset de fuso horário a ser aplicado (não nulo)
-   * @return a data/hora formatada como {@link String} de acordo com o {@code zoneOffset}
-   * @throws NullPointerException se {@code dateTime} ou {@code zoneOffset} forem nulos
-   */
-  public static String formatDateWithOffset(LocalDateTime dateTime, ZoneOffset zoneOffset) {
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ssXXX");
-    return dateTime.atOffset(zoneOffset).format(formatter);
-  }
-
-  /**
    * Este método interpreta todos os formatos já encontrados de datas que podem vir na NFe para o formato do Java. Atualmente os formatos reconhecidos são:<br>
    * <li>"yyyy-MM-dd'T'HH:mm:ssXXX" (Padrão UTC)</li>
    * <li>"yyyy-MM-dd'T'HH:mm:ss" (Padrão UTC Sem TimeZone)</li>
@@ -427,4 +388,16 @@ public class SEFAZUtils {
     return xml;
   }
 
+  /**
+   * Método auxiliar genérico para simplificar a criação de um JAXBElement de qualquer tipo (String, BigDecimal, ICMS, IPI, etc.) para os elemebtos genéricos.
+   *
+   * @param tagName Nome da tag XML (ex: "vTotTrib", "ICMS", "IPI").
+   * @param value Objeto a ser inserido dentro do JAXBElement (String, BigDecimal, ICMS, etc.).
+   * @param <T> Tipo do objeto a ser encapsulado.
+   * @return JAXBElement contendo o valor ou objeto formatado corretamente para o JAXB.
+   */
+  @SuppressWarnings("unchecked")
+  public static <T> JAXBElement<T> auxCreateJAXBElement(String tagName, T value) {
+    return new JAXBElement<>(new QName("http://www.portalfiscal.inf.br/nfe", tagName), (Class<T>) value.getClass(), value);
+  }
 }

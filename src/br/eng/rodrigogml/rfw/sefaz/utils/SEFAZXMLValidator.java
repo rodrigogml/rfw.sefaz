@@ -25,7 +25,8 @@ public class SEFAZXMLValidator {
   }
 
   public static void validateEnviNFeV400(String xml) throws RFWException {
-    SEFAZXMLValidator.validateXMLAgainstSchema(xml, "enviNFe_v4.00.xsd", "/xsd/PL_009p_NT2024_003_v1.02/");
+    // SEFAZXMLValidator.validateXMLAgainstSchema(xml, "enviNFe_v4.00.xsd", "/xsd/PL_009p_NT2024_003_v1.02/");
+    SEFAZXMLValidator.validateXMLAgainstSchema(xml, "enviNFe_v4.00.xsd", "/xsd/PL_009q_NT2025_001_v1.00_PL_010b_NT2025_002_v1.30/");
   }
 
   public static void validateConsReciNFeV400(String xml) throws RFWException {
@@ -60,9 +61,7 @@ public class SEFAZXMLValidator {
       RFWLogger.logDebug("XML: " + xml);
       RFWLogger.logDebug("schemaPath: " + schemapath);
       RFWLogger.logDebug("basePath: " + basepath);
-      RFWCriticalException ex = new RFWCriticalException("RFW_000035", new String[] {
-          schemapath
-      }, e);
+      RFWCriticalException ex = new RFWCriticalException("RFW_000035", new String[] { schemapath }, e);
       RFWLogger.logException(ex);
       throw ex;
     }

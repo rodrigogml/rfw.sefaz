@@ -2702,4 +2702,102 @@ public class SEFAZEnums {
     }
   }
 
+  /**
+   * Enumeração SEFAZ_indSinc — Indicador de Processamento Síncrono do Lote (campo AP03a).
+   *
+   * <p>
+   * Campo AP03a – indSinc, pertencente ao grupo AP01 (Identificação do Lote).
+   * </p>
+   *
+   * <p>
+   * <b>Valores permitidos:</b>
+   * </p>
+   * <ul>
+   * <li><b>0 = Não</b></li>
+   * <li><b>1 = Empresa solicita processamento síncrono do lote</b></li>
+   * </ul>
+   *
+   * <p>
+   * Tipo: N Tamanho: 1 Ocorrência: 1-1
+   * </p>
+   *
+   * <p>
+   * Observações importantes segundo a NT:
+   * </p>
+   * <ul>
+   * <li>O processamento síncrono corresponde ao retorno imediato da autorização da NF-e, sem geração de recibo.</li>
+   * <li>A SEFAZ somente retornará de forma síncrona se:
+   * <ul>
+   * <li>a empresa solicitar (valor = 1);</li>
+   * <li>houver somente uma NF-e no lote;</li>
+   * <li>a SEFAZ autorizadora implementar esse modo de processamento.</li>
+   * </ul>
+   * </li>
+   * </ul>
+   *
+   * <p>
+   * Implementado conforme padrão das enums SEFAZ:
+   * </p>
+   * <ul>
+   * <li>valor XML exato ({@code xmlData});</li>
+   * <li>flag {@code deprecated};</li>
+   * <li>métodos padrão: {@code getXMLData()}, {@code isDeprecated()}, {@code valueOfXMLData()}.</li>
+   * </ul>
+   */
+  public enum SEFAZ_indSinc {
+
+    /** 0 – Não solicita processamento síncrono. */
+    NAO("0", false),
+
+    /** 1 – Solicita processamento síncrono do lote. */
+    SOLICITA_SINCRONO("1", false);
+
+    /** Valor utilizado exatamente no XML. */
+    private final String xmlData;
+
+    /** Indica se o valor está obsoleto/descontinuado. */
+    private final boolean deprecated;
+
+    SEFAZ_indSinc(String xmlData, boolean deprecated) {
+      this.xmlData = xmlData;
+      this.deprecated = deprecated;
+    }
+
+    /** Retorna o valor utilizado no XML. */
+    public String getXMLData() {
+      return this.xmlData;
+    }
+
+    /** Indica se o valor está obsoleto/descontinuado. */
+    public boolean isDeprecated() {
+      return this.deprecated;
+    }
+
+    /**
+     * Converte o valor do XML para a enum correspondente.
+     *
+     * @param xmlValue valor bruto do XML.
+     * @return enum correspondente.
+     * @throws IllegalArgumentException se for nulo, vazio ou desconhecido.
+     */
+    public static SEFAZ_indSinc valueOfXMLData(String xmlValue) {
+      if (xmlValue == null) {
+        throw new IllegalArgumentException("O valor de 'indSinc' no XML não pode ser nulo.");
+      }
+
+      final String v = xmlValue.trim();
+      if (v.isEmpty()) {
+        throw new IllegalArgumentException("O valor de 'indSinc' no XML não pode ser vazio.");
+      }
+
+      for (SEFAZ_indSinc e : SEFAZ_indSinc.values()) {
+        if (e.xmlData.equals(v)) {
+          return e;
+        }
+      }
+
+      throw new IllegalArgumentException("Valor XML desconhecido para 'indSinc': '" + xmlValue + "'.");
+    }
+  }
+
 }
