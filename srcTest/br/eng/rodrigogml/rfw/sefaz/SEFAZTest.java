@@ -19,10 +19,10 @@ import br.eng.rodrigogml.rfw.kernel.preprocess.PreProcess;
 import br.eng.rodrigogml.rfw.kernel.utils.RUFile;
 import br.eng.rodrigogml.rfw.kernel.utils.RUTypes;
 import br.eng.rodrigogml.rfw.kernel.utils.RUValueValidation;
-import br.eng.rodrigogml.rfw.sefaz.SEFAZDefinitions.SefazWebServices;
 import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_CRT;
 import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_CST_COFINS;
 import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_CST_PIS;
+import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_WebServices;
 import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_finNFe;
 import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_idDest;
 import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_indFinal;
@@ -96,7 +96,7 @@ public class SEFAZTest {
 
   @Test
   public void t00_consultaCadastroCPF() throws RFWException {
-    SEFAZ sefaz = new SEFAZ(cert, SefazWebServices.SP, SEFAZ_tpAmb.PRODUCAO);
+    SEFAZ sefaz = new SEFAZ(cert, SEFAZ_WebServices.SP, SEFAZ_tpAmb.PRODUCAO);
 
     final String cpf = "12345678910";
     TRetConsCad root = sefaz.consultaCadastroV200byCPF(cpf);
@@ -106,7 +106,7 @@ public class SEFAZTest {
 
   @Test
   public void t01_consultaCadastroCNPJ() throws RFWException {
-    SEFAZ sefaz = new SEFAZ(cert, SefazWebServices.SP, SEFAZ_tpAmb.PRODUCAO);
+    SEFAZ sefaz = new SEFAZ(cert, SEFAZ_WebServices.SP, SEFAZ_tpAmb.PRODUCAO);
 
     final String cnpj = "45990181000189";
     TRetConsCad root = sefaz.consultaCadastroV200byCNPJ(cnpj);
@@ -116,7 +116,7 @@ public class SEFAZTest {
 
   @Test
   public void t02_consultaCadastroCPF() throws RFWException {
-    SEFAZ sefaz = new SEFAZ(cert, SefazWebServices.SP, SEFAZ_tpAmb.HOMOLOGACAO);
+    SEFAZ sefaz = new SEFAZ(cert, SEFAZ_WebServices.SP, SEFAZ_tpAmb.HOMOLOGACAO);
 
     TRetConsStatServ root = sefaz.nfeStatusServicoNFV400();
     assertEquals("107", root.getCStat());
@@ -124,7 +124,7 @@ public class SEFAZTest {
 
   @Test
   public void t01_enviaNFCe_Homologacao_SP() throws RFWException {
-    SEFAZ sefaz = new SEFAZ(cert, SefazWebServices.SP, SEFAZ_tpAmb.HOMOLOGACAO);
+    SEFAZ sefaz = new SEFAZ(cert, SEFAZ_WebServices.SP, SEFAZ_tpAmb.HOMOLOGACAO);
     TEnviNFe tNFe = mountSampleNFCeHomologationMessage();
 
     Object[] ret = sefaz.nfeAutorizacaoLoteV400(tNFe);

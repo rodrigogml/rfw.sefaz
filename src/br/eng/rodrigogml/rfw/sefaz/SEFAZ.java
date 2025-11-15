@@ -52,9 +52,10 @@ import br.eng.rodrigogml.rfw.kernel.utils.RUCert;
 import br.eng.rodrigogml.rfw.kernel.utils.RUFile;
 import br.eng.rodrigogml.rfw.kernel.utils.RUIO;
 import br.eng.rodrigogml.rfw.sefaz.SEFAZDefinitions.SefazContingency;
-import br.eng.rodrigogml.rfw.sefaz.SEFAZDefinitions.SefazWebServices;
+import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_WebServices;
 import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_mod;
 import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_tpAmb;
+import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_uf;
 import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZUtils;
 import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZXMLValidator;
 
@@ -96,7 +97,7 @@ public class SEFAZ {
   /**
    * Definição do estado/servidor de comunicação
    */
-  private final SefazWebServices ws;
+  private final SEFAZ_WebServices ws;
 
   /**
    * Definição do ambiente de comunicação (Homologação/Produção).
@@ -170,7 +171,7 @@ public class SEFAZ {
    * @param env Ambiente a ser utilizado na emissão de documentos e comunicação.
    * @throws RFWException
    */
-  public SEFAZ(RFWCertificate cert, SefazWebServices ws, SEFAZ_tpAmb env) throws RFWException {
+  public SEFAZ(RFWCertificate cert, SEFAZ_WebServices ws, SEFAZ_tpAmb env) throws RFWException {
     this(cert, new RFWCertificate() {
       @Override
       public CertificateType getType() {
@@ -202,7 +203,7 @@ public class SEFAZ {
    * @param env Ambiente a ser utilizado na emissão de documentos e comunicação.
    * @throws RFWException
    */
-  public SEFAZ(RFWCertificate cert, RFWCertificate trustCert, SefazWebServices ws, SEFAZ_tpAmb env) throws RFWException {
+  public SEFAZ(RFWCertificate cert, RFWCertificate trustCert, SEFAZ_WebServices ws, SEFAZ_tpAmb env) throws RFWException {
     PreProcess.requiredNonNull(ws);
     PreProcess.requiredNonNull(env);
 
@@ -552,14 +553,18 @@ public class SEFAZ {
         final String baseQrUrl;
         final String urlChave;
 
+        // Recupera a UF a partir do ambiente que estamos utilizando, para recuperar as URLs do QRcode e consulta.
+        // TODO Quando entender melhor quando os ambientes SVN forrem utilizados, melhor esse código, pois os valores de WS não estão 100% como UFs.
+        SEFAZ_uf uf = SEFAZ_uf.valueOf(this.ws.toString());
+
         if ("2".equals(tpAmb)) {
-          // Homologação SP
-          baseQrUrl = "https://www.homologacao.nfce.fazenda.sp.gov.br/qrcode";
-          urlChave = "https://www.homologacao.nfce.fazenda.sp.gov.br/consulta";
+          // Homologação
+          baseQrUrl = uf.getQrCodeHomUrl();
+          urlChave = uf.getConsultaHomUrl();
         } else {
-          // Produção SP
-          baseQrUrl = "https://www.nfce.fazenda.sp.gov.br/qrcode";
-          urlChave = "https://www.nfce.fazenda.sp.gov.br/NFCeConsultaPublica";
+          // Produção
+          baseQrUrl = uf.getQrCodeProdUrl();
+          urlChave = uf.getConsultaProdUrl();
         }
 
         final String p;
@@ -573,7 +578,7 @@ public class SEFAZ {
           p = sb.toString();
         } else if ("9".equals(tpEmis)) {
           // ----------------------------------------
-          // CONTINGÊNCIA OFFLINE – v3 (esqueleto)
+          // CONTINGÊNCIA OFFLINE – v3
           // p = chave|3|tpAmb|dia|vNF|tp_idDest|idDest|assinatura
           // ----------------------------------------
 
@@ -948,11 +953,11 @@ public class SEFAZ {
    * @return Stub pronto para conexão.
    * @throws RFWException
    */
-  private CadConsultaCadastro4Stub createCadConsultaCadastro4Stub(SEFAZ_tpAmb env, SefazWebServices ws, SefazContingency contingency) throws RFWException {
+  private CadConsultaCadastro4Stub createCadConsultaCadastro4Stub(SEFAZ_tpAmb env, SEFAZ_WebServices ws, SefazContingency contingency) throws RFWException {
     CadConsultaCadastro4Stub stub = null;
     try {
       if (env.equals(SEFAZ_tpAmb.PRODUCAO)) {
-        if (ws.equals(SefazWebServices.SP)) {
+        if (ws.equals(SEFAZ_WebServices.SP)) {
           if (contingency == null) {
             stub = new CadConsultaCadastro4Stub(SEFAZDefinitions.NFE_SP_PRODUCTION_V400_CADCONSULTACADASTRO4);
           } else {
@@ -960,7 +965,7 @@ public class SEFAZ {
           }
         }
       } else if (env.equals(SEFAZ_tpAmb.HOMOLOGACAO)) {
-        if (ws.equals(SefazWebServices.SP)) {
+        if (ws.equals(SEFAZ_WebServices.SP)) {
           if (contingency == null) {
             stub = new CadConsultaCadastro4Stub(SEFAZDefinitions.NFE_SP_TEST_V400_CADCONSULTACADASTRO4);
           } else {
@@ -987,11 +992,11 @@ public class SEFAZ {
    * @return Stub pronto para conexão.
    * @throws RFWException
    */
-  private NFeStatusServico4Stub createNfeStatusServicoNFStub(SEFAZ_tpAmb env, SefazWebServices ws, SefazContingency contingency) throws RFWException {
+  private NFeStatusServico4Stub createNfeStatusServicoNFStub(SEFAZ_tpAmb env, SEFAZ_WebServices ws, SefazContingency contingency) throws RFWException {
     NFeStatusServico4Stub stub = null;
     try {
       if (env.equals(SEFAZ_tpAmb.PRODUCAO)) {
-        if (ws.equals(SefazWebServices.SP)) {
+        if (ws.equals(SEFAZ_WebServices.SP)) {
           if (contingency == null) {
             stub = new NFeStatusServico4Stub(SEFAZDefinitions.NFE_SP_PRODUCTION_V400_NFESTATUSSERVICO4);
           } else {
@@ -999,7 +1004,7 @@ public class SEFAZ {
           }
         }
       } else if (env.equals(SEFAZ_tpAmb.HOMOLOGACAO)) {
-        if (ws.equals(SefazWebServices.SP)) {
+        if (ws.equals(SEFAZ_WebServices.SP)) {
           if (contingency == null) {
             stub = new NFeStatusServico4Stub(SEFAZDefinitions.NFE_SP_TEST_V400_NFESTATUSSERVICO4);
           } else {
@@ -1027,12 +1032,12 @@ public class SEFAZ {
    * @return Stub pronto para conexão.
    * @throws RFWException
    */
-  private NFeAutorizacao4Stub createNFeAutorizacao4Stub(SEFAZ_mod mod, SEFAZ_tpAmb env, SefazWebServices ws, SefazContingency contingency) throws RFWException {
+  private NFeAutorizacao4Stub createNFeAutorizacao4Stub(SEFAZ_mod mod, SEFAZ_tpAmb env, SEFAZ_WebServices ws, SefazContingency contingency) throws RFWException {
     NFeAutorizacao4Stub stub = null;
     try {
       if (mod.equals(SEFAZ_mod.NFE_MODELO_55)) {
         if (env.equals(SEFAZ_tpAmb.PRODUCAO)) {
-          if (ws.equals(SefazWebServices.SP)) {
+          if (ws.equals(SEFAZ_WebServices.SP)) {
             if (contingency == null) {
               stub = new NFeAutorizacao4Stub(SEFAZDefinitions.NFE_SP_PRODUCTION_V400_NFEAUTORIZACAO4);
             } else {
@@ -1040,7 +1045,7 @@ public class SEFAZ {
             }
           }
         } else if (env.equals(SEFAZ_tpAmb.HOMOLOGACAO)) {
-          if (ws.equals(SefazWebServices.SP)) {
+          if (ws.equals(SEFAZ_WebServices.SP)) {
             if (contingency == null) {
               stub = new NFeAutorizacao4Stub(SEFAZDefinitions.NFE_SP_TEST_V400_NFEAUTORIZACAO4);
             } else {
@@ -1050,7 +1055,7 @@ public class SEFAZ {
         }
       } else if (mod.equals(SEFAZ_mod.NFCE_MODELO_65)) {
         if (env.equals(SEFAZ_tpAmb.PRODUCAO)) {
-          if (ws.equals(SefazWebServices.SP)) {
+          if (ws.equals(SEFAZ_WebServices.SP)) {
             if (contingency == null) {
               stub = new NFeAutorizacao4Stub(SEFAZDefinitions.NFCE_SP_PRODUCTION_V400_NFEAUTORIZACAO4);
             } else {
@@ -1058,7 +1063,7 @@ public class SEFAZ {
             }
           }
         } else if (env.equals(SEFAZ_tpAmb.HOMOLOGACAO)) {
-          if (ws.equals(SefazWebServices.SP)) {
+          if (ws.equals(SEFAZ_WebServices.SP)) {
             if (contingency == null) {
               stub = new NFeAutorizacao4Stub(SEFAZDefinitions.NFCE_SP_TEST_V400_NFEAUTORIZACAO4);
             } else {
@@ -1086,11 +1091,11 @@ public class SEFAZ {
    * @return Stub pronto para conexão.
    * @throws RFWException
    */
-  private NFeRetAutorizacao4Stub createNFeRetAutorizacao4Stub(SEFAZ_tpAmb env, SefazWebServices ws, SefazContingency contingency) throws RFWException {
+  private NFeRetAutorizacao4Stub createNFeRetAutorizacao4Stub(SEFAZ_tpAmb env, SEFAZ_WebServices ws, SefazContingency contingency) throws RFWException {
     NFeRetAutorizacao4Stub stub = null;
     try {
       if (env.equals(SEFAZ_tpAmb.PRODUCAO)) {
-        if (ws.equals(SefazWebServices.SP)) {
+        if (ws.equals(SEFAZ_WebServices.SP)) {
           if (contingency == null) {
             stub = new NFeRetAutorizacao4Stub(SEFAZDefinitions.NFE_SP_PRODUCTION_V400_NFERETAUTORIZACAO4);
           } else {
@@ -1098,7 +1103,7 @@ public class SEFAZ {
           }
         }
       } else if (env.equals(SEFAZ_tpAmb.HOMOLOGACAO)) {
-        if (ws.equals(SefazWebServices.SP)) {
+        if (ws.equals(SEFAZ_WebServices.SP)) {
           if (contingency == null) {
             stub = new NFeRetAutorizacao4Stub(SEFAZDefinitions.NFE_SP_TEST_V400_NFERETAUTORIZACAO4);
           } else {
@@ -1172,11 +1177,11 @@ public class SEFAZ {
    * @return Stub pronto para conexão.
    * @throws RFWException
    */
-  private NFeInutilizacao4Stub createNFeInutilizacao4Stub(SEFAZ_tpAmb env, SefazWebServices ws, SefazContingency contingency) throws RFWException {
+  private NFeInutilizacao4Stub createNFeInutilizacao4Stub(SEFAZ_tpAmb env, SEFAZ_WebServices ws, SefazContingency contingency) throws RFWException {
     NFeInutilizacao4Stub stub = null;
     try {
       if (env.equals(SEFAZ_tpAmb.PRODUCAO)) {
-        if (ws.equals(SefazWebServices.SP)) {
+        if (ws.equals(SEFAZ_WebServices.SP)) {
           if (contingency == null) {
             stub = new NFeInutilizacao4Stub(SEFAZDefinitions.NFE_SP_PRODUCTION_V400_NFEINUTILIZACAO4);
           } else {
@@ -1184,7 +1189,7 @@ public class SEFAZ {
           }
         }
       } else if (env.equals(SEFAZ_tpAmb.HOMOLOGACAO)) {
-        if (ws.equals(SefazWebServices.SP)) {
+        if (ws.equals(SEFAZ_WebServices.SP)) {
           if (contingency == null) {
             stub = new NFeInutilizacao4Stub(SEFAZDefinitions.NFE_SP_TEST_V400_NFEINUTILIZACAO4);
           } else {
@@ -1258,11 +1263,11 @@ public class SEFAZ {
    * @return Stub pronto para conexão.
    * @throws RFWException
    */
-  private NFeRecepcaoEvento4Stub createNFeRecepcaoEvento4Stub(SEFAZ_tpAmb env, SefazWebServices ws, SefazContingency contingency) throws RFWException {
+  private NFeRecepcaoEvento4Stub createNFeRecepcaoEvento4Stub(SEFAZ_tpAmb env, SEFAZ_WebServices ws, SefazContingency contingency) throws RFWException {
     NFeRecepcaoEvento4Stub stub = null;
     try {
       if (env.equals(SEFAZ_tpAmb.PRODUCAO)) {
-        if (ws.equals(SefazWebServices.SP)) {
+        if (ws.equals(SEFAZ_WebServices.SP)) {
           if (contingency == null) {
             stub = new NFeRecepcaoEvento4Stub(SEFAZDefinitions.NFE_SP_PRODUCTION_V400_NFERECEPCAOEVENTO4);
           } else {
@@ -1270,7 +1275,7 @@ public class SEFAZ {
           }
         }
       } else if (env.equals(SEFAZ_tpAmb.HOMOLOGACAO)) {
-        if (ws.equals(SefazWebServices.SP)) {
+        if (ws.equals(SEFAZ_WebServices.SP)) {
           if (contingency == null) {
             stub = new NFeRecepcaoEvento4Stub(SEFAZDefinitions.NFE_SP_TEST_V400_NFERECEPCAOEVENTO4);
           } else {
@@ -1382,11 +1387,11 @@ public class SEFAZ {
    * @return Stub pronto para conexão.
    * @throws RFWException
    */
-  private NFeConsultaProtocolo4Stub createNFeConsultaProtocolo4Stub(SEFAZ_tpAmb env, SefazWebServices ws, SefazContingency contingency) throws RFWException {
+  private NFeConsultaProtocolo4Stub createNFeConsultaProtocolo4Stub(SEFAZ_tpAmb env, SEFAZ_WebServices ws, SefazContingency contingency) throws RFWException {
     NFeConsultaProtocolo4Stub stub = null;
     try {
       if (env.equals(SEFAZ_tpAmb.PRODUCAO)) {
-        if (ws.equals(SefazWebServices.SP)) {
+        if (ws.equals(SEFAZ_WebServices.SP)) {
           if (contingency == null) {
             stub = new NFeConsultaProtocolo4Stub(SEFAZDefinitions.NFE_SP_PRODUCTION_V400_NFECONSULTAPROTOCOLO4);
           } else {
@@ -1394,7 +1399,7 @@ public class SEFAZ {
           }
         }
       } else if (env.equals(SEFAZ_tpAmb.HOMOLOGACAO)) {
-        if (ws.equals(SefazWebServices.SP)) {
+        if (ws.equals(SEFAZ_WebServices.SP)) {
           if (contingency == null) {
             stub = new NFeConsultaProtocolo4Stub(SEFAZDefinitions.NFE_SP_TEST_V400_NFECONSULTAPROTOCOLO4);
           } else {

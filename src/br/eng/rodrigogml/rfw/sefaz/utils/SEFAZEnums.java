@@ -2800,4 +2800,269 @@ public class SEFAZEnums {
     }
   }
 
+  /**
+   * Enumeration com as UF e mais alguns códigos extras que são aceitos em alguns campos de UF do XML da SEFAZ.<br>
+   * <br>
+   * Cada constante contém:
+   * <ul>
+   * <li><b>ibgeCode</b> – código IBGE da UF, usado em campos como {@code cUF} e na chave de acesso;</li>
+   * <li><b>qrCodeProdUrl</b> – URL base do QR-Code NFC-e em produção (pode iniciar como {@code null});</li>
+   * <li><b>qrCodeHomUrl</b> – URL base do QR-Code NFC-e em homologação (pode iniciar como {@code null});</li>
+   * <li><b>consultaProdUrl</b> – URL de consulta pública da NFC-e em produção (pode iniciar como {@code null});</li>
+   * <li><b>consultaHomUrl</b> – URL de consulta pública da NFC-e em homologação (pode iniciar como {@code null}).</li>
+   * </ul>
+   *
+   * <p>
+   * Os campos de URL são deliberadamente inicializados com {@code null} nas constantes, para que sejam preenchidos manualmente conforme as URLs oficiais confirmadas para cada UF e ambiente.
+   * </p>
+   *
+   * <p>
+   * A constante {@link #EX} representa o código utilizado em alguns campos de UF para endereços no exterior, e por isso não possui código IBGE nem URLs de NFC-e.
+   * </p>
+   */
+  public enum SEFAZ_uf {
+    AC("12", null, null, null, null),
+    AL("27", null, null, null, null),
+    AP("16", null, null, null, null),
+    AM("13", null, null, null, null),
+    BA("29", null, null, null, null),
+    CE("23", null, null, null, null),
+    DF("53", null, null, null, null),
+    ES("32", null, null, null, null),
+    GO("52", null, null, null, null),
+    MA("21", null, null, null, null),
+    MG("31", null, null, null, null),
+    MS("50", null, null, null, null),
+    MT("51", null, null, null, null),
+    PA("15", null, null, null, null),
+    PB("25", null, null, null, null),
+    PE("26", null, null, null, null),
+    PI("22", null, null, null, null),
+    PR("41", null, null, null, null),
+    RJ("33", null, null, null, null),
+    RN("24", null, null, null, null),
+    RO("11", null, null, null, null),
+    RR("14", null, null, null, null),
+    RS("43", null, null, null, null),
+    SC("42", null, null, null, null),
+    SE("28", null, null, null, null),
+    SP("35", "https://www.nfce.fazenda.sp.gov.br/qrcode", "https://www.homologacao.nfce.fazenda.sp.gov.br/qrcode", "https://www.nfce.fazenda.sp.gov.br/NFCeConsultaPublica", "https://www.homologacao.nfce.fazenda.sp.gov.br/consulta"),
+    TO("17", null, null, null, null),
+
+    /**
+     * Exterior (EX).<br>
+     * Usado em alguns campos de UF/município do XML quando o endereço está fora do Brasil. Não possui código IBGE, nem URLs de NFC-e.
+     */
+    EX(null, null, null, null, null);
+
+    /** Código IBGE da UF (ou {@code null} para EX). */
+    private final String ibgeCode;
+
+    /** URL base do QR-Code NFC-e em produção (pode ser {@code null}). */
+    private final String qrCodeProdUrl;
+
+    /** URL base do QR-Code NFC-e em homologação (pode ser {@code null}). */
+    private final String qrCodeHomUrl;
+
+    /** URL de consulta pública da NFC-e em produção (pode ser {@code null}). */
+    private final String consultaProdUrl;
+
+    /** URL de consulta pública da NFC-e em homologação (pode ser {@code null}). */
+    private final String consultaHomUrl;
+
+    /**
+     * Construtor principal da enum.
+     *
+     * <p>
+     * Parâmetros:
+     * </p>
+     * <ul>
+     * <li><b>ibgeCode</b> – código IBGE da UF, usado em {@code cUF}, chave de acesso e outros campos numéricos que identificam a UF. Para {@link #EX}, este valor deve ser {@code null}, pois não há código IBGE para o exterior.</li>
+     *
+     * <li><b>qrCodeProdUrl</b> – URL base do QR-Code NFC-e no ambiente de produção da UF. Corresponde ao endpoint onde o parâmetro {@code p=} (ou demais parâmetros da versão do QR-Code) será anexado. Inicialmente pode ser passado {@code null} e preenchido posteriormente, conforme confirmação da documentação oficial da SEFAZ.</li>
+     *
+     * <li><b>qrCodeHomUrl</b> – URL base do QR-Code NFC-e no ambiente de homologação. Mesmo uso da {@code qrCodeProdUrl}, porém apontando para o ambiente de testes. Também pode ser inicializado como {@code null} até que a URL seja confirmada e ajustada manualmente.</li>
+     *
+     * <li><b>consultaProdUrl</b> – URL da página de consulta pública da NFC-e em produção, normalmente usada para permitir ao consumidor verificar a autenticidade do documento pela chave de acesso. Pode ser {@code null} se ainda não definida ou não aplicável para a UF.</li>
+     *
+     * <li><b>consultaHomUrl</b> – URL da página de consulta pública da NFC-e em homologação. Também pode ser mantida como {@code null} até confirmação da URL oficial da UF.</li>
+     * </ul>
+     *
+     * <p>
+     * A ideia é que, em um primeiro momento, as constantes sejam declaradas com {@code null} para todas as URLs, e o integrador vá preenchendo essas informações aos poucos, à medida que confirmar os endereços corretos diretamente na documentação de cada SEFAZ estadual.
+     * </p>
+     *
+     * @param ibgeCode Código IBGE da UF, ou {@code null} para EX.
+     * @param qrCodeProdUrl URL base do QR-Code NFC-e em produção (pode ser {@code null}).
+     * @param qrCodeHomUrl URL base do QR-Code NFC-e em homologação (pode ser {@code null}).
+     * @param consultaProdUrl URL de consulta pública da NFC-e em produção (pode ser {@code null}).
+     * @param consultaHomUrl URL de consulta pública da NFC-e em homologação (pode ser {@code null}).
+     */
+    SEFAZ_uf(String ibgeCode, String qrCodeProdUrl, String qrCodeHomUrl, String consultaProdUrl, String consultaHomUrl) {
+      this.ibgeCode = ibgeCode;
+      this.qrCodeProdUrl = qrCodeProdUrl;
+      this.qrCodeHomUrl = qrCodeHomUrl;
+      this.consultaProdUrl = consultaProdUrl;
+      this.consultaHomUrl = consultaHomUrl;
+    }
+
+    public String getIBGECode() {
+      return ibgeCode;
+    }
+
+    public String getQrCodeProdUrl() {
+      return qrCodeProdUrl;
+    }
+
+    public String getQrCodeHomUrl() {
+      return qrCodeHomUrl;
+    }
+
+    public String getConsultaProdUrl() {
+      return consultaProdUrl;
+    }
+
+    public String getConsultaHomUrl() {
+      return consultaHomUrl;
+    }
+
+    /** Sigla da UF (AC, AL, SP, EX, etc.). */
+    public String getAcronym() {
+      return name();
+    }
+
+    public static SEFAZ_uf valueOfIBGECode(String ibgeCode) {
+      for (SEFAZ_uf uf : values()) {
+        if (ibgeCode != null && ibgeCode.equals(uf.getIBGECode())) {
+          return uf;
+        }
+      }
+      return null;
+    }
+  }
+
+  /**
+   * Enumeration dos autorizadores de WebServices da SEFAZ para NF-e/NFC-e.
+   *
+   * <p>
+   * Cada constante representa um “servidor autorizador”, que pode ser:
+   * </p>
+   * <ul>
+   * <li>Uma SEFAZ estadual (ex.: {@code SP}, {@code PR}, {@code RS});</li>
+   * <li>Um autorizador virtual (ex.: {@code SVRS}, {@code SVAN}, {@code SVCAN}, {@code SVCRS});</li>
+   * <li>O Ambiente Nacional ({@code AN}) para alguns serviços centralizados.</li>
+   * </ul>
+   *
+   * <p>
+   * Para UFs “reais”, o {@code ibgeCode} é o código numérico da UF (como em {@code cUF} e chave de acesso). Para autorizadores virtuais e para o Ambiente Nacional, o {@code ibgeCode} é {@code null}. O mapeamento cUF - autorizador deve ser feito em outra lógica da aplicação.
+   * </p>
+   *
+   * <p>
+   * Cada autorizador tem espaço para armazenar as URLs principais dos serviços de autorização de NF-e e NFC-e, em produção e homologação. Inicialmente, muitas delas podem ser {@code null} e devem ser preenchidas manualmente conforme a documentação oficial de cada autorizador.
+   * </p>
+   */
+  public enum SEFAZ_WebServices {
+
+    AM("13"),
+    BA("29"),
+    GO("52"),
+    MG("31"),
+    MS("50"),
+    MT("51"),
+    PE("26"),
+    PR("41"),
+    RS("43"),
+    SP("35"),
+
+    /**
+     * SVAN – Sefaz Virtual do Ambiente Nacional.
+     *
+     * <p>
+     * Autorizador virtual mantido pelo Ambiente Nacional para alguns estados que não possuem infraestrutura própria de autorização em determinados momentos da evolução da NF-e.
+     * </p>
+     *
+     * <p>
+     * Não possui código IBGE próprio (não é uma UF). O uso é definido por tabela de mapeamento cUF - autorizador.
+     * </p>
+     */
+    SVAN(null),
+
+    /**
+     * SVRS – Sefaz Virtual do Rio Grande do Sul.
+     *
+     * <p>
+     * Autorizador virtual que atende diversas UFs (principalmente da região Sul, Sudeste e Nordeste), conforme tabela oficial de “Autorizadores”.
+     * </p>
+     *
+     * <p>
+     * Não é uma UF: o cUF permanece o da UF do contribuinte, mas o WebService chamado é o do SVRS. Por isso, {@code ibgeCode} é {@code null}.
+     * </p>
+     */
+    SVRS(null),
+
+    /**
+     * SVCAN – Sefaz Virtual de Contingência – Ambiente Nacional.
+     *
+     * <p>
+     * Utilizado em cenários de contingência, quando a SEFAZ da UF e/ou o autorizador principal não estiverem disponíveis.
+     * </p>
+     *
+     * <p>
+     * Atende um conjunto de UFs definido em NT específica. O XML continua com o cUF da UF de origem; apenas o endpoint muda para o SVCAN.
+     * </p>
+     */
+    SVCAN(null),
+
+    /**
+     * SVCRS – Sefaz Virtual de Contingência – Rio Grande do Sul.
+     *
+     * <p>
+     * Similar ao SVCAN, mas operado pela SEFAZ-RS. Também utilizado em contingência para um conjunto definido de UFs.
+     * </p>
+     */
+    SVCRS(null),
+
+    /**
+     * AN – Ambiente Nacional.
+     *
+     * <p>
+     * Representa o Ambiente Nacional para serviços centralizados (ex.: distribuição de DF-e, manifestação do destinatário, etc.), que não se vinculam diretamente a uma única UF.
+     * </p>
+     *
+     * <p>
+     * Usado mais como código lógico de agrupamento de WebServices nacionais do que como “UF/autorizador” em si.
+     * </p>
+     */
+    AN(null);
+
+    private final String ibgeCode;
+
+    /**
+     * Construtor da enum de autorizadores de WebService.
+     *
+     * @param ibgeCode Código IBGE da UF quando o autorizador é estadual (ex.: "35" para SP) ou {@code null} para autorizadores virtuais / Ambiente Nacional (SVAN, SVRS, SVCAN, SVCRS, AN).
+     */
+    SEFAZ_WebServices(String ibgeCode) {
+      this.ibgeCode = ibgeCode;
+    }
+
+    public String getIBGECode() {
+      return this.ibgeCode;
+    }
+
+    public String getAcronym() {
+      return this.name();
+    }
+
+    public static SEFAZ_WebServices valueOfIBGECode(String ibgeCode) {
+      if (ibgeCode == null) return null;
+      for (SEFAZ_WebServices service : SEFAZ_WebServices.values()) {
+        if (ibgeCode.equals(service.getIBGECode())) {
+          return service;
+        }
+      }
+      return null;
+    }
+  }
+
 }

@@ -367,86 +367,6 @@ public class SEFAZDefinitions {
     }
   }
 
-  public enum SefazWebServices {
-    AM("13"), BA("29"), GO("52"), MG("31"), MS("50"), MT("51"), PE("26"), PR("41"), RS("43"), SP("35"), SVAN(null), SVRS(null), SVCAN(null), SVCRS(null), AN(null);
-
-    private String ibgeCode;
-
-    SefazWebServices(String ibgeCode) {
-      this.ibgeCode = ibgeCode;
-    }
-
-    public String getIBGECode() {
-      return this.ibgeCode;
-    }
-
-    public static SefazWebServices valueOfIBGECode(String ibgeCode) {
-      for (SefazWebServices service : SefazWebServices.values()) {
-        if (ibgeCode.equalsIgnoreCase(service.getIBGECode())) {
-          return service;
-        }
-      }
-      return null;
-    }
-
-    public String getAcronym() {
-      return this.name();
-    }
-  }
-
-  /**
-   * Enumeration com as UF e mais alguns códigos extras que são aceitos em alguns campos de UF do XML da SEFAZ.<br>
-   * Veja detalhes de onde os códigos adicionais são aceitos na documentação de cada Enum.<br>
-   * <li>Cada estado e DF contém o código do IBGE usado no XML;</li><br>
-   *
-   * <Br>
-   * Usada nas Tags:
-   * <li>ICMSPart\UFST</li>
-   *
-   * <br>
-   * <bR>
-   * <b>Atenção:</b> Não confundir com a relação de webservices / autorizadores da enumeration {@link SefazWebServices}
-   */
-  public enum SefazXMLUF {
-    AC("12", "https://nfe.sefaz.ac.gov.br/nfe/services/NFeAutorizacao4"), AL("27", "https://nfe.sefaz.al.gov.br/nfe/services/NFeAutorizacao4"), AP("16", "https://nfe.sefaz.ap.gov.br/nfe/services/NFeAutorizacao4"), AM("13", "https://nfe.sefaz.am.gov.br/services2/services/NfeAutorizacao4"), BA("29",
-        "https://nfe.sefaz.ba.gov.br/webservices/NFeAutorizacao4/NFeAutorizacao4.asmx"), CE("23", "https://nfe.sefaz.ce.gov.br/nfe/services/NFeAutorizacao4"), DF("53", "https://nfe.fazenda.df.gov.br/nfe/services/NFeAutorizacao4"), ES("32",
-            "https://nfe.sefaz.es.gov.br/nfe/services/NFeAutorizacao4"), GO("52", "https://nfe.sefaz.go.gov.br/nfe/services/NFeAutorizacao4?wsdl"), MA("21", "https://nfe.sefaz.ma.gov.br/nfe/services/NFeAutorizacao4"), MG("31", "https://nfe.fazenda.mg.gov.br/nfe2/services/NFeAutorizacao4"), MS("50",
-                "https://nfe.sefaz.ms.gov.br/ws/NFeAutorizacao4"), MT("51", "https://nfe.sefaz.mt.gov.br/nfews/v2/services/NfeAutorizacao4?wsdl"), PA("15", "https://nfe.sefaz.pa.gov.br/nfe/services/NFeAutorizacao4"), PB("25",
-                    "https://nfe.receita.pb.gov.br/nfe/services/NFeAutorizacao4"), PE("26", "https://nfe.sefaz.pe.gov.br/nfe-service/services/NFeAutorizacao4"), PI("22", "https://nfe.sefaz.pi.gov.br/nfe/services/NFeAutorizacao4"), PR("41",
-                        "https://nfe.sefa.pr.gov.br/nfe/NFeAutorizacao4?wsdl"), RJ("33", "https://nfe.fazenda.rj.gov.br/nfe/services/NFeAutorizacao4"), RN("24", "https://nfe.set.rn.gov.br/nfe/services/NFeAutorizacao4"), RO("11", "https://nfe.sefin.ro.gov.br/nfe/services/NFeAutorizacao4"), RR("14",
-                            "https://nfe.sefaz.rr.gov.br/nfe/services/NFeAutorizacao4"), RS("43", "https://nfe.sefazrs.rs.gov.br/ws/NfeAutorizacao/NFeAutorizacao4.asmx"), SC("42", "https://nfe.sef.sc.gov.br/nfe/services/NFeAutorizacao4"), SE("28",
-                                "https://nfe.sefaz.se.gov.br/nfe/services/NFeAutorizacao4"), SP("35", "https://nfe.fazenda.sp.gov.br/ws/nfeautorizacao4.asmx"), TO("17", "https://nfe.sefaz.to.gov.br/nfe/services/NFeAutorizacao4"), EX(null, null);
-
-    private String ibgeCode;
-    private String checkURL;
-
-    SefazXMLUF(String ibgeCode, String checkURL) {
-      this.ibgeCode = ibgeCode;
-      this.checkURL = checkURL;
-    }
-
-    public String getIBGECode() {
-      return this.ibgeCode;
-    }
-
-    public String getCheckURL() {
-      return this.checkURL;
-    }
-
-    public String getAcronym() {
-      return this.name();
-    }
-
-    public static SefazXMLUF valueOfIBGECode(String ibgeCode) {
-      for (SefazXMLUF uf : SefazXMLUF.values()) {
-        if (ibgeCode.equalsIgnoreCase(uf.getIBGECode())) {
-          return uf;
-        }
-      }
-      return null;
-    }
-  }
-
   /**
    * Indicador de presença do comprador no estabelecimento comercial no momento da operação.<br>
    * Utilizado em:<br>
@@ -717,8 +637,16 @@ public class SEFAZDefinitions {
      */
     ICMS_CST_90("90", false, false, false),
 
-    ICMS_CSOSN_101("101", true, false, false), ICMS_CSOSN_102("102", true, false, false), ICMS_CSOSN_103("103", true, false, false), ICMS_CSOSN_201("201", true, true, false), ICMS_CSOSN_202("202", true, true, false), ICMS_CSOSN_203("203", true, true, false), ICMS_CSOSN_300("300", true, false,
-        false), ICMS_CSOSN_400("400", true, false, false), ICMS_CSOSN_500("500", true, true, false), ICMS_CSOSN_900("900", true, false, false);
+    ICMS_CSOSN_101("101", true, false, false),
+    ICMS_CSOSN_102("102", true, false, false),
+    ICMS_CSOSN_103("103", true, false, false),
+    ICMS_CSOSN_201("201", true, true, false),
+    ICMS_CSOSN_202("202", true, true, false),
+    ICMS_CSOSN_203("203", true, true, false),
+    ICMS_CSOSN_300("300", true, false, false),
+    ICMS_CSOSN_400("400", true, false, false),
+    ICMS_CSOSN_500("500", true, true, false),
+    ICMS_CSOSN_900("900", true, false, false);
 
     /**
      * Código da Situação Tributária que representa o

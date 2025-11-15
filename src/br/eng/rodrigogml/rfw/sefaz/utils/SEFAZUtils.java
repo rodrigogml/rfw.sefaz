@@ -24,9 +24,9 @@ import br.eng.rodrigogml.rfw.kernel.preprocess.PreProcess;
 import br.eng.rodrigogml.rfw.kernel.utils.RUString;
 import br.eng.rodrigogml.rfw.kernel.utils.RUTypes;
 import br.eng.rodrigogml.rfw.kernel.utils.RUXML;
-import br.eng.rodrigogml.rfw.sefaz.SEFAZDefinitions.SefazWebServices;
-import br.eng.rodrigogml.rfw.sefaz.SEFAZDefinitions.SefazXMLUF;
+import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_WebServices;
 import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_tpAmb;
+import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_uf;
 
 import xsdobjects.consCad200.TConsCad;
 import xsdobjects.consCad200.TConsCad.InfCons;
@@ -132,7 +132,7 @@ public class SEFAZUtils {
    * @return XML da mensagem de retorno do WebService.
    * @throws RFWException
    */
-  public static TConsStatServ mountNfeStatusServicoNFV400Message(SEFAZ_tpAmb env, SefazWebServices ws) throws RFWException {
+  public static TConsStatServ mountNfeStatusServicoNFV400Message(SEFAZ_tpAmb env, SEFAZ_WebServices ws) throws RFWException {
     TConsStatServ root = new TConsStatServ();
     root.setVersao("4.00");
     root.setTpAmb(env.getXMLData());
@@ -152,7 +152,7 @@ public class SEFAZUtils {
    * @return XML da mensagem de retorno do WebService.
    * @throws RFWException
    */
-  public static TConsCad mountConsCadV200Message(SefazWebServices ws, String cpf, String cnpj, String ie) throws RFWException {
+  public static TConsCad mountConsCadV200Message(SEFAZ_WebServices ws, String cpf, String cnpj, String ie) throws RFWException {
     TConsCad root = new TConsCad();
     root.setVersao("2.00");
     root.setInfCons(new InfCons());
@@ -253,7 +253,7 @@ public class SEFAZUtils {
    *
    * @return
    */
-  public static String generateQRCodeData(SefazXMLUF uf, SEFAZ_tpAmb env, String chave, String destCPFCNPJ, LocalDateTime dhEmi, BigDecimal vNF, BigDecimal vICMS, byte[] digestValue, String tokenID, String token) throws RFWException {
+  public static String generateQRCodeData(SEFAZ_uf uf, SEFAZ_tpAmb env, String chave, String destCPFCNPJ, LocalDateTime dhEmi, BigDecimal vNF, BigDecimal vICMS, byte[] digestValue, String tokenID, String token) throws RFWException {
     return generateQRCodeData(uf, env, chave, destCPFCNPJ, RUTypes.formatToyyyy_MM_dd_T_HH_mm_ssXXX(dhEmi), vNF, vICMS, digestValue, tokenID, token);
   }
 
@@ -273,7 +273,7 @@ public class SEFAZUtils {
    *
    * @return
    */
-  public static String generateQRCodeData(SefazXMLUF uf, SEFAZ_tpAmb env, String chave, String destCPFCNPJ, Date dhEmi, BigDecimal vNF, BigDecimal vICMS, byte[] digestValue, String tokenID, String token) throws RFWException {
+  public static String generateQRCodeData(SEFAZ_uf uf, SEFAZ_tpAmb env, String chave, String destCPFCNPJ, Date dhEmi, BigDecimal vNF, BigDecimal vICMS, byte[] digestValue, String tokenID, String token) throws RFWException {
     return generateQRCodeData(uf, env, chave, destCPFCNPJ, RUTypes.formatToyyyy_MM_dd_T_HH_mm_ssXXX(dhEmi), vNF, vICMS, digestValue, tokenID, token);
   }
 
@@ -293,16 +293,16 @@ public class SEFAZUtils {
    *
    * @return
    */
-  public static String generateQRCodeData(SefazXMLUF uf, SEFAZ_tpAmb env, String chave, String destCPFCNPJ, String dhEmi, BigDecimal vNF, BigDecimal vICMS, byte[] digestValue, String tokenID, String token) throws RFWException {
+  public static String generateQRCodeData(SEFAZ_uf uf, SEFAZ_tpAmb env, String chave, String destCPFCNPJ, String dhEmi, BigDecimal vNF, BigDecimal vICMS, byte[] digestValue, String tokenID, String token) throws RFWException {
     // Parte 1: Endereço de consulta
     String address = null;
-    if (uf == SefazXMLUF.SP) {
+    if (uf == SEFAZ_uf.SP) {
       if (env == SEFAZ_tpAmb.HOMOLOGACAO) {
         address = "https://www.homologacao.nfce.fazenda.sp.gov.br/NFCeConsultaPublica/Paginas/ConsultaQRCode.aspx?";
       } else if (env == SEFAZ_tpAmb.PRODUCAO) {
         address = "https://www.nfce.fazenda.sp.gov.br/NFCeConsultaPublica/Paginas/ConsultaQRCode.aspx?";
       }
-    } else if (uf == SefazXMLUF.RS) {
+    } else if (uf == SEFAZ_uf.RS) {
       if (env == SEFAZ_tpAmb.HOMOLOGACAO) {
         address = "https://www.sefaz.rs.gov.br/NFCE/NFCE-COM.aspx?";
       } else if (env == SEFAZ_tpAmb.PRODUCAO) {
