@@ -1,5 +1,5 @@
 -- ----------------------------
--- Script para criação das tabelas 'sefaz_' oferecidas pelo RFW.SEFAZ
+-- Script para criaÃ§Ã£o das tabelas 'sefaz_' oferecidas pelo RFW.SEFAZ
 -- ----------------------------
 
 -- Tabela derivada de br.eng.rodrigogml.rfw.sefaz.vo.SEFAZNFeProcVO
@@ -389,4 +389,316 @@ CREATE TABLE `sefaz_lacres` (
   `nlacre` varchar(60) DEFAULT NULL,
   PRIMARY KEY (`id`),
   CONSTRAINT `fk_sefaz_lacres_sefaz_vol` FOREIGN KEY (`idsefaz_vol`) REFERENCES `sefaz_vol` (`id`)
+) ENGINE=InnoDB;
+
+-- Tabela derivada de br.eng.rodrigogml.rfw.sefaz.vo.SEFAZDestVO
+CREATE TABLE `sefaz_dest` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `idsefaz_infnfe` bigint NOT NULL,
+  `cnpj` char(14) DEFAULT NULL,
+  `cpf` char(11) DEFAULT NULL,
+  `idestrangeiro` varchar(20) DEFAULT NULL,
+  `xnome` varchar(60) DEFAULT NULL,
+  `indiedest` varchar(50) DEFAULT NULL,
+  `ie` varchar(14) DEFAULT NULL,
+  `isuf` varchar(9) DEFAULT NULL,
+  `im` varchar(15) DEFAULT NULL,
+  `email` varchar(60) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  CONSTRAINT `fk_sefaz_dest_sefaz_infnfe` FOREIGN KEY (`idsefaz_infnfe`) REFERENCES `sefaz_infnfe` (`id`)
+) ENGINE=InnoDB;
+
+-- Tabela derivada de br.eng.rodrigogml.rfw.sefaz.vo.SEFAZEnderDestVO
+CREATE TABLE `sefaz_enderdest` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `idsefaz_dest` bigint NOT NULL,
+  `xlgr` varchar(60) DEFAULT NULL,
+  `nro` varchar(60) DEFAULT NULL,
+  `xcpl` varchar(60) DEFAULT NULL,
+  `xbairro` varchar(60) DEFAULT NULL,
+  `cmun` char(7) DEFAULT NULL,
+  `xmun` varchar(60) DEFAULT NULL,
+  `uf` char(2) DEFAULT NULL,
+  `cep` char(8) DEFAULT NULL,
+  `cpais` varchar(4) DEFAULT NULL,
+  `xpais` varchar(60) DEFAULT NULL,
+  `fone` varchar(14) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  CONSTRAINT `fk_sefaz_enderdest_sefaz_dest` FOREIGN KEY (`idsefaz_dest`) REFERENCES `sefaz_dest` (`id`)
+) ENGINE=InnoDB;
+
+-- Tabela derivada de br.eng.rodrigogml.rfw.sefaz.vo.SEFAZTotalVO
+CREATE TABLE `sefaz_total` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `idsefaz_infnfe` bigint NOT NULL,
+  PRIMARY KEY (`id`),
+  CONSTRAINT `fk_sefaz_total_sefaz_infnfe` FOREIGN KEY (`idsefaz_infnfe`) REFERENCES `sefaz_infnfe` (`id`)
+) ENGINE=InnoDB;
+
+-- Tabela derivada de br.eng.rodrigogml.rfw.sefaz.vo.SEFAZICMSTotVO
+CREATE TABLE `sefaz_icmstot` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `idsefaz_total` bigint NOT NULL,
+  `vbc` decimal(15,2) DEFAULT NULL,
+  `vicms` decimal(15,2) DEFAULT NULL,
+  `vicmsdeson` decimal(15,2) DEFAULT NULL,
+  `vfcpufdest` decimal(15,2) DEFAULT NULL,
+  `vicmsufdest` decimal(15,2) DEFAULT NULL,
+  `vicmsufremet` decimal(15,2) DEFAULT NULL,
+  `vfcp` decimal(15,2) DEFAULT NULL,
+  `vbcst` decimal(15,2) DEFAULT NULL,
+  `vst` decimal(15,2) DEFAULT NULL,
+  `vfcpst` decimal(15,2) DEFAULT NULL,
+  `vfcpstret` decimal(15,2) DEFAULT NULL,
+  `vprod` decimal(15,2) DEFAULT NULL,
+  `vfrete` decimal(15,2) DEFAULT NULL,
+  `vseg` decimal(15,2) DEFAULT NULL,
+  `vdesc` decimal(15,2) DEFAULT NULL,
+  `vii` decimal(15,2) DEFAULT NULL,
+  `vipi` decimal(15,2) DEFAULT NULL,
+  `vipidevol` decimal(15,2) DEFAULT NULL,
+  `vpis` decimal(15,2) DEFAULT NULL,
+  `vcofins` decimal(15,2) DEFAULT NULL,
+  `voutro` decimal(15,2) DEFAULT NULL,
+  `vnf` decimal(15,2) DEFAULT NULL,
+  `vtottrib` decimal(15,2) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  CONSTRAINT `fk_sefaz_icmstot_sefaz_total` FOREIGN KEY (`idsefaz_total`) REFERENCES `sefaz_total` (`id`)
+) ENGINE=InnoDB;
+
+-- Tabela derivada de br.eng.rodrigogml.rfw.sefaz.vo.SEFAZISSQNTotVO
+CREATE TABLE `sefaz_issqntot` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `idsefaz_total` bigint NOT NULL,
+  `vserv` decimal(15,2) DEFAULT NULL,
+  `vbc` decimal(15,2) DEFAULT NULL,
+  `viss` decimal(15,2) DEFAULT NULL,
+  `vpis` decimal(15,2) DEFAULT NULL,
+  `vcofins` decimal(15,2) DEFAULT NULL,
+  `dcompet` date DEFAULT NULL,
+  `vdeducao` decimal(15,2) DEFAULT NULL,
+  `voutro` decimal(15,2) DEFAULT NULL,
+  `vdescincond` decimal(15,2) DEFAULT NULL,
+  `vdesccond` decimal(15,2) DEFAULT NULL,
+  `vissret` decimal(15,2) DEFAULT NULL,
+  `cregtrib` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  CONSTRAINT `fk_sefaz_issqntot_sefaz_total` FOREIGN KEY (`idsefaz_total`) REFERENCES `sefaz_total` (`id`)
+) ENGINE=InnoDB;
+
+-- Tabela derivada de br.eng.rodrigogml.rfw.sefaz.vo.SEFAZInfAdicVO
+CREATE TABLE `sefaz_infadic` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `idsefaz_infnfe` bigint NOT NULL,
+  `infadfisco` varchar(2000) DEFAULT NULL,
+  `infcpl` varchar(5000) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  CONSTRAINT `fk_sefaz_infadic_sefaz_infnfe` FOREIGN KEY (`idsefaz_infnfe`) REFERENCES `sefaz_infnfe` (`id`)
+) ENGINE=InnoDB;
+
+-- Tabela derivada de br.eng.rodrigogml.rfw.sefaz.vo.SEFAZObsContVO
+CREATE TABLE `sefaz_obscont` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `idsefaz_infadic` bigint NOT NULL,
+  `xcampo` varchar(20) DEFAULT NULL,
+  `xtexto` varchar(60) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  CONSTRAINT `fk_sefaz_obscont_sefaz_infadic` FOREIGN KEY (`idsefaz_infadic`) REFERENCES `sefaz_infadic` (`id`)
+) ENGINE=InnoDB;
+
+-- Tabela derivada de br.eng.rodrigogml.rfw.sefaz.vo.SEFAZObsFiscoVO
+CREATE TABLE `sefaz_obsfisco` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `idsefaz_infadic` bigint NOT NULL,
+  `xcampo` varchar(20) DEFAULT NULL,
+  `xtexto` varchar(60) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  CONSTRAINT `fk_sefaz_obsfisco_sefaz_infadic` FOREIGN KEY (`idsefaz_infadic`) REFERENCES `sefaz_infadic` (`id`)
+) ENGINE=InnoDB;
+
+-- Tabela derivada de br.eng.rodrigogml.rfw.sefaz.vo.SEFAZProcRefVO
+CREATE TABLE `sefaz_procref` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `idsefaz_infadic` bigint NOT NULL,
+  `nproc` varchar(60) DEFAULT NULL,
+  `indproc` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  CONSTRAINT `fk_sefaz_procref_sefaz_infadic` FOREIGN KEY (`idsefaz_infadic`) REFERENCES `sefaz_infadic` (`id`)
+) ENGINE=InnoDB;
+
+-- Tabela derivada de br.eng.rodrigogml.rfw.sefaz.vo.SEFAZCobrVO
+CREATE TABLE `sefaz_cobr` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `idsefaz_infnfe` bigint NOT NULL,
+  PRIMARY KEY (`id`),
+  CONSTRAINT `fk_sefaz_cobr_sefaz_infnfe` FOREIGN KEY (`idsefaz_infnfe`) REFERENCES `sefaz_infnfe` (`id`)
+) ENGINE=InnoDB;
+
+-- Tabela derivada de br.eng.rodrigogml.rfw.sefaz.vo.SEFAZFatVO
+CREATE TABLE `sefaz_fat` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `idsefaz_cobr` bigint NOT NULL,
+  `nfat` varchar(60) DEFAULT NULL,
+  `vorig` decimal(15,2) DEFAULT NULL,
+  `vdesc` decimal(15,2) DEFAULT NULL,
+  `vliq` decimal(15,2) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  CONSTRAINT `fk_sefaz_fat_sefaz_cobr` FOREIGN KEY (`idsefaz_cobr`) REFERENCES `sefaz_cobr` (`id`)
+) ENGINE=InnoDB;
+
+-- Tabela derivada de br.eng.rodrigogml.rfw.sefaz.vo.SEFAZDupVO
+CREATE TABLE `sefaz_dup` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `idsefaz_cobr` bigint NOT NULL,
+  `ndup` varchar(60) DEFAULT NULL,
+  `dvenc` date DEFAULT NULL,
+  `vdup` decimal(15,2) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  CONSTRAINT `fk_sefaz_dup_sefaz_cobr` FOREIGN KEY (`idsefaz_cobr`) REFERENCES `sefaz_cobr` (`id`)
+) ENGINE=InnoDB;
+
+-- Tabela derivada de br.eng.rodrigogml.rfw.sefaz.vo.SEFAZPagVO
+CREATE TABLE `sefaz_pag` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `idsefaz_infnfe` bigint NOT NULL,
+  `vtroco` decimal(15,2) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  CONSTRAINT `fk_sefaz_pag_sefaz_infnfe` FOREIGN KEY (`idsefaz_infnfe`) REFERENCES `sefaz_infnfe` (`id`)
+) ENGINE=InnoDB;
+
+-- Tabela derivada de br.eng.rodrigogml.rfw.sefaz.vo.SEFAZDetPagVO
+CREATE TABLE `sefaz_detpag` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `idsefaz_pag` bigint NOT NULL,
+  `indpag` varchar(50) DEFAULT NULL,
+  `tpag` varchar(50) DEFAULT NULL,
+  `vpag` decimal(15,2) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  CONSTRAINT `fk_sefaz_detpag_sefaz_pag` FOREIGN KEY (`idsefaz_pag`) REFERENCES `sefaz_pag` (`id`)
+) ENGINE=InnoDB;
+
+-- Tabela derivada de br.eng.rodrigogml.rfw.sefaz.vo.SEFAZCardVO
+CREATE TABLE `sefaz_card` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `idsefaz_detpag` bigint NOT NULL,
+  `tpintegra` varchar(50) DEFAULT NULL,
+  `cnpj` char(14) DEFAULT NULL,
+  `tband` varchar(50) DEFAULT NULL,
+  `caut` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  CONSTRAINT `fk_sefaz_card_sefaz_detpag` FOREIGN KEY (`idsefaz_detpag`) REFERENCES `sefaz_detpag` (`id`)
+) ENGINE=InnoDB;
+
+-- Tabela derivada de br.eng.rodrigogml.rfw.sefaz.vo.SEFAZISSQNVO
+CREATE TABLE `sefaz_issqn` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `idsefaz_imposto` bigint NOT NULL,
+  `vbc` decimal(15,2) DEFAULT NULL,
+  `valiq` decimal(9,4) DEFAULT NULL,
+  `vissqn` decimal(15,2) DEFAULT NULL,
+  `cmunfg` char(7) DEFAULT NULL,
+  `clistserv` varchar(5) DEFAULT NULL,
+  `vdeducao` decimal(15,2) DEFAULT NULL,
+  `voutro` decimal(15,2) DEFAULT NULL,
+  `vdescincond` decimal(15,2) DEFAULT NULL,
+  `vdesccond` decimal(15,2) DEFAULT NULL,
+  `vissret` decimal(15,2) DEFAULT NULL,
+  `indiss` varchar(50) DEFAULT NULL,
+  `cservico` varchar(20) DEFAULT NULL,
+  `cmun` char(7) DEFAULT NULL,
+  `cpais` char(4) DEFAULT NULL,
+  `nprocesso` varchar(30) DEFAULT NULL,
+  `indincentivo` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  CONSTRAINT `fk_sefaz_issqn_sefaz_imposto` FOREIGN KEY (`idsefaz_imposto`) REFERENCES `sefaz_imposto` (`id`)
+) ENGINE=InnoDB;
+
+-- Tabela derivada de br.eng.rodrigogml.rfw.sefaz.vo.SEFAZPISSTVO
+CREATE TABLE `sefaz_pisst` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `idsefaz_imposto` bigint NOT NULL,
+  `vbc` decimal(15,2) DEFAULT NULL,
+  `ppis` decimal(9,4) DEFAULT NULL,
+  `qbcprod` decimal(15,4) DEFAULT NULL,
+  `valiqprod` decimal(15,4) DEFAULT NULL,
+  `vpis` decimal(15,2) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  CONSTRAINT `fk_sefaz_pisst_sefaz_imposto` FOREIGN KEY (`idsefaz_imposto`) REFERENCES `sefaz_imposto` (`id`)
+) ENGINE=InnoDB;
+
+-- Tabela derivada de br.eng.rodrigogml.rfw.sefaz.vo.SEFAZCOFINSSTVO
+CREATE TABLE `sefaz_cofinsst` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `idsefaz_imposto` bigint NOT NULL,
+  `vbc` decimal(15,2) DEFAULT NULL,
+  `pcofins` decimal(9,4) DEFAULT NULL,
+  `qbcprod` decimal(15,4) DEFAULT NULL,
+  `valiqprod` decimal(15,4) DEFAULT NULL,
+  `vcofins` decimal(15,2) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  CONSTRAINT `fk_sefaz_cofinsst_sefaz_imposto` FOREIGN KEY (`idsefaz_imposto`) REFERENCES `sefaz_imposto` (`id`)
+) ENGINE=InnoDB;
+
+-- Tabela derivada de br.eng.rodrigogml.rfw.sefaz.vo.SEFAZICMSPartVO
+CREATE TABLE `sefaz_icmspart` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `idsefaz_icms` bigint NOT NULL,
+  `orig` varchar(50) DEFAULT NULL,
+  `cst` varchar(50) DEFAULT NULL,
+  `modbc` varchar(50) DEFAULT NULL,
+  `vbc` decimal(15,2) DEFAULT NULL,
+  `predbc` decimal(9,4) DEFAULT NULL,
+  `picms` decimal(9,4) DEFAULT NULL,
+  `modbcst` varchar(50) DEFAULT NULL,
+  `pmvast` decimal(9,4) DEFAULT NULL,
+  `predbcst` decimal(9,4) DEFAULT NULL,
+  `vbcst` decimal(15,2) DEFAULT NULL,
+  `picmsst` decimal(9,4) DEFAULT NULL,
+  `vicmsst` decimal(15,2) DEFAULT NULL,
+  `pbcop` decimal(9,4) DEFAULT NULL,
+  `ufst` char(2) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  CONSTRAINT `fk_sefaz_icmspart_sefaz_icms` FOREIGN KEY (`idsefaz_icms`) REFERENCES `sefaz_icms` (`id`)
+) ENGINE=InnoDB;
+
+-- Tabela derivada de br.eng.rodrigogml.rfw.sefaz.vo.SEFAZICMSSTVO
+CREATE TABLE `sefaz_icmsst` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `idsefaz_icms` bigint NOT NULL,
+  `orig` varchar(50) DEFAULT NULL,
+  `cst` varchar(50) DEFAULT NULL,
+  `vbcstret` decimal(15,2) DEFAULT NULL,
+  `pst` decimal(9,4) DEFAULT NULL,
+  `vicmssubstituto` decimal(15,2) DEFAULT NULL,
+  `vicmsstret` decimal(15,2) DEFAULT NULL,
+  `vbcfcpstret` decimal(15,2) DEFAULT NULL,
+  `pfcpstret` decimal(9,4) DEFAULT NULL,
+  `vfcpstret` decimal(15,2) DEFAULT NULL,
+  `vbcstdest` decimal(15,2) DEFAULT NULL,
+  `vicmsstdest` decimal(15,2) DEFAULT NULL,
+  `predbcefet` decimal(9,4) DEFAULT NULL,
+  `vbcefet` decimal(15,2) DEFAULT NULL,
+  `picmsefet` decimal(9,4) DEFAULT NULL,
+  `vicmsefet` decimal(15,2) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  CONSTRAINT `fk_sefaz_icmsst_sefaz_icms` FOREIGN KEY (`idsefaz_icms`) REFERENCES `sefaz_icms` (`id`)
+) ENGINE=InnoDB;
+
+-- Tabela derivada de br.eng.rodrigogml.rfw.sefaz.vo.SEFAZEnviNFeVO
+CREATE TABLE `sefaz_envinfe` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `versao` varchar(50) NOT NULL,
+  `idlote` varchar(15) NOT NULL,
+  `indsinc` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB;
+
+-- Tabela de associao entre lotes (SEFAZEnviNFeVO) e NF-e
+CREATE TABLE `sefaz_envinfe_nfe` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `idsefaz_envinfe` bigint NOT NULL,
+  `idsefaz_nfe` bigint NOT NULL,
+  PRIMARY KEY (`id`),
+  CONSTRAINT `fk_sefaz_envinfe_nfe_envinfe` FOREIGN KEY (`idsefaz_envinfe`) REFERENCES `sefaz_envinfe` (`id`),
+  CONSTRAINT `fk_sefaz_envinfe_nfe_nfe` FOREIGN KEY (`idsefaz_nfe`) REFERENCES `sefaz_nfe` (`id`)
 ) ENGINE=InnoDB;
