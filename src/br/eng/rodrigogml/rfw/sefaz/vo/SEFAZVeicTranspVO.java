@@ -8,7 +8,7 @@ import br.eng.rodrigogml.rfw.kernel.vo.RFWVO;
 import br.eng.rodrigogml.rfw.orm.dao.annotations.dao.RFWDAOAnnotation;
 
 /**
- * Grupo X18 - veicTransp: Veículo de Transporte (veículo trator).
+ * Grupo X18 - veicTransp: VeÃ­culo de Transporte (veÃ­culo trator).
  */
 @RFWDAOAnnotation(schema = "_RFW.SEFAZ", table = "sefaz_veictransp")
 public class SEFAZVeicTranspVO extends RFWVO {
@@ -22,19 +22,19 @@ public class SEFAZVeicTranspVO extends RFWVO {
   private SEFAZTranspVO transpVO = null;
 
   /**
-   * X19 - placa: Placa do Veículo. Tipo: C, Tamanho: 7, Ocorrência: 1-1.
+   * X19 - placa: Placa do VeÃ­culo. Tipo: C, Tamanho: 7, OcorrÃªncia: 1-1.
    */
   @RFWMetaStringField(caption = "placa", required = false, unique = false, maxLength = 7, minLength = 7, preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
   private String placa;
 
   /**
-   * X20 - UF: Sigla da UF. Tipo: C, Tamanho: 2, Ocorrência: 1-1. Informar "EX" se exterior.
+   * X20 - UF: Sigla da UF. Tipo: C, Tamanho: 2, OcorrÃªncia: 1-1. Informar "EX" se exterior.
    */
   @RFWMetaStringField(caption = "UF", required = false, unique = false, maxLength = 2, minLength = 2, preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
   private String uf;
 
   /**
-   * X21 - RNTC: Registro Nacional de Transportador de Carga (ANTT). Tipo: C, Tamanho: 1-20, Ocorrência: 0-1.
+   * X21 - RNTC: Registro Nacional de Transportador de Carga (ANTT). Tipo: C, Tamanho: 1-20, OcorrÃªncia: 0-1.
    */
   @RFWMetaStringField(caption = "RNTC", required = false, unique = false, maxLength = 20, minLength = 1, preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
   private String rntc;
@@ -58,25 +58,25 @@ public class SEFAZVeicTranspVO extends RFWVO {
   }
 
   /**
-   * # x19 - placa: Placa do Veículo. Tipo: C, Tamanho: 7, Ocorrência: 1-1.
+   * # x19 - placa: Placa do VeÃ­culo. Tipo: C, Tamanho: 7, OcorrÃªncia: 1-1.
    *
-   * @return the x19 - placa: Placa do Veículo
+   * @return the x19 - placa: Placa do VeÃ­culo
    */
   public String getPlaca() {
     return placa;
   }
 
   /**
-   * # x19 - placa: Placa do Veículo. Tipo: C, Tamanho: 7, Ocorrência: 1-1.
+   * # x19 - placa: Placa do VeÃ­culo. Tipo: C, Tamanho: 7, OcorrÃªncia: 1-1.
    *
-   * @param placa the new x19 - placa: Placa do Veículo
+   * @param placa the new x19 - placa: Placa do VeÃ­culo
    */
   public void setPlaca(String placa) {
     this.placa = placa;
   }
 
   /**
-   * # x20 - UF: Sigla da UF. Tipo: C, Tamanho: 2, Ocorrência: 1-1. Informar "EX" se exterior.
+   * # x20 - UF: Sigla da UF. Tipo: C, Tamanho: 2, OcorrÃªncia: 1-1. Informar "EX" se exterior.
    *
    * @return the x20 - UF: Sigla da UF
    */
@@ -85,7 +85,7 @@ public class SEFAZVeicTranspVO extends RFWVO {
   }
 
   /**
-   * # x20 - UF: Sigla da UF. Tipo: C, Tamanho: 2, Ocorrência: 1-1. Informar "EX" se exterior.
+   * # x20 - UF: Sigla da UF. Tipo: C, Tamanho: 2, OcorrÃªncia: 1-1. Informar "EX" se exterior.
    *
    * @param uf the new x20 - UF: Sigla da UF
    */
@@ -94,7 +94,7 @@ public class SEFAZVeicTranspVO extends RFWVO {
   }
 
   /**
-   * # x21 - RNTC: Registro Nacional de Transportador de Carga (ANTT). Tipo: C, Tamanho: 1-20, Ocorrência: 0-1.
+   * # x21 - RNTC: Registro Nacional de Transportador de Carga (ANTT). Tipo: C, Tamanho: 1-20, OcorrÃªncia: 0-1.
    *
    * @return the x21 - RNTC: Registro Nacional de Transportador de Carga (ANTT)
    */
@@ -103,7 +103,7 @@ public class SEFAZVeicTranspVO extends RFWVO {
   }
 
   /**
-   * # x21 - RNTC: Registro Nacional de Transportador de Carga (ANTT). Tipo: C, Tamanho: 1-20, Ocorrência: 0-1.
+   * # x21 - RNTC: Registro Nacional de Transportador de Carga (ANTT). Tipo: C, Tamanho: 1-20, OcorrÃªncia: 0-1.
    *
    * @param rntc the new x21 - RNTC: Registro Nacional de Transportador de Carga (ANTT)
    */

@@ -20,7 +20,7 @@ import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_cRegTrib;
  * <p>
  * Ocorre 0-1 dentro do grupo W01 (total da NF-e).
  * <p>
- * Campos de totais de serviços não sujeitos ao ICMS, base de cálculo, ISS, PIS/COFINS sobre serviços, descontos, deduções, retenções e regime especial de tributação.
+ * Campos de totais de serviÃ§os nÃ£o sujeitos ao ICMS, base de cÃ¡lculo, ISS, PIS/COFINS sobre serviÃ§os, descontos, deduÃ§Ãµes, retenÃ§Ãµes e regime especial de tributaÃ§Ã£o.
  */
 @RFWDAOAnnotation(schema = "_RFW.SEFAZ", table = "sefaz_issqntot")
 public class SEFAZISSQNTotVO extends RFWVO {
@@ -34,80 +34,80 @@ public class SEFAZISSQNTotVO extends RFWVO {
   private SEFAZTotalVO totalVO = null;
 
   /**
-   * W18 - vServ: Valor total dos serviços sob não incidência ou não tributados pelo ICMS. Tipo: N, Tamanho: 13v2, Ocorrência: 0-1 (campo opcional).
+   * W18 - vServ: Valor total dos serviÃ§os sob nÃ£o incidÃªncia ou nÃ£o tributados pelo ICMS. Tipo: N, Tamanho: 13v2, OcorrÃªncia: 0-1 (campo opcional).
    */
   @RFWMetaBigDecimalField(caption = "vServ", required = false, unique = false, maxValue = "", minValue = "", scale = 2, absolute = false)
   private BigDecimal vserv;
 
   /**
-   * W19 - vBC: Valor total da Base de Cálculo do ISS. Tipo: N, Tamanho: 13v2, Ocorrência: 0-1 (campo opcional).
+   * W19 - vBC: Valor total da Base de CÃ¡lculo do ISS. Tipo: N, Tamanho: 13v2, OcorrÃªncia: 0-1 (campo opcional).
    */
   @RFWMetaBigDecimalField(caption = "vBC", required = false, unique = false, maxValue = "", minValue = "", scale = 2, absolute = false)
   private BigDecimal vbc;
 
   /**
-   * W20 - vISS: Valor total do ISS. Tipo: N, Tamanho: 13v2, Ocorrência: 0-1 (campo opcional).
+   * W20 - vISS: Valor total do ISS. Tipo: N, Tamanho: 13v2, OcorrÃªncia: 0-1 (campo opcional).
    */
   @RFWMetaBigDecimalField(caption = "vISS", required = false, unique = false, maxValue = "", minValue = "", scale = 2, absolute = false)
   private BigDecimal viss;
 
   /**
-   * W21 - vPIS: Valor total do PIS sobre serviços. Tipo: N, Tamanho: 13v2, Ocorrência: 0-1 (campo opcional).
+   * W21 - vPIS: Valor total do PIS sobre serviÃ§os. Tipo: N, Tamanho: 13v2, OcorrÃªncia: 0-1 (campo opcional).
    */
   @RFWMetaBigDecimalField(caption = "vPIS", required = false, unique = false, maxValue = "", minValue = "", scale = 2, absolute = false)
   private BigDecimal vpis;
 
   /**
-   * W22 - vCOFINS: Valor total da COFINS sobre serviços. Tipo: N, Tamanho: 13v2, Ocorrência: 0-1 (campo opcional).
+   * W22 - vCOFINS: Valor total da COFINS sobre serviÃ§os. Tipo: N, Tamanho: 13v2, OcorrÃªncia: 0-1 (campo opcional).
    */
   @RFWMetaBigDecimalField(caption = "vCOFINS", required = false, unique = false, maxValue = "", minValue = "", scale = 2, absolute = false)
   private BigDecimal vcofins;
 
   /**
-   * W22a - dCompet: Data da prestação do serviço. Tipo: N (data AAAA-MM-DD), Tamanho: 8, Ocorrência: 1-1 (obrigatório na estrutura).
+   * W22a - dCompet: Data da prestaÃ§Ã£o do serviÃ§o. Tipo: N (data AAAA-MM-DD), Tamanho: 8, OcorrÃªncia: 1-1 (obrigatÃ³rio na estrutura).
    */
   @RFWMetaDateField(caption = "dCompet", required = false, unique = false)
   private Date dcompet;
 
   /**
-   * W22b - vDeducao: Valor total dedução para redução da Base de Cálculo. Tipo: N, Tamanho: 13v2, Ocorrência: 0-1 (campo opcional).
+   * W22b - vDeducao: Valor total deduÃ§Ã£o para reduÃ§Ã£o da Base de CÃ¡lculo. Tipo: N, Tamanho: 13v2, OcorrÃªncia: 0-1 (campo opcional).
    */
   @RFWMetaBigDecimalField(caption = "vDeducao", required = false, unique = false, maxValue = "", minValue = "", scale = 2, absolute = false)
   private BigDecimal vdeducao;
 
   /**
-   * W22c - vOutro: Valor total outras retenções (valor declaratório). Tipo: N, Tamanho: 13v2, Ocorrência: 0-1 (campo opcional).
+   * W22c - vOutro: Valor total outras retenÃ§Ãµes (valor declaratÃ³rio). Tipo: N, Tamanho: 13v2, OcorrÃªncia: 0-1 (campo opcional).
    */
   @RFWMetaBigDecimalField(caption = "vOutro", required = false, unique = false, maxValue = "", minValue = "", scale = 2, absolute = false)
   private BigDecimal voutro;
 
   /**
-   * W22d - vDescIncond: Valor total desconto incondicionado. Tipo: N, Tamanho: 13v2, Ocorrência: 0-1 (campo opcional).
+   * W22d - vDescIncond: Valor total desconto incondicionado. Tipo: N, Tamanho: 13v2, OcorrÃªncia: 0-1 (campo opcional).
    */
   @RFWMetaBigDecimalField(caption = "vDescIncond", required = false, unique = false, maxValue = "", minValue = "", scale = 2, absolute = false)
   private BigDecimal vdescIncond;
 
   /**
-   * W22e - vDescCond: Valor total desconto condicionado. Tipo: N, Tamanho: 13v2, Ocorrência: 0-1 (campo opcional).
+   * W22e - vDescCond: Valor total desconto condicionado. Tipo: N, Tamanho: 13v2, OcorrÃªncia: 0-1 (campo opcional).
    */
   @RFWMetaBigDecimalField(caption = "vDescCond", required = false, unique = false, maxValue = "", minValue = "", scale = 2, absolute = false)
   private BigDecimal vdescCond;
 
   /**
-   * W22f - vISSRet: Valor total retenção ISS. Tipo: N, Tamanho: 13v2, Ocorrência: 0-1 (campo opcional).
+   * W22f - vISSRet: Valor total retenÃ§Ã£o ISS. Tipo: N, Tamanho: 13v2, OcorrÃªncia: 0-1 (campo opcional).
    */
   @RFWMetaBigDecimalField(caption = "vISSRet", required = false, unique = false, maxValue = "", minValue = "", scale = 2, absolute = false)
   private BigDecimal vissRet;
 
   /**
-   * W22g - cRegTrib: Código do Regime Especial de Tributação. Tipo: N, Tamanho: 2, Ocorrência: 0-1 (campo opcional).
+   * W22g - cRegTrib: CÃ³digo do Regime Especial de TributaÃ§Ã£o. Tipo: N, Tamanho: 2, OcorrÃªncia: 0-1 (campo opcional).
    * <p>
    * Valores: 1 = Microempresa Municipal<br>
    * 2 = Estimativa<br>
    * 3 = Sociedade de Profissionais<br>
    * 4 = Cooperativa<br>
-   * 5 = Microempresário Individual (MEI)<br>
-   * 6 = Microempresário e Empresa de Pequeno Porte.
+   * 5 = MicroempresÃ¡rio Individual (MEI)<br>
+   * 6 = MicroempresÃ¡rio e Empresa de Pequeno Porte.
    */
   @RFWMetaEnumField(caption = "cRegTrib", required = false)
   private SEFAZ_cRegTrib cregTrib;
@@ -131,43 +131,43 @@ public class SEFAZISSQNTotVO extends RFWVO {
   }
 
   /**
-   * # w18 - vServ: Valor total dos serviços sob não incidência ou não tributados pelo ICMS. Tipo: N, Tamanho: 13v2, Ocorrência: 0-1 (campo opcional).
+   * # w18 - vServ: Valor total dos serviÃ§os sob nÃ£o incidÃªncia ou nÃ£o tributados pelo ICMS. Tipo: N, Tamanho: 13v2, OcorrÃªncia: 0-1 (campo opcional).
    *
-   * @return the w18 - vServ: Valor total dos serviços sob não incidência ou não tributados pelo ICMS
+   * @return the w18 - vServ: Valor total dos serviÃ§os sob nÃ£o incidÃªncia ou nÃ£o tributados pelo ICMS
    */
   public BigDecimal getVserv() {
     return vserv;
   }
 
   /**
-   * # w18 - vServ: Valor total dos serviços sob não incidência ou não tributados pelo ICMS. Tipo: N, Tamanho: 13v2, Ocorrência: 0-1 (campo opcional).
+   * # w18 - vServ: Valor total dos serviÃ§os sob nÃ£o incidÃªncia ou nÃ£o tributados pelo ICMS. Tipo: N, Tamanho: 13v2, OcorrÃªncia: 0-1 (campo opcional).
    *
-   * @param vserv the new w18 - vServ: Valor total dos serviços sob não incidência ou não tributados pelo ICMS
+   * @param vserv the new w18 - vServ: Valor total dos serviÃ§os sob nÃ£o incidÃªncia ou nÃ£o tributados pelo ICMS
    */
   public void setVserv(BigDecimal vserv) {
     this.vserv = vserv;
   }
 
   /**
-   * # w19 - vBC: Valor total da Base de Cálculo do ISS. Tipo: N, Tamanho: 13v2, Ocorrência: 0-1 (campo opcional).
+   * # w19 - vBC: Valor total da Base de CÃ¡lculo do ISS. Tipo: N, Tamanho: 13v2, OcorrÃªncia: 0-1 (campo opcional).
    *
-   * @return the w19 - vBC: Valor total da Base de Cálculo do ISS
+   * @return the w19 - vBC: Valor total da Base de CÃ¡lculo do ISS
    */
   public BigDecimal getVbc() {
     return vbc;
   }
 
   /**
-   * # w19 - vBC: Valor total da Base de Cálculo do ISS. Tipo: N, Tamanho: 13v2, Ocorrência: 0-1 (campo opcional).
+   * # w19 - vBC: Valor total da Base de CÃ¡lculo do ISS. Tipo: N, Tamanho: 13v2, OcorrÃªncia: 0-1 (campo opcional).
    *
-   * @param vbc the new w19 - vBC: Valor total da Base de Cálculo do ISS
+   * @param vbc the new w19 - vBC: Valor total da Base de CÃ¡lculo do ISS
    */
   public void setVbc(BigDecimal vbc) {
     this.vbc = vbc;
   }
 
   /**
-   * # w20 - vISS: Valor total do ISS. Tipo: N, Tamanho: 13v2, Ocorrência: 0-1 (campo opcional).
+   * # w20 - vISS: Valor total do ISS. Tipo: N, Tamanho: 13v2, OcorrÃªncia: 0-1 (campo opcional).
    *
    * @return the w20 - vISS: Valor total do ISS
    */
@@ -176,7 +176,7 @@ public class SEFAZISSQNTotVO extends RFWVO {
   }
 
   /**
-   * # w20 - vISS: Valor total do ISS. Tipo: N, Tamanho: 13v2, Ocorrência: 0-1 (campo opcional).
+   * # w20 - vISS: Valor total do ISS. Tipo: N, Tamanho: 13v2, OcorrÃªncia: 0-1 (campo opcional).
    *
    * @param viss the new w20 - vISS: Valor total do ISS
    */
@@ -185,97 +185,97 @@ public class SEFAZISSQNTotVO extends RFWVO {
   }
 
   /**
-   * # w21 - vPIS: Valor total do PIS sobre serviços. Tipo: N, Tamanho: 13v2, Ocorrência: 0-1 (campo opcional).
+   * # w21 - vPIS: Valor total do PIS sobre serviÃ§os. Tipo: N, Tamanho: 13v2, OcorrÃªncia: 0-1 (campo opcional).
    *
-   * @return the w21 - vPIS: Valor total do PIS sobre serviços
+   * @return the w21 - vPIS: Valor total do PIS sobre serviÃ§os
    */
   public BigDecimal getVpis() {
     return vpis;
   }
 
   /**
-   * # w21 - vPIS: Valor total do PIS sobre serviços. Tipo: N, Tamanho: 13v2, Ocorrência: 0-1 (campo opcional).
+   * # w21 - vPIS: Valor total do PIS sobre serviÃ§os. Tipo: N, Tamanho: 13v2, OcorrÃªncia: 0-1 (campo opcional).
    *
-   * @param vpis the new w21 - vPIS: Valor total do PIS sobre serviços
+   * @param vpis the new w21 - vPIS: Valor total do PIS sobre serviÃ§os
    */
   public void setVpis(BigDecimal vpis) {
     this.vpis = vpis;
   }
 
   /**
-   * # w22 - vCOFINS: Valor total da COFINS sobre serviços. Tipo: N, Tamanho: 13v2, Ocorrência: 0-1 (campo opcional).
+   * # w22 - vCOFINS: Valor total da COFINS sobre serviÃ§os. Tipo: N, Tamanho: 13v2, OcorrÃªncia: 0-1 (campo opcional).
    *
-   * @return the w22 - vCOFINS: Valor total da COFINS sobre serviços
+   * @return the w22 - vCOFINS: Valor total da COFINS sobre serviÃ§os
    */
   public BigDecimal getVcofins() {
     return vcofins;
   }
 
   /**
-   * # w22 - vCOFINS: Valor total da COFINS sobre serviços. Tipo: N, Tamanho: 13v2, Ocorrência: 0-1 (campo opcional).
+   * # w22 - vCOFINS: Valor total da COFINS sobre serviÃ§os. Tipo: N, Tamanho: 13v2, OcorrÃªncia: 0-1 (campo opcional).
    *
-   * @param vcofins the new w22 - vCOFINS: Valor total da COFINS sobre serviços
+   * @param vcofins the new w22 - vCOFINS: Valor total da COFINS sobre serviÃ§os
    */
   public void setVcofins(BigDecimal vcofins) {
     this.vcofins = vcofins;
   }
 
   /**
-   * # w22a - dCompet: Data da prestação do serviço. Tipo: N (data AAAA-MM-DD), Tamanho: 8, Ocorrência: 1-1 (obrigatório na estrutura).
+   * # w22a - dCompet: Data da prestaÃ§Ã£o do serviÃ§o. Tipo: N (data AAAA-MM-DD), Tamanho: 8, OcorrÃªncia: 1-1 (obrigatÃ³rio na estrutura).
    *
-   * @return the w22a - dCompet: Data da prestação do serviço
+   * @return the w22a - dCompet: Data da prestaÃ§Ã£o do serviÃ§o
    */
   public Date getDcompet() {
     return dcompet;
   }
 
   /**
-   * # w22a - dCompet: Data da prestação do serviço. Tipo: N (data AAAA-MM-DD), Tamanho: 8, Ocorrência: 1-1 (obrigatório na estrutura).
+   * # w22a - dCompet: Data da prestaÃ§Ã£o do serviÃ§o. Tipo: N (data AAAA-MM-DD), Tamanho: 8, OcorrÃªncia: 1-1 (obrigatÃ³rio na estrutura).
    *
-   * @param dcompet the new w22a - dCompet: Data da prestação do serviço
+   * @param dcompet the new w22a - dCompet: Data da prestaÃ§Ã£o do serviÃ§o
    */
   public void setDcompet(Date dcompet) {
     this.dcompet = dcompet;
   }
 
   /**
-   * # w22b - vDeducao: Valor total dedução para redução da Base de Cálculo. Tipo: N, Tamanho: 13v2, Ocorrência: 0-1 (campo opcional).
+   * # w22b - vDeducao: Valor total deduÃ§Ã£o para reduÃ§Ã£o da Base de CÃ¡lculo. Tipo: N, Tamanho: 13v2, OcorrÃªncia: 0-1 (campo opcional).
    *
-   * @return the w22b - vDeducao: Valor total dedução para redução da Base de Cálculo
+   * @return the w22b - vDeducao: Valor total deduÃ§Ã£o para reduÃ§Ã£o da Base de CÃ¡lculo
    */
   public BigDecimal getVdeducao() {
     return vdeducao;
   }
 
   /**
-   * # w22b - vDeducao: Valor total dedução para redução da Base de Cálculo. Tipo: N, Tamanho: 13v2, Ocorrência: 0-1 (campo opcional).
+   * # w22b - vDeducao: Valor total deduÃ§Ã£o para reduÃ§Ã£o da Base de CÃ¡lculo. Tipo: N, Tamanho: 13v2, OcorrÃªncia: 0-1 (campo opcional).
    *
-   * @param vdeducao the new w22b - vDeducao: Valor total dedução para redução da Base de Cálculo
+   * @param vdeducao the new w22b - vDeducao: Valor total deduÃ§Ã£o para reduÃ§Ã£o da Base de CÃ¡lculo
    */
   public void setVdeducao(BigDecimal vdeducao) {
     this.vdeducao = vdeducao;
   }
 
   /**
-   * # w22c - vOutro: Valor total outras retenções (valor declaratório). Tipo: N, Tamanho: 13v2, Ocorrência: 0-1 (campo opcional).
+   * # w22c - vOutro: Valor total outras retenÃ§Ãµes (valor declaratÃ³rio). Tipo: N, Tamanho: 13v2, OcorrÃªncia: 0-1 (campo opcional).
    *
-   * @return the w22c - vOutro: Valor total outras retenções (valor declaratório)
+   * @return the w22c - vOutro: Valor total outras retenÃ§Ãµes (valor declaratÃ³rio)
    */
   public BigDecimal getVoutro() {
     return voutro;
   }
 
   /**
-   * # w22c - vOutro: Valor total outras retenções (valor declaratório). Tipo: N, Tamanho: 13v2, Ocorrência: 0-1 (campo opcional).
+   * # w22c - vOutro: Valor total outras retenÃ§Ãµes (valor declaratÃ³rio). Tipo: N, Tamanho: 13v2, OcorrÃªncia: 0-1 (campo opcional).
    *
-   * @param voutro the new w22c - vOutro: Valor total outras retenções (valor declaratório)
+   * @param voutro the new w22c - vOutro: Valor total outras retenÃ§Ãµes (valor declaratÃ³rio)
    */
   public void setVoutro(BigDecimal voutro) {
     this.voutro = voutro;
   }
 
   /**
-   * # w22d - vDescIncond: Valor total desconto incondicionado. Tipo: N, Tamanho: 13v2, Ocorrência: 0-1 (campo opcional).
+   * # w22d - vDescIncond: Valor total desconto incondicionado. Tipo: N, Tamanho: 13v2, OcorrÃªncia: 0-1 (campo opcional).
    *
    * @return the w22d - vDescIncond: Valor total desconto incondicionado
    */
@@ -284,7 +284,7 @@ public class SEFAZISSQNTotVO extends RFWVO {
   }
 
   /**
-   * # w22d - vDescIncond: Valor total desconto incondicionado. Tipo: N, Tamanho: 13v2, Ocorrência: 0-1 (campo opcional).
+   * # w22d - vDescIncond: Valor total desconto incondicionado. Tipo: N, Tamanho: 13v2, OcorrÃªncia: 0-1 (campo opcional).
    *
    * @param vdescIncond the new w22d - vDescIncond: Valor total desconto incondicionado
    */
@@ -293,7 +293,7 @@ public class SEFAZISSQNTotVO extends RFWVO {
   }
 
   /**
-   * # w22e - vDescCond: Valor total desconto condicionado. Tipo: N, Tamanho: 13v2, Ocorrência: 0-1 (campo opcional).
+   * # w22e - vDescCond: Valor total desconto condicionado. Tipo: N, Tamanho: 13v2, OcorrÃªncia: 0-1 (campo opcional).
    *
    * @return the w22e - vDescCond: Valor total desconto condicionado
    */
@@ -302,7 +302,7 @@ public class SEFAZISSQNTotVO extends RFWVO {
   }
 
   /**
-   * # w22e - vDescCond: Valor total desconto condicionado. Tipo: N, Tamanho: 13v2, Ocorrência: 0-1 (campo opcional).
+   * # w22e - vDescCond: Valor total desconto condicionado. Tipo: N, Tamanho: 13v2, OcorrÃªncia: 0-1 (campo opcional).
    *
    * @param vdescCond the new w22e - vDescCond: Valor total desconto condicionado
    */
@@ -311,50 +311,50 @@ public class SEFAZISSQNTotVO extends RFWVO {
   }
 
   /**
-   * # w22f - vISSRet: Valor total retenção ISS. Tipo: N, Tamanho: 13v2, Ocorrência: 0-1 (campo opcional).
+   * # w22f - vISSRet: Valor total retenÃ§Ã£o ISS. Tipo: N, Tamanho: 13v2, OcorrÃªncia: 0-1 (campo opcional).
    *
-   * @return the w22f - vISSRet: Valor total retenção ISS
+   * @return the w22f - vISSRet: Valor total retenÃ§Ã£o ISS
    */
   public BigDecimal getVissRet() {
     return vissRet;
   }
 
   /**
-   * # w22f - vISSRet: Valor total retenção ISS. Tipo: N, Tamanho: 13v2, Ocorrência: 0-1 (campo opcional).
+   * # w22f - vISSRet: Valor total retenÃ§Ã£o ISS. Tipo: N, Tamanho: 13v2, OcorrÃªncia: 0-1 (campo opcional).
    *
-   * @param vissRet the new w22f - vISSRet: Valor total retenção ISS
+   * @param vissRet the new w22f - vISSRet: Valor total retenÃ§Ã£o ISS
    */
   public void setVissRet(BigDecimal vissRet) {
     this.vissRet = vissRet;
   }
 
   /**
-   * # w22g - cRegTrib: Código do Regime Especial de Tributação. Tipo: N, Tamanho: 2, Ocorrência: 0-1 (campo opcional).
+   * # w22g - cRegTrib: CÃ³digo do Regime Especial de TributaÃ§Ã£o. Tipo: N, Tamanho: 2, OcorrÃªncia: 0-1 (campo opcional).
    * <p>
    * Valores: 1 = Microempresa Municipal<br>
    * 2 = Estimativa<br>
    * 3 = Sociedade de Profissionais<br>
    * 4 = Cooperativa<br>
-   * 5 = Microempresário Individual (MEI)<br>
-   * 6 = Microempresário e Empresa de Pequeno Porte.
+   * 5 = MicroempresÃ¡rio Individual (MEI)<br>
+   * 6 = MicroempresÃ¡rio e Empresa de Pequeno Porte.
    *
-   * @return the w22g - cRegTrib: Código do Regime Especial de Tributação
+   * @return the w22g - cRegTrib: CÃ³digo do Regime Especial de TributaÃ§Ã£o
    */
   public SEFAZ_cRegTrib getCregTrib() {
     return cregTrib;
   }
 
   /**
-   * # w22g - cRegTrib: Código do Regime Especial de Tributação. Tipo: N, Tamanho: 2, Ocorrência: 0-1 (campo opcional).
+   * # w22g - cRegTrib: CÃ³digo do Regime Especial de TributaÃ§Ã£o. Tipo: N, Tamanho: 2, OcorrÃªncia: 0-1 (campo opcional).
    * <p>
    * Valores: 1 = Microempresa Municipal<br>
    * 2 = Estimativa<br>
    * 3 = Sociedade de Profissionais<br>
    * 4 = Cooperativa<br>
-   * 5 = Microempresário Individual (MEI)<br>
-   * 6 = Microempresário e Empresa de Pequeno Porte.
+   * 5 = MicroempresÃ¡rio Individual (MEI)<br>
+   * 6 = MicroempresÃ¡rio e Empresa de Pequeno Porte.
    *
-   * @param cregTrib the new w22g - cRegTrib: Código do Regime Especial de Tributação
+   * @param cregTrib the new w22g - cRegTrib: CÃ³digo do Regime Especial de TributaÃ§Ã£o
    */
   public void setCregTrib(SEFAZ_cRegTrib cregTrib) {
     this.cregTrib = cregTrib;

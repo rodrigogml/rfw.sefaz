@@ -13,16 +13,16 @@ import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_CST_COFINS;
 /**
  * Grupo S01 - COFINS (Grupo COFINS).
  * <p>
- * Ocorre 0-1 dentro do grupo M01 (imposto do item). Deve ser informado apenas quando o item for sujeito à COFINS.
+ * Ocorre 0-1 dentro do grupo M01 (imposto do item). Deve ser informado apenas quando o item for sujeito Ã  COFINS.
  * <p>
  * Estrutura que concentra todos os campos dos subgrupos de COFINS do leiaute da NF-e:
  * <ul>
- * <li>S02 - COFINSAliq: COFINS tributado pela alíquota (CST 01, 02, com base em valor e alíquota percentual);</li>
- * <li>S03 - COFINSQtde: COFINS tributado por quantidade (CST 03, com base em quantidade × alíquota em reais);</li>
- * <li>S04 - COFINSNT: COFINS não tributado (CST 04, 05, 06, 07, 08, 09);</li>
- * <li>S05 - COFINSOutr: COFINS – outras operações (CST 49, 50, 51, 52, 53, 54, 55, 56, 61–67, 70–73, 98, 99).</li>
+ * <li>S02 - COFINSAliq: COFINS tributado pela alÃ­quota (CST 01, 02, com base em valor e alÃ­quota percentual);</li>
+ * <li>S03 - COFINSQtde: COFINS tributado por quantidade (CST 03, com base em quantidade Ã— alÃ­quota em reais);</li>
+ * <li>S04 - COFINSNT: COFINS nÃ£o tributado (CST 04, 05, 06, 07, 08, 09);</li>
+ * <li>S05 - COFINSOutr: COFINS â€“ outras operaÃ§Ãµes (CST 49, 50, 51, 52, 53, 54, 55, 56, 61â€“67, 70â€“73, 98, 99).</li>
  * </ul>
- * Na estrutura XML original, apenas um dos grupos S02, S03, S04 ou S05 é informado por item, conforme o valor atribuído ao campo S06 – CST da COFINS. Neste VO, os campos necessários para todos os cenários foram unificados.
+ * Na estrutura XML original, apenas um dos grupos S02, S03, S04 ou S05 Ã© informado por item, conforme o valor atribuÃ­do ao campo S06 â€“ CST da COFINS. Neste VO, os campos necessÃ¡rios para todos os cenÃ¡rios foram unificados.
  */
 @RFWDAOAnnotation(schema = "_RFW.SEFAZ", table = "sefaz_cofins")
 public class SEFAZCOFINSVO extends RFWVO {
@@ -39,41 +39,41 @@ public class SEFAZCOFINSVO extends RFWVO {
   private SEFAZImpostoVO impostoVO = null;
 
   /**
-   * S06 - Código de Situação Tributária da COFINS (CST). Tipo: N, Tamanho: 2, Ocorrência: 1-1 (campo obrigatório na estrutura da NF-e).
+   * S06 - CÃ³digo de SituaÃ§Ã£o TributÃ¡ria da COFINS (CST). Tipo: N, Tamanho: 2, OcorrÃªncia: 1-1 (campo obrigatÃ³rio na estrutura da NF-e).
    * <p>
-   * Utiliza a enumeração SEFAZ_CST_COFINS, contemplando os códigos das situações tributáveis por alíquota, por quantidade, não tributadas e outras operações (COFINSAliq, COFINSQtde, COFINSNT, COFINSOutr).
+   * Utiliza a enumeraÃ§Ã£o SEFAZ_CST_COFINS, contemplando os cÃ³digos das situaÃ§Ãµes tributÃ¡veis por alÃ­quota, por quantidade, nÃ£o tributadas e outras operaÃ§Ãµes (COFINSAliq, COFINSQtde, COFINSNT, COFINSOutr).
    */
   @RFWMetaEnumField(caption = "CST", required = false)
   private SEFAZ_CST_COFINS cst;
 
   /**
-   * S07 - Valor da Base de Cálculo da COFINS (vBC). Tipo: N, Tamanho: 13v2, Ocorrência: 1-1 nos cenários em que o cálculo da COFINS é em percentual.
+   * S07 - Valor da Base de CÃ¡lculo da COFINS (vBC). Tipo: N, Tamanho: 13v2, OcorrÃªncia: 1-1 nos cenÃ¡rios em que o cÃ¡lculo da COFINS Ã© em percentual.
    * <p>
-   * Utilização na estrutura XML:
+   * UtilizaÃ§Ã£o na estrutura XML:
    * <ul>
-   * <li>Grupo S02 - COFINSAliq (COFINS tributado pela alíquota em percentual);</li>
-   * <li>Grupo S05 - COFINSOutr, quando o cálculo for em percentual (sequência S06.1).</li>
+   * <li>Grupo S02 - COFINSAliq (COFINS tributado pela alÃ­quota em percentual);</li>
+   * <li>Grupo S05 - COFINSOutr, quando o cÃ¡lculo for em percentual (sequÃªncia S06.1).</li>
    * </ul>
    */
   @RFWMetaBigDecimalField(caption = "vBC", required = false, unique = false, maxValue = "", minValue = "", scale = 2, absolute = false)
   private BigDecimal vbc;
 
   /**
-   * S08 - Alíquota da COFINS em percentual (pCOFINS). Tipo: N, Tamanho: 3v2-4, Ocorrência: 1-1 nos cenários em que o cálculo da COFINS é em percentual.
+   * S08 - AlÃ­quota da COFINS em percentual (pCOFINS). Tipo: N, Tamanho: 3v2-4, OcorrÃªncia: 1-1 nos cenÃ¡rios em que o cÃ¡lculo da COFINS Ã© em percentual.
    * <p>
-   * Utilização na estrutura XML:
+   * UtilizaÃ§Ã£o na estrutura XML:
    * <ul>
    * <li>Grupo S02 - COFINSAliq;</li>
-   * <li>Grupo S05 - COFINSOutr, quando o cálculo for em percentual (sequência S06.1).</li>
+   * <li>Grupo S05 - COFINSOutr, quando o cÃ¡lculo for em percentual (sequÃªncia S06.1).</li>
    * </ul>
    */
   @RFWMetaBigDecimalField(caption = "pCOFINS", required = false, unique = false, maxValue = "", minValue = "", scale = 2, scaleMax = 4, absolute = false)
   private BigDecimal pcofins;
 
   /**
-   * S11 - Valor da COFINS (vCOFINS). Tipo: N, Tamanho: 13v2, Ocorrência: 1-1 nos grupos de COFINS com cálculo de imposto.
+   * S11 - Valor da COFINS (vCOFINS). Tipo: N, Tamanho: 13v2, OcorrÃªncia: 1-1 nos grupos de COFINS com cÃ¡lculo de imposto.
    * <p>
-   * Utilização na estrutura XML:
+   * UtilizaÃ§Ã£o na estrutura XML:
    * <ul>
    * <li>Grupo S02 - COFINSAliq (S11 - vCOFINS);</li>
    * <li>Grupo S03 - COFINSQtde (S11 - vCOFINS);</li>
@@ -84,24 +84,24 @@ public class SEFAZCOFINSVO extends RFWVO {
   private BigDecimal vcofins;
 
   /**
-   * S09 - Quantidade Vendida (qBCProd). Tipo: N, Tamanho: 12v0-4, Ocorrência: 1-1 nos cenários em que o cálculo da COFINS é por quantidade.
+   * S09 - Quantidade Vendida (qBCProd). Tipo: N, Tamanho: 12v0-4, OcorrÃªncia: 1-1 nos cenÃ¡rios em que o cÃ¡lculo da COFINS Ã© por quantidade.
    * <p>
-   * Utilização na estrutura XML:
+   * UtilizaÃ§Ã£o na estrutura XML:
    * <ul>
    * <li>Grupo S03 - COFINSQtde (COFINS tributado por quantidade);</li>
-   * <li>Grupo S05 - COFINSOutr, quando o cálculo for em valor por unidade (sequência S08.1).</li>
+   * <li>Grupo S05 - COFINSOutr, quando o cÃ¡lculo for em valor por unidade (sequÃªncia S08.1).</li>
    * </ul>
    */
   @RFWMetaBigDecimalField(caption = "qBCProd", required = false, unique = false, maxValue = "", minValue = "", scale = 0, scaleMax = 4, absolute = false)
   private BigDecimal qbcProd;
 
   /**
-   * S10 - Alíquota da COFINS em reais (vAliqProd). Tipo: N, Tamanho: 11v0-4, Ocorrência: 1-1 nos cenários em que o cálculo da COFINS é por quantidade (valor por unidade).
+   * S10 - AlÃ­quota da COFINS em reais (vAliqProd). Tipo: N, Tamanho: 11v0-4, OcorrÃªncia: 1-1 nos cenÃ¡rios em que o cÃ¡lculo da COFINS Ã© por quantidade (valor por unidade).
    * <p>
-   * Utilização na estrutura XML:
+   * UtilizaÃ§Ã£o na estrutura XML:
    * <ul>
    * <li>Grupo S03 - COFINSQtde;</li>
-   * <li>Grupo S05 - COFINSOutr, quando o cálculo for em valor por unidade (sequência S08.1).</li>
+   * <li>Grupo S05 - COFINSOutr, quando o cÃ¡lculo for em valor por unidade (sequÃªncia S08.1).</li>
    * </ul>
    */
   @RFWMetaBigDecimalField(caption = "vAliqProd", required = false, unique = false, maxValue = "", minValue = "", scale = 0, scaleMax = 4, absolute = false)
@@ -126,95 +126,95 @@ public class SEFAZCOFINSVO extends RFWVO {
   }
 
   /**
-   * # s06 - Código de Situação Tributária da COFINS (CST). Tipo: N, Tamanho: 2, Ocorrência: 1-1 (campo obrigatório na estrutura da NF-e).
+   * # s06 - CÃ³digo de SituaÃ§Ã£o TributÃ¡ria da COFINS (CST). Tipo: N, Tamanho: 2, OcorrÃªncia: 1-1 (campo obrigatÃ³rio na estrutura da NF-e).
    * <p>
-   * Utiliza a enumeração SEFAZ_CST_COFINS, contemplando os códigos das situações tributáveis por alíquota, por quantidade, não tributadas e outras operações (COFINSAliq, COFINSQtde, COFINSNT, COFINSOutr).
+   * Utiliza a enumeraÃ§Ã£o SEFAZ_CST_COFINS, contemplando os cÃ³digos das situaÃ§Ãµes tributÃ¡veis por alÃ­quota, por quantidade, nÃ£o tributadas e outras operaÃ§Ãµes (COFINSAliq, COFINSQtde, COFINSNT, COFINSOutr).
    *
-   * @return the s06 - Código de Situação Tributária da COFINS (CST)
+   * @return the s06 - CÃ³digo de SituaÃ§Ã£o TributÃ¡ria da COFINS (CST)
    */
   public SEFAZ_CST_COFINS getCst() {
     return cst;
   }
 
   /**
-   * # s06 - Código de Situação Tributária da COFINS (CST). Tipo: N, Tamanho: 2, Ocorrência: 1-1 (campo obrigatório na estrutura da NF-e).
+   * # s06 - CÃ³digo de SituaÃ§Ã£o TributÃ¡ria da COFINS (CST). Tipo: N, Tamanho: 2, OcorrÃªncia: 1-1 (campo obrigatÃ³rio na estrutura da NF-e).
    * <p>
-   * Utiliza a enumeração SEFAZ_CST_COFINS, contemplando os códigos das situações tributáveis por alíquota, por quantidade, não tributadas e outras operações (COFINSAliq, COFINSQtde, COFINSNT, COFINSOutr).
+   * Utiliza a enumeraÃ§Ã£o SEFAZ_CST_COFINS, contemplando os cÃ³digos das situaÃ§Ãµes tributÃ¡veis por alÃ­quota, por quantidade, nÃ£o tributadas e outras operaÃ§Ãµes (COFINSAliq, COFINSQtde, COFINSNT, COFINSOutr).
    *
-   * @param cst the new s06 - Código de Situação Tributária da COFINS (CST)
+   * @param cst the new s06 - CÃ³digo de SituaÃ§Ã£o TributÃ¡ria da COFINS (CST)
    */
   public void setCst(SEFAZ_CST_COFINS cst) {
     this.cst = cst;
   }
 
   /**
-   * # s07 - Valor da Base de Cálculo da COFINS (vBC). Tipo: N, Tamanho: 13v2, Ocorrência: 1-1 nos cenários em que o cálculo da COFINS é em percentual.
+   * # s07 - Valor da Base de CÃ¡lculo da COFINS (vBC). Tipo: N, Tamanho: 13v2, OcorrÃªncia: 1-1 nos cenÃ¡rios em que o cÃ¡lculo da COFINS Ã© em percentual.
    * <p>
-   * Utilização na estrutura XML:
+   * UtilizaÃ§Ã£o na estrutura XML:
    * <ul>
-   * <li>Grupo S02 - COFINSAliq (COFINS tributado pela alíquota em percentual);</li>
-   * <li>Grupo S05 - COFINSOutr, quando o cálculo for em percentual (sequência S06.1).</li>
+   * <li>Grupo S02 - COFINSAliq (COFINS tributado pela alÃ­quota em percentual);</li>
+   * <li>Grupo S05 - COFINSOutr, quando o cÃ¡lculo for em percentual (sequÃªncia S06.1).</li>
    * </ul>
    * .
    *
-   * @return the s07 - Valor da Base de Cálculo da COFINS (vBC)
+   * @return the s07 - Valor da Base de CÃ¡lculo da COFINS (vBC)
    */
   public BigDecimal getVbc() {
     return vbc;
   }
 
   /**
-   * # s07 - Valor da Base de Cálculo da COFINS (vBC). Tipo: N, Tamanho: 13v2, Ocorrência: 1-1 nos cenários em que o cálculo da COFINS é em percentual.
+   * # s07 - Valor da Base de CÃ¡lculo da COFINS (vBC). Tipo: N, Tamanho: 13v2, OcorrÃªncia: 1-1 nos cenÃ¡rios em que o cÃ¡lculo da COFINS Ã© em percentual.
    * <p>
-   * Utilização na estrutura XML:
+   * UtilizaÃ§Ã£o na estrutura XML:
    * <ul>
-   * <li>Grupo S02 - COFINSAliq (COFINS tributado pela alíquota em percentual);</li>
-   * <li>Grupo S05 - COFINSOutr, quando o cálculo for em percentual (sequência S06.1).</li>
+   * <li>Grupo S02 - COFINSAliq (COFINS tributado pela alÃ­quota em percentual);</li>
+   * <li>Grupo S05 - COFINSOutr, quando o cÃ¡lculo for em percentual (sequÃªncia S06.1).</li>
    * </ul>
    * .
    *
-   * @param vbc the new s07 - Valor da Base de Cálculo da COFINS (vBC)
+   * @param vbc the new s07 - Valor da Base de CÃ¡lculo da COFINS (vBC)
    */
   public void setVbc(BigDecimal vbc) {
     this.vbc = vbc;
   }
 
   /**
-   * # s08 - Alíquota da COFINS em percentual (pCOFINS). Tipo: N, Tamanho: 3v2-4, Ocorrência: 1-1 nos cenários em que o cálculo da COFINS é em percentual.
+   * # s08 - AlÃ­quota da COFINS em percentual (pCOFINS). Tipo: N, Tamanho: 3v2-4, OcorrÃªncia: 1-1 nos cenÃ¡rios em que o cÃ¡lculo da COFINS Ã© em percentual.
    * <p>
-   * Utilização na estrutura XML:
+   * UtilizaÃ§Ã£o na estrutura XML:
    * <ul>
    * <li>Grupo S02 - COFINSAliq;</li>
-   * <li>Grupo S05 - COFINSOutr, quando o cálculo for em percentual (sequência S06.1).</li>
+   * <li>Grupo S05 - COFINSOutr, quando o cÃ¡lculo for em percentual (sequÃªncia S06.1).</li>
    * </ul>
    * .
    *
-   * @return the s08 - Alíquota da COFINS em percentual (pCOFINS)
+   * @return the s08 - AlÃ­quota da COFINS em percentual (pCOFINS)
    */
   public BigDecimal getPcofins() {
     return pcofins;
   }
 
   /**
-   * # s08 - Alíquota da COFINS em percentual (pCOFINS). Tipo: N, Tamanho: 3v2-4, Ocorrência: 1-1 nos cenários em que o cálculo da COFINS é em percentual.
+   * # s08 - AlÃ­quota da COFINS em percentual (pCOFINS). Tipo: N, Tamanho: 3v2-4, OcorrÃªncia: 1-1 nos cenÃ¡rios em que o cÃ¡lculo da COFINS Ã© em percentual.
    * <p>
-   * Utilização na estrutura XML:
+   * UtilizaÃ§Ã£o na estrutura XML:
    * <ul>
    * <li>Grupo S02 - COFINSAliq;</li>
-   * <li>Grupo S05 - COFINSOutr, quando o cálculo for em percentual (sequência S06.1).</li>
+   * <li>Grupo S05 - COFINSOutr, quando o cÃ¡lculo for em percentual (sequÃªncia S06.1).</li>
    * </ul>
    * .
    *
-   * @param pcofins the new s08 - Alíquota da COFINS em percentual (pCOFINS)
+   * @param pcofins the new s08 - AlÃ­quota da COFINS em percentual (pCOFINS)
    */
   public void setPcofins(BigDecimal pcofins) {
     this.pcofins = pcofins;
   }
 
   /**
-   * # s11 - Valor da COFINS (vCOFINS). Tipo: N, Tamanho: 13v2, Ocorrência: 1-1 nos grupos de COFINS com cálculo de imposto.
+   * # s11 - Valor da COFINS (vCOFINS). Tipo: N, Tamanho: 13v2, OcorrÃªncia: 1-1 nos grupos de COFINS com cÃ¡lculo de imposto.
    * <p>
-   * Utilização na estrutura XML:
+   * UtilizaÃ§Ã£o na estrutura XML:
    * <ul>
    * <li>Grupo S02 - COFINSAliq (S11 - vCOFINS);</li>
    * <li>Grupo S03 - COFINSQtde (S11 - vCOFINS);</li>
@@ -229,9 +229,9 @@ public class SEFAZCOFINSVO extends RFWVO {
   }
 
   /**
-   * # s11 - Valor da COFINS (vCOFINS). Tipo: N, Tamanho: 13v2, Ocorrência: 1-1 nos grupos de COFINS com cálculo de imposto.
+   * # s11 - Valor da COFINS (vCOFINS). Tipo: N, Tamanho: 13v2, OcorrÃªncia: 1-1 nos grupos de COFINS com cÃ¡lculo de imposto.
    * <p>
-   * Utilização na estrutura XML:
+   * UtilizaÃ§Ã£o na estrutura XML:
    * <ul>
    * <li>Grupo S02 - COFINSAliq (S11 - vCOFINS);</li>
    * <li>Grupo S03 - COFINSQtde (S11 - vCOFINS);</li>
@@ -246,12 +246,12 @@ public class SEFAZCOFINSVO extends RFWVO {
   }
 
   /**
-   * # s09 - Quantidade Vendida (qBCProd). Tipo: N, Tamanho: 12v0-4, Ocorrência: 1-1 nos cenários em que o cálculo da COFINS é por quantidade.
+   * # s09 - Quantidade Vendida (qBCProd). Tipo: N, Tamanho: 12v0-4, OcorrÃªncia: 1-1 nos cenÃ¡rios em que o cÃ¡lculo da COFINS Ã© por quantidade.
    * <p>
-   * Utilização na estrutura XML:
+   * UtilizaÃ§Ã£o na estrutura XML:
    * <ul>
    * <li>Grupo S03 - COFINSQtde (COFINS tributado por quantidade);</li>
-   * <li>Grupo S05 - COFINSOutr, quando o cálculo for em valor por unidade (sequência S08.1).</li>
+   * <li>Grupo S05 - COFINSOutr, quando o cÃ¡lculo for em valor por unidade (sequÃªncia S08.1).</li>
    * </ul>
    * .
    *
@@ -262,12 +262,12 @@ public class SEFAZCOFINSVO extends RFWVO {
   }
 
   /**
-   * # s09 - Quantidade Vendida (qBCProd). Tipo: N, Tamanho: 12v0-4, Ocorrência: 1-1 nos cenários em que o cálculo da COFINS é por quantidade.
+   * # s09 - Quantidade Vendida (qBCProd). Tipo: N, Tamanho: 12v0-4, OcorrÃªncia: 1-1 nos cenÃ¡rios em que o cÃ¡lculo da COFINS Ã© por quantidade.
    * <p>
-   * Utilização na estrutura XML:
+   * UtilizaÃ§Ã£o na estrutura XML:
    * <ul>
    * <li>Grupo S03 - COFINSQtde (COFINS tributado por quantidade);</li>
-   * <li>Grupo S05 - COFINSOutr, quando o cálculo for em valor por unidade (sequência S08.1).</li>
+   * <li>Grupo S05 - COFINSOutr, quando o cÃ¡lculo for em valor por unidade (sequÃªncia S08.1).</li>
    * </ul>
    * .
    *
@@ -278,32 +278,32 @@ public class SEFAZCOFINSVO extends RFWVO {
   }
 
   /**
-   * # s10 - Alíquota da COFINS em reais (vAliqProd). Tipo: N, Tamanho: 11v0-4, Ocorrência: 1-1 nos cenários em que o cálculo da COFINS é por quantidade (valor por unidade).
+   * # s10 - AlÃ­quota da COFINS em reais (vAliqProd). Tipo: N, Tamanho: 11v0-4, OcorrÃªncia: 1-1 nos cenÃ¡rios em que o cÃ¡lculo da COFINS Ã© por quantidade (valor por unidade).
    * <p>
-   * Utilização na estrutura XML:
+   * UtilizaÃ§Ã£o na estrutura XML:
    * <ul>
    * <li>Grupo S03 - COFINSQtde;</li>
-   * <li>Grupo S05 - COFINSOutr, quando o cálculo for em valor por unidade (sequência S08.1).</li>
+   * <li>Grupo S05 - COFINSOutr, quando o cÃ¡lculo for em valor por unidade (sequÃªncia S08.1).</li>
    * </ul>
    * .
    *
-   * @return the s10 - Alíquota da COFINS em reais (vAliqProd)
+   * @return the s10 - AlÃ­quota da COFINS em reais (vAliqProd)
    */
   public BigDecimal getValiqProd() {
     return valiqProd;
   }
 
   /**
-   * # s10 - Alíquota da COFINS em reais (vAliqProd). Tipo: N, Tamanho: 11v0-4, Ocorrência: 1-1 nos cenários em que o cálculo da COFINS é por quantidade (valor por unidade).
+   * # s10 - AlÃ­quota da COFINS em reais (vAliqProd). Tipo: N, Tamanho: 11v0-4, OcorrÃªncia: 1-1 nos cenÃ¡rios em que o cÃ¡lculo da COFINS Ã© por quantidade (valor por unidade).
    * <p>
-   * Utilização na estrutura XML:
+   * UtilizaÃ§Ã£o na estrutura XML:
    * <ul>
    * <li>Grupo S03 - COFINSQtde;</li>
-   * <li>Grupo S05 - COFINSOutr, quando o cálculo for em valor por unidade (sequência S08.1).</li>
+   * <li>Grupo S05 - COFINSOutr, quando o cÃ¡lculo for em valor por unidade (sequÃªncia S08.1).</li>
    * </ul>
    * .
    *
-   * @param valiqProd the new s10 - Alíquota da COFINS em reais (vAliqProd)
+   * @param valiqProd the new s10 - AlÃ­quota da COFINS em reais (vAliqProd)
    */
   public void setValiqProd(BigDecimal valiqProd) {
     this.valiqProd = valiqProd;

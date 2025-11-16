@@ -11,7 +11,7 @@ import br.eng.rodrigogml.rfw.kernel.vo.RFWVO;
 import br.eng.rodrigogml.rfw.orm.dao.annotations.dao.RFWDAOAnnotation;
 
 /**
- * Grupo X11 - retTransp: Retenção ICMS transporte.
+ * Grupo X11 - retTransp: RetenÃ§Ã£o ICMS transporte.
  */
 @RFWDAOAnnotation(schema = "_RFW.SEFAZ", table = "sefaz_rettransp")
 public class SEFAZRetTranspVO extends RFWVO {
@@ -25,37 +25,37 @@ public class SEFAZRetTranspVO extends RFWVO {
   private SEFAZTranspVO transpVO = null;
 
   /**
-   * X12 - vServ: Valor do Serviço. Tipo: N, Tamanho: 13v2, Ocorrência: 1-1.
+   * X12 - vServ: Valor do ServiÃ§o. Tipo: N, Tamanho: 13v2, OcorrÃªncia: 1-1.
    */
   @RFWMetaBigDecimalField(caption = "vServ", required = false, unique = false, maxValue = "", minValue = "", scale = 2, absolute = false)
   private BigDecimal vserv;
 
   /**
-   * X13 - vBCRet: BC da Retenção do ICMS. Tipo: N, Tamanho: 13v2, Ocorrência: 1-1.
+   * X13 - vBCRet: BC da RetenÃ§Ã£o do ICMS. Tipo: N, Tamanho: 13v2, OcorrÃªncia: 1-1.
    */
   @RFWMetaBigDecimalField(caption = "vBCRet", required = false, unique = false, maxValue = "", minValue = "", scale = 2, absolute = false)
   private BigDecimal vbcret;
 
   /**
-   * X14 - pICMSRet: Alíquota da Retenção. Tipo: N, Tamanho: 3v2-4, Ocorrência: 1-1.
+   * X14 - pICMSRet: AlÃ­quota da RetenÃ§Ã£o. Tipo: N, Tamanho: 3v2-4, OcorrÃªncia: 1-1.
    */
   @RFWMetaBigDecimalField(caption = "pICMSRet", required = false, unique = false, maxValue = "", minValue = "", scale = 2, scaleMax = 4, absolute = false)
   private BigDecimal picmsRet;
 
   /**
-   * X15 - vICMSRet: Valor do ICMS Retido. Tipo: N, Tamanho: 13v2, Ocorrência: 1-1.
+   * X15 - vICMSRet: Valor do ICMS Retido. Tipo: N, Tamanho: 13v2, OcorrÃªncia: 1-1.
    */
   @RFWMetaBigDecimalField(caption = "vICMSRet", required = false, unique = false, maxValue = "", minValue = "", scale = 2, absolute = false)
   private BigDecimal vicmsRet;
 
   /**
-   * X16 - CFOP: CFOP de Serviço de Transporte. Tipo: N, Tamanho: 4, Ocorrência: 1-1.
+   * X16 - CFOP: CFOP de ServiÃ§o de Transporte. Tipo: N, Tamanho: 4, OcorrÃªncia: 1-1.
    */
   @RFWMetaStringField(caption = "CFOP", required = false, unique = false, maxLength = 4, minLength = 4, pattern = "^[0-9]{4}$", preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
   private String cfop;
 
   /**
-   * X17 - cMunFG: Código do município do fato gerador do ICMS do transporte. Tipo: N, Tamanho: 7, Ocorrência: 1-1. Utilizar tabela IBGE.
+   * X17 - cMunFG: CÃ³digo do municÃ­pio do fato gerador do ICMS do transporte. Tipo: N, Tamanho: 7, OcorrÃªncia: 1-1. Utilizar tabela IBGE.
    */
   @RFWMetaStringField(caption = "cMunFG", required = false, unique = false, maxLength = 7, minLength = 7, pattern = "^[0-9]{7}$", preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
   private String cmunFg;
@@ -79,61 +79,61 @@ public class SEFAZRetTranspVO extends RFWVO {
   }
 
   /**
-   * # x12 - vServ: Valor do Serviço. Tipo: N, Tamanho: 13v2, Ocorrência: 1-1.
+   * # x12 - vServ: Valor do ServiÃ§o. Tipo: N, Tamanho: 13v2, OcorrÃªncia: 1-1.
    *
-   * @return the x12 - vServ: Valor do Serviço
+   * @return the x12 - vServ: Valor do ServiÃ§o
    */
   public BigDecimal getVserv() {
     return vserv;
   }
 
   /**
-   * # x12 - vServ: Valor do Serviço. Tipo: N, Tamanho: 13v2, Ocorrência: 1-1.
+   * # x12 - vServ: Valor do ServiÃ§o. Tipo: N, Tamanho: 13v2, OcorrÃªncia: 1-1.
    *
-   * @param vserv the new x12 - vServ: Valor do Serviço
+   * @param vserv the new x12 - vServ: Valor do ServiÃ§o
    */
   public void setVserv(BigDecimal vserv) {
     this.vserv = vserv;
   }
 
   /**
-   * # x13 - vBCRet: BC da Retenção do ICMS. Tipo: N, Tamanho: 13v2, Ocorrência: 1-1.
+   * # x13 - vBCRet: BC da RetenÃ§Ã£o do ICMS. Tipo: N, Tamanho: 13v2, OcorrÃªncia: 1-1.
    *
-   * @return the x13 - vBCRet: BC da Retenção do ICMS
+   * @return the x13 - vBCRet: BC da RetenÃ§Ã£o do ICMS
    */
   public BigDecimal getVbcret() {
     return vbcret;
   }
 
   /**
-   * # x13 - vBCRet: BC da Retenção do ICMS. Tipo: N, Tamanho: 13v2, Ocorrência: 1-1.
+   * # x13 - vBCRet: BC da RetenÃ§Ã£o do ICMS. Tipo: N, Tamanho: 13v2, OcorrÃªncia: 1-1.
    *
-   * @param vbcret the new x13 - vBCRet: BC da Retenção do ICMS
+   * @param vbcret the new x13 - vBCRet: BC da RetenÃ§Ã£o do ICMS
    */
   public void setVbcret(BigDecimal vbcret) {
     this.vbcret = vbcret;
   }
 
   /**
-   * # x14 - pICMSRet: Alíquota da Retenção. Tipo: N, Tamanho: 3v2-4, Ocorrência: 1-1.
+   * # x14 - pICMSRet: AlÃ­quota da RetenÃ§Ã£o. Tipo: N, Tamanho: 3v2-4, OcorrÃªncia: 1-1.
    *
-   * @return the x14 - pICMSRet: Alíquota da Retenção
+   * @return the x14 - pICMSRet: AlÃ­quota da RetenÃ§Ã£o
    */
   public BigDecimal getPicmsRet() {
     return picmsRet;
   }
 
   /**
-   * # x14 - pICMSRet: Alíquota da Retenção. Tipo: N, Tamanho: 3v2-4, Ocorrência: 1-1.
+   * # x14 - pICMSRet: AlÃ­quota da RetenÃ§Ã£o. Tipo: N, Tamanho: 3v2-4, OcorrÃªncia: 1-1.
    *
-   * @param picmsRet the new x14 - pICMSRet: Alíquota da Retenção
+   * @param picmsRet the new x14 - pICMSRet: AlÃ­quota da RetenÃ§Ã£o
    */
   public void setPicmsRet(BigDecimal picmsRet) {
     this.picmsRet = picmsRet;
   }
 
   /**
-   * # x15 - vICMSRet: Valor do ICMS Retido. Tipo: N, Tamanho: 13v2, Ocorrência: 1-1.
+   * # x15 - vICMSRet: Valor do ICMS Retido. Tipo: N, Tamanho: 13v2, OcorrÃªncia: 1-1.
    *
    * @return the x15 - vICMSRet: Valor do ICMS Retido
    */
@@ -142,7 +142,7 @@ public class SEFAZRetTranspVO extends RFWVO {
   }
 
   /**
-   * # x15 - vICMSRet: Valor do ICMS Retido. Tipo: N, Tamanho: 13v2, Ocorrência: 1-1.
+   * # x15 - vICMSRet: Valor do ICMS Retido. Tipo: N, Tamanho: 13v2, OcorrÃªncia: 1-1.
    *
    * @param vicmsRet the new x15 - vICMSRet: Valor do ICMS Retido
    */
@@ -151,36 +151,36 @@ public class SEFAZRetTranspVO extends RFWVO {
   }
 
   /**
-   * # x16 - CFOP: CFOP de Serviço de Transporte. Tipo: N, Tamanho: 4, Ocorrência: 1-1.
+   * # x16 - CFOP: CFOP de ServiÃ§o de Transporte. Tipo: N, Tamanho: 4, OcorrÃªncia: 1-1.
    *
-   * @return the x16 - CFOP: CFOP de Serviço de Transporte
+   * @return the x16 - CFOP: CFOP de ServiÃ§o de Transporte
    */
   public String getCfop() {
     return cfop;
   }
 
   /**
-   * # x16 - CFOP: CFOP de Serviço de Transporte. Tipo: N, Tamanho: 4, Ocorrência: 1-1.
+   * # x16 - CFOP: CFOP de ServiÃ§o de Transporte. Tipo: N, Tamanho: 4, OcorrÃªncia: 1-1.
    *
-   * @param cfop the new x16 - CFOP: CFOP de Serviço de Transporte
+   * @param cfop the new x16 - CFOP: CFOP de ServiÃ§o de Transporte
    */
   public void setCfop(String cfop) {
     this.cfop = cfop;
   }
 
   /**
-   * # x17 - cMunFG: Código do município do fato gerador do ICMS do transporte. Tipo: N, Tamanho: 7, Ocorrência: 1-1. Utilizar tabela IBGE.
+   * # x17 - cMunFG: CÃ³digo do municÃ­pio do fato gerador do ICMS do transporte. Tipo: N, Tamanho: 7, OcorrÃªncia: 1-1. Utilizar tabela IBGE.
    *
-   * @return the x17 - cMunFG: Código do município do fato gerador do ICMS do transporte
+   * @return the x17 - cMunFG: CÃ³digo do municÃ­pio do fato gerador do ICMS do transporte
    */
   public String getCmunFg() {
     return cmunFg;
   }
 
   /**
-   * # x17 - cMunFG: Código do município do fato gerador do ICMS do transporte. Tipo: N, Tamanho: 7, Ocorrência: 1-1. Utilizar tabela IBGE.
+   * # x17 - cMunFG: CÃ³digo do municÃ­pio do fato gerador do ICMS do transporte. Tipo: N, Tamanho: 7, OcorrÃªncia: 1-1. Utilizar tabela IBGE.
    *
-   * @param cmunFg the new x17 - cMunFG: Código do município do fato gerador do ICMS do transporte
+   * @param cmunFg the new x17 - cMunFG: CÃ³digo do municÃ­pio do fato gerador do ICMS do transporte
    */
   public void setCmunFg(String cmunFg) {
     this.cmunFg = cmunFg;

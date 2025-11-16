@@ -7,16 +7,16 @@ import br.eng.rodrigogml.rfw.kernel.vo.RFWVO;
 import br.eng.rodrigogml.rfw.orm.dao.annotations.dao.RFWDAOAnnotation;
 
 /**
- * Grupo PIS SubstituiÁ„o Tribut·ria (TAG {@code PISST}, ID R01).<br>
- * Consolidado em objeto prÛprio conforme documentaÁ„o MOC:
+ * Grupo PIS Substitui√ß√£o Tribut√°ria (TAG {@code PISST}, ID R01).<br>
+ * Consolidado em objeto pr√≥prio conforme documenta√ß√£o MOC:
  * <ul>
- * <li>R02 ñ vBC (Base de c·lculo do PIS ST, 13v2)</li>
- * <li>R03 ñ pPIS (AlÌquota do PIS ST em %, 3v2ñ4)</li>
- * <li>R04 ñ qBCProd (Quantidade vendida, 12v0ñ4)</li>
- * <li>R05 ñ vAliqProd (AlÌquota do PIS ST em R$/un, 11v0ñ4)</li>
- * <li>R06 ñ vPIS (Valor do PIS ST, 13v2)</li>
+ * <li>R02 ‚Äì vBC (Base de c√°lculo do PIS ST, 13v2)</li>
+ * <li>R03 ‚Äì pPIS (Al√≠quota do PIS ST em %, 3v2‚Äì4)</li>
+ * <li>R04 ‚Äì qBCProd (Quantidade vendida, 12v0‚Äì4)</li>
+ * <li>R05 ‚Äì vAliqProd (Al√≠quota do PIS ST em R$/un, 11v0‚Äì4)</li>
+ * <li>R06 ‚Äì vPIS (Valor do PIS ST, 13v2)</li>
  * </ul>
- * ObservaÁ„o: as ìSequÍncias XMLî (R01.1 e R03.1) s„o apenas agrupamentos e n„o geram campos adicionais.
+ * Observa√ß√£o: as ‚ÄúSequ√™ncias XML‚Äù (R01.1 e R03.1) s√£o apenas agrupamentos e n√£o geram campos adicionais.
  *
  * @author BIS DEVil
  * @since (11 de nov. de 2025)
@@ -26,111 +26,111 @@ public class SEFAZPISSTVO extends RFWVO {
 
   private static final long serialVersionUID = 3529187641203341903L;
 
-  /** ID: R02 ñ Base de c·lculo do PIS ST (13v2). */
-  @RFWMetaBigDecimalField(caption = "Base de c·lculo PIS ST", required = false, scale = 2, absolute = true)
+  /** ID: R02 ‚Äì Base de c√°lculo do PIS ST (13v2). */
+  @RFWMetaBigDecimalField(caption = "Base de c√°lculo PIS ST", required = false, scale = 2, absolute = true)
   private BigDecimal vBC = null;
 
-  /** ID: R03 ñ AlÌquota do PIS ST em percentual (3v2ñ4). */
-  @RFWMetaBigDecimalField(caption = "AlÌquota PIS ST (%)", required = false, scale = 2, scaleMax = 4, absolute = true)
+  /** ID: R03 ‚Äì Al√≠quota do PIS ST em percentual (3v2‚Äì4). */
+  @RFWMetaBigDecimalField(caption = "Al√≠quota PIS ST (%)", required = false, scale = 2, scaleMax = 4, absolute = true)
   private BigDecimal pPIS = null;
 
-  /** ID: R04 ñ Quantidade vendida para c·lculo do PIS ST (12v0ñ4). */
+  /** ID: R04 ‚Äì Quantidade vendida para c√°lculo do PIS ST (12v0‚Äì4). */
   @RFWMetaBigDecimalField(caption = "Quantidade para ST", required = false, scale = 0, scaleMax = 4, absolute = true)
   private BigDecimal qBCProd = null;
 
-  /** ID: R05 ñ AlÌquota do PIS ST em reais por unidade (11v0ñ4). */
-  @RFWMetaBigDecimalField(caption = "AlÌquota (R$) PIS ST", required = false, scale = 0, scaleMax = 4, absolute = true)
+  /** ID: R05 ‚Äì Al√≠quota do PIS ST em reais por unidade (11v0‚Äì4). */
+  @RFWMetaBigDecimalField(caption = "Al√≠quota (R$) PIS ST", required = false, scale = 0, scaleMax = 4, absolute = true)
   private BigDecimal vAliqProd = null;
 
-  /** ID: R06 ñ Valor do PIS ST (13v2). */
+  /** ID: R06 ‚Äì Valor do PIS ST (13v2). */
   @RFWMetaBigDecimalField(caption = "Valor do PIS ST", required = false, scale = 2, absolute = true)
   private BigDecimal vPIS = null;
 
   /**
-   * # iD: R02 ñ Base de c·lculo do PIS ST (13v2).
+   * # iD: R02 ‚Äì Base de c√°lculo do PIS ST (13v2).
    *
-   * @return the iD: R02 ñ Base de c·lculo do PIS ST (13v2)
+   * @return the iD: R02 ‚Äì Base de c√°lculo do PIS ST (13v2)
    */
   public BigDecimal getVBC() {
     return vBC;
   }
 
   /**
-   * # iD: R02 ñ Base de c·lculo do PIS ST (13v2).
+   * # iD: R02 ‚Äì Base de c√°lculo do PIS ST (13v2).
    *
-   * @param vBC the new iD: R02 ñ Base de c·lculo do PIS ST (13v2)
+   * @param vBC the new iD: R02 ‚Äì Base de c√°lculo do PIS ST (13v2)
    */
   public void setVBC(BigDecimal vBC) {
     this.vBC = vBC;
   }
 
   /**
-   * # iD: R03 ñ AlÌquota do PIS ST em percentual (3v2ñ4).
+   * # iD: R03 ‚Äì Al√≠quota do PIS ST em percentual (3v2‚Äì4).
    *
-   * @return the iD: R03 ñ AlÌquota do PIS ST em percentual (3v2ñ4)
+   * @return the iD: R03 ‚Äì Al√≠quota do PIS ST em percentual (3v2‚Äì4)
    */
   public BigDecimal getPPIS() {
     return pPIS;
   }
 
   /**
-   * # iD: R03 ñ AlÌquota do PIS ST em percentual (3v2ñ4).
+   * # iD: R03 ‚Äì Al√≠quota do PIS ST em percentual (3v2‚Äì4).
    *
-   * @param pPIS the new iD: R03 ñ AlÌquota do PIS ST em percentual (3v2ñ4)
+   * @param pPIS the new iD: R03 ‚Äì Al√≠quota do PIS ST em percentual (3v2‚Äì4)
    */
   public void setPPIS(BigDecimal pPIS) {
     this.pPIS = pPIS;
   }
 
   /**
-   * # iD: R04 ñ Quantidade vendida para c·lculo do PIS ST (12v0ñ4).
+   * # iD: R04 ‚Äì Quantidade vendida para c√°lculo do PIS ST (12v0‚Äì4).
    *
-   * @return the iD: R04 ñ Quantidade vendida para c·lculo do PIS ST (12v0ñ4)
+   * @return the iD: R04 ‚Äì Quantidade vendida para c√°lculo do PIS ST (12v0‚Äì4)
    */
   public BigDecimal getQBCProd() {
     return qBCProd;
   }
 
   /**
-   * # iD: R04 ñ Quantidade vendida para c·lculo do PIS ST (12v0ñ4).
+   * # iD: R04 ‚Äì Quantidade vendida para c√°lculo do PIS ST (12v0‚Äì4).
    *
-   * @param qBCProd the new iD: R04 ñ Quantidade vendida para c·lculo do PIS ST (12v0ñ4)
+   * @param qBCProd the new iD: R04 ‚Äì Quantidade vendida para c√°lculo do PIS ST (12v0‚Äì4)
    */
   public void setQBCProd(BigDecimal qBCProd) {
     this.qBCProd = qBCProd;
   }
 
   /**
-   * # iD: R05 ñ AlÌquota do PIS ST em reais por unidade (11v0ñ4).
+   * # iD: R05 ‚Äì Al√≠quota do PIS ST em reais por unidade (11v0‚Äì4).
    *
-   * @return the iD: R05 ñ AlÌquota do PIS ST em reais por unidade (11v0ñ4)
+   * @return the iD: R05 ‚Äì Al√≠quota do PIS ST em reais por unidade (11v0‚Äì4)
    */
   public BigDecimal getVAliqProd() {
     return vAliqProd;
   }
 
   /**
-   * # iD: R05 ñ AlÌquota do PIS ST em reais por unidade (11v0ñ4).
+   * # iD: R05 ‚Äì Al√≠quota do PIS ST em reais por unidade (11v0‚Äì4).
    *
-   * @param vAliqProd the new iD: R05 ñ AlÌquota do PIS ST em reais por unidade (11v0ñ4)
+   * @param vAliqProd the new iD: R05 ‚Äì Al√≠quota do PIS ST em reais por unidade (11v0‚Äì4)
    */
   public void setVAliqProd(BigDecimal vAliqProd) {
     this.vAliqProd = vAliqProd;
   }
 
   /**
-   * # iD: R06 ñ Valor do PIS ST (13v2).
+   * # iD: R06 ‚Äì Valor do PIS ST (13v2).
    *
-   * @return the iD: R06 ñ Valor do PIS ST (13v2)
+   * @return the iD: R06 ‚Äì Valor do PIS ST (13v2)
    */
   public BigDecimal getVPIS() {
     return vPIS;
   }
 
   /**
-   * # iD: R06 ñ Valor do PIS ST (13v2).
+   * # iD: R06 ‚Äì Valor do PIS ST (13v2).
    *
-   * @param vPIS the new iD: R06 ñ Valor do PIS ST (13v2)
+   * @param vPIS the new iD: R06 ‚Äì Valor do PIS ST (13v2)
    */
   public void setVPIS(BigDecimal vPIS) {
     this.vPIS = vPIS;

@@ -15,9 +15,9 @@ import br.eng.rodrigogml.rfw.orm.dao.annotations.dao.RFWDAOAnnotation;
 import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_indTot;
 
 /**
- * Grupo I - Detalhamento de Produtos e ServiÁos (tag prod / I01). Detalhamento de Produtos e ServiÁos do item da NF-e.
+ * Grupo I - Detalhamento de Produtos e Servi√ßos (tag prod / I01). Detalhamento de Produtos e Servi√ßos do item da NF-e.
  *
- * ObservaÁ„o: a obrigatoriedade dos campos segue o MOC, mas nas annotations o atributo {@code required} È sempre definido como false conforme solicitado.
+ * Observa√ß√£o: a obrigatoriedade dos campos segue o MOC, mas nas annotations o atributo {@code required} √© sempre definido como false conforme solicitado.
  */
 @RFWDAOAnnotation(schema = "_RFW.SEFAZ", table = "sefaz_prod")
 public class SEFAZProdVO extends RFWVO implements Serializable {
@@ -31,151 +31,151 @@ public class SEFAZProdVO extends RFWVO implements Serializable {
   private SEFAZDetVO detVO = null;
 
   /**
-   * I02 - cProd. CÛdigo do produto ou serviÁo. Quando itens n„o relacionados com mercadorias/produtos e sem codificaÁ„o prÛpria, preencher com CFOP no formato: "CFOP9999". Ocor.: 1ñ1 / Tam.: 1ñ60 / Tipo: C.
+   * I02 - cProd. C√≥digo do produto ou servi√ßo. Quando itens n√£o relacionados com mercadorias/produtos e sem codifica√ß√£o pr√≥pria, preencher com CFOP no formato: "CFOP9999". Ocor.: 1‚Äì1 / Tam.: 1‚Äì60 / Tipo: C.
    */
-  @RFWMetaStringField(caption = "CÛdigo do produto ou serviÁo", required = false, unique = false, maxLength = 60, minLength = 1, preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
+  @RFWMetaStringField(caption = "C√≥digo do produto ou servi√ßo", required = false, unique = false, maxLength = 60, minLength = 1, preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
   private String cprod;
 
   /**
-   * I03 - cEAN. GTIN (Global Trade Item Number) do produto, antigo cÛdigo EAN ou cÛdigo de barras. Preencher com GTIN-8, GTIN-12, GTIN-13 ou GTIN-14. Produtos sem GTIN: informar ìSEM GTINî. Ocor.: 1ñ1 / Tam.: 0, 8, 12, 13, 14 / Tipo: N (campo pode conter texto ìSEM GTINî).
+   * I03 - cEAN. GTIN (Global Trade Item Number) do produto, antigo c√≥digo EAN ou c√≥digo de barras. Preencher com GTIN-8, GTIN-12, GTIN-13 ou GTIN-14. Produtos sem GTIN: informar ‚ÄúSEM GTIN‚Äù. Ocor.: 1‚Äì1 / Tam.: 0, 8, 12, 13, 14 / Tipo: N (campo pode conter texto ‚ÄúSEM GTIN‚Äù).
    */
   @RFWMetaStringField(caption = "GTIN do produto (cEAN)", required = false, unique = false, maxLength = 14, preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
   private String cean;
 
   /**
-   * I04 - xProd. DescriÁ„o do produto ou serviÁo. Ocor.: 1ñ1 / Tam.: 1ñ120 / Tipo: C.
+   * I04 - xProd. Descri√ß√£o do produto ou servi√ßo. Ocor.: 1‚Äì1 / Tam.: 1‚Äì120 / Tipo: C.
    */
-  @RFWMetaStringField(caption = "DescriÁ„o do produto ou serviÁo", required = false, unique = false, maxLength = 120, minLength = 1, preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
+  @RFWMetaStringField(caption = "Descri√ß√£o do produto ou servi√ßo", required = false, unique = false, maxLength = 120, minLength = 1, preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
   private String xprod;
 
   /**
-   * I05 - NCM. CÛdigo NCM com 8 dÌgitos. ObrigatÛria para produtos; para serviÁos, informar ì00î. Ocor.: 1ñ1 / Tam.: 8 / Tipo: N.
+   * I05 - NCM. C√≥digo NCM com 8 d√≠gitos. Obrigat√≥ria para produtos; para servi√ßos, informar ‚Äú00‚Äù. Ocor.: 1‚Äì1 / Tam.: 8 / Tipo: N.
    */
-  @RFWMetaStringField(caption = "CÛdigo NCM", required = false, unique = false, maxLength = 8, pattern = "^[0-9]{2}([0-9]{6}|0{6})$", preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
+  @RFWMetaStringField(caption = "C√≥digo NCM", required = false, unique = false, maxLength = 8, pattern = "^[0-9]{2}([0-9]{6}|0{6})$", preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
   private String ncm;
 
   /**
-   * I05a - NVE. CodificaÁ„o NVE ñ Nomenclatura de Valor Aduaneiro e EstatÌstica. CodificaÁ„o opcional que detalha alguns NCM. Ocor.: 0ñ8 / Tam.: 6 / Tipo: C.
+   * I05a - NVE. Codifica√ß√£o NVE ‚Äì Nomenclatura de Valor Aduaneiro e Estat√≠stica. Codifica√ß√£o opcional que detalha alguns NCM. Ocor.: 0‚Äì8 / Tam.: 6 / Tipo: C.
    */
-  @RFWMetaStringField(caption = "CodificaÁ„o NVE", required = false, unique = false, maxLength = 6, minLength = 6, preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
+  @RFWMetaStringField(caption = "Codifica√ß√£o NVE", required = false, unique = false, maxLength = 6, minLength = 6, preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
   private String nve;
 
   /**
-   * I05c - CEST. CÛdigo CEST (ICMS-ST). Ocor.: 1ñ1 / Tam.: 7 / Tipo: N. Campo originalmente em grupo de sequÍncia XML (I05b), aqui trazido para o VO principal.
+   * I05c - CEST. C√≥digo CEST (ICMS-ST). Ocor.: 1‚Äì1 / Tam.: 7 / Tipo: N. Campo originalmente em grupo de sequ√™ncia XML (I05b), aqui trazido para o VO principal.
    */
-  @RFWMetaStringField(caption = "CÛdigo CEST", required = false, unique = false, maxLength = 7, pattern = "^[0-9]{7}$", preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
+  @RFWMetaStringField(caption = "C√≥digo CEST", required = false, unique = false, maxLength = 7, pattern = "^[0-9]{7}$", preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
   private String cest;
 
   /**
-   * I05d - indEscala. Indicador de Escala Relevante, conforme Ajuste SINIEF 23/2016. Ocor.: 0ñ1 / Tam.: 1 / Tipo: C. Campo originalmente em grupo de sequÍncia XML (I05b), aqui trazido para o VO principal.
+   * I05d - indEscala. Indicador de Escala Relevante, conforme Ajuste SINIEF 23/2016. Ocor.: 0‚Äì1 / Tam.: 1 / Tipo: C. Campo originalmente em grupo de sequ√™ncia XML (I05b), aqui trazido para o VO principal.
    */
   @RFWMetaStringField(caption = "Indicador de Escala Relevante", required = false, unique = false, maxLength = 1, minLength = 1, preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
   private String indescala;
 
   /**
-   * I05e - CNPJFab. CNPJ do Fabricante da Mercadoria. Informar quando indEscala = "S". Ocor.: 0ñ1 / Tam.: 14 / Tipo: C (CNPJ somente dÌgitos). Campo originalmente em grupo de sequÍncia XML (I05b), aqui trazido para o VO principal.
+   * I05e - CNPJFab. CNPJ do Fabricante da Mercadoria. Informar quando indEscala = "S". Ocor.: 0‚Äì1 / Tam.: 14 / Tipo: C (CNPJ somente d√≠gitos). Campo originalmente em grupo de sequ√™ncia XML (I05b), aqui trazido para o VO principal.
    */
   @RFWMetaStringCNPJField(caption = "CNPJ do fabricante da mercadoria", required = false, unique = false)
   private String cnpjFab;
 
   /**
-   * I05f - cBenef. CÛdigo de BenefÌcio Fiscal na UF aplicado ao item. CÛdigo do benefÌcio fiscal. Ocor.: 0ñ1 / Tam.: 8 / Tipo: C. Campo originalmente em grupo de sequÍncia XML (I05b), aqui trazido para o VO principal.
+   * I05f - cBenef. C√≥digo de Benef√≠cio Fiscal na UF aplicado ao item. C√≥digo do benef√≠cio fiscal. Ocor.: 0‚Äì1 / Tam.: 8 / Tipo: C. Campo originalmente em grupo de sequ√™ncia XML (I05b), aqui trazido para o VO principal.
    */
-  @RFWMetaStringField(caption = "CÛdigo de benefÌcio fiscal (UF)", required = false, unique = false, maxLength = 8, minLength = 1, preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
+  @RFWMetaStringField(caption = "C√≥digo de benef√≠cio fiscal (UF)", required = false, unique = false, maxLength = 8, minLength = 1, preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
   private String cbenef;
 
   /**
-   * I06 - EXTIPI. EX_TIPI. Ocor.: 0ñ1 / Tam.: 3 / Tipo: N.
+   * I06 - EXTIPI. EX_TIPI. Ocor.: 0‚Äì1 / Tam.: 3 / Tipo: N.
    */
   @RFWMetaStringField(caption = "EX TIPI", required = false, unique = false, maxLength = 3, minLength = 3, pattern = "^[0-9]{3}$", preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
   private String extipi;
 
   /**
-   * I07 - CFOP. CÛdigo Fiscal de OperaÁıes e PrestaÁıes. Utilizar tabela de CFOP. Ocor.: 1ñ1 / Tam.: 4 / Tipo: N.
+   * I07 - CFOP. C√≥digo Fiscal de Opera√ß√µes e Presta√ß√µes. Utilizar tabela de CFOP. Ocor.: 1‚Äì1 / Tam.: 4 / Tipo: N.
    */
   @RFWMetaStringField(caption = "CFOP", required = false, unique = false, maxLength = 4, minLength = 4, pattern = "^[0-9]{4}$", preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
   private String cfop;
 
   /**
-   * I08 - uCom. Unidade Comercial. Unidade de comercializaÁ„o. Ocor.: 1ñ1 / Tam.: 1ñ6 / Tipo: C.
+   * I08 - uCom. Unidade Comercial. Unidade de comercializa√ß√£o. Ocor.: 1‚Äì1 / Tam.: 1‚Äì6 / Tipo: C.
    */
   @RFWMetaStringField(caption = "Unidade comercial", required = false, unique = false, maxLength = 6, minLength = 1, preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
   private String ucom;
 
   /**
-   * I09 - qCom. Quantidade Comercial. Quantidade comercializada. Ocor.: 1ñ1 / Tam.: 11v0ñ4 / Tipo: N.
+   * I09 - qCom. Quantidade Comercial. Quantidade comercializada. Ocor.: 1‚Äì1 / Tam.: 11v0‚Äì4 / Tipo: N.
    */
   @RFWMetaBigDecimalField(caption = "Quantidade comercial", required = false, unique = false, scaleMax = 4, absolute = true)
   private BigDecimal qcom;
 
   /**
-   * I10 - vUnCom. Valor Unit·rio de ComercializaÁ„o. Valor unit·rio. Ocor.: 1ñ1 / Tam.: 11v0ñ10 / Tipo: N.
+   * I10 - vUnCom. Valor Unit√°rio de Comercializa√ß√£o. Valor unit√°rio. Ocor.: 1‚Äì1 / Tam.: 11v0‚Äì10 / Tipo: N.
    */
-  @RFWMetaBigDecimalField(caption = "Valor unit·rio de comercializaÁ„o", required = false, unique = false, scaleMax = 10, absolute = true)
+  @RFWMetaBigDecimalField(caption = "Valor unit√°rio de comercializa√ß√£o", required = false, unique = false, scaleMax = 10, absolute = true)
   private BigDecimal vunCom;
 
   /**
-   * I11 - vProd. Valor Total Bruto dos Produtos ou ServiÁos. Ocor.: 1ñ1 / Tam.: 13v2 (conforme MOC) / Tipo: N.
+   * I11 - vProd. Valor Total Bruto dos Produtos ou Servi√ßos. Ocor.: 1‚Äì1 / Tam.: 13v2 (conforme MOC) / Tipo: N.
    */
-  @RFWMetaBigDecimalField(caption = "Valor total bruto dos produtos/serviÁos", required = false, unique = false, scale = 2, absolute = true)
+  @RFWMetaBigDecimalField(caption = "Valor total bruto dos produtos/servi√ßos", required = false, unique = false, scale = 2, absolute = true)
   private BigDecimal vprod;
 
   /**
-   * I12 - cEANTrib. GTIN tribut·vel da unidade tribut·vel; se inexistente: ìSEM GTINî. Ocor.: 1ñ1 / Tam.: 0, 8, 12, 13, 14 / Tipo: C.
+   * I12 - cEANTrib. GTIN tribut√°vel da unidade tribut√°vel; se inexistente: ‚ÄúSEM GTIN‚Äù. Ocor.: 1‚Äì1 / Tam.: 0, 8, 12, 13, 14 / Tipo: C.
    */
-  @RFWMetaStringField(caption = "GTIN tribut·vel (cEANTrib)", required = false, unique = false, maxLength = 14, preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
+  @RFWMetaStringField(caption = "GTIN tribut√°vel (cEANTrib)", required = false, unique = false, maxLength = 14, preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
   private String ceanTrib;
 
   /**
-   * I13 - uTrib. Unidade Tribut·vel. Unidade tribut·vel. Ocor.: 1ñ1 / Tam.: 1ñ6 / Tipo: C.
+   * I13 - uTrib. Unidade Tribut√°vel. Unidade tribut√°vel. Ocor.: 1‚Äì1 / Tam.: 1‚Äì6 / Tipo: C.
    */
-  @RFWMetaStringField(caption = "Unidade tribut·vel", required = false, unique = false, maxLength = 6, minLength = 1, preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
+  @RFWMetaStringField(caption = "Unidade tribut√°vel", required = false, unique = false, maxLength = 6, minLength = 1, preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
   private String utrib;
 
   /**
-   * I14 - qTrib. Quantidade Tribut·vel. Quantidade tribut·vel. Ocor.: 1ñ1 / Tam.: 11v0ñ4 / Tipo: N.
+   * I14 - qTrib. Quantidade Tribut√°vel. Quantidade tribut√°vel. Ocor.: 1‚Äì1 / Tam.: 11v0‚Äì4 / Tipo: N.
    */
-  @RFWMetaBigDecimalField(caption = "Quantidade tribut·vel", required = false, unique = false, scaleMax = 4, absolute = true)
+  @RFWMetaBigDecimalField(caption = "Quantidade tribut√°vel", required = false, unique = false, scaleMax = 4, absolute = true)
   private BigDecimal qtrib;
 
   /**
-   * I14a - vUnTrib. Valor Unit·rio de TributaÁ„o. Valor unit·rio tribut·vel. Ocor.: 1ñ1 / Tam.: 11v0ñ10 / Tipo: N.
+   * I14a - vUnTrib. Valor Unit√°rio de Tributa√ß√£o. Valor unit√°rio tribut√°vel. Ocor.: 1‚Äì1 / Tam.: 11v0‚Äì10 / Tipo: N.
    */
-  @RFWMetaBigDecimalField(caption = "Valor unit·rio de tributaÁ„o", required = false, unique = false, scaleMax = 10, absolute = true)
+  @RFWMetaBigDecimalField(caption = "Valor unit√°rio de tributa√ß√£o", required = false, unique = false, scaleMax = 10, absolute = true)
   private BigDecimal vunTrib;
 
   /**
-   * I15 - vFrete. Valor Total do Frete. Ocor.: 0ñ1 / Tam.: 13v2 / Tipo: N.
+   * I15 - vFrete. Valor Total do Frete. Ocor.: 0‚Äì1 / Tam.: 13v2 / Tipo: N.
    */
   @RFWMetaBigDecimalField(caption = "Valor total do frete", required = false, unique = false, scale = 2, absolute = true)
   private BigDecimal vfrete;
 
   /**
-   * I16 - vSeg. Valor Total do Seguro. Ocor.: 0ñ1 / Tam.: 13v2 / Tipo: N.
+   * I16 - vSeg. Valor Total do Seguro. Ocor.: 0‚Äì1 / Tam.: 13v2 / Tipo: N.
    */
   @RFWMetaBigDecimalField(caption = "Valor total do seguro", required = false, unique = false, scale = 2, absolute = true)
   private BigDecimal vseg;
 
   /**
-   * I17 - vDesc. Valor do Desconto. Ocor.: 0ñ1 / Tam.: 13v2 / Tipo: N.
+   * I17 - vDesc. Valor do Desconto. Ocor.: 0‚Äì1 / Tam.: 13v2 / Tipo: N.
    */
   @RFWMetaBigDecimalField(caption = "Valor do desconto", required = false, unique = false, scale = 2, absolute = true)
   private BigDecimal vdesc;
 
   /**
-   * I17a - vOutro. Outras despesas acessÛrias. Ocor.: 0ñ1 / Tam.: 13v2 / Tipo: N.
+   * I17a - vOutro. Outras despesas acess√≥rias. Ocor.: 0‚Äì1 / Tam.: 13v2 / Tipo: N.
    */
-  @RFWMetaBigDecimalField(caption = "Outras despesas acessÛrias", required = false, unique = false, scale = 2, absolute = true)
+  @RFWMetaBigDecimalField(caption = "Outras despesas acess√≥rias", required = false, unique = false, scale = 2, absolute = true)
   private BigDecimal voutro;
 
   /**
-   * I17b - indTot. Indica se valor do item compıe o total da NF-e (vProd). 0 = n„o compıe; 1 = compıe. Ocor.: 1ñ1 / Tam.: 1 / Tipo: N.
+   * I17b - indTot. Indica se valor do item comp√µe o total da NF-e (vProd). 0 = n√£o comp√µe; 1 = comp√µe. Ocor.: 1‚Äì1 / Tam.: 1 / Tipo: N.
    */
-  @RFWMetaEnumField(caption = "Indicador se compıe o total da NF-e", required = false)
+  @RFWMetaEnumField(caption = "Indicador se comp√µe o total da NF-e", required = false)
   private SEFAZ_indTot indTot;
 
   /**
-   * # i02 - cProd. CÛdigo do produto ou serviÁo. Quando itens n„o relacionados com mercadorias/produtos e sem codificaÁ„o prÛpria, preencher com CFOP no formato: "CFOP9999". Ocor.: 1ñ1 / Tam.: 1ñ60 / Tipo: C.
+   * # i02 - cProd. C√≥digo do produto ou servi√ßo. Quando itens n√£o relacionados com mercadorias/produtos e sem codifica√ß√£o pr√≥pria, preencher com CFOP no formato: "CFOP9999". Ocor.: 1‚Äì1 / Tam.: 1‚Äì60 / Tipo: C.
    *
    * @return the i02 - cProd
    */
@@ -184,7 +184,7 @@ public class SEFAZProdVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # i02 - cProd. CÛdigo do produto ou serviÁo. Quando itens n„o relacionados com mercadorias/produtos e sem codificaÁ„o prÛpria, preencher com CFOP no formato: "CFOP9999". Ocor.: 1ñ1 / Tam.: 1ñ60 / Tipo: C.
+   * # i02 - cProd. C√≥digo do produto ou servi√ßo. Quando itens n√£o relacionados com mercadorias/produtos e sem codifica√ß√£o pr√≥pria, preencher com CFOP no formato: "CFOP9999". Ocor.: 1‚Äì1 / Tam.: 1‚Äì60 / Tipo: C.
    *
    * @param cprod the new i02 - cProd
    */
@@ -193,7 +193,7 @@ public class SEFAZProdVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # i03 - cEAN. GTIN (Global Trade Item Number) do produto, antigo cÛdigo EAN ou cÛdigo de barras. Preencher com GTIN-8, GTIN-12, GTIN-13 ou GTIN-14. Produtos sem GTIN: informar ìSEM GTINî. Ocor.: 1ñ1 / Tam.: 0, 8, 12, 13, 14 / Tipo: N (campo pode conter texto ìSEM GTINî).
+   * # i03 - cEAN. GTIN (Global Trade Item Number) do produto, antigo c√≥digo EAN ou c√≥digo de barras. Preencher com GTIN-8, GTIN-12, GTIN-13 ou GTIN-14. Produtos sem GTIN: informar ‚ÄúSEM GTIN‚Äù. Ocor.: 1‚Äì1 / Tam.: 0, 8, 12, 13, 14 / Tipo: N (campo pode conter texto ‚ÄúSEM GTIN‚Äù).
    *
    * @return the i03 - cEAN
    */
@@ -202,7 +202,7 @@ public class SEFAZProdVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # i03 - cEAN. GTIN (Global Trade Item Number) do produto, antigo cÛdigo EAN ou cÛdigo de barras. Preencher com GTIN-8, GTIN-12, GTIN-13 ou GTIN-14. Produtos sem GTIN: informar ìSEM GTINî. Ocor.: 1ñ1 / Tam.: 0, 8, 12, 13, 14 / Tipo: N (campo pode conter texto ìSEM GTINî).
+   * # i03 - cEAN. GTIN (Global Trade Item Number) do produto, antigo c√≥digo EAN ou c√≥digo de barras. Preencher com GTIN-8, GTIN-12, GTIN-13 ou GTIN-14. Produtos sem GTIN: informar ‚ÄúSEM GTIN‚Äù. Ocor.: 1‚Äì1 / Tam.: 0, 8, 12, 13, 14 / Tipo: N (campo pode conter texto ‚ÄúSEM GTIN‚Äù).
    *
    * @param cean the new i03 - cEAN
    */
@@ -211,7 +211,7 @@ public class SEFAZProdVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # i04 - xProd. DescriÁ„o do produto ou serviÁo. Ocor.: 1ñ1 / Tam.: 1ñ120 / Tipo: C.
+   * # i04 - xProd. Descri√ß√£o do produto ou servi√ßo. Ocor.: 1‚Äì1 / Tam.: 1‚Äì120 / Tipo: C.
    *
    * @return the i04 - xProd
    */
@@ -220,7 +220,7 @@ public class SEFAZProdVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # i04 - xProd. DescriÁ„o do produto ou serviÁo. Ocor.: 1ñ1 / Tam.: 1ñ120 / Tipo: C.
+   * # i04 - xProd. Descri√ß√£o do produto ou servi√ßo. Ocor.: 1‚Äì1 / Tam.: 1‚Äì120 / Tipo: C.
    *
    * @param xprod the new i04 - xProd
    */
@@ -229,7 +229,7 @@ public class SEFAZProdVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # i05 - NCM. CÛdigo NCM com 8 dÌgitos. ObrigatÛria para produtos; para serviÁos, informar ì00î. Ocor.: 1ñ1 / Tam.: 8 / Tipo: N.
+   * # i05 - NCM. C√≥digo NCM com 8 d√≠gitos. Obrigat√≥ria para produtos; para servi√ßos, informar ‚Äú00‚Äù. Ocor.: 1‚Äì1 / Tam.: 8 / Tipo: N.
    *
    * @return the i05 - NCM
    */
@@ -238,7 +238,7 @@ public class SEFAZProdVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # i05 - NCM. CÛdigo NCM com 8 dÌgitos. ObrigatÛria para produtos; para serviÁos, informar ì00î. Ocor.: 1ñ1 / Tam.: 8 / Tipo: N.
+   * # i05 - NCM. C√≥digo NCM com 8 d√≠gitos. Obrigat√≥ria para produtos; para servi√ßos, informar ‚Äú00‚Äù. Ocor.: 1‚Äì1 / Tam.: 8 / Tipo: N.
    *
    * @param ncm the new i05 - NCM
    */
@@ -247,7 +247,7 @@ public class SEFAZProdVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # i05a - NVE. CodificaÁ„o NVE ñ Nomenclatura de Valor Aduaneiro e EstatÌstica. CodificaÁ„o opcional que detalha alguns NCM. Ocor.: 0ñ8 / Tam.: 6 / Tipo: C.
+   * # i05a - NVE. Codifica√ß√£o NVE ‚Äì Nomenclatura de Valor Aduaneiro e Estat√≠stica. Codifica√ß√£o opcional que detalha alguns NCM. Ocor.: 0‚Äì8 / Tam.: 6 / Tipo: C.
    *
    * @return the i05a - NVE
    */
@@ -256,7 +256,7 @@ public class SEFAZProdVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # i05a - NVE. CodificaÁ„o NVE ñ Nomenclatura de Valor Aduaneiro e EstatÌstica. CodificaÁ„o opcional que detalha alguns NCM. Ocor.: 0ñ8 / Tam.: 6 / Tipo: C.
+   * # i05a - NVE. Codifica√ß√£o NVE ‚Äì Nomenclatura de Valor Aduaneiro e Estat√≠stica. Codifica√ß√£o opcional que detalha alguns NCM. Ocor.: 0‚Äì8 / Tam.: 6 / Tipo: C.
    *
    * @param nve the new i05a - NVE
    */
@@ -265,7 +265,7 @@ public class SEFAZProdVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # i05c - CEST. CÛdigo CEST (ICMS-ST). Ocor.: 1ñ1 / Tam.: 7 / Tipo: N. Campo originalmente em grupo de sequÍncia XML (I05b), aqui trazido para o VO principal.
+   * # i05c - CEST. C√≥digo CEST (ICMS-ST). Ocor.: 1‚Äì1 / Tam.: 7 / Tipo: N. Campo originalmente em grupo de sequ√™ncia XML (I05b), aqui trazido para o VO principal.
    *
    * @return the i05c - CEST
    */
@@ -274,7 +274,7 @@ public class SEFAZProdVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # i05c - CEST. CÛdigo CEST (ICMS-ST). Ocor.: 1ñ1 / Tam.: 7 / Tipo: N. Campo originalmente em grupo de sequÍncia XML (I05b), aqui trazido para o VO principal.
+   * # i05c - CEST. C√≥digo CEST (ICMS-ST). Ocor.: 1‚Äì1 / Tam.: 7 / Tipo: N. Campo originalmente em grupo de sequ√™ncia XML (I05b), aqui trazido para o VO principal.
    *
    * @param cest the new i05c - CEST
    */
@@ -283,7 +283,7 @@ public class SEFAZProdVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # i05d - indEscala. Indicador de Escala Relevante, conforme Ajuste SINIEF 23/2016. Ocor.: 0ñ1 / Tam.: 1 / Tipo: C. Campo originalmente em grupo de sequÍncia XML (I05b), aqui trazido para o VO principal.
+   * # i05d - indEscala. Indicador de Escala Relevante, conforme Ajuste SINIEF 23/2016. Ocor.: 0‚Äì1 / Tam.: 1 / Tipo: C. Campo originalmente em grupo de sequ√™ncia XML (I05b), aqui trazido para o VO principal.
    *
    * @return the i05d - indEscala
    */
@@ -292,7 +292,7 @@ public class SEFAZProdVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # i05d - indEscala. Indicador de Escala Relevante, conforme Ajuste SINIEF 23/2016. Ocor.: 0ñ1 / Tam.: 1 / Tipo: C. Campo originalmente em grupo de sequÍncia XML (I05b), aqui trazido para o VO principal.
+   * # i05d - indEscala. Indicador de Escala Relevante, conforme Ajuste SINIEF 23/2016. Ocor.: 0‚Äì1 / Tam.: 1 / Tipo: C. Campo originalmente em grupo de sequ√™ncia XML (I05b), aqui trazido para o VO principal.
    *
    * @param indescala the new i05d - indEscala
    */
@@ -301,7 +301,7 @@ public class SEFAZProdVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # i05e - CNPJFab. CNPJ do Fabricante da Mercadoria. Informar quando indEscala = "S". Ocor.: 0ñ1 / Tam.: 14 / Tipo: C (CNPJ somente dÌgitos). Campo originalmente em grupo de sequÍncia XML (I05b), aqui trazido para o VO principal.
+   * # i05e - CNPJFab. CNPJ do Fabricante da Mercadoria. Informar quando indEscala = "S". Ocor.: 0‚Äì1 / Tam.: 14 / Tipo: C (CNPJ somente d√≠gitos). Campo originalmente em grupo de sequ√™ncia XML (I05b), aqui trazido para o VO principal.
    *
    * @return the i05e - CNPJFab
    */
@@ -310,7 +310,7 @@ public class SEFAZProdVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # i05e - CNPJFab. CNPJ do Fabricante da Mercadoria. Informar quando indEscala = "S". Ocor.: 0ñ1 / Tam.: 14 / Tipo: C (CNPJ somente dÌgitos). Campo originalmente em grupo de sequÍncia XML (I05b), aqui trazido para o VO principal.
+   * # i05e - CNPJFab. CNPJ do Fabricante da Mercadoria. Informar quando indEscala = "S". Ocor.: 0‚Äì1 / Tam.: 14 / Tipo: C (CNPJ somente d√≠gitos). Campo originalmente em grupo de sequ√™ncia XML (I05b), aqui trazido para o VO principal.
    *
    * @param cnpjFab the new i05e - CNPJFab
    */
@@ -319,7 +319,7 @@ public class SEFAZProdVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # i05f - cBenef. CÛdigo de BenefÌcio Fiscal na UF aplicado ao item. CÛdigo do benefÌcio fiscal. Ocor.: 0ñ1 / Tam.: 8 / Tipo: C. Campo originalmente em grupo de sequÍncia XML (I05b), aqui trazido para o VO principal.
+   * # i05f - cBenef. C√≥digo de Benef√≠cio Fiscal na UF aplicado ao item. C√≥digo do benef√≠cio fiscal. Ocor.: 0‚Äì1 / Tam.: 8 / Tipo: C. Campo originalmente em grupo de sequ√™ncia XML (I05b), aqui trazido para o VO principal.
    *
    * @return the i05f - cBenef
    */
@@ -328,7 +328,7 @@ public class SEFAZProdVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # i05f - cBenef. CÛdigo de BenefÌcio Fiscal na UF aplicado ao item. CÛdigo do benefÌcio fiscal. Ocor.: 0ñ1 / Tam.: 8 / Tipo: C. Campo originalmente em grupo de sequÍncia XML (I05b), aqui trazido para o VO principal.
+   * # i05f - cBenef. C√≥digo de Benef√≠cio Fiscal na UF aplicado ao item. C√≥digo do benef√≠cio fiscal. Ocor.: 0‚Äì1 / Tam.: 8 / Tipo: C. Campo originalmente em grupo de sequ√™ncia XML (I05b), aqui trazido para o VO principal.
    *
    * @param cbenef the new i05f - cBenef
    */
@@ -337,7 +337,7 @@ public class SEFAZProdVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # i06 - EXTIPI. EX_TIPI. Ocor.: 0ñ1 / Tam.: 3 / Tipo: N.
+   * # i06 - EXTIPI. EX_TIPI. Ocor.: 0‚Äì1 / Tam.: 3 / Tipo: N.
    *
    * @return the i06 - EXTIPI
    */
@@ -346,7 +346,7 @@ public class SEFAZProdVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # i06 - EXTIPI. EX_TIPI. Ocor.: 0ñ1 / Tam.: 3 / Tipo: N.
+   * # i06 - EXTIPI. EX_TIPI. Ocor.: 0‚Äì1 / Tam.: 3 / Tipo: N.
    *
    * @param extipi the new i06 - EXTIPI
    */
@@ -355,7 +355,7 @@ public class SEFAZProdVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # i07 - CFOP. CÛdigo Fiscal de OperaÁıes e PrestaÁıes. Utilizar tabela de CFOP. Ocor.: 1ñ1 / Tam.: 4 / Tipo: N.
+   * # i07 - CFOP. C√≥digo Fiscal de Opera√ß√µes e Presta√ß√µes. Utilizar tabela de CFOP. Ocor.: 1‚Äì1 / Tam.: 4 / Tipo: N.
    *
    * @return the i07 - CFOP
    */
@@ -364,7 +364,7 @@ public class SEFAZProdVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # i07 - CFOP. CÛdigo Fiscal de OperaÁıes e PrestaÁıes. Utilizar tabela de CFOP. Ocor.: 1ñ1 / Tam.: 4 / Tipo: N.
+   * # i07 - CFOP. C√≥digo Fiscal de Opera√ß√µes e Presta√ß√µes. Utilizar tabela de CFOP. Ocor.: 1‚Äì1 / Tam.: 4 / Tipo: N.
    *
    * @param cfop the new i07 - CFOP
    */
@@ -373,7 +373,7 @@ public class SEFAZProdVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # i08 - uCom. Unidade Comercial. Unidade de comercializaÁ„o. Ocor.: 1ñ1 / Tam.: 1ñ6 / Tipo: C.
+   * # i08 - uCom. Unidade Comercial. Unidade de comercializa√ß√£o. Ocor.: 1‚Äì1 / Tam.: 1‚Äì6 / Tipo: C.
    *
    * @return the i08 - uCom
    */
@@ -382,7 +382,7 @@ public class SEFAZProdVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # i08 - uCom. Unidade Comercial. Unidade de comercializaÁ„o. Ocor.: 1ñ1 / Tam.: 1ñ6 / Tipo: C.
+   * # i08 - uCom. Unidade Comercial. Unidade de comercializa√ß√£o. Ocor.: 1‚Äì1 / Tam.: 1‚Äì6 / Tipo: C.
    *
    * @param ucom the new i08 - uCom
    */
@@ -391,7 +391,7 @@ public class SEFAZProdVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # i09 - qCom. Quantidade Comercial. Quantidade comercializada. Ocor.: 1ñ1 / Tam.: 11v0ñ4 / Tipo: N.
+   * # i09 - qCom. Quantidade Comercial. Quantidade comercializada. Ocor.: 1‚Äì1 / Tam.: 11v0‚Äì4 / Tipo: N.
    *
    * @return the i09 - qCom
    */
@@ -400,7 +400,7 @@ public class SEFAZProdVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # i09 - qCom. Quantidade Comercial. Quantidade comercializada. Ocor.: 1ñ1 / Tam.: 11v0ñ4 / Tipo: N.
+   * # i09 - qCom. Quantidade Comercial. Quantidade comercializada. Ocor.: 1‚Äì1 / Tam.: 11v0‚Äì4 / Tipo: N.
    *
    * @param qcom the new i09 - qCom
    */
@@ -409,7 +409,7 @@ public class SEFAZProdVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # i10 - vUnCom. Valor Unit·rio de ComercializaÁ„o. Valor unit·rio. Ocor.: 1ñ1 / Tam.: 11v0ñ10 / Tipo: N.
+   * # i10 - vUnCom. Valor Unit√°rio de Comercializa√ß√£o. Valor unit√°rio. Ocor.: 1‚Äì1 / Tam.: 11v0‚Äì10 / Tipo: N.
    *
    * @return the i10 - vUnCom
    */
@@ -418,7 +418,7 @@ public class SEFAZProdVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # i10 - vUnCom. Valor Unit·rio de ComercializaÁ„o. Valor unit·rio. Ocor.: 1ñ1 / Tam.: 11v0ñ10 / Tipo: N.
+   * # i10 - vUnCom. Valor Unit√°rio de Comercializa√ß√£o. Valor unit√°rio. Ocor.: 1‚Äì1 / Tam.: 11v0‚Äì10 / Tipo: N.
    *
    * @param vunCom the new i10 - vUnCom
    */
@@ -427,7 +427,7 @@ public class SEFAZProdVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # i11 - vProd. Valor Total Bruto dos Produtos ou ServiÁos. Ocor.: 1ñ1 / Tam.: 13v2 (conforme MOC) / Tipo: N.
+   * # i11 - vProd. Valor Total Bruto dos Produtos ou Servi√ßos. Ocor.: 1‚Äì1 / Tam.: 13v2 (conforme MOC) / Tipo: N.
    *
    * @return the i11 - vProd
    */
@@ -436,7 +436,7 @@ public class SEFAZProdVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # i11 - vProd. Valor Total Bruto dos Produtos ou ServiÁos. Ocor.: 1ñ1 / Tam.: 13v2 (conforme MOC) / Tipo: N.
+   * # i11 - vProd. Valor Total Bruto dos Produtos ou Servi√ßos. Ocor.: 1‚Äì1 / Tam.: 13v2 (conforme MOC) / Tipo: N.
    *
    * @param vprod the new i11 - vProd
    */
@@ -445,7 +445,7 @@ public class SEFAZProdVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # i12 - cEANTrib. GTIN tribut·vel da unidade tribut·vel; se inexistente: ìSEM GTINî. Ocor.: 1ñ1 / Tam.: 0, 8, 12, 13, 14 / Tipo: C.
+   * # i12 - cEANTrib. GTIN tribut√°vel da unidade tribut√°vel; se inexistente: ‚ÄúSEM GTIN‚Äù. Ocor.: 1‚Äì1 / Tam.: 0, 8, 12, 13, 14 / Tipo: C.
    *
    * @return the i12 - cEANTrib
    */
@@ -454,7 +454,7 @@ public class SEFAZProdVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # i12 - cEANTrib. GTIN tribut·vel da unidade tribut·vel; se inexistente: ìSEM GTINî. Ocor.: 1ñ1 / Tam.: 0, 8, 12, 13, 14 / Tipo: C.
+   * # i12 - cEANTrib. GTIN tribut√°vel da unidade tribut√°vel; se inexistente: ‚ÄúSEM GTIN‚Äù. Ocor.: 1‚Äì1 / Tam.: 0, 8, 12, 13, 14 / Tipo: C.
    *
    * @param ceanTrib the new i12 - cEANTrib
    */
@@ -463,7 +463,7 @@ public class SEFAZProdVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # i13 - uTrib. Unidade Tribut·vel. Unidade tribut·vel. Ocor.: 1ñ1 / Tam.: 1ñ6 / Tipo: C.
+   * # i13 - uTrib. Unidade Tribut√°vel. Unidade tribut√°vel. Ocor.: 1‚Äì1 / Tam.: 1‚Äì6 / Tipo: C.
    *
    * @return the i13 - uTrib
    */
@@ -472,7 +472,7 @@ public class SEFAZProdVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # i13 - uTrib. Unidade Tribut·vel. Unidade tribut·vel. Ocor.: 1ñ1 / Tam.: 1ñ6 / Tipo: C.
+   * # i13 - uTrib. Unidade Tribut√°vel. Unidade tribut√°vel. Ocor.: 1‚Äì1 / Tam.: 1‚Äì6 / Tipo: C.
    *
    * @param utrib the new i13 - uTrib
    */
@@ -481,7 +481,7 @@ public class SEFAZProdVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # i14 - qTrib. Quantidade Tribut·vel. Quantidade tribut·vel. Ocor.: 1ñ1 / Tam.: 11v0ñ4 / Tipo: N.
+   * # i14 - qTrib. Quantidade Tribut√°vel. Quantidade tribut√°vel. Ocor.: 1‚Äì1 / Tam.: 11v0‚Äì4 / Tipo: N.
    *
    * @return the i14 - qTrib
    */
@@ -490,7 +490,7 @@ public class SEFAZProdVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # i14 - qTrib. Quantidade Tribut·vel. Quantidade tribut·vel. Ocor.: 1ñ1 / Tam.: 11v0ñ4 / Tipo: N.
+   * # i14 - qTrib. Quantidade Tribut√°vel. Quantidade tribut√°vel. Ocor.: 1‚Äì1 / Tam.: 11v0‚Äì4 / Tipo: N.
    *
    * @param qtrib the new i14 - qTrib
    */
@@ -499,7 +499,7 @@ public class SEFAZProdVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # i14a - vUnTrib. Valor Unit·rio de TributaÁ„o. Valor unit·rio tribut·vel. Ocor.: 1ñ1 / Tam.: 11v0ñ10 / Tipo: N.
+   * # i14a - vUnTrib. Valor Unit√°rio de Tributa√ß√£o. Valor unit√°rio tribut√°vel. Ocor.: 1‚Äì1 / Tam.: 11v0‚Äì10 / Tipo: N.
    *
    * @return the i14a - vUnTrib
    */
@@ -508,7 +508,7 @@ public class SEFAZProdVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # i14a - vUnTrib. Valor Unit·rio de TributaÁ„o. Valor unit·rio tribut·vel. Ocor.: 1ñ1 / Tam.: 11v0ñ10 / Tipo: N.
+   * # i14a - vUnTrib. Valor Unit√°rio de Tributa√ß√£o. Valor unit√°rio tribut√°vel. Ocor.: 1‚Äì1 / Tam.: 11v0‚Äì10 / Tipo: N.
    *
    * @param vunTrib the new i14a - vUnTrib
    */
@@ -517,7 +517,7 @@ public class SEFAZProdVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # i15 - vFrete. Valor Total do Frete. Ocor.: 0ñ1 / Tam.: 13v2 / Tipo: N.
+   * # i15 - vFrete. Valor Total do Frete. Ocor.: 0‚Äì1 / Tam.: 13v2 / Tipo: N.
    *
    * @return the i15 - vFrete
    */
@@ -526,7 +526,7 @@ public class SEFAZProdVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # i15 - vFrete. Valor Total do Frete. Ocor.: 0ñ1 / Tam.: 13v2 / Tipo: N.
+   * # i15 - vFrete. Valor Total do Frete. Ocor.: 0‚Äì1 / Tam.: 13v2 / Tipo: N.
    *
    * @param vfrete the new i15 - vFrete
    */
@@ -535,7 +535,7 @@ public class SEFAZProdVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # i16 - vSeg. Valor Total do Seguro. Ocor.: 0ñ1 / Tam.: 13v2 / Tipo: N.
+   * # i16 - vSeg. Valor Total do Seguro. Ocor.: 0‚Äì1 / Tam.: 13v2 / Tipo: N.
    *
    * @return the i16 - vSeg
    */
@@ -544,7 +544,7 @@ public class SEFAZProdVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # i16 - vSeg. Valor Total do Seguro. Ocor.: 0ñ1 / Tam.: 13v2 / Tipo: N.
+   * # i16 - vSeg. Valor Total do Seguro. Ocor.: 0‚Äì1 / Tam.: 13v2 / Tipo: N.
    *
    * @param vseg the new i16 - vSeg
    */
@@ -553,7 +553,7 @@ public class SEFAZProdVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # i17 - vDesc. Valor do Desconto. Ocor.: 0ñ1 / Tam.: 13v2 / Tipo: N.
+   * # i17 - vDesc. Valor do Desconto. Ocor.: 0‚Äì1 / Tam.: 13v2 / Tipo: N.
    *
    * @return the i17 - vDesc
    */
@@ -562,7 +562,7 @@ public class SEFAZProdVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # i17 - vDesc. Valor do Desconto. Ocor.: 0ñ1 / Tam.: 13v2 / Tipo: N.
+   * # i17 - vDesc. Valor do Desconto. Ocor.: 0‚Äì1 / Tam.: 13v2 / Tipo: N.
    *
    * @param vdesc the new i17 - vDesc
    */
@@ -571,7 +571,7 @@ public class SEFAZProdVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # i17a - vOutro. Outras despesas acessÛrias. Ocor.: 0ñ1 / Tam.: 13v2 / Tipo: N.
+   * # i17a - vOutro. Outras despesas acess√≥rias. Ocor.: 0‚Äì1 / Tam.: 13v2 / Tipo: N.
    *
    * @return the i17a - vOutro
    */
@@ -580,7 +580,7 @@ public class SEFAZProdVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # i17a - vOutro. Outras despesas acessÛrias. Ocor.: 0ñ1 / Tam.: 13v2 / Tipo: N.
+   * # i17a - vOutro. Outras despesas acess√≥rias. Ocor.: 0‚Äì1 / Tam.: 13v2 / Tipo: N.
    *
    * @param voutro the new i17a - vOutro
    */
@@ -589,7 +589,7 @@ public class SEFAZProdVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # i17b - indTot. Indica se valor do item compıe o total da NF-e (vProd). 0 = n„o compıe; 1 = compıe. Ocor.: 1ñ1 / Tam.: 1 / Tipo: N.
+   * # i17b - indTot. Indica se valor do item comp√µe o total da NF-e (vProd). 0 = n√£o comp√µe; 1 = comp√µe. Ocor.: 1‚Äì1 / Tam.: 1 / Tipo: N.
    *
    * @return the i17b - indTot
    */
@@ -598,7 +598,7 @@ public class SEFAZProdVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # i17b - indTot. Indica se valor do item compıe o total da NF-e (vProd). 0 = n„o compıe; 1 = compıe. Ocor.: 1ñ1 / Tam.: 1 / Tipo: N.
+   * # i17b - indTot. Indica se valor do item comp√µe o total da NF-e (vProd). 0 = n√£o comp√µe; 1 = comp√µe. Ocor.: 1‚Äì1 / Tam.: 1 / Tipo: N.
    *
    * @param indTot the new i17b - indTot
    */

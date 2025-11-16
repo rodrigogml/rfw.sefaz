@@ -16,9 +16,9 @@ import br.eng.rodrigogml.rfw.orm.dao.annotations.dao.RFWDAOAnnotation;
 import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.IndIEDestEnum;
 
 /**
- * Grupo E - IdentificaÁ„o do Destinat·rio da NF-e (tag dest / E01). Grupo obrigatÛrio para a NF-e (modelo 55).
+ * Grupo E - Identifica√ß√£o do Destinat√°rio da NF-e (tag dest / E01). Grupo obrigat√≥rio para a NF-e (modelo 55).
  *
- * ObservaÁ„o: a obrigatoriedade dos campos segue o MOC, mas nas annotations o atributo {@code required} È sempre definido como false conforme solicitado.
+ * Observa√ß√£o: a obrigatoriedade dos campos segue o MOC, mas nas annotations o atributo {@code required} √© sempre definido como false conforme solicitado.
  */
 @RFWDAOAnnotation(schema = "_RFW.SEFAZ", table = "sefaz_dest")
 public class SEFAZDestVO extends RFWVO implements Serializable {
@@ -38,58 +38,58 @@ public class SEFAZDestVO extends RFWVO implements Serializable {
   private SEFAZEnderDestVO enderDestVO = null;
 
   /**
-   * E02 - CNPJ do destinat·rio. Condicional ao CPF/idEstrangeiro: informar CNPJ ou CPF do destinat·rio, preenchendo os zeros n„o significativos. No caso de operaÁ„o com o exterior, ou para comprador estrangeiro, informar a tag idEstrangeiro. Ocor.: 1-1 / Tam.: 14 / Tipo: N.
+   * E02 - CNPJ do destinat√°rio. Condicional ao CPF/idEstrangeiro: informar CNPJ ou CPF do destinat√°rio, preenchendo os zeros n√£o significativos. No caso de opera√ß√£o com o exterior, ou para comprador estrangeiro, informar a tag idEstrangeiro. Ocor.: 1-1 / Tam.: 14 / Tipo: N.
    */
-  @RFWMetaStringCNPJField(caption = "CNPJ do destinat·rio", required = false, unique = false)
+  @RFWMetaStringCNPJField(caption = "CNPJ do destinat√°rio", required = false, unique = false)
   private String cnpj;
 
   /**
-   * E03 - CPF do destinat·rio. Condicional ao CNPJ/idEstrangeiro: informar CPF do destinat·rio quando n„o houver CNPJ, conforme regras da SEFAZ. Ocor.: 1-1 / Tam.: 11 / Tipo: N.
+   * E03 - CPF do destinat√°rio. Condicional ao CNPJ/idEstrangeiro: informar CPF do destinat√°rio quando n√£o houver CNPJ, conforme regras da SEFAZ. Ocor.: 1-1 / Tam.: 11 / Tipo: N.
    */
-  @RFWMetaStringCPFField(caption = "CPF do destinat·rio", required = false, unique = false)
+  @RFWMetaStringCPFField(caption = "CPF do destinat√°rio", required = false, unique = false)
   private String cpf;
 
   /**
-   * E03a - idEstrangeiro. IdentificaÁ„o do destinat·rio no caso de comprador estrangeiro. Informar no caso de operaÁ„o com o exterior ou para comprador estrangeiro. Informar n˙mero do passaporte ou outro documento legal (campo aceita valor nulo). Ocor.: 1-1 / Tam.: 0,5-20 / Tipo: C. Aceita algarismos, letras (mai˙sculas e min˙sculas) e caracteres: [: . + - / ( )].
+   * E03a - idEstrangeiro. Identifica√ß√£o do destinat√°rio no caso de comprador estrangeiro. Informar no caso de opera√ß√£o com o exterior ou para comprador estrangeiro. Informar n√∫mero do passaporte ou outro documento legal (campo aceita valor nulo). Ocor.: 1-1 / Tam.: 0,5-20 / Tipo: C. Aceita algarismos, letras (mai√∫sculas e min√∫sculas) e caracteres: [: . + - / ( )].
    */
-  @RFWMetaStringField(caption = "IdentificaÁ„o destinat·rio estrangeiro", required = false, unique = false, maxLength = 20, preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
+  @RFWMetaStringField(caption = "Identifica√ß√£o destinat√°rio estrangeiro", required = false, unique = false, maxLength = 20, preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
   private String idEstrangeiro;
 
   /**
-   * E04 - xNome. Raz„o Social ou nome do destinat·rio. Tag obrigatÛria para a NF-e (modelo 55) e opcional para a NFC-e. Ocor.: 0-1 / Tam.: 2-60 / Tipo: C.
+   * E04 - xNome. Raz√£o Social ou nome do destinat√°rio. Tag obrigat√≥ria para a NF-e (modelo 55) e opcional para a NFC-e. Ocor.: 0-1 / Tam.: 2-60 / Tipo: C.
    */
-  @RFWMetaStringField(caption = "Nome/Raz„o Social do destinat·rio", required = false, unique = false, maxLength = 60, preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
+  @RFWMetaStringField(caption = "Nome/Raz√£o Social do destinat√°rio", required = false, unique = false, maxLength = 60, preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
   private String xnome;
 
   /**
-   * E16a - indIEDest. Indicador da IE do Destinat·rio. Valores: 1 = Contribuinte ICMS (informar a IE do destinat·rio); 2 = Contribuinte isento de InscriÁ„o no cadastro de Contribuintes; 9 = N„o Contribuinte, que pode ou n„o possuir IE. Notas: - NFC-e: indIEDest=9 e n„o informar IE; - OperaÁ„o com exterior: indIEDest=9 e n„o informar IE; - Contribuinte isento (indIEDest=2): n„o informar IE. Ocor.:
+   * E16a - indIEDest. Indicador da IE do Destinat√°rio. Valores: 1 = Contribuinte ICMS (informar a IE do destinat√°rio); 2 = Contribuinte isento de Inscri√ß√£o no cadastro de Contribuintes; 9 = N√£o Contribuinte, que pode ou n√£o possuir IE. Notas: - NFC-e: indIEDest=9 e n√£o informar IE; - Opera√ß√£o com exterior: indIEDest=9 e n√£o informar IE; - Contribuinte isento (indIEDest=2): n√£o informar IE. Ocor.:
    * 1-1 / Tam.: 1 / Tipo: N.
    */
-  @RFWMetaEnumField(caption = "Indicador da IE do destinat·rio", required = false)
+  @RFWMetaEnumField(caption = "Indicador da IE do destinat√°rio", required = false)
   private IndIEDestEnum indIEDest;
 
   /**
-   * E17 - IE. InscriÁ„o Estadual do destinat·rio. Campo opcional. Informar somente algarismos, sem caracteres de formataÁ„o. Ocor.: 0-1 / Tam.: 2-14 / Tipo: N.
+   * E17 - IE. Inscri√ß√£o Estadual do destinat√°rio. Campo opcional. Informar somente algarismos, sem caracteres de formata√ß√£o. Ocor.: 0-1 / Tam.: 2-14 / Tipo: N.
    */
-  @RFWMetaStringIEField(caption = "InscriÁ„o Estadual do destinat·rio", required = false, unique = false)
+  @RFWMetaStringIEField(caption = "Inscri√ß√£o Estadual do destinat√°rio", required = false, unique = false)
   private String ie;
 
   /**
-   * E18 - ISUF. InscriÁ„o na SUFRAMA. ObrigatÛrio nas operaÁıes com incentivos fiscais em ·reas sob controle da SUFRAMA. Ocor.: 0-1 / Tam.: 8-9 / Tipo: N.
+   * E18 - ISUF. Inscri√ß√£o na SUFRAMA. Obrigat√≥rio nas opera√ß√µes com incentivos fiscais em √°reas sob controle da SUFRAMA. Ocor.: 0-1 / Tam.: 8-9 / Tipo: N.
    */
-  @RFWMetaStringField(caption = "InscriÁ„o SUFRAMA", required = false, unique = false, maxLength = 9, minLength = 8, pattern = "^[0-9]{8,9}$", preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
+  @RFWMetaStringField(caption = "Inscri√ß√£o SUFRAMA", required = false, unique = false, maxLength = 9, minLength = 8, pattern = "^[0-9]{8,9}$", preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
   private String isuf;
 
   /**
-   * E18a - IM. InscriÁ„o Municipal do Tomador do ServiÁo. Campo opcional, pode ser informado em NF-e conjugada. Ocor.: 0-1 / Tam.: 1-15 / Tipo: C.
+   * E18a - IM. Inscri√ß√£o Municipal do Tomador do Servi√ßo. Campo opcional, pode ser informado em NF-e conjugada. Ocor.: 0-1 / Tam.: 1-15 / Tipo: C.
    */
-  @RFWMetaStringField(caption = "InscriÁ„o Municipal", required = false, unique = false, maxLength = 15, minLength = 1, preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
+  @RFWMetaStringField(caption = "Inscri√ß√£o Municipal", required = false, unique = false, maxLength = 15, minLength = 1, preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
   private String im;
 
   /**
-   * E19 - email. E-mail de recepÁ„o da NF-e indicado pelo destinat·rio. Campo opcional. Ocor.: 0-1 / Tam.: 1-60 / Tipo: C.
+   * E19 - email. E-mail de recep√ß√£o da NF-e indicado pelo destinat√°rio. Campo opcional. Ocor.: 0-1 / Tam.: 1-60 / Tipo: C.
    */
-  @RFWMetaStringEmailField(caption = "E-mail do destinat·rio", required = false, maxLength = 60, unique = false, preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL, useRFC822 = false)
+  @RFWMetaStringEmailField(caption = "E-mail do destinat√°rio", required = false, maxLength = 60, unique = false, preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL, useRFC822 = false)
   private String email;
 
   /**
@@ -111,43 +111,43 @@ public class SEFAZDestVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # e02 - CNPJ do destinat·rio. Condicional ao CPF/idEstrangeiro: informar CNPJ ou CPF do destinat·rio, preenchendo os zeros n„o significativos. No caso de operaÁ„o com o exterior, ou para comprador estrangeiro, informar a tag idEstrangeiro. Ocor.: 1-1 / Tam.: 14 / Tipo: N.
+   * # e02 - CNPJ do destinat√°rio. Condicional ao CPF/idEstrangeiro: informar CNPJ ou CPF do destinat√°rio, preenchendo os zeros n√£o significativos. No caso de opera√ß√£o com o exterior, ou para comprador estrangeiro, informar a tag idEstrangeiro. Ocor.: 1-1 / Tam.: 14 / Tipo: N.
    *
-   * @return the e02 - CNPJ do destinat·rio
+   * @return the e02 - CNPJ do destinat√°rio
    */
   public String getCnpj() {
     return cnpj;
   }
 
   /**
-   * # e02 - CNPJ do destinat·rio. Condicional ao CPF/idEstrangeiro: informar CNPJ ou CPF do destinat·rio, preenchendo os zeros n„o significativos. No caso de operaÁ„o com o exterior, ou para comprador estrangeiro, informar a tag idEstrangeiro. Ocor.: 1-1 / Tam.: 14 / Tipo: N.
+   * # e02 - CNPJ do destinat√°rio. Condicional ao CPF/idEstrangeiro: informar CNPJ ou CPF do destinat√°rio, preenchendo os zeros n√£o significativos. No caso de opera√ß√£o com o exterior, ou para comprador estrangeiro, informar a tag idEstrangeiro. Ocor.: 1-1 / Tam.: 14 / Tipo: N.
    *
-   * @param cnpj the new e02 - CNPJ do destinat·rio
+   * @param cnpj the new e02 - CNPJ do destinat√°rio
    */
   public void setCnpj(String cnpj) {
     this.cnpj = cnpj;
   }
 
   /**
-   * # e03 - CPF do destinat·rio. Condicional ao CNPJ/idEstrangeiro: informar CPF do destinat·rio quando n„o houver CNPJ, conforme regras da SEFAZ. Ocor.: 1-1 / Tam.: 11 / Tipo: N.
+   * # e03 - CPF do destinat√°rio. Condicional ao CNPJ/idEstrangeiro: informar CPF do destinat√°rio quando n√£o houver CNPJ, conforme regras da SEFAZ. Ocor.: 1-1 / Tam.: 11 / Tipo: N.
    *
-   * @return the e03 - CPF do destinat·rio
+   * @return the e03 - CPF do destinat√°rio
    */
   public String getCpf() {
     return cpf;
   }
 
   /**
-   * # e03 - CPF do destinat·rio. Condicional ao CNPJ/idEstrangeiro: informar CPF do destinat·rio quando n„o houver CNPJ, conforme regras da SEFAZ. Ocor.: 1-1 / Tam.: 11 / Tipo: N.
+   * # e03 - CPF do destinat√°rio. Condicional ao CNPJ/idEstrangeiro: informar CPF do destinat√°rio quando n√£o houver CNPJ, conforme regras da SEFAZ. Ocor.: 1-1 / Tam.: 11 / Tipo: N.
    *
-   * @param cpf the new e03 - CPF do destinat·rio
+   * @param cpf the new e03 - CPF do destinat√°rio
    */
   public void setCpf(String cpf) {
     this.cpf = cpf;
   }
 
   /**
-   * # e03a - idEstrangeiro. IdentificaÁ„o do destinat·rio no caso de comprador estrangeiro. Informar no caso de operaÁ„o com o exterior ou para comprador estrangeiro. Informar n˙mero do passaporte ou outro documento legal (campo aceita valor nulo). Ocor.: 1-1 / Tam.: 0,5-20 / Tipo: C. Aceita algarismos, letras (mai˙sculas e min˙sculas) e caracteres: [: . + - / ( )].
+   * # e03a - idEstrangeiro. Identifica√ß√£o do destinat√°rio no caso de comprador estrangeiro. Informar no caso de opera√ß√£o com o exterior ou para comprador estrangeiro. Informar n√∫mero do passaporte ou outro documento legal (campo aceita valor nulo). Ocor.: 1-1 / Tam.: 0,5-20 / Tipo: C. Aceita algarismos, letras (mai√∫sculas e min√∫sculas) e caracteres: [: . + - / ( )].
    *
    * @return the e03a - idEstrangeiro
    */
@@ -156,7 +156,7 @@ public class SEFAZDestVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # e03a - idEstrangeiro. IdentificaÁ„o do destinat·rio no caso de comprador estrangeiro. Informar no caso de operaÁ„o com o exterior ou para comprador estrangeiro. Informar n˙mero do passaporte ou outro documento legal (campo aceita valor nulo). Ocor.: 1-1 / Tam.: 0,5-20 / Tipo: C. Aceita algarismos, letras (mai˙sculas e min˙sculas) e caracteres: [: . + - / ( )].
+   * # e03a - idEstrangeiro. Identifica√ß√£o do destinat√°rio no caso de comprador estrangeiro. Informar no caso de opera√ß√£o com o exterior ou para comprador estrangeiro. Informar n√∫mero do passaporte ou outro documento legal (campo aceita valor nulo). Ocor.: 1-1 / Tam.: 0,5-20 / Tipo: C. Aceita algarismos, letras (mai√∫sculas e min√∫sculas) e caracteres: [: . + - / ( )].
    *
    * @param idEstrangeiro the new e03a - idEstrangeiro
    */
@@ -165,7 +165,7 @@ public class SEFAZDestVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # e04 - xNome. Raz„o Social ou nome do destinat·rio. Tag obrigatÛria para a NF-e (modelo 55) e opcional para a NFC-e. Ocor.: 0-1 / Tam.: 2-60 / Tipo: C.
+   * # e04 - xNome. Raz√£o Social ou nome do destinat√°rio. Tag obrigat√≥ria para a NF-e (modelo 55) e opcional para a NFC-e. Ocor.: 0-1 / Tam.: 2-60 / Tipo: C.
    *
    * @return the e04 - xNome
    */
@@ -174,7 +174,7 @@ public class SEFAZDestVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # e04 - xNome. Raz„o Social ou nome do destinat·rio. Tag obrigatÛria para a NF-e (modelo 55) e opcional para a NFC-e. Ocor.: 0-1 / Tam.: 2-60 / Tipo: C.
+   * # e04 - xNome. Raz√£o Social ou nome do destinat√°rio. Tag obrigat√≥ria para a NF-e (modelo 55) e opcional para a NFC-e. Ocor.: 0-1 / Tam.: 2-60 / Tipo: C.
    *
    * @param xnome the new e04 - xNome
    */
@@ -183,7 +183,7 @@ public class SEFAZDestVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # e16a - indIEDest. Indicador da IE do Destinat·rio. Valores: 1 = Contribuinte ICMS (informar a IE do destinat·rio); 2 = Contribuinte isento de InscriÁ„o no cadastro de Contribuintes; 9 = N„o Contribuinte, que pode ou n„o possuir IE. Notas: - NFC-e: indIEDest=9 e n„o informar IE; - OperaÁ„o com exterior: indIEDest=9 e n„o informar IE; - Contribuinte isento (indIEDest=2): n„o informar IE.
+   * # e16a - indIEDest. Indicador da IE do Destinat√°rio. Valores: 1 = Contribuinte ICMS (informar a IE do destinat√°rio); 2 = Contribuinte isento de Inscri√ß√£o no cadastro de Contribuintes; 9 = N√£o Contribuinte, que pode ou n√£o possuir IE. Notas: - NFC-e: indIEDest=9 e n√£o informar IE; - Opera√ß√£o com exterior: indIEDest=9 e n√£o informar IE; - Contribuinte isento (indIEDest=2): n√£o informar IE.
    * Ocor.: 1-1 / Tam.: 1 / Tipo: N.
    *
    * @return the e16a - indIEDest
@@ -193,7 +193,7 @@ public class SEFAZDestVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # e16a - indIEDest. Indicador da IE do Destinat·rio. Valores: 1 = Contribuinte ICMS (informar a IE do destinat·rio); 2 = Contribuinte isento de InscriÁ„o no cadastro de Contribuintes; 9 = N„o Contribuinte, que pode ou n„o possuir IE. Notas: - NFC-e: indIEDest=9 e n„o informar IE; - OperaÁ„o com exterior: indIEDest=9 e n„o informar IE; - Contribuinte isento (indIEDest=2): n„o informar IE.
+   * # e16a - indIEDest. Indicador da IE do Destinat√°rio. Valores: 1 = Contribuinte ICMS (informar a IE do destinat√°rio); 2 = Contribuinte isento de Inscri√ß√£o no cadastro de Contribuintes; 9 = N√£o Contribuinte, que pode ou n√£o possuir IE. Notas: - NFC-e: indIEDest=9 e n√£o informar IE; - Opera√ß√£o com exterior: indIEDest=9 e n√£o informar IE; - Contribuinte isento (indIEDest=2): n√£o informar IE.
    * Ocor.: 1-1 / Tam.: 1 / Tipo: N.
    *
    * @param indIEDest the new e16a - indIEDest
@@ -203,7 +203,7 @@ public class SEFAZDestVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # e17 - IE. InscriÁ„o Estadual do destinat·rio. Campo opcional. Informar somente algarismos, sem caracteres de formataÁ„o. Ocor.: 0-1 / Tam.: 2-14 / Tipo: N.
+   * # e17 - IE. Inscri√ß√£o Estadual do destinat√°rio. Campo opcional. Informar somente algarismos, sem caracteres de formata√ß√£o. Ocor.: 0-1 / Tam.: 2-14 / Tipo: N.
    *
    * @return the e17 - IE
    */
@@ -212,7 +212,7 @@ public class SEFAZDestVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # e17 - IE. InscriÁ„o Estadual do destinat·rio. Campo opcional. Informar somente algarismos, sem caracteres de formataÁ„o. Ocor.: 0-1 / Tam.: 2-14 / Tipo: N.
+   * # e17 - IE. Inscri√ß√£o Estadual do destinat√°rio. Campo opcional. Informar somente algarismos, sem caracteres de formata√ß√£o. Ocor.: 0-1 / Tam.: 2-14 / Tipo: N.
    *
    * @param ie the new e17 - IE
    */
@@ -221,7 +221,7 @@ public class SEFAZDestVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # e18 - ISUF. InscriÁ„o na SUFRAMA. ObrigatÛrio nas operaÁıes com incentivos fiscais em ·reas sob controle da SUFRAMA. Ocor.: 0-1 / Tam.: 8-9 / Tipo: N.
+   * # e18 - ISUF. Inscri√ß√£o na SUFRAMA. Obrigat√≥rio nas opera√ß√µes com incentivos fiscais em √°reas sob controle da SUFRAMA. Ocor.: 0-1 / Tam.: 8-9 / Tipo: N.
    *
    * @return the e18 - ISUF
    */
@@ -230,7 +230,7 @@ public class SEFAZDestVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # e18 - ISUF. InscriÁ„o na SUFRAMA. ObrigatÛrio nas operaÁıes com incentivos fiscais em ·reas sob controle da SUFRAMA. Ocor.: 0-1 / Tam.: 8-9 / Tipo: N.
+   * # e18 - ISUF. Inscri√ß√£o na SUFRAMA. Obrigat√≥rio nas opera√ß√µes com incentivos fiscais em √°reas sob controle da SUFRAMA. Ocor.: 0-1 / Tam.: 8-9 / Tipo: N.
    *
    * @param isuf the new e18 - ISUF
    */
@@ -239,7 +239,7 @@ public class SEFAZDestVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # e18a - IM. InscriÁ„o Municipal do Tomador do ServiÁo. Campo opcional, pode ser informado em NF-e conjugada. Ocor.: 0-1 / Tam.: 1-15 / Tipo: C.
+   * # e18a - IM. Inscri√ß√£o Municipal do Tomador do Servi√ßo. Campo opcional, pode ser informado em NF-e conjugada. Ocor.: 0-1 / Tam.: 1-15 / Tipo: C.
    *
    * @return the e18a - IM
    */
@@ -248,7 +248,7 @@ public class SEFAZDestVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # e18a - IM. InscriÁ„o Municipal do Tomador do ServiÁo. Campo opcional, pode ser informado em NF-e conjugada. Ocor.: 0-1 / Tam.: 1-15 / Tipo: C.
+   * # e18a - IM. Inscri√ß√£o Municipal do Tomador do Servi√ßo. Campo opcional, pode ser informado em NF-e conjugada. Ocor.: 0-1 / Tam.: 1-15 / Tipo: C.
    *
    * @param im the new e18a - IM
    */
@@ -257,7 +257,7 @@ public class SEFAZDestVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # e19 - email. E-mail de recepÁ„o da NF-e indicado pelo destinat·rio. Campo opcional. Ocor.: 0-1 / Tam.: 1-60 / Tipo: C.
+   * # e19 - email. E-mail de recep√ß√£o da NF-e indicado pelo destinat√°rio. Campo opcional. Ocor.: 0-1 / Tam.: 1-60 / Tipo: C.
    *
    * @return the e19 - email
    */
@@ -266,7 +266,7 @@ public class SEFAZDestVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # e19 - email. E-mail de recepÁ„o da NF-e indicado pelo destinat·rio. Campo opcional. Ocor.: 0-1 / Tam.: 1-60 / Tipo: C.
+   * # e19 - email. E-mail de recep√ß√£o da NF-e indicado pelo destinat√°rio. Campo opcional. Ocor.: 0-1 / Tam.: 1-60 / Tipo: C.
    *
    * @param email the new e19 - email
    */

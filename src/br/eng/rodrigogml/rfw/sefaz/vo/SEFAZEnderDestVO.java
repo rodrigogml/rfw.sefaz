@@ -10,9 +10,9 @@ import br.eng.rodrigogml.rfw.kernel.vo.RFWVO;
 import br.eng.rodrigogml.rfw.orm.dao.annotations.dao.RFWDAOAnnotation;
 
 /**
- * Grupo E05 - enderDest. EndereÁo do Destinat·rio da NF-e. Grupo obrigatÛrio para a NF-e (modelo 55).
+ * Grupo E05 - enderDest. Endere√ßo do Destinat√°rio da NF-e. Grupo obrigat√≥rio para a NF-e (modelo 55).
  *
- * ObservaÁ„o: a obrigatoriedade dos campos segue o MOC, mas nas annotations o atributo {@code required} È sempre definido como false conforme solicitado.
+ * Observa√ß√£o: a obrigatoriedade dos campos segue o MOC, mas nas annotations o atributo {@code required} √© sempre definido como false conforme solicitado.
  */
 @RFWDAOAnnotation(schema = "_RFW.SEFAZ", table = "sefaz_enderdest")
 public class SEFAZEnderDestVO extends RFWVO implements Serializable {
@@ -26,73 +26,73 @@ public class SEFAZEnderDestVO extends RFWVO implements Serializable {
   private SEFAZDestVO destVO = null;
 
   /**
-   * E06 - xLgr. Logradouro do endereÁo do destinat·rio. Ocor.: 1-1 / Tam.: 2-60 / Tipo: C.
+   * E06 - xLgr. Logradouro do endere√ßo do destinat√°rio. Ocor.: 1-1 / Tam.: 2-60 / Tipo: C.
    */
   @RFWMetaStringField(caption = "Logradouro", required = false, unique = false, maxLength = 60, preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
   private String xlgr;
 
   /**
-   * E07 - nro. N˙mero do endereÁo. Ocor.: 1-1 / Tam.: 1-60 / Tipo: C.
+   * E07 - nro. N√∫mero do endere√ßo. Ocor.: 1-1 / Tam.: 1-60 / Tipo: C.
    */
-  @RFWMetaStringField(caption = "N˙mero", required = false, unique = false, maxLength = 60, minLength = 1, preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
+  @RFWMetaStringField(caption = "N√∫mero", required = false, unique = false, maxLength = 60, minLength = 1, preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
   private String nro;
 
   /**
-   * E08 - xCpl. Complemento do endereÁo. Ocor.: 0-1 / Tam.: 1-60 / Tipo: C.
+   * E08 - xCpl. Complemento do endere√ßo. Ocor.: 0-1 / Tam.: 1-60 / Tipo: C.
    */
   @RFWMetaStringField(caption = "Complemento", required = false, unique = false, maxLength = 60, minLength = 1, preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
   private String xcpl;
 
   /**
-   * E09 - xBairro. Bairro do endereÁo do destinat·rio. Ocor.: 1-1 / Tam.: 2-60 / Tipo: C.
+   * E09 - xBairro. Bairro do endere√ßo do destinat√°rio. Ocor.: 1-1 / Tam.: 2-60 / Tipo: C.
    */
   @RFWMetaStringField(caption = "Bairro", required = false, unique = false, maxLength = 60, preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
   private String xbairro;
 
   /**
-   * E10 - cMun. CÛdigo do municÌpio do endereÁo do destinat·rio. Utilizar a Tabela do IBGE. Ocor.: 1-1 / Tam.: 7 / Tipo: N.
+   * E10 - cMun. C√≥digo do munic√≠pio do endere√ßo do destinat√°rio. Utilizar a Tabela do IBGE. Ocor.: 1-1 / Tam.: 7 / Tipo: N.
    */
-  @RFWMetaStringField(caption = "CÛdigo do municÌpio (IBGE)", required = false, unique = false, maxLength = 7, pattern = "^[0-9]{7}$", preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
+  @RFWMetaStringField(caption = "C√≥digo do munic√≠pio (IBGE)", required = false, unique = false, maxLength = 7, pattern = "^[0-9]{7}$", preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
   private String cmun;
 
   /**
-   * E11 - xMun. Nome do municÌpio. Informar ìEXTERIORî para operaÁıes com o exterior. Ocor.: 1-1 / Tam.: 2-60 / Tipo: C.
+   * E11 - xMun. Nome do munic√≠pio. Informar ‚ÄúEXTERIOR‚Äù para opera√ß√µes com o exterior. Ocor.: 1-1 / Tam.: 2-60 / Tipo: C.
    */
-  @RFWMetaStringField(caption = "Nome do municÌpio", required = false, unique = false, maxLength = 60, preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
+  @RFWMetaStringField(caption = "Nome do munic√≠pio", required = false, unique = false, maxLength = 60, preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
   private String xmun;
 
   /**
-   * E12 - UF. Sigla da UF. Informar ìEXî para operaÁıes com o exterior. Ocor.: 1-1 / Tam.: 2 / Tipo: C.
+   * E12 - UF. Sigla da UF. Informar ‚ÄúEX‚Äù para opera√ß√µes com o exterior. Ocor.: 1-1 / Tam.: 2 / Tipo: C.
    */
   @RFWMetaStringField(caption = "UF", required = false, unique = false, maxLength = 2, preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
   private String uf;
 
   /**
-   * E13 - CEP. CÛdigo do CEP, com zeros n„o significativos. Ocor.: 0-1 / Tam.: 8 / Tipo: N.
+   * E13 - CEP. C√≥digo do CEP, com zeros n√£o significativos. Ocor.: 0-1 / Tam.: 8 / Tipo: N.
    */
   @RFWMetaStringField(caption = "CEP", required = false, unique = false, maxLength = 8, pattern = "^[0-9]{8}$", preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
   private String cep;
 
   /**
-   * E14 - cPais. CÛdigo do PaÌs, conforme Tabela do BACEN. Ocor.: 0-1 / Tam.: 2-4 / Tipo: N.
+   * E14 - cPais. C√≥digo do Pa√≠s, conforme Tabela do BACEN. Ocor.: 0-1 / Tam.: 2-4 / Tipo: N.
    */
-  @RFWMetaStringField(caption = "CÛdigo do paÌs (BACEN)", required = false, unique = false, maxLength = 4, minLength = 2, pattern = "^[0-9]{2,4}$", preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
+  @RFWMetaStringField(caption = "C√≥digo do pa√≠s (BACEN)", required = false, unique = false, maxLength = 4, minLength = 2, pattern = "^[0-9]{2,4}$", preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
   private String cpais;
 
   /**
-   * E15 - xPais. Nome do PaÌs. Ocor.: 0-1 / Tam.: 2-60 / Tipo: C.
+   * E15 - xPais. Nome do Pa√≠s. Ocor.: 0-1 / Tam.: 2-60 / Tipo: C.
    */
-  @RFWMetaStringField(caption = "Nome do paÌs", required = false, unique = false, maxLength = 60, preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
+  @RFWMetaStringField(caption = "Nome do pa√≠s", required = false, unique = false, maxLength = 60, preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
   private String xpais;
 
   /**
-   * E16 - fone. Telefone do destinat·rio. Preencher com CÛdigo DDD + n˙mero ou, em operaÁıes com exterior, cÛdigo do paÌs + cÛdigo da localidade + n˙mero do telefone. Ocor.: 0-1 / Tam.: 6-14 / Tipo: N.
+   * E16 - fone. Telefone do destinat√°rio. Preencher com C√≥digo DDD + n√∫mero ou, em opera√ß√µes com exterior, c√≥digo do pa√≠s + c√≥digo da localidade + n√∫mero do telefone. Ocor.: 0-1 / Tam.: 6-14 / Tipo: N.
    */
   @RFWMetaStringField(caption = "Telefone", required = false, unique = false, maxLength = 14, minLength = 6, pattern = "^[0-9]{6,14}$", preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
   private String fone;
 
   /**
-   * # e06 - xLgr. Logradouro do endereÁo do destinat·rio. Ocor.: 1-1 / Tam.: 2-60 / Tipo: C.
+   * # e06 - xLgr. Logradouro do endere√ßo do destinat√°rio. Ocor.: 1-1 / Tam.: 2-60 / Tipo: C.
    *
    * @return the e06 - xLgr
    */
@@ -101,7 +101,7 @@ public class SEFAZEnderDestVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # e06 - xLgr. Logradouro do endereÁo do destinat·rio. Ocor.: 1-1 / Tam.: 2-60 / Tipo: C.
+   * # e06 - xLgr. Logradouro do endere√ßo do destinat√°rio. Ocor.: 1-1 / Tam.: 2-60 / Tipo: C.
    *
    * @param xlgr the new e06 - xLgr
    */
@@ -110,7 +110,7 @@ public class SEFAZEnderDestVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # e07 - nro. N˙mero do endereÁo. Ocor.: 1-1 / Tam.: 1-60 / Tipo: C.
+   * # e07 - nro. N√∫mero do endere√ßo. Ocor.: 1-1 / Tam.: 1-60 / Tipo: C.
    *
    * @return the e07 - nro
    */
@@ -119,7 +119,7 @@ public class SEFAZEnderDestVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # e07 - nro. N˙mero do endereÁo. Ocor.: 1-1 / Tam.: 1-60 / Tipo: C.
+   * # e07 - nro. N√∫mero do endere√ßo. Ocor.: 1-1 / Tam.: 1-60 / Tipo: C.
    *
    * @param nro the new e07 - nro
    */
@@ -128,7 +128,7 @@ public class SEFAZEnderDestVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # e08 - xCpl. Complemento do endereÁo. Ocor.: 0-1 / Tam.: 1-60 / Tipo: C.
+   * # e08 - xCpl. Complemento do endere√ßo. Ocor.: 0-1 / Tam.: 1-60 / Tipo: C.
    *
    * @return the e08 - xCpl
    */
@@ -137,7 +137,7 @@ public class SEFAZEnderDestVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # e08 - xCpl. Complemento do endereÁo. Ocor.: 0-1 / Tam.: 1-60 / Tipo: C.
+   * # e08 - xCpl. Complemento do endere√ßo. Ocor.: 0-1 / Tam.: 1-60 / Tipo: C.
    *
    * @param xcpl the new e08 - xCpl
    */
@@ -146,7 +146,7 @@ public class SEFAZEnderDestVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # e09 - xBairro. Bairro do endereÁo do destinat·rio. Ocor.: 1-1 / Tam.: 2-60 / Tipo: C.
+   * # e09 - xBairro. Bairro do endere√ßo do destinat√°rio. Ocor.: 1-1 / Tam.: 2-60 / Tipo: C.
    *
    * @return the e09 - xBairro
    */
@@ -155,7 +155,7 @@ public class SEFAZEnderDestVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # e09 - xBairro. Bairro do endereÁo do destinat·rio. Ocor.: 1-1 / Tam.: 2-60 / Tipo: C.
+   * # e09 - xBairro. Bairro do endere√ßo do destinat√°rio. Ocor.: 1-1 / Tam.: 2-60 / Tipo: C.
    *
    * @param xbairro the new e09 - xBairro
    */
@@ -164,7 +164,7 @@ public class SEFAZEnderDestVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # e10 - cMun. CÛdigo do municÌpio do endereÁo do destinat·rio. Utilizar a Tabela do IBGE. Ocor.: 1-1 / Tam.: 7 / Tipo: N.
+   * # e10 - cMun. C√≥digo do munic√≠pio do endere√ßo do destinat√°rio. Utilizar a Tabela do IBGE. Ocor.: 1-1 / Tam.: 7 / Tipo: N.
    *
    * @return the e10 - cMun
    */
@@ -173,7 +173,7 @@ public class SEFAZEnderDestVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # e10 - cMun. CÛdigo do municÌpio do endereÁo do destinat·rio. Utilizar a Tabela do IBGE. Ocor.: 1-1 / Tam.: 7 / Tipo: N.
+   * # e10 - cMun. C√≥digo do munic√≠pio do endere√ßo do destinat√°rio. Utilizar a Tabela do IBGE. Ocor.: 1-1 / Tam.: 7 / Tipo: N.
    *
    * @param cmun the new e10 - cMun
    */
@@ -182,7 +182,7 @@ public class SEFAZEnderDestVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # e11 - xMun. Nome do municÌpio. Informar ìEXTERIORî para operaÁıes com o exterior. Ocor.: 1-1 / Tam.: 2-60 / Tipo: C.
+   * # e11 - xMun. Nome do munic√≠pio. Informar ‚ÄúEXTERIOR‚Äù para opera√ß√µes com o exterior. Ocor.: 1-1 / Tam.: 2-60 / Tipo: C.
    *
    * @return the e11 - xMun
    */
@@ -191,7 +191,7 @@ public class SEFAZEnderDestVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # e11 - xMun. Nome do municÌpio. Informar ìEXTERIORî para operaÁıes com o exterior. Ocor.: 1-1 / Tam.: 2-60 / Tipo: C.
+   * # e11 - xMun. Nome do munic√≠pio. Informar ‚ÄúEXTERIOR‚Äù para opera√ß√µes com o exterior. Ocor.: 1-1 / Tam.: 2-60 / Tipo: C.
    *
    * @param xmun the new e11 - xMun
    */
@@ -200,7 +200,7 @@ public class SEFAZEnderDestVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # e12 - UF. Sigla da UF. Informar ìEXî para operaÁıes com o exterior. Ocor.: 1-1 / Tam.: 2 / Tipo: C.
+   * # e12 - UF. Sigla da UF. Informar ‚ÄúEX‚Äù para opera√ß√µes com o exterior. Ocor.: 1-1 / Tam.: 2 / Tipo: C.
    *
    * @return the e12 - UF
    */
@@ -209,7 +209,7 @@ public class SEFAZEnderDestVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # e12 - UF. Sigla da UF. Informar ìEXî para operaÁıes com o exterior. Ocor.: 1-1 / Tam.: 2 / Tipo: C.
+   * # e12 - UF. Sigla da UF. Informar ‚ÄúEX‚Äù para opera√ß√µes com o exterior. Ocor.: 1-1 / Tam.: 2 / Tipo: C.
    *
    * @param uf the new e12 - UF
    */
@@ -218,7 +218,7 @@ public class SEFAZEnderDestVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # e13 - CEP. CÛdigo do CEP, com zeros n„o significativos. Ocor.: 0-1 / Tam.: 8 / Tipo: N.
+   * # e13 - CEP. C√≥digo do CEP, com zeros n√£o significativos. Ocor.: 0-1 / Tam.: 8 / Tipo: N.
    *
    * @return the e13 - CEP
    */
@@ -227,7 +227,7 @@ public class SEFAZEnderDestVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # e13 - CEP. CÛdigo do CEP, com zeros n„o significativos. Ocor.: 0-1 / Tam.: 8 / Tipo: N.
+   * # e13 - CEP. C√≥digo do CEP, com zeros n√£o significativos. Ocor.: 0-1 / Tam.: 8 / Tipo: N.
    *
    * @param cep the new e13 - CEP
    */
@@ -236,7 +236,7 @@ public class SEFAZEnderDestVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # e14 - cPais. CÛdigo do PaÌs, conforme Tabela do BACEN. Ocor.: 0-1 / Tam.: 2-4 / Tipo: N.
+   * # e14 - cPais. C√≥digo do Pa√≠s, conforme Tabela do BACEN. Ocor.: 0-1 / Tam.: 2-4 / Tipo: N.
    *
    * @return the e14 - cPais
    */
@@ -245,7 +245,7 @@ public class SEFAZEnderDestVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # e14 - cPais. CÛdigo do PaÌs, conforme Tabela do BACEN. Ocor.: 0-1 / Tam.: 2-4 / Tipo: N.
+   * # e14 - cPais. C√≥digo do Pa√≠s, conforme Tabela do BACEN. Ocor.: 0-1 / Tam.: 2-4 / Tipo: N.
    *
    * @param cpais the new e14 - cPais
    */
@@ -254,7 +254,7 @@ public class SEFAZEnderDestVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # e15 - xPais. Nome do PaÌs. Ocor.: 0-1 / Tam.: 2-60 / Tipo: C.
+   * # e15 - xPais. Nome do Pa√≠s. Ocor.: 0-1 / Tam.: 2-60 / Tipo: C.
    *
    * @return the e15 - xPais
    */
@@ -263,7 +263,7 @@ public class SEFAZEnderDestVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # e15 - xPais. Nome do PaÌs. Ocor.: 0-1 / Tam.: 2-60 / Tipo: C.
+   * # e15 - xPais. Nome do Pa√≠s. Ocor.: 0-1 / Tam.: 2-60 / Tipo: C.
    *
    * @param xpais the new e15 - xPais
    */
@@ -272,7 +272,7 @@ public class SEFAZEnderDestVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # e16 - fone. Telefone do destinat·rio. Preencher com CÛdigo DDD + n˙mero ou, em operaÁıes com exterior, cÛdigo do paÌs + cÛdigo da localidade + n˙mero do telefone. Ocor.: 0-1 / Tam.: 6-14 / Tipo: N.
+   * # e16 - fone. Telefone do destinat√°rio. Preencher com C√≥digo DDD + n√∫mero ou, em opera√ß√µes com exterior, c√≥digo do pa√≠s + c√≥digo da localidade + n√∫mero do telefone. Ocor.: 0-1 / Tam.: 6-14 / Tipo: N.
    *
    * @return the e16 - fone
    */
@@ -281,7 +281,7 @@ public class SEFAZEnderDestVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # e16 - fone. Telefone do destinat·rio. Preencher com CÛdigo DDD + n˙mero ou, em operaÁıes com exterior, cÛdigo do paÌs + cÛdigo da localidade + n˙mero do telefone. Ocor.: 0-1 / Tam.: 6-14 / Tipo: N.
+   * # e16 - fone. Telefone do destinat√°rio. Preencher com C√≥digo DDD + n√∫mero ou, em opera√ß√µes com exterior, c√≥digo do pa√≠s + c√≥digo da localidade + n√∫mero do telefone. Ocor.: 0-1 / Tam.: 6-14 / Tipo: N.
    *
    * @param fone the new e16 - fone
    */

@@ -6,7 +6,7 @@ import br.eng.rodrigogml.rfw.kernel.logger.RFWLogger;
 import br.eng.rodrigogml.rfw.kernel.utils.RUXML;
 
 /**
- * Description: Classe com métodos de validação dos XMLs enviados e recebidos do SEFAZ contra seu schema de definição.<br>
+ * Description: Classe com mÃ©todos de validaÃ§Ã£o dos XMLs enviados e recebidos do SEFAZ contra seu schema de definiÃ§Ã£o.<br>
  *
  * @author Rodrigo Leit?o
  * @since 4.0.0 (27/01/2011)
@@ -50,14 +50,14 @@ public class SEFAZXMLValidator {
    *
    * @param xml XML da mensagem a ser validada
    * @param schemapath Schema que valida a mensagem
-   * @param basepath Caminho base para encontrar os arquivos cujo schema principal referencia. Sempre temine argumento com "/". Por exemplo "/XSD/". O caminho começando com "/" referencia a raiz da pasta de classes (bin) ou fontes (src), ou rais do JAR.
+   * @param basepath Caminho base para encontrar os arquivos cujo schema principal referencia. Sempre temine argumento com "/". Por exemplo "/XSD/". O caminho comeÃ§ando com "/" referencia a raiz da pasta de classes (bin) ou fontes (src), ou rais do JAR.
    * @throws RFWException
    */
   private static void validateXMLAgainstSchema(String xml, String schemapath, String basepath) throws RFWException {
     try {
       RUXML.validateXMLAgainstSchema2(xml, schemapath, basepath);
     } catch (Exception e) {
-      RFWLogger.logDebug("Logando falha de validação do XML para possível consulta do desenvolvedor...");
+      RFWLogger.logDebug("Logando falha de validaÃ§Ã£o do XML para possÃ­vel consulta do desenvolvedor...");
       RFWLogger.logDebug("XML: " + xml);
       RFWLogger.logDebug("schemaPath: " + schemapath);
       RFWLogger.logDebug("basePath: " + basepath);

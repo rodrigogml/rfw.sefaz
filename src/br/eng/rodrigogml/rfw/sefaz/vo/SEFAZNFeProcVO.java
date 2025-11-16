@@ -8,17 +8,17 @@ import br.eng.rodrigogml.rfw.orm.dao.annotations.dao.RFWDAOAnnotation;
 import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_versao;
 
 /**
- * Description: Classe que representa a estrutura da tag nfeProc (TAG raiz do processo da NF-e). ContÈm a NFe assinada e o protocolo de autorizaÁ„o/denegaÁ„o. <br>
- * Tabela de referÍncia (SEFAZ):
+ * Description: Classe que representa a estrutura da tag nfeProc (TAG raiz do processo da NF-e). Cont√©m a NFe assinada e o protocolo de autoriza√ß√£o/denega√ß√£o. <br>
+ * Tabela de refer√™ncia (SEFAZ):
  * <ul>
- * <li>#XR01 | Campo: nfeProc | Ele: Raiz | Pai: - | Tipo: - | Ocor.: - | Tam.: - | DescriÁ„o: TAG raiz</li>
+ * <li>#XR01 | Campo: nfeProc | Ele: Raiz | Pai: - | Tipo: - | Ocor.: - | Tam.: - | Descri√ß√£o: TAG raiz</li>
  * <li>#XR02 | Campo: versao | Ele: A | Pai: XR01 | Tipo: N | Ocor.: 1-1 | Tam.: 1-2v2</li>
- * <li>#XR03 | Campo: NFe | Ele: G | Pai: XR01 | Ocor.: 1-1 | DescriÁ„o: Dados da NF-e, inclusive com a assinatura</li>
- * <li>#XR05 | Campo: protNfe | Ele: G | Pai: XR01 | Ocor.: 1-1 | DescriÁ„o: Protocolo de autorizaÁ„o/denegaÁ„o (item 5.2.2)</li>
+ * <li>#XR03 | Campo: NFe | Ele: G | Pai: XR01 | Ocor.: 1-1 | Descri√ß√£o: Dados da NF-e, inclusive com a assinatura</li>
+ * <li>#XR05 | Campo: protNfe | Ele: G | Pai: XR01 | Ocor.: 1-1 | Descri√ß√£o: Protocolo de autoriza√ß√£o/denega√ß√£o (item 5.2.2)</li>
  * </ul>
- * ObservaÁ„o: elementos filhos (NFe, protNfe) ser„o modelados em VOs prÛprios.
+ * Observa√ß√£o: elementos filhos (NFe, protNfe) ser√£o modelados em VOs pr√≥prios.
  *
- * @author Rodrigo Leit„o
+ * @author Rodrigo Leit√£o
  * @since (11 de nov. de 2025)
  */
 @RFWDAOAnnotation(schema = "_RFW.SEFAZ", table = "sefaz_nfeproc")
@@ -28,10 +28,10 @@ public class SEFAZNFeProcVO extends RFWVO {
 
   /**
    * ID: #XR02 | Campo: versao | Ele: A | Pai: XR01 | Tipo: N | Ocor.: 1-1 | Tam.: 1-2v2 <br>
-   * DescriÁ„o: Define a vers„o do XML do nfeProc. <br>
-   * Mapeamento: Enumeration com as versıes suportadas.
+   * Descri√ß√£o: Define a vers√£o do XML do nfeProc. <br>
+   * Mapeamento: Enumeration com as vers√µes suportadas.
    */
-  @RFWMetaEnumField(caption = "Vers„o", required = true)
+  @RFWMetaEnumField(caption = "Vers√£o", required = true)
   private SEFAZ_versao versao;
 
   /**
@@ -42,8 +42,8 @@ public class SEFAZNFeProcVO extends RFWVO {
 
   /**
    * # iD: #XR02 | Campo: versao | Ele: A | Pai: XR01 | Tipo: N | Ocor.: 1-1 | Tam.: 1-2v2 <br>
-   * DescriÁ„o: Define a vers„o do XML do nfeProc. <br>
-   * Mapeamento: Enumeration com as versıes suportadas.
+   * Descri√ß√£o: Define a vers√£o do XML do nfeProc. <br>
+   * Mapeamento: Enumeration com as vers√µes suportadas.
    *
    * @return the iD: #XR02 | Campo: versao | Ele: A | Pai: XR01 | Tipo: N | Ocor
    */
@@ -53,8 +53,8 @@ public class SEFAZNFeProcVO extends RFWVO {
 
   /**
    * # iD: #XR02 | Campo: versao | Ele: A | Pai: XR01 | Tipo: N | Ocor.: 1-1 | Tam.: 1-2v2 <br>
-   * DescriÁ„o: Define a vers„o do XML do nfeProc. <br>
-   * Mapeamento: Enumeration com as versıes suportadas.
+   * Descri√ß√£o: Define a vers√£o do XML do nfeProc. <br>
+   * Mapeamento: Enumeration com as vers√µes suportadas.
    *
    * @param versao the new iD: #XR02 | Campo: versao | Ele: A | Pai: XR01 | Tipo: N | Ocor
    */

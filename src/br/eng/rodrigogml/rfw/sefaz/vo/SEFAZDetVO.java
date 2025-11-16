@@ -9,9 +9,9 @@ import br.eng.rodrigogml.rfw.kernel.vo.RFWVO;
 import br.eng.rodrigogml.rfw.orm.dao.annotations.dao.RFWDAOAnnotation;
 
 /**
- * Grupo H - Detalhamento de Produtos e Serviços (tag det / H01). Detalhamento de Produtos e Serviços da NF-e. Múltiplas ocorrências (1–990) para cada NF-e.
+ * Grupo H - Detalhamento de Produtos e ServiÃ§os (tag det / H01). Detalhamento de Produtos e ServiÃ§os da NF-e. MÃºltiplas ocorrÃªncias (1â€“990) para cada NF-e.
  *
- * Observação: a obrigatoriedade dos campos segue o MOC, mas nas annotations o atributo {@code required} é sempre definido como false conforme solicitado.
+ * ObservaÃ§Ã£o: a obrigatoriedade dos campos segue o MOC, mas nas annotations o atributo {@code required} Ã© sempre definido como false conforme solicitado.
  */
 @RFWDAOAnnotation(schema = "_RFW.SEFAZ", table = "sefaz_det")
 public class SEFAZDetVO extends RFWVO implements Serializable {
@@ -37,13 +37,13 @@ public class SEFAZDetVO extends RFWVO implements Serializable {
   private SEFAZImpostoVO impostoVO = null;
 
   /**
-   * H02 - nItem. Número do item na NF-e. Contador sequencial do item (1–990). Ocor.: 1–1 / Tam.: 1–3 / Tipo: N.
+   * H02 - nItem. NÃºmero do item na NF-e. Contador sequencial do item (1â€“990). Ocor.: 1â€“1 / Tam.: 1â€“3 / Tipo: N.
    */
-  @RFWMetaIntegerField(caption = "Número do item", required = false, unique = false, minValue = 1, maxValue = 990)
+  @RFWMetaIntegerField(caption = "NÃºmero do item", required = false, unique = false, minValue = 1, maxValue = 990)
   private Integer nitem;
 
   /**
-   * # h02 - nItem. Número do item na NF-e. Contador sequencial do item (1–990). Ocor.: 1–1 / Tam.: 1–3 / Tipo: N.
+   * # h02 - nItem. NÃºmero do item na NF-e. Contador sequencial do item (1â€“990). Ocor.: 1â€“1 / Tam.: 1â€“3 / Tipo: N.
    *
    * @return the h02 - nItem
    */
@@ -52,7 +52,7 @@ public class SEFAZDetVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # h02 - nItem. Número do item na NF-e. Contador sequencial do item (1–990). Ocor.: 1–1 / Tam.: 1–3 / Tipo: N.
+   * # h02 - nItem. NÃºmero do item na NF-e. Contador sequencial do item (1â€“990). Ocor.: 1â€“1 / Tam.: 1â€“3 / Tipo: N.
    *
    * @param nitem the new h02 - nItem
    */

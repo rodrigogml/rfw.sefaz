@@ -24,10 +24,10 @@ import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_tpImp;
 import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_tpNF;
 
 /**
- * Informações de identificação da NF-e ({@code ide}).
+ * InformaÃ§Ãµes de identificaÃ§Ã£o da NF-e ({@code ide}).
  *
  * <p>
- * Este VO representa o Grupo B da NF-e, contendo os principais dados de identificação do documento fiscal eletrônico, como UF do emitente, modelo, série, número, datas de emissão/saída, tipo de operação, ambiente, finalidade, presença do comprador, processo de emissão e dados de contingência.
+ * Este VO representa o Grupo B da NF-e, contendo os principais dados de identificaÃ§Ã£o do documento fiscal eletrÃ´nico, como UF do emitente, modelo, sÃ©rie, nÃºmero, datas de emissÃ£o/saÃ­da, tipo de operaÃ§Ã£o, ambiente, finalidade, presenÃ§a do comprador, processo de emissÃ£o e dados de contingÃªncia.
  */
 public class SEFAZIdeVO extends RFWVO {
 
@@ -46,198 +46,198 @@ public class SEFAZIdeVO extends RFWVO {
   private SEFAZNFRefVO nfRefVO = null;
 
   /**
-   * Código da UF do emitente do Documento Fiscal ({@code cUF}).
+   * CÃ³digo da UF do emitente do Documento Fiscal ({@code cUF}).
    *
    * <p>
-   * Obrigatório na especificação. Utilizar a Tabela do IBGE de código de unidades da federação (MOC – Visão Geral, Tabela de UF, Município e País).
+   * ObrigatÃ³rio na especificaÃ§Ã£o. Utilizar a Tabela do IBGE de cÃ³digo de unidades da federaÃ§Ã£o (MOC â€“ VisÃ£o Geral, Tabela de UF, MunicÃ­pio e PaÃ­s).
    */
-  @RFWMetaBigDecimalField(caption = "Código da UF do emitente", required = false)
+  @RFWMetaBigDecimalField(caption = "CÃ³digo da UF do emitente", required = false)
   private BigDecimal cuf;
 
   /**
-   * Código numérico que compõe a Chave de Acesso ({@code cNF}).
+   * CÃ³digo numÃ©rico que compÃµe a Chave de Acesso ({@code cNF}).
    *
    * <p>
-   * Obrigatório na especificação. Número aleatório gerado pelo emitente para cada NF-e, utilizado na composição da chave de acesso para evitar acessos indevidos ao documento.
+   * ObrigatÃ³rio na especificaÃ§Ã£o. NÃºmero aleatÃ³rio gerado pelo emitente para cada NF-e, utilizado na composiÃ§Ã£o da chave de acesso para evitar acessos indevidos ao documento.
    */
-  @RFWMetaBigDecimalField(caption = "Código numérico da chave de acesso", required = false)
+  @RFWMetaBigDecimalField(caption = "CÃ³digo numÃ©rico da chave de acesso", required = false)
   private BigDecimal cnf;
 
   /**
-   * Descrição da Natureza da Operação ({@code natOp}).
+   * DescriÃ§Ã£o da Natureza da OperaÃ§Ã£o ({@code natOp}).
    *
    * <p>
-   * Obrigatório na especificação. Informar a natureza da operação que deve decorrer da saída ou da entrada, tais como: venda, compra, transferência, devolução, importação, consignação, remessa (para demonstração, industrialização ou outra), conforme previsto na legislação (CONVÊNIO/SINIEF de 15 de dezembro de 1970).
+   * ObrigatÃ³rio na especificaÃ§Ã£o. Informar a natureza da operaÃ§Ã£o que deve decorrer da saÃ­da ou da entrada, tais como: venda, compra, transferÃªncia, devoluÃ§Ã£o, importaÃ§Ã£o, consignaÃ§Ã£o, remessa (para demonstraÃ§Ã£o, industrializaÃ§Ã£o ou outra), conforme previsto na legislaÃ§Ã£o (CONVÃŠNIO/SINIEF de 15 de dezembro de 1970).
    */
-  @RFWMetaStringField(caption = "Natureza da operação", required = false, maxLength = 60)
+  @RFWMetaStringField(caption = "Natureza da operaÃ§Ã£o", required = false, maxLength = 60)
   private String natOp;
 
   /**
    * Indicador da forma de pagamento ({@code indPag}).
    *
    * <p>
-   * Campo obrigatório nas versões antigas da especificação, mas excluído no leiaute 4.0 (NT 2016.002). Mantido aqui apenas para compatibilidade com documentos antigos.
+   * Campo obrigatÃ³rio nas versÃµes antigas da especificaÃ§Ã£o, mas excluÃ­do no leiaute 4.0 (NT 2016.002). Mantido aqui apenas para compatibilidade com documentos antigos.
    */
   @RFWMetaBigDecimalField(caption = "Indicador da forma de pagamento (obsoleto)", required = false)
   private BigDecimal indPag;
 
   /**
-   * Código do Modelo do Documento Fiscal ({@code mod}).
+   * CÃ³digo do Modelo do Documento Fiscal ({@code mod}).
    *
    * <p>
-   * Obrigatório na especificação. Exemplos:
+   * ObrigatÃ³rio na especificaÃ§Ã£o. Exemplos:
    * <ul>
-   * <li>{@code 55} = NF-e emitida em substituição ao modelo 1 ou 1A</li>
-   * <li>{@code 65} = NFC-e, utilizada em operações de venda no varejo</li>
+   * <li>{@code 55} = NF-e emitida em substituiÃ§Ã£o ao modelo 1 ou 1A</li>
+   * <li>{@code 65} = NFC-e, utilizada em operaÃ§Ãµes de venda no varejo</li>
    * </ul>
    */
   @RFWMetaEnumField(caption = "Modelo do documento fiscal", required = false)
   private SEFAZ_mod mod;
 
   /**
-   * Série do Documento Fiscal ({@code serie}).
+   * SÃ©rie do Documento Fiscal ({@code serie}).
    *
    * <p>
-   * Obrigatório na especificação. Preencher com zeros na hipótese de a NF-e não possuir série.
+   * ObrigatÃ³rio na especificaÃ§Ã£o. Preencher com zeros na hipÃ³tese de a NF-e nÃ£o possuir sÃ©rie.
    * <ul>
-   * <li>{@code 000–899}: Aplicativo do contribuinte</li>
-   * <li>{@code 900–999}: Emissão no site do Fisco (NFA-e e outros cenários conforme NT 2018/001)</li>
+   * <li>{@code 000â€“899}: Aplicativo do contribuinte</li>
+   * <li>{@code 900â€“999}: EmissÃ£o no site do Fisco (NFA-e e outros cenÃ¡rios conforme NT 2018/001)</li>
    * </ul>
    */
-  @RFWMetaBigDecimalField(caption = "Série do documento fiscal", required = false)
+  @RFWMetaBigDecimalField(caption = "SÃ©rie do documento fiscal", required = false)
   private BigDecimal serie;
 
   /**
-   * Número do Documento Fiscal ({@code nNF}).
+   * NÃºmero do Documento Fiscal ({@code nNF}).
    *
    * <p>
-   * Obrigatório na especificação. Identifica a numeração do documento fiscal dentro da série.
+   * ObrigatÃ³rio na especificaÃ§Ã£o. Identifica a numeraÃ§Ã£o do documento fiscal dentro da sÃ©rie.
    */
-  @RFWMetaBigDecimalField(caption = "Número do documento fiscal", required = false)
+  @RFWMetaBigDecimalField(caption = "NÃºmero do documento fiscal", required = false)
   private BigDecimal nnf;
 
   /**
-   * Data e hora de emissão do Documento Fiscal ({@code dhEmi}).
+   * Data e hora de emissÃ£o do Documento Fiscal ({@code dhEmi}).
    *
    * <p>
-   * Obrigatório na especificação. Data e hora no formato UTC {@code AAAA-MM-DDThh:mm:ssTZD}.
+   * ObrigatÃ³rio na especificaÃ§Ã£o. Data e hora no formato UTC {@code AAAA-MM-DDThh:mm:ssTZD}.
    */
-  @RFWMetaDateField(caption = "Data e hora de emissão", required = false, resolution = DateResolution.SECOND)
+  @RFWMetaDateField(caption = "Data e hora de emissÃ£o", required = false, resolution = DateResolution.SECOND)
   private LocalDateTime dhEmi;
 
   /**
-   * Data e hora de saída ou da entrada da mercadoria/produto ({@code dhSaiEnt}).
+   * Data e hora de saÃ­da ou da entrada da mercadoria/produto ({@code dhSaiEnt}).
    *
    * <p>
-   * Opcional na especificação. Data e hora no formato UTC {@code AAAA-MM-DDThh:mm:ssTZD}. Não deve ser informado para NFC-e.
+   * Opcional na especificaÃ§Ã£o. Data e hora no formato UTC {@code AAAA-MM-DDThh:mm:ssTZD}. NÃ£o deve ser informado para NFC-e.
    */
-  @RFWMetaDateField(caption = "Data e hora de saída/entrada", required = false, resolution = DateResolution.SECOND)
+  @RFWMetaDateField(caption = "Data e hora de saÃ­da/entrada", required = false, resolution = DateResolution.SECOND)
   private LocalDateTime dhSaiEnt;
 
   /**
-   * Tipo de operação ({@code tpNF}).
+   * Tipo de operaÃ§Ã£o ({@code tpNF}).
    *
    * <p>
-   * Obrigatório na especificação. Valores:
+   * ObrigatÃ³rio na especificaÃ§Ã£o. Valores:
    * <ul>
    * <li>{@code 0} = Entrada</li>
-   * <li>{@code 1} = Saída</li>
+   * <li>{@code 1} = SaÃ­da</li>
    * </ul>
    */
-  @RFWMetaEnumField(caption = "Tipo de operação (entrada/saída)", required = false)
+  @RFWMetaEnumField(caption = "Tipo de operaÃ§Ã£o (entrada/saÃ­da)", required = false)
   private SEFAZ_tpNF tpNF;
 
   /**
-   * Identificador de local de destino da operação ({@code idDest}).
+   * Identificador de local de destino da operaÃ§Ã£o ({@code idDest}).
    *
    * <p>
-   * Obrigatório na especificação. Valores:
+   * ObrigatÃ³rio na especificaÃ§Ã£o. Valores:
    * <ul>
-   * <li>{@code 1} = Operação interna</li>
-   * <li>{@code 2} = Operação interestadual</li>
-   * <li>{@code 3} = Operação com exterior</li>
+   * <li>{@code 1} = OperaÃ§Ã£o interna</li>
+   * <li>{@code 2} = OperaÃ§Ã£o interestadual</li>
+   * <li>{@code 3} = OperaÃ§Ã£o com exterior</li>
    * </ul>
    */
-  @RFWMetaEnumField(caption = "Destino da operação", required = false)
+  @RFWMetaEnumField(caption = "Destino da operaÃ§Ã£o", required = false)
   private SEFAZ_idDest idDest;
 
   /**
-   * Código do município de ocorrência do fato gerador do ICMS ({@code cMunFG}).
+   * CÃ³digo do municÃ­pio de ocorrÃªncia do fato gerador do ICMS ({@code cMunFG}).
    *
    * <p>
-   * Obrigatório na especificação. Informar o município de ocorrência do fato gerador do ICMS. Utilizar a tabela de municípios do IBGE (MOC, Seção 8.2).
+   * ObrigatÃ³rio na especificaÃ§Ã£o. Informar o municÃ­pio de ocorrÃªncia do fato gerador do ICMS. Utilizar a tabela de municÃ­pios do IBGE (MOC, SeÃ§Ã£o 8.2).
    */
-  @RFWMetaBigDecimalField(caption = "Município do fato gerador", required = false)
+  @RFWMetaBigDecimalField(caption = "MunicÃ­pio do fato gerador", required = false)
   private BigDecimal cmunFG;
 
   /**
-   * Formato de impressão do DANFE ({@code tpImp}).
+   * Formato de impressÃ£o do DANFE ({@code tpImp}).
    *
    * <p>
-   * Obrigatório na especificação. Valores:
+   * ObrigatÃ³rio na especificaÃ§Ã£o. Valores:
    * <ul>
-   * <li>{@code 0} = Sem geração de DANFE</li>
+   * <li>{@code 0} = Sem geraÃ§Ã£o de DANFE</li>
    * <li>{@code 1} = DANFE normal, retrato</li>
    * <li>{@code 2} = DANFE normal, paisagem</li>
    * <li>{@code 3} = DANFE simplificado</li>
    * <li>{@code 4} = DANFE NFC-e</li>
-   * <li>{@code 5} = DANFE NFC-e mensagem eletrônica</li>
+   * <li>{@code 5} = DANFE NFC-e mensagem eletrÃ´nica</li>
    * </ul>
    */
-  @RFWMetaEnumField(caption = "Formato de impressão do DANFE", required = false)
+  @RFWMetaEnumField(caption = "Formato de impressÃ£o do DANFE", required = false)
   private SEFAZ_tpImp tpImp;
 
   /**
-   * Tipo de emissão da NF-e ({@code tpEmis}).
+   * Tipo de emissÃ£o da NF-e ({@code tpEmis}).
    *
    * <p>
-   * Obrigatório na especificação. Inclui emissão normal e diversos tipos de contingência: FS-IA, SCAN, EPEC, FS-DA, SVC-AN, SVC-RS e off-line NFC-e.
+   * ObrigatÃ³rio na especificaÃ§Ã£o. Inclui emissÃ£o normal e diversos tipos de contingÃªncia: FS-IA, SCAN, EPEC, FS-DA, SVC-AN, SVC-RS e off-line NFC-e.
    */
-  @RFWMetaEnumField(caption = "Tipo de emissão da NF-e", required = false)
+  @RFWMetaEnumField(caption = "Tipo de emissÃ£o da NF-e", required = false)
   private SEFAZ_tpEmis tpEmis;
 
   /**
-   * Dígito verificador da chave de acesso da NF-e ({@code cDV}).
+   * DÃ­gito verificador da chave de acesso da NF-e ({@code cDV}).
    *
    * <p>
-   * Obrigatório na especificação. Informar o DV da chave de acesso, calculado pelo algoritmo módulo 11 (base 2,9) sobre os demais campos da chave.
+   * ObrigatÃ³rio na especificaÃ§Ã£o. Informar o DV da chave de acesso, calculado pelo algoritmo mÃ³dulo 11 (base 2,9) sobre os demais campos da chave.
    */
-  @RFWMetaBigDecimalField(caption = "Dígito verificador da chave de acesso", required = false)
+  @RFWMetaBigDecimalField(caption = "DÃ­gito verificador da chave de acesso", required = false)
   private BigDecimal cdv;
 
   /**
-   * Identificação do ambiente de autorização da NF-e ({@code tpAmb}).
+   * IdentificaÃ§Ã£o do ambiente de autorizaÃ§Ã£o da NF-e ({@code tpAmb}).
    *
    * <p>
-   * Obrigatório na especificação. Valores:
+   * ObrigatÃ³rio na especificaÃ§Ã£o. Valores:
    * <ul>
-   * <li>{@code 1} = Produção</li>
-   * <li>{@code 2} = Homologação</li>
+   * <li>{@code 1} = ProduÃ§Ã£o</li>
+   * <li>{@code 2} = HomologaÃ§Ã£o</li>
    * </ul>
    */
-  @RFWMetaEnumField(caption = "Ambiente de autorização", required = false)
+  @RFWMetaEnumField(caption = "Ambiente de autorizaÃ§Ã£o", required = false)
   private SEFAZ_tpAmb tpAmb;
 
   /**
-   * Finalidade de emissão da NF-e ({@code finNFe}).
+   * Finalidade de emissÃ£o da NF-e ({@code finNFe}).
    *
    * <p>
-   * Obrigatório na especificação. Valores:
+   * ObrigatÃ³rio na especificaÃ§Ã£o. Valores:
    * <ul>
    * <li>{@code 1} = NF-e normal</li>
    * <li>{@code 2} = NF-e complementar</li>
    * <li>{@code 3} = NF-e de ajuste</li>
-   * <li>{@code 4} = Devolução de mercadoria</li>
+   * <li>{@code 4} = DevoluÃ§Ã£o de mercadoria</li>
    * </ul>
    */
-  @RFWMetaEnumField(caption = "Finalidade de emissão", required = false)
+  @RFWMetaEnumField(caption = "Finalidade de emissÃ£o", required = false)
   private SEFAZ_finNFe finNFe;
 
   /**
-   * Indicador de operação com consumidor final ({@code indFinal}).
+   * Indicador de operaÃ§Ã£o com consumidor final ({@code indFinal}).
    *
    * <p>
-   * Obrigatório na especificação. Valores:
+   * ObrigatÃ³rio na especificaÃ§Ã£o. Valores:
    * <ul>
    * <li>{@code 0} = Normal</li>
    * <li>{@code 1} = Consumidor final</li>
@@ -247,139 +247,139 @@ public class SEFAZIdeVO extends RFWVO {
   private SEFAZ_indFinal indFinal;
 
   /**
-   * Indicador de presença do comprador no estabelecimento comercial ({@code indPres}).
+   * Indicador de presenÃ§a do comprador no estabelecimento comercial ({@code indPres}).
    *
    * <p>
-   * Obrigatório na especificação. Valores:
+   * ObrigatÃ³rio na especificaÃ§Ã£o. Valores:
    * <ul>
-   * <li>{@code 0} = Não se aplica</li>
-   * <li>{@code 1} = Operação presencial</li>
-   * <li>{@code 2} = Operação não presencial, internet</li>
-   * <li>{@code 3} = Operação não presencial, teleatendimento</li>
-   * <li>{@code 4} = Operação com entrega a domicílio</li>
-   * <li>{@code 5} = Operação presencial, fora do estabelecimento</li>
-   * <li>{@code 9} = Operação não presencial, outros</li>
+   * <li>{@code 0} = NÃ£o se aplica</li>
+   * <li>{@code 1} = OperaÃ§Ã£o presencial</li>
+   * <li>{@code 2} = OperaÃ§Ã£o nÃ£o presencial, internet</li>
+   * <li>{@code 3} = OperaÃ§Ã£o nÃ£o presencial, teleatendimento</li>
+   * <li>{@code 4} = OperaÃ§Ã£o com entrega a domicÃ­lio</li>
+   * <li>{@code 5} = OperaÃ§Ã£o presencial, fora do estabelecimento</li>
+   * <li>{@code 9} = OperaÃ§Ã£o nÃ£o presencial, outros</li>
    * </ul>
    */
-  @RFWMetaEnumField(caption = "Indicador de presença do comprador", required = false)
+  @RFWMetaEnumField(caption = "Indicador de presenÃ§a do comprador", required = false)
   private SEFAZ_indPres indPres;
 
   /**
    * Indicador de intermediador/marketplace ({@code indIntermed}).
    *
    * <p>
-   * Opcional na especificação. Valores:
+   * Opcional na especificaÃ§Ã£o. Valores:
    * <ul>
-   * <li>{@code 0} = Operação sem intermediador</li>
-   * <li>{@code 1} = Operação com plataforma de terceiros</li>
+   * <li>{@code 0} = OperaÃ§Ã£o sem intermediador</li>
+   * <li>{@code 1} = OperaÃ§Ã£o com plataforma de terceiros</li>
    * </ul>
    */
   @RFWMetaEnumField(caption = "Indicador de intermediador/marketplace", required = false)
   private SEFAZ_indIntermed indIntermed;
 
   /**
-   * Processo de emissão da NF-e ({@code procEmi}).
+   * Processo de emissÃ£o da NF-e ({@code procEmi}).
    *
    * <p>
-   * Obrigatório na especificação. Valores:
+   * ObrigatÃ³rio na especificaÃ§Ã£o. Valores:
    * <ul>
-   * <li>{@code 0} = Emissão pelo contribuinte</li>
-   * <li>{@code 1} = Emissão avulsa pelo Fisco</li>
-   * <li>{@code 2} = Emissão avulsa com certificado digital pelo contribuinte</li>
-   * <li>{@code 3} = Emissão pelo aplicativo do Fisco</li>
+   * <li>{@code 0} = EmissÃ£o pelo contribuinte</li>
+   * <li>{@code 1} = EmissÃ£o avulsa pelo Fisco</li>
+   * <li>{@code 2} = EmissÃ£o avulsa com certificado digital pelo contribuinte</li>
+   * <li>{@code 3} = EmissÃ£o pelo aplicativo do Fisco</li>
    * </ul>
    */
-  @RFWMetaEnumField(caption = "Processo de emissão da NF-e", required = false)
+  @RFWMetaEnumField(caption = "Processo de emissÃ£o da NF-e", required = false)
   private SEFAZ_procEmi procEmi;
 
   /**
-   * Versão do processo de emissão da NF-e ({@code verProc}).
+   * VersÃ£o do processo de emissÃ£o da NF-e ({@code verProc}).
    *
    * <p>
-   * Obrigatório na especificação. Informar a versão do aplicativo emissor da NF-e (versão do sistema ou componente responsável pela geração da NF-e).
+   * ObrigatÃ³rio na especificaÃ§Ã£o. Informar a versÃ£o do aplicativo emissor da NF-e (versÃ£o do sistema ou componente responsÃ¡vel pela geraÃ§Ã£o da NF-e).
    */
-  @RFWMetaStringField(caption = "Versão do processo de emissão", required = false, maxLength = 20)
+  @RFWMetaStringField(caption = "VersÃ£o do processo de emissÃ£o", required = false, maxLength = 20)
   private String verProc;
 
   /**
-   * Data e hora da entrada em contingência ({@code dhCont}).
+   * Data e hora da entrada em contingÃªncia ({@code dhCont}).
    *
    * <p>
-   * Obrigatório na especificação quando o grupo de contingência é informado. Data e hora no formato UTC {@code AAAA-MM-DDThh:mm:ssTZD}, indicando o momento em que o contribuinte entrou em contingência.
+   * ObrigatÃ³rio na especificaÃ§Ã£o quando o grupo de contingÃªncia Ã© informado. Data e hora no formato UTC {@code AAAA-MM-DDThh:mm:ssTZD}, indicando o momento em que o contribuinte entrou em contingÃªncia.
    */
-  @RFWMetaDateField(caption = "Data e hora de entrada em contingência", required = false, resolution = DateResolution.SECOND)
+  @RFWMetaDateField(caption = "Data e hora de entrada em contingÃªncia", required = false, resolution = DateResolution.SECOND)
   private LocalDateTime dhCont;
 
   /**
-   * Justificativa da entrada em contingência ({@code xJust}).
+   * Justificativa da entrada em contingÃªncia ({@code xJust}).
    *
    * <p>
-   * Obrigatório na especificação quando o grupo de contingência é informado. Deve conter um texto explicando o motivo da entrada em contingência, com comprimento mínimo de 15 e máximo de 256 caracteres.
+   * ObrigatÃ³rio na especificaÃ§Ã£o quando o grupo de contingÃªncia Ã© informado. Deve conter um texto explicando o motivo da entrada em contingÃªncia, com comprimento mÃ­nimo de 15 e mÃ¡ximo de 256 caracteres.
    */
-  @RFWMetaStringField(caption = "Justificativa da contingência", required = false, maxLength = 256, minLength = 15)
+  @RFWMetaStringField(caption = "Justificativa da contingÃªncia", required = false, maxLength = 256, minLength = 15)
   private String xjust;
 
   /**
-   * # código da UF do emitente do Documento Fiscal ({@code cUF}).
+   * # cÃ³digo da UF do emitente do Documento Fiscal ({@code cUF}).
    * <p>
-   * Obrigatório na especificação. Utilizar a Tabela do IBGE de código de unidades da federação (MOC – Visão Geral, Tabela de UF, Município e País).
+   * ObrigatÃ³rio na especificaÃ§Ã£o. Utilizar a Tabela do IBGE de cÃ³digo de unidades da federaÃ§Ã£o (MOC â€“ VisÃ£o Geral, Tabela de UF, MunicÃ­pio e PaÃ­s).
    *
-   * @return the código da UF do emitente do Documento Fiscal ({@code cUF})
+   * @return the cÃ³digo da UF do emitente do Documento Fiscal ({@code cUF})
    */
   public BigDecimal getCuf() {
     return cuf;
   }
 
   /**
-   * # código da UF do emitente do Documento Fiscal ({@code cUF}).
+   * # cÃ³digo da UF do emitente do Documento Fiscal ({@code cUF}).
    * <p>
-   * Obrigatório na especificação. Utilizar a Tabela do IBGE de código de unidades da federação (MOC – Visão Geral, Tabela de UF, Município e País).
+   * ObrigatÃ³rio na especificaÃ§Ã£o. Utilizar a Tabela do IBGE de cÃ³digo de unidades da federaÃ§Ã£o (MOC â€“ VisÃ£o Geral, Tabela de UF, MunicÃ­pio e PaÃ­s).
    *
-   * @param cuf the new código da UF do emitente do Documento Fiscal ({@code cUF})
+   * @param cuf the new cÃ³digo da UF do emitente do Documento Fiscal ({@code cUF})
    */
   public void setCuf(BigDecimal cuf) {
     this.cuf = cuf;
   }
 
   /**
-   * # código numérico que compõe a Chave de Acesso ({@code cNF}).
+   * # cÃ³digo numÃ©rico que compÃµe a Chave de Acesso ({@code cNF}).
    * <p>
-   * Obrigatório na especificação. Número aleatório gerado pelo emitente para cada NF-e, utilizado na composição da chave de acesso para evitar acessos indevidos ao documento.
+   * ObrigatÃ³rio na especificaÃ§Ã£o. NÃºmero aleatÃ³rio gerado pelo emitente para cada NF-e, utilizado na composiÃ§Ã£o da chave de acesso para evitar acessos indevidos ao documento.
    *
-   * @return the código numérico que compõe a Chave de Acesso ({@code cNF})
+   * @return the cÃ³digo numÃ©rico que compÃµe a Chave de Acesso ({@code cNF})
    */
   public BigDecimal getCnf() {
     return cnf;
   }
 
   /**
-   * # código numérico que compõe a Chave de Acesso ({@code cNF}).
+   * # cÃ³digo numÃ©rico que compÃµe a Chave de Acesso ({@code cNF}).
    * <p>
-   * Obrigatório na especificação. Número aleatório gerado pelo emitente para cada NF-e, utilizado na composição da chave de acesso para evitar acessos indevidos ao documento.
+   * ObrigatÃ³rio na especificaÃ§Ã£o. NÃºmero aleatÃ³rio gerado pelo emitente para cada NF-e, utilizado na composiÃ§Ã£o da chave de acesso para evitar acessos indevidos ao documento.
    *
-   * @param cnf the new código numérico que compõe a Chave de Acesso ({@code cNF})
+   * @param cnf the new cÃ³digo numÃ©rico que compÃµe a Chave de Acesso ({@code cNF})
    */
   public void setCnf(BigDecimal cnf) {
     this.cnf = cnf;
   }
 
   /**
-   * # descrição da Natureza da Operação ({@code natOp}).
+   * # descriÃ§Ã£o da Natureza da OperaÃ§Ã£o ({@code natOp}).
    * <p>
-   * Obrigatório na especificação. Informar a natureza da operação que deve decorrer da saída ou da entrada, tais como: venda, compra, transferência, devolução, importação, consignação, remessa (para demonstração, industrialização ou outra), conforme previsto na legislação (CONVÊNIO/SINIEF de 15 de dezembro de 1970).
+   * ObrigatÃ³rio na especificaÃ§Ã£o. Informar a natureza da operaÃ§Ã£o que deve decorrer da saÃ­da ou da entrada, tais como: venda, compra, transferÃªncia, devoluÃ§Ã£o, importaÃ§Ã£o, consignaÃ§Ã£o, remessa (para demonstraÃ§Ã£o, industrializaÃ§Ã£o ou outra), conforme previsto na legislaÃ§Ã£o (CONVÃŠNIO/SINIEF de 15 de dezembro de 1970).
    *
-   * @return the descrição da Natureza da Operação ({@code natOp})
+   * @return the descriÃ§Ã£o da Natureza da OperaÃ§Ã£o ({@code natOp})
    */
   public String getNatOp() {
     return natOp;
   }
 
   /**
-   * # descrição da Natureza da Operação ({@code natOp}).
+   * # descriÃ§Ã£o da Natureza da OperaÃ§Ã£o ({@code natOp}).
    * <p>
-   * Obrigatório na especificação. Informar a natureza da operação que deve decorrer da saída ou da entrada, tais como: venda, compra, transferência, devolução, importação, consignação, remessa (para demonstração, industrialização ou outra), conforme previsto na legislação (CONVÊNIO/SINIEF de 15 de dezembro de 1970).
+   * ObrigatÃ³rio na especificaÃ§Ã£o. Informar a natureza da operaÃ§Ã£o que deve decorrer da saÃ­da ou da entrada, tais como: venda, compra, transferÃªncia, devoluÃ§Ã£o, importaÃ§Ã£o, consignaÃ§Ã£o, remessa (para demonstraÃ§Ã£o, industrializaÃ§Ã£o ou outra), conforme previsto na legislaÃ§Ã£o (CONVÃŠNIO/SINIEF de 15 de dezembro de 1970).
    *
-   * @param natOp the new descrição da Natureza da Operação ({@code natOp})
+   * @param natOp the new descriÃ§Ã£o da Natureza da OperaÃ§Ã£o ({@code natOp})
    */
   public void setNatOp(String natOp) {
     this.natOp = natOp;
@@ -388,7 +388,7 @@ public class SEFAZIdeVO extends RFWVO {
   /**
    * # indicador da forma de pagamento ({@code indPag}).
    * <p>
-   * Campo obrigatório nas versões antigas da especificação, mas excluído no leiaute 4.0 (NT 2016.002). Mantido aqui apenas para compatibilidade com documentos antigos.
+   * Campo obrigatÃ³rio nas versÃµes antigas da especificaÃ§Ã£o, mas excluÃ­do no leiaute 4.0 (NT 2016.002). Mantido aqui apenas para compatibilidade com documentos antigos.
    *
    * @return the indicador da forma de pagamento ({@code indPag})
    */
@@ -399,7 +399,7 @@ public class SEFAZIdeVO extends RFWVO {
   /**
    * # indicador da forma de pagamento ({@code indPag}).
    * <p>
-   * Campo obrigatório nas versões antigas da especificação, mas excluído no leiaute 4.0 (NT 2016.002). Mantido aqui apenas para compatibilidade com documentos antigos.
+   * Campo obrigatÃ³rio nas versÃµes antigas da especificaÃ§Ã£o, mas excluÃ­do no leiaute 4.0 (NT 2016.002). Mantido aqui apenas para compatibilidade com documentos antigos.
    *
    * @param indPag the new indicador da forma de pagamento ({@code indPag})
    */
@@ -408,444 +408,444 @@ public class SEFAZIdeVO extends RFWVO {
   }
 
   /**
-   * # código do Modelo do Documento Fiscal ({@code mod}).
+   * # cÃ³digo do Modelo do Documento Fiscal ({@code mod}).
    * <p>
-   * Obrigatório na especificação. Exemplos:
+   * ObrigatÃ³rio na especificaÃ§Ã£o. Exemplos:
    * <ul>
-   * <li>{@code 55} = NF-e emitida em substituição ao modelo 1 ou 1A</li>
-   * <li>{@code 65} = NFC-e, utilizada em operações de venda no varejo</li>
+   * <li>{@code 55} = NF-e emitida em substituiÃ§Ã£o ao modelo 1 ou 1A</li>
+   * <li>{@code 65} = NFC-e, utilizada em operaÃ§Ãµes de venda no varejo</li>
    * </ul>
    * .
    *
-   * @return the código do Modelo do Documento Fiscal ({@code mod})
+   * @return the cÃ³digo do Modelo do Documento Fiscal ({@code mod})
    */
   public SEFAZ_mod getMod() {
     return mod;
   }
 
   /**
-   * # código do Modelo do Documento Fiscal ({@code mod}).
+   * # cÃ³digo do Modelo do Documento Fiscal ({@code mod}).
    * <p>
-   * Obrigatório na especificação. Exemplos:
+   * ObrigatÃ³rio na especificaÃ§Ã£o. Exemplos:
    * <ul>
-   * <li>{@code 55} = NF-e emitida em substituição ao modelo 1 ou 1A</li>
-   * <li>{@code 65} = NFC-e, utilizada em operações de venda no varejo</li>
+   * <li>{@code 55} = NF-e emitida em substituiÃ§Ã£o ao modelo 1 ou 1A</li>
+   * <li>{@code 65} = NFC-e, utilizada em operaÃ§Ãµes de venda no varejo</li>
    * </ul>
    * .
    *
-   * @param mod the new código do Modelo do Documento Fiscal ({@code mod})
+   * @param mod the new cÃ³digo do Modelo do Documento Fiscal ({@code mod})
    */
   public void setMod(SEFAZ_mod mod) {
     this.mod = mod;
   }
 
   /**
-   * # série do Documento Fiscal ({@code serie}).
+   * # sÃ©rie do Documento Fiscal ({@code serie}).
    * <p>
-   * Obrigatório na especificação. Preencher com zeros na hipótese de a NF-e não possuir série.
+   * ObrigatÃ³rio na especificaÃ§Ã£o. Preencher com zeros na hipÃ³tese de a NF-e nÃ£o possuir sÃ©rie.
    * <ul>
-   * <li>{@code 000–899}: Aplicativo do contribuinte</li>
-   * <li>{@code 900–999}: Emissão no site do Fisco (NFA-e e outros cenários conforme NT 2018/001)</li>
+   * <li>{@code 000â€“899}: Aplicativo do contribuinte</li>
+   * <li>{@code 900â€“999}: EmissÃ£o no site do Fisco (NFA-e e outros cenÃ¡rios conforme NT 2018/001)</li>
    * </ul>
    * .
    *
-   * @return the série do Documento Fiscal ({@code serie})
+   * @return the sÃ©rie do Documento Fiscal ({@code serie})
    */
   public BigDecimal getSerie() {
     return serie;
   }
 
   /**
-   * # série do Documento Fiscal ({@code serie}).
+   * # sÃ©rie do Documento Fiscal ({@code serie}).
    * <p>
-   * Obrigatório na especificação. Preencher com zeros na hipótese de a NF-e não possuir série.
+   * ObrigatÃ³rio na especificaÃ§Ã£o. Preencher com zeros na hipÃ³tese de a NF-e nÃ£o possuir sÃ©rie.
    * <ul>
-   * <li>{@code 000–899}: Aplicativo do contribuinte</li>
-   * <li>{@code 900–999}: Emissão no site do Fisco (NFA-e e outros cenários conforme NT 2018/001)</li>
+   * <li>{@code 000â€“899}: Aplicativo do contribuinte</li>
+   * <li>{@code 900â€“999}: EmissÃ£o no site do Fisco (NFA-e e outros cenÃ¡rios conforme NT 2018/001)</li>
    * </ul>
    * .
    *
-   * @param serie the new série do Documento Fiscal ({@code serie})
+   * @param serie the new sÃ©rie do Documento Fiscal ({@code serie})
    */
   public void setSerie(BigDecimal serie) {
     this.serie = serie;
   }
 
   /**
-   * # número do Documento Fiscal ({@code nNF}).
+   * # nÃºmero do Documento Fiscal ({@code nNF}).
    * <p>
-   * Obrigatório na especificação. Identifica a numeração do documento fiscal dentro da série.
+   * ObrigatÃ³rio na especificaÃ§Ã£o. Identifica a numeraÃ§Ã£o do documento fiscal dentro da sÃ©rie.
    *
-   * @return the número do Documento Fiscal ({@code nNF})
+   * @return the nÃºmero do Documento Fiscal ({@code nNF})
    */
   public BigDecimal getNnf() {
     return nnf;
   }
 
   /**
-   * # número do Documento Fiscal ({@code nNF}).
+   * # nÃºmero do Documento Fiscal ({@code nNF}).
    * <p>
-   * Obrigatório na especificação. Identifica a numeração do documento fiscal dentro da série.
+   * ObrigatÃ³rio na especificaÃ§Ã£o. Identifica a numeraÃ§Ã£o do documento fiscal dentro da sÃ©rie.
    *
-   * @param nnf the new número do Documento Fiscal ({@code nNF})
+   * @param nnf the new nÃºmero do Documento Fiscal ({@code nNF})
    */
   public void setNnf(BigDecimal nnf) {
     this.nnf = nnf;
   }
 
   /**
-   * # data e hora de emissão do Documento Fiscal ({@code dhEmi}).
+   * # data e hora de emissÃ£o do Documento Fiscal ({@code dhEmi}).
    * <p>
-   * Obrigatório na especificação. Data e hora no formato UTC {@code AAAA-MM-DDThh:mm:ssTZD}.
+   * ObrigatÃ³rio na especificaÃ§Ã£o. Data e hora no formato UTC {@code AAAA-MM-DDThh:mm:ssTZD}.
    *
-   * @return the data e hora de emissão do Documento Fiscal ({@code dhEmi})
+   * @return the data e hora de emissÃ£o do Documento Fiscal ({@code dhEmi})
    */
   public LocalDateTime getDhEmi() {
     return dhEmi;
   }
 
   /**
-   * # data e hora de emissão do Documento Fiscal ({@code dhEmi}).
+   * # data e hora de emissÃ£o do Documento Fiscal ({@code dhEmi}).
    * <p>
-   * Obrigatório na especificação. Data e hora no formato UTC {@code AAAA-MM-DDThh:mm:ssTZD}.
+   * ObrigatÃ³rio na especificaÃ§Ã£o. Data e hora no formato UTC {@code AAAA-MM-DDThh:mm:ssTZD}.
    *
-   * @param dhEmi the new data e hora de emissão do Documento Fiscal ({@code dhEmi})
+   * @param dhEmi the new data e hora de emissÃ£o do Documento Fiscal ({@code dhEmi})
    */
   public void setDhEmi(LocalDateTime dhEmi) {
     this.dhEmi = dhEmi;
   }
 
   /**
-   * # data e hora de saída ou da entrada da mercadoria/produto ({@code dhSaiEnt}).
+   * # data e hora de saÃ­da ou da entrada da mercadoria/produto ({@code dhSaiEnt}).
    * <p>
-   * Opcional na especificação. Data e hora no formato UTC {@code AAAA-MM-DDThh:mm:ssTZD}. Não deve ser informado para NFC-e.
+   * Opcional na especificaÃ§Ã£o. Data e hora no formato UTC {@code AAAA-MM-DDThh:mm:ssTZD}. NÃ£o deve ser informado para NFC-e.
    *
-   * @return the data e hora de saída ou da entrada da mercadoria/produto ({@code dhSaiEnt})
+   * @return the data e hora de saÃ­da ou da entrada da mercadoria/produto ({@code dhSaiEnt})
    */
   public LocalDateTime getDhSaiEnt() {
     return dhSaiEnt;
   }
 
   /**
-   * # data e hora de saída ou da entrada da mercadoria/produto ({@code dhSaiEnt}).
+   * # data e hora de saÃ­da ou da entrada da mercadoria/produto ({@code dhSaiEnt}).
    * <p>
-   * Opcional na especificação. Data e hora no formato UTC {@code AAAA-MM-DDThh:mm:ssTZD}. Não deve ser informado para NFC-e.
+   * Opcional na especificaÃ§Ã£o. Data e hora no formato UTC {@code AAAA-MM-DDThh:mm:ssTZD}. NÃ£o deve ser informado para NFC-e.
    *
-   * @param dhSaiEnt the new data e hora de saída ou da entrada da mercadoria/produto ({@code dhSaiEnt})
+   * @param dhSaiEnt the new data e hora de saÃ­da ou da entrada da mercadoria/produto ({@code dhSaiEnt})
    */
   public void setDhSaiEnt(LocalDateTime dhSaiEnt) {
     this.dhSaiEnt = dhSaiEnt;
   }
 
   /**
-   * # tipo de operação ({@code tpNF}).
+   * # tipo de operaÃ§Ã£o ({@code tpNF}).
    * <p>
-   * Obrigatório na especificação. Valores:
+   * ObrigatÃ³rio na especificaÃ§Ã£o. Valores:
    * <ul>
    * <li>{@code 0} = Entrada</li>
-   * <li>{@code 1} = Saída</li>
+   * <li>{@code 1} = SaÃ­da</li>
    * </ul>
    * .
    *
-   * @return the tipo de operação ({@code tpNF})
+   * @return the tipo de operaÃ§Ã£o ({@code tpNF})
    */
   public SEFAZ_tpNF getTpNF() {
     return tpNF;
   }
 
   /**
-   * # tipo de operação ({@code tpNF}).
+   * # tipo de operaÃ§Ã£o ({@code tpNF}).
    * <p>
-   * Obrigatório na especificação. Valores:
+   * ObrigatÃ³rio na especificaÃ§Ã£o. Valores:
    * <ul>
    * <li>{@code 0} = Entrada</li>
-   * <li>{@code 1} = Saída</li>
+   * <li>{@code 1} = SaÃ­da</li>
    * </ul>
    * .
    *
-   * @param tpNF the new tipo de operação ({@code tpNF})
+   * @param tpNF the new tipo de operaÃ§Ã£o ({@code tpNF})
    */
   public void setTpNF(SEFAZ_tpNF tpNF) {
     this.tpNF = tpNF;
   }
 
   /**
-   * # identificador de local de destino da operação ({@code idDest}).
+   * # identificador de local de destino da operaÃ§Ã£o ({@code idDest}).
    * <p>
-   * Obrigatório na especificação. Valores:
+   * ObrigatÃ³rio na especificaÃ§Ã£o. Valores:
    * <ul>
-   * <li>{@code 1} = Operação interna</li>
-   * <li>{@code 2} = Operação interestadual</li>
-   * <li>{@code 3} = Operação com exterior</li>
+   * <li>{@code 1} = OperaÃ§Ã£o interna</li>
+   * <li>{@code 2} = OperaÃ§Ã£o interestadual</li>
+   * <li>{@code 3} = OperaÃ§Ã£o com exterior</li>
    * </ul>
    * .
    *
-   * @return the identificador de local de destino da operação ({@code idDest})
+   * @return the identificador de local de destino da operaÃ§Ã£o ({@code idDest})
    */
   public SEFAZ_idDest getIdDest() {
     return idDest;
   }
 
   /**
-   * # identificador de local de destino da operação ({@code idDest}).
+   * # identificador de local de destino da operaÃ§Ã£o ({@code idDest}).
    * <p>
-   * Obrigatório na especificação. Valores:
+   * ObrigatÃ³rio na especificaÃ§Ã£o. Valores:
    * <ul>
-   * <li>{@code 1} = Operação interna</li>
-   * <li>{@code 2} = Operação interestadual</li>
-   * <li>{@code 3} = Operação com exterior</li>
+   * <li>{@code 1} = OperaÃ§Ã£o interna</li>
+   * <li>{@code 2} = OperaÃ§Ã£o interestadual</li>
+   * <li>{@code 3} = OperaÃ§Ã£o com exterior</li>
    * </ul>
    * .
    *
-   * @param idDest the new identificador de local de destino da operação ({@code idDest})
+   * @param idDest the new identificador de local de destino da operaÃ§Ã£o ({@code idDest})
    */
   public void setIdDest(SEFAZ_idDest idDest) {
     this.idDest = idDest;
   }
 
   /**
-   * # código do município de ocorrência do fato gerador do ICMS ({@code cMunFG}).
+   * # cÃ³digo do municÃ­pio de ocorrÃªncia do fato gerador do ICMS ({@code cMunFG}).
    * <p>
-   * Obrigatório na especificação. Informar o município de ocorrência do fato gerador do ICMS. Utilizar a tabela de municípios do IBGE (MOC, Seção 8.2).
+   * ObrigatÃ³rio na especificaÃ§Ã£o. Informar o municÃ­pio de ocorrÃªncia do fato gerador do ICMS. Utilizar a tabela de municÃ­pios do IBGE (MOC, SeÃ§Ã£o 8.2).
    *
-   * @return the código do município de ocorrência do fato gerador do ICMS ({@code cMunFG})
+   * @return the cÃ³digo do municÃ­pio de ocorrÃªncia do fato gerador do ICMS ({@code cMunFG})
    */
   public BigDecimal getCmunFG() {
     return cmunFG;
   }
 
   /**
-   * # código do município de ocorrência do fato gerador do ICMS ({@code cMunFG}).
+   * # cÃ³digo do municÃ­pio de ocorrÃªncia do fato gerador do ICMS ({@code cMunFG}).
    * <p>
-   * Obrigatório na especificação. Informar o município de ocorrência do fato gerador do ICMS. Utilizar a tabela de municípios do IBGE (MOC, Seção 8.2).
+   * ObrigatÃ³rio na especificaÃ§Ã£o. Informar o municÃ­pio de ocorrÃªncia do fato gerador do ICMS. Utilizar a tabela de municÃ­pios do IBGE (MOC, SeÃ§Ã£o 8.2).
    *
-   * @param cmunFG the new código do município de ocorrência do fato gerador do ICMS ({@code cMunFG})
+   * @param cmunFG the new cÃ³digo do municÃ­pio de ocorrÃªncia do fato gerador do ICMS ({@code cMunFG})
    */
   public void setCmunFG(BigDecimal cmunFG) {
     this.cmunFG = cmunFG;
   }
 
   /**
-   * # formato de impressão do DANFE ({@code tpImp}).
+   * # formato de impressÃ£o do DANFE ({@code tpImp}).
    * <p>
-   * Obrigatório na especificação. Valores:
+   * ObrigatÃ³rio na especificaÃ§Ã£o. Valores:
    * <ul>
-   * <li>{@code 0} = Sem geração de DANFE</li>
+   * <li>{@code 0} = Sem geraÃ§Ã£o de DANFE</li>
    * <li>{@code 1} = DANFE normal, retrato</li>
    * <li>{@code 2} = DANFE normal, paisagem</li>
    * <li>{@code 3} = DANFE simplificado</li>
    * <li>{@code 4} = DANFE NFC-e</li>
-   * <li>{@code 5} = DANFE NFC-e mensagem eletrônica</li>
+   * <li>{@code 5} = DANFE NFC-e mensagem eletrÃ´nica</li>
    * </ul>
    * .
    *
-   * @return the formato de impressão do DANFE ({@code tpImp})
+   * @return the formato de impressÃ£o do DANFE ({@code tpImp})
    */
   public SEFAZ_tpImp getTpImp() {
     return tpImp;
   }
 
   /**
-   * # formato de impressão do DANFE ({@code tpImp}).
+   * # formato de impressÃ£o do DANFE ({@code tpImp}).
    * <p>
-   * Obrigatório na especificação. Valores:
+   * ObrigatÃ³rio na especificaÃ§Ã£o. Valores:
    * <ul>
-   * <li>{@code 0} = Sem geração de DANFE</li>
+   * <li>{@code 0} = Sem geraÃ§Ã£o de DANFE</li>
    * <li>{@code 1} = DANFE normal, retrato</li>
    * <li>{@code 2} = DANFE normal, paisagem</li>
    * <li>{@code 3} = DANFE simplificado</li>
    * <li>{@code 4} = DANFE NFC-e</li>
-   * <li>{@code 5} = DANFE NFC-e mensagem eletrônica</li>
+   * <li>{@code 5} = DANFE NFC-e mensagem eletrÃ´nica</li>
    * </ul>
    * .
    *
-   * @param tpImp the new formato de impressão do DANFE ({@code tpImp})
+   * @param tpImp the new formato de impressÃ£o do DANFE ({@code tpImp})
    */
   public void setTpImp(SEFAZ_tpImp tpImp) {
     this.tpImp = tpImp;
   }
 
   /**
-   * # tipo de emissão da NF-e ({@code tpEmis}).
+   * # tipo de emissÃ£o da NF-e ({@code tpEmis}).
    * <p>
-   * Obrigatório na especificação. Inclui emissão normal e diversos tipos de contingência: FS-IA, SCAN, EPEC, FS-DA, SVC-AN, SVC-RS e off-line NFC-e.
+   * ObrigatÃ³rio na especificaÃ§Ã£o. Inclui emissÃ£o normal e diversos tipos de contingÃªncia: FS-IA, SCAN, EPEC, FS-DA, SVC-AN, SVC-RS e off-line NFC-e.
    *
-   * @return the tipo de emissão da NF-e ({@code tpEmis})
+   * @return the tipo de emissÃ£o da NF-e ({@code tpEmis})
    */
   public SEFAZ_tpEmis getTpEmis() {
     return tpEmis;
   }
 
   /**
-   * # tipo de emissão da NF-e ({@code tpEmis}).
+   * # tipo de emissÃ£o da NF-e ({@code tpEmis}).
    * <p>
-   * Obrigatório na especificação. Inclui emissão normal e diversos tipos de contingência: FS-IA, SCAN, EPEC, FS-DA, SVC-AN, SVC-RS e off-line NFC-e.
+   * ObrigatÃ³rio na especificaÃ§Ã£o. Inclui emissÃ£o normal e diversos tipos de contingÃªncia: FS-IA, SCAN, EPEC, FS-DA, SVC-AN, SVC-RS e off-line NFC-e.
    *
-   * @param tpEmis the new tipo de emissão da NF-e ({@code tpEmis})
+   * @param tpEmis the new tipo de emissÃ£o da NF-e ({@code tpEmis})
    */
   public void setTpEmis(SEFAZ_tpEmis tpEmis) {
     this.tpEmis = tpEmis;
   }
 
   /**
-   * # dígito verificador da chave de acesso da NF-e ({@code cDV}).
+   * # dÃ­gito verificador da chave de acesso da NF-e ({@code cDV}).
    * <p>
-   * Obrigatório na especificação. Informar o DV da chave de acesso, calculado pelo algoritmo módulo 11 (base 2,9) sobre os demais campos da chave.
+   * ObrigatÃ³rio na especificaÃ§Ã£o. Informar o DV da chave de acesso, calculado pelo algoritmo mÃ³dulo 11 (base 2,9) sobre os demais campos da chave.
    *
-   * @return the dígito verificador da chave de acesso da NF-e ({@code cDV})
+   * @return the dÃ­gito verificador da chave de acesso da NF-e ({@code cDV})
    */
   public BigDecimal getCdv() {
     return cdv;
   }
 
   /**
-   * # dígito verificador da chave de acesso da NF-e ({@code cDV}).
+   * # dÃ­gito verificador da chave de acesso da NF-e ({@code cDV}).
    * <p>
-   * Obrigatório na especificação. Informar o DV da chave de acesso, calculado pelo algoritmo módulo 11 (base 2,9) sobre os demais campos da chave.
+   * ObrigatÃ³rio na especificaÃ§Ã£o. Informar o DV da chave de acesso, calculado pelo algoritmo mÃ³dulo 11 (base 2,9) sobre os demais campos da chave.
    *
-   * @param cdv the new dígito verificador da chave de acesso da NF-e ({@code cDV})
+   * @param cdv the new dÃ­gito verificador da chave de acesso da NF-e ({@code cDV})
    */
   public void setCdv(BigDecimal cdv) {
     this.cdv = cdv;
   }
 
   /**
-   * # identificação do ambiente de autorização da NF-e ({@code tpAmb}).
+   * # identificaÃ§Ã£o do ambiente de autorizaÃ§Ã£o da NF-e ({@code tpAmb}).
    * <p>
-   * Obrigatório na especificação. Valores:
+   * ObrigatÃ³rio na especificaÃ§Ã£o. Valores:
    * <ul>
-   * <li>{@code 1} = Produção</li>
-   * <li>{@code 2} = Homologação</li>
+   * <li>{@code 1} = ProduÃ§Ã£o</li>
+   * <li>{@code 2} = HomologaÃ§Ã£o</li>
    * </ul>
    * .
    *
-   * @return the identificação do ambiente de autorização da NF-e ({@code tpAmb})
+   * @return the identificaÃ§Ã£o do ambiente de autorizaÃ§Ã£o da NF-e ({@code tpAmb})
    */
   public SEFAZ_tpAmb getTpAmb() {
     return tpAmb;
   }
 
   /**
-   * # identificação do ambiente de autorização da NF-e ({@code tpAmb}).
+   * # identificaÃ§Ã£o do ambiente de autorizaÃ§Ã£o da NF-e ({@code tpAmb}).
    * <p>
-   * Obrigatório na especificação. Valores:
+   * ObrigatÃ³rio na especificaÃ§Ã£o. Valores:
    * <ul>
-   * <li>{@code 1} = Produção</li>
-   * <li>{@code 2} = Homologação</li>
+   * <li>{@code 1} = ProduÃ§Ã£o</li>
+   * <li>{@code 2} = HomologaÃ§Ã£o</li>
    * </ul>
    * .
    *
-   * @param tpAmb the new identificação do ambiente de autorização da NF-e ({@code tpAmb})
+   * @param tpAmb the new identificaÃ§Ã£o do ambiente de autorizaÃ§Ã£o da NF-e ({@code tpAmb})
    */
   public void setTpAmb(SEFAZ_tpAmb tpAmb) {
     this.tpAmb = tpAmb;
   }
 
   /**
-   * # finalidade de emissão da NF-e ({@code finNFe}).
+   * # finalidade de emissÃ£o da NF-e ({@code finNFe}).
    * <p>
-   * Obrigatório na especificação. Valores:
+   * ObrigatÃ³rio na especificaÃ§Ã£o. Valores:
    * <ul>
    * <li>{@code 1} = NF-e normal</li>
    * <li>{@code 2} = NF-e complementar</li>
    * <li>{@code 3} = NF-e de ajuste</li>
-   * <li>{@code 4} = Devolução de mercadoria</li>
+   * <li>{@code 4} = DevoluÃ§Ã£o de mercadoria</li>
    * </ul>
    * .
    *
-   * @return the finalidade de emissão da NF-e ({@code finNFe})
+   * @return the finalidade de emissÃ£o da NF-e ({@code finNFe})
    */
   public SEFAZ_finNFe getFinNFe() {
     return finNFe;
   }
 
   /**
-   * # finalidade de emissão da NF-e ({@code finNFe}).
+   * # finalidade de emissÃ£o da NF-e ({@code finNFe}).
    * <p>
-   * Obrigatório na especificação. Valores:
+   * ObrigatÃ³rio na especificaÃ§Ã£o. Valores:
    * <ul>
    * <li>{@code 1} = NF-e normal</li>
    * <li>{@code 2} = NF-e complementar</li>
    * <li>{@code 3} = NF-e de ajuste</li>
-   * <li>{@code 4} = Devolução de mercadoria</li>
+   * <li>{@code 4} = DevoluÃ§Ã£o de mercadoria</li>
    * </ul>
    * .
    *
-   * @param finNFe the new finalidade de emissão da NF-e ({@code finNFe})
+   * @param finNFe the new finalidade de emissÃ£o da NF-e ({@code finNFe})
    */
   public void setFinNFe(SEFAZ_finNFe finNFe) {
     this.finNFe = finNFe;
   }
 
   /**
-   * # indicador de operação com consumidor final ({@code indFinal}).
+   * # indicador de operaÃ§Ã£o com consumidor final ({@code indFinal}).
    * <p>
-   * Obrigatório na especificação. Valores:
+   * ObrigatÃ³rio na especificaÃ§Ã£o. Valores:
    * <ul>
    * <li>{@code 0} = Normal</li>
    * <li>{@code 1} = Consumidor final</li>
    * </ul>
    * .
    *
-   * @return the indicador de operação com consumidor final ({@code indFinal})
+   * @return the indicador de operaÃ§Ã£o com consumidor final ({@code indFinal})
    */
   public SEFAZ_indFinal getIndFinal() {
     return indFinal;
   }
 
   /**
-   * # indicador de operação com consumidor final ({@code indFinal}).
+   * # indicador de operaÃ§Ã£o com consumidor final ({@code indFinal}).
    * <p>
-   * Obrigatório na especificação. Valores:
+   * ObrigatÃ³rio na especificaÃ§Ã£o. Valores:
    * <ul>
    * <li>{@code 0} = Normal</li>
    * <li>{@code 1} = Consumidor final</li>
    * </ul>
    * .
    *
-   * @param indFinal the new indicador de operação com consumidor final ({@code indFinal})
+   * @param indFinal the new indicador de operaÃ§Ã£o com consumidor final ({@code indFinal})
    */
   public void setIndFinal(SEFAZ_indFinal indFinal) {
     this.indFinal = indFinal;
   }
 
   /**
-   * # indicador de presença do comprador no estabelecimento comercial ({@code indPres}).
+   * # indicador de presenÃ§a do comprador no estabelecimento comercial ({@code indPres}).
    * <p>
-   * Obrigatório na especificação. Valores:
+   * ObrigatÃ³rio na especificaÃ§Ã£o. Valores:
    * <ul>
-   * <li>{@code 0} = Não se aplica</li>
-   * <li>{@code 1} = Operação presencial</li>
-   * <li>{@code 2} = Operação não presencial, internet</li>
-   * <li>{@code 3} = Operação não presencial, teleatendimento</li>
-   * <li>{@code 4} = Operação com entrega a domicílio</li>
-   * <li>{@code 5} = Operação presencial, fora do estabelecimento</li>
-   * <li>{@code 9} = Operação não presencial, outros</li>
+   * <li>{@code 0} = NÃ£o se aplica</li>
+   * <li>{@code 1} = OperaÃ§Ã£o presencial</li>
+   * <li>{@code 2} = OperaÃ§Ã£o nÃ£o presencial, internet</li>
+   * <li>{@code 3} = OperaÃ§Ã£o nÃ£o presencial, teleatendimento</li>
+   * <li>{@code 4} = OperaÃ§Ã£o com entrega a domicÃ­lio</li>
+   * <li>{@code 5} = OperaÃ§Ã£o presencial, fora do estabelecimento</li>
+   * <li>{@code 9} = OperaÃ§Ã£o nÃ£o presencial, outros</li>
    * </ul>
    * .
    *
-   * @return the indicador de presença do comprador no estabelecimento comercial ({@code indPres})
+   * @return the indicador de presenÃ§a do comprador no estabelecimento comercial ({@code indPres})
    */
   public SEFAZ_indPres getIndPres() {
     return indPres;
   }
 
   /**
-   * # indicador de presença do comprador no estabelecimento comercial ({@code indPres}).
+   * # indicador de presenÃ§a do comprador no estabelecimento comercial ({@code indPres}).
    * <p>
-   * Obrigatório na especificação. Valores:
+   * ObrigatÃ³rio na especificaÃ§Ã£o. Valores:
    * <ul>
-   * <li>{@code 0} = Não se aplica</li>
-   * <li>{@code 1} = Operação presencial</li>
-   * <li>{@code 2} = Operação não presencial, internet</li>
-   * <li>{@code 3} = Operação não presencial, teleatendimento</li>
-   * <li>{@code 4} = Operação com entrega a domicílio</li>
-   * <li>{@code 5} = Operação presencial, fora do estabelecimento</li>
-   * <li>{@code 9} = Operação não presencial, outros</li>
+   * <li>{@code 0} = NÃ£o se aplica</li>
+   * <li>{@code 1} = OperaÃ§Ã£o presencial</li>
+   * <li>{@code 2} = OperaÃ§Ã£o nÃ£o presencial, internet</li>
+   * <li>{@code 3} = OperaÃ§Ã£o nÃ£o presencial, teleatendimento</li>
+   * <li>{@code 4} = OperaÃ§Ã£o com entrega a domicÃ­lio</li>
+   * <li>{@code 5} = OperaÃ§Ã£o presencial, fora do estabelecimento</li>
+   * <li>{@code 9} = OperaÃ§Ã£o nÃ£o presencial, outros</li>
    * </ul>
    * .
    *
-   * @param indPres the new indicador de presença do comprador no estabelecimento comercial ({@code indPres})
+   * @param indPres the new indicador de presenÃ§a do comprador no estabelecimento comercial ({@code indPres})
    */
   public void setIndPres(SEFAZ_indPres indPres) {
     this.indPres = indPres;
@@ -854,10 +854,10 @@ public class SEFAZIdeVO extends RFWVO {
   /**
    * # indicador de intermediador/marketplace ({@code indIntermed}).
    * <p>
-   * Opcional na especificação. Valores:
+   * Opcional na especificaÃ§Ã£o. Valores:
    * <ul>
-   * <li>{@code 0} = Operação sem intermediador</li>
-   * <li>{@code 1} = Operação com plataforma de terceiros</li>
+   * <li>{@code 0} = OperaÃ§Ã£o sem intermediador</li>
+   * <li>{@code 1} = OperaÃ§Ã£o com plataforma de terceiros</li>
    * </ul>
    * .
    *
@@ -870,10 +870,10 @@ public class SEFAZIdeVO extends RFWVO {
   /**
    * # indicador de intermediador/marketplace ({@code indIntermed}).
    * <p>
-   * Opcional na especificação. Valores:
+   * Opcional na especificaÃ§Ã£o. Valores:
    * <ul>
-   * <li>{@code 0} = Operação sem intermediador</li>
-   * <li>{@code 1} = Operação com plataforma de terceiros</li>
+   * <li>{@code 0} = OperaÃ§Ã£o sem intermediador</li>
+   * <li>{@code 1} = OperaÃ§Ã£o com plataforma de terceiros</li>
    * </ul>
    * .
    *
@@ -884,102 +884,102 @@ public class SEFAZIdeVO extends RFWVO {
   }
 
   /**
-   * # processo de emissão da NF-e ({@code procEmi}).
+   * # processo de emissÃ£o da NF-e ({@code procEmi}).
    * <p>
-   * Obrigatório na especificação. Valores:
+   * ObrigatÃ³rio na especificaÃ§Ã£o. Valores:
    * <ul>
-   * <li>{@code 0} = Emissão pelo contribuinte</li>
-   * <li>{@code 1} = Emissão avulsa pelo Fisco</li>
-   * <li>{@code 2} = Emissão avulsa com certificado digital pelo contribuinte</li>
-   * <li>{@code 3} = Emissão pelo aplicativo do Fisco</li>
+   * <li>{@code 0} = EmissÃ£o pelo contribuinte</li>
+   * <li>{@code 1} = EmissÃ£o avulsa pelo Fisco</li>
+   * <li>{@code 2} = EmissÃ£o avulsa com certificado digital pelo contribuinte</li>
+   * <li>{@code 3} = EmissÃ£o pelo aplicativo do Fisco</li>
    * </ul>
    * .
    *
-   * @return the processo de emissão da NF-e ({@code procEmi})
+   * @return the processo de emissÃ£o da NF-e ({@code procEmi})
    */
   public SEFAZ_procEmi getProcEmi() {
     return procEmi;
   }
 
   /**
-   * # processo de emissão da NF-e ({@code procEmi}).
+   * # processo de emissÃ£o da NF-e ({@code procEmi}).
    * <p>
-   * Obrigatório na especificação. Valores:
+   * ObrigatÃ³rio na especificaÃ§Ã£o. Valores:
    * <ul>
-   * <li>{@code 0} = Emissão pelo contribuinte</li>
-   * <li>{@code 1} = Emissão avulsa pelo Fisco</li>
-   * <li>{@code 2} = Emissão avulsa com certificado digital pelo contribuinte</li>
-   * <li>{@code 3} = Emissão pelo aplicativo do Fisco</li>
+   * <li>{@code 0} = EmissÃ£o pelo contribuinte</li>
+   * <li>{@code 1} = EmissÃ£o avulsa pelo Fisco</li>
+   * <li>{@code 2} = EmissÃ£o avulsa com certificado digital pelo contribuinte</li>
+   * <li>{@code 3} = EmissÃ£o pelo aplicativo do Fisco</li>
    * </ul>
    * .
    *
-   * @param procEmi the new processo de emissão da NF-e ({@code procEmi})
+   * @param procEmi the new processo de emissÃ£o da NF-e ({@code procEmi})
    */
   public void setProcEmi(SEFAZ_procEmi procEmi) {
     this.procEmi = procEmi;
   }
 
   /**
-   * # versão do processo de emissão da NF-e ({@code verProc}).
+   * # versÃ£o do processo de emissÃ£o da NF-e ({@code verProc}).
    * <p>
-   * Obrigatório na especificação. Informar a versão do aplicativo emissor da NF-e (versão do sistema ou componente responsável pela geração da NF-e).
+   * ObrigatÃ³rio na especificaÃ§Ã£o. Informar a versÃ£o do aplicativo emissor da NF-e (versÃ£o do sistema ou componente responsÃ¡vel pela geraÃ§Ã£o da NF-e).
    *
-   * @return the versão do processo de emissão da NF-e ({@code verProc})
+   * @return the versÃ£o do processo de emissÃ£o da NF-e ({@code verProc})
    */
   public String getVerProc() {
     return verProc;
   }
 
   /**
-   * # versão do processo de emissão da NF-e ({@code verProc}).
+   * # versÃ£o do processo de emissÃ£o da NF-e ({@code verProc}).
    * <p>
-   * Obrigatório na especificação. Informar a versão do aplicativo emissor da NF-e (versão do sistema ou componente responsável pela geração da NF-e).
+   * ObrigatÃ³rio na especificaÃ§Ã£o. Informar a versÃ£o do aplicativo emissor da NF-e (versÃ£o do sistema ou componente responsÃ¡vel pela geraÃ§Ã£o da NF-e).
    *
-   * @param verProc the new versão do processo de emissão da NF-e ({@code verProc})
+   * @param verProc the new versÃ£o do processo de emissÃ£o da NF-e ({@code verProc})
    */
   public void setVerProc(String verProc) {
     this.verProc = verProc;
   }
 
   /**
-   * # data e hora da entrada em contingência ({@code dhCont}).
+   * # data e hora da entrada em contingÃªncia ({@code dhCont}).
    * <p>
-   * Obrigatório na especificação quando o grupo de contingência é informado. Data e hora no formato UTC {@code AAAA-MM-DDThh:mm:ssTZD}, indicando o momento em que o contribuinte entrou em contingência.
+   * ObrigatÃ³rio na especificaÃ§Ã£o quando o grupo de contingÃªncia Ã© informado. Data e hora no formato UTC {@code AAAA-MM-DDThh:mm:ssTZD}, indicando o momento em que o contribuinte entrou em contingÃªncia.
    *
-   * @return the data e hora da entrada em contingência ({@code dhCont})
+   * @return the data e hora da entrada em contingÃªncia ({@code dhCont})
    */
   public LocalDateTime getDhCont() {
     return dhCont;
   }
 
   /**
-   * # data e hora da entrada em contingência ({@code dhCont}).
+   * # data e hora da entrada em contingÃªncia ({@code dhCont}).
    * <p>
-   * Obrigatório na especificação quando o grupo de contingência é informado. Data e hora no formato UTC {@code AAAA-MM-DDThh:mm:ssTZD}, indicando o momento em que o contribuinte entrou em contingência.
+   * ObrigatÃ³rio na especificaÃ§Ã£o quando o grupo de contingÃªncia Ã© informado. Data e hora no formato UTC {@code AAAA-MM-DDThh:mm:ssTZD}, indicando o momento em que o contribuinte entrou em contingÃªncia.
    *
-   * @param dhCont the new data e hora da entrada em contingência ({@code dhCont})
+   * @param dhCont the new data e hora da entrada em contingÃªncia ({@code dhCont})
    */
   public void setDhCont(LocalDateTime dhCont) {
     this.dhCont = dhCont;
   }
 
   /**
-   * # justificativa da entrada em contingência ({@code xJust}).
+   * # justificativa da entrada em contingÃªncia ({@code xJust}).
    * <p>
-   * Obrigatório na especificação quando o grupo de contingência é informado. Deve conter um texto explicando o motivo da entrada em contingência, com comprimento mínimo de 15 e máximo de 256 caracteres.
+   * ObrigatÃ³rio na especificaÃ§Ã£o quando o grupo de contingÃªncia Ã© informado. Deve conter um texto explicando o motivo da entrada em contingÃªncia, com comprimento mÃ­nimo de 15 e mÃ¡ximo de 256 caracteres.
    *
-   * @return the justificativa da entrada em contingência ({@code xJust})
+   * @return the justificativa da entrada em contingÃªncia ({@code xJust})
    */
   public String getXjust() {
     return xjust;
   }
 
   /**
-   * # justificativa da entrada em contingência ({@code xJust}).
+   * # justificativa da entrada em contingÃªncia ({@code xJust}).
    * <p>
-   * Obrigatório na especificação quando o grupo de contingência é informado. Deve conter um texto explicando o motivo da entrada em contingência, com comprimento mínimo de 15 e máximo de 256 caracteres.
+   * ObrigatÃ³rio na especificaÃ§Ã£o quando o grupo de contingÃªncia Ã© informado. Deve conter um texto explicando o motivo da entrada em contingÃªncia, com comprimento mÃ­nimo de 15 e mÃ¡ximo de 256 caracteres.
    *
-   * @param xjust the new justificativa da entrada em contingência ({@code xJust})
+   * @param xjust the new justificativa da entrada em contingÃªncia ({@code xJust})
    */
   public void setXjust(String xjust) {
     this.xjust = xjust;

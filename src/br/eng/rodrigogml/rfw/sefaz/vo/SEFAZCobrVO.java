@@ -8,14 +8,14 @@ import br.eng.rodrigogml.rfw.kernel.vo.RFWVO;
 import br.eng.rodrigogml.rfw.orm.dao.annotations.dao.RFWDAOAnnotation;
 
 /**
- * Grupo Y01 - cobr: Cobrança.
+ * Grupo Y01 - cobr: CobranÃ§a.
  * <p>
  * Ocorre 0-1 dentro do grupo A01 (infNFe).
  * <p>
- * Contém:
+ * ContÃ©m:
  * <ul>
  * <li>Y02 - fat: Grupo Fatura;</li>
- * <li>Y07 - dup: Grupo Parcelas (0-120 ocorrências).</li>
+ * <li>Y07 - dup: Grupo Parcelas (0-120 ocorrÃªncias).</li>
  * </ul>
  */
 @RFWDAOAnnotation(schema = "_RFW.SEFAZ", table = "sefaz_cobr")

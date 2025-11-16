@@ -18,14 +18,14 @@ import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_CST_IPI;
  * <p>
  * Ocorre 0-1 dentro do grupo M01 (imposto do item). Deve ser informado apenas quando o item for sujeito ao IPI.
  * <p>
- * Estrutura principal do IPI no item da NF-e, contemplando os dados gerais de enquadramento (cEnq), identificação do produtor (CNPJProd), selo de controle (cSelo/qSelo) e os campos de tributação/cálculo do imposto (CST, vBC, pIPI, qUnid, vUnid, vIPI).
+ * Estrutura principal do IPI no item da NF-e, contemplando os dados gerais de enquadramento (cEnq), identificaÃ§Ã£o do produtor (CNPJProd), selo de controle (cSelo/qSelo) e os campos de tributaÃ§Ã£o/cÃ¡lculo do imposto (CST, vBC, pIPI, qUnid, vUnid, vIPI).
  * <p>
- * Observação: apenas um dos cenários de cálculo é utilizado por item:
+ * ObservaÃ§Ã£o: apenas um dos cenÃ¡rios de cÃ¡lculo Ã© utilizado por item:
  * <ul>
- * <li>Cálculo por alíquota: uso de vBC (O10) e pIPI (O13);</li>
- * <li>Cálculo por valor por unidade: uso de qUnid (O11) e vUnid (O12).</li>
+ * <li>CÃ¡lculo por alÃ­quota: uso de vBC (O10) e pIPI (O13);</li>
+ * <li>CÃ¡lculo por valor por unidade: uso de qUnid (O11) e vUnid (O12).</li>
  * </ul>
- * O CST do IPI (campo CST – O09/O09b) determina se a tributação será feita pelo grupo "IPITrib" (CST 00, 49, 50, 99) ou "IPINT" (CST 01, 02, 03, 04, 05, 51, 52, 53, 54, 55).
+ * O CST do IPI (campo CST â€“ O09/O09b) determina se a tributaÃ§Ã£o serÃ¡ feita pelo grupo "IPITrib" (CST 00, 49, 50, 99) ou "IPINT" (CST 01, 02, 03, 04, 05, 51, 52, 53, 54, 55).
  */
 @RFWDAOAnnotation(schema = "_RFW.SEFAZ", table = "sefaz_ipi")
 public class SEFAZIPIVO extends RFWVO {
@@ -39,47 +39,47 @@ public class SEFAZIPIVO extends RFWVO {
   private SEFAZImpostoVO impostoVO = null;
 
   /**
-   * O02 - Classe de enquadramento do IPI (cIEnq). Tipo: C, Tamanho: 1-5, Ocorrência: 0-1 (campo opcional na estrutura).
+   * O02 - Classe de enquadramento do IPI (cIEnq). Tipo: C, Tamanho: 1-5, OcorrÃªncia: 0-1 (campo opcional na estrutura).
    * <p>
-   * Observação: campo excluído no leiaute 4.0 – NT2016.002, mantido aqui apenas para compatibilidade com versões anteriores.
+   * ObservaÃ§Ã£o: campo excluÃ­do no leiaute 4.0 â€“ NT2016.002, mantido aqui apenas para compatibilidade com versÃµes anteriores.
    */
   @RFWMetaStringField(caption = "cIEnq", required = false, unique = false, maxLength = 5, minLength = 1, preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
   private String ciEnq;
 
   /**
-   * O03 - CNPJ do produtor da mercadoria (CNPJProd), quando diferente do emitente. Tipo: N, Tamanho: 14, Ocorrência: 0-1 (campo opcional na estrutura).
+   * O03 - CNPJ do produtor da mercadoria (CNPJProd), quando diferente do emitente. Tipo: N, Tamanho: 14, OcorrÃªncia: 0-1 (campo opcional na estrutura).
    * <p>
-   * Utilizado somente para os casos de exportação direta ou indireta. Devem ser informados os zeros não significativos.
+   * Utilizado somente para os casos de exportaÃ§Ã£o direta ou indireta. Devem ser informados os zeros nÃ£o significativos.
    */
   @RFWMetaStringCNPJField(caption = "CNPJProd", required = false, unique = false)
   private String cnpjProd;
 
   /**
-   * O04 - Código do selo de controle IPI (cSelo). Tipo: C, Tamanho: 1–60, Ocorrência: 0-1 (campo opcional na estrutura).
+   * O04 - CÃ³digo do selo de controle IPI (cSelo). Tipo: C, Tamanho: 1â€“60, OcorrÃªncia: 0-1 (campo opcional na estrutura).
    * <p>
-   * Preenchimento conforme Anexo II-A da Instrução Normativa RFB nº 770/2007, com códigos específicos para produto nacional, exportação e produto estrangeiro. Campo atualizado na NT2016.002.
+   * Preenchimento conforme Anexo II-A da InstruÃ§Ã£o Normativa RFB nÂº 770/2007, com cÃ³digos especÃ­ficos para produto nacional, exportaÃ§Ã£o e produto estrangeiro. Campo atualizado na NT2016.002.
    */
   @RFWMetaStringField(caption = "cSelo", required = false, unique = false, maxLength = 60, minLength = 1, preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
   private String cselo;
 
   /**
-   * O05 - Quantidade de selo de controle (qSelo). Tipo: N, Tamanho: 1–12 (inteiro), Ocorrência: 0-1 (campo opcional na estrutura).
+   * O05 - Quantidade de selo de controle (qSelo). Tipo: N, Tamanho: 1â€“12 (inteiro), OcorrÃªncia: 0-1 (campo opcional na estrutura).
    */
   @RFWMetaBigDecimalField(caption = "qSelo", required = false, unique = false, maxValue = "", minValue = "", scale = 0, absolute = false)
   private BigDecimal qselo;
 
   /**
-   * O06 - Código de Enquadramento Legal do IPI (cEnq). Tipo: N, Tamanho: 1–3, Ocorrência: 1-1 (campo obrigatório na estrutura da NF-e).
+   * O06 - CÃ³digo de Enquadramento Legal do IPI (cEnq). Tipo: N, Tamanho: 1â€“3, OcorrÃªncia: 1-1 (campo obrigatÃ³rio na estrutura da NF-e).
    * <p>
-   * Preenchimento conforme seção 8.9 do Manual de Orientação do Contribuinte (MOC) – Visão Geral (Tabela de Código de Enquadramento do IPI).
+   * Preenchimento conforme seÃ§Ã£o 8.9 do Manual de OrientaÃ§Ã£o do Contribuinte (MOC) â€“ VisÃ£o Geral (Tabela de CÃ³digo de Enquadramento do IPI).
    */
   @RFWMetaStringField(caption = "cEnq", required = false, unique = false, maxLength = 3, minLength = 1, pattern = "^[0-9]{1,3}$", preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
   private String cenq;
 
   /**
-   * O09 / O09b - Código da situação tributária do IPI (CST). Tipo: N, Tamanho: 2, Ocorrência: 1-1 (campo obrigatório na estrutura da NF-e).
+   * O09 / O09b - CÃ³digo da situaÃ§Ã£o tributÃ¡ria do IPI (CST). Tipo: N, Tamanho: 2, OcorrÃªncia: 1-1 (campo obrigatÃ³rio na estrutura da NF-e).
    * <p>
-   * Utiliza a enumeração SEFAZ_CST_IPI, contemplando os códigos dos grupos:
+   * Utiliza a enumeraÃ§Ã£o SEFAZ_CST_IPI, contemplando os cÃ³digos dos grupos:
    * <ul>
    * <li>O07 - IPITrib (CST 00, 49, 50, 99);</li>
    * <li>O08 - IPINT (CST 01, 02, 03, 04, 05, 51, 52, 53, 54, 55).</li>
@@ -89,41 +89,41 @@ public class SEFAZIPIVO extends RFWVO {
   private SEFAZ_CST_IPI cstIpi;
 
   /**
-   * O10 - Valor da BC do IPI (vBC). Tipo: N, Tamanho: 13v2, Ocorrência: 1-1 quando o cálculo do IPI for por alíquota (sequência O09.1).
+   * O10 - Valor da BC do IPI (vBC). Tipo: N, Tamanho: 13v2, OcorrÃªncia: 1-1 quando o cÃ¡lculo do IPI for por alÃ­quota (sequÃªncia O09.1).
    */
   @RFWMetaBigDecimalField(caption = "vBC", required = false, unique = false, maxValue = "", minValue = "", scale = 2, absolute = false)
   private BigDecimal vbcIpi;
 
   /**
-   * O13 - Alíquota do IPI (pIPI). Tipo: N, Tamanho: 3v2–4, Ocorrência: 1-1 quando o cálculo do IPI for por alíquota (sequência O09.1).
+   * O13 - AlÃ­quota do IPI (pIPI). Tipo: N, Tamanho: 3v2â€“4, OcorrÃªncia: 1-1 quando o cÃ¡lculo do IPI for por alÃ­quota (sequÃªncia O09.1).
    */
   @RFWMetaBigDecimalField(caption = "pIPI", required = false, unique = false, maxValue = "", minValue = "", scale = 2, scaleMax = 4, absolute = false)
   private BigDecimal pipi;
 
   /**
-   * O11 - Quantidade total na unidade padrão para tributação (qUnid). Tipo: N, Tamanho: 12v0–4, Ocorrência: 1-1 quando o cálculo do IPI for de valor por unidade (sequência O13.1). Utilizado somente para produtos tributados por unidade.
+   * O11 - Quantidade total na unidade padrÃ£o para tributaÃ§Ã£o (qUnid). Tipo: N, Tamanho: 12v0â€“4, OcorrÃªncia: 1-1 quando o cÃ¡lculo do IPI for de valor por unidade (sequÃªncia O13.1). Utilizado somente para produtos tributados por unidade.
    */
   @RFWMetaBigDecimalField(caption = "qUnid", required = false, unique = false, maxValue = "", minValue = "", scale = 0, scaleMax = 4, absolute = false)
   private BigDecimal qunidIpi;
 
   /**
-   * O12 - Valor por Unidade Tributável (vUnid). Tipo: N, Tamanho: 11v0–4, Ocorrência: 1-1 quando o cálculo do IPI for de valor por unidade (sequência O13.1).
+   * O12 - Valor por Unidade TributÃ¡vel (vUnid). Tipo: N, Tamanho: 11v0â€“4, OcorrÃªncia: 1-1 quando o cÃ¡lculo do IPI for de valor por unidade (sequÃªncia O13.1).
    */
   @RFWMetaBigDecimalField(caption = "vUnid", required = false, unique = false, maxValue = "", minValue = "", scale = 0, scaleMax = 4, absolute = false)
   private BigDecimal vunidIpi;
 
   /**
-   * O14 - Valor do IPI (vIPI). Tipo: N, Tamanho: 13v2, Ocorrência: 1-1 (campo obrigatório dentro do grupo de IPI para o item).
+   * O14 - Valor do IPI (vIPI). Tipo: N, Tamanho: 13v2, OcorrÃªncia: 1-1 (campo obrigatÃ³rio dentro do grupo de IPI para o item).
    * <p>
-   * Quando o cálculo do IPI for de valor por unidade, devem ser informados também os campos O11 (qUnid) e O12 (vUnid).
+   * Quando o cÃ¡lculo do IPI for de valor por unidade, devem ser informados tambÃ©m os campos O11 (qUnid) e O12 (vUnid).
    */
   @RFWMetaBigDecimalField(caption = "vIPI", required = false, unique = false, maxValue = "", minValue = "", scale = 2, absolute = false)
   private BigDecimal vipi;
 
   /**
-   * # o02 - Classe de enquadramento do IPI (cIEnq). Tipo: C, Tamanho: 1-5, Ocorrência: 0-1 (campo opcional na estrutura).
+   * # o02 - Classe de enquadramento do IPI (cIEnq). Tipo: C, Tamanho: 1-5, OcorrÃªncia: 0-1 (campo opcional na estrutura).
    * <p>
-   * Observação: campo excluído no leiaute 4.0 – NT2016.002, mantido aqui apenas para compatibilidade com versões anteriores.
+   * ObservaÃ§Ã£o: campo excluÃ­do no leiaute 4.0 â€“ NT2016.002, mantido aqui apenas para compatibilidade com versÃµes anteriores.
    *
    * @return the o02 - Classe de enquadramento do IPI (cIEnq)
    */
@@ -132,9 +132,9 @@ public class SEFAZIPIVO extends RFWVO {
   }
 
   /**
-   * # o02 - Classe de enquadramento do IPI (cIEnq). Tipo: C, Tamanho: 1-5, Ocorrência: 0-1 (campo opcional na estrutura).
+   * # o02 - Classe de enquadramento do IPI (cIEnq). Tipo: C, Tamanho: 1-5, OcorrÃªncia: 0-1 (campo opcional na estrutura).
    * <p>
-   * Observação: campo excluído no leiaute 4.0 – NT2016.002, mantido aqui apenas para compatibilidade com versões anteriores.
+   * ObservaÃ§Ã£o: campo excluÃ­do no leiaute 4.0 â€“ NT2016.002, mantido aqui apenas para compatibilidade com versÃµes anteriores.
    *
    * @param ciEnq the new o02 - Classe de enquadramento do IPI (cIEnq)
    */
@@ -143,9 +143,9 @@ public class SEFAZIPIVO extends RFWVO {
   }
 
   /**
-   * # o03 - CNPJ do produtor da mercadoria (CNPJProd), quando diferente do emitente. Tipo: N, Tamanho: 14, Ocorrência: 0-1 (campo opcional na estrutura).
+   * # o03 - CNPJ do produtor da mercadoria (CNPJProd), quando diferente do emitente. Tipo: N, Tamanho: 14, OcorrÃªncia: 0-1 (campo opcional na estrutura).
    * <p>
-   * Utilizado somente para os casos de exportação direta ou indireta. Devem ser informados os zeros não significativos.
+   * Utilizado somente para os casos de exportaÃ§Ã£o direta ou indireta. Devem ser informados os zeros nÃ£o significativos.
    *
    * @return the o03 - CNPJ do produtor da mercadoria (CNPJProd), quando diferente do emitente
    */
@@ -154,9 +154,9 @@ public class SEFAZIPIVO extends RFWVO {
   }
 
   /**
-   * # o03 - CNPJ do produtor da mercadoria (CNPJProd), quando diferente do emitente. Tipo: N, Tamanho: 14, Ocorrência: 0-1 (campo opcional na estrutura).
+   * # o03 - CNPJ do produtor da mercadoria (CNPJProd), quando diferente do emitente. Tipo: N, Tamanho: 14, OcorrÃªncia: 0-1 (campo opcional na estrutura).
    * <p>
-   * Utilizado somente para os casos de exportação direta ou indireta. Devem ser informados os zeros não significativos.
+   * Utilizado somente para os casos de exportaÃ§Ã£o direta ou indireta. Devem ser informados os zeros nÃ£o significativos.
    *
    * @param cnpjProd the new o03 - CNPJ do produtor da mercadoria (CNPJProd), quando diferente do emitente
    */
@@ -165,29 +165,29 @@ public class SEFAZIPIVO extends RFWVO {
   }
 
   /**
-   * # o04 - Código do selo de controle IPI (cSelo). Tipo: C, Tamanho: 1–60, Ocorrência: 0-1 (campo opcional na estrutura).
+   * # o04 - CÃ³digo do selo de controle IPI (cSelo). Tipo: C, Tamanho: 1â€“60, OcorrÃªncia: 0-1 (campo opcional na estrutura).
    * <p>
-   * Preenchimento conforme Anexo II-A da Instrução Normativa RFB nº 770/2007, com códigos específicos para produto nacional, exportação e produto estrangeiro. Campo atualizado na NT2016.002.
+   * Preenchimento conforme Anexo II-A da InstruÃ§Ã£o Normativa RFB nÂº 770/2007, com cÃ³digos especÃ­ficos para produto nacional, exportaÃ§Ã£o e produto estrangeiro. Campo atualizado na NT2016.002.
    *
-   * @return the o04 - Código do selo de controle IPI (cSelo)
+   * @return the o04 - CÃ³digo do selo de controle IPI (cSelo)
    */
   public String getCselo() {
     return cselo;
   }
 
   /**
-   * # o04 - Código do selo de controle IPI (cSelo). Tipo: C, Tamanho: 1–60, Ocorrência: 0-1 (campo opcional na estrutura).
+   * # o04 - CÃ³digo do selo de controle IPI (cSelo). Tipo: C, Tamanho: 1â€“60, OcorrÃªncia: 0-1 (campo opcional na estrutura).
    * <p>
-   * Preenchimento conforme Anexo II-A da Instrução Normativa RFB nº 770/2007, com códigos específicos para produto nacional, exportação e produto estrangeiro. Campo atualizado na NT2016.002.
+   * Preenchimento conforme Anexo II-A da InstruÃ§Ã£o Normativa RFB nÂº 770/2007, com cÃ³digos especÃ­ficos para produto nacional, exportaÃ§Ã£o e produto estrangeiro. Campo atualizado na NT2016.002.
    *
-   * @param cselo the new o04 - Código do selo de controle IPI (cSelo)
+   * @param cselo the new o04 - CÃ³digo do selo de controle IPI (cSelo)
    */
   public void setCselo(String cselo) {
     this.cselo = cselo;
   }
 
   /**
-   * # o05 - Quantidade de selo de controle (qSelo). Tipo: N, Tamanho: 1–12 (inteiro), Ocorrência: 0-1 (campo opcional na estrutura).
+   * # o05 - Quantidade de selo de controle (qSelo). Tipo: N, Tamanho: 1â€“12 (inteiro), OcorrÃªncia: 0-1 (campo opcional na estrutura).
    *
    * @return the o05 - Quantidade de selo de controle (qSelo)
    */
@@ -196,7 +196,7 @@ public class SEFAZIPIVO extends RFWVO {
   }
 
   /**
-   * # o05 - Quantidade de selo de controle (qSelo). Tipo: N, Tamanho: 1–12 (inteiro), Ocorrência: 0-1 (campo opcional na estrutura).
+   * # o05 - Quantidade de selo de controle (qSelo). Tipo: N, Tamanho: 1â€“12 (inteiro), OcorrÃªncia: 0-1 (campo opcional na estrutura).
    *
    * @param qselo the new o05 - Quantidade de selo de controle (qSelo)
    */
@@ -205,61 +205,61 @@ public class SEFAZIPIVO extends RFWVO {
   }
 
   /**
-   * # o06 - Código de Enquadramento Legal do IPI (cEnq). Tipo: N, Tamanho: 1–3, Ocorrência: 1-1 (campo obrigatório na estrutura da NF-e).
+   * # o06 - CÃ³digo de Enquadramento Legal do IPI (cEnq). Tipo: N, Tamanho: 1â€“3, OcorrÃªncia: 1-1 (campo obrigatÃ³rio na estrutura da NF-e).
    * <p>
-   * Preenchimento conforme seção 8.9 do Manual de Orientação do Contribuinte (MOC) – Visão Geral (Tabela de Código de Enquadramento do IPI).
+   * Preenchimento conforme seÃ§Ã£o 8.9 do Manual de OrientaÃ§Ã£o do Contribuinte (MOC) â€“ VisÃ£o Geral (Tabela de CÃ³digo de Enquadramento do IPI).
    *
-   * @return the o06 - Código de Enquadramento Legal do IPI (cEnq)
+   * @return the o06 - CÃ³digo de Enquadramento Legal do IPI (cEnq)
    */
   public String getCenq() {
     return cenq;
   }
 
   /**
-   * # o06 - Código de Enquadramento Legal do IPI (cEnq). Tipo: N, Tamanho: 1–3, Ocorrência: 1-1 (campo obrigatório na estrutura da NF-e).
+   * # o06 - CÃ³digo de Enquadramento Legal do IPI (cEnq). Tipo: N, Tamanho: 1â€“3, OcorrÃªncia: 1-1 (campo obrigatÃ³rio na estrutura da NF-e).
    * <p>
-   * Preenchimento conforme seção 8.9 do Manual de Orientação do Contribuinte (MOC) – Visão Geral (Tabela de Código de Enquadramento do IPI).
+   * Preenchimento conforme seÃ§Ã£o 8.9 do Manual de OrientaÃ§Ã£o do Contribuinte (MOC) â€“ VisÃ£o Geral (Tabela de CÃ³digo de Enquadramento do IPI).
    *
-   * @param cenq the new o06 - Código de Enquadramento Legal do IPI (cEnq)
+   * @param cenq the new o06 - CÃ³digo de Enquadramento Legal do IPI (cEnq)
    */
   public void setCenq(String cenq) {
     this.cenq = cenq;
   }
 
   /**
-   * # o09 / O09b - Código da situação tributária do IPI (CST). Tipo: N, Tamanho: 2, Ocorrência: 1-1 (campo obrigatório na estrutura da NF-e).
+   * # o09 / O09b - CÃ³digo da situaÃ§Ã£o tributÃ¡ria do IPI (CST). Tipo: N, Tamanho: 2, OcorrÃªncia: 1-1 (campo obrigatÃ³rio na estrutura da NF-e).
    * <p>
-   * Utiliza a enumeração SEFAZ_CST_IPI, contemplando os códigos dos grupos:
+   * Utiliza a enumeraÃ§Ã£o SEFAZ_CST_IPI, contemplando os cÃ³digos dos grupos:
    * <ul>
    * <li>O07 - IPITrib (CST 00, 49, 50, 99);</li>
    * <li>O08 - IPINT (CST 01, 02, 03, 04, 05, 51, 52, 53, 54, 55).</li>
    * </ul>
    * .
    *
-   * @return the o09 / O09b - Código da situação tributária do IPI (CST)
+   * @return the o09 / O09b - CÃ³digo da situaÃ§Ã£o tributÃ¡ria do IPI (CST)
    */
   public SEFAZ_CST_IPI getCstIpi() {
     return cstIpi;
   }
 
   /**
-   * # o09 / O09b - Código da situação tributária do IPI (CST). Tipo: N, Tamanho: 2, Ocorrência: 1-1 (campo obrigatório na estrutura da NF-e).
+   * # o09 / O09b - CÃ³digo da situaÃ§Ã£o tributÃ¡ria do IPI (CST). Tipo: N, Tamanho: 2, OcorrÃªncia: 1-1 (campo obrigatÃ³rio na estrutura da NF-e).
    * <p>
-   * Utiliza a enumeração SEFAZ_CST_IPI, contemplando os códigos dos grupos:
+   * Utiliza a enumeraÃ§Ã£o SEFAZ_CST_IPI, contemplando os cÃ³digos dos grupos:
    * <ul>
    * <li>O07 - IPITrib (CST 00, 49, 50, 99);</li>
    * <li>O08 - IPINT (CST 01, 02, 03, 04, 05, 51, 52, 53, 54, 55).</li>
    * </ul>
    * .
    *
-   * @param cstIpi the new o09 / O09b - Código da situação tributária do IPI (CST)
+   * @param cstIpi the new o09 / O09b - CÃ³digo da situaÃ§Ã£o tributÃ¡ria do IPI (CST)
    */
   public void setCstIpi(SEFAZ_CST_IPI cstIpi) {
     this.cstIpi = cstIpi;
   }
 
   /**
-   * # o10 - Valor da BC do IPI (vBC). Tipo: N, Tamanho: 13v2, Ocorrência: 1-1 quando o cálculo do IPI for por alíquota (sequência O09.1).
+   * # o10 - Valor da BC do IPI (vBC). Tipo: N, Tamanho: 13v2, OcorrÃªncia: 1-1 quando o cÃ¡lculo do IPI for por alÃ­quota (sequÃªncia O09.1).
    *
    * @return the o10 - Valor da BC do IPI (vBC)
    */
@@ -268,7 +268,7 @@ public class SEFAZIPIVO extends RFWVO {
   }
 
   /**
-   * # o10 - Valor da BC do IPI (vBC). Tipo: N, Tamanho: 13v2, Ocorrência: 1-1 quando o cálculo do IPI for por alíquota (sequência O09.1).
+   * # o10 - Valor da BC do IPI (vBC). Tipo: N, Tamanho: 13v2, OcorrÃªncia: 1-1 quando o cÃ¡lculo do IPI for por alÃ­quota (sequÃªncia O09.1).
    *
    * @param vbcIpi the new o10 - Valor da BC do IPI (vBC)
    */
@@ -277,63 +277,63 @@ public class SEFAZIPIVO extends RFWVO {
   }
 
   /**
-   * # o13 - Alíquota do IPI (pIPI). Tipo: N, Tamanho: 3v2–4, Ocorrência: 1-1 quando o cálculo do IPI for por alíquota (sequência O09.1).
+   * # o13 - AlÃ­quota do IPI (pIPI). Tipo: N, Tamanho: 3v2â€“4, OcorrÃªncia: 1-1 quando o cÃ¡lculo do IPI for por alÃ­quota (sequÃªncia O09.1).
    *
-   * @return the o13 - Alíquota do IPI (pIPI)
+   * @return the o13 - AlÃ­quota do IPI (pIPI)
    */
   public BigDecimal getPipi() {
     return pipi;
   }
 
   /**
-   * # o13 - Alíquota do IPI (pIPI). Tipo: N, Tamanho: 3v2–4, Ocorrência: 1-1 quando o cálculo do IPI for por alíquota (sequência O09.1).
+   * # o13 - AlÃ­quota do IPI (pIPI). Tipo: N, Tamanho: 3v2â€“4, OcorrÃªncia: 1-1 quando o cÃ¡lculo do IPI for por alÃ­quota (sequÃªncia O09.1).
    *
-   * @param pipi the new o13 - Alíquota do IPI (pIPI)
+   * @param pipi the new o13 - AlÃ­quota do IPI (pIPI)
    */
   public void setPipi(BigDecimal pipi) {
     this.pipi = pipi;
   }
 
   /**
-   * # o11 - Quantidade total na unidade padrão para tributação (qUnid). Tipo: N, Tamanho: 12v0–4, Ocorrência: 1-1 quando o cálculo do IPI for de valor por unidade (sequência O13.1). Utilizado somente para produtos tributados por unidade.
+   * # o11 - Quantidade total na unidade padrÃ£o para tributaÃ§Ã£o (qUnid). Tipo: N, Tamanho: 12v0â€“4, OcorrÃªncia: 1-1 quando o cÃ¡lculo do IPI for de valor por unidade (sequÃªncia O13.1). Utilizado somente para produtos tributados por unidade.
    *
-   * @return the o11 - Quantidade total na unidade padrão para tributação (qUnid)
+   * @return the o11 - Quantidade total na unidade padrÃ£o para tributaÃ§Ã£o (qUnid)
    */
   public BigDecimal getQunidIpi() {
     return qunidIpi;
   }
 
   /**
-   * # o11 - Quantidade total na unidade padrão para tributação (qUnid). Tipo: N, Tamanho: 12v0–4, Ocorrência: 1-1 quando o cálculo do IPI for de valor por unidade (sequência O13.1). Utilizado somente para produtos tributados por unidade.
+   * # o11 - Quantidade total na unidade padrÃ£o para tributaÃ§Ã£o (qUnid). Tipo: N, Tamanho: 12v0â€“4, OcorrÃªncia: 1-1 quando o cÃ¡lculo do IPI for de valor por unidade (sequÃªncia O13.1). Utilizado somente para produtos tributados por unidade.
    *
-   * @param qunidIpi the new o11 - Quantidade total na unidade padrão para tributação (qUnid)
+   * @param qunidIpi the new o11 - Quantidade total na unidade padrÃ£o para tributaÃ§Ã£o (qUnid)
    */
   public void setQunidIpi(BigDecimal qunidIpi) {
     this.qunidIpi = qunidIpi;
   }
 
   /**
-   * # o12 - Valor por Unidade Tributável (vUnid). Tipo: N, Tamanho: 11v0–4, Ocorrência: 1-1 quando o cálculo do IPI for de valor por unidade (sequência O13.1).
+   * # o12 - Valor por Unidade TributÃ¡vel (vUnid). Tipo: N, Tamanho: 11v0â€“4, OcorrÃªncia: 1-1 quando o cÃ¡lculo do IPI for de valor por unidade (sequÃªncia O13.1).
    *
-   * @return the o12 - Valor por Unidade Tributável (vUnid)
+   * @return the o12 - Valor por Unidade TributÃ¡vel (vUnid)
    */
   public BigDecimal getVunidIpi() {
     return vunidIpi;
   }
 
   /**
-   * # o12 - Valor por Unidade Tributável (vUnid). Tipo: N, Tamanho: 11v0–4, Ocorrência: 1-1 quando o cálculo do IPI for de valor por unidade (sequência O13.1).
+   * # o12 - Valor por Unidade TributÃ¡vel (vUnid). Tipo: N, Tamanho: 11v0â€“4, OcorrÃªncia: 1-1 quando o cÃ¡lculo do IPI for de valor por unidade (sequÃªncia O13.1).
    *
-   * @param vunidIpi the new o12 - Valor por Unidade Tributável (vUnid)
+   * @param vunidIpi the new o12 - Valor por Unidade TributÃ¡vel (vUnid)
    */
   public void setVunidIpi(BigDecimal vunidIpi) {
     this.vunidIpi = vunidIpi;
   }
 
   /**
-   * # o14 - Valor do IPI (vIPI). Tipo: N, Tamanho: 13v2, Ocorrência: 1-1 (campo obrigatório dentro do grupo de IPI para o item).
+   * # o14 - Valor do IPI (vIPI). Tipo: N, Tamanho: 13v2, OcorrÃªncia: 1-1 (campo obrigatÃ³rio dentro do grupo de IPI para o item).
    * <p>
-   * Quando o cálculo do IPI for de valor por unidade, devem ser informados também os campos O11 (qUnid) e O12 (vUnid).
+   * Quando o cÃ¡lculo do IPI for de valor por unidade, devem ser informados tambÃ©m os campos O11 (qUnid) e O12 (vUnid).
    *
    * @return the o14 - Valor do IPI (vIPI)
    */
@@ -342,9 +342,9 @@ public class SEFAZIPIVO extends RFWVO {
   }
 
   /**
-   * # o14 - Valor do IPI (vIPI). Tipo: N, Tamanho: 13v2, Ocorrência: 1-1 (campo obrigatório dentro do grupo de IPI para o item).
+   * # o14 - Valor do IPI (vIPI). Tipo: N, Tamanho: 13v2, OcorrÃªncia: 1-1 (campo obrigatÃ³rio dentro do grupo de IPI para o item).
    * <p>
-   * Quando o cálculo do IPI for de valor por unidade, devem ser informados também os campos O11 (qUnid) e O12 (vUnid).
+   * Quando o cÃ¡lculo do IPI for de valor por unidade, devem ser informados tambÃ©m os campos O11 (qUnid) e O12 (vUnid).
    *
    * @param vipi the new o14 - Valor do IPI (vIPI)
    */

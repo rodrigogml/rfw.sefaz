@@ -1,22 +1,22 @@
 package br.eng.rodrigogml.rfw.sefaz.utils;
 
 /**
- * Classe utilit·ria que concentra as Enums SEFAZ utilizadas em VOs.
+ * Classe utilit√°ria que concentra as Enums SEFAZ utilizadas em VOs.
  * <p>
- * Todas as enums expıem:
+ * Todas as enums exp√µem:
  * <ul>
- * <li>{@link #getXmlData()} ó valor exato gravado/lido no XML;</li>
- * <li>{@link #isDeprecated()} ó indica obsolescÍncia;</li>
- * <li>{@code valueOfXMLData(String)} ó parser seguro do valor do XML.</li>
+ * <li>{@link #getXmlData()} ‚Äî valor exato gravado/lido no XML;</li>
+ * <li>{@link #isDeprecated()} ‚Äî indica obsolesc√™ncia;</li>
+ * <li>{@code valueOfXMLData(String)} ‚Äî parser seguro do valor do XML.</li>
  * </ul>
  *
- * @author Rodrigo Leit„o
+ * @author Rodrigo Leit√£o
  * @since (11 de nov. de 2025)
  */
 public class SEFAZEnums {
 
   /**
-   * Construtor privado para classe utilit·ria/est·tica
+   * Construtor privado para classe utilit√°ria/est√°tica
    */
   private SEFAZEnums() {
   }
@@ -80,7 +80,7 @@ public class SEFAZEnums {
   }
 
   /**
-   * Enumeration com as versıes da NFe suportadas pelo mÛdulo.
+   * Enumeration com as vers√µes da NFe suportadas pelo m√≥dulo.
    */
   public enum SEFAZ_versao implements SEFAZEnum<SEFAZ_versao> {
     VERSAO_4_00("4.00", false);
@@ -90,7 +90,7 @@ public class SEFAZEnums {
      */
     private final String xmlData;
     /**
-     * Indica se o tipo est· obsoleto/descontinuado para uso atual.
+     * Indica se o tipo est√° obsoleto/descontinuado para uso atual.
      */
     private final boolean deprecated;
 
@@ -110,9 +110,9 @@ public class SEFAZEnums {
     }
 
     /**
-     * Indica se o tipo est· obsoleto e n„o deve ser utilizado nas emissıes atuais.
+     * Indica se o tipo est√° obsoleto e n√£o deve ser utilizado nas emiss√µes atuais.
      *
-     * @return {@code true} se o tipo estiver obsoleto; {@code false} caso contr·rio.
+     * @return {@code true} se o tipo estiver obsoleto; {@code false} caso contr√°rio.
      */
     public boolean isDeprecated() {
       return this.deprecated;
@@ -121,17 +121,17 @@ public class SEFAZEnums {
   }
 
   /**
-   * CÛdigo do Modelo do Documento Fiscal ({@code mod}) utilizado na NF-e.
+   * C√≥digo do Modelo do Documento Fiscal ({@code mod}) utilizado na NF-e.
    *
    * <p>
-   * Valores possÌveis conforme especificaÁ„o (incluindo modelos usados em documentos referenciados):
+   * Valores poss√≠veis conforme especifica√ß√£o (incluindo modelos usados em documentos referenciados):
    * <ul>
    * <li>{@code 55} = NF-e</li>
    * <li>{@code 65} = NFC-e</li>
    * <li>{@code 01} = NF modelo 1</li>
    * <li>{@code 02} = NF modelo 2</li>
    * <li>{@code 04} = NF de Produtor</li>
-   * <li>{@code 2B} = Cupom Fiscal emitido por m·quina registradora (n„o ECF)</li>
+   * <li>{@code 2B} = Cupom Fiscal emitido por m√°quina registradora (n√£o ECF)</li>
    * <li>{@code 2C} = Cupom Fiscal PDV</li>
    * <li>{@code 2D} = Cupom Fiscal emitido por ECF</li>
    * </ul>
@@ -153,7 +153,7 @@ public class SEFAZEnums {
     /** NF de Produtor ({@code 04}). */
     NF_PRODUTOR_04("04", false),
 
-    /** Cupom Fiscal m·quina registradora ({@code 2B}). */
+    /** Cupom Fiscal m√°quina registradora ({@code 2B}). */
     CUPOM_FISCAL_2B("2B", false),
 
     /** Cupom Fiscal PDV ({@code 2C}). */
@@ -192,25 +192,25 @@ public class SEFAZEnums {
   }
 
   /**
-   * Identificador de local de destino da operaÁ„o ({@code idDest}) na NF-e.
+   * Identificador de local de destino da opera√ß√£o ({@code idDest}) na NF-e.
    *
    * <p>
-   * Valores possÌveis:
+   * Valores poss√≠veis:
    * <ul>
-   * <li>{@code 1} = OperaÁ„o interna</li>
-   * <li>{@code 2} = OperaÁ„o interestadual</li>
-   * <li>{@code 3} = OperaÁ„o com exterior</li>
+   * <li>{@code 1} = Opera√ß√£o interna</li>
+   * <li>{@code 2} = Opera√ß√£o interestadual</li>
+   * <li>{@code 3} = Opera√ß√£o com exterior</li>
    * </ul>
    */
   public enum SEFAZ_idDest implements SEFAZEnum<SEFAZ_idDest> {
 
-    /** OperaÁ„o interna ({@code 1}). */
+    /** Opera√ß√£o interna ({@code 1}). */
     OPERACAO_INTERNA("1", false),
 
-    /** OperaÁ„o interestadual ({@code 2}). */
+    /** Opera√ß√£o interestadual ({@code 2}). */
     OPERACAO_INTERESTADUAL("2", false),
 
-    /** OperaÁ„o com exterior ({@code 3}). */
+    /** Opera√ß√£o com exterior ({@code 3}). */
     OPERACAO_EXTERIOR("3", false);
 
     private final String xmlData;
@@ -232,7 +232,7 @@ public class SEFAZEnums {
     }
 
     /**
-     * Indica se o cÛdigo est· obsoleto/descontinuado na especificaÁ„o.
+     * Indica se o c√≥digo est√° obsoleto/descontinuado na especifica√ß√£o.
      *
      * @return true, if is deprecated
      */
@@ -243,21 +243,21 @@ public class SEFAZEnums {
   }
 
   /**
-   * Tipo de operaÁ„o ({@code tpNF}) na NF-e.
+   * Tipo de opera√ß√£o ({@code tpNF}) na NF-e.
    *
    * <p>
-   * Valores possÌveis:
+   * Valores poss√≠veis:
    * <ul>
    * <li>{@code 0} = Entrada</li>
-   * <li>{@code 1} = SaÌda</li>
+   * <li>{@code 1} = Sa√≠da</li>
    * </ul>
    */
   public enum SEFAZ_tpNF implements SEFAZEnum<SEFAZ_tpNF> {
 
-    /** OperaÁ„o de entrada ({@code 0}). */
+    /** Opera√ß√£o de entrada ({@code 0}). */
     ENTRADA("0", false),
 
-    /** OperaÁ„o de saÌda ({@code 1}). */
+    /** Opera√ß√£o de sa√≠da ({@code 1}). */
     SAIDA("1", false);
 
     private final String xmlData;
@@ -279,7 +279,7 @@ public class SEFAZEnums {
     }
 
     /**
-     * Indica se o cÛdigo est· obsoleto/descontinuado na especificaÁ„o.
+     * Indica se o c√≥digo est√° obsoleto/descontinuado na especifica√ß√£o.
      *
      * @return true, if is deprecated
      */
@@ -290,22 +290,22 @@ public class SEFAZEnums {
   }
 
   /**
-   * Formato de impress„o do DANFE ({@code tpImp}) da NF-e.
+   * Formato de impress√£o do DANFE ({@code tpImp}) da NF-e.
    *
    * <p>
-   * Valores possÌveis:
+   * Valores poss√≠veis:
    * <ul>
-   * <li>{@code 0} = Sem geraÁ„o de DANFE</li>
+   * <li>{@code 0} = Sem gera√ß√£o de DANFE</li>
    * <li>{@code 1} = DANFE normal, Retrato</li>
    * <li>{@code 2} = DANFE normal, Paisagem</li>
    * <li>{@code 3} = DANFE Simplificado</li>
    * <li>{@code 4} = DANFE NFC-e</li>
-   * <li>{@code 5} = DANFE NFC-e mensagem eletrÙnica</li>
+   * <li>{@code 5} = DANFE NFC-e mensagem eletr√¥nica</li>
    * </ul>
    */
   public enum SEFAZ_tpImp implements SEFAZEnum<SEFAZ_tpImp> {
 
-    /** Sem geraÁ„o de DANFE ({@code 0}). */
+    /** Sem gera√ß√£o de DANFE ({@code 0}). */
     SEM_DANFE("0", false),
 
     /** DANFE normal em formato retrato ({@code 1}). */
@@ -317,10 +317,10 @@ public class SEFAZEnums {
     /** DANFE simplificado ({@code 3}). */
     DANFE_SIMPLIFICADO("3", false),
 
-    /** DANFE especÌfico da NFC-e ({@code 4}). */
+    /** DANFE espec√≠fico da NFC-e ({@code 4}). */
     DANFE_NFCE("4", false),
 
-    /** DANFE NFC-e em formato de mensagem eletrÙnica ({@code 5}). */
+    /** DANFE NFC-e em formato de mensagem eletr√¥nica ({@code 5}). */
     DANFE_NFCE_MENSAGEM_ELETRONICA("5", false);
 
     private final String xmlData;
@@ -342,7 +342,7 @@ public class SEFAZEnums {
     }
 
     /**
-     * Indica se o cÛdigo est· obsoleto/descontinuado na especificaÁ„o.
+     * Indica se o c√≥digo est√° obsoleto/descontinuado na especifica√ß√£o.
      *
      * @return true, if is deprecated
      */
@@ -353,45 +353,45 @@ public class SEFAZEnums {
   }
 
   /**
-   * Tipo de emiss„o da NF-e ({@code tpEmis}).
+   * Tipo de emiss√£o da NF-e ({@code tpEmis}).
    *
    * <p>
-   * Valores possÌveis:
+   * Valores poss√≠veis:
    * <ul>
-   * <li>{@code 1} = Emiss„o normal</li>
-   * <li>{@code 2} = ContingÍncia FS-IA</li>
-   * <li>{@code 3} = ContingÍncia SCAN</li>
-   * <li>{@code 4} = ContingÍncia EPEC</li>
-   * <li>{@code 5} = ContingÍncia FS-DA</li>
-   * <li>{@code 6} = ContingÍncia SVC-AN</li>
-   * <li>{@code 7} = ContingÍncia SVC-RS</li>
-   * <li>{@code 9} = ContingÍncia off-line NFC-e</li>
+   * <li>{@code 1} = Emiss√£o normal</li>
+   * <li>{@code 2} = Conting√™ncia FS-IA</li>
+   * <li>{@code 3} = Conting√™ncia SCAN</li>
+   * <li>{@code 4} = Conting√™ncia EPEC</li>
+   * <li>{@code 5} = Conting√™ncia FS-DA</li>
+   * <li>{@code 6} = Conting√™ncia SVC-AN</li>
+   * <li>{@code 7} = Conting√™ncia SVC-RS</li>
+   * <li>{@code 9} = Conting√™ncia off-line NFC-e</li>
    * </ul>
    */
   public enum SEFAZ_tpEmis implements SEFAZEnum<SEFAZ_tpEmis> {
 
-    /** Emiss„o normal da NF-e ({@code 1}). */
+    /** Emiss√£o normal da NF-e ({@code 1}). */
     EMISSAO_NORMAL("1", false),
 
-    /** Emiss„o em contingÍncia FS-IA ({@code 2}). */
+    /** Emiss√£o em conting√™ncia FS-IA ({@code 2}). */
     CONTINGENCIA_FS_IA("2", false),
 
-    /** Emiss„o em contingÍncia SCAN ({@code 3}). */
+    /** Emiss√£o em conting√™ncia SCAN ({@code 3}). */
     CONTINGENCIA_SCAN("3", false),
 
-    /** Emiss„o em contingÍncia EPEC ({@code 4}). */
+    /** Emiss√£o em conting√™ncia EPEC ({@code 4}). */
     CONTINGENCIA_EPEC("4", false),
 
-    /** Emiss„o em contingÍncia FS-DA ({@code 5}). */
+    /** Emiss√£o em conting√™ncia FS-DA ({@code 5}). */
     CONTINGENCIA_FS_DA("5", false),
 
-    /** Emiss„o em contingÍncia SVC-AN ({@code 6}). */
+    /** Emiss√£o em conting√™ncia SVC-AN ({@code 6}). */
     CONTINGENCIA_SVC_AN("6", false),
 
-    /** Emiss„o em contingÍncia SVC-RS ({@code 7}). */
+    /** Emiss√£o em conting√™ncia SVC-RS ({@code 7}). */
     CONTINGENCIA_SVC_RS("7", false),
 
-    /** Emiss„o em contingÍncia off-line NFC-e ({@code 9}). */
+    /** Emiss√£o em conting√™ncia off-line NFC-e ({@code 9}). */
     CONTINGENCIA_OFFLINE_NFCE("9", false);
 
     private final String xmlData;
@@ -413,7 +413,7 @@ public class SEFAZEnums {
     }
 
     /**
-     * Indica se o cÛdigo est· obsoleto/descontinuado na especificaÁ„o.
+     * Indica se o c√≥digo est√° obsoleto/descontinuado na especifica√ß√£o.
      *
      * @return true, if is deprecated
      */
@@ -424,21 +424,21 @@ public class SEFAZEnums {
   }
 
   /**
-   * IdentificaÁ„o do ambiente de autorizaÁ„o da NF-e ({@code tpAmb}).
+   * Identifica√ß√£o do ambiente de autoriza√ß√£o da NF-e ({@code tpAmb}).
    *
    * <p>
-   * Valores possÌveis:
+   * Valores poss√≠veis:
    * <ul>
-   * <li>{@code 1} = ProduÁ„o</li>
-   * <li>{@code 2} = HomologaÁ„o</li>
+   * <li>{@code 1} = Produ√ß√£o</li>
+   * <li>{@code 2} = Homologa√ß√£o</li>
    * </ul>
    */
   public enum SEFAZ_tpAmb implements SEFAZEnum<SEFAZ_tpAmb> {
 
-    /** Ambiente de produÁ„o ({@code 1}). */
+    /** Ambiente de produ√ß√£o ({@code 1}). */
     PRODUCAO("1", false),
 
-    /** Ambiente de homologaÁ„o ({@code 2}). */
+    /** Ambiente de homologa√ß√£o ({@code 2}). */
     HOMOLOGACAO("2", false);
 
     private final String xmlData;
@@ -460,7 +460,7 @@ public class SEFAZEnums {
     }
 
     /**
-     * Indica se o cÛdigo est· obsoleto/descontinuado na especificaÁ„o.
+     * Indica se o c√≥digo est√° obsoleto/descontinuado na especifica√ß√£o.
      *
      * @return true, if is deprecated
      */
@@ -471,15 +471,15 @@ public class SEFAZEnums {
   }
 
   /**
-   * Finalidade de emiss„o da NF-e ({@code finNFe}).
+   * Finalidade de emiss√£o da NF-e ({@code finNFe}).
    *
    * <p>
-   * Valores possÌveis:
+   * Valores poss√≠veis:
    * <ul>
    * <li>{@code 1} = NF-e normal</li>
    * <li>{@code 2} = NF-e complementar</li>
    * <li>{@code 3} = NF-e de ajuste</li>
-   * <li>{@code 4} = DevoluÁ„o de mercadoria</li>
+   * <li>{@code 4} = Devolu√ß√£o de mercadoria</li>
    * </ul>
    */
   public enum SEFAZ_finNFe implements SEFAZEnum<SEFAZ_finNFe> {
@@ -493,7 +493,7 @@ public class SEFAZEnums {
     /** NF-e de ajuste ({@code 3}). */
     NFE_AJUSTE("3", false),
 
-    /** NF-e de devoluÁ„o de mercadoria ({@code 4}). */
+    /** NF-e de devolu√ß√£o de mercadoria ({@code 4}). */
     DEVOLUCAO_MERCADORIA("4", false);
 
     private final String xmlData;
@@ -515,7 +515,7 @@ public class SEFAZEnums {
     }
 
     /**
-     * Indica se o cÛdigo est· obsoleto/descontinuado na especificaÁ„o.
+     * Indica se o c√≥digo est√° obsoleto/descontinuado na especifica√ß√£o.
      *
      * @return true, if is deprecated
      */
@@ -526,10 +526,10 @@ public class SEFAZEnums {
   }
 
   /**
-   * Indicador de operaÁ„o com consumidor final ({@code indFinal}).
+   * Indicador de opera√ß√£o com consumidor final ({@code indFinal}).
    *
    * <p>
-   * Valores possÌveis:
+   * Valores poss√≠veis:
    * <ul>
    * <li>{@code 0} = Normal</li>
    * <li>{@code 1} = Consumidor final</li>
@@ -537,10 +537,10 @@ public class SEFAZEnums {
    */
   public enum SEFAZ_indFinal implements SEFAZEnum<SEFAZ_indFinal> {
 
-    /** OperaÁ„o normal, n„o direcionada a consumidor final ({@code 0}). */
+    /** Opera√ß√£o normal, n√£o direcionada a consumidor final ({@code 0}). */
     OPERACAO_NORMAL("0", false),
 
-    /** OperaÁ„o destinada a consumidor final ({@code 1}). */
+    /** Opera√ß√£o destinada a consumidor final ({@code 1}). */
     CONSUMIDOR_FINAL("1", false);
 
     private final String xmlData;
@@ -562,7 +562,7 @@ public class SEFAZEnums {
     }
 
     /**
-     * Indica se o cÛdigo est· obsoleto/descontinuado na especificaÁ„o.
+     * Indica se o c√≥digo est√° obsoleto/descontinuado na especifica√ß√£o.
      *
      * @return true, if is deprecated
      */
@@ -573,41 +573,41 @@ public class SEFAZEnums {
   }
 
   /**
-   * Indicador de presenÁa do comprador no estabelecimento comercial ({@code indPres}).
+   * Indicador de presen√ßa do comprador no estabelecimento comercial ({@code indPres}).
    *
    * <p>
-   * Valores possÌveis:
+   * Valores poss√≠veis:
    * <ul>
-   * <li>{@code 0} = N„o se aplica</li>
-   * <li>{@code 1} = OperaÁ„o presencial</li>
-   * <li>{@code 2} = OperaÁ„o n„o presencial, internet</li>
-   * <li>{@code 3} = OperaÁ„o n„o presencial, teleatendimento</li>
-   * <li>{@code 4} = OperaÁ„o com entrega a domicÌlio</li>
-   * <li>{@code 5} = OperaÁ„o presencial, fora do estabelecimento</li>
-   * <li>{@code 9} = OperaÁ„o n„o presencial, outros</li>
+   * <li>{@code 0} = N√£o se aplica</li>
+   * <li>{@code 1} = Opera√ß√£o presencial</li>
+   * <li>{@code 2} = Opera√ß√£o n√£o presencial, internet</li>
+   * <li>{@code 3} = Opera√ß√£o n√£o presencial, teleatendimento</li>
+   * <li>{@code 4} = Opera√ß√£o com entrega a domic√≠lio</li>
+   * <li>{@code 5} = Opera√ß√£o presencial, fora do estabelecimento</li>
+   * <li>{@code 9} = Opera√ß√£o n√£o presencial, outros</li>
    * </ul>
    */
   public enum SEFAZ_indPres implements SEFAZEnum<SEFAZ_indPres> {
 
-    /** SituaÁ„o em que o indicador de presenÁa n„o se aplica ({@code 0}). */
+    /** Situa√ß√£o em que o indicador de presen√ßa n√£o se aplica ({@code 0}). */
     NAO_SE_APLICA("0", false),
 
-    /** OperaÁ„o presencial no estabelecimento ({@code 1}). */
+    /** Opera√ß√£o presencial no estabelecimento ({@code 1}). */
     OPERACAO_PRESENCIAL("1", false),
 
-    /** OperaÁ„o n„o presencial realizada via internet ({@code 2}). */
+    /** Opera√ß√£o n√£o presencial realizada via internet ({@code 2}). */
     OPERACAO_NAO_PRESENCIAL_INTERNET("2", false),
 
-    /** OperaÁ„o n„o presencial realizada via teleatendimento ({@code 3}). */
+    /** Opera√ß√£o n√£o presencial realizada via teleatendimento ({@code 3}). */
     OPERACAO_NAO_PRESENCIAL_TELEATENDIMENTO("3", false),
 
-    /** OperaÁ„o com entrega a domicÌlio ({@code 4}). */
+    /** Opera√ß√£o com entrega a domic√≠lio ({@code 4}). */
     OPERACAO_ENTREGA_DOMICILIO("4", false),
 
-    /** OperaÁ„o presencial realizada fora do estabelecimento ({@code 5}). */
+    /** Opera√ß√£o presencial realizada fora do estabelecimento ({@code 5}). */
     OPERACAO_PRESENCIAL_FORA_ESTABELECIMENTO("5", false),
 
-    /** OperaÁ„o n„o presencial em outras modalidades ({@code 9}). */
+    /** Opera√ß√£o n√£o presencial em outras modalidades ({@code 9}). */
     OPERACAO_NAO_PRESENCIAL_OUTROS("9", false);
 
     private final String xmlData;
@@ -629,7 +629,7 @@ public class SEFAZEnums {
     }
 
     /**
-     * Indica se o cÛdigo est· obsoleto/descontinuado na especificaÁ„o.
+     * Indica se o c√≥digo est√° obsoleto/descontinuado na especifica√ß√£o.
      *
      * @return true, if is deprecated
      */
@@ -643,18 +643,18 @@ public class SEFAZEnums {
    * Indicador de intermediador/marketplace ({@code indIntermed}).
    *
    * <p>
-   * Valores possÌveis:
+   * Valores poss√≠veis:
    * <ul>
-   * <li>{@code 0} = OperaÁ„o sem intermediador</li>
-   * <li>{@code 1} = OperaÁ„o com plataforma de terceiros</li>
+   * <li>{@code 0} = Opera√ß√£o sem intermediador</li>
+   * <li>{@code 1} = Opera√ß√£o com plataforma de terceiros</li>
    * </ul>
    */
   public enum SEFAZ_indIntermed implements SEFAZEnum<SEFAZ_indIntermed> {
 
-    /** OperaÁ„o realizada sem intermediador ou marketplace ({@code 0}). */
+    /** Opera√ß√£o realizada sem intermediador ou marketplace ({@code 0}). */
     SEM_INTERMEDIADOR("0", false),
 
-    /** OperaÁ„o intermediada por plataforma de terceiros ({@code 1}). */
+    /** Opera√ß√£o intermediada por plataforma de terceiros ({@code 1}). */
     PLATAFORMA_TERCEIROS("1", false);
 
     private final String xmlData;
@@ -676,7 +676,7 @@ public class SEFAZEnums {
     }
 
     /**
-     * Indica se o cÛdigo est· obsoleto/descontinuado na especificaÁ„o.
+     * Indica se o c√≥digo est√° obsoleto/descontinuado na especifica√ß√£o.
      *
      * @return true, if is deprecated
      */
@@ -687,29 +687,29 @@ public class SEFAZEnums {
   }
 
   /**
-   * Processo de emiss„o da NF-e ({@code procEmi}).
+   * Processo de emiss√£o da NF-e ({@code procEmi}).
    *
    * <p>
-   * Valores possÌveis:
+   * Valores poss√≠veis:
    * <ul>
-   * <li>{@code 0} = Emiss„o pelo contribuinte</li>
-   * <li>{@code 1} = Emiss„o avulsa pelo Fisco</li>
-   * <li>{@code 2} = Emiss„o avulsa com certificado digital pelo contribuinte</li>
-   * <li>{@code 3} = Emiss„o pelo aplicativo do Fisco</li>
+   * <li>{@code 0} = Emiss√£o pelo contribuinte</li>
+   * <li>{@code 1} = Emiss√£o avulsa pelo Fisco</li>
+   * <li>{@code 2} = Emiss√£o avulsa com certificado digital pelo contribuinte</li>
+   * <li>{@code 3} = Emiss√£o pelo aplicativo do Fisco</li>
    * </ul>
    */
   public enum SEFAZ_procEmi implements SEFAZEnum<SEFAZ_procEmi> {
 
-    /** Emiss„o da NF-e diretamente pelo contribuinte ({@code 0}). */
+    /** Emiss√£o da NF-e diretamente pelo contribuinte ({@code 0}). */
     EMISSAO_CONTRIBUINTE("0", false),
 
-    /** Emiss„o avulsa realizada pelo Fisco ({@code 1}). */
+    /** Emiss√£o avulsa realizada pelo Fisco ({@code 1}). */
     EMISSAO_AVULSA_FISCO("1", false),
 
-    /** Emiss„o avulsa com certificado digital pelo contribuinte ({@code 2}). */
+    /** Emiss√£o avulsa com certificado digital pelo contribuinte ({@code 2}). */
     EMISSAO_AVULSA_CERTIFICADO_CONTRIBUINTE("2", false),
 
-    /** Emiss„o por aplicativo fornecido pelo Fisco ({@code 3}). */
+    /** Emiss√£o por aplicativo fornecido pelo Fisco ({@code 3}). */
     EMISSAO_APLICATIVO_FISCO("3", false);
 
     private final String xmlData;
@@ -731,7 +731,7 @@ public class SEFAZEnums {
     }
 
     /**
-     * Indica se o cÛdigo est· obsoleto/descontinuado na especificaÁ„o.
+     * Indica se o c√≥digo est√° obsoleto/descontinuado na especifica√ß√£o.
      *
      * @return true, if is deprecated
      */
@@ -742,9 +742,9 @@ public class SEFAZEnums {
   }
 
   /**
-   * Enumeration do CÛdigo de Regime Tribut·rio (CRT) utilizado no XML da NFe.
+   * Enumeration do C√≥digo de Regime Tribut√°rio (CRT) utilizado no XML da NFe.
    *
-   * Valores conforme a especificaÁ„o do campo CRT: 1 = Simples Nacional 2 = Simples Nacional, excesso sublimite de receita bruta 3 = Regime Normal
+   * Valores conforme a especifica√ß√£o do campo CRT: 1 = Simples Nacional 2 = Simples Nacional, excesso sublimite de receita bruta 3 = Regime Normal
    */
   public enum SEFAZ_CRT implements SEFAZEnum<SEFAZ_CRT> {
 
@@ -766,7 +766,7 @@ public class SEFAZEnums {
     /** Valor exato gravado/lido no XML (campo CRT). */
     private final String xmlData;
 
-    /** Indica se o tipo est· obsoleto/descontinuado para uso atual. */
+    /** Indica se o tipo est√° obsoleto/descontinuado para uso atual. */
     private final boolean deprecated;
 
     SEFAZ_CRT(String xmlData, boolean deprecated) {
@@ -785,9 +785,9 @@ public class SEFAZEnums {
     }
 
     /**
-     * Indica se o tipo est· obsoleto.
+     * Indica se o tipo est√° obsoleto.
      *
-     * @return the indica se o tipo est· obsoleto/descontinuado para uso atual
+     * @return the indica se o tipo est√° obsoleto/descontinuado para uso atual
      */
     public boolean isDeprecated() {
       return this.deprecated;
@@ -796,9 +796,9 @@ public class SEFAZEnums {
   }
 
   /**
-   * Enumeration do Indicador da IE do Destinat·rio (indIEDest) utilizado no XML da NFe.
+   * Enumeration do Indicador da IE do Destinat√°rio (indIEDest) utilizado no XML da NFe.
    *
-   * Valores conforme especificaÁ„o: 1 = Contribuinte ICMS 2 = Contribuinte isento de InscriÁ„o no cadastro de Contribuintes 9 = N„o Contribuinte
+   * Valores conforme especifica√ß√£o: 1 = Contribuinte ICMS 2 = Contribuinte isento de Inscri√ß√£o no cadastro de Contribuintes 9 = N√£o Contribuinte
    */
   public enum IndIEDestEnum implements SEFAZEnum<IndIEDestEnum> {
 
@@ -808,19 +808,19 @@ public class SEFAZEnums {
     CONTRIBUINTE_ICMS("1", false),
 
     /**
-     * 2 = Contribuinte isento de InscriÁ„o.
+     * 2 = Contribuinte isento de Inscri√ß√£o.
      */
     CONTRIBUINTE_ISENTO("2", false),
 
     /**
-     * 9 = N„o Contribuinte.
+     * 9 = N√£o Contribuinte.
      */
     NAO_CONTRIBUINTE("9", false);
 
     /** Valor exato gravado/lido no XML (campo indIEDest). */
     private final String xmlData;
 
-    /** Indica se o tipo est· obsoleto/descontinuado para uso atual. */
+    /** Indica se o tipo est√° obsoleto/descontinuado para uso atual. */
     private final boolean deprecated;
 
     IndIEDestEnum(String xmlData, boolean deprecated) {
@@ -839,9 +839,9 @@ public class SEFAZEnums {
     }
 
     /**
-     * Indica se o tipo est· obsoleto.
+     * Indica se o tipo est√° obsoleto.
      *
-     * @return the indica se o tipo est· obsoleto/descontinuado para uso atual
+     * @return the indica se o tipo est√° obsoleto/descontinuado para uso atual
      */
     public boolean isDeprecated() {
       return this.deprecated;
@@ -850,26 +850,26 @@ public class SEFAZEnums {
   }
 
   /**
-   * Enumeration do Indicador se o valor do item compıe o total da NF-e (indTot) utilizado no XML da NFe.
+   * Enumeration do Indicador se o valor do item comp√µe o total da NF-e (indTot) utilizado no XML da NFe.
    *
-   * Valores conforme especificaÁ„o do campo indTot: 0 = n„o compıe; 1 = compıe.
+   * Valores conforme especifica√ß√£o do campo indTot: 0 = n√£o comp√µe; 1 = comp√µe.
    */
   public enum SEFAZ_indTot implements SEFAZEnum<SEFAZ_indTot> {
 
     /**
-     * 0 = n„o compıe o total da NF-e.
+     * 0 = n√£o comp√µe o total da NF-e.
      */
     NAO_COMPOE_TOTAL("0", false),
 
     /**
-     * 1 = compıe o total da NF-e.
+     * 1 = comp√µe o total da NF-e.
      */
     COMPOE_TOTAL("1", false);
 
     /** Valor exato gravado/lido no XML (campo indTot). */
     private final String xmlData;
 
-    /** Indica se o tipo est· obsoleto/descontinuado para uso atual. */
+    /** Indica se o tipo est√° obsoleto/descontinuado para uso atual. */
     private final boolean deprecated;
 
     SEFAZ_indTot(String xmlData, boolean deprecated) {
@@ -888,9 +888,9 @@ public class SEFAZEnums {
     }
 
     /**
-     * Indica se o tipo est· obsoleto.
+     * Indica se o tipo est√° obsoleto.
      *
-     * @return the indica se o tipo est· obsoleto/descontinuado para uso atual
+     * @return the indica se o tipo est√° obsoleto/descontinuado para uso atual
      */
     public boolean isDeprecated() {
       return this.deprecated;
@@ -903,47 +903,47 @@ public class SEFAZEnums {
    *
    * Utilizada nos grupos de ICMS (ex.: ICMS00, ICMS10).
    *
-   * Valores conforme a especificaÁ„o do campo orig: 0 ñ Nacional, exceto as indicadas nos cÛdigos 3, 4, 5 e 8; 1 ñ Estrangeira ñ ImportaÁ„o direta, exceto a indicada no cÛdigo 6; 2 ñ Estrangeira ñ Adquirida no mercado interno, exceto a indicada no cÛdigo 7; 3 ñ Nacional, mercadoria ou bem com Conte˙do de ImportaÁ„o superior a 40% e inferior ou igual a 70%; 4 ñ Nacional, cuja produÁ„o tenha sido
-   * feita em conformidade com os processos produtivos b·sicos (PPB) previstos na legislaÁ„o aplic·vel; 5 ñ Nacional, mercadoria ou bem com Conte˙do de ImportaÁ„o inferior ou igual a 40%; 6 ñ Estrangeira ñ ImportaÁ„o direta, sem similar nacional, constante em lista da CAMEX (inclui g·s natural); 7 ñ Estrangeira ñ Adquirida no mercado interno, sem similar nacional, constante em lista CAMEX (inclui
-   * g·s natural); 8 ñ Nacional, mercadoria ou bem com Conte˙do de ImportaÁ„o superior a 70%.
+   * Valores conforme a especifica√ß√£o do campo orig: 0 ‚Äì Nacional, exceto as indicadas nos c√≥digos 3, 4, 5 e 8; 1 ‚Äì Estrangeira ‚Äì Importa√ß√£o direta, exceto a indicada no c√≥digo 6; 2 ‚Äì Estrangeira ‚Äì Adquirida no mercado interno, exceto a indicada no c√≥digo 7; 3 ‚Äì Nacional, mercadoria ou bem com Conte√∫do de Importa√ß√£o superior a 40% e inferior ou igual a 70%; 4 ‚Äì Nacional, cuja produ√ß√£o tenha sido
+   * feita em conformidade com os processos produtivos b√°sicos (PPB) previstos na legisla√ß√£o aplic√°vel; 5 ‚Äì Nacional, mercadoria ou bem com Conte√∫do de Importa√ß√£o inferior ou igual a 40%; 6 ‚Äì Estrangeira ‚Äì Importa√ß√£o direta, sem similar nacional, constante em lista da CAMEX (inclui g√°s natural); 7 ‚Äì Estrangeira ‚Äì Adquirida no mercado interno, sem similar nacional, constante em lista CAMEX (inclui
+   * g√°s natural); 8 ‚Äì Nacional, mercadoria ou bem com Conte√∫do de Importa√ß√£o superior a 70%.
    */
   public enum SEFAZ_orig implements SEFAZEnum<SEFAZ_orig> {
 
-    /** 0 ñ Nacional, exceto as indicadas nos cÛdigos 3, 4, 5 e 8. */
+    /** 0 ‚Äì Nacional, exceto as indicadas nos c√≥digos 3, 4, 5 e 8. */
     NACIONAL_EXCETO_3_4_5_8("0", false),
 
-    /** 1 ñ Estrangeira ñ ImportaÁ„o direta, exceto a indicada no cÛdigo 6. */
+    /** 1 ‚Äì Estrangeira ‚Äì Importa√ß√£o direta, exceto a indicada no c√≥digo 6. */
     ESTRANGEIRA_IMPORTACAO_DIRETA_EXCETO_6("1", false),
 
-    /** 2 ñ Estrangeira ñ Adquirida no mercado interno, exceto a indicada no cÛdigo 7. */
+    /** 2 ‚Äì Estrangeira ‚Äì Adquirida no mercado interno, exceto a indicada no c√≥digo 7. */
     ESTRANGEIRA_ADQUIRIDA_MERCADO_INTERNO_EXCETO_7("2", false),
 
-    /** 3 ñ Nacional, mercadoria ou bem com Conte˙do de ImportaÁ„o > 40% e <= 70%. */
+    /** 3 ‚Äì Nacional, mercadoria ou bem com Conte√∫do de Importa√ß√£o > 40% e <= 70%. */
     NACIONAL_CONTEUDO_IMPORTACAO_MAIOR_40_MENOR_IGUAL_70("3", false),
 
-    /** 4 ñ Nacional, produÁ„o em conformidade com processos produtivos b·sicos (PPB). */
+    /** 4 ‚Äì Nacional, produ√ß√£o em conformidade com processos produtivos b√°sicos (PPB). */
     NACIONAL_PROCESSO_PRODUTIVO_PPB("4", false),
 
-    /** 5 ñ Nacional, mercadoria ou bem com Conte˙do de ImportaÁ„o <= 40%. */
+    /** 5 ‚Äì Nacional, mercadoria ou bem com Conte√∫do de Importa√ß√£o <= 40%. */
     NACIONAL_CONTEUDO_IMPORTACAO_MENOR_IGUAL_40("5", false),
 
     /**
-     * 6 ñ Estrangeira ñ ImportaÁ„o direta, sem similar nacional, constante em lista da CAMEX (inclui g·s natural).
+     * 6 ‚Äì Estrangeira ‚Äì Importa√ß√£o direta, sem similar nacional, constante em lista da CAMEX (inclui g√°s natural).
      */
     ESTRANGEIRA_IMPORTACAO_DIRETA_SEM_SIMILAR_CAMEX_GAS("6", false),
 
     /**
-     * 7 ñ Estrangeira ñ Adquirida no mercado interno, sem similar nacional, constante em lista CAMEX (inclui g·s natural).
+     * 7 ‚Äì Estrangeira ‚Äì Adquirida no mercado interno, sem similar nacional, constante em lista CAMEX (inclui g√°s natural).
      */
     ESTRANGEIRA_ADQUIRIDA_MERCADO_INTERNO_SEM_SIMILAR_CAMEX_GAS("7", false),
 
-    /** 8 ñ Nacional, mercadoria ou bem com Conte˙do de ImportaÁ„o > 70%. */
+    /** 8 ‚Äì Nacional, mercadoria ou bem com Conte√∫do de Importa√ß√£o > 70%. */
     NACIONAL_CONTEUDO_IMPORTACAO_MAIOR_70("8", false);
 
     /** Valor exato gravado/lido no XML (campo orig). */
     private final String xmlData;
 
-    /** Indica se o tipo est· obsoleto/descontinuado para uso atual. */
+    /** Indica se o tipo est√° obsoleto/descontinuado para uso atual. */
     private final boolean deprecated;
 
     SEFAZ_orig(String xmlData, boolean deprecated) {
@@ -962,9 +962,9 @@ public class SEFAZEnums {
     }
 
     /**
-     * Indica se o tipo est· obsoleto.
+     * Indica se o tipo est√° obsoleto.
      *
-     * @return the indica se o tipo est· obsoleto/descontinuado para uso atual
+     * @return the indica se o tipo est√° obsoleto/descontinuado para uso atual
      */
     public boolean isDeprecated() {
       return this.deprecated;
@@ -973,9 +973,9 @@ public class SEFAZEnums {
   }
 
   /**
-   * Enumeration da Modalidade de determinaÁ„o da BC do ICMS (modBC) utilizada no XML da NFe.
+   * Enumeration da Modalidade de determina√ß√£o da BC do ICMS (modBC) utilizada no XML da NFe.
    *
-   * Valores conforme especificaÁ„o do campo modBC: 0 = Margem Valor Agregado (MVA %); 1 = Pauta (valor); 2 = PreÁo tabelado m·ximo (valor); 3 = Valor da operaÁ„o.
+   * Valores conforme especifica√ß√£o do campo modBC: 0 = Margem Valor Agregado (MVA %); 1 = Pauta (valor); 2 = Pre√ßo tabelado m√°ximo (valor); 3 = Valor da opera√ß√£o.
    */
   public enum SEFAZ_modBC implements SEFAZEnum<SEFAZ_modBC> {
 
@@ -985,16 +985,16 @@ public class SEFAZEnums {
     /** 1 = Pauta (valor). */
     PAUTA_VALOR("1", false),
 
-    /** 2 = PreÁo tabelado m·ximo (valor). */
+    /** 2 = Pre√ßo tabelado m√°ximo (valor). */
     PRECO_TABELADO_MAX("2", false),
 
-    /** 3 = Valor da operaÁ„o. */
+    /** 3 = Valor da opera√ß√£o. */
     VALOR_OPERACAO("3", false);
 
     /** Valor exato gravado/lido no XML (campo modBC). */
     private final String xmlData;
 
-    /** Indica se o tipo est· obsoleto/descontinuado para uso atual. */
+    /** Indica se o tipo est√° obsoleto/descontinuado para uso atual. */
     private final boolean deprecated;
 
     SEFAZ_modBC(String xmlData, boolean deprecated) {
@@ -1013,9 +1013,9 @@ public class SEFAZEnums {
     }
 
     /**
-     * Indica se o tipo est· obsoleto.
+     * Indica se o tipo est√° obsoleto.
      *
-     * @return the indica se o tipo est· obsoleto/descontinuado para uso atual
+     * @return the indica se o tipo est√° obsoleto/descontinuado para uso atual
      */
     public boolean isDeprecated() {
       return this.deprecated;
@@ -1024,50 +1024,50 @@ public class SEFAZEnums {
   }
 
   /**
-   * Enumeration da TributaÁ„o do ICMS (CST) utilizada no XML da NFe.
+   * Enumeration da Tributa√ß√£o do ICMS (CST) utilizada no XML da NFe.
    *
-   * Contemplando (atÈ o momento): 00 ñ Tributado integralmente (ICMS00); 10 ñ Tributado e com cobranÁa do ICMS por substituiÁ„o tribut·ria (ICMS10); 20 ñ Com reduÁ„o da base de c·lculo (ICMS20); 30 ñ Isenta ou n„o tributada e com cobranÁa do ICMS por substituiÁ„o tribut·ria (ICMS30); 40 ñ Isenta (ICMS40); 41 ñ N„o tributada (ICMS40); 50 ñ Suspens„o (ICMS40); 51 ñ Diferimento (ICMS51); 60 ñ ICMS
-   * cobrado anteriormente por substituiÁ„o tribut·ria (ICMS60); 70 ñ Com reduÁ„o de base de c·lculo e cobranÁa do ICMS por substituiÁ„o tribut·ria (ICMS70); 90 ñ Outros (ICMS90).
+   * Contemplando (at√© o momento): 00 ‚Äì Tributado integralmente (ICMS00); 10 ‚Äì Tributado e com cobran√ßa do ICMS por substitui√ß√£o tribut√°ria (ICMS10); 20 ‚Äì Com redu√ß√£o da base de c√°lculo (ICMS20); 30 ‚Äì Isenta ou n√£o tributada e com cobran√ßa do ICMS por substitui√ß√£o tribut√°ria (ICMS30); 40 ‚Äì Isenta (ICMS40); 41 ‚Äì N√£o tributada (ICMS40); 50 ‚Äì Suspens√£o (ICMS40); 51 ‚Äì Diferimento (ICMS51); 60 ‚Äì ICMS
+   * cobrado anteriormente por substitui√ß√£o tribut√°ria (ICMS60); 70 ‚Äì Com redu√ß√£o de base de c√°lculo e cobran√ßa do ICMS por substitui√ß√£o tribut√°ria (ICMS70); 90 ‚Äì Outros (ICMS90).
    */
   public enum SEFAZ_CST_ICMS implements SEFAZEnum<SEFAZ_CST_ICMS> {
 
-    /** 00 ñ Tributado integralmente (ICMS00). */
+    /** 00 ‚Äì Tributado integralmente (ICMS00). */
     CST_00_TRIBUTADO_INTEGRALMENTE("00", false),
 
-    /** 10 ñ Tributado e com cobranÁa do ICMS por substituiÁ„o tribut·ria (ICMS10). */
+    /** 10 ‚Äì Tributado e com cobran√ßa do ICMS por substitui√ß√£o tribut√°ria (ICMS10). */
     CST_10_TRIBUTADO_COM_ICMS_ST("10", false),
 
-    /** 20 ñ Com reduÁ„o da base de c·lculo (ICMS20). */
+    /** 20 ‚Äì Com redu√ß√£o da base de c√°lculo (ICMS20). */
     CST_20_REDUCAO_BASE_CALCULO("20", false),
 
-    /** 30 ñ Isenta ou n„o tributada e com cobranÁa do ICMS por substituiÁ„o tribut·ria (ICMS30). */
+    /** 30 ‚Äì Isenta ou n√£o tributada e com cobran√ßa do ICMS por substitui√ß√£o tribut√°ria (ICMS30). */
     CST_30_ISENTA_OU_NAO_TRIBUTADA_COM_ST("30", false),
 
-    /** 40 ñ Isenta (ICMS40). */
+    /** 40 ‚Äì Isenta (ICMS40). */
     CST_40_ISENTA("40", false),
 
-    /** 41 ñ N„o tributada (ICMS40). */
+    /** 41 ‚Äì N√£o tributada (ICMS40). */
     CST_41_NAO_TRIBUTADA("41", false),
 
-    /** 50 ñ Suspens„o (ICMS40). */
+    /** 50 ‚Äì Suspens√£o (ICMS40). */
     CST_50_SUSPENSAO("50", false),
 
-    /** 51 ñ Diferimento (ICMS51). */
+    /** 51 ‚Äì Diferimento (ICMS51). */
     CST_51_DIFERIMENTO("51", false),
 
-    /** 60 ñ ICMS cobrado anteriormente por substituiÁ„o tribut·ria (ICMS60). */
+    /** 60 ‚Äì ICMS cobrado anteriormente por substitui√ß√£o tribut√°ria (ICMS60). */
     CST_60_COBRADO_ANTERIOR_ST("60", false),
 
-    /** 70 ñ Com reduÁ„o de BC e cobranÁa de ICMS ST (ICMS70). */
+    /** 70 ‚Äì Com redu√ß√£o de BC e cobran√ßa de ICMS ST (ICMS70). */
     CST_70_REDUCAO_BC_COM_ST("70", false),
 
-    /** 90 ñ Outros (ICMS90). */
+    /** 90 ‚Äì Outros (ICMS90). */
     CST_90_OUTROS("90", false);
 
     /** Valor exato gravado/lido no XML (campo CST). */
     private final String xmlData;
 
-    /** Indica se o tipo est· obsoleto/descontinuado para uso atual. */
+    /** Indica se o tipo est√° obsoleto/descontinuado para uso atual. */
     private final boolean deprecated;
 
     SEFAZ_CST_ICMS(String xmlData, boolean deprecated) {
@@ -1086,9 +1086,9 @@ public class SEFAZEnums {
     }
 
     /**
-     * Indica se o tipo est· obsoleto.
+     * Indica se o tipo est√° obsoleto.
      *
-     * @return the indica se o tipo est· obsoleto/descontinuado para uso atual
+     * @return the indica se o tipo est√° obsoleto/descontinuado para uso atual
      */
     public boolean isDeprecated() {
       return this.deprecated;
@@ -1097,13 +1097,13 @@ public class SEFAZEnums {
   }
 
   /**
-   * Enumeration da Modalidade de determinaÁ„o da BC do ICMS ST (modBCST) utilizada no XML da NFe.
+   * Enumeration da Modalidade de determina√ß√£o da BC do ICMS ST (modBCST) utilizada no XML da NFe.
    *
-   * Valores conforme especificaÁ„o do campo modBCST: 0 = PreÁo tabelado ou m·ximo sugerido; 1 = Lista Negativa (valor); 2 = Lista Positiva (valor); 3 = Lista Neutra (valor); 4 = Margem Valor Agregado (%); 5 = Pauta (Valor); 6 = Valor da OperaÁ„o (NT 2019.001).
+   * Valores conforme especifica√ß√£o do campo modBCST: 0 = Pre√ßo tabelado ou m√°ximo sugerido; 1 = Lista Negativa (valor); 2 = Lista Positiva (valor); 3 = Lista Neutra (valor); 4 = Margem Valor Agregado (%); 5 = Pauta (Valor); 6 = Valor da Opera√ß√£o (NT 2019.001).
    */
   public enum SEFAZ_modBCST implements SEFAZEnum<SEFAZ_modBCST> {
 
-    /** 0 = PreÁo tabelado ou m·ximo sugerido. */
+    /** 0 = Pre√ßo tabelado ou m√°ximo sugerido. */
     PRECO_TABELADO_MAX_SUGERIDO("0", false),
 
     /** 1 = Lista Negativa (valor). */
@@ -1121,13 +1121,13 @@ public class SEFAZEnums {
     /** 5 = Pauta (Valor). */
     PAUTA_VALOR("5", false),
 
-    /** 6 = Valor da OperaÁ„o (NT 2019.001). */
+    /** 6 = Valor da Opera√ß√£o (NT 2019.001). */
     VALOR_OPERACAO("6", false);
 
     /** Valor exato gravado/lido no XML (campo modBCST). */
     private final String xmlData;
 
-    /** Indica se o tipo est· obsoleto/descontinuado para uso atual. */
+    /** Indica se o tipo est√° obsoleto/descontinuado para uso atual. */
     private final boolean deprecated;
 
     SEFAZ_modBCST(String xmlData, boolean deprecated) {
@@ -1146,9 +1146,9 @@ public class SEFAZEnums {
     }
 
     /**
-     * Indica se o tipo est· obsoleto.
+     * Indica se o tipo est√° obsoleto.
      *
-     * @return the indica se o tipo est· obsoleto/descontinuado para uso atual
+     * @return the indica se o tipo est√° obsoleto/descontinuado para uso atual
      */
     public boolean isDeprecated() {
       return this.deprecated;
@@ -1157,60 +1157,60 @@ public class SEFAZEnums {
   }
 
   /**
-   * Enumeration do Motivo da desoneraÁ„o do ICMS (motDesICMS) utilizado no XML da NFe.
+   * Enumeration do Motivo da desonera√ß√£o do ICMS (motDesICMS) utilizado no XML da NFe.
    *
-   * Valores conforme especificaÁıes (ICMS20, ICMS30, ICMS40): 1 ñ T·xi 3 ñ Uso na agropecu·ria / Produtor Agropecu·rio 4 ñ Frotista/locadora 5 ñ Diplom·tico/consular 6 ñ Utilit·rios e motocicletas da AmazÙnia Ocidental e ¡reas de Livre ComÈrcio 7 ñ SUFRAMA 8 ñ Venda a Ûrg„os p˙blicos 9 ñ Outros 10 ñ Deficiente Condutor 11 ñ Deficiente N„o Condutor 12 ñ ”rg„o de fomento e desenvolvimento
-   * agropecu·rio 16 ñ OlimpÌadas Rio 2016 90 ñ Solicitado pelo Fisco
+   * Valores conforme especifica√ß√µes (ICMS20, ICMS30, ICMS40): 1 ‚Äì T√°xi 3 ‚Äì Uso na agropecu√°ria / Produtor Agropecu√°rio 4 ‚Äì Frotista/locadora 5 ‚Äì Diplom√°tico/consular 6 ‚Äì Utilit√°rios e motocicletas da Amaz√¥nia Ocidental e √Åreas de Livre Com√©rcio 7 ‚Äì SUFRAMA 8 ‚Äì Venda a √≥rg√£os p√∫blicos 9 ‚Äì Outros 10 ‚Äì Deficiente Condutor 11 ‚Äì Deficiente N√£o Condutor 12 ‚Äì √ìrg√£o de fomento e desenvolvimento
+   * agropecu√°rio 16 ‚Äì Olimp√≠adas Rio 2016 90 ‚Äì Solicitado pelo Fisco
    *
-   * ObservaÁ„o: motivo 2 (Deficiente FÌsico) foi revogado e n„o È utilizado.
+   * Observa√ß√£o: motivo 2 (Deficiente F√≠sico) foi revogado e n√£o √© utilizado.
    */
   public enum SEFAZ_motDesICMS implements SEFAZEnum<SEFAZ_motDesICMS> {
 
-    /** 1 ñ T·xi. */
+    /** 1 ‚Äì T√°xi. */
     TAXI("1", false),
 
-    /** 3 ñ Uso na agropecu·ria / Produtor Agropecu·rio. */
+    /** 3 ‚Äì Uso na agropecu√°ria / Produtor Agropecu√°rio. */
     USO_AGROPECUARIA("3", false),
 
-    /** 4 ñ Frotista/locadora. */
+    /** 4 ‚Äì Frotista/locadora. */
     FROTISTA_LOCADORA("4", false),
 
-    /** 5 ñ Diplom·tico/consular. */
+    /** 5 ‚Äì Diplom√°tico/consular. */
     DIPLOMATICO_CONSULAR("5", false),
 
     /**
-     * 6 ñ Utilit·rios/motocicletas da AmazÙnia Ocidental e ¡reas de Livre ComÈrcio ou Produtor Prim·rio (conforme grupo ICMS da NF-e).
+     * 6 ‚Äì Utilit√°rios/motocicletas da Amaz√¥nia Ocidental e √Åreas de Livre Com√©rcio ou Produtor Prim√°rio (conforme grupo ICMS da NF-e).
      */
     UTILITARIOS_MOTOS_AMAZONIA_ALC("6", false),
 
-    /** 7 ñ SUFRAMA. */
+    /** 7 ‚Äì SUFRAMA. */
     SUFRAMA("7", false),
 
-    /** 8 ñ Venda a Ûrg„os p˙blicos. */
+    /** 8 ‚Äì Venda a √≥rg√£os p√∫blicos. */
     VENDA_ORGAOS_PUBLICOS("8", false),
 
-    /** 9 ñ Outros. */
+    /** 9 ‚Äì Outros. */
     OUTROS("9", false),
 
-    /** 10 ñ Deficiente Condutor. */
+    /** 10 ‚Äì Deficiente Condutor. */
     DEFICIENTE_CONDUTOR("10", false),
 
-    /** 11 ñ Deficiente N„o Condutor. */
+    /** 11 ‚Äì Deficiente N√£o Condutor. */
     DEFICIENTE_NAO_CONDUTOR("11", false),
 
-    /** 12 ñ ”rg„o de fomento e desenvolvimento agropecu·rio. */
+    /** 12 ‚Äì √ìrg√£o de fomento e desenvolvimento agropecu√°rio. */
     ORGAO_FOMENTO_DESENVOLVIMENTO_AGROPECUARIO("12", false),
 
-    /** 16 ñ OlimpÌadas Rio 2016. */
+    /** 16 ‚Äì Olimp√≠adas Rio 2016. */
     OLIMPIADAS_RIO_2016("16", false),
 
-    /** 90 ñ Solicitado pelo Fisco. */
+    /** 90 ‚Äì Solicitado pelo Fisco. */
     SOLICITADO_PELO_FISCO("90", false);
 
     /** Valor exato gravado/lido no XML (campo motDesICMS). */
     private final String xmlData;
 
-    /** Indica se o tipo est· obsoleto/descontinuado para uso atual. */
+    /** Indica se o tipo est√° obsoleto/descontinuado para uso atual. */
     private final boolean deprecated;
 
     SEFAZ_motDesICMS(String xmlData, boolean deprecated) {
@@ -1229,9 +1229,9 @@ public class SEFAZEnums {
     }
 
     /**
-     * Indica se o tipo est· obsoleto.
+     * Indica se o tipo est√° obsoleto.
      *
-     * @return the indica se o tipo est· obsoleto/descontinuado para uso atual
+     * @return the indica se o tipo est√° obsoleto/descontinuado para uso atual
      */
     public boolean isDeprecated() {
       return this.deprecated;
@@ -1240,47 +1240,47 @@ public class SEFAZEnums {
   }
 
   /**
-   * Enumeration do CÛdigo de SituaÁ„o da OperaÁ„o ñ Simples Nacional (CSOSN) utilizado no XML da NF-e.
+   * Enumeration do C√≥digo de Situa√ß√£o da Opera√ß√£o ‚Äì Simples Nacional (CSOSN) utilizado no XML da NF-e.
    *
-   * Contempla atÈ o momento: 101 ñ Tributada com permiss„o de crÈdito; 102 ñ Tributada sem permiss„o de crÈdito; 103 ñ IsenÁ„o do ICMS no Simples Nacional para faixa de receita bruta; 201 ñ Tributada com permiss„o de crÈdito e com ICMS ST; 202 ñ Tributada sem permiss„o de crÈdito e com ICMS ST; 203 ñ IsenÁ„o do ICMS no Simples Nacional para faixa de receita bruta e com ICMS ST; 300 ñ Imune; 400 ñ
-   * N„o tributada pelo Simples Nacional; 500 ñ ICMS cobrado anteriormente por substituiÁ„o tribut·ria ou por antecipaÁ„o; 900 ñ Outros (Simples Nacional).
+   * Contempla at√© o momento: 101 ‚Äì Tributada com permiss√£o de cr√©dito; 102 ‚Äì Tributada sem permiss√£o de cr√©dito; 103 ‚Äì Isen√ß√£o do ICMS no Simples Nacional para faixa de receita bruta; 201 ‚Äì Tributada com permiss√£o de cr√©dito e com ICMS ST; 202 ‚Äì Tributada sem permiss√£o de cr√©dito e com ICMS ST; 203 ‚Äì Isen√ß√£o do ICMS no Simples Nacional para faixa de receita bruta e com ICMS ST; 300 ‚Äì Imune; 400 ‚Äì
+   * N√£o tributada pelo Simples Nacional; 500 ‚Äì ICMS cobrado anteriormente por substitui√ß√£o tribut√°ria ou por antecipa√ß√£o; 900 ‚Äì Outros (Simples Nacional).
    */
   public enum SEFAZ_CSOSN implements SEFAZEnum<SEFAZ_CSOSN> {
 
-    /** 101 ñ Tributada pelo Simples Nacional com permiss„o de crÈdito. */
+    /** 101 ‚Äì Tributada pelo Simples Nacional com permiss√£o de cr√©dito. */
     CSOSN_101_TRIBUTADA_COM_PERMISSAO_CREDITO("101", false),
 
-    /** 102 ñ Tributada pelo Simples Nacional sem permiss„o de crÈdito. */
+    /** 102 ‚Äì Tributada pelo Simples Nacional sem permiss√£o de cr√©dito. */
     CSOSN_102_TRIBUTADA_SEM_CREDITO("102", false),
 
-    /** 103 ñ IsenÁ„o do ICMS no Simples Nacional para faixa de receita bruta. */
+    /** 103 ‚Äì Isen√ß√£o do ICMS no Simples Nacional para faixa de receita bruta. */
     CSOSN_103_ISENCAO_FAIXA_RECEITA("103", false),
 
-    /** 201 ñ Tributada pelo Simples Nacional com permiss„o de crÈdito e com ICMS ST. */
+    /** 201 ‚Äì Tributada pelo Simples Nacional com permiss√£o de cr√©dito e com ICMS ST. */
     CSOSN_201_TRIBUTADA_COM_CREDITO_E_ST("201", false),
 
-    /** 202 ñ Tributada pelo Simples Nacional sem permiss„o de crÈdito e com ICMS ST. */
+    /** 202 ‚Äì Tributada pelo Simples Nacional sem permiss√£o de cr√©dito e com ICMS ST. */
     CSOSN_202_TRIBUTADA_SEM_CREDITO_COM_ST("202", false),
 
-    /** 203 ñ IsenÁ„o do ICMS no Simples Nacional para faixa de receita bruta e com ICMS ST. */
+    /** 203 ‚Äì Isen√ß√£o do ICMS no Simples Nacional para faixa de receita bruta e com ICMS ST. */
     CSOSN_203_ISENCAO_FAIXA_RECEITA_COM_ST("203", false),
 
-    /** 300 ñ Imune. */
+    /** 300 ‚Äì Imune. */
     CSOSN_300_IMUNE("300", false),
 
-    /** 400 ñ N„o tributada pelo Simples Nacional. */
+    /** 400 ‚Äì N√£o tributada pelo Simples Nacional. */
     CSOSN_400_NAO_TRIBUTADA("400", false),
 
-    /** 500 ñ ICMS cobrado anteriormente por substituiÁ„o tribut·ria ou por antecipaÁ„o. */
+    /** 500 ‚Äì ICMS cobrado anteriormente por substitui√ß√£o tribut√°ria ou por antecipa√ß√£o. */
     CSOSN_500_ST_OU_ANTECIPACAO("500", false),
 
-    /** 900 ñ Outros (Simples Nacional). */
+    /** 900 ‚Äì Outros (Simples Nacional). */
     CSOSN_900_OUTROS("900", false);
 
     /** Valor exato gravado/lido no XML (campo CSOSN). */
     private final String xmlData;
 
-    /** Indica se o tipo est· obsoleto/descontinuado para uso atual. */
+    /** Indica se o tipo est√° obsoleto/descontinuado para uso atual. */
     private final boolean deprecated;
 
     SEFAZ_CSOSN(String xmlData, boolean deprecated) {
@@ -1299,9 +1299,9 @@ public class SEFAZEnums {
     }
 
     /**
-     * Indica se o tipo est· obsoleto.
+     * Indica se o tipo est√° obsoleto.
      *
-     * @return the indica se o tipo est· obsoleto/descontinuado para uso atual
+     * @return the indica se o tipo est√° obsoleto/descontinuado para uso atual
      */
     public boolean isDeprecated() {
       return this.deprecated;
@@ -1310,9 +1310,9 @@ public class SEFAZEnums {
   }
 
   /**
-   * EnumeraÁ„o da TributaÁ„o do IPI (CST) utilizada no XML da NF-e.
+   * Enumera√ß√£o da Tributa√ß√£o do IPI (CST) utilizada no XML da NF-e.
    * <p>
-   * Contempla os cÛdigos do campo CST do IPI para os grupos:
+   * Contempla os c√≥digos do campo CST do IPI para os grupos:
    * <ul>
    * <li>O09 (grupo O07 - IPITrib): 00, 49, 50, 99;</li>
    * <li>O09b (grupo O08 - IPINT): 01, 02, 03, 04, 05, 51, 52, 53, 54, 55.</li>
@@ -1320,52 +1320,52 @@ public class SEFAZEnums {
    */
   public enum SEFAZ_CST_IPI implements SEFAZEnum<SEFAZ_CST_IPI> {
 
-    /** 00 = Entrada com recuperaÁ„o de crÈdito. */
+    /** 00 = Entrada com recupera√ß√£o de cr√©dito. */
     CST_00_ENTRADA_RECUPERACAO_CREDITO("00", false),
 
     /** 49 = Outras entradas. */
     CST_49_OUTRAS_ENTRADAS("49", false),
 
-    /** 50 = SaÌda tributada. */
+    /** 50 = Sa√≠da tributada. */
     CST_50_SAIDA_TRIBUTADA("50", false),
 
-    /** 99 = Outras saÌdas. */
+    /** 99 = Outras sa√≠das. */
     CST_99_OUTRAS_SAIDAS("99", false),
 
-    /** 01 = Entrada tributada com alÌquota zero. */
+    /** 01 = Entrada tributada com al√≠quota zero. */
     CST_01_ENTRADA_TRIBUTADA_ALIQUOTA_ZERO("01", false),
 
     /** 02 = Entrada isenta. */
     CST_02_ENTRADA_ISENTA("02", false),
 
-    /** 03 = Entrada n„o-tributada. */
+    /** 03 = Entrada n√£o-tributada. */
     CST_03_ENTRADA_NAO_TRIBUTADA("03", false),
 
     /** 04 = Entrada imune. */
     CST_04_ENTRADA_IMUNE("04", false),
 
-    /** 05 = Entrada com suspens„o. */
+    /** 05 = Entrada com suspens√£o. */
     CST_05_ENTRADA_COM_SUSPENSAO("05", false),
 
-    /** 51 = SaÌda tributada com alÌquota zero. */
+    /** 51 = Sa√≠da tributada com al√≠quota zero. */
     CST_51_SAIDA_TRIBUTADA_ALIQUOTA_ZERO("51", false),
 
-    /** 52 = SaÌda isenta. */
+    /** 52 = Sa√≠da isenta. */
     CST_52_SAIDA_ISENTA("52", false),
 
-    /** 53 = SaÌda n„o tributada. */
+    /** 53 = Sa√≠da n√£o tributada. */
     CST_53_SAIDA_NAO_TRIBUTADA("53", false),
 
-    /** 54 = SaÌda imune. */
+    /** 54 = Sa√≠da imune. */
     CST_54_SAIDA_IMUNE("54", false),
 
-    /** 55 = SaÌda com suspens„o. */
+    /** 55 = Sa√≠da com suspens√£o. */
     CST_55_SAIDA_COM_SUSPENSAO("55", false);
 
     /** Valor exato gravado/lido no XML (campo CST). */
     private final String xmlData;
 
-    /** Indica se o tipo est· obsoleto/descontinuado para uso atual. */
+    /** Indica se o tipo est√° obsoleto/descontinuado para uso atual. */
     private final boolean deprecated;
 
     SEFAZ_CST_IPI(String xmlData, boolean deprecated) {
@@ -1384,9 +1384,9 @@ public class SEFAZEnums {
     }
 
     /**
-     * Indica se o tipo est· obsoleto.
+     * Indica se o tipo est√° obsoleto.
      *
-     * @return the indica se o tipo est· obsoleto/descontinuado para uso atual
+     * @return the indica se o tipo est√° obsoleto/descontinuado para uso atual
      */
     public boolean isDeprecated() {
       return this.deprecated;
@@ -1395,121 +1395,121 @@ public class SEFAZEnums {
   }
 
   /**
-   * EnumeraÁ„o da TributaÁ„o do PIS (CST) utilizada no XML da NF-e.
+   * Enumera√ß√£o da Tributa√ß√£o do PIS (CST) utilizada no XML da NF-e.
    * <p>
-   * Contempla todos os cÛdigos do campo CST do PIS nos grupos:
+   * Contempla todos os c√≥digos do campo CST do PIS nos grupos:
    * <ul>
    * <li>Q02 - PISAliq (CST 01, 02);</li>
    * <li>Q03 - PISQtde (CST 03);</li>
    * <li>Q04 - PISNT (CST 04, 05, 06, 07, 08, 09);</li>
-   * <li>Q05 - PISOutr (CST 49, 50ñ56, 60ñ67, 70ñ75, 98, 99).</li>
+   * <li>Q05 - PISOutr (CST 49, 50‚Äì56, 60‚Äì67, 70‚Äì75, 98, 99).</li>
    * </ul>
    */
   public enum SEFAZ_CST_PIS implements SEFAZEnum<SEFAZ_CST_PIS> {
 
-    /** 01 = OperaÁ„o Tribut·vel (base de c·lculo = valor da operaÁ„o, alÌquota normal). */
+    /** 01 = Opera√ß√£o Tribut√°vel (base de c√°lculo = valor da opera√ß√£o, al√≠quota normal). */
     CST_01_OPERACAO_TRIBUTAVEL_BC_VALOR_ALIQUOTA_NORMAL("01", false),
 
-    /** 02 = OperaÁ„o Tribut·vel (base de c·lculo = valor da operaÁ„o, alÌquota diferenciada). */
+    /** 02 = Opera√ß√£o Tribut√°vel (base de c√°lculo = valor da opera√ß√£o, al√≠quota diferenciada). */
     CST_02_OPERACAO_TRIBUTAVEL_BC_VALOR_ALIQUOTA_DIFERENCIADA("02", false),
 
-    /** 03 = OperaÁ„o Tribut·vel (base de c·lculo = quantidade vendida ◊ alÌquota por unidade de produto). */
+    /** 03 = Opera√ß√£o Tribut√°vel (base de c√°lculo = quantidade vendida √ó al√≠quota por unidade de produto). */
     CST_03_OPERACAO_TRIBUTAVEL_BC_QTDE_ALIQUOTA_POR_UNIDADE("03", false),
 
-    /** 04 = OperaÁ„o Tribut·vel (tributaÁ„o monof·sica, alÌquota zero). */
+    /** 04 = Opera√ß√£o Tribut√°vel (tributa√ß√£o monof√°sica, al√≠quota zero). */
     CST_04_OPERACAO_TRIBUTAVEL_MONOFASICA_ALIQUOTA_ZERO("04", false),
 
-    /** 05 = OperaÁ„o Tribut·vel (SubstituiÁ„o Tribut·ria). */
+    /** 05 = Opera√ß√£o Tribut√°vel (Substitui√ß√£o Tribut√°ria). */
     CST_05_OPERACAO_TRIBUTAVEL_SUBSTITUICAO_TRIBUTARIA("05", false),
 
-    /** 06 = OperaÁ„o Tribut·vel (alÌquota zero). */
+    /** 06 = Opera√ß√£o Tribut√°vel (al√≠quota zero). */
     CST_06_OPERACAO_TRIBUTAVEL_ALIQUOTA_ZERO("06", false),
 
-    /** 07 = OperaÁ„o Isenta da ContribuiÁ„o. */
+    /** 07 = Opera√ß√£o Isenta da Contribui√ß√£o. */
     CST_07_OPERACAO_ISENTA("07", false),
 
-    /** 08 = OperaÁ„o Sem IncidÍncia da ContribuiÁ„o. */
+    /** 08 = Opera√ß√£o Sem Incid√™ncia da Contribui√ß√£o. */
     CST_08_OPERACAO_SEM_INCIDENCIA("08", false),
 
-    /** 09 = OperaÁ„o com Suspens„o da ContribuiÁ„o. */
+    /** 09 = Opera√ß√£o com Suspens√£o da Contribui√ß√£o. */
     CST_09_OPERACAO_COM_SUSPENSAO("09", false),
 
-    /** 49 = Outras OperaÁıes de SaÌda. */
+    /** 49 = Outras Opera√ß√µes de Sa√≠da. */
     CST_49_OUTRAS_OPERACOES_SAIDA("49", false),
 
-    /** 50 = OperaÁ„o com Direito a CrÈdito ñ Vinculada Exclusivamente a Receita Tributada no Mercado Interno. */
+    /** 50 = Opera√ß√£o com Direito a Cr√©dito ‚Äì Vinculada Exclusivamente a Receita Tributada no Mercado Interno. */
     CST_50_DIREITO_CREDITO_VINCULADA_EXCLUSIVA_RECEITA_TRIBUTADA_INTERNA("50", false),
 
-    /** 51 = OperaÁ„o com Direito a CrÈdito ñ Vinculada Exclusivamente a Receita N„o Tributada no Mercado Interno. */
+    /** 51 = Opera√ß√£o com Direito a Cr√©dito ‚Äì Vinculada Exclusivamente a Receita N√£o Tributada no Mercado Interno. */
     CST_51_DIREITO_CREDITO_VINCULADA_EXCLUSIVA_RECEITA_NAO_TRIBUTADA_INTERNA("51", false),
 
-    /** 52 = OperaÁ„o com Direito a CrÈdito ñ Vinculada Exclusivamente a Receita de ExportaÁ„o. */
+    /** 52 = Opera√ß√£o com Direito a Cr√©dito ‚Äì Vinculada Exclusivamente a Receita de Exporta√ß√£o. */
     CST_52_DIREITO_CREDITO_VINCULADA_EXCLUSIVA_RECEITA_EXPORTACAO("52", false),
 
-    /** 53 = OperaÁ„o com Direito a CrÈdito ñ Vinculada a Receitas Tributadas e N„o-Tributadas no Mercado Interno. */
+    /** 53 = Opera√ß√£o com Direito a Cr√©dito ‚Äì Vinculada a Receitas Tributadas e N√£o-Tributadas no Mercado Interno. */
     CST_53_DIREITO_CREDITO_RECEITAS_TRIBUTADAS_E_NAO_TRIBUTADAS_INTERNA("53", false),
 
-    /** 54 = OperaÁ„o com Direito a CrÈdito ñ Vinculada a Receitas Tributadas no Mercado Interno e de ExportaÁ„o. */
+    /** 54 = Opera√ß√£o com Direito a Cr√©dito ‚Äì Vinculada a Receitas Tributadas no Mercado Interno e de Exporta√ß√£o. */
     CST_54_DIREITO_CREDITO_RECEITAS_TRIBUTADAS_INTERNA_E_EXPORTACAO("54", false),
 
-    /** 55 = OperaÁ„o com Direito a CrÈdito ñ Vinculada a Receitas N„o-Tributadas no Mercado Interno e de ExportaÁ„o. */
+    /** 55 = Opera√ß√£o com Direito a Cr√©dito ‚Äì Vinculada a Receitas N√£o-Tributadas no Mercado Interno e de Exporta√ß√£o. */
     CST_55_DIREITO_CREDITO_RECEITAS_NAO_TRIBUTADAS_INTERNA_E_EXPORTACAO("55", false),
 
-    /** 56 = OperaÁ„o com Direito a CrÈdito ñ Vinculada a Receitas Tributadas e N„o-Tributadas no Mercado Interno e de ExportaÁ„o. */
+    /** 56 = Opera√ß√£o com Direito a Cr√©dito ‚Äì Vinculada a Receitas Tributadas e N√£o-Tributadas no Mercado Interno e de Exporta√ß√£o. */
     CST_56_DIREITO_CREDITO_RECEITAS_TRIBUTADAS_E_NAO_TRIBUTADAS_INTERNA_E_EXPORTACAO("56", false),
 
-    /** 60 = CrÈdito Presumido ñ OperaÁ„o de AquisiÁ„o Vinculada Exclusivamente a Receita Tributada no Mercado Interno. */
+    /** 60 = Cr√©dito Presumido ‚Äì Opera√ß√£o de Aquisi√ß√£o Vinculada Exclusivamente a Receita Tributada no Mercado Interno. */
     CST_60_CREDITO_PRESUMIDO_AQUISICAO_EXCLUSIVA_RECEITA_TRIBUTADA_INTERNA("60", false),
 
-    /** 61 = CrÈdito Presumido ñ OperaÁ„o de AquisiÁ„o Exclusivamente Receita N„o-Tributada Mercado Interno. */
+    /** 61 = Cr√©dito Presumido ‚Äì Opera√ß√£o de Aquisi√ß√£o Exclusivamente Receita N√£o-Tributada Mercado Interno. */
     CST_61_CREDITO_PRESUMIDO_AQUISICAO_EXCLUSIVA_RECEITA_NAO_TRIBUTADA_INTERNA("61", false),
 
-    /** 62 = CrÈdito Presumido ñ AquisiÁ„o Vinculada Exclusivamente a Receita de ExportaÁ„o. */
+    /** 62 = Cr√©dito Presumido ‚Äì Aquisi√ß√£o Vinculada Exclusivamente a Receita de Exporta√ß√£o. */
     CST_62_CREDITO_PRESUMIDO_AQUISICAO_EXCLUSIVA_RECEITA_EXPORTACAO("62", false),
 
-    /** 63 = CrÈdito Presumido ñ OperaÁ„o de AquisiÁ„o Vinculada a Receitas Tributadas e N„o-Tributadas no Mercado Interno. */
+    /** 63 = Cr√©dito Presumido ‚Äì Opera√ß√£o de Aquisi√ß√£o Vinculada a Receitas Tributadas e N√£o-Tributadas no Mercado Interno. */
     CST_63_CREDITO_PRESUMIDO_AQUISICAO_RECEITAS_TRIBUTADAS_E_NAO_TRIBUTADAS_INTERNA("63", false),
 
-    /** 64 = CrÈdito Presumido ñ OperaÁ„o de AquisiÁ„o Vinculada a Receitas Tributadas no Mercado Interno e de ExportaÁ„o. */
+    /** 64 = Cr√©dito Presumido ‚Äì Opera√ß√£o de Aquisi√ß√£o Vinculada a Receitas Tributadas no Mercado Interno e de Exporta√ß√£o. */
     CST_64_CREDITO_PRESUMIDO_AQUISICAO_RECEITAS_TRIBUTADAS_INTERNA_E_EXPORTACAO("64", false),
 
-    /** 65 = CrÈdito Presumido ñ OperaÁ„o de AquisiÁ„o Vinculada a Receitas N„o-Tributadas no Mercado Interno e de ExportaÁ„o. */
+    /** 65 = Cr√©dito Presumido ‚Äì Opera√ß√£o de Aquisi√ß√£o Vinculada a Receitas N√£o-Tributadas no Mercado Interno e de Exporta√ß√£o. */
     CST_65_CREDITO_PRESUMIDO_AQUISICAO_RECEITAS_NAO_TRIBUTADAS_INTERNA_E_EXPORTACAO("65", false),
 
-    /** 66 = CrÈdito Presumido ñ OperaÁ„o de AquisiÁ„o Vinculada a Receitas Tributadas e N„o-Tributadas no Mercado Interno. */
+    /** 66 = Cr√©dito Presumido ‚Äì Opera√ß√£o de Aquisi√ß√£o Vinculada a Receitas Tributadas e N√£o-Tributadas no Mercado Interno. */
     CST_66_CREDITO_PRESUMIDO_AQUISICAO_RECEITAS_TRIBUTADAS_E_NAO_TRIBUTADAS_INTERNA("66", false),
 
-    /** 67 = CrÈdito Presumido ñ Outras OperaÁıes. */
+    /** 67 = Cr√©dito Presumido ‚Äì Outras Opera√ß√µes. */
     CST_67_CREDITO_PRESUMIDO_OUTRAS_OPERACOES("67", false),
 
-    /** 70 = OperaÁ„o de AquisiÁ„o com Direito a CrÈdito. */
+    /** 70 = Opera√ß√£o de Aquisi√ß√£o com Direito a Cr√©dito. */
     CST_70_AQUISICAO_COM_DIREITO_A_CREDITO("70", false),
 
-    /** 71 = OperaÁ„o de AquisiÁ„o com IsenÁ„o. */
+    /** 71 = Opera√ß√£o de Aquisi√ß√£o com Isen√ß√£o. */
     CST_71_AQUISICAO_COM_ISENCAO("71", false),
 
-    /** 72 = OperaÁ„o de AquisiÁ„o com Suspens„o. */
+    /** 72 = Opera√ß√£o de Aquisi√ß√£o com Suspens√£o. */
     CST_72_AQUISICAO_COM_SUSPENSAO("72", false),
 
-    /** 73 = OperaÁ„o de AquisiÁ„o ñ AlÌquota Zero. */
+    /** 73 = Opera√ß√£o de Aquisi√ß√£o ‚Äì Al√≠quota Zero. */
     CST_73_AQUISICAO_ALIQUOTA_ZERO("73", false),
 
-    /** 74 = OperaÁ„o de AquisiÁ„o ñ Sem IncidÍncia da ContribuiÁ„o. */
+    /** 74 = Opera√ß√£o de Aquisi√ß√£o ‚Äì Sem Incid√™ncia da Contribui√ß√£o. */
     CST_74_AQUISICAO_SEM_INCIDENCIA("74", false),
 
-    /** 75 = OperaÁ„o de AquisiÁ„o por SubstituiÁ„o Tribut·ria. */
+    /** 75 = Opera√ß√£o de Aquisi√ß√£o por Substitui√ß√£o Tribut√°ria. */
     CST_75_AQUISICAO_POR_SUBSTITUICAO_TRIBUTARIA("75", false),
 
-    /** 98 = Outras OperaÁıes de Entrada. */
+    /** 98 = Outras Opera√ß√µes de Entrada. */
     CST_98_OUTRAS_OPERACOES_ENTRADA("98", false),
 
-    /** 99 = Outras OperaÁıes. */
+    /** 99 = Outras Opera√ß√µes. */
     CST_99_OUTRAS_OPERACOES("99", false);
 
     /** Valor exato gravado/lido no XML (campo CST). */
     private final String xmlData;
 
-    /** Indica se o tipo est· obsoleto/descontinuado para uso atual. */
+    /** Indica se o tipo est√° obsoleto/descontinuado para uso atual. */
     private final boolean deprecated;
 
     SEFAZ_CST_PIS(String xmlData, boolean deprecated) {
@@ -1528,9 +1528,9 @@ public class SEFAZEnums {
     }
 
     /**
-     * Indica se o tipo est· obsoleto.
+     * Indica se o tipo est√° obsoleto.
      *
-     * @return the indica se o tipo est· obsoleto/descontinuado para uso atual
+     * @return the indica se o tipo est√° obsoleto/descontinuado para uso atual
      */
     public boolean isDeprecated() {
       return this.deprecated;
@@ -1539,106 +1539,106 @@ public class SEFAZEnums {
   }
 
   /**
-   * EnumeraÁ„o da TributaÁ„o da COFINS (CST) utilizada no XML da NF-e.
+   * Enumera√ß√£o da Tributa√ß√£o da COFINS (CST) utilizada no XML da NF-e.
    *
-   * Contempla todos os cÛdigos do campo CST da COFINS nos grupos: - S02 - COFINSAliq (CST 01, 02); - S03 - COFINSQtde (CST 03); - S04 - COFINSNT (CST 04, 05, 06, 07, 08, 09); - S05 - COFINSOutr (CST 49, 50, 51, 52, 53, 54, 55, 56, 61ñ67, 70ñ73, 98, 99).
+   * Contempla todos os c√≥digos do campo CST da COFINS nos grupos: - S02 - COFINSAliq (CST 01, 02); - S03 - COFINSQtde (CST 03); - S04 - COFINSNT (CST 04, 05, 06, 07, 08, 09); - S05 - COFINSOutr (CST 49, 50, 51, 52, 53, 54, 55, 56, 61‚Äì67, 70‚Äì73, 98, 99).
    */
   public enum SEFAZ_CST_COFINS implements SEFAZEnum<SEFAZ_CST_COFINS> {
 
-    /** 01 = OperaÁ„o Tribut·vel (base de c·lculo = valor da operaÁ„o alÌquota normal (cumulativo/n„o cumulativo)). */
+    /** 01 = Opera√ß√£o Tribut√°vel (base de c√°lculo = valor da opera√ß√£o al√≠quota normal (cumulativo/n√£o cumulativo)). */
     CST_01_OPERACAO_TRIBUTAVEL_BC_VALOR_ALIQUOTA_NORMAL("01", false),
 
-    /** 02 = OperaÁ„o Tribut·vel (base de c·lculo = valor da operaÁ„o (alÌquota diferenciada)). */
+    /** 02 = Opera√ß√£o Tribut√°vel (base de c√°lculo = valor da opera√ß√£o (al√≠quota diferenciada)). */
     CST_02_OPERACAO_TRIBUTAVEL_BC_VALOR_ALIQUOTA_DIFERENCIADA("02", false),
 
-    /** 03 = OperaÁ„o Tribut·vel (base de c·lculo = quantidade vendida ◊ alÌquota por unidade de produto). */
+    /** 03 = Opera√ß√£o Tribut√°vel (base de c√°lculo = quantidade vendida √ó al√≠quota por unidade de produto). */
     CST_03_OPERACAO_TRIBUTAVEL_BC_QTDE_ALIQUOTA_POR_UNIDADE("03", false),
 
-    /** 04 = OperaÁ„o Tribut·vel (tributaÁ„o monof·sica, alÌquota zero). */
+    /** 04 = Opera√ß√£o Tribut√°vel (tributa√ß√£o monof√°sica, al√≠quota zero). */
     CST_04_OPERACAO_TRIBUTAVEL_MONOFASICA_ALIQUOTA_ZERO("04", false),
 
-    /** 05 = OperaÁ„o Tribut·vel (SubstituiÁ„o Tribut·ria). */
+    /** 05 = Opera√ß√£o Tribut√°vel (Substitui√ß√£o Tribut√°ria). */
     CST_05_OPERACAO_TRIBUTAVEL_SUBSTITUICAO_TRIBUTARIA("05", false),
 
-    /** 06 = OperaÁ„o Tribut·vel (alÌquota zero). */
+    /** 06 = Opera√ß√£o Tribut√°vel (al√≠quota zero). */
     CST_06_OPERACAO_TRIBUTAVEL_ALIQUOTA_ZERO("06", false),
 
-    /** 07 = OperaÁ„o Isenta da ContribuiÁ„o. */
+    /** 07 = Opera√ß√£o Isenta da Contribui√ß√£o. */
     CST_07_OPERACAO_ISENTA("07", false),
 
-    /** 08 = OperaÁ„o Sem IncidÍncia da ContribuiÁ„o. */
+    /** 08 = Opera√ß√£o Sem Incid√™ncia da Contribui√ß√£o. */
     CST_08_OPERACAO_SEM_INCIDENCIA("08", false),
 
-    /** 09 = OperaÁ„o com Suspens„o da ContribuiÁ„o. */
+    /** 09 = Opera√ß√£o com Suspens√£o da Contribui√ß√£o. */
     CST_09_OPERACAO_COM_SUSPENSAO("09", false),
 
-    /** 49 = Outras OperaÁıes de SaÌda. */
+    /** 49 = Outras Opera√ß√µes de Sa√≠da. */
     CST_49_OUTRAS_OPERACOES_SAIDA("49", false),
 
-    /** 50 = OperaÁ„o com Direito a CrÈdito ñ Vinculada exclusivamente a Receita Tributada no Mercado Interno. */
+    /** 50 = Opera√ß√£o com Direito a Cr√©dito ‚Äì Vinculada exclusivamente a Receita Tributada no Mercado Interno. */
     CST_50_DIREITO_CREDITO_VINCULADA_EXCLUSIVA_RECEITA_TRIBUTADA_INTERNA("50", false),
 
-    /** 51 = OperaÁ„o com Direito a CrÈdito ñ Vinculada exclusivamente a Receita N„o-Tributada no Mercado Interno. */
+    /** 51 = Opera√ß√£o com Direito a Cr√©dito ‚Äì Vinculada exclusivamente a Receita N√£o-Tributada no Mercado Interno. */
     CST_51_DIREITO_CREDITO_VINCULADA_EXCLUSIVA_RECEITA_NAO_TRIBUTADA_INTERNA("51", false),
 
-    /** 52 = OperaÁ„o com Direito a CrÈdito ñ Vinculada exclusivamente a Receita de ExportaÁ„o. */
+    /** 52 = Opera√ß√£o com Direito a Cr√©dito ‚Äì Vinculada exclusivamente a Receita de Exporta√ß√£o. */
     CST_52_DIREITO_CREDITO_VINCULADA_EXCLUSIVA_RECEITA_EXPORTACAO("52", false),
 
-    /** 53 = OperaÁ„o com Direito a CrÈdito ñ Vinculada a Receitas Tributadas e N„o-Tributadas no Mercado Interno. */
+    /** 53 = Opera√ß√£o com Direito a Cr√©dito ‚Äì Vinculada a Receitas Tributadas e N√£o-Tributadas no Mercado Interno. */
     CST_53_DIREITO_CREDITO_RECEITAS_TRIBUTADAS_E_NAO_TRIBUTADAS_INTERNA("53", false),
 
-    /** 54 = OperaÁ„o com Direito a CrÈdito ñ Vinculada a Receitas Tributadas no Mercado Interno e de ExportaÁ„o. */
+    /** 54 = Opera√ß√£o com Direito a Cr√©dito ‚Äì Vinculada a Receitas Tributadas no Mercado Interno e de Exporta√ß√£o. */
     CST_54_DIREITO_CREDITO_RECEITAS_TRIBUTADAS_INTERNA_E_EXPORTACAO("54", false),
 
-    /** 55 = OperaÁ„o com Direito a CrÈdito ñ Vinculada a Receitas N„o-Tributadas no Mercado Interno e de ExportaÁ„o. */
+    /** 55 = Opera√ß√£o com Direito a Cr√©dito ‚Äì Vinculada a Receitas N√£o-Tributadas no Mercado Interno e de Exporta√ß√£o. */
     CST_55_DIREITO_CREDITO_RECEITAS_NAO_TRIBUTADAS_INTERNA_E_EXPORTACAO("55", false),
 
-    /** 56 = CrÈdito Presumido ñ OperaÁ„o de AquisiÁ„o Vinculada exclusivamente a Receita Tributada no Mercado Interno. */
+    /** 56 = Cr√©dito Presumido ‚Äì Opera√ß√£o de Aquisi√ß√£o Vinculada exclusivamente a Receita Tributada no Mercado Interno. */
     CST_56_CREDITO_PRESUMIDO_AQUISICAO_EXCLUSIVA_RECEITA_TRIBUTADA_INTERNA("56", false),
 
-    /** 61 = CrÈdito Presumido ñ OperaÁ„o de AquisiÁ„o Vinculada exclusivamente a Receita N„o-Tributada no Mercado Interno. */
+    /** 61 = Cr√©dito Presumido ‚Äì Opera√ß√£o de Aquisi√ß√£o Vinculada exclusivamente a Receita N√£o-Tributada no Mercado Interno. */
     CST_61_CREDITO_PRESUMIDO_AQUISICAO_EXCLUSIVA_RECEITA_NAO_TRIBUTADA_INTERNA("61", false),
 
-    /** 62 = CrÈdito Presumido ñ OperaÁ„o de AquisiÁ„o Vinculada exclusivamente a Receita de ExportaÁ„o. */
+    /** 62 = Cr√©dito Presumido ‚Äì Opera√ß√£o de Aquisi√ß√£o Vinculada exclusivamente a Receita de Exporta√ß√£o. */
     CST_62_CREDITO_PRESUMIDO_AQUISICAO_EXCLUSIVA_RECEITA_EXPORTACAO("62", false),
 
-    /** 63 = CrÈdito Presumido ñ OperaÁ„o Vinculada a Receitas Tributadas e N„o-Tributadas no Mercado Interno. */
+    /** 63 = Cr√©dito Presumido ‚Äì Opera√ß√£o Vinculada a Receitas Tributadas e N√£o-Tributadas no Mercado Interno. */
     CST_63_CREDITO_PRESUMIDO_OPERACAO_RECEITAS_TRIBUTADAS_E_NAO_TRIBUTADAS_INTERNA("63", false),
 
-    /** 64 = CrÈdito Presumido ñ OperaÁ„o de AquisiÁ„o Vinculada a Receitas Tributadas no Mercado Interno e de ExportaÁ„o. */
+    /** 64 = Cr√©dito Presumido ‚Äì Opera√ß√£o de Aquisi√ß√£o Vinculada a Receitas Tributadas no Mercado Interno e de Exporta√ß√£o. */
     CST_64_CREDITO_PRESUMIDO_AQUISICAO_RECEITAS_TRIBUTADAS_INTERNA_E_EXPORTACAO("64", false),
 
-    /** 65 = CrÈdito Presumido ñ OperaÁ„o de AquisiÁ„o Vinculada a Receitas N„o-Tributadas no Mercado Interno e de ExportaÁ„o. */
+    /** 65 = Cr√©dito Presumido ‚Äì Opera√ß√£o de Aquisi√ß√£o Vinculada a Receitas N√£o-Tributadas no Mercado Interno e de Exporta√ß√£o. */
     CST_65_CREDITO_PRESUMIDO_AQUISICAO_RECEITAS_NAO_TRIBUTADAS_INTERNA_E_EXPORTACAO("65", false),
 
-    /** 66 = CrÈdito Presumido ñ OperaÁ„o de AquisiÁ„o Vinculada a Receitas Tributadas e N„o-Tributadas no Mercado Interno e de ExportaÁ„o. */
+    /** 66 = Cr√©dito Presumido ‚Äì Opera√ß√£o de Aquisi√ß√£o Vinculada a Receitas Tributadas e N√£o-Tributadas no Mercado Interno e de Exporta√ß√£o. */
     CST_66_CREDITO_PRESUMIDO_AQUISICAO_RECEITAS_TRIBUTADAS_E_NAO_TRIBUTADAS_INTERNA_E_EXPORTACAO("66", false),
 
-    /** 67 = CrÈdito Presumido ñ Outras OperaÁıes. */
+    /** 67 = Cr√©dito Presumido ‚Äì Outras Opera√ß√µes. */
     CST_67_CREDITO_PRESUMIDO_OUTRAS_OPERACOES("67", false),
 
-    /** 70 = OperaÁ„o de AquisiÁ„o com Suspens„o. */
+    /** 70 = Opera√ß√£o de Aquisi√ß√£o com Suspens√£o. */
     CST_70_AQUISICAO_COM_SUSPENSAO("70", false),
 
-    /** 71 = OperaÁ„o de AquisiÁ„o com AlÌquota Zero. */
+    /** 71 = Opera√ß√£o de Aquisi√ß√£o com Al√≠quota Zero. */
     CST_71_AQUISICAO_ALIQUOTA_ZERO("71", false),
 
-    /** 72 = OperaÁ„o de AquisiÁ„o sem IncidÍncia da ContribuiÁ„o. */
+    /** 72 = Opera√ß√£o de Aquisi√ß√£o sem Incid√™ncia da Contribui√ß√£o. */
     CST_72_AQUISICAO_SEM_INCIDENCIA("72", false),
 
-    /** 73 = OperaÁ„o de AquisiÁ„o por SubstituiÁ„o Tribut·ria. */
+    /** 73 = Opera√ß√£o de Aquisi√ß√£o por Substitui√ß√£o Tribut√°ria. */
     CST_73_AQUISICAO_POR_SUBSTITUICAO_TRIBUTARIA("73", false),
 
-    /** 98 = Outras OperaÁıes de Entrada. */
+    /** 98 = Outras Opera√ß√µes de Entrada. */
     CST_98_OUTRAS_OPERACOES_ENTRADA("98", false),
 
-    /** 99 = Outras OperaÁıes. */
+    /** 99 = Outras Opera√ß√µes. */
     CST_99_OUTRAS_OPERACOES("99", false);
 
     /** Valor exato gravado/lido no XML (campo CST). */
     private final String xmlData;
 
-    /** Indica se o tipo est· obsoleto/descontinuado para uso atual. */
+    /** Indica se o tipo est√° obsoleto/descontinuado para uso atual. */
     private final boolean deprecated;
 
     SEFAZ_CST_COFINS(String xmlData, boolean deprecated) {
@@ -1657,9 +1657,9 @@ public class SEFAZEnums {
     }
 
     /**
-     * Indica se o tipo est· obsoleto.
+     * Indica se o tipo est√° obsoleto.
      *
-     * @return the indica se o tipo est· obsoleto/descontinuado para uso atual
+     * @return the indica se o tipo est√° obsoleto/descontinuado para uso atual
      */
     public boolean isDeprecated() {
       return this.deprecated;
@@ -1668,9 +1668,9 @@ public class SEFAZEnums {
   }
 
   /**
-   * EnumeraÁ„o do CÛdigo do Regime Especial de TributaÁ„o (cRegTrib) do ISSQN no grupo W17 - ISSQNtot da NF-e.
+   * Enumera√ß√£o do C√≥digo do Regime Especial de Tributa√ß√£o (cRegTrib) do ISSQN no grupo W17 - ISSQNtot da NF-e.
    *
-   * Valores: 1 = Microempresa Municipal 2 = Estimativa 3 = Sociedade de Profissionais 4 = Cooperativa 5 = Microempres·rio Individual (MEI) 6 = Microempres·rio e Empresa de Pequeno Porte
+   * Valores: 1 = Microempresa Municipal 2 = Estimativa 3 = Sociedade de Profissionais 4 = Cooperativa 5 = Microempres√°rio Individual (MEI) 6 = Microempres√°rio e Empresa de Pequeno Porte
    */
   public enum SEFAZ_cRegTrib implements SEFAZEnum<SEFAZ_cRegTrib> {
 
@@ -1686,16 +1686,16 @@ public class SEFAZEnums {
     /** 4 = Cooperativa. */
     COOPERATIVA("4", false),
 
-    /** 5 = Microempres·rio Individual (MEI). */
+    /** 5 = Microempres√°rio Individual (MEI). */
     MEI("5", false),
 
-    /** 6 = Microempres·rio e Empresa de Pequeno Porte. */
+    /** 6 = Microempres√°rio e Empresa de Pequeno Porte. */
     ME_EPP("6", false);
 
     /** Valor exato gravado/lido no XML (campo cRegTrib). */
     private final String xmlData;
 
-    /** Indica se o tipo est· obsoleto/descontinuado para uso atual. */
+    /** Indica se o tipo est√° obsoleto/descontinuado para uso atual. */
     private final boolean deprecated;
 
     SEFAZ_cRegTrib(String xmlData, boolean deprecated) {
@@ -1714,9 +1714,9 @@ public class SEFAZEnums {
     }
 
     /**
-     * Indica se o tipo est· obsoleto.
+     * Indica se o tipo est√° obsoleto.
      *
-     * @return the indica se o tipo est· obsoleto/descontinuado para uso atual
+     * @return the indica se o tipo est√° obsoleto/descontinuado para uso atual
      */
     public boolean isDeprecated() {
       return this.deprecated;
@@ -1725,34 +1725,34 @@ public class SEFAZEnums {
   }
 
   /**
-   * EnumeraÁ„o da Modalidade do Frete (modFrete) utilizada no XML da NF-e.
+   * Enumera√ß√£o da Modalidade do Frete (modFrete) utilizada no XML da NF-e.
    *
-   * Valores: 0 = ContrataÁ„o do Frete por conta do Remetente (CIF) 1 = ContrataÁ„o do Frete por conta do Destinat·rio (FOB) 2 = ContrataÁ„o do Frete por conta de Terceiros 3 = Transporte PrÛprio por conta do Remetente 4 = Transporte PrÛprio por conta do Destinat·rio 9 = Sem OcorrÍncia de Transporte
+   * Valores: 0 = Contrata√ß√£o do Frete por conta do Remetente (CIF) 1 = Contrata√ß√£o do Frete por conta do Destinat√°rio (FOB) 2 = Contrata√ß√£o do Frete por conta de Terceiros 3 = Transporte Pr√≥prio por conta do Remetente 4 = Transporte Pr√≥prio por conta do Destinat√°rio 9 = Sem Ocorr√™ncia de Transporte
    */
   public enum SEFAZ_modFrete implements SEFAZEnum<SEFAZ_modFrete> {
 
-    /** 0 = ContrataÁ„o do Frete por conta do Remetente (CIF). */
+    /** 0 = Contrata√ß√£o do Frete por conta do Remetente (CIF). */
     REMETENTE_CIF("0", false),
 
-    /** 1 = ContrataÁ„o do Frete por conta do Destinat·rio (FOB). */
+    /** 1 = Contrata√ß√£o do Frete por conta do Destinat√°rio (FOB). */
     DESTINATARIO_FOB("1", false),
 
-    /** 2 = ContrataÁ„o do Frete por conta de Terceiros. */
+    /** 2 = Contrata√ß√£o do Frete por conta de Terceiros. */
     TERCEIROS("2", false),
 
-    /** 3 = Transporte PrÛprio por conta do Remetente. */
+    /** 3 = Transporte Pr√≥prio por conta do Remetente. */
     TRANSP_PROPRIO_REMETENTE("3", false),
 
-    /** 4 = Transporte PrÛprio por conta do Destinat·rio. */
+    /** 4 = Transporte Pr√≥prio por conta do Destinat√°rio. */
     TRANSP_PROPRIO_DESTINATARIO("4", false),
 
-    /** 9 = Sem OcorrÍncia de Transporte. */
+    /** 9 = Sem Ocorr√™ncia de Transporte. */
     SEM_OCORRENCIA("9", false);
 
     /** Valor exato gravado/lido no XML (campo modFrete). */
     private final String xmlData;
 
-    /** Indica se o tipo est· obsoleto/descontinuado para uso atual. */
+    /** Indica se o tipo est√° obsoleto/descontinuado para uso atual. */
     private final boolean deprecated;
 
     SEFAZ_modFrete(String xmlData, boolean deprecated) {
@@ -1771,9 +1771,9 @@ public class SEFAZEnums {
     }
 
     /**
-     * Indica se o tipo est· obsoleto.
+     * Indica se o tipo est√° obsoleto.
      *
-     * @return the indica se o tipo est· obsoleto/descontinuado para uso atual
+     * @return the indica se o tipo est√° obsoleto/descontinuado para uso atual
      */
     public boolean isDeprecated() {
       return this.deprecated;
@@ -1782,22 +1782,22 @@ public class SEFAZEnums {
   }
 
   /**
-   * EnumeraÁ„o do Indicador da Forma de Pagamento (indPag).
+   * Enumera√ß√£o do Indicador da Forma de Pagamento (indPag).
    *
-   * Valores: 0 = Pagamento ‡ Vista 1 = Pagamento ‡ Prazo
+   * Valores: 0 = Pagamento √† Vista 1 = Pagamento √† Prazo
    */
   public enum SEFAZ_indPag implements SEFAZEnum<SEFAZ_indPag> {
 
-    /** 0 = Pagamento ‡ Vista. */
+    /** 0 = Pagamento √† Vista. */
     A_VISTA("0", false),
 
-    /** 1 = Pagamento ‡ Prazo. */
+    /** 1 = Pagamento √† Prazo. */
     A_PRAZO("1", false);
 
     /** Valor exato gravado/lido no XML (campo indPag). */
     private final String xmlData;
 
-    /** Indica se o tipo est· obsoleto/descontinuado para uso atual. */
+    /** Indica se o tipo est√° obsoleto/descontinuado para uso atual. */
     private final boolean deprecated;
 
     SEFAZ_indPag(String xmlData, boolean deprecated) {
@@ -1816,9 +1816,9 @@ public class SEFAZEnums {
     }
 
     /**
-     * Indica se o tipo est· obsoleto.
+     * Indica se o tipo est√° obsoleto.
      *
-     * @return the indica se o tipo est· obsoleto/descontinuado para uso atual
+     * @return the indica se o tipo est√° obsoleto/descontinuado para uso atual
      */
     public boolean isDeprecated() {
       return this.deprecated;
@@ -1827,9 +1827,9 @@ public class SEFAZEnums {
   }
 
   /**
-   * EnumeraÁ„o do Meio de Pagamento (tPag).
+   * Enumera√ß√£o do Meio de Pagamento (tPag).
    *
-   * Valores: 01 = Dinheiro 02 = Cheque 03 = Cart„o de CrÈdito 04 = Cart„o de DÈbito 05 = CrÈdito Loja 10 = Vale AlimentaÁ„o 11 = Vale RefeiÁ„o 12 = Vale Presente 13 = Vale CombustÌvel 15 = Boleto Banc·rio 16 = DepÛsito Banc·rio 17 = Pagamento Instant‚neo (PIX) 18 = TransferÍncia banc·ria, Carteira Digital 19 = Programa de fidelidade, Cashback, CrÈdito Virtual 90 = Sem pagamento 99 = Outros
+   * Valores: 01 = Dinheiro 02 = Cheque 03 = Cart√£o de Cr√©dito 04 = Cart√£o de D√©bito 05 = Cr√©dito Loja 10 = Vale Alimenta√ß√£o 11 = Vale Refei√ß√£o 12 = Vale Presente 13 = Vale Combust√≠vel 15 = Boleto Banc√°rio 16 = Dep√≥sito Banc√°rio 17 = Pagamento Instant√¢neo (PIX) 18 = Transfer√™ncia banc√°ria, Carteira Digital 19 = Programa de fidelidade, Cashback, Cr√©dito Virtual 90 = Sem pagamento 99 = Outros
    */
   public enum SEFAZ_tPag implements SEFAZEnum<SEFAZ_tPag> {
 
@@ -1839,40 +1839,40 @@ public class SEFAZEnums {
     /** 02 = Cheque. */
     CHEQUE("02", false),
 
-    /** 03 = Cart„o de CrÈdito. */
+    /** 03 = Cart√£o de Cr√©dito. */
     CARTAO_CREDITO("03", false),
 
-    /** 04 = Cart„o de DÈbito. */
+    /** 04 = Cart√£o de D√©bito. */
     CARTAO_DEBITO("04", false),
 
-    /** 05 = CrÈdito Loja. */
+    /** 05 = Cr√©dito Loja. */
     CREDITO_LOJA("05", false),
 
-    /** 10 = Vale AlimentaÁ„o. */
+    /** 10 = Vale Alimenta√ß√£o. */
     VALE_ALIMENTACAO("10", false),
 
-    /** 11 = Vale RefeiÁ„o. */
+    /** 11 = Vale Refei√ß√£o. */
     VALE_REFEICAO("11", false),
 
     /** 12 = Vale Presente. */
     VALE_PRESENTE("12", false),
 
-    /** 13 = Vale CombustÌvel. */
+    /** 13 = Vale Combust√≠vel. */
     VALE_COMBUSTIVEL("13", false),
 
-    /** 15 = Boleto Banc·rio. */
+    /** 15 = Boleto Banc√°rio. */
     BOLETO_BANCARIO("15", false),
 
-    /** 16 = DepÛsito Banc·rio. */
+    /** 16 = Dep√≥sito Banc√°rio. */
     DEPOSITO_BANCARIO("16", false),
 
-    /** 17 = Pagamento Instant‚neo (PIX). */
+    /** 17 = Pagamento Instant√¢neo (PIX). */
     PIX("17", false),
 
-    /** 18 = TransferÍncia banc·ria, Carteira Digital. */
+    /** 18 = Transfer√™ncia banc√°ria, Carteira Digital. */
     TRANSFERENCIA_OU_CARTEIRA_DIGITAL("18", false),
 
-    /** 19 = Programa de fidelidade, Cashback, CrÈdito Virtual. */
+    /** 19 = Programa de fidelidade, Cashback, Cr√©dito Virtual. */
     FIDELIDADE_CASHBACK_CREDITO_VIRTUAL("19", false),
 
     /** 90 = Sem pagamento. */
@@ -1884,7 +1884,7 @@ public class SEFAZEnums {
     /** Valor exato gravado/lido no XML (campo tPag). */
     private final String xmlData;
 
-    /** Indica se o tipo est· obsoleto/descontinuado para uso atual. */
+    /** Indica se o tipo est√° obsoleto/descontinuado para uso atual. */
     private final boolean deprecated;
 
     SEFAZ_tPag(String xmlData, boolean deprecated) {
@@ -1903,9 +1903,9 @@ public class SEFAZEnums {
     }
 
     /**
-     * Indica se o tipo est· obsoleto.
+     * Indica se o tipo est√° obsoleto.
      *
-     * @return the indica se o tipo est· obsoleto/descontinuado para uso atual
+     * @return the indica se o tipo est√° obsoleto/descontinuado para uso atual
      */
     public boolean isDeprecated() {
       return this.deprecated;
@@ -1914,22 +1914,22 @@ public class SEFAZEnums {
   }
 
   /**
-   * EnumeraÁ„o do Tipo de IntegraÁ„o para pagamento (tpIntegra).
+   * Enumera√ß√£o do Tipo de Integra√ß√£o para pagamento (tpIntegra).
    *
-   * Valores: 1 = Pagamento integrado com o sistema de automaÁ„o da empresa 2 = Pagamento n„o integrado com o sistema de automaÁ„o da empresa
+   * Valores: 1 = Pagamento integrado com o sistema de automa√ß√£o da empresa 2 = Pagamento n√£o integrado com o sistema de automa√ß√£o da empresa
    */
   public enum SEFAZ_tpIntegra implements SEFAZEnum<SEFAZ_tpIntegra> {
 
-    /** 1 = Pagamento integrado com o sistema de automaÁ„o da empresa. */
+    /** 1 = Pagamento integrado com o sistema de automa√ß√£o da empresa. */
     INTEGRADO_AUTOMACAO("1", false),
 
-    /** 2 = Pagamento n„o integrado com o sistema de automaÁ„o da empresa. */
+    /** 2 = Pagamento n√£o integrado com o sistema de automa√ß√£o da empresa. */
     NAO_INTEGRADO_AUTOMACAO("2", false);
 
     /** Valor exato gravado/lido no XML (campo tpIntegra). */
     private final String xmlData;
 
-    /** Indica se o tipo est· obsoleto/descontinuado para uso atual. */
+    /** Indica se o tipo est√° obsoleto/descontinuado para uso atual. */
     private final boolean deprecated;
 
     SEFAZ_tpIntegra(String xmlData, boolean deprecated) {
@@ -1948,9 +1948,9 @@ public class SEFAZEnums {
     }
 
     /**
-     * Indica se o tipo est· obsoleto.
+     * Indica se o tipo est√° obsoleto.
      *
-     * @return the indica se o tipo est· obsoleto/descontinuado para uso atual
+     * @return the indica se o tipo est√° obsoleto/descontinuado para uso atual
      */
     public boolean isDeprecated() {
       return this.deprecated;
@@ -1959,7 +1959,7 @@ public class SEFAZEnums {
   }
 
   /**
-   * EnumeraÁ„o da Bandeira da operadora de cart„o (tBand).
+   * Enumera√ß√£o da Bandeira da operadora de cart√£o (tBand).
    *
    * Valores: 01 = Visa 02 = Mastercard 03 = American Express 04 = Sorocred 05 = Diners Club 06 = Elo 07 = Hipercard 08 = Aura 09 = Cabal 99 = Outros
    */
@@ -1998,7 +1998,7 @@ public class SEFAZEnums {
     /** Valor exato gravado/lido no XML (campo tBand). */
     private final String xmlData;
 
-    /** Indica se o tipo est· obsoleto/descontinuado para uso atual. */
+    /** Indica se o tipo est√° obsoleto/descontinuado para uso atual. */
     private final boolean deprecated;
 
     SEFAZ_tBand(String xmlData, boolean deprecated) {
@@ -2017,9 +2017,9 @@ public class SEFAZEnums {
     }
 
     /**
-     * Indica se o tipo est· obsoleto.
+     * Indica se o tipo est√° obsoleto.
      *
-     * @return the indica se o tipo est· obsoleto/descontinuado para uso atual
+     * @return the indica se o tipo est√° obsoleto/descontinuado para uso atual
      */
     public boolean isDeprecated() {
       return this.deprecated;
@@ -2028,74 +2028,74 @@ public class SEFAZEnums {
   }
 
   /**
-   * EnumeraÁ„o SEFAZ_indProc ó Indicador da Origem do Processo (campo Z12 da NF-e).
+   * Enumera√ß√£o SEFAZ_indProc ‚Äî Indicador da Origem do Processo (campo Z12 da NF-e).
    *
    * <p>
-   * Esta enumeraÁ„o representa os valores aceitos no campo {@code indProc} do grupo Z10 - procRef (Processo Referenciado), conforme especificaÁ„o oficial da NF-e.
+   * Esta enumera√ß√£o representa os valores aceitos no campo {@code indProc} do grupo Z10 - procRef (Processo Referenciado), conforme especifica√ß√£o oficial da NF-e.
    * </p>
    *
    * <p>
-   * <b>Origem do Processo (Z12 ñ indProc):</b>
+   * <b>Origem do Processo (Z12 ‚Äì indProc):</b>
    * </p>
    * <ul>
-   * <li><b>0 ñ SEFAZ:</b> Processo originado na Secretaria da Fazenda estadual.</li>
-   * <li><b>1 ñ JustiÁa Federal:</b> Processo administrativo ou judicial originado em Ûrg„o federal.</li>
-   * <li><b>2 ñ JustiÁa Estadual:</b> Processo originado no ‚mbito judicial estadual.</li>
-   * <li><b>3 ñ Secex/RFB:</b> Processo originado na Secretaria de ComÈrcio Exterior ou Receita Federal do Brasil.</li>
-   * <li><b>9 ñ Outros:</b> Qualquer outra origem n„o contemplada nos cÛdigos anteriores.</li>
+   * <li><b>0 ‚Äì SEFAZ:</b> Processo originado na Secretaria da Fazenda estadual.</li>
+   * <li><b>1 ‚Äì Justi√ßa Federal:</b> Processo administrativo ou judicial originado em √≥rg√£o federal.</li>
+   * <li><b>2 ‚Äì Justi√ßa Estadual:</b> Processo originado no √¢mbito judicial estadual.</li>
+   * <li><b>3 ‚Äì Secex/RFB:</b> Processo originado na Secretaria de Com√©rcio Exterior ou Receita Federal do Brasil.</li>
+   * <li><b>9 ‚Äì Outros:</b> Qualquer outra origem n√£o contemplada nos c√≥digos anteriores.</li>
    * </ul>
    *
    * <p>
-   * Tamanho: 1 dÌgito numÈrico. OcorrÍncia: 1-1 dentro de {@code procRef}.
+   * Tamanho: 1 d√≠gito num√©rico. Ocorr√™ncia: 1-1 dentro de {@code procRef}.
    * </p>
    *
    * <p>
-   * A enum segue o padr„o geral do sistema, contendo:
+   * A enum segue o padr√£o geral do sistema, contendo:
    * </p>
    * <ul>
    * <li>valor exato gravado/lido no XML ({@code xmlData});</li>
-   * <li>indicador de descontinuaÁ„o ({@code deprecated});</li>
-   * <li>mÈtodos: {@code getXMLData()}, {@code isDeprecated()}, {@code valueOfXMLData()}.</li>
+   * <li>indicador de descontinua√ß√£o ({@code deprecated});</li>
+   * <li>m√©todos: {@code getXMLData()}, {@code isDeprecated()}, {@code valueOfXMLData()}.</li>
    * </ul>
    */
   public enum SEFAZ_indProc implements SEFAZEnum<SEFAZ_indProc> {
 
     /**
-     * 0 ñ SEFAZ.
+     * 0 ‚Äì SEFAZ.
      * <p>
-     * Indica que o processo ou ato concessÛrio foi originado na Secretaria da Fazenda estadual.
+     * Indica que o processo ou ato concess√≥rio foi originado na Secretaria da Fazenda estadual.
      * </p>
      */
     SEFAZ("0", false),
 
     /**
-     * 1 ñ JustiÁa Federal.
+     * 1 ‚Äì Justi√ßa Federal.
      * <p>
-     * Processo administrativo ou judicial cuja origem est· no ‚mbito da JustiÁa Federal.
+     * Processo administrativo ou judicial cuja origem est√° no √¢mbito da Justi√ßa Federal.
      * </p>
      */
     JUSTICA_FEDERAL("1", false),
 
     /**
-     * 2 ñ JustiÁa Estadual.
+     * 2 ‚Äì Justi√ßa Estadual.
      * <p>
-     * Processo administrativo ou judicial de origem na JustiÁa Estadual.
+     * Processo administrativo ou judicial de origem na Justi√ßa Estadual.
      * </p>
      */
     JUSTICA_ESTADUAL("2", false),
 
     /**
-     * 3 ñ Secex/RFB.
+     * 3 ‚Äì Secex/RFB.
      * <p>
-     * Processo originado na Secretaria de ComÈrcio Exterior (Secex) ou na Receita Federal do Brasil (RFB).
+     * Processo originado na Secretaria de Com√©rcio Exterior (Secex) ou na Receita Federal do Brasil (RFB).
      * </p>
      */
     SECEX_RFB("3", false),
 
     /**
-     * 9 ñ Outros.
+     * 9 ‚Äì Outros.
      * <p>
-     * Qualquer outra origem n„o contemplada nas opÁıes anteriores.
+     * Qualquer outra origem n√£o contemplada nas op√ß√µes anteriores.
      * </p>
      */
     OUTROS("9", false);
@@ -2103,7 +2103,7 @@ public class SEFAZEnums {
     /** Valor gravado/lido exatamente como aparece no XML. */
     private final String xmlData;
 
-    /** Indica se este cÛdigo est· obsoleto/descontinuado. */
+    /** Indica se este c√≥digo est√° obsoleto/descontinuado. */
     private final boolean deprecated;
 
     SEFAZ_indProc(String xmlData, boolean deprecated) {
@@ -2122,9 +2122,9 @@ public class SEFAZEnums {
     }
 
     /**
-     * Informa se o cÛdigo est· obsoleto ou descontinuado para uso atual.
+     * Informa se o c√≥digo est√° obsoleto ou descontinuado para uso atual.
      *
-     * @return {@code true} se o cÛdigo estiver obsoleto; {@code false} caso contr·rio.
+     * @return {@code true} se o c√≥digo estiver obsoleto; {@code false} caso contr√°rio.
      */
     public boolean isDeprecated() {
       return this.deprecated;
@@ -2133,37 +2133,37 @@ public class SEFAZEnums {
   }
 
   /**
-   * EnumeraÁ„o SEFAZ_indIncentivo ó Indicador de Incentivo Fiscal (campo U17).
+   * Enumera√ß√£o SEFAZ_indIncentivo ‚Äî Indicador de Incentivo Fiscal (campo U17).
    *
    * <p>
-   * Campo U17 ñ indIncentivo (Indicador de Incentivo Fiscal) pertencente ao grupo U01.
+   * Campo U17 ‚Äì indIncentivo (Indicador de Incentivo Fiscal) pertencente ao grupo U01.
    * </p>
    *
    * <p>
    * <b>Valores permitidos:</b>
    * </p>
    * <ul>
-   * <li><b>1 = Sim</b> ó Existe incentivo fiscal vinculado ao item.</li>
-   * <li><b>2 = N„o</b> ó N„o h· incentivo fiscal associado.</li>
+   * <li><b>1 = Sim</b> ‚Äî Existe incentivo fiscal vinculado ao item.</li>
+   * <li><b>2 = N√£o</b> ‚Äî N√£o h√° incentivo fiscal associado.</li>
    * </ul>
    *
    * <p>
-   * Tipo: N Tamanho: 1 OcorrÍncia: 1-1
+   * Tipo: N Tamanho: 1 Ocorr√™ncia: 1-1
    * </p>
    *
    * <p>
-   * Segue o padr„o geral das enumeraÁıes do sistema, contendo:
+   * Segue o padr√£o geral das enumera√ß√µes do sistema, contendo:
    * </p>
    * <ul>
    * <li>valor XML exato ({@code xmlData});</li>
-   * <li>indicador de descontinuaÁ„o ({@code deprecated});</li>
-   * <li>mÈtodos utilit·rios: {@code getXMLData()}, {@code isDeprecated()}, {@code valueOfXMLData()}.</li>
+   * <li>indicador de descontinua√ß√£o ({@code deprecated});</li>
+   * <li>m√©todos utilit√°rios: {@code getXMLData()}, {@code isDeprecated()}, {@code valueOfXMLData()}.</li>
    * </ul>
    */
   public enum SEFAZ_indIncentivo implements SEFAZEnum<SEFAZ_indIncentivo> {
 
     /**
-     * 1 ñ Sim.
+     * 1 ‚Äì Sim.
      * <p>
      * Indica que o item possui incentivo fiscal.
      * </p>
@@ -2171,9 +2171,9 @@ public class SEFAZEnums {
     SIM("1", false),
 
     /**
-     * 2 ñ N„o.
+     * 2 ‚Äì N√£o.
      * <p>
-     * Indica que n„o h· incentivo fiscal relacionado ao item.
+     * Indica que n√£o h√° incentivo fiscal relacionado ao item.
      * </p>
      */
     NAO("2", false);
@@ -2181,7 +2181,7 @@ public class SEFAZEnums {
     /** Valor gravado/lido exatamente como aparece no XML. */
     private final String xmlData;
 
-    /** Indica se o cÛdigo est· obsoleto ou descontinuado. */
+    /** Indica se o c√≥digo est√° obsoleto ou descontinuado. */
     private final boolean deprecated;
 
     SEFAZ_indIncentivo(String xmlData, boolean deprecated) {
@@ -2192,7 +2192,7 @@ public class SEFAZEnums {
     /**
      * Retorna o valor exato utilizado no XML.
      *
-     * @return valor XML correspondente ao cÛdigo da enum.
+     * @return valor XML correspondente ao c√≥digo da enum.
      */
     @Override
     public String getXmlData() {
@@ -2200,9 +2200,9 @@ public class SEFAZEnums {
     }
 
     /**
-     * Retorna se este cÛdigo est· obsoleto/descontinuado.
+     * Retorna se este c√≥digo est√° obsoleto/descontinuado.
      *
-     * @return true se obsoleto; false caso contr·rio.
+     * @return true se obsoleto; false caso contr√°rio.
      */
     public boolean isDeprecated() {
       return this.deprecated;
@@ -2211,65 +2211,65 @@ public class SEFAZEnums {
   }
 
   /**
-   * EnumeraÁ„o SEFAZ_indISS ó Indicador da Exigibilidade do ISS (campo U12).
+   * Enumera√ß√£o SEFAZ_indISS ‚Äî Indicador da Exigibilidade do ISS (campo U12).
    *
    * <p>
-   * Campo U12 ñ indISS (Indicador da Exigibilidade do ISS) pertencente ao grupo U01.
+   * Campo U12 ‚Äì indISS (Indicador da Exigibilidade do ISS) pertencente ao grupo U01.
    * </p>
    *
    * <p>
    * <b>Valores permitidos:</b>
    * </p>
    * <ul>
-   * <li><b>1 = ExigÌvel</b></li>
-   * <li><b>2 = N„o incidÍncia</b></li>
-   * <li><b>3 = IsenÁ„o</b></li>
-   * <li><b>4 = ExportaÁ„o</b></li>
+   * <li><b>1 = Exig√≠vel</b></li>
+   * <li><b>2 = N√£o incid√™ncia</b></li>
+   * <li><b>3 = Isen√ß√£o</b></li>
+   * <li><b>4 = Exporta√ß√£o</b></li>
    * <li><b>5 = Imunidade</b></li>
-   * <li><b>6 = Exigibilidade suspensa por decis„o judicial</b></li>
+   * <li><b>6 = Exigibilidade suspensa por decis√£o judicial</b></li>
    * <li><b>7 = Exigibilidade suspensa por processo administrativo</b></li>
    * </ul>
    *
    * <p>
-   * Tipo: N Tamanho: 2 OcorrÍncia: 1-1
+   * Tipo: N Tamanho: 2 Ocorr√™ncia: 1-1
    * </p>
    *
    * <p>
-   * Implementada conforme o padr„o das enumeraÁıes SEFAZ do sistema, contendo:
+   * Implementada conforme o padr√£o das enumera√ß√µes SEFAZ do sistema, contendo:
    * </p>
    * <ul>
    * <li>valor XML exato ({@code xmlData});</li>
-   * <li>flag de descontinuaÁ„o ({@code deprecated});</li>
-   * <li>mÈtodos obrigatÛrios: {@code getXMLData()}, {@code isDeprecated()}, {@code valueOfXMLData()}.</li>
+   * <li>flag de descontinua√ß√£o ({@code deprecated});</li>
+   * <li>m√©todos obrigat√≥rios: {@code getXMLData()}, {@code isDeprecated()}, {@code valueOfXMLData()}.</li>
    * </ul>
    */
   public enum SEFAZ_indISS implements SEFAZEnum<SEFAZ_indISS> {
 
-    /** 1 ñ ExigÌvel. */
+    /** 1 ‚Äì Exig√≠vel. */
     EXIGIVEL("1", false),
 
-    /** 2 ñ N„o incidÍncia. */
+    /** 2 ‚Äì N√£o incid√™ncia. */
     NAO_INCIDENCIA("2", false),
 
-    /** 3 ñ IsenÁ„o. */
+    /** 3 ‚Äì Isen√ß√£o. */
     ISENCAO("3", false),
 
-    /** 4 ñ ExportaÁ„o. */
+    /** 4 ‚Äì Exporta√ß√£o. */
     EXPORTACAO("4", false),
 
-    /** 5 ñ Imunidade. */
+    /** 5 ‚Äì Imunidade. */
     IMUNIDADE("5", false),
 
-    /** 6 ñ Exigibilidade suspensa por decis„o judicial. */
+    /** 6 ‚Äì Exigibilidade suspensa por decis√£o judicial. */
     SUSPENSA_DECISAO_JUDICIAL("6", false),
 
-    /** 7 ñ Exigibilidade suspensa por processo administrativo. */
+    /** 7 ‚Äì Exigibilidade suspensa por processo administrativo. */
     SUSPENSA_PROCESSO_ADMINISTRATIVO("7", false);
 
     /** Valor utilizado exatamente no XML. */
     private final String xmlData;
 
-    /** Indica se o valor est· obsoleto/descontinuado. */
+    /** Indica se o valor est√° obsoleto/descontinuado. */
     private final boolean deprecated;
 
     SEFAZ_indISS(String xmlData, boolean deprecated) {
@@ -2288,9 +2288,9 @@ public class SEFAZEnums {
     }
 
     /**
-     * Indica se o valor est· obsoleto/descontinuado.
+     * Indica se o valor est√° obsoleto/descontinuado.
      *
-     * @return the indica se o valor est· obsoleto/descontinuado
+     * @return the indica se o valor est√° obsoleto/descontinuado
      */
     public boolean isDeprecated() {
       return this.deprecated;
@@ -2299,30 +2299,30 @@ public class SEFAZEnums {
   }
 
   /**
-   * EnumeraÁ„o SEFAZ_indSinc ó Indicador de Processamento SÌncrono do Lote (campo AP03a).
+   * Enumera√ß√£o SEFAZ_indSinc ‚Äî Indicador de Processamento S√≠ncrono do Lote (campo AP03a).
    *
    * <p>
-   * Campo AP03a ñ indSinc, pertencente ao grupo AP01 (IdentificaÁ„o do Lote).
+   * Campo AP03a ‚Äì indSinc, pertencente ao grupo AP01 (Identifica√ß√£o do Lote).
    * </p>
    *
    * <p>
    * <b>Valores permitidos:</b>
    * </p>
    * <ul>
-   * <li><b>0 = N„o</b></li>
-   * <li><b>1 = Empresa solicita processamento sÌncrono do lote</b></li>
+   * <li><b>0 = N√£o</b></li>
+   * <li><b>1 = Empresa solicita processamento s√≠ncrono do lote</b></li>
    * </ul>
    *
    * <p>
-   * Tipo: N Tamanho: 1 OcorrÍncia: 1-1
+   * Tipo: N Tamanho: 1 Ocorr√™ncia: 1-1
    * </p>
    *
    * <p>
-   * ObservaÁıes importantes segundo a NT:
+   * Observa√ß√µes importantes segundo a NT:
    * </p>
    * <ul>
-   * <li>O processamento sÌncrono corresponde ao retorno imediato da autorizaÁ„o da NF-e, sem geraÁ„o de recibo.</li>
-   * <li>A SEFAZ somente retornar· de forma sÌncrona se:
+   * <li>O processamento s√≠ncrono corresponde ao retorno imediato da autoriza√ß√£o da NF-e, sem gera√ß√£o de recibo.</li>
+   * <li>A SEFAZ somente retornar√° de forma s√≠ncrona se:
    * <ul>
    * <li>a empresa solicitar (valor = 1);</li>
    * <li>houver somente uma NF-e no lote;</li>
@@ -2332,26 +2332,26 @@ public class SEFAZEnums {
    * </ul>
    *
    * <p>
-   * Implementado conforme padr„o das enums SEFAZ:
+   * Implementado conforme padr√£o das enums SEFAZ:
    * </p>
    * <ul>
    * <li>valor XML exato ({@code xmlData});</li>
    * <li>flag {@code deprecated};</li>
-   * <li>mÈtodos padr„o: {@code getXMLData()}, {@code isDeprecated()}, {@code valueOfXMLData()}.</li>
+   * <li>m√©todos padr√£o: {@code getXMLData()}, {@code isDeprecated()}, {@code valueOfXMLData()}.</li>
    * </ul>
    */
   public enum SEFAZ_indSinc implements SEFAZEnum<SEFAZ_indSinc> {
 
-    /** 0 ñ N„o solicita processamento sÌncrono. */
+    /** 0 ‚Äì N√£o solicita processamento s√≠ncrono. */
     NAO("0", false),
 
-    /** 1 ñ Solicita processamento sÌncrono do lote. */
+    /** 1 ‚Äì Solicita processamento s√≠ncrono do lote. */
     SOLICITA_SINCRONO("1", false);
 
     /** Valor utilizado exatamente no XML. */
     private final String xmlData;
 
-    /** Indica se o valor est· obsoleto/descontinuado. */
+    /** Indica se o valor est√° obsoleto/descontinuado. */
     private final boolean deprecated;
 
     SEFAZ_indSinc(String xmlData, boolean deprecated) {
@@ -2370,9 +2370,9 @@ public class SEFAZEnums {
     }
 
     /**
-     * Indica se o valor est· obsoleto/descontinuado.
+     * Indica se o valor est√° obsoleto/descontinuado.
      *
-     * @return the indica se o valor est· obsoleto/descontinuado
+     * @return the indica se o valor est√° obsoleto/descontinuado
      */
     public boolean isDeprecated() {
       return this.deprecated;
@@ -2381,23 +2381,23 @@ public class SEFAZEnums {
   }
 
   /**
-   * Enumeration com as UF e mais alguns cÛdigos extras que s„o aceitos em alguns campos de UF do XML da SEFAZ.<br>
+   * Enumeration com as UF e mais alguns c√≥digos extras que s√£o aceitos em alguns campos de UF do XML da SEFAZ.<br>
    * <br>
-   * Cada constante contÈm:
+   * Cada constante cont√©m:
    * <ul>
-   * <li><b>ibgeCode</b> ñ cÛdigo IBGE da UF, usado em campos como {@code cUF} e na chave de acesso;</li>
-   * <li><b>qrCodeProdUrl</b> ñ URL base do QR-Code NFC-e em produÁ„o (pode iniciar como {@code null});</li>
-   * <li><b>qrCodeHomUrl</b> ñ URL base do QR-Code NFC-e em homologaÁ„o (pode iniciar como {@code null});</li>
-   * <li><b>consultaProdUrl</b> ñ URL de consulta p˙blica da NFC-e em produÁ„o (pode iniciar como {@code null});</li>
-   * <li><b>consultaHomUrl</b> ñ URL de consulta p˙blica da NFC-e em homologaÁ„o (pode iniciar como {@code null}).</li>
+   * <li><b>ibgeCode</b> ‚Äì c√≥digo IBGE da UF, usado em campos como {@code cUF} e na chave de acesso;</li>
+   * <li><b>qrCodeProdUrl</b> ‚Äì URL base do QR-Code NFC-e em produ√ß√£o (pode iniciar como {@code null});</li>
+   * <li><b>qrCodeHomUrl</b> ‚Äì URL base do QR-Code NFC-e em homologa√ß√£o (pode iniciar como {@code null});</li>
+   * <li><b>consultaProdUrl</b> ‚Äì URL de consulta p√∫blica da NFC-e em produ√ß√£o (pode iniciar como {@code null});</li>
+   * <li><b>consultaHomUrl</b> ‚Äì URL de consulta p√∫blica da NFC-e em homologa√ß√£o (pode iniciar como {@code null}).</li>
    * </ul>
    *
    * <p>
-   * Os campos de URL s„o deliberadamente inicializados com {@code null} nas constantes, para que sejam preenchidos manualmente conforme as URLs oficiais confirmadas para cada UF e ambiente.
+   * Os campos de URL s√£o deliberadamente inicializados com {@code null} nas constantes, para que sejam preenchidos manualmente conforme as URLs oficiais confirmadas para cada UF e ambiente.
    * </p>
    *
    * <p>
-   * A constante {@link #EX} representa o cÛdigo utilizado em alguns campos de UF para endereÁos no exterior, e por isso n„o possui cÛdigo IBGE nem URLs de NFC-e.
+   * A constante {@link #EX} representa o c√≥digo utilizado em alguns campos de UF para endere√ßos no exterior, e por isso n√£o possui c√≥digo IBGE nem URLs de NFC-e.
    * </p>
    */
   public enum SEFAZ_uf implements SEFAZEnum<SEFAZ_uf> {
@@ -2431,52 +2431,52 @@ public class SEFAZEnums {
 
     /**
      * Exterior (EX).<br>
-     * Usado em alguns campos de UF/municÌpio do XML quando o endereÁo est· fora do Brasil. N„o possui cÛdigo IBGE, nem URLs de NFC-e.
+     * Usado em alguns campos de UF/munic√≠pio do XML quando o endere√ßo est√° fora do Brasil. N√£o possui c√≥digo IBGE, nem URLs de NFC-e.
      */
     EX(null, null, null, null, null);
 
-    /** CÛdigo IBGE da UF (ou {@code null} para EX). */
+    /** C√≥digo IBGE da UF (ou {@code null} para EX). */
     private final String xmlData;
 
-    /** URL base do QR-Code NFC-e em produÁ„o (pode ser {@code null}). */
+    /** URL base do QR-Code NFC-e em produ√ß√£o (pode ser {@code null}). */
     private final String qrCodeProdUrl;
 
-    /** URL base do QR-Code NFC-e em homologaÁ„o (pode ser {@code null}). */
+    /** URL base do QR-Code NFC-e em homologa√ß√£o (pode ser {@code null}). */
     private final String qrCodeHomUrl;
 
-    /** URL de consulta p˙blica da NFC-e em produÁ„o (pode ser {@code null}). */
+    /** URL de consulta p√∫blica da NFC-e em produ√ß√£o (pode ser {@code null}). */
     private final String consultaProdUrl;
 
-    /** URL de consulta p˙blica da NFC-e em homologaÁ„o (pode ser {@code null}). */
+    /** URL de consulta p√∫blica da NFC-e em homologa√ß√£o (pode ser {@code null}). */
     private final String consultaHomUrl;
 
     /**
      * Construtor principal da enum.
      *
      * <p>
-     * Par‚metros:
+     * Par√¢metros:
      * </p>
      * <ul>
-     * <li><b>ibgeCode</b> ñ cÛdigo IBGE da UF, usado em {@code cUF}, chave de acesso e outros campos numÈricos que identificam a UF. Para {@link #EX}, este valor deve ser {@code null}, pois n„o h· cÛdigo IBGE para o exterior.</li>
+     * <li><b>ibgeCode</b> ‚Äì c√≥digo IBGE da UF, usado em {@code cUF}, chave de acesso e outros campos num√©ricos que identificam a UF. Para {@link #EX}, este valor deve ser {@code null}, pois n√£o h√° c√≥digo IBGE para o exterior.</li>
      *
-     * <li><b>qrCodeProdUrl</b> ñ URL base do QR-Code NFC-e no ambiente de produÁ„o da UF. Corresponde ao endpoint onde o par‚metro {@code p=} (ou demais par‚metros da vers„o do QR-Code) ser· anexado. Inicialmente pode ser passado {@code null} e preenchido posteriormente, conforme confirmaÁ„o da documentaÁ„o oficial da SEFAZ.</li>
+     * <li><b>qrCodeProdUrl</b> ‚Äì URL base do QR-Code NFC-e no ambiente de produ√ß√£o da UF. Corresponde ao endpoint onde o par√¢metro {@code p=} (ou demais par√¢metros da vers√£o do QR-Code) ser√° anexado. Inicialmente pode ser passado {@code null} e preenchido posteriormente, conforme confirma√ß√£o da documenta√ß√£o oficial da SEFAZ.</li>
      *
-     * <li><b>qrCodeHomUrl</b> ñ URL base do QR-Code NFC-e no ambiente de homologaÁ„o. Mesmo uso da {@code qrCodeProdUrl}, porÈm apontando para o ambiente de testes. TambÈm pode ser inicializado como {@code null} atÈ que a URL seja confirmada e ajustada manualmente.</li>
+     * <li><b>qrCodeHomUrl</b> ‚Äì URL base do QR-Code NFC-e no ambiente de homologa√ß√£o. Mesmo uso da {@code qrCodeProdUrl}, por√©m apontando para o ambiente de testes. Tamb√©m pode ser inicializado como {@code null} at√© que a URL seja confirmada e ajustada manualmente.</li>
      *
-     * <li><b>consultaProdUrl</b> ñ URL da p·gina de consulta p˙blica da NFC-e em produÁ„o, normalmente usada para permitir ao consumidor verificar a autenticidade do documento pela chave de acesso. Pode ser {@code null} se ainda n„o definida ou n„o aplic·vel para a UF.</li>
+     * <li><b>consultaProdUrl</b> ‚Äì URL da p√°gina de consulta p√∫blica da NFC-e em produ√ß√£o, normalmente usada para permitir ao consumidor verificar a autenticidade do documento pela chave de acesso. Pode ser {@code null} se ainda n√£o definida ou n√£o aplic√°vel para a UF.</li>
      *
-     * <li><b>consultaHomUrl</b> ñ URL da p·gina de consulta p˙blica da NFC-e em homologaÁ„o. TambÈm pode ser mantida como {@code null} atÈ confirmaÁ„o da URL oficial da UF.</li>
+     * <li><b>consultaHomUrl</b> ‚Äì URL da p√°gina de consulta p√∫blica da NFC-e em homologa√ß√£o. Tamb√©m pode ser mantida como {@code null} at√© confirma√ß√£o da URL oficial da UF.</li>
      * </ul>
      *
      * <p>
-     * A ideia È que, em um primeiro momento, as constantes sejam declaradas com {@code null} para todas as URLs, e o integrador v· preenchendo essas informaÁıes aos poucos, ‡ medida que confirmar os endereÁos corretos diretamente na documentaÁ„o de cada SEFAZ estadual.
+     * A ideia √© que, em um primeiro momento, as constantes sejam declaradas com {@code null} para todas as URLs, e o integrador v√° preenchendo essas informa√ß√µes aos poucos, √† medida que confirmar os endere√ßos corretos diretamente na documenta√ß√£o de cada SEFAZ estadual.
      * </p>
      *
-     * @param xmlData CÛdigo IBGE da UF, ou {@code null} para EX.
-     * @param qrCodeProdUrl URL base do QR-Code NFC-e em produÁ„o (pode ser {@code null}).
-     * @param qrCodeHomUrl URL base do QR-Code NFC-e em homologaÁ„o (pode ser {@code null}).
-     * @param consultaProdUrl URL de consulta p˙blica da NFC-e em produÁ„o (pode ser {@code null}).
-     * @param consultaHomUrl URL de consulta p˙blica da NFC-e em homologaÁ„o (pode ser {@code null}).
+     * @param xmlData C√≥digo IBGE da UF, ou {@code null} para EX.
+     * @param qrCodeProdUrl URL base do QR-Code NFC-e em produ√ß√£o (pode ser {@code null}).
+     * @param qrCodeHomUrl URL base do QR-Code NFC-e em homologa√ß√£o (pode ser {@code null}).
+     * @param consultaProdUrl URL de consulta p√∫blica da NFC-e em produ√ß√£o (pode ser {@code null}).
+     * @param consultaHomUrl URL de consulta p√∫blica da NFC-e em homologa√ß√£o (pode ser {@code null}).
      */
     SEFAZ_uf(String xmlData, String qrCodeProdUrl, String qrCodeHomUrl, String consultaProdUrl, String consultaHomUrl) {
       this.xmlData = xmlData;
@@ -2487,36 +2487,36 @@ public class SEFAZEnums {
     }
 
     /**
-     * # uRL base do QR-Code NFC-e em produÁ„o (pode ser {@code null}).
+     * # uRL base do QR-Code NFC-e em produ√ß√£o (pode ser {@code null}).
      *
-     * @return the uRL base do QR-Code NFC-e em produÁ„o (pode ser {@code null})
+     * @return the uRL base do QR-Code NFC-e em produ√ß√£o (pode ser {@code null})
      */
     public String getQrCodeProdUrl() {
       return qrCodeProdUrl;
     }
 
     /**
-     * # uRL base do QR-Code NFC-e em homologaÁ„o (pode ser {@code null}).
+     * # uRL base do QR-Code NFC-e em homologa√ß√£o (pode ser {@code null}).
      *
-     * @return the uRL base do QR-Code NFC-e em homologaÁ„o (pode ser {@code null})
+     * @return the uRL base do QR-Code NFC-e em homologa√ß√£o (pode ser {@code null})
      */
     public String getQrCodeHomUrl() {
       return qrCodeHomUrl;
     }
 
     /**
-     * # uRL de consulta p˙blica da NFC-e em produÁ„o (pode ser {@code null}).
+     * # uRL de consulta p√∫blica da NFC-e em produ√ß√£o (pode ser {@code null}).
      *
-     * @return the uRL de consulta p˙blica da NFC-e em produÁ„o (pode ser {@code null})
+     * @return the uRL de consulta p√∫blica da NFC-e em produ√ß√£o (pode ser {@code null})
      */
     public String getConsultaProdUrl() {
       return consultaProdUrl;
     }
 
     /**
-     * # uRL de consulta p˙blica da NFC-e em homologaÁ„o (pode ser {@code null}).
+     * # uRL de consulta p√∫blica da NFC-e em homologa√ß√£o (pode ser {@code null}).
      *
-     * @return the uRL de consulta p˙blica da NFC-e em homologaÁ„o (pode ser {@code null})
+     * @return the uRL de consulta p√∫blica da NFC-e em homologa√ß√£o (pode ser {@code null})
      */
     public String getConsultaHomUrl() {
       return consultaHomUrl;
@@ -2546,20 +2546,20 @@ public class SEFAZEnums {
    * Enumeration dos autorizadores de WebServices da SEFAZ para NF-e/NFC-e.
    *
    * <p>
-   * Cada constante representa um ìservidor autorizadorî, que pode ser:
+   * Cada constante representa um ‚Äúservidor autorizador‚Äù, que pode ser:
    * </p>
    * <ul>
    * <li>Uma SEFAZ estadual (ex.: {@code SP}, {@code PR}, {@code RS});</li>
    * <li>Um autorizador virtual (ex.: {@code SVRS}, {@code SVAN}, {@code SVCAN}, {@code SVCRS});</li>
-   * <li>O Ambiente Nacional ({@code AN}) para alguns serviÁos centralizados.</li>
+   * <li>O Ambiente Nacional ({@code AN}) para alguns servi√ßos centralizados.</li>
    * </ul>
    *
    * <p>
-   * Para UFs ìreaisî, o {@code ibgeCode} È o cÛdigo numÈrico da UF (como em {@code cUF} e chave de acesso). Para autorizadores virtuais e para o Ambiente Nacional, o {@code ibgeCode} È {@code null}. O mapeamento cUF - autorizador deve ser feito em outra lÛgica da aplicaÁ„o.
+   * Para UFs ‚Äúreais‚Äù, o {@code ibgeCode} √© o c√≥digo num√©rico da UF (como em {@code cUF} e chave de acesso). Para autorizadores virtuais e para o Ambiente Nacional, o {@code ibgeCode} √© {@code null}. O mapeamento cUF - autorizador deve ser feito em outra l√≥gica da aplica√ß√£o.
    * </p>
    *
    * <p>
-   * Cada autorizador tem espaÁo para armazenar as URLs principais dos serviÁos de autorizaÁ„o de NF-e e NFC-e, em produÁ„o e homologaÁ„o. Inicialmente, muitas delas podem ser {@code null} e devem ser preenchidas manualmente conforme a documentaÁ„o oficial de cada autorizador.
+   * Cada autorizador tem espa√ßo para armazenar as URLs principais dos servi√ßos de autoriza√ß√£o de NF-e e NFC-e, em produ√ß√£o e homologa√ß√£o. Inicialmente, muitas delas podem ser {@code null} e devem ser preenchidas manualmente conforme a documenta√ß√£o oficial de cada autorizador.
    * </p>
    */
   public enum SEFAZ_WebServices implements SEFAZEnum<SEFAZ_WebServices> {
@@ -2576,75 +2576,75 @@ public class SEFAZEnums {
     SP("35"),
 
     /**
-     * SVAN ñ Sefaz Virtual do Ambiente Nacional.
+     * SVAN ‚Äì Sefaz Virtual do Ambiente Nacional.
      *
      * <p>
-     * Autorizador virtual mantido pelo Ambiente Nacional para alguns estados que n„o possuem infraestrutura prÛpria de autorizaÁ„o em determinados momentos da evoluÁ„o da NF-e.
+     * Autorizador virtual mantido pelo Ambiente Nacional para alguns estados que n√£o possuem infraestrutura pr√≥pria de autoriza√ß√£o em determinados momentos da evolu√ß√£o da NF-e.
      * </p>
      *
      * <p>
-     * N„o possui cÛdigo IBGE prÛprio (n„o È uma UF). O uso È definido por tabela de mapeamento cUF - autorizador.
+     * N√£o possui c√≥digo IBGE pr√≥prio (n√£o √© uma UF). O uso √© definido por tabela de mapeamento cUF - autorizador.
      * </p>
      */
     SVAN(null),
 
     /**
-     * SVRS ñ Sefaz Virtual do Rio Grande do Sul.
+     * SVRS ‚Äì Sefaz Virtual do Rio Grande do Sul.
      *
      * <p>
-     * Autorizador virtual que atende diversas UFs (principalmente da regi„o Sul, Sudeste e Nordeste), conforme tabela oficial de ìAutorizadoresî.
+     * Autorizador virtual que atende diversas UFs (principalmente da regi√£o Sul, Sudeste e Nordeste), conforme tabela oficial de ‚ÄúAutorizadores‚Äù.
      * </p>
      *
      * <p>
-     * N„o È uma UF: o cUF permanece o da UF do contribuinte, mas o WebService chamado È o do SVRS. Por isso, {@code ibgeCode} È {@code null}.
+     * N√£o √© uma UF: o cUF permanece o da UF do contribuinte, mas o WebService chamado √© o do SVRS. Por isso, {@code ibgeCode} √© {@code null}.
      * </p>
      */
     SVRS(null),
 
     /**
-     * SVCAN ñ Sefaz Virtual de ContingÍncia ñ Ambiente Nacional.
+     * SVCAN ‚Äì Sefaz Virtual de Conting√™ncia ‚Äì Ambiente Nacional.
      *
      * <p>
-     * Utilizado em cen·rios de contingÍncia, quando a SEFAZ da UF e/ou o autorizador principal n„o estiverem disponÌveis.
+     * Utilizado em cen√°rios de conting√™ncia, quando a SEFAZ da UF e/ou o autorizador principal n√£o estiverem dispon√≠veis.
      * </p>
      *
      * <p>
-     * Atende um conjunto de UFs definido em NT especÌfica. O XML continua com o cUF da UF de origem; apenas o endpoint muda para o SVCAN.
+     * Atende um conjunto de UFs definido em NT espec√≠fica. O XML continua com o cUF da UF de origem; apenas o endpoint muda para o SVCAN.
      * </p>
      */
     SVCAN(null),
 
     /**
-     * SVCRS ñ Sefaz Virtual de ContingÍncia ñ Rio Grande do Sul.
+     * SVCRS ‚Äì Sefaz Virtual de Conting√™ncia ‚Äì Rio Grande do Sul.
      *
      * <p>
-     * Similar ao SVCAN, mas operado pela SEFAZ-RS. TambÈm utilizado em contingÍncia para um conjunto definido de UFs.
+     * Similar ao SVCAN, mas operado pela SEFAZ-RS. Tamb√©m utilizado em conting√™ncia para um conjunto definido de UFs.
      * </p>
      */
     SVCRS(null),
 
     /**
-     * AN ñ Ambiente Nacional.
+     * AN ‚Äì Ambiente Nacional.
      *
      * <p>
-     * Representa o Ambiente Nacional para serviÁos centralizados (ex.: distribuiÁ„o de DF-e, manifestaÁ„o do destinat·rio, etc.), que n„o se vinculam diretamente a uma ˙nica UF.
+     * Representa o Ambiente Nacional para servi√ßos centralizados (ex.: distribui√ß√£o de DF-e, manifesta√ß√£o do destinat√°rio, etc.), que n√£o se vinculam diretamente a uma √∫nica UF.
      * </p>
      *
      * <p>
-     * Usado mais como cÛdigo lÛgico de agrupamento de WebServices nacionais do que como ìUF/autorizadorî em si.
+     * Usado mais como c√≥digo l√≥gico de agrupamento de WebServices nacionais do que como ‚ÄúUF/autorizador‚Äù em si.
      * </p>
      */
     AN(null);
 
     /**
-     * CÛdigo do IBGE utilizado no XML.
+     * C√≥digo do IBGE utilizado no XML.
      */
     private final String xmlData;
 
     /**
      * Construtor da enum de autorizadores de WebService.
      *
-     * @param xmlData CÛdigo IBGE da UF quando o autorizador È estadual (ex.: "35" para SP) ou {@code null} para autorizadores virtuais / Ambiente Nacional (SVAN, SVRS, SVCAN, SVCRS, AN).
+     * @param xmlData C√≥digo IBGE da UF quando o autorizador √© estadual (ex.: "35" para SP) ou {@code null} para autorizadores virtuais / Ambiente Nacional (SVAN, SVRS, SVCAN, SVCRS, AN).
      */
     SEFAZ_WebServices(String xmlData) {
       this.xmlData = xmlData;
@@ -2670,9 +2670,9 @@ public class SEFAZEnums {
     }
 
     /**
-     * # cÛdigo do IBGE utilizado no XML.
+     * # c√≥digo do IBGE utilizado no XML.
      *
-     * @return the cÛdigo do IBGE utilizado no XML
+     * @return the c√≥digo do IBGE utilizado no XML
      */
     @Override
     public String getXmlData() {

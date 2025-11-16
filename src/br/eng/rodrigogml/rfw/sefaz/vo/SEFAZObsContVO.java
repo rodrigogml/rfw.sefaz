@@ -8,7 +8,7 @@ import br.eng.rodrigogml.rfw.kernel.vo.RFWVO;
 import br.eng.rodrigogml.rfw.orm.dao.annotations.dao.RFWDAOAnnotation;
 
 /**
- * Z04 - obsCont: Grupo Campo de uso livre do contribuinte. Ocorrência: 0-10.
+ * Z04 - obsCont: Grupo Campo de uso livre do contribuinte. OcorrÃªncia: 0-10.
  */
 @RFWDAOAnnotation(schema = "_RFW.SEFAZ", table = "sefaz_obscont")
 public class SEFAZObsContVO extends RFWVO {
@@ -22,13 +22,13 @@ public class SEFAZObsContVO extends RFWVO {
   private SEFAZInfAdicVO infAdicVO = null;
 
   /**
-   * Z05 - xCampo: Identificação do campo. Tipo C, tamanho 1-20, ocorrência 1-1.
+   * Z05 - xCampo: IdentificaÃ§Ã£o do campo. Tipo C, tamanho 1-20, ocorrÃªncia 1-1.
    */
   @RFWMetaStringField(caption = "xCampo", required = false, unique = false, maxLength = 20, minLength = 1, preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
   private String xcampo;
 
   /**
-   * Z06 - xTexto: Conteúdo do campo. Tipo C, tamanho 1-60, ocorrência 1-1.
+   * Z06 - xTexto: ConteÃºdo do campo. Tipo C, tamanho 1-60, ocorrÃªncia 1-1.
    */
   @RFWMetaStringField(caption = "xTexto", required = false, unique = false, maxLength = 60, minLength = 1, preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
   private String xtexto;
@@ -52,36 +52,36 @@ public class SEFAZObsContVO extends RFWVO {
   }
 
   /**
-   * # z05 - xCampo: Identificação do campo. Tipo C, tamanho 1-20, ocorrência 1-1.
+   * # z05 - xCampo: IdentificaÃ§Ã£o do campo. Tipo C, tamanho 1-20, ocorrÃªncia 1-1.
    *
-   * @return the z05 - xCampo: Identificação do campo
+   * @return the z05 - xCampo: IdentificaÃ§Ã£o do campo
    */
   public String getXcampo() {
     return xcampo;
   }
 
   /**
-   * # z05 - xCampo: Identificação do campo. Tipo C, tamanho 1-20, ocorrência 1-1.
+   * # z05 - xCampo: IdentificaÃ§Ã£o do campo. Tipo C, tamanho 1-20, ocorrÃªncia 1-1.
    *
-   * @param xcampo the new z05 - xCampo: Identificação do campo
+   * @param xcampo the new z05 - xCampo: IdentificaÃ§Ã£o do campo
    */
   public void setXcampo(String xcampo) {
     this.xcampo = xcampo;
   }
 
   /**
-   * # z06 - xTexto: Conteúdo do campo. Tipo C, tamanho 1-60, ocorrência 1-1.
+   * # z06 - xTexto: ConteÃºdo do campo. Tipo C, tamanho 1-60, ocorrÃªncia 1-1.
    *
-   * @return the z06 - xTexto: Conteúdo do campo
+   * @return the z06 - xTexto: ConteÃºdo do campo
    */
   public String getXtexto() {
     return xtexto;
   }
 
   /**
-   * # z06 - xTexto: Conteúdo do campo. Tipo C, tamanho 1-60, ocorrência 1-1.
+   * # z06 - xTexto: ConteÃºdo do campo. Tipo C, tamanho 1-60, ocorrÃªncia 1-1.
    *
-   * @param xtexto the new z06 - xTexto: Conteúdo do campo
+   * @param xtexto the new z06 - xTexto: ConteÃºdo do campo
    */
   public void setXtexto(String xtexto) {
     this.xtexto = xtexto;

@@ -13,7 +13,7 @@ import br.eng.rodrigogml.rfw.orm.dao.annotations.dao.RFWDAOAnnotation;
 import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_mod;
 
 /**
- * VO para o grupo BA10 (refNFP) ñ InformaÁıes da NF de produtor rural referenciada. Utilizado para referenciar documento fiscal de produtor rural vinculado ‡ NF-e.
+ * VO para o grupo BA10 (refNFP) ‚Äì Informa√ß√µes da NF de produtor rural referenciada. Utilizado para referenciar documento fiscal de produtor rural vinculado √† NF-e.
  */
 @RFWDAOAnnotation(schema = "_RFW.SEFAZ", table = "sefaz_refnfp")
 public class SEFAZRefNFPVO extends RFWVO {
@@ -27,51 +27,51 @@ public class SEFAZRefNFPVO extends RFWVO {
   private SEFAZNFRefVO nfRefVO = null;
 
   /**
-   * BA11 - CÛdigo da UF do emitente. Utilizar a tabela de UF do IBGE. OcorrÍncia: 1-1.
+   * BA11 - C√≥digo da UF do emitente. Utilizar a tabela de UF do IBGE. Ocorr√™ncia: 1-1.
    */
-  @RFWMetaStringField(caption = "CÛdigo da UF do emitente da NF de produtor", required = true, unique = false, maxLength = 2, minLength = 2, pattern = "", preProcess = { PreProcessOption.NONE })
+  @RFWMetaStringField(caption = "C√≥digo da UF do emitente da NF de produtor", required = true, unique = false, maxLength = 2, minLength = 2, pattern = "", preProcess = { PreProcessOption.NONE })
   private String cuf;
 
   /**
-   * BA12 - Ano e MÍs de emiss„o da NF de produtor. Formato AAMM da emiss„o da NF de produtor. OcorrÍncia: 1-1.
+   * BA12 - Ano e M√™s de emiss√£o da NF de produtor. Formato AAMM da emiss√£o da NF de produtor. Ocorr√™ncia: 1-1.
    */
-  @RFWMetaStringField(caption = "Ano e mÍs da emiss„o da NF de produtor (AAMM)", required = true, unique = false, maxLength = 4, minLength = 4, pattern = "", preProcess = { PreProcessOption.NONE })
+  @RFWMetaStringField(caption = "Ano e m√™s da emiss√£o da NF de produtor (AAMM)", required = true, unique = false, maxLength = 4, minLength = 4, pattern = "", preProcess = { PreProcessOption.NONE })
   private String aamm;
 
   /**
-   * BA13 - CNPJ do emitente da NF de produtor. Conte˙do numÈrico com 14 dÌgitos, sem m·scara. OcorrÍncia: 0-1 (condicional).
+   * BA13 - CNPJ do emitente da NF de produtor. Conte√∫do num√©rico com 14 d√≠gitos, sem m√°scara. Ocorr√™ncia: 0-1 (condicional).
    */
   @RFWMetaStringCNPJField(caption = "CNPJ do emitente da NF de produtor", required = false, unique = false, preProcess = { PreProcessOption.NONE })
   private String cnpj;
 
   /**
-   * BA14 - CPF do emitente da NF de produtor. Conte˙do numÈrico com 11 dÌgitos, sem m·scara. OcorrÍncia: 1-1 (quando pessoa fÌsica).
+   * BA14 - CPF do emitente da NF de produtor. Conte√∫do num√©rico com 11 d√≠gitos, sem m√°scara. Ocorr√™ncia: 1-1 (quando pessoa f√≠sica).
    */
   @RFWMetaStringCPFField(caption = "CPF do emitente da NF de produtor", required = true, unique = false, preProcess = { PreProcessOption.NONE })
   private String cpf;
 
   /**
-   * BA15 - InscriÁ„o Estadual (IE) do emitente da NF de produtor. Informar a IE do emitente da NF de Produtor ou literal ìISENTOî. Tamanho 2-14 caracteres. OcorrÍncia: 1-1.
+   * BA15 - Inscri√ß√£o Estadual (IE) do emitente da NF de produtor. Informar a IE do emitente da NF de Produtor ou literal ‚ÄúISENTO‚Äù. Tamanho 2-14 caracteres. Ocorr√™ncia: 1-1.
    */
   @RFWMetaStringIEField(caption = "IE do emitente da NF de produtor", required = true, unique = false, uf = "", uffield = "", preProcess = { PreProcessOption.NONE })
   private String ie;
 
   /**
-   * BA16 - Modelo do Documento Fiscal. Valores possÌveis: 04 = NF de Produtor 01 = NF. OcorrÍncia: 1-1.
+   * BA16 - Modelo do Documento Fiscal. Valores poss√≠veis: 04 = NF de Produtor 01 = NF. Ocorr√™ncia: 1-1.
    */
   @RFWMetaEnumField(caption = "Modelo do Documento Fiscal (01 ou 02)", required = false)
   private SEFAZ_mod mod;
 
   /**
-   * BA17 - SÈrie do Documento Fiscal. Informar a sÈrie do documento fiscal; informar zero se inexistente. OcorrÍncia: 1-1.
+   * BA17 - S√©rie do Documento Fiscal. Informar a s√©rie do documento fiscal; informar zero se inexistente. Ocorr√™ncia: 1-1.
    */
-  @RFWMetaStringField(caption = "SÈrie do Documento Fiscal da NF de produtor", required = true, unique = false, maxLength = -1, minLength = -1, pattern = "", preProcess = { PreProcessOption.NONE })
+  @RFWMetaStringField(caption = "S√©rie do Documento Fiscal da NF de produtor", required = true, unique = false, maxLength = -1, minLength = -1, pattern = "", preProcess = { PreProcessOption.NONE })
   private String serie;
 
   /**
-   * BA18 - N˙mero do Documento Fiscal. Faixa: 1ñ999999999. Tamanho 1-9 caracteres. OcorrÍncia: 1-1.
+   * BA18 - N√∫mero do Documento Fiscal. Faixa: 1‚Äì999999999. Tamanho 1-9 caracteres. Ocorr√™ncia: 1-1.
    */
-  @RFWMetaStringField(caption = "N˙mero do Documento Fiscal da NF de produtor", required = true, unique = false, maxLength = 9, minLength = 1, pattern = "", preProcess = { PreProcessOption.NONE })
+  @RFWMetaStringField(caption = "N√∫mero do Documento Fiscal da NF de produtor", required = true, unique = false, maxLength = 9, minLength = 1, pattern = "", preProcess = { PreProcessOption.NONE })
   private String nnf;
 
   /**
@@ -93,43 +93,43 @@ public class SEFAZRefNFPVO extends RFWVO {
   }
 
   /**
-   * # bA11 - CÛdigo da UF do emitente. Utilizar a tabela de UF do IBGE. OcorrÍncia: 1-1.
+   * # bA11 - C√≥digo da UF do emitente. Utilizar a tabela de UF do IBGE. Ocorr√™ncia: 1-1.
    *
-   * @return the bA11 - CÛdigo da UF do emitente
+   * @return the bA11 - C√≥digo da UF do emitente
    */
   public String getCuf() {
     return cuf;
   }
 
   /**
-   * # bA11 - CÛdigo da UF do emitente. Utilizar a tabela de UF do IBGE. OcorrÍncia: 1-1.
+   * # bA11 - C√≥digo da UF do emitente. Utilizar a tabela de UF do IBGE. Ocorr√™ncia: 1-1.
    *
-   * @param cuf the new bA11 - CÛdigo da UF do emitente
+   * @param cuf the new bA11 - C√≥digo da UF do emitente
    */
   public void setCuf(String cuf) {
     this.cuf = cuf;
   }
 
   /**
-   * # bA12 - Ano e MÍs de emiss„o da NF de produtor. Formato AAMM da emiss„o da NF de produtor. OcorrÍncia: 1-1.
+   * # bA12 - Ano e M√™s de emiss√£o da NF de produtor. Formato AAMM da emiss√£o da NF de produtor. Ocorr√™ncia: 1-1.
    *
-   * @return the bA12 - Ano e MÍs de emiss„o da NF de produtor
+   * @return the bA12 - Ano e M√™s de emiss√£o da NF de produtor
    */
   public String getAamm() {
     return aamm;
   }
 
   /**
-   * # bA12 - Ano e MÍs de emiss„o da NF de produtor. Formato AAMM da emiss„o da NF de produtor. OcorrÍncia: 1-1.
+   * # bA12 - Ano e M√™s de emiss√£o da NF de produtor. Formato AAMM da emiss√£o da NF de produtor. Ocorr√™ncia: 1-1.
    *
-   * @param aamm the new bA12 - Ano e MÍs de emiss„o da NF de produtor
+   * @param aamm the new bA12 - Ano e M√™s de emiss√£o da NF de produtor
    */
   public void setAamm(String aamm) {
     this.aamm = aamm;
   }
 
   /**
-   * # bA13 - CNPJ do emitente da NF de produtor. Conte˙do numÈrico com 14 dÌgitos, sem m·scara. OcorrÍncia: 0-1 (condicional).
+   * # bA13 - CNPJ do emitente da NF de produtor. Conte√∫do num√©rico com 14 d√≠gitos, sem m√°scara. Ocorr√™ncia: 0-1 (condicional).
    *
    * @return the bA13 - CNPJ do emitente da NF de produtor
    */
@@ -138,7 +138,7 @@ public class SEFAZRefNFPVO extends RFWVO {
   }
 
   /**
-   * # bA13 - CNPJ do emitente da NF de produtor. Conte˙do numÈrico com 14 dÌgitos, sem m·scara. OcorrÍncia: 0-1 (condicional).
+   * # bA13 - CNPJ do emitente da NF de produtor. Conte√∫do num√©rico com 14 d√≠gitos, sem m√°scara. Ocorr√™ncia: 0-1 (condicional).
    *
    * @param cnpj the new bA13 - CNPJ do emitente da NF de produtor
    */
@@ -147,7 +147,7 @@ public class SEFAZRefNFPVO extends RFWVO {
   }
 
   /**
-   * # bA14 - CPF do emitente da NF de produtor. Conte˙do numÈrico com 11 dÌgitos, sem m·scara. OcorrÍncia: 1-1 (quando pessoa fÌsica).
+   * # bA14 - CPF do emitente da NF de produtor. Conte√∫do num√©rico com 11 d√≠gitos, sem m√°scara. Ocorr√™ncia: 1-1 (quando pessoa f√≠sica).
    *
    * @return the bA14 - CPF do emitente da NF de produtor
    */
@@ -156,7 +156,7 @@ public class SEFAZRefNFPVO extends RFWVO {
   }
 
   /**
-   * # bA14 - CPF do emitente da NF de produtor. Conte˙do numÈrico com 11 dÌgitos, sem m·scara. OcorrÍncia: 1-1 (quando pessoa fÌsica).
+   * # bA14 - CPF do emitente da NF de produtor. Conte√∫do num√©rico com 11 d√≠gitos, sem m√°scara. Ocorr√™ncia: 1-1 (quando pessoa f√≠sica).
    *
    * @param cpf the new bA14 - CPF do emitente da NF de produtor
    */
@@ -165,61 +165,61 @@ public class SEFAZRefNFPVO extends RFWVO {
   }
 
   /**
-   * # bA15 - InscriÁ„o Estadual (IE) do emitente da NF de produtor. Informar a IE do emitente da NF de Produtor ou literal ìISENTOî. Tamanho 2-14 caracteres. OcorrÍncia: 1-1.
+   * # bA15 - Inscri√ß√£o Estadual (IE) do emitente da NF de produtor. Informar a IE do emitente da NF de Produtor ou literal ‚ÄúISENTO‚Äù. Tamanho 2-14 caracteres. Ocorr√™ncia: 1-1.
    *
-   * @return the bA15 - InscriÁ„o Estadual (IE) do emitente da NF de produtor
+   * @return the bA15 - Inscri√ß√£o Estadual (IE) do emitente da NF de produtor
    */
   public String getIe() {
     return ie;
   }
 
   /**
-   * # bA15 - InscriÁ„o Estadual (IE) do emitente da NF de produtor. Informar a IE do emitente da NF de Produtor ou literal ìISENTOî. Tamanho 2-14 caracteres. OcorrÍncia: 1-1.
+   * # bA15 - Inscri√ß√£o Estadual (IE) do emitente da NF de produtor. Informar a IE do emitente da NF de Produtor ou literal ‚ÄúISENTO‚Äù. Tamanho 2-14 caracteres. Ocorr√™ncia: 1-1.
    *
-   * @param ie the new bA15 - InscriÁ„o Estadual (IE) do emitente da NF de produtor
+   * @param ie the new bA15 - Inscri√ß√£o Estadual (IE) do emitente da NF de produtor
    */
   public void setIe(String ie) {
     this.ie = ie;
   }
 
   /**
-   * # bA17 - SÈrie do Documento Fiscal. Informar a sÈrie do documento fiscal; informar zero se inexistente. OcorrÍncia: 1-1.
+   * # bA17 - S√©rie do Documento Fiscal. Informar a s√©rie do documento fiscal; informar zero se inexistente. Ocorr√™ncia: 1-1.
    *
-   * @return the bA17 - SÈrie do Documento Fiscal
+   * @return the bA17 - S√©rie do Documento Fiscal
    */
   public String getSerie() {
     return serie;
   }
 
   /**
-   * # bA17 - SÈrie do Documento Fiscal. Informar a sÈrie do documento fiscal; informar zero se inexistente. OcorrÍncia: 1-1.
+   * # bA17 - S√©rie do Documento Fiscal. Informar a s√©rie do documento fiscal; informar zero se inexistente. Ocorr√™ncia: 1-1.
    *
-   * @param serie the new bA17 - SÈrie do Documento Fiscal
+   * @param serie the new bA17 - S√©rie do Documento Fiscal
    */
   public void setSerie(String serie) {
     this.serie = serie;
   }
 
   /**
-   * # bA18 - N˙mero do Documento Fiscal. Faixa: 1ñ999999999. Tamanho 1-9 caracteres. OcorrÍncia: 1-1.
+   * # bA18 - N√∫mero do Documento Fiscal. Faixa: 1‚Äì999999999. Tamanho 1-9 caracteres. Ocorr√™ncia: 1-1.
    *
-   * @return the bA18 - N˙mero do Documento Fiscal
+   * @return the bA18 - N√∫mero do Documento Fiscal
    */
   public String getNnf() {
     return nnf;
   }
 
   /**
-   * # bA18 - N˙mero do Documento Fiscal. Faixa: 1ñ999999999. Tamanho 1-9 caracteres. OcorrÍncia: 1-1.
+   * # bA18 - N√∫mero do Documento Fiscal. Faixa: 1‚Äì999999999. Tamanho 1-9 caracteres. Ocorr√™ncia: 1-1.
    *
-   * @param nnf the new bA18 - N˙mero do Documento Fiscal
+   * @param nnf the new bA18 - N√∫mero do Documento Fiscal
    */
   public void setNnf(String nnf) {
     this.nnf = nnf;
   }
 
   /**
-   * # bA16 - Modelo do Documento Fiscal. Valores possÌveis: 04 = NF de Produtor 01 = NF. OcorrÍncia: 1-1.
+   * # bA16 - Modelo do Documento Fiscal. Valores poss√≠veis: 04 = NF de Produtor 01 = NF. Ocorr√™ncia: 1-1.
    *
    * @return the bA16 - Modelo do Documento Fiscal
    */
@@ -228,7 +228,7 @@ public class SEFAZRefNFPVO extends RFWVO {
   }
 
   /**
-   * # bA16 - Modelo do Documento Fiscal. Valores possÌveis: 04 = NF de Produtor 01 = NF. OcorrÍncia: 1-1.
+   * # bA16 - Modelo do Documento Fiscal. Valores poss√≠veis: 04 = NF de Produtor 01 = NF. Ocorr√™ncia: 1-1.
    *
    * @param mod the new bA16 - Modelo do Documento Fiscal
    */

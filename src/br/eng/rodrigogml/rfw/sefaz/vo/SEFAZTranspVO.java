@@ -12,7 +12,7 @@ import br.eng.rodrigogml.rfw.orm.dao.annotations.dao.RFWDAOAnnotation;
 import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_modFrete;
 
 /**
- * Grupo X01 - transp: Informações do Transporte.
+ * Grupo X01 - transp: InformaÃ§Ãµes do Transporte.
  * <p>
  * Ocorre 1-1 dentro do grupo A01 (infNFe).
  */
@@ -58,19 +58,19 @@ public class SEFAZTranspVO extends RFWVO {
   private List<SEFAZVolVO> volVO = null;
 
   /**
-   * X02 - modFrete: Modalidade do frete. Tipo: N, Tamanho: 1, Ocorrência: 1-1 (obrigatório na estrutura). Valores: 0=Remetente (CIF), 1=Destinatário (FOB), 2=Terceiros, 3=Transporte próprio remetente, 4=Transporte próprio destinatário, 9=Sem ocorrência de transporte.
+   * X02 - modFrete: Modalidade do frete. Tipo: N, Tamanho: 1, OcorrÃªncia: 1-1 (obrigatÃ³rio na estrutura). Valores: 0=Remetente (CIF), 1=DestinatÃ¡rio (FOB), 2=Terceiros, 3=Transporte prÃ³prio remetente, 4=Transporte prÃ³prio destinatÃ¡rio, 9=Sem ocorrÃªncia de transporte.
    */
   @RFWMetaEnumField(caption = "modFrete", required = false)
   private SEFAZ_modFrete modFrete;
 
   /**
-   * X25a - vagao: Identificação do vagão. Tipo: C, Tamanho: 1-20, Ocorrência: 0-1.
+   * X25a - vagao: IdentificaÃ§Ã£o do vagÃ£o. Tipo: C, Tamanho: 1-20, OcorrÃªncia: 0-1.
    */
   @RFWMetaStringField(caption = "vagao", required = false, unique = false, maxLength = 20, minLength = 1, preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
   private String vagao;
 
   /**
-   * X25b - balsa: Identificação da balsa. Tipo: C, Tamanho: 1-20, Ocorrência: 0-1.
+   * X25b - balsa: IdentificaÃ§Ã£o da balsa. Tipo: C, Tamanho: 1-20, OcorrÃªncia: 0-1.
    */
   @RFWMetaStringField(caption = "balsa", required = false, unique = false, maxLength = 20, minLength = 1, preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
   private String balsa;
@@ -184,7 +184,7 @@ public class SEFAZTranspVO extends RFWVO {
   }
 
   /**
-   * # x02 - modFrete: Modalidade do frete. Tipo: N, Tamanho: 1, Ocorrência: 1-1 (obrigatório na estrutura). Valores: 0=Remetente (CIF), 1=Destinatário (FOB), 2=Terceiros, 3=Transporte próprio remetente, 4=Transporte próprio destinatário, 9=Sem ocorrência de transporte.
+   * # x02 - modFrete: Modalidade do frete. Tipo: N, Tamanho: 1, OcorrÃªncia: 1-1 (obrigatÃ³rio na estrutura). Valores: 0=Remetente (CIF), 1=DestinatÃ¡rio (FOB), 2=Terceiros, 3=Transporte prÃ³prio remetente, 4=Transporte prÃ³prio destinatÃ¡rio, 9=Sem ocorrÃªncia de transporte.
    *
    * @return the x02 - modFrete: Modalidade do frete
    */
@@ -193,7 +193,7 @@ public class SEFAZTranspVO extends RFWVO {
   }
 
   /**
-   * # x02 - modFrete: Modalidade do frete. Tipo: N, Tamanho: 1, Ocorrência: 1-1 (obrigatório na estrutura). Valores: 0=Remetente (CIF), 1=Destinatário (FOB), 2=Terceiros, 3=Transporte próprio remetente, 4=Transporte próprio destinatário, 9=Sem ocorrência de transporte.
+   * # x02 - modFrete: Modalidade do frete. Tipo: N, Tamanho: 1, OcorrÃªncia: 1-1 (obrigatÃ³rio na estrutura). Valores: 0=Remetente (CIF), 1=DestinatÃ¡rio (FOB), 2=Terceiros, 3=Transporte prÃ³prio remetente, 4=Transporte prÃ³prio destinatÃ¡rio, 9=Sem ocorrÃªncia de transporte.
    *
    * @param modFrete the new x02 - modFrete: Modalidade do frete
    */
@@ -202,36 +202,36 @@ public class SEFAZTranspVO extends RFWVO {
   }
 
   /**
-   * # x25a - vagao: Identificação do vagão. Tipo: C, Tamanho: 1-20, Ocorrência: 0-1.
+   * # x25a - vagao: IdentificaÃ§Ã£o do vagÃ£o. Tipo: C, Tamanho: 1-20, OcorrÃªncia: 0-1.
    *
-   * @return the x25a - vagao: Identificação do vagão
+   * @return the x25a - vagao: IdentificaÃ§Ã£o do vagÃ£o
    */
   public String getVagao() {
     return vagao;
   }
 
   /**
-   * # x25a - vagao: Identificação do vagão. Tipo: C, Tamanho: 1-20, Ocorrência: 0-1.
+   * # x25a - vagao: IdentificaÃ§Ã£o do vagÃ£o. Tipo: C, Tamanho: 1-20, OcorrÃªncia: 0-1.
    *
-   * @param vagao the new x25a - vagao: Identificação do vagão
+   * @param vagao the new x25a - vagao: IdentificaÃ§Ã£o do vagÃ£o
    */
   public void setVagao(String vagao) {
     this.vagao = vagao;
   }
 
   /**
-   * # x25b - balsa: Identificação da balsa. Tipo: C, Tamanho: 1-20, Ocorrência: 0-1.
+   * # x25b - balsa: IdentificaÃ§Ã£o da balsa. Tipo: C, Tamanho: 1-20, OcorrÃªncia: 0-1.
    *
-   * @return the x25b - balsa: Identificação da balsa
+   * @return the x25b - balsa: IdentificaÃ§Ã£o da balsa
    */
   public String getBalsa() {
     return balsa;
   }
 
   /**
-   * # x25b - balsa: Identificação da balsa. Tipo: C, Tamanho: 1-20, Ocorrência: 0-1.
+   * # x25b - balsa: IdentificaÃ§Ã£o da balsa. Tipo: C, Tamanho: 1-20, OcorrÃªncia: 0-1.
    *
-   * @param balsa the new x25b - balsa: Identificação da balsa
+   * @param balsa the new x25b - balsa: IdentificaÃ§Ã£o da balsa
    */
   public void setBalsa(String balsa) {
     this.balsa = balsa;

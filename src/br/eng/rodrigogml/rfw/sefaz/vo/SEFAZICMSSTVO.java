@@ -15,11 +15,11 @@ import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_orig;
 /**
  * Grupo N10b - ICMSST.
  *
- * Grupo de repasse de ICMS ST retido anteriormente em operações interestaduais com repasses através do Substituto Tributário (tag ICMSST / N10b).
+ * Grupo de repasse de ICMS ST retido anteriormente em operaÃ§Ãµes interestaduais com repasses atravÃ©s do Substituto TributÃ¡rio (tag ICMSST / N10b).
  * <p>
- * Representa o ICMS ST devido para a UF de destino nas operações interestaduais de produtos que tiveram retenção antecipada de ICMS por ST na UF do remetente, com repasse via substituto tributário (v2.0 e NT 2018.005).
+ * Representa o ICMS ST devido para a UF de destino nas operaÃ§Ãµes interestaduais de produtos que tiveram retenÃ§Ã£o antecipada de ICMS por ST na UF do remetente, com repasse via substituto tributÃ¡rio (v2.0 e NT 2018.005).
  *
- * Observação: nas annotations o atributo {@code required} é sempre definido como false conforme solicitado, mesmo que o MOC defina obrigatoriedade.
+ * ObservaÃ§Ã£o: nas annotations o atributo {@code required} Ã© sempre definido como false conforme solicitado, mesmo que o MOC defina obrigatoriedade.
  */
 @RFWDAOAnnotation(schema = "_RFW.SEFAZ", table = "sefaz_icmsst")
 public class SEFAZICMSSTVO extends RFWVO implements Serializable {
@@ -27,150 +27,150 @@ public class SEFAZICMSSTVO extends RFWVO implements Serializable {
   private static final long serialVersionUID = 1L;
 
   /**
-   * Relação com o ICMS da operação (tag ICMS / N01). Associação pai para o grupo ICMSST.
+   * RelaÃ§Ã£o com o ICMS da operaÃ§Ã£o (tag ICMS / N01). AssociaÃ§Ã£o pai para o grupo ICMSST.
    */
   @RFWMetaRelationshipField(caption = "ICMS", relationship = RelationshipTypes.PARENT_ASSOCIATION, required = true, column = "idsefaz_icms")
   private SEFAZICMSVO icmsVO = null;
 
   /**
-   * N11 - orig. Origem da mercadoria. Ocor.: 1–1 / Tam.: 1 / Tipo: N. Ver valores em {@link SEFAZ_orig}. <br>
-   * Utilizada no contexto do repasse de ICMS ST retido anteriormente, em operações interestaduais com substituto tributário.
+   * N11 - orig. Origem da mercadoria. Ocor.: 1â€“1 / Tam.: 1 / Tipo: N. Ver valores em {@link SEFAZ_orig}. <br>
+   * Utilizada no contexto do repasse de ICMS ST retido anteriormente, em operaÃ§Ãµes interestaduais com substituto tributÃ¡rio.
    */
   @RFWMetaEnumField(caption = "Origem da mercadoria (ICMS ST)", required = false)
   private SEFAZ_orig orig;
 
   /**
-   * N12 - CST. Tributação do ICMS. Ocor.: 1–1 / Tam.: 2 / Tipo: N. <br>
+   * N12 - CST. TributaÃ§Ã£o do ICMS. Ocor.: 1â€“1 / Tam.: 2 / Tipo: N. <br>
    * Valores permitidos para ICMSST: <br>
-   * 41 – Não tributada; <br>
-   * 60 – Cobrado anteriormente por substituição tributária. <br>
+   * 41 â€“ NÃ£o tributada; <br>
+   * 60 â€“ Cobrado anteriormente por substituiÃ§Ã£o tributÃ¡ria. <br>
    * Mapeado para {@link SEFAZ_CST_ICMS}.
    */
   @RFWMetaEnumField(caption = "CST do ICMS (ICMS ST)", required = false)
   private SEFAZ_CST_ICMS cst;
 
   /**
-   * N26 - vBCSTRet. Valor da base de cálculo do ICMS ST retido na UF remetente. <br>
-   * Ocor.: 1–1 / Tam.: 13v2 / Tipo: N. <br>
+   * N26 - vBCSTRet. Valor da base de cÃ¡lculo do ICMS ST retido na UF remetente. <br>
+   * Ocor.: 1â€“1 / Tam.: 13v2 / Tipo: N. <br>
    * Informar o valor da BC do ICMS ST que foi retido antecipadamente na UF de origem.
    */
   @RFWMetaBigDecimalField(caption = "BC do ICMS ST retido na UF remetente", required = false, unique = false, scale = 2, absolute = true)
   private BigDecimal vbcSTRet;
 
   /**
-   * N26a - pST. Alíquota suportada pelo consumidor final. Ocor.: 0–1 / Tam.: 3v2–4 / Tipo: N. <br>
-   * Deve ser informada a alíquota do cálculo do ICMS-ST, já incluindo o FCP quando incidir sobre a mercadoria. Ex.: 18% ICMS + 2% FCP informar 20%.
+   * N26a - pST. AlÃ­quota suportada pelo consumidor final. Ocor.: 0â€“1 / Tam.: 3v2â€“4 / Tipo: N. <br>
+   * Deve ser informada a alÃ­quota do cÃ¡lculo do ICMS-ST, jÃ¡ incluindo o FCP quando incidir sobre a mercadoria. Ex.: 18% ICMS + 2% FCP informar 20%.
    */
-  @RFWMetaBigDecimalField(caption = "Alíquota suportada pelo consumidor final (pST)", required = false, unique = false, scaleMax = 4, absolute = true)
+  @RFWMetaBigDecimalField(caption = "AlÃ­quota suportada pelo consumidor final (pST)", required = false, unique = false, scaleMax = 4, absolute = true)
   private BigDecimal pst;
 
   /**
-   * N26b - vICMSSubstituto. Valor do ICMS próprio do substituto. Ocor.: 0–1 / Tam.: 13v2 / Tipo: N. <br>
-   * Valor do ICMS próprio do substituto tributário cobrado em operação anterior.
+   * N26b - vICMSSubstituto. Valor do ICMS prÃ³prio do substituto. Ocor.: 0â€“1 / Tam.: 13v2 / Tipo: N. <br>
+   * Valor do ICMS prÃ³prio do substituto tributÃ¡rio cobrado em operaÃ§Ã£o anterior.
    */
-  @RFWMetaBigDecimalField(caption = "Valor do ICMS próprio do substituto", required = false, unique = false, scale = 2, absolute = true)
+  @RFWMetaBigDecimalField(caption = "Valor do ICMS prÃ³prio do substituto", required = false, unique = false, scale = 2, absolute = true)
   private BigDecimal vicmsSubstituto;
 
   /**
-   * N27 - vICMSSTRet. Valor do ICMS ST retido na UF remetente. Ocor.: 1–1 / Tam.: 13v2 / Tipo: N. <br>
+   * N27 - vICMSSTRet. Valor do ICMS ST retido na UF remetente. Ocor.: 1â€“1 / Tam.: 13v2 / Tipo: N. <br>
    * Informar o valor do ICMS ST retido antecipadamente na UF de origem.
    */
   @RFWMetaBigDecimalField(caption = "Valor do ICMS ST retido na UF remetente", required = false, unique = false, scale = 2, absolute = true)
   private BigDecimal vicmsSTRet;
 
   /**
-   * N27a - vBCFCPSTRet. Valor da base de cálculo do FCP retido anteriormente por ST. <br>
-   * Ocor.: 1–1 / Tam.: 13v2 / Tipo: N. <br>
+   * N27a - vBCFCPSTRet. Valor da base de cÃ¡lculo do FCP retido anteriormente por ST. <br>
+   * Ocor.: 1â€“1 / Tam.: 13v2 / Tipo: N. <br>
    * Informar o valor da BC do FCP-ST retido anteriormente na UF remetente.
    */
   @RFWMetaBigDecimalField(caption = "BC do FCP ST retido anteriormente", required = false, unique = false, scale = 2, absolute = true)
   private BigDecimal vbcFCPSTRet;
 
   /**
-   * N27b - pFCPSTRet. Percentual do FCP retido anteriormente por substituição tributária. <br>
-   * Ocor.: 1–1 / Tam.: 3v2–4 / Tipo: N. <br>
-   * Percentual relativo ao Fundo de Combate à Pobreza (FCP) retido por ST.
+   * N27b - pFCPSTRet. Percentual do FCP retido anteriormente por substituiÃ§Ã£o tributÃ¡ria. <br>
+   * Ocor.: 1â€“1 / Tam.: 3v2â€“4 / Tipo: N. <br>
+   * Percentual relativo ao Fundo de Combate Ã  Pobreza (FCP) retido por ST.
    */
   @RFWMetaBigDecimalField(caption = "Percentual do FCP ST retido anteriormente", required = false, unique = false, scaleMax = 4, absolute = true)
   private BigDecimal pfcpSTRet;
 
   /**
-   * N27d - vFCPSTRet. Valor do FCP retido por substituição tributária. <br>
-   * Ocor.: 1–1 / Tam.: 13v2 / Tipo: N. <br>
+   * N27d - vFCPSTRet. Valor do FCP retido por substituiÃ§Ã£o tributÃ¡ria. <br>
+   * Ocor.: 1â€“1 / Tam.: 13v2 / Tipo: N. <br>
    * Valor do ICMS relativo ao FCP retido anteriormente por ST.
    */
   @RFWMetaBigDecimalField(caption = "Valor do FCP ST retido anteriormente", required = false, unique = false, scale = 2, absolute = true)
   private BigDecimal vfcpSTRet;
 
   /**
-   * N31 - vBCSTDest. Valor da base de cálculo do ICMS ST da UF de destino. <br>
-   * Ocor.: 1–1 / Tam.: 13v2 / Tipo: N. <br>
-   * Base de cálculo do ICMS ST considerada para a UF de destino na operação interestadual.
+   * N31 - vBCSTDest. Valor da base de cÃ¡lculo do ICMS ST da UF de destino. <br>
+   * Ocor.: 1â€“1 / Tam.: 13v2 / Tipo: N. <br>
+   * Base de cÃ¡lculo do ICMS ST considerada para a UF de destino na operaÃ§Ã£o interestadual.
    */
   @RFWMetaBigDecimalField(caption = "BC do ICMS ST da UF destino", required = false, unique = false, scale = 2, absolute = true)
   private BigDecimal vbcSTDest;
 
   /**
    * N32 - vICMSSTDest. Valor do ICMS ST da UF de destino. <br>
-   * Ocor.: 1–1 / Tam.: 13v2 / Tipo: N. <br>
-   * Valor do ICMS ST devido à UF de destino na operação interestadual.
+   * Ocor.: 1â€“1 / Tam.: 13v2 / Tipo: N. <br>
+   * Valor do ICMS ST devido Ã  UF de destino na operaÃ§Ã£o interestadual.
    */
   @RFWMetaBigDecimalField(caption = "Valor do ICMS ST da UF destino", required = false, unique = false, scale = 2, absolute = true)
   private BigDecimal vicmsSTDest;
 
   /**
-   * N34 - pRedBCEfet. Percentual de redução da base de cálculo efetiva. <br>
-   * Ocor.: 1–1 / Tam.: 3v2–4 / Tipo: N. <br>
-   * Percentual de redução que seria aplicado caso a operação estivesse submetida ao regime comum, para obtenção da base de cálculo efetiva (vBCEfet). Campo opcional, a critério da UF.
+   * N34 - pRedBCEfet. Percentual de reduÃ§Ã£o da base de cÃ¡lculo efetiva. <br>
+   * Ocor.: 1â€“1 / Tam.: 3v2â€“4 / Tipo: N. <br>
+   * Percentual de reduÃ§Ã£o que seria aplicado caso a operaÃ§Ã£o estivesse submetida ao regime comum, para obtenÃ§Ã£o da base de cÃ¡lculo efetiva (vBCEfet). Campo opcional, a critÃ©rio da UF.
    */
-  @RFWMetaBigDecimalField(caption = "Percentual de redução da BC efetiva (ICMS ST)", required = false, unique = false, scaleMax = 4, absolute = true)
+  @RFWMetaBigDecimalField(caption = "Percentual de reduÃ§Ã£o da BC efetiva (ICMS ST)", required = false, unique = false, scaleMax = 4, absolute = true)
   private BigDecimal predBCEfet;
 
   /**
-   * N35 - vBCEfet. Valor da base de cálculo efetiva. <br>
-   * Ocor.: 1–1 / Tam.: 13v2 / Tipo: N. <br>
-   * Valor da base que seria atribuída à operação própria do contribuinte substituto, caso estivesse no regime comum, obtida por vProd × (1 - pRedBCEfet). Campo opcional, a critério da UF.
+   * N35 - vBCEfet. Valor da base de cÃ¡lculo efetiva. <br>
+   * Ocor.: 1â€“1 / Tam.: 13v2 / Tipo: N. <br>
+   * Valor da base que seria atribuÃ­da Ã  operaÃ§Ã£o prÃ³pria do contribuinte substituto, caso estivesse no regime comum, obtida por vProd Ã— (1 - pRedBCEfet). Campo opcional, a critÃ©rio da UF.
    */
-  @RFWMetaBigDecimalField(caption = "Base de cálculo efetiva (ICMS ST)", required = false, unique = false, scale = 2, absolute = true)
+  @RFWMetaBigDecimalField(caption = "Base de cÃ¡lculo efetiva (ICMS ST)", required = false, unique = false, scale = 2, absolute = true)
   private BigDecimal vbcfet;
 
   /**
-   * N36 - pICMSEfet. Alíquota efetiva do ICMS. <br>
-   * Ocor.: 1–1 / Tam.: 3v2–4 / Tipo: N. <br>
-   * Alíquota que seria aplicada à operação a consumidor final, caso estivesse submetida ao regime comum de tributação. Campo opcional, a critério da UF.
+   * N36 - pICMSEfet. AlÃ­quota efetiva do ICMS. <br>
+   * Ocor.: 1â€“1 / Tam.: 3v2â€“4 / Tipo: N. <br>
+   * AlÃ­quota que seria aplicada Ã  operaÃ§Ã£o a consumidor final, caso estivesse submetida ao regime comum de tributaÃ§Ã£o. Campo opcional, a critÃ©rio da UF.
    */
-  @RFWMetaBigDecimalField(caption = "Alíquota efetiva do ICMS (ICMS ST)", required = false, unique = false, scaleMax = 4, absolute = true)
+  @RFWMetaBigDecimalField(caption = "AlÃ­quota efetiva do ICMS (ICMS ST)", required = false, unique = false, scaleMax = 4, absolute = true)
   private BigDecimal picmsEfet;
 
   /**
    * N37 - vICMSEfet. Valor do ICMS efetivo. <br>
-   * Ocor.: 1–1 / Tam.: 13v2 / Tipo: N. <br>
-   * Obtido pelo produto de vBCEfet por pICMSEfet, simulando a tributação no regime comum. Campo opcional, a critério da UF.
+   * Ocor.: 1â€“1 / Tam.: 13v2 / Tipo: N. <br>
+   * Obtido pelo produto de vBCEfet por pICMSEfet, simulando a tributaÃ§Ã£o no regime comum. Campo opcional, a critÃ©rio da UF.
    */
   @RFWMetaBigDecimalField(caption = "Valor do ICMS efetivo (ICMS ST)", required = false, unique = false, scale = 2, absolute = true)
   private BigDecimal vicmsEfet;
 
   /**
-   * # relação com o ICMS da operação (tag ICMS / N01). Associação pai para o grupo ICMSST.
+   * # relaÃ§Ã£o com o ICMS da operaÃ§Ã£o (tag ICMS / N01). AssociaÃ§Ã£o pai para o grupo ICMSST.
    *
-   * @return the relação com o ICMS da operação (tag ICMS / N01)
+   * @return the relaÃ§Ã£o com o ICMS da operaÃ§Ã£o (tag ICMS / N01)
    */
   public SEFAZICMSVO getIcmsVO() {
     return icmsVO;
   }
 
   /**
-   * # relação com o ICMS da operação (tag ICMS / N01). Associação pai para o grupo ICMSST.
+   * # relaÃ§Ã£o com o ICMS da operaÃ§Ã£o (tag ICMS / N01). AssociaÃ§Ã£o pai para o grupo ICMSST.
    *
-   * @param icmsVO the new relação com o ICMS da operação (tag ICMS / N01)
+   * @param icmsVO the new relaÃ§Ã£o com o ICMS da operaÃ§Ã£o (tag ICMS / N01)
    */
   public void setIcmsVO(SEFAZICMSVO icmsVO) {
     this.icmsVO = icmsVO;
   }
 
   /**
-   * # n11 - orig. Origem da mercadoria. Ocor.: 1–1 / Tam.: 1 / Tipo: N. Ver valores em {@link SEFAZ_orig}. <br>
-   * Utilizada no contexto do repasse de ICMS ST retido anteriormente, em operações interestaduais com substituto tributário.
+   * # n11 - orig. Origem da mercadoria. Ocor.: 1â€“1 / Tam.: 1 / Tipo: N. Ver valores em {@link SEFAZ_orig}. <br>
+   * Utilizada no contexto do repasse de ICMS ST retido anteriormente, em operaÃ§Ãµes interestaduais com substituto tributÃ¡rio.
    *
    * @return the n11 - orig
    */
@@ -179,8 +179,8 @@ public class SEFAZICMSSTVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # n11 - orig. Origem da mercadoria. Ocor.: 1–1 / Tam.: 1 / Tipo: N. Ver valores em {@link SEFAZ_orig}. <br>
-   * Utilizada no contexto do repasse de ICMS ST retido anteriormente, em operações interestaduais com substituto tributário.
+   * # n11 - orig. Origem da mercadoria. Ocor.: 1â€“1 / Tam.: 1 / Tipo: N. Ver valores em {@link SEFAZ_orig}. <br>
+   * Utilizada no contexto do repasse de ICMS ST retido anteriormente, em operaÃ§Ãµes interestaduais com substituto tributÃ¡rio.
    *
    * @param orig the new n11 - orig
    */
@@ -189,10 +189,10 @@ public class SEFAZICMSSTVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # n12 - CST. Tributação do ICMS. Ocor.: 1–1 / Tam.: 2 / Tipo: N. <br>
+   * # n12 - CST. TributaÃ§Ã£o do ICMS. Ocor.: 1â€“1 / Tam.: 2 / Tipo: N. <br>
    * Valores permitidos para ICMSST: <br>
-   * 41 – Não tributada; <br>
-   * 60 – Cobrado anteriormente por substituição tributária. <br>
+   * 41 â€“ NÃ£o tributada; <br>
+   * 60 â€“ Cobrado anteriormente por substituiÃ§Ã£o tributÃ¡ria. <br>
    * Mapeado para {@link SEFAZ_CST_ICMS}.
    *
    * @return the n12 - CST
@@ -202,10 +202,10 @@ public class SEFAZICMSSTVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # n12 - CST. Tributação do ICMS. Ocor.: 1–1 / Tam.: 2 / Tipo: N. <br>
+   * # n12 - CST. TributaÃ§Ã£o do ICMS. Ocor.: 1â€“1 / Tam.: 2 / Tipo: N. <br>
    * Valores permitidos para ICMSST: <br>
-   * 41 – Não tributada; <br>
-   * 60 – Cobrado anteriormente por substituição tributária. <br>
+   * 41 â€“ NÃ£o tributada; <br>
+   * 60 â€“ Cobrado anteriormente por substituiÃ§Ã£o tributÃ¡ria. <br>
    * Mapeado para {@link SEFAZ_CST_ICMS}.
    *
    * @param cst the new n12 - CST
@@ -215,8 +215,8 @@ public class SEFAZICMSSTVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # n26 - vBCSTRet. Valor da base de cálculo do ICMS ST retido na UF remetente. <br>
-   * Ocor.: 1–1 / Tam.: 13v2 / Tipo: N. <br>
+   * # n26 - vBCSTRet. Valor da base de cÃ¡lculo do ICMS ST retido na UF remetente. <br>
+   * Ocor.: 1â€“1 / Tam.: 13v2 / Tipo: N. <br>
    * Informar o valor da BC do ICMS ST que foi retido antecipadamente na UF de origem.
    *
    * @return the n26 - vBCSTRet
@@ -226,8 +226,8 @@ public class SEFAZICMSSTVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # n26 - vBCSTRet. Valor da base de cálculo do ICMS ST retido na UF remetente. <br>
-   * Ocor.: 1–1 / Tam.: 13v2 / Tipo: N. <br>
+   * # n26 - vBCSTRet. Valor da base de cÃ¡lculo do ICMS ST retido na UF remetente. <br>
+   * Ocor.: 1â€“1 / Tam.: 13v2 / Tipo: N. <br>
    * Informar o valor da BC do ICMS ST que foi retido antecipadamente na UF de origem.
    *
    * @param vbcSTRet the new n26 - vBCSTRet
@@ -237,8 +237,8 @@ public class SEFAZICMSSTVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # n26a - pST. Alíquota suportada pelo consumidor final. Ocor.: 0–1 / Tam.: 3v2–4 / Tipo: N. <br>
-   * Deve ser informada a alíquota do cálculo do ICMS-ST, já incluindo o FCP quando incidir sobre a mercadoria. Ex.: 18% ICMS + 2% FCP informar 20%.
+   * # n26a - pST. AlÃ­quota suportada pelo consumidor final. Ocor.: 0â€“1 / Tam.: 3v2â€“4 / Tipo: N. <br>
+   * Deve ser informada a alÃ­quota do cÃ¡lculo do ICMS-ST, jÃ¡ incluindo o FCP quando incidir sobre a mercadoria. Ex.: 18% ICMS + 2% FCP informar 20%.
    *
    * @return the n26a - pST
    */
@@ -247,8 +247,8 @@ public class SEFAZICMSSTVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # n26a - pST. Alíquota suportada pelo consumidor final. Ocor.: 0–1 / Tam.: 3v2–4 / Tipo: N. <br>
-   * Deve ser informada a alíquota do cálculo do ICMS-ST, já incluindo o FCP quando incidir sobre a mercadoria. Ex.: 18% ICMS + 2% FCP informar 20%.
+   * # n26a - pST. AlÃ­quota suportada pelo consumidor final. Ocor.: 0â€“1 / Tam.: 3v2â€“4 / Tipo: N. <br>
+   * Deve ser informada a alÃ­quota do cÃ¡lculo do ICMS-ST, jÃ¡ incluindo o FCP quando incidir sobre a mercadoria. Ex.: 18% ICMS + 2% FCP informar 20%.
    *
    * @param pst the new n26a - pST
    */
@@ -257,8 +257,8 @@ public class SEFAZICMSSTVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # n26b - vICMSSubstituto. Valor do ICMS próprio do substituto. Ocor.: 0–1 / Tam.: 13v2 / Tipo: N. <br>
-   * Valor do ICMS próprio do substituto tributário cobrado em operação anterior.
+   * # n26b - vICMSSubstituto. Valor do ICMS prÃ³prio do substituto. Ocor.: 0â€“1 / Tam.: 13v2 / Tipo: N. <br>
+   * Valor do ICMS prÃ³prio do substituto tributÃ¡rio cobrado em operaÃ§Ã£o anterior.
    *
    * @return the n26b - vICMSSubstituto
    */
@@ -267,8 +267,8 @@ public class SEFAZICMSSTVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # n26b - vICMSSubstituto. Valor do ICMS próprio do substituto. Ocor.: 0–1 / Tam.: 13v2 / Tipo: N. <br>
-   * Valor do ICMS próprio do substituto tributário cobrado em operação anterior.
+   * # n26b - vICMSSubstituto. Valor do ICMS prÃ³prio do substituto. Ocor.: 0â€“1 / Tam.: 13v2 / Tipo: N. <br>
+   * Valor do ICMS prÃ³prio do substituto tributÃ¡rio cobrado em operaÃ§Ã£o anterior.
    *
    * @param vicmsSubstituto the new n26b - vICMSSubstituto
    */
@@ -277,7 +277,7 @@ public class SEFAZICMSSTVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # n27 - vICMSSTRet. Valor do ICMS ST retido na UF remetente. Ocor.: 1–1 / Tam.: 13v2 / Tipo: N. <br>
+   * # n27 - vICMSSTRet. Valor do ICMS ST retido na UF remetente. Ocor.: 1â€“1 / Tam.: 13v2 / Tipo: N. <br>
    * Informar o valor do ICMS ST retido antecipadamente na UF de origem.
    *
    * @return the n27 - vICMSSTRet
@@ -287,7 +287,7 @@ public class SEFAZICMSSTVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # n27 - vICMSSTRet. Valor do ICMS ST retido na UF remetente. Ocor.: 1–1 / Tam.: 13v2 / Tipo: N. <br>
+   * # n27 - vICMSSTRet. Valor do ICMS ST retido na UF remetente. Ocor.: 1â€“1 / Tam.: 13v2 / Tipo: N. <br>
    * Informar o valor do ICMS ST retido antecipadamente na UF de origem.
    *
    * @param vicmsSTRet the new n27 - vICMSSTRet
@@ -297,8 +297,8 @@ public class SEFAZICMSSTVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # n27a - vBCFCPSTRet. Valor da base de cálculo do FCP retido anteriormente por ST. <br>
-   * Ocor.: 1–1 / Tam.: 13v2 / Tipo: N. <br>
+   * # n27a - vBCFCPSTRet. Valor da base de cÃ¡lculo do FCP retido anteriormente por ST. <br>
+   * Ocor.: 1â€“1 / Tam.: 13v2 / Tipo: N. <br>
    * Informar o valor da BC do FCP-ST retido anteriormente na UF remetente.
    *
    * @return the n27a - vBCFCPSTRet
@@ -308,8 +308,8 @@ public class SEFAZICMSSTVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # n27a - vBCFCPSTRet. Valor da base de cálculo do FCP retido anteriormente por ST. <br>
-   * Ocor.: 1–1 / Tam.: 13v2 / Tipo: N. <br>
+   * # n27a - vBCFCPSTRet. Valor da base de cÃ¡lculo do FCP retido anteriormente por ST. <br>
+   * Ocor.: 1â€“1 / Tam.: 13v2 / Tipo: N. <br>
    * Informar o valor da BC do FCP-ST retido anteriormente na UF remetente.
    *
    * @param vbcFCPSTRet the new n27a - vBCFCPSTRet
@@ -319,9 +319,9 @@ public class SEFAZICMSSTVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # n27b - pFCPSTRet. Percentual do FCP retido anteriormente por substituição tributária. <br>
-   * Ocor.: 1–1 / Tam.: 3v2–4 / Tipo: N. <br>
-   * Percentual relativo ao Fundo de Combate à Pobreza (FCP) retido por ST.
+   * # n27b - pFCPSTRet. Percentual do FCP retido anteriormente por substituiÃ§Ã£o tributÃ¡ria. <br>
+   * Ocor.: 1â€“1 / Tam.: 3v2â€“4 / Tipo: N. <br>
+   * Percentual relativo ao Fundo de Combate Ã  Pobreza (FCP) retido por ST.
    *
    * @return the n27b - pFCPSTRet
    */
@@ -330,9 +330,9 @@ public class SEFAZICMSSTVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # n27b - pFCPSTRet. Percentual do FCP retido anteriormente por substituição tributária. <br>
-   * Ocor.: 1–1 / Tam.: 3v2–4 / Tipo: N. <br>
-   * Percentual relativo ao Fundo de Combate à Pobreza (FCP) retido por ST.
+   * # n27b - pFCPSTRet. Percentual do FCP retido anteriormente por substituiÃ§Ã£o tributÃ¡ria. <br>
+   * Ocor.: 1â€“1 / Tam.: 3v2â€“4 / Tipo: N. <br>
+   * Percentual relativo ao Fundo de Combate Ã  Pobreza (FCP) retido por ST.
    *
    * @param pfcpSTRet the new n27b - pFCPSTRet
    */
@@ -341,8 +341,8 @@ public class SEFAZICMSSTVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # n27d - vFCPSTRet. Valor do FCP retido por substituição tributária. <br>
-   * Ocor.: 1–1 / Tam.: 13v2 / Tipo: N. <br>
+   * # n27d - vFCPSTRet. Valor do FCP retido por substituiÃ§Ã£o tributÃ¡ria. <br>
+   * Ocor.: 1â€“1 / Tam.: 13v2 / Tipo: N. <br>
    * Valor do ICMS relativo ao FCP retido anteriormente por ST.
    *
    * @return the n27d - vFCPSTRet
@@ -352,8 +352,8 @@ public class SEFAZICMSSTVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # n27d - vFCPSTRet. Valor do FCP retido por substituição tributária. <br>
-   * Ocor.: 1–1 / Tam.: 13v2 / Tipo: N. <br>
+   * # n27d - vFCPSTRet. Valor do FCP retido por substituiÃ§Ã£o tributÃ¡ria. <br>
+   * Ocor.: 1â€“1 / Tam.: 13v2 / Tipo: N. <br>
    * Valor do ICMS relativo ao FCP retido anteriormente por ST.
    *
    * @param vfcpSTRet the new n27d - vFCPSTRet
@@ -363,9 +363,9 @@ public class SEFAZICMSSTVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # n31 - vBCSTDest. Valor da base de cálculo do ICMS ST da UF de destino. <br>
-   * Ocor.: 1–1 / Tam.: 13v2 / Tipo: N. <br>
-   * Base de cálculo do ICMS ST considerada para a UF de destino na operação interestadual.
+   * # n31 - vBCSTDest. Valor da base de cÃ¡lculo do ICMS ST da UF de destino. <br>
+   * Ocor.: 1â€“1 / Tam.: 13v2 / Tipo: N. <br>
+   * Base de cÃ¡lculo do ICMS ST considerada para a UF de destino na operaÃ§Ã£o interestadual.
    *
    * @return the n31 - vBCSTDest
    */
@@ -374,9 +374,9 @@ public class SEFAZICMSSTVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # n31 - vBCSTDest. Valor da base de cálculo do ICMS ST da UF de destino. <br>
-   * Ocor.: 1–1 / Tam.: 13v2 / Tipo: N. <br>
-   * Base de cálculo do ICMS ST considerada para a UF de destino na operação interestadual.
+   * # n31 - vBCSTDest. Valor da base de cÃ¡lculo do ICMS ST da UF de destino. <br>
+   * Ocor.: 1â€“1 / Tam.: 13v2 / Tipo: N. <br>
+   * Base de cÃ¡lculo do ICMS ST considerada para a UF de destino na operaÃ§Ã£o interestadual.
    *
    * @param vbcSTDest the new n31 - vBCSTDest
    */
@@ -386,8 +386,8 @@ public class SEFAZICMSSTVO extends RFWVO implements Serializable {
 
   /**
    * # n32 - vICMSSTDest. Valor do ICMS ST da UF de destino. <br>
-   * Ocor.: 1–1 / Tam.: 13v2 / Tipo: N. <br>
-   * Valor do ICMS ST devido à UF de destino na operação interestadual.
+   * Ocor.: 1â€“1 / Tam.: 13v2 / Tipo: N. <br>
+   * Valor do ICMS ST devido Ã  UF de destino na operaÃ§Ã£o interestadual.
    *
    * @return the n32 - vICMSSTDest
    */
@@ -397,8 +397,8 @@ public class SEFAZICMSSTVO extends RFWVO implements Serializable {
 
   /**
    * # n32 - vICMSSTDest. Valor do ICMS ST da UF de destino. <br>
-   * Ocor.: 1–1 / Tam.: 13v2 / Tipo: N. <br>
-   * Valor do ICMS ST devido à UF de destino na operação interestadual.
+   * Ocor.: 1â€“1 / Tam.: 13v2 / Tipo: N. <br>
+   * Valor do ICMS ST devido Ã  UF de destino na operaÃ§Ã£o interestadual.
    *
    * @param vicmsSTDest the new n32 - vICMSSTDest
    */
@@ -407,9 +407,9 @@ public class SEFAZICMSSTVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # n34 - pRedBCEfet. Percentual de redução da base de cálculo efetiva. <br>
-   * Ocor.: 1–1 / Tam.: 3v2–4 / Tipo: N. <br>
-   * Percentual de redução que seria aplicado caso a operação estivesse submetida ao regime comum, para obtenção da base de cálculo efetiva (vBCEfet). Campo opcional, a critério da UF.
+   * # n34 - pRedBCEfet. Percentual de reduÃ§Ã£o da base de cÃ¡lculo efetiva. <br>
+   * Ocor.: 1â€“1 / Tam.: 3v2â€“4 / Tipo: N. <br>
+   * Percentual de reduÃ§Ã£o que seria aplicado caso a operaÃ§Ã£o estivesse submetida ao regime comum, para obtenÃ§Ã£o da base de cÃ¡lculo efetiva (vBCEfet). Campo opcional, a critÃ©rio da UF.
    *
    * @return the n34 - pRedBCEfet
    */
@@ -418,9 +418,9 @@ public class SEFAZICMSSTVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # n34 - pRedBCEfet. Percentual de redução da base de cálculo efetiva. <br>
-   * Ocor.: 1–1 / Tam.: 3v2–4 / Tipo: N. <br>
-   * Percentual de redução que seria aplicado caso a operação estivesse submetida ao regime comum, para obtenção da base de cálculo efetiva (vBCEfet). Campo opcional, a critério da UF.
+   * # n34 - pRedBCEfet. Percentual de reduÃ§Ã£o da base de cÃ¡lculo efetiva. <br>
+   * Ocor.: 1â€“1 / Tam.: 3v2â€“4 / Tipo: N. <br>
+   * Percentual de reduÃ§Ã£o que seria aplicado caso a operaÃ§Ã£o estivesse submetida ao regime comum, para obtenÃ§Ã£o da base de cÃ¡lculo efetiva (vBCEfet). Campo opcional, a critÃ©rio da UF.
    *
    * @param predBCEfet the new n34 - pRedBCEfet
    */
@@ -429,9 +429,9 @@ public class SEFAZICMSSTVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # n35 - vBCEfet. Valor da base de cálculo efetiva. <br>
-   * Ocor.: 1–1 / Tam.: 13v2 / Tipo: N. <br>
-   * Valor da base que seria atribuída à operação própria do contribuinte substituto, caso estivesse no regime comum, obtida por vProd × (1 - pRedBCEfet). Campo opcional, a critério da UF.
+   * # n35 - vBCEfet. Valor da base de cÃ¡lculo efetiva. <br>
+   * Ocor.: 1â€“1 / Tam.: 13v2 / Tipo: N. <br>
+   * Valor da base que seria atribuÃ­da Ã  operaÃ§Ã£o prÃ³pria do contribuinte substituto, caso estivesse no regime comum, obtida por vProd Ã— (1 - pRedBCEfet). Campo opcional, a critÃ©rio da UF.
    *
    * @return the n35 - vBCEfet
    */
@@ -440,9 +440,9 @@ public class SEFAZICMSSTVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # n35 - vBCEfet. Valor da base de cálculo efetiva. <br>
-   * Ocor.: 1–1 / Tam.: 13v2 / Tipo: N. <br>
-   * Valor da base que seria atribuída à operação própria do contribuinte substituto, caso estivesse no regime comum, obtida por vProd × (1 - pRedBCEfet). Campo opcional, a critério da UF.
+   * # n35 - vBCEfet. Valor da base de cÃ¡lculo efetiva. <br>
+   * Ocor.: 1â€“1 / Tam.: 13v2 / Tipo: N. <br>
+   * Valor da base que seria atribuÃ­da Ã  operaÃ§Ã£o prÃ³pria do contribuinte substituto, caso estivesse no regime comum, obtida por vProd Ã— (1 - pRedBCEfet). Campo opcional, a critÃ©rio da UF.
    *
    * @param vbcfet the new n35 - vBCEfet
    */
@@ -451,9 +451,9 @@ public class SEFAZICMSSTVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # n36 - pICMSEfet. Alíquota efetiva do ICMS. <br>
-   * Ocor.: 1–1 / Tam.: 3v2–4 / Tipo: N. <br>
-   * Alíquota que seria aplicada à operação a consumidor final, caso estivesse submetida ao regime comum de tributação. Campo opcional, a critério da UF.
+   * # n36 - pICMSEfet. AlÃ­quota efetiva do ICMS. <br>
+   * Ocor.: 1â€“1 / Tam.: 3v2â€“4 / Tipo: N. <br>
+   * AlÃ­quota que seria aplicada Ã  operaÃ§Ã£o a consumidor final, caso estivesse submetida ao regime comum de tributaÃ§Ã£o. Campo opcional, a critÃ©rio da UF.
    *
    * @return the n36 - pICMSEfet
    */
@@ -462,9 +462,9 @@ public class SEFAZICMSSTVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # n36 - pICMSEfet. Alíquota efetiva do ICMS. <br>
-   * Ocor.: 1–1 / Tam.: 3v2–4 / Tipo: N. <br>
-   * Alíquota que seria aplicada à operação a consumidor final, caso estivesse submetida ao regime comum de tributação. Campo opcional, a critério da UF.
+   * # n36 - pICMSEfet. AlÃ­quota efetiva do ICMS. <br>
+   * Ocor.: 1â€“1 / Tam.: 3v2â€“4 / Tipo: N. <br>
+   * AlÃ­quota que seria aplicada Ã  operaÃ§Ã£o a consumidor final, caso estivesse submetida ao regime comum de tributaÃ§Ã£o. Campo opcional, a critÃ©rio da UF.
    *
    * @param picmsEfet the new n36 - pICMSEfet
    */
@@ -474,8 +474,8 @@ public class SEFAZICMSSTVO extends RFWVO implements Serializable {
 
   /**
    * # n37 - vICMSEfet. Valor do ICMS efetivo. <br>
-   * Ocor.: 1–1 / Tam.: 13v2 / Tipo: N. <br>
-   * Obtido pelo produto de vBCEfet por pICMSEfet, simulando a tributação no regime comum. Campo opcional, a critério da UF.
+   * Ocor.: 1â€“1 / Tam.: 13v2 / Tipo: N. <br>
+   * Obtido pelo produto de vBCEfet por pICMSEfet, simulando a tributaÃ§Ã£o no regime comum. Campo opcional, a critÃ©rio da UF.
    *
    * @return the n37 - vICMSEfet
    */
@@ -485,8 +485,8 @@ public class SEFAZICMSSTVO extends RFWVO implements Serializable {
 
   /**
    * # n37 - vICMSEfet. Valor do ICMS efetivo. <br>
-   * Ocor.: 1–1 / Tam.: 13v2 / Tipo: N. <br>
-   * Obtido pelo produto de vBCEfet por pICMSEfet, simulando a tributação no regime comum. Campo opcional, a critério da UF.
+   * Ocor.: 1â€“1 / Tam.: 13v2 / Tipo: N. <br>
+   * Obtido pelo produto de vBCEfet por pICMSEfet, simulando a tributaÃ§Ã£o no regime comum. Campo opcional, a critÃ©rio da UF.
    *
    * @param vicmsEfet the new n37 - vICMSEfet
    */
