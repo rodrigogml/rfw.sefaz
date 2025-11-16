@@ -7,6 +7,9 @@
  */
 package org.xmlsoap.schemas.soap.encoding;
 
+// Codificação UTF-8 – caracteres de exemplo: á, é, í, ó, ú, ç.
+
+
 
 /**
  * An XML QName(@http://schemas.xmlsoap.org/soap/encoding/).

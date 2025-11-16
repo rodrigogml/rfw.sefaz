@@ -1,5 +1,8 @@
 package br.eng.rodrigogml.rfw.sefaz;
 
+// Codificação UTF-8 – caracteres de exemplo: á, é, í, ó, ú, ç.
+
+
 import static org.junit.Assert.assertEquals;
 
 import java.time.LocalDateTime;

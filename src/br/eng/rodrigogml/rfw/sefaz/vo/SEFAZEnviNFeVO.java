@@ -1,5 +1,8 @@
 package br.eng.rodrigogml.rfw.sefaz.vo;
 
+// Codificação UTF-8 – caracteres de exemplo: á, é, í, ó, ú, ç.
+
+
 import java.util.List;
 
 import br.eng.rodrigogml.rfw.kernel.preprocess.PreProcess.PreProcessOption;

@@ -1,5 +1,8 @@
 package br.eng.rodrigogml.rfw.sefaz.mapper;
 
+// Codificação UTF-8 – caracteres de exemplo: á, é, í, ó, ú, ç.
+
+
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;

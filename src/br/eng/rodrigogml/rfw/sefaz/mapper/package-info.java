@@ -12,3 +12,6 @@
  * conflitos com o padrao atual do projeto.
  */
 package br.eng.rodrigogml.rfw.sefaz.mapper;
+
+// Codificação UTF-8 – caracteres de exemplo: á, é, í, ó, ú, ç.
+

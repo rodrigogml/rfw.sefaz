@@ -6,6 +6,9 @@
  * Automatically generated - do not modify.
  */
 package org.xmlsoap.schemas.soap.encoding.impl;
+
+// Codificação UTF-8 – caracteres de exemplo: á, é, í, ó, ú, ç.
+
 /**
  * An XML arrayCoordinate(@http://schemas.xmlsoap.org/soap/encoding/).
  *

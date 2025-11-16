@@ -6,6 +6,9 @@
  */
 package br.inf.portalfiscal.www.nfe.wsdl.cadconsultacadastro4;
 
+// Codificação UTF-8 – caracteres de exemplo: á, é, í, ó, ú, ç.
+
+
 /*
  *  CadConsultaCadastro4Stub java implementation
  */

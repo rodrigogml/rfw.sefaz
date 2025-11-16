@@ -7,6 +7,9 @@
  * Automatically generated - do not modify.
  */
 package br.inf.portalfiscal.www.nfe.wsdl.nfeautorizacao4.impl;
+
+// Codificação UTF-8 – caracteres de exemplo: á, é, í, ó, ú, ç.
+
 /**
  * A document containing one nfeDadosMsgZip(@http://www.portalfiscal.inf.br/nfe/wsdl/NFeAutorizacao4) element.
  *
