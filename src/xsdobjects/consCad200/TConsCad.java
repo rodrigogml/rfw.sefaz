@@ -1,8 +1,8 @@
 //
-// Este arquivo foi gerado pela Arquitetura JavaTM para Implementação de Referência (JAXB) de Bind XML, v2.2.8-b130911.1802
+// Este arquivo foi gerado pela Arquitetura JavaTM para ImplementaÃ§Ã£o de ReferÃªncia (JAXB) de Bind XML, v2.2.8-b130911.1802
 // Consulte <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a>
-// Todas as modificações neste arquivo serão perdidas após a recompilação do esquema de origem.
-// Gerado em: 2025.02.09 às 04:51:19 PM BRT
+// Todas as modificaÃ§Ãµes neste arquivo serÃ£o perdidas apÃ³s a recompilaÃ§Ã£o do esquema de origem.
+// Gerado em: 2025.02.09 Ã s 04:51:19 PM BRT
 //
 
 package xsdobjects.consCad200;
@@ -24,7 +24,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  * Classe Java de TConsCad complex type.
  *
  * <p>
- * O seguinte fragmento do esquema especifica o conteúdo esperado contido dentro desta classe.
+ * O seguinte fragmento do esquema especifica o conteÃºdo esperado contido dentro desta classe.
  *
  * <pre>
  * &lt;complexType name="TConsCad">
@@ -77,7 +77,7 @@ public class TConsCad {
   protected String versao;
 
   /**
-   * Obtém o valor da propriedade infCons.
+   * ObtÃ©m o valor da propriedade infCons.
    *
    * @return possible object is {@link TConsCad.InfCons }
    *
@@ -97,7 +97,7 @@ public class TConsCad {
   }
 
   /**
-   * Obtém o valor da propriedade versao.
+   * ObtÃ©m o valor da propriedade versao.
    *
    * @return possible object is {@link String }
    *
@@ -121,7 +121,7 @@ public class TConsCad {
    * Classe Java de anonymous complex type.
    *
    * <p>
-   * O seguinte fragmento do esquema especifica o conteúdo esperado contido dentro desta classe.
+   * O seguinte fragmento do esquema especifica o conteÃºdo esperado contido dentro desta classe.
    *
    * <pre>
    * &lt;complexType>
@@ -172,7 +172,7 @@ public class TConsCad {
     protected String cpf;
 
     /**
-     * Obtém o valor da propriedade xServ.
+     * ObtÃ©m o valor da propriedade xServ.
      *
      * @return possible object is {@link String }
      *
@@ -192,7 +192,7 @@ public class TConsCad {
     }
 
     /**
-     * Obtém o valor da propriedade uf.
+     * ObtÃ©m o valor da propriedade uf.
      *
      * @return possible object is {@link TUfCons }
      *
@@ -212,7 +212,7 @@ public class TConsCad {
     }
 
     /**
-     * Obtém o valor da propriedade ie.
+     * ObtÃ©m o valor da propriedade ie.
      *
      * @return possible object is {@link String }
      *
@@ -232,7 +232,7 @@ public class TConsCad {
     }
 
     /**
-     * Obtém o valor da propriedade cnpj.
+     * ObtÃ©m o valor da propriedade cnpj.
      *
      * @return possible object is {@link String }
      *
@@ -252,7 +252,7 @@ public class TConsCad {
     }
 
     /**
-     * Obtém o valor da propriedade cpf.
+     * ObtÃ©m o valor da propriedade cpf.
      *
      * @return possible object is {@link String }
      *

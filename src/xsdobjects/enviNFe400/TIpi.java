@@ -1,8 +1,8 @@
 //
-// Este arquivo foi gerado pela Arquitetura JavaTM para Implementação de Referência (JAXB) de Bind XML, v2.2.8-b130911.1802 
+// Este arquivo foi gerado pela Arquitetura JavaTM para ImplementaÃ§Ã£o de ReferÃªncia (JAXB) de Bind XML, v2.2.8-b130911.1802 
 // Consulte <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
-// Todas as modificações neste arquivo serão perdidas após a recompilação do esquema de origem. 
-// Gerado em: 2025.02.09 às 04:58:58 PM BRT 
+// Todas as modificaÃ§Ãµes neste arquivo serÃ£o perdidas apÃ³s a recompilaÃ§Ã£o do esquema de origem. 
+// Gerado em: 2025.02.09 Ã s 04:58:58 PM BRT 
 //
 
 
@@ -19,7 +19,7 @@ import javax.xml.bind.annotation.XmlType;
  * 
  * <p>Classe Java de TIpi complex type.
  * 
- * <p>O seguinte fragmento do esquema especifica o conteúdo esperado contido dentro desta classe.
+ * <p>O seguinte fragmento do esquema especifica o conteÃºdo esperado contido dentro desta classe.
  * 
  * <pre>
  * &lt;complexType name="TIpi">
@@ -143,7 +143,7 @@ public class TIpi {
     protected TIpi.IPINT ipint;
 
     /**
-     * Obtém o valor da propriedade cnpjProd.
+     * ObtÃ©m o valor da propriedade cnpjProd.
      * 
      * @return
      *     possible object is
@@ -167,7 +167,7 @@ public class TIpi {
     }
 
     /**
-     * Obtém o valor da propriedade cSelo.
+     * ObtÃ©m o valor da propriedade cSelo.
      * 
      * @return
      *     possible object is
@@ -191,7 +191,7 @@ public class TIpi {
     }
 
     /**
-     * Obtém o valor da propriedade qSelo.
+     * ObtÃ©m o valor da propriedade qSelo.
      * 
      * @return
      *     possible object is
@@ -215,7 +215,7 @@ public class TIpi {
     }
 
     /**
-     * Obtém o valor da propriedade cEnq.
+     * ObtÃ©m o valor da propriedade cEnq.
      * 
      * @return
      *     possible object is
@@ -239,7 +239,7 @@ public class TIpi {
     }
 
     /**
-     * Obtém o valor da propriedade ipiTrib.
+     * ObtÃ©m o valor da propriedade ipiTrib.
      * 
      * @return
      *     possible object is
@@ -263,7 +263,7 @@ public class TIpi {
     }
 
     /**
-     * Obtém o valor da propriedade ipint.
+     * ObtÃ©m o valor da propriedade ipint.
      * 
      * @return
      *     possible object is
@@ -290,7 +290,7 @@ public class TIpi {
     /**
      * <p>Classe Java de anonymous complex type.
      * 
-     * <p>O seguinte fragmento do esquema especifica o conteúdo esperado contido dentro desta classe.
+     * <p>O seguinte fragmento do esquema especifica o conteÃºdo esperado contido dentro desta classe.
      * 
      * <pre>
      * &lt;complexType>
@@ -332,7 +332,7 @@ public class TIpi {
         protected String cst;
 
         /**
-         * Obtém o valor da propriedade cst.
+         * ObtÃ©m o valor da propriedade cst.
          * 
          * @return
          *     possible object is
@@ -361,7 +361,7 @@ public class TIpi {
     /**
      * <p>Classe Java de anonymous complex type.
      * 
-     * <p>O seguinte fragmento do esquema especifica o conteúdo esperado contido dentro desta classe.
+     * <p>O seguinte fragmento do esquema especifica o conteÃºdo esperado contido dentro desta classe.
      * 
      * <pre>
      * &lt;complexType>
@@ -421,7 +421,7 @@ public class TIpi {
         protected String vipi;
 
         /**
-         * Obtém o valor da propriedade cst.
+         * ObtÃ©m o valor da propriedade cst.
          * 
          * @return
          *     possible object is
@@ -445,7 +445,7 @@ public class TIpi {
         }
 
         /**
-         * Obtém o valor da propriedade vbc.
+         * ObtÃ©m o valor da propriedade vbc.
          * 
          * @return
          *     possible object is
@@ -469,7 +469,7 @@ public class TIpi {
         }
 
         /**
-         * Obtém o valor da propriedade pipi.
+         * ObtÃ©m o valor da propriedade pipi.
          * 
          * @return
          *     possible object is
@@ -493,7 +493,7 @@ public class TIpi {
         }
 
         /**
-         * Obtém o valor da propriedade qUnid.
+         * ObtÃ©m o valor da propriedade qUnid.
          * 
          * @return
          *     possible object is
@@ -517,7 +517,7 @@ public class TIpi {
         }
 
         /**
-         * Obtém o valor da propriedade vUnid.
+         * ObtÃ©m o valor da propriedade vUnid.
          * 
          * @return
          *     possible object is
@@ -541,7 +541,7 @@ public class TIpi {
         }
 
         /**
-         * Obtém o valor da propriedade vipi.
+         * ObtÃ©m o valor da propriedade vipi.
          * 
          * @return
          *     possible object is

@@ -1,8 +1,8 @@
 //
-// Este arquivo foi gerado pela Arquitetura JavaTM para Implementação de Referência (JAXB) de Bind XML, v2.2.8-b130911.1802 
+// Este arquivo foi gerado pela Arquitetura JavaTM para ImplementaÃ§Ã£o de ReferÃªncia (JAXB) de Bind XML, v2.2.8-b130911.1802 
 // Consulte <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
-// Todas as modificações neste arquivo serão perdidas após a recompilação do esquema de origem. 
-// Gerado em: 2025.02.09 às 05:05:54 PM BRT 
+// Todas as modificaÃ§Ãµes neste arquivo serÃ£o perdidas apÃ³s a recompilaÃ§Ã£o do esquema de origem. 
+// Gerado em: 2025.02.09 Ã s 05:05:54 PM BRT 
 //
 
 
@@ -22,7 +22,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 /**
  * <p>Classe Java de SignatureType complex type.
  * 
- * <p>O seguinte fragmento do esquema especifica o conteúdo esperado contido dentro desta classe.
+ * <p>O seguinte fragmento do esquema especifica o conteÃºdo esperado contido dentro desta classe.
  * 
  * <pre>
  * &lt;complexType name="SignatureType">
@@ -62,7 +62,7 @@ public class SignatureType {
     protected String id;
 
     /**
-     * Obtém o valor da propriedade signedInfo.
+     * ObtÃ©m o valor da propriedade signedInfo.
      * 
      * @return
      *     possible object is
@@ -86,7 +86,7 @@ public class SignatureType {
     }
 
     /**
-     * Obtém o valor da propriedade signatureValue.
+     * ObtÃ©m o valor da propriedade signatureValue.
      * 
      * @return
      *     possible object is
@@ -110,7 +110,7 @@ public class SignatureType {
     }
 
     /**
-     * Obtém o valor da propriedade keyInfo.
+     * ObtÃ©m o valor da propriedade keyInfo.
      * 
      * @return
      *     possible object is
@@ -134,7 +134,7 @@ public class SignatureType {
     }
 
     /**
-     * Obtém o valor da propriedade id.
+     * ObtÃ©m o valor da propriedade id.
      * 
      * @return
      *     possible object is

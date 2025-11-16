@@ -1,8 +1,8 @@
 //
-// Este arquivo foi gerado pela Arquitetura JavaTM para Implementação de Referência (JAXB) de Bind XML, v2.2.8-b130911.1802 
+// Este arquivo foi gerado pela Arquitetura JavaTM para ImplementaÃ§Ã£o de ReferÃªncia (JAXB) de Bind XML, v2.2.8-b130911.1802 
 // Consulte <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
-// Todas as modificações neste arquivo serão perdidas após a recompilação do esquema de origem. 
-// Gerado em: 2025.02.14 às 05:54:12 PM BRT 
+// Todas as modificaÃ§Ãµes neste arquivo serÃ£o perdidas apÃ³s a recompilaÃ§Ã£o do esquema de origem. 
+// Gerado em: 2025.02.14 Ã s 05:54:12 PM BRT 
 //
 
 
@@ -23,7 +23,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  * 
  * <p>Classe Java de TRetEvento complex type.
  * 
- * <p>O seguinte fragmento do esquema especifica o conteúdo esperado contido dentro desta classe.
+ * <p>O seguinte fragmento do esquema especifica o conteÃºdo esperado contido dentro desta classe.
  * 
  * <pre>
  * &lt;complexType name="TRetEvento">
@@ -124,7 +124,7 @@ public class TRetEvento {
     protected String versao;
 
     /**
-     * Obtém o valor da propriedade infEvento.
+     * ObtÃ©m o valor da propriedade infEvento.
      * 
      * @return
      *     possible object is
@@ -148,7 +148,7 @@ public class TRetEvento {
     }
 
     /**
-     * Obtém o valor da propriedade signature.
+     * ObtÃ©m o valor da propriedade signature.
      * 
      * @return
      *     possible object is
@@ -172,7 +172,7 @@ public class TRetEvento {
     }
 
     /**
-     * Obtém o valor da propriedade versao.
+     * ObtÃ©m o valor da propriedade versao.
      * 
      * @return
      *     possible object is
@@ -199,7 +199,7 @@ public class TRetEvento {
     /**
      * <p>Classe Java de anonymous complex type.
      * 
-     * <p>O seguinte fragmento do esquema especifica o conteúdo esperado contido dentro desta classe.
+     * <p>O seguinte fragmento do esquema especifica o conteÃºdo esperado contido dentro desta classe.
      * 
      * <pre>
      * &lt;complexType>
@@ -329,7 +329,7 @@ public class TRetEvento {
         protected String id;
 
         /**
-         * Obtém o valor da propriedade tpAmb.
+         * ObtÃ©m o valor da propriedade tpAmb.
          * 
          * @return
          *     possible object is
@@ -353,7 +353,7 @@ public class TRetEvento {
         }
 
         /**
-         * Obtém o valor da propriedade verAplic.
+         * ObtÃ©m o valor da propriedade verAplic.
          * 
          * @return
          *     possible object is
@@ -377,7 +377,7 @@ public class TRetEvento {
         }
 
         /**
-         * Obtém o valor da propriedade cOrgao.
+         * ObtÃ©m o valor da propriedade cOrgao.
          * 
          * @return
          *     possible object is
@@ -401,7 +401,7 @@ public class TRetEvento {
         }
 
         /**
-         * Obtém o valor da propriedade cStat.
+         * ObtÃ©m o valor da propriedade cStat.
          * 
          * @return
          *     possible object is
@@ -425,7 +425,7 @@ public class TRetEvento {
         }
 
         /**
-         * Obtém o valor da propriedade xMotivo.
+         * ObtÃ©m o valor da propriedade xMotivo.
          * 
          * @return
          *     possible object is
@@ -449,7 +449,7 @@ public class TRetEvento {
         }
 
         /**
-         * Obtém o valor da propriedade chNFe.
+         * ObtÃ©m o valor da propriedade chNFe.
          * 
          * @return
          *     possible object is
@@ -473,7 +473,7 @@ public class TRetEvento {
         }
 
         /**
-         * Obtém o valor da propriedade tpEvento.
+         * ObtÃ©m o valor da propriedade tpEvento.
          * 
          * @return
          *     possible object is
@@ -497,7 +497,7 @@ public class TRetEvento {
         }
 
         /**
-         * Obtém o valor da propriedade xEvento.
+         * ObtÃ©m o valor da propriedade xEvento.
          * 
          * @return
          *     possible object is
@@ -521,7 +521,7 @@ public class TRetEvento {
         }
 
         /**
-         * Obtém o valor da propriedade nSeqEvento.
+         * ObtÃ©m o valor da propriedade nSeqEvento.
          * 
          * @return
          *     possible object is
@@ -545,7 +545,7 @@ public class TRetEvento {
         }
 
         /**
-         * Obtém o valor da propriedade cOrgaoAutor.
+         * ObtÃ©m o valor da propriedade cOrgaoAutor.
          * 
          * @return
          *     possible object is
@@ -569,7 +569,7 @@ public class TRetEvento {
         }
 
         /**
-         * Obtém o valor da propriedade cnpjDest.
+         * ObtÃ©m o valor da propriedade cnpjDest.
          * 
          * @return
          *     possible object is
@@ -593,7 +593,7 @@ public class TRetEvento {
         }
 
         /**
-         * Obtém o valor da propriedade cpfDest.
+         * ObtÃ©m o valor da propriedade cpfDest.
          * 
          * @return
          *     possible object is
@@ -617,7 +617,7 @@ public class TRetEvento {
         }
 
         /**
-         * Obtém o valor da propriedade emailDest.
+         * ObtÃ©m o valor da propriedade emailDest.
          * 
          * @return
          *     possible object is
@@ -641,7 +641,7 @@ public class TRetEvento {
         }
 
         /**
-         * Obtém o valor da propriedade dhRegEvento.
+         * ObtÃ©m o valor da propriedade dhRegEvento.
          * 
          * @return
          *     possible object is
@@ -665,7 +665,7 @@ public class TRetEvento {
         }
 
         /**
-         * Obtém o valor da propriedade nProt.
+         * ObtÃ©m o valor da propriedade nProt.
          * 
          * @return
          *     possible object is
@@ -689,7 +689,7 @@ public class TRetEvento {
         }
 
         /**
-         * Obtém o valor da propriedade id.
+         * ObtÃ©m o valor da propriedade id.
          * 
          * @return
          *     possible object is

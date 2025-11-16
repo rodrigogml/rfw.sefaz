@@ -1,8 +1,8 @@
 //
-// Este arquivo foi gerado pela Arquitetura JavaTM para Implementação de Referência (JAXB) de Bind XML, v2.2.8-b130911.1802
+// Este arquivo foi gerado pela Arquitetura JavaTM para ImplementaÃ§Ã£o de ReferÃªncia (JAXB) de Bind XML, v2.2.8-b130911.1802
 // Consulte <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a>
-// Todas as modificações neste arquivo serão perdidas após a recompilação do esquema de origem.
-// Gerado em: 2025.02.09 às 04:51:19 PM BRT
+// Todas as modificaÃ§Ãµes neste arquivo serÃ£o perdidas apÃ³s a recompilaÃ§Ã£o do esquema de origem.
+// Gerado em: 2025.02.09 Ã s 04:51:19 PM BRT
 //
 
 package xsdobjects.consCad200;
@@ -28,7 +28,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
  * Classe Java de TRetConsCad complex type.
  *
  * <p>
- * O seguinte fragmento do esquema especifica o conteúdo esperado contido dentro desta classe.
+ * O seguinte fragmento do esquema especifica o conteÃºdo esperado contido dentro desta classe.
  *
  * <pre>
  * &lt;complexType name="TRetConsCad">
@@ -164,7 +164,7 @@ public class TRetConsCad {
   protected String versao;
 
   /**
-   * Obtém o valor da propriedade infCons.
+   * ObtÃ©m o valor da propriedade infCons.
    * 
    * @return possible object is {@link TRetConsCad.InfCons }
    * 
@@ -184,7 +184,7 @@ public class TRetConsCad {
   }
 
   /**
-   * Obtém o valor da propriedade versao.
+   * ObtÃ©m o valor da propriedade versao.
    * 
    * @return possible object is {@link String }
    * 
@@ -208,7 +208,7 @@ public class TRetConsCad {
    * Classe Java de anonymous complex type.
    * 
    * <p>
-   * O seguinte fragmento do esquema especifica o conteúdo esperado contido dentro desta classe.
+   * O seguinte fragmento do esquema especifica o conteÃºdo esperado contido dentro desta classe.
    * 
    * <pre>
    * &lt;complexType>
@@ -357,7 +357,7 @@ public class TRetConsCad {
     protected List<TRetConsCad.InfCons.InfCad> infCad;
 
     /**
-     * Obtém o valor da propriedade verAplic.
+     * ObtÃ©m o valor da propriedade verAplic.
      * 
      * @return possible object is {@link String }
      * 
@@ -377,7 +377,7 @@ public class TRetConsCad {
     }
 
     /**
-     * Obtém o valor da propriedade cStat.
+     * ObtÃ©m o valor da propriedade cStat.
      * 
      * @return possible object is {@link String }
      * 
@@ -397,7 +397,7 @@ public class TRetConsCad {
     }
 
     /**
-     * Obtém o valor da propriedade xMotivo.
+     * ObtÃ©m o valor da propriedade xMotivo.
      * 
      * @return possible object is {@link String }
      * 
@@ -417,7 +417,7 @@ public class TRetConsCad {
     }
 
     /**
-     * Obtém o valor da propriedade uf.
+     * ObtÃ©m o valor da propriedade uf.
      * 
      * @return possible object is {@link TUfCons }
      * 
@@ -437,7 +437,7 @@ public class TRetConsCad {
     }
 
     /**
-     * Obtém o valor da propriedade ie.
+     * ObtÃ©m o valor da propriedade ie.
      * 
      * @return possible object is {@link String }
      * 
@@ -457,7 +457,7 @@ public class TRetConsCad {
     }
 
     /**
-     * Obtém o valor da propriedade cnpj.
+     * ObtÃ©m o valor da propriedade cnpj.
      * 
      * @return possible object is {@link String }
      * 
@@ -477,7 +477,7 @@ public class TRetConsCad {
     }
 
     /**
-     * Obtém o valor da propriedade cpf.
+     * ObtÃ©m o valor da propriedade cpf.
      * 
      * @return possible object is {@link String }
      * 
@@ -497,7 +497,7 @@ public class TRetConsCad {
     }
 
     /**
-     * Obtém o valor da propriedade dhCons.
+     * ObtÃ©m o valor da propriedade dhCons.
      * 
      * @return possible object is {@link XMLGregorianCalendar }
      * 
@@ -517,7 +517,7 @@ public class TRetConsCad {
     }
 
     /**
-     * Obtém o valor da propriedade cuf.
+     * ObtÃ©m o valor da propriedade cuf.
      * 
      * @return possible object is {@link String }
      * 
@@ -567,7 +567,7 @@ public class TRetConsCad {
      * Classe Java de anonymous complex type.
      * 
      * <p>
-     * O seguinte fragmento do esquema especifica o conteúdo esperado contido dentro desta classe.
+     * O seguinte fragmento do esquema especifica o conteÃºdo esperado contido dentro desta classe.
      * 
      * <pre>
      * &lt;complexType>
@@ -716,7 +716,7 @@ public class TRetConsCad {
       protected TEndereco ender;
 
       /**
-       * Obtém o valor da propriedade ie.
+       * ObtÃ©m o valor da propriedade ie.
        * 
        * @return possible object is {@link String }
        * 
@@ -736,7 +736,7 @@ public class TRetConsCad {
       }
 
       /**
-       * Obtém o valor da propriedade cnpj.
+       * ObtÃ©m o valor da propriedade cnpj.
        * 
        * @return possible object is {@link String }
        * 
@@ -756,7 +756,7 @@ public class TRetConsCad {
       }
 
       /**
-       * Obtém o valor da propriedade cpf.
+       * ObtÃ©m o valor da propriedade cpf.
        * 
        * @return possible object is {@link String }
        * 
@@ -776,7 +776,7 @@ public class TRetConsCad {
       }
 
       /**
-       * Obtém o valor da propriedade uf.
+       * ObtÃ©m o valor da propriedade uf.
        * 
        * @return possible object is {@link TUf }
        * 
@@ -796,7 +796,7 @@ public class TRetConsCad {
       }
 
       /**
-       * Obtém o valor da propriedade cSit.
+       * ObtÃ©m o valor da propriedade cSit.
        * 
        * @return possible object is {@link String }
        * 
@@ -816,7 +816,7 @@ public class TRetConsCad {
       }
 
       /**
-       * Obtém o valor da propriedade indCredNFe.
+       * ObtÃ©m o valor da propriedade indCredNFe.
        * 
        * @return possible object is {@link String }
        * 
@@ -836,7 +836,7 @@ public class TRetConsCad {
       }
 
       /**
-       * Obtém o valor da propriedade indCredCTe.
+       * ObtÃ©m o valor da propriedade indCredCTe.
        * 
        * @return possible object is {@link String }
        * 
@@ -856,7 +856,7 @@ public class TRetConsCad {
       }
 
       /**
-       * Obtém o valor da propriedade xNome.
+       * ObtÃ©m o valor da propriedade xNome.
        * 
        * @return possible object is {@link String }
        * 
@@ -876,7 +876,7 @@ public class TRetConsCad {
       }
 
       /**
-       * Obtém o valor da propriedade xFant.
+       * ObtÃ©m o valor da propriedade xFant.
        * 
        * @return possible object is {@link String }
        * 
@@ -896,7 +896,7 @@ public class TRetConsCad {
       }
 
       /**
-       * Obtém o valor da propriedade xRegApur.
+       * ObtÃ©m o valor da propriedade xRegApur.
        * 
        * @return possible object is {@link String }
        * 
@@ -916,7 +916,7 @@ public class TRetConsCad {
       }
 
       /**
-       * Obtém o valor da propriedade cnae.
+       * ObtÃ©m o valor da propriedade cnae.
        * 
        * @return possible object is {@link String }
        * 
@@ -936,7 +936,7 @@ public class TRetConsCad {
       }
 
       /**
-       * Obtém o valor da propriedade dIniAtiv.
+       * ObtÃ©m o valor da propriedade dIniAtiv.
        * 
        * @return possible object is {@link XMLGregorianCalendar }
        * 
@@ -956,7 +956,7 @@ public class TRetConsCad {
       }
 
       /**
-       * Obtém o valor da propriedade dUltSit.
+       * ObtÃ©m o valor da propriedade dUltSit.
        * 
        * @return possible object is {@link XMLGregorianCalendar }
        * 
@@ -976,7 +976,7 @@ public class TRetConsCad {
       }
 
       /**
-       * Obtém o valor da propriedade dBaixa.
+       * ObtÃ©m o valor da propriedade dBaixa.
        * 
        * @return possible object is {@link XMLGregorianCalendar }
        * 
@@ -996,7 +996,7 @@ public class TRetConsCad {
       }
 
       /**
-       * Obtém o valor da propriedade ieUnica.
+       * ObtÃ©m o valor da propriedade ieUnica.
        * 
        * @return possible object is {@link String }
        * 
@@ -1016,7 +1016,7 @@ public class TRetConsCad {
       }
 
       /**
-       * Obtém o valor da propriedade ieAtual.
+       * ObtÃ©m o valor da propriedade ieAtual.
        * 
        * @return possible object is {@link String }
        * 
@@ -1036,7 +1036,7 @@ public class TRetConsCad {
       }
 
       /**
-       * Obtém o valor da propriedade ender.
+       * ObtÃ©m o valor da propriedade ender.
        * 
        * @return possible object is {@link TEndereco }
        * 

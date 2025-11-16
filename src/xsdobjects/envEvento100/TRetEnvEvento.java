@@ -1,8 +1,8 @@
 //
-// Este arquivo foi gerado pela Arquitetura JavaTM para Implementação de Referência (JAXB) de Bind XML, v2.2.8-b130911.1802 
+// Este arquivo foi gerado pela Arquitetura JavaTM para ImplementaÃ§Ã£o de ReferÃªncia (JAXB) de Bind XML, v2.2.8-b130911.1802 
 // Consulte <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
-// Todas as modificações neste arquivo serão perdidas após a recompilação do esquema de origem. 
-// Gerado em: 2025.02.14 às 05:54:12 PM BRT 
+// Todas as modificaÃ§Ãµes neste arquivo serÃ£o perdidas apÃ³s a recompilaÃ§Ã£o do esquema de origem. 
+// Gerado em: 2025.02.14 Ã s 05:54:12 PM BRT 
 //
 
 
@@ -22,7 +22,7 @@ import javax.xml.bind.annotation.XmlType;
  * 
  * <p>Classe Java de TRetEnvEvento complex type.
  * 
- * <p>O seguinte fragmento do esquema especifica o conteúdo esperado contido dentro desta classe.
+ * <p>O seguinte fragmento do esquema especifica o conteÃºdo esperado contido dentro desta classe.
  * 
  * <pre>
  * &lt;complexType name="TRetEnvEvento">
@@ -81,7 +81,7 @@ public class TRetEnvEvento {
     protected String versao;
 
     /**
-     * Obtém o valor da propriedade idLote.
+     * ObtÃ©m o valor da propriedade idLote.
      * 
      * @return
      *     possible object is
@@ -105,7 +105,7 @@ public class TRetEnvEvento {
     }
 
     /**
-     * Obtém o valor da propriedade tpAmb.
+     * ObtÃ©m o valor da propriedade tpAmb.
      * 
      * @return
      *     possible object is
@@ -129,7 +129,7 @@ public class TRetEnvEvento {
     }
 
     /**
-     * Obtém o valor da propriedade verAplic.
+     * ObtÃ©m o valor da propriedade verAplic.
      * 
      * @return
      *     possible object is
@@ -153,7 +153,7 @@ public class TRetEnvEvento {
     }
 
     /**
-     * Obtém o valor da propriedade cOrgao.
+     * ObtÃ©m o valor da propriedade cOrgao.
      * 
      * @return
      *     possible object is
@@ -177,7 +177,7 @@ public class TRetEnvEvento {
     }
 
     /**
-     * Obtém o valor da propriedade cStat.
+     * ObtÃ©m o valor da propriedade cStat.
      * 
      * @return
      *     possible object is
@@ -201,7 +201,7 @@ public class TRetEnvEvento {
     }
 
     /**
-     * Obtém o valor da propriedade xMotivo.
+     * ObtÃ©m o valor da propriedade xMotivo.
      * 
      * @return
      *     possible object is
@@ -254,7 +254,7 @@ public class TRetEnvEvento {
     }
 
     /**
-     * Obtém o valor da propriedade versao.
+     * ObtÃ©m o valor da propriedade versao.
      * 
      * @return
      *     possible object is
