@@ -1,8 +1,8 @@
 //
-// Este arquivo foi gerado pela Arquitetura JavaTM para Implementação de Referência (JAXB) de Bind XML, v2.2.8-b130911.1802 
+// Este arquivo foi gerado pela Arquitetura JavaTM para ImplementaÃ§Ã£o de ReferÃªncia (JAXB) de Bind XML, v2.2.8-b130911.1802 
 // Consulte <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
-// Todas as modificações neste arquivo serão perdidas após a recompilação do esquema de origem. 
-// Gerado em: 2025.02.09 às 04:58:58 PM BRT 
+// Todas as modificaÃ§Ãµes neste arquivo serÃ£o perdidas apÃ³s a recompilaÃ§Ã£o do esquema de origem. 
+// Gerado em: 2025.02.09 Ã s 04:58:58 PM BRT 
 //
 
 
@@ -16,11 +16,11 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * Tipo Pedido de Consulta do Recido do Lote de Notas Fiscais Eletrônicas
+ * Tipo Pedido de Consulta do Recido do Lote de Notas Fiscais EletrÃ´nicas
  * 
  * <p>Classe Java de TConsReciNFe complex type.
  * 
- * <p>O seguinte fragmento do esquema especifica o conteúdo esperado contido dentro desta classe.
+ * <p>O seguinte fragmento do esquema especifica o conteÃºdo esperado contido dentro desta classe.
  * 
  * <pre>
  * &lt;complexType name="TConsReciNFe">
@@ -53,7 +53,7 @@ public class TConsReciNFe {
     protected String versao;
 
     /**
-     * Obtém o valor da propriedade tpAmb.
+     * ObtÃ©m o valor da propriedade tpAmb.
      * 
      * @return
      *     possible object is
@@ -77,7 +77,7 @@ public class TConsReciNFe {
     }
 
     /**
-     * Obtém o valor da propriedade nRec.
+     * ObtÃ©m o valor da propriedade nRec.
      * 
      * @return
      *     possible object is
@@ -101,7 +101,7 @@ public class TConsReciNFe {
     }
 
     /**
-     * Obtém o valor da propriedade versao.
+     * ObtÃ©m o valor da propriedade versao.
      * 
      * @return
      *     possible object is

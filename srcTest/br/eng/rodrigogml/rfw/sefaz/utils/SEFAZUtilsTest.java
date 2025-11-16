@@ -25,7 +25,7 @@ import xsdobjects.consReciNFe400.TNfeProc;
 public class SEFAZUtilsTest {
 
   /**
-   * Se n„o houver arquivos na pasta indicada pela propriedade de desenvolvimento, o teste n„o testa nenhum arquivo. PorÈm a pasta precisa existir e ser v·lida para que o teste funciona. Foi mantido desta forma para forÁar que ao menos o desenvolvedor tenha ciÍncia de que o teste ser· anulado se ele criar a pasta e mantivÈ-la vazia.
+   * Se n√£o houver arquivos na pasta indicada pela propriedade de desenvolvimento, o teste n√£o testa nenhum arquivo. Por√©m a pasta precisa existir e ser v√°lida para que o teste funciona. Foi mantido desta forma para for√ßar que ao menos o desenvolvedor tenha ci√™ncia de que o teste ser√° anulado se ele criar a pasta e mantiv√©-la vazia.
    *
    * @throws Exception
    */
@@ -39,7 +39,7 @@ public class SEFAZUtilsTest {
     for (int i = (int) (Math.random() * files.length * 0.1); i < files.length; i += (Math.random() * files.length * 0.1)) {
       File file = files[i];
       String xml = RUFile.readFileContentToString(file);
-      System.out.println("Testando Arquivo (Incremento AleatÛrio) [" + i + "/" + files.length + "]: " + xml);
+      System.out.println("Testando Arquivo (Incremento Aleat√≥rio) [" + i + "/" + files.length + "]: " + xml);
       TNfeProc bean = SEFAZUtils.readXMLToObject(xml, TNfeProc.class);
       assertNotNull(bean);
       assertNotNull(bean.getNFe());
