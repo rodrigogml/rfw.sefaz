@@ -120,48 +120,6 @@ public class SEFAZ {
    */
   private final CloseableHttpClient httpClientCustom;
 
-  // /**
-  // * Código de Segurança do Contribuinte (CSC).
-  // *
-  // * <p>
-  // * O CSC é um código secreto, gerado e fornecido pela SEFAZ do estado para o contribuinte emissor de NFC-e. Ele é utilizado exclusivamente para a geração do QR-Code da NFC-e, compondo o cálculo do "cHashQRCode".
-  // *
-  // * <p>
-  // * Este valor NÃO pode ser inventado, nem reutilizado entre ambientes. A SEFAZ fornece dois conjuntos distintos:
-  // * <ul>
-  // * <li>Um CSC válido para o ambiente de **Homologação**</li>
-  // * <li>Outro CSC distinto para o ambiente de **Produção**</li>
-  // * </ul>
-  // *
-  // * <p>
-  // * Portanto, o CSC configurado nesta classe deve sempre corresponder exatamente ao ambiente em que a NFC-e está sendo emitida, caso contrário a SEFAZ rejeitará a nota (erro de QR-Code inválido).
-  // *
-  // * <p>
-  // * O contribuinte obtém o CSC acessando o portal da SEFAZ do estado, entrando no menu de gerenciamento de CSC e gerando/ativando um código vinculado ao seu CNPJ.
-  // */
-  // private String csc;
-
-  // /**
-  // * Identificador do Código de Segurança do Contribuinte (ID do CSC).
-  // *
-  // * <p>
-  // * Além do próprio CSC, a SEFAZ fornece um identificador numérico (geralmente com 6 dírafos) associado ao CSC ativo. Esse identificador também é obrigatório na composição do QR-Code da NFC-e, sendo informado no parâmetro <code>cIdToken</code>.
-  // *
-  // * <p>
-  // * Da mesma forma que o CSC, o ID do CSC é específico para cada ambiente:
-  // * <ul>
-  // * <li>Um IdCSC válido para **Homologação**</li>
-  // * <li>Outro IdCSC distinto para **Produção**</li>
-  // * </ul>
-  // *
-  // * <p>
-  // * O valor informado aqui deve estar sempre sincronizado com o CSC utilizado e deve corresponder exatamente ao ambiente configurado. Se o IdCSC utilizado não for compatível com o CSC do ambiente, o QR-Code gerado será rejeitado pela SEFAZ.
-  // *
-  // * <p>
-  // * O contribuinte obtém este ID no mesmo local onde obtém o CSC, no portal da SEFAZ do estado.
-  // */
-  // private Integer cscId;
-
   /**
    * Instancia o objeto para comunicação com o WS da SEFAZ.<br>
    * Carrega o trustCert inserido na distribuição do módulo RFW.SEFAZ, a depender da versão pode conter certificados vencidos e causar problemas de comunicação.<br>
