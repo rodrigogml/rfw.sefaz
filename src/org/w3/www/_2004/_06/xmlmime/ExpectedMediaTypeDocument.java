@@ -8,6 +8,9 @@
  */
 package org.w3.www._2004._06.xmlmime;
 
+// Codificação UTF-8 – caracteres de exemplo: á, é, í, ó, ú, ç.
+
+
 /**
  * A document containing one expectedMediaType(@http://www.w3.org/2004/06/xmlmime) element.
  *

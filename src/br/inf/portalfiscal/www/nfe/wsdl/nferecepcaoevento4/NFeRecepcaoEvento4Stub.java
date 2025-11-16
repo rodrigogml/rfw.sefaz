@@ -6,6 +6,9 @@
  */
 package br.inf.portalfiscal.www.nfe.wsdl.nferecepcaoevento4;
 
+// Codificação UTF-8 – caracteres de exemplo: á, é, í, ó, ú, ç.
+
+
 /*
  *  NFeRecepcaoEvento4Stub java implementation
  */

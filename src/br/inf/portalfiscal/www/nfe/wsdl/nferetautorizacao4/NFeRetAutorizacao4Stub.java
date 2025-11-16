@@ -6,6 +6,9 @@
  */
 package br.inf.portalfiscal.www.nfe.wsdl.nferetautorizacao4;
 
+// Codificação UTF-8 – caracteres de exemplo: á, é, í, ó, ú, ç.
+
+
 /*
  *  NFeRetAutorizacao4Stub java implementation
  */

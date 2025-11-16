@@ -8,6 +8,9 @@
  */
 package br.inf.portalfiscal.www.nfe.wsdl.nfeconsultaprotocolo4;
 
+// Codificação UTF-8 – caracteres de exemplo: á, é, í, ó, ú, ç.
+
+
 
 /**
  * A document containing one nfeResultMsg(@http://www.portalfiscal.inf.br/nfe/wsdl/NFeConsultaProtocolo4) element.
