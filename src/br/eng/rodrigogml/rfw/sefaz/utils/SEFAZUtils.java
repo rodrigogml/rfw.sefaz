@@ -119,7 +119,7 @@ public class SEFAZUtils {
   public static TConsReciNFe mountNFeRetAutorizacaoV400MessageFromNRec(SEFAZ_tpAmb env, String nRec) throws RFWException {
     TConsReciNFe root = new TConsReciNFe();
     root.setVersao("4.00");
-    root.setTpAmb(env.getXMLData());
+    root.setTpAmb(env.getXmlData());
     root.setNRec(nRec);
     return root;
   }
@@ -135,8 +135,8 @@ public class SEFAZUtils {
   public static TConsStatServ mountNfeStatusServicoNFV400Message(SEFAZ_tpAmb env, SEFAZ_WebServices ws) throws RFWException {
     TConsStatServ root = new TConsStatServ();
     root.setVersao("4.00");
-    root.setTpAmb(env.getXMLData());
-    root.setCUF(ws.getIBGECode());
+    root.setTpAmb(env.getXmlData());
+    root.setCUF(ws.getXmlData());
     root.setXServ("STATUS");
     return root;
   }
@@ -319,7 +319,7 @@ public class SEFAZUtils {
     final StringBuilder buff = new StringBuilder();
     buff.append("chNFe=").append(chave);
     buff.append("&nVersao=100");
-    buff.append("&tpAmb=").append(env.getXMLData());
+    buff.append("&tpAmb=").append(env.getXmlData());
     if (destCPFCNPJ != null) buff.append("&cDest=").append(destCPFCNPJ);
     buff.append("&dhEmi=").append(RUString.toHex(dhEmi));
     buff.append("&vNF=").append(vNF.toString());

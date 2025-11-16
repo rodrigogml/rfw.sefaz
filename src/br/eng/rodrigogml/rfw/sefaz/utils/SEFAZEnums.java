@@ -5,7 +5,7 @@ package br.eng.rodrigogml.rfw.sefaz.utils;
  * <p>
  * Todas as enums expõem:
  * <ul>
- * <li>{@link #getXMLData()} — valor exato gravado/lido no XML;</li>
+ * <li>{@link #getXmlData()} — valor exato gravado/lido no XML;</li>
  * <li>{@link #isDeprecated()} — indica obsolescência;</li>
  * <li>{@code valueOfXMLData(String)} — parser seguro do valor do XML.</li>
  * </ul>
@@ -22,9 +22,67 @@ public class SEFAZEnums {
   }
 
   /**
+   * Contrato comum de todas as enums SEFAZ para facilitar a serializacao entre VO e XML.
+   *
+   * @param <T> tipo concreto da enumeracao.
+   */
+  public interface SEFAZEnum<T extends Enum<T> & SEFAZEnum<T>> {
+
+    /**
+     * Retorna o valor textual exatamente como deve aparecer no XML.
+     *
+     * @return representacao textual oficial do campo.
+     */
+    String getXmlData();
+
+    /**
+     * Converte o valor textual proveniente do XML na instancia concreta da enum.
+     *
+     * @param xmlData valor obtido do XML.
+     * @return enum correspondente ao texto informado.
+     */
+    @SuppressWarnings("unchecked")
+    default T valueOfXMLData(String xmlData) {
+      Class<T> enumType = (Class<T>) ((Enum<?>) this).getDeclaringClass();
+      return resolveEnumValue(xmlData, enumType);
+    }
+  }
+
+  /**
+   * Parser generico que permite resolver o valor de qualquer enum que implemente {@link SEFAZEnum} a partir do texto XML.
+   *
+   * @param <E> tipo concreto da enumeracao.
+   * @param enumType classe da enum.
+   * @param xmlValue valor textual proveniente do XML.
+   * @return enum correspondente ao valor informado.
+   */
+  public static <E extends Enum<E> & SEFAZEnum<E>> E valueOfXMLData(Class<E> enumType, String xmlValue) {
+    return resolveEnumValue(xmlValue, enumType);
+  }
+
+  private static <E extends Enum<E> & SEFAZEnum<E>> E resolveEnumValue(String xmlValue, Class<E> enumType) {
+    if (enumType == null) {
+      throw new IllegalArgumentException("O tipo da enumeracao SEFAZ nao pode ser nulo.");
+    }
+    if (xmlValue == null) {
+      throw new IllegalArgumentException("O valor XML para '" + enumType.getSimpleName() + "' nao pode ser nulo.");
+    }
+    final String value = xmlValue.trim();
+    if (value.isEmpty()) {
+      throw new IllegalArgumentException("O valor XML para '" + enumType.getSimpleName() + "' nao pode ser vazio.");
+    }
+    for (E constant : enumType.getEnumConstants()) {
+      if (constant.getXmlData().equals(value)) {
+        return constant;
+      }
+    }
+    throw new IllegalArgumentException("Valor XML desconhecido para '" + enumType.getSimpleName() + "': '" + xmlValue + "'.");
+  }
+
+  /**
    * Enumeration com as versões da NFe suportadas pelo módulo.
    */
-  public enum SEFAZ_versao {
+  public enum SEFAZ_versao implements SEFAZEnum<SEFAZ_versao> {
     VERSAO_4_00("4.00", false);
 
     /**
@@ -46,7 +104,8 @@ public class SEFAZEnums {
      *
      * @return String com o valor XML correspondente.
      */
-    public String getXMLData() {
+    @Override
+    public String getXmlData() {
       return this.xmlData;
     }
 
@@ -59,28 +118,6 @@ public class SEFAZEnums {
       return this.deprecated;
     }
 
-    /**
-     * Interpreta o valor recebido do XML (campo versao) e retorna a enumeration correspondente.
-     *
-     * @param xmlValue Valor vindo do XML (por exemplo: "4.00").
-     * @return Enumeration correspondente ao valor informado.
-     * @throws IllegalArgumentException Caso o valor seja nulo/vazio ou não exista mapeamento.
-     */
-    public static SEFAZ_versao valueOfXMLData(String xmlValue) {
-      if (xmlValue == null) {
-        throw new IllegalArgumentException("O valor de 'versao' no XML não pode ser nulo.");
-      }
-      final String v = xmlValue.trim();
-      if (v.isEmpty()) {
-        throw new IllegalArgumentException("O valor de 'versao' no XML não pode ser vazio.");
-      }
-      for (SEFAZ_versao e : SEFAZ_versao.values()) {
-        if (e.xmlData.equals(v)) {
-          return e;
-        }
-      }
-      throw new IllegalArgumentException("Valor XML desconhecido para 'versao': '" + xmlValue + "'.");
-    }
   }
 
   /**
@@ -99,7 +136,7 @@ public class SEFAZEnums {
    * <li>{@code 2D} = Cupom Fiscal emitido por ECF</li>
    * </ul>
    */
-  public enum SEFAZ_mod {
+  public enum SEFAZ_mod implements SEFAZEnum<SEFAZ_mod> {
 
     /** NF-e ({@code 55}). */
     NFE_MODELO_55("55", false),
@@ -133,29 +170,25 @@ public class SEFAZEnums {
       this.deprecated = deprecated;
     }
 
-    public String getXMLData() {
+    /**
+     * Gets the XML data.
+     *
+     * @return the XML data
+     */
+    @Override
+    public String getXmlData() {
       return this.xmlData;
     }
 
+    /**
+     * Checks if is deprecated.
+     *
+     * @return true, if is deprecated
+     */
     public boolean isDeprecated() {
       return this.deprecated;
     }
 
-    public static SEFAZ_mod valueOfXMLData(String xmlValue) {
-      if (xmlValue == null) {
-        throw new IllegalArgumentException("O valor de 'mod' não pode ser nulo.");
-      }
-      final String v = xmlValue.trim();
-      if (v.isEmpty()) {
-        throw new IllegalArgumentException("O valor de 'mod' não pode ser vazio.");
-      }
-      for (SEFAZ_mod e : values()) {
-        if (e.xmlData.equals(v)) {
-          return e;
-        }
-      }
-      throw new IllegalArgumentException("Modelo de documento fiscal desconhecido para 'mod': '" + xmlValue + "'.");
-    }
   }
 
   /**
@@ -169,7 +202,7 @@ public class SEFAZEnums {
    * <li>{@code 3} = Operação com exterior</li>
    * </ul>
    */
-  public enum SEFAZ_idDest {
+  public enum SEFAZ_idDest implements SEFAZEnum<SEFAZ_idDest> {
 
     /** Operação interna ({@code 1}). */
     OPERACAO_INTERNA("1", false),
@@ -188,38 +221,25 @@ public class SEFAZEnums {
       this.deprecated = deprecated;
     }
 
-    /** Retorna o valor esperado no XML para o campo {@code idDest}. */
-    public String getXMLData() {
+    /**
+     * Retorna o valor esperado no XML para o campo {@code idDest}.
+     *
+     * @return the XML data
+     */
+    @Override
+    public String getXmlData() {
       return this.xmlData;
     }
 
-    /** Indica se o código está obsoleto/descontinuado na especificação. */
+    /**
+     * Indica se o código está obsoleto/descontinuado na especificação.
+     *
+     * @return true, if is deprecated
+     */
     public boolean isDeprecated() {
       return this.deprecated;
     }
 
-    /**
-     * Converte o valor textual do XML para a constante correspondente.
-     *
-     * @param xmlValue valor do campo {@code idDest} no XML
-     * @return constante correspondente
-     * @throws IllegalArgumentException se o valor for nulo, vazio ou não mapeado
-     */
-    public static SEFAZ_idDest valueOfXMLData(String xmlValue) {
-      if (xmlValue == null) {
-        throw new IllegalArgumentException("O valor de 'idDest' não pode ser nulo.");
-      }
-      final String v = xmlValue.trim();
-      if (v.isEmpty()) {
-        throw new IllegalArgumentException("O valor de 'idDest' não pode ser vazio.");
-      }
-      for (SEFAZ_idDest e : values()) {
-        if (e.xmlData.equals(v)) {
-          return e;
-        }
-      }
-      throw new IllegalArgumentException("Identificador de destino da operação desconhecido para 'idDest': '" + xmlValue + "'.");
-    }
   }
 
   /**
@@ -232,7 +252,7 @@ public class SEFAZEnums {
    * <li>{@code 1} = Saída</li>
    * </ul>
    */
-  public enum SEFAZ_tpNF {
+  public enum SEFAZ_tpNF implements SEFAZEnum<SEFAZ_tpNF> {
 
     /** Operação de entrada ({@code 0}). */
     ENTRADA("0", false),
@@ -248,38 +268,25 @@ public class SEFAZEnums {
       this.deprecated = deprecated;
     }
 
-    /** Retorna o valor esperado no XML para o campo {@code tpNF}. */
-    public String getXMLData() {
+    /**
+     * Retorna o valor esperado no XML para o campo {@code tpNF}.
+     *
+     * @return the XML data
+     */
+    @Override
+    public String getXmlData() {
       return this.xmlData;
     }
 
-    /** Indica se o código está obsoleto/descontinuado na especificação. */
+    /**
+     * Indica se o código está obsoleto/descontinuado na especificação.
+     *
+     * @return true, if is deprecated
+     */
     public boolean isDeprecated() {
       return this.deprecated;
     }
 
-    /**
-     * Converte o valor textual do XML para a constante correspondente.
-     *
-     * @param xmlValue valor do campo {@code tpNF} no XML
-     * @return constante correspondente
-     * @throws IllegalArgumentException se o valor for nulo, vazio ou não mapeado
-     */
-    public static SEFAZ_tpNF valueOfXMLData(String xmlValue) {
-      if (xmlValue == null) {
-        throw new IllegalArgumentException("O valor de 'tpNF' não pode ser nulo.");
-      }
-      final String v = xmlValue.trim();
-      if (v.isEmpty()) {
-        throw new IllegalArgumentException("O valor de 'tpNF' não pode ser vazio.");
-      }
-      for (SEFAZ_tpNF e : values()) {
-        if (e.xmlData.equals(v)) {
-          return e;
-        }
-      }
-      throw new IllegalArgumentException("Tipo de operação desconhecido para 'tpNF': '" + xmlValue + "'.");
-    }
   }
 
   /**
@@ -296,7 +303,7 @@ public class SEFAZEnums {
    * <li>{@code 5} = DANFE NFC-e mensagem eletrônica</li>
    * </ul>
    */
-  public enum SEFAZ_tpImp {
+  public enum SEFAZ_tpImp implements SEFAZEnum<SEFAZ_tpImp> {
 
     /** Sem geração de DANFE ({@code 0}). */
     SEM_DANFE("0", false),
@@ -324,38 +331,25 @@ public class SEFAZEnums {
       this.deprecated = deprecated;
     }
 
-    /** Retorna o valor esperado no XML para o campo {@code tpImp}. */
-    public String getXMLData() {
+    /**
+     * Retorna o valor esperado no XML para o campo {@code tpImp}.
+     *
+     * @return the XML data
+     */
+    @Override
+    public String getXmlData() {
       return this.xmlData;
     }
 
-    /** Indica se o código está obsoleto/descontinuado na especificação. */
+    /**
+     * Indica se o código está obsoleto/descontinuado na especificação.
+     *
+     * @return true, if is deprecated
+     */
     public boolean isDeprecated() {
       return this.deprecated;
     }
 
-    /**
-     * Converte o valor textual do XML para a constante correspondente.
-     *
-     * @param xmlValue valor do campo {@code tpImp} no XML
-     * @return constante correspondente
-     * @throws IllegalArgumentException se o valor for nulo, vazio ou não mapeado
-     */
-    public static SEFAZ_tpImp valueOfXMLData(String xmlValue) {
-      if (xmlValue == null) {
-        throw new IllegalArgumentException("O valor de 'tpImp' não pode ser nulo.");
-      }
-      final String v = xmlValue.trim();
-      if (v.isEmpty()) {
-        throw new IllegalArgumentException("O valor de 'tpImp' não pode ser vazio.");
-      }
-      for (SEFAZ_tpImp e : values()) {
-        if (e.xmlData.equals(v)) {
-          return e;
-        }
-      }
-      throw new IllegalArgumentException("Formato de impressão de DANFE desconhecido para 'tpImp': '" + xmlValue + "'.");
-    }
   }
 
   /**
@@ -374,7 +368,7 @@ public class SEFAZEnums {
    * <li>{@code 9} = Contingência off-line NFC-e</li>
    * </ul>
    */
-  public enum SEFAZ_tpEmis {
+  public enum SEFAZ_tpEmis implements SEFAZEnum<SEFAZ_tpEmis> {
 
     /** Emissão normal da NF-e ({@code 1}). */
     EMISSAO_NORMAL("1", false),
@@ -408,38 +402,25 @@ public class SEFAZEnums {
       this.deprecated = deprecated;
     }
 
-    /** Retorna o valor esperado no XML para o campo {@code tpEmis}. */
-    public String getXMLData() {
+    /**
+     * Retorna o valor esperado no XML para o campo {@code tpEmis}.
+     *
+     * @return the XML data
+     */
+    @Override
+    public String getXmlData() {
       return this.xmlData;
     }
 
-    /** Indica se o código está obsoleto/descontinuado na especificação. */
+    /**
+     * Indica se o código está obsoleto/descontinuado na especificação.
+     *
+     * @return true, if is deprecated
+     */
     public boolean isDeprecated() {
       return this.deprecated;
     }
 
-    /**
-     * Converte o valor textual do XML para a constante correspondente.
-     *
-     * @param xmlValue valor do campo {@code tpEmis} no XML
-     * @return constante correspondente
-     * @throws IllegalArgumentException se o valor for nulo, vazio ou não mapeado
-     */
-    public static SEFAZ_tpEmis valueOfXMLData(String xmlValue) {
-      if (xmlValue == null) {
-        throw new IllegalArgumentException("O valor de 'tpEmis' não pode ser nulo.");
-      }
-      final String v = xmlValue.trim();
-      if (v.isEmpty()) {
-        throw new IllegalArgumentException("O valor de 'tpEmis' não pode ser vazio.");
-      }
-      for (SEFAZ_tpEmis e : values()) {
-        if (e.xmlData.equals(v)) {
-          return e;
-        }
-      }
-      throw new IllegalArgumentException("Tipo de emissão desconhecido para 'tpEmis': '" + xmlValue + "'.");
-    }
   }
 
   /**
@@ -452,7 +433,7 @@ public class SEFAZEnums {
    * <li>{@code 2} = Homologação</li>
    * </ul>
    */
-  public enum SEFAZ_tpAmb {
+  public enum SEFAZ_tpAmb implements SEFAZEnum<SEFAZ_tpAmb> {
 
     /** Ambiente de produção ({@code 1}). */
     PRODUCAO("1", false),
@@ -468,38 +449,25 @@ public class SEFAZEnums {
       this.deprecated = deprecated;
     }
 
-    /** Retorna o valor esperado no XML para o campo {@code tpAmb}. */
-    public String getXMLData() {
+    /**
+     * Retorna o valor esperado no XML para o campo {@code tpAmb}.
+     *
+     * @return the XML data
+     */
+    @Override
+    public String getXmlData() {
       return this.xmlData;
     }
 
-    /** Indica se o código está obsoleto/descontinuado na especificação. */
+    /**
+     * Indica se o código está obsoleto/descontinuado na especificação.
+     *
+     * @return true, if is deprecated
+     */
     public boolean isDeprecated() {
       return this.deprecated;
     }
 
-    /**
-     * Converte o valor textual do XML para a constante correspondente.
-     *
-     * @param xmlValue valor do campo {@code tpAmb} no XML
-     * @return constante correspondente
-     * @throws IllegalArgumentException se o valor for nulo, vazio ou não mapeado
-     */
-    public static SEFAZ_tpAmb valueOfXMLData(String xmlValue) {
-      if (xmlValue == null) {
-        throw new IllegalArgumentException("O valor de 'tpAmb' não pode ser nulo.");
-      }
-      final String v = xmlValue.trim();
-      if (v.isEmpty()) {
-        throw new IllegalArgumentException("O valor de 'tpAmb' não pode ser vazio.");
-      }
-      for (SEFAZ_tpAmb e : values()) {
-        if (e.xmlData.equals(v)) {
-          return e;
-        }
-      }
-      throw new IllegalArgumentException("Ambiente de autorização desconhecido para 'tpAmb': '" + xmlValue + "'.");
-    }
   }
 
   /**
@@ -514,7 +482,7 @@ public class SEFAZEnums {
    * <li>{@code 4} = Devolução de mercadoria</li>
    * </ul>
    */
-  public enum SEFAZ_finNFe {
+  public enum SEFAZ_finNFe implements SEFAZEnum<SEFAZ_finNFe> {
 
     /** NF-e normal ({@code 1}). */
     NFE_NORMAL("1", false),
@@ -536,38 +504,25 @@ public class SEFAZEnums {
       this.deprecated = deprecated;
     }
 
-    /** Retorna o valor esperado no XML para o campo {@code finNFe}. */
-    public String getXMLData() {
+    /**
+     * Retorna o valor esperado no XML para o campo {@code finNFe}.
+     *
+     * @return the XML data
+     */
+    @Override
+    public String getXmlData() {
       return this.xmlData;
     }
 
-    /** Indica se o código está obsoleto/descontinuado na especificação. */
+    /**
+     * Indica se o código está obsoleto/descontinuado na especificação.
+     *
+     * @return true, if is deprecated
+     */
     public boolean isDeprecated() {
       return this.deprecated;
     }
 
-    /**
-     * Converte o valor textual do XML para a constante correspondente.
-     *
-     * @param xmlValue valor do campo {@code finNFe} no XML
-     * @return constante correspondente
-     * @throws IllegalArgumentException se o valor for nulo, vazio ou não mapeado
-     */
-    public static SEFAZ_finNFe valueOfXMLData(String xmlValue) {
-      if (xmlValue == null) {
-        throw new IllegalArgumentException("O valor de 'finNFe' não pode ser nulo.");
-      }
-      final String v = xmlValue.trim();
-      if (v.isEmpty()) {
-        throw new IllegalArgumentException("O valor de 'finNFe' não pode ser vazio.");
-      }
-      for (SEFAZ_finNFe e : values()) {
-        if (e.xmlData.equals(v)) {
-          return e;
-        }
-      }
-      throw new IllegalArgumentException("Finalidade de emissão desconhecida para 'finNFe': '" + xmlValue + "'.");
-    }
   }
 
   /**
@@ -580,7 +535,7 @@ public class SEFAZEnums {
    * <li>{@code 1} = Consumidor final</li>
    * </ul>
    */
-  public enum SEFAZ_indFinal {
+  public enum SEFAZ_indFinal implements SEFAZEnum<SEFAZ_indFinal> {
 
     /** Operação normal, não direcionada a consumidor final ({@code 0}). */
     OPERACAO_NORMAL("0", false),
@@ -596,38 +551,25 @@ public class SEFAZEnums {
       this.deprecated = deprecated;
     }
 
-    /** Retorna o valor esperado no XML para o campo {@code indFinal}. */
-    public String getXMLData() {
+    /**
+     * Retorna o valor esperado no XML para o campo {@code indFinal}.
+     *
+     * @return the XML data
+     */
+    @Override
+    public String getXmlData() {
       return this.xmlData;
     }
 
-    /** Indica se o código está obsoleto/descontinuado na especificação. */
+    /**
+     * Indica se o código está obsoleto/descontinuado na especificação.
+     *
+     * @return true, if is deprecated
+     */
     public boolean isDeprecated() {
       return this.deprecated;
     }
 
-    /**
-     * Converte o valor textual do XML para a constante correspondente.
-     *
-     * @param xmlValue valor do campo {@code indFinal} no XML
-     * @return constante correspondente
-     * @throws IllegalArgumentException se o valor for nulo, vazio ou não mapeado
-     */
-    public static SEFAZ_indFinal valueOfXMLData(String xmlValue) {
-      if (xmlValue == null) {
-        throw new IllegalArgumentException("O valor de 'indFinal' não pode ser nulo.");
-      }
-      final String v = xmlValue.trim();
-      if (v.isEmpty()) {
-        throw new IllegalArgumentException("O valor de 'indFinal' não pode ser vazio.");
-      }
-      for (SEFAZ_indFinal e : values()) {
-        if (e.xmlData.equals(v)) {
-          return e;
-        }
-      }
-      throw new IllegalArgumentException("Indicador de consumidor final desconhecido para 'indFinal': '" + xmlValue + "'.");
-    }
   }
 
   /**
@@ -645,7 +587,7 @@ public class SEFAZEnums {
    * <li>{@code 9} = Operação não presencial, outros</li>
    * </ul>
    */
-  public enum SEFAZ_indPres {
+  public enum SEFAZ_indPres implements SEFAZEnum<SEFAZ_indPres> {
 
     /** Situação em que o indicador de presença não se aplica ({@code 0}). */
     NAO_SE_APLICA("0", false),
@@ -676,38 +618,25 @@ public class SEFAZEnums {
       this.deprecated = deprecated;
     }
 
-    /** Retorna o valor esperado no XML para o campo {@code indPres}. */
-    public String getXMLData() {
+    /**
+     * Retorna o valor esperado no XML para o campo {@code indPres}.
+     *
+     * @return the XML data
+     */
+    @Override
+    public String getXmlData() {
       return this.xmlData;
     }
 
-    /** Indica se o código está obsoleto/descontinuado na especificação. */
+    /**
+     * Indica se o código está obsoleto/descontinuado na especificação.
+     *
+     * @return true, if is deprecated
+     */
     public boolean isDeprecated() {
       return this.deprecated;
     }
 
-    /**
-     * Converte o valor textual do XML para a constante correspondente.
-     *
-     * @param xmlValue valor do campo {@code indPres} no XML
-     * @return constante correspondente
-     * @throws IllegalArgumentException se o valor for nulo, vazio ou não mapeado
-     */
-    public static SEFAZ_indPres valueOfXMLData(String xmlValue) {
-      if (xmlValue == null) {
-        throw new IllegalArgumentException("O valor de 'indPres' não pode ser nulo.");
-      }
-      final String v = xmlValue.trim();
-      if (v.isEmpty()) {
-        throw new IllegalArgumentException("O valor de 'indPres' não pode ser vazio.");
-      }
-      for (SEFAZ_indPres e : values()) {
-        if (e.xmlData.equals(v)) {
-          return e;
-        }
-      }
-      throw new IllegalArgumentException("Indicador de presença desconhecido para 'indPres': '" + xmlValue + "'.");
-    }
   }
 
   /**
@@ -720,7 +649,7 @@ public class SEFAZEnums {
    * <li>{@code 1} = Operação com plataforma de terceiros</li>
    * </ul>
    */
-  public enum SEFAZ_indIntermed {
+  public enum SEFAZ_indIntermed implements SEFAZEnum<SEFAZ_indIntermed> {
 
     /** Operação realizada sem intermediador ou marketplace ({@code 0}). */
     SEM_INTERMEDIADOR("0", false),
@@ -736,38 +665,25 @@ public class SEFAZEnums {
       this.deprecated = deprecated;
     }
 
-    /** Retorna o valor esperado no XML para o campo {@code indIntermed}. */
-    public String getXMLData() {
+    /**
+     * Retorna o valor esperado no XML para o campo {@code indIntermed}.
+     *
+     * @return the XML data
+     */
+    @Override
+    public String getXmlData() {
       return this.xmlData;
     }
 
-    /** Indica se o código está obsoleto/descontinuado na especificação. */
+    /**
+     * Indica se o código está obsoleto/descontinuado na especificação.
+     *
+     * @return true, if is deprecated
+     */
     public boolean isDeprecated() {
       return this.deprecated;
     }
 
-    /**
-     * Converte o valor textual do XML para a constante correspondente.
-     *
-     * @param xmlValue valor do campo {@code indIntermed} no XML
-     * @return constante correspondente
-     * @throws IllegalArgumentException se o valor for nulo, vazio ou não mapeado
-     */
-    public static SEFAZ_indIntermed valueOfXMLData(String xmlValue) {
-      if (xmlValue == null) {
-        throw new IllegalArgumentException("O valor de 'indIntermed' não pode ser nulo.");
-      }
-      final String v = xmlValue.trim();
-      if (v.isEmpty()) {
-        throw new IllegalArgumentException("O valor de 'indIntermed' não pode ser vazio.");
-      }
-      for (SEFAZ_indIntermed e : values()) {
-        if (e.xmlData.equals(v)) {
-          return e;
-        }
-      }
-      throw new IllegalArgumentException("Indicador de intermediador desconhecido para 'indIntermed': '" + xmlValue + "'.");
-    }
   }
 
   /**
@@ -782,7 +698,7 @@ public class SEFAZEnums {
    * <li>{@code 3} = Emissão pelo aplicativo do Fisco</li>
    * </ul>
    */
-  public enum SEFAZ_procEmi {
+  public enum SEFAZ_procEmi implements SEFAZEnum<SEFAZ_procEmi> {
 
     /** Emissão da NF-e diretamente pelo contribuinte ({@code 0}). */
     EMISSAO_CONTRIBUINTE("0", false),
@@ -804,38 +720,25 @@ public class SEFAZEnums {
       this.deprecated = deprecated;
     }
 
-    /** Retorna o valor esperado no XML para o campo {@code procEmi}. */
-    public String getXMLData() {
+    /**
+     * Retorna o valor esperado no XML para o campo {@code procEmi}.
+     *
+     * @return the XML data
+     */
+    @Override
+    public String getXmlData() {
       return this.xmlData;
     }
 
-    /** Indica se o código está obsoleto/descontinuado na especificação. */
+    /**
+     * Indica se o código está obsoleto/descontinuado na especificação.
+     *
+     * @return true, if is deprecated
+     */
     public boolean isDeprecated() {
       return this.deprecated;
     }
 
-    /**
-     * Converte o valor textual do XML para a constante correspondente.
-     *
-     * @param xmlValue valor do campo {@code procEmi} no XML
-     * @return constante correspondente
-     * @throws IllegalArgumentException se o valor for nulo, vazio ou não mapeado
-     */
-    public static SEFAZ_procEmi valueOfXMLData(String xmlValue) {
-      if (xmlValue == null) {
-        throw new IllegalArgumentException("O valor de 'procEmi' não pode ser nulo.");
-      }
-      final String v = xmlValue.trim();
-      if (v.isEmpty()) {
-        throw new IllegalArgumentException("O valor de 'procEmi' não pode ser vazio.");
-      }
-      for (SEFAZ_procEmi e : values()) {
-        if (e.xmlData.equals(v)) {
-          return e;
-        }
-      }
-      throw new IllegalArgumentException("Processo de emissão desconhecido para 'procEmi': '" + xmlValue + "'.");
-    }
   }
 
   /**
@@ -843,7 +746,7 @@ public class SEFAZEnums {
    *
    * Valores conforme a especificação do campo CRT: 1 = Simples Nacional 2 = Simples Nacional, excesso sublimite de receita bruta 3 = Regime Normal
    */
-  public enum SEFAZ_CRT {
+  public enum SEFAZ_CRT implements SEFAZEnum<SEFAZ_CRT> {
 
     /**
      * 1 = Simples Nacional.
@@ -873,40 +776,23 @@ public class SEFAZEnums {
 
     /**
      * Retorna o valor utilizado no XML (campo CRT).
+     *
+     * @return the XML data
      */
-    public String getXMLData() {
+    @Override
+    public String getXmlData() {
       return this.xmlData;
     }
 
     /**
      * Indica se o tipo está obsoleto.
+     *
+     * @return the indica se o tipo está obsoleto/descontinuado para uso atual
      */
     public boolean isDeprecated() {
       return this.deprecated;
     }
 
-    /**
-     * Converte o valor do XML para a enum correspondente.
-     *
-     * @param xmlValue Valor do XML (ex.: "1", "2", "3").
-     * @return Enum correspondente.
-     * @throws IllegalArgumentException Se for nulo, vazio ou desconhecido.
-     */
-    public static SEFAZ_CRT valueOfXMLData(String xmlValue) {
-      if (xmlValue == null) {
-        throw new IllegalArgumentException("O valor de 'CRT' no XML não pode ser nulo.");
-      }
-      final String v = xmlValue.trim();
-      if (v.isEmpty()) {
-        throw new IllegalArgumentException("O valor de 'CRT' no XML não pode ser vazio.");
-      }
-      for (SEFAZ_CRT e : SEFAZ_CRT.values()) {
-        if (e.xmlData.equals(v)) {
-          return e;
-        }
-      }
-      throw new IllegalArgumentException("Valor XML desconhecido para 'CRT': '" + xmlValue + "'.");
-    }
   }
 
   /**
@@ -914,7 +800,7 @@ public class SEFAZEnums {
    *
    * Valores conforme especificação: 1 = Contribuinte ICMS 2 = Contribuinte isento de Inscrição no cadastro de Contribuintes 9 = Não Contribuinte
    */
-  public enum IndIEDestEnum {
+  public enum IndIEDestEnum implements SEFAZEnum<IndIEDestEnum> {
 
     /**
      * 1 = Contribuinte ICMS.
@@ -944,43 +830,23 @@ public class SEFAZEnums {
 
     /**
      * Retorna o valor utilizado no XML (campo indIEDest).
+     *
+     * @return the XML data
      */
-    public String getXMLData() {
+    @Override
+    public String getXmlData() {
       return this.xmlData;
     }
 
     /**
      * Indica se o tipo está obsoleto.
+     *
+     * @return the indica se o tipo está obsoleto/descontinuado para uso atual
      */
     public boolean isDeprecated() {
       return this.deprecated;
     }
 
-    /**
-     * Converte o valor do XML para a enum correspondente.
-     *
-     * @param xmlValue Valor do XML (ex.: "1", "2", "9").
-     * @return Enum correspondente.
-     * @throws IllegalArgumentException Se for nulo, vazio ou desconhecido.
-     */
-    public static IndIEDestEnum valueOfXMLData(String xmlValue) {
-      if (xmlValue == null) {
-        throw new IllegalArgumentException("O valor de 'indIEDest' no XML não pode ser nulo.");
-      }
-
-      final String v = xmlValue.trim();
-      if (v.isEmpty()) {
-        throw new IllegalArgumentException("O valor de 'indIEDest' no XML não pode ser vazio.");
-      }
-
-      for (IndIEDestEnum e : IndIEDestEnum.values()) {
-        if (e.xmlData.equals(v)) {
-          return e;
-        }
-      }
-
-      throw new IllegalArgumentException("Valor XML desconhecido para 'indIEDest': '" + xmlValue + "'.");
-    }
   }
 
   /**
@@ -988,7 +854,7 @@ public class SEFAZEnums {
    *
    * Valores conforme especificação do campo indTot: 0 = não compõe; 1 = compõe.
    */
-  public enum SEFAZ_indTot {
+  public enum SEFAZ_indTot implements SEFAZEnum<SEFAZ_indTot> {
 
     /**
      * 0 = não compõe o total da NF-e.
@@ -1013,40 +879,23 @@ public class SEFAZEnums {
 
     /**
      * Retorna o valor utilizado no XML (campo indTot).
+     *
+     * @return the XML data
      */
-    public String getXMLData() {
+    @Override
+    public String getXmlData() {
       return this.xmlData;
     }
 
     /**
      * Indica se o tipo está obsoleto.
+     *
+     * @return the indica se o tipo está obsoleto/descontinuado para uso atual
      */
     public boolean isDeprecated() {
       return this.deprecated;
     }
 
-    /**
-     * Converte o valor do XML para a enum correspondente.
-     *
-     * @param xmlValue Valor do XML (ex.: "0", "1").
-     * @return Enum correspondente.
-     * @throws IllegalArgumentException Se for nulo, vazio ou desconhecido.
-     */
-    public static SEFAZ_indTot valueOfXMLData(String xmlValue) {
-      if (xmlValue == null) {
-        throw new IllegalArgumentException("O valor de 'indTot' no XML não pode ser nulo.");
-      }
-      final String v = xmlValue.trim();
-      if (v.isEmpty()) {
-        throw new IllegalArgumentException("O valor de 'indTot' no XML não pode ser vazio.");
-      }
-      for (SEFAZ_indTot e : SEFAZ_indTot.values()) {
-        if (e.xmlData.equals(v)) {
-          return e;
-        }
-      }
-      throw new IllegalArgumentException("Valor XML desconhecido para 'indTot': '" + xmlValue + "'.");
-    }
   }
 
   /**
@@ -1058,7 +907,7 @@ public class SEFAZEnums {
    * feita em conformidade com os processos produtivos básicos (PPB) previstos na legislação aplicável; 5 – Nacional, mercadoria ou bem com Conteúdo de Importação inferior ou igual a 40%; 6 – Estrangeira – Importação direta, sem similar nacional, constante em lista da CAMEX (inclui gás natural); 7 – Estrangeira – Adquirida no mercado interno, sem similar nacional, constante em lista CAMEX (inclui
    * gás natural); 8 – Nacional, mercadoria ou bem com Conteúdo de Importação superior a 70%.
    */
-  public enum SEFAZ_orig {
+  public enum SEFAZ_orig implements SEFAZEnum<SEFAZ_orig> {
 
     /** 0 – Nacional, exceto as indicadas nos códigos 3, 4, 5 e 8. */
     NACIONAL_EXCETO_3_4_5_8("0", false),
@@ -1102,38 +951,25 @@ public class SEFAZEnums {
       this.deprecated = deprecated;
     }
 
-    /** Retorna o valor utilizado no XML (campo orig). */
-    public String getXMLData() {
+    /**
+     * Retorna o valor utilizado no XML (campo orig).
+     *
+     * @return the XML data
+     */
+    @Override
+    public String getXmlData() {
       return this.xmlData;
     }
 
-    /** Indica se o tipo está obsoleto. */
+    /**
+     * Indica se o tipo está obsoleto.
+     *
+     * @return the indica se o tipo está obsoleto/descontinuado para uso atual
+     */
     public boolean isDeprecated() {
       return this.deprecated;
     }
 
-    /**
-     * Converte o valor do XML para a enum correspondente.
-     *
-     * @param xmlValue Valor do XML (ex.: "0" a "8").
-     * @return Enum correspondente.
-     * @throws IllegalArgumentException Se for nulo, vazio ou desconhecido.
-     */
-    public static SEFAZ_orig valueOfXMLData(String xmlValue) {
-      if (xmlValue == null) {
-        throw new IllegalArgumentException("O valor de 'orig' no XML não pode ser nulo.");
-      }
-      final String v = xmlValue.trim();
-      if (v.isEmpty()) {
-        throw new IllegalArgumentException("O valor de 'orig' no XML não pode ser vazio.");
-      }
-      for (SEFAZ_orig e : SEFAZ_orig.values()) {
-        if (e.xmlData.equals(v)) {
-          return e;
-        }
-      }
-      throw new IllegalArgumentException("Valor XML desconhecido para 'orig': '" + xmlValue + "'.");
-    }
   }
 
   /**
@@ -1141,7 +977,7 @@ public class SEFAZEnums {
    *
    * Valores conforme especificação do campo modBC: 0 = Margem Valor Agregado (MVA %); 1 = Pauta (valor); 2 = Preço tabelado máximo (valor); 3 = Valor da operação.
    */
-  public enum SEFAZ_modBC {
+  public enum SEFAZ_modBC implements SEFAZEnum<SEFAZ_modBC> {
 
     /** 0 = Margem Valor Agregado (MVA %). */
     MARGEM_VALOR_AGREGADO("0", false),
@@ -1166,38 +1002,25 @@ public class SEFAZEnums {
       this.deprecated = deprecated;
     }
 
-    /** Retorna o valor utilizado no XML (campo modBC). */
-    public String getXMLData() {
+    /**
+     * Retorna o valor utilizado no XML (campo modBC).
+     *
+     * @return the XML data
+     */
+    @Override
+    public String getXmlData() {
       return this.xmlData;
     }
 
-    /** Indica se o tipo está obsoleto. */
+    /**
+     * Indica se o tipo está obsoleto.
+     *
+     * @return the indica se o tipo está obsoleto/descontinuado para uso atual
+     */
     public boolean isDeprecated() {
       return this.deprecated;
     }
 
-    /**
-     * Converte o valor do XML para a enum correspondente.
-     *
-     * @param xmlValue Valor do XML (ex.: "0", "1", "2", "3").
-     * @return Enum correspondente.
-     * @throws IllegalArgumentException Se for nulo, vazio ou desconhecido.
-     */
-    public static SEFAZ_modBC valueOfXMLData(String xmlValue) {
-      if (xmlValue == null) {
-        throw new IllegalArgumentException("O valor de 'modBC' no XML não pode ser nulo.");
-      }
-      final String v = xmlValue.trim();
-      if (v.isEmpty()) {
-        throw new IllegalArgumentException("O valor de 'modBC' no XML não pode ser vazio.");
-      }
-      for (SEFAZ_modBC e : SEFAZ_modBC.values()) {
-        if (e.xmlData.equals(v)) {
-          return e;
-        }
-      }
-      throw new IllegalArgumentException("Valor XML desconhecido para 'modBC': '" + xmlValue + "'.");
-    }
   }
 
   /**
@@ -1206,7 +1029,7 @@ public class SEFAZEnums {
    * Contemplando (até o momento): 00 – Tributado integralmente (ICMS00); 10 – Tributado e com cobrança do ICMS por substituição tributária (ICMS10); 20 – Com redução da base de cálculo (ICMS20); 30 – Isenta ou não tributada e com cobrança do ICMS por substituição tributária (ICMS30); 40 – Isenta (ICMS40); 41 – Não tributada (ICMS40); 50 – Suspensão (ICMS40); 51 – Diferimento (ICMS51); 60 – ICMS
    * cobrado anteriormente por substituição tributária (ICMS60); 70 – Com redução de base de cálculo e cobrança do ICMS por substituição tributária (ICMS70); 90 – Outros (ICMS90).
    */
-  public enum SEFAZ_CST_ICMS {
+  public enum SEFAZ_CST_ICMS implements SEFAZEnum<SEFAZ_CST_ICMS> {
 
     /** 00 – Tributado integralmente (ICMS00). */
     CST_00_TRIBUTADO_INTEGRALMENTE("00", false),
@@ -1252,38 +1075,25 @@ public class SEFAZEnums {
       this.deprecated = deprecated;
     }
 
-    /** Retorna o valor utilizado no XML (campo CST). */
-    public String getXMLData() {
+    /**
+     * Retorna o valor utilizado no XML (campo CST).
+     *
+     * @return the XML data
+     */
+    @Override
+    public String getXmlData() {
       return this.xmlData;
     }
 
-    /** Indica se o tipo está obsoleto. */
+    /**
+     * Indica se o tipo está obsoleto.
+     *
+     * @return the indica se o tipo está obsoleto/descontinuado para uso atual
+     */
     public boolean isDeprecated() {
       return this.deprecated;
     }
 
-    /**
-     * Converte o valor do XML para a enum correspondente.
-     *
-     * @param xmlValue Valor do XML (ex.: "00", "10", "20", "30", "40", "41", "50", "51", "60", "70", "90").
-     * @return Enum correspondente.
-     * @throws IllegalArgumentException Se for nulo, vazio ou desconhecido.
-     */
-    public static SEFAZ_CST_ICMS valueOfXMLData(String xmlValue) {
-      if (xmlValue == null) {
-        throw new IllegalArgumentException("O valor de 'CST' no XML não pode ser nulo.");
-      }
-      final String v = xmlValue.trim();
-      if (v.isEmpty()) {
-        throw new IllegalArgumentException("O valor de 'CST' no XML não pode ser vazio.");
-      }
-      for (SEFAZ_CST_ICMS e : SEFAZ_CST_ICMS.values()) {
-        if (e.xmlData.equals(v)) {
-          return e;
-        }
-      }
-      throw new IllegalArgumentException("Valor XML desconhecido para 'CST': '" + xmlValue + "'.");
-    }
   }
 
   /**
@@ -1291,7 +1101,7 @@ public class SEFAZEnums {
    *
    * Valores conforme especificação do campo modBCST: 0 = Preço tabelado ou máximo sugerido; 1 = Lista Negativa (valor); 2 = Lista Positiva (valor); 3 = Lista Neutra (valor); 4 = Margem Valor Agregado (%); 5 = Pauta (Valor); 6 = Valor da Operação (NT 2019.001).
    */
-  public enum SEFAZ_modBCST {
+  public enum SEFAZ_modBCST implements SEFAZEnum<SEFAZ_modBCST> {
 
     /** 0 = Preço tabelado ou máximo sugerido. */
     PRECO_TABELADO_MAX_SUGERIDO("0", false),
@@ -1325,38 +1135,25 @@ public class SEFAZEnums {
       this.deprecated = deprecated;
     }
 
-    /** Retorna o valor utilizado no XML (campo modBCST). */
-    public String getXMLData() {
+    /**
+     * Retorna o valor utilizado no XML (campo modBCST).
+     *
+     * @return the XML data
+     */
+    @Override
+    public String getXmlData() {
       return this.xmlData;
     }
 
-    /** Indica se o tipo está obsoleto. */
+    /**
+     * Indica se o tipo está obsoleto.
+     *
+     * @return the indica se o tipo está obsoleto/descontinuado para uso atual
+     */
     public boolean isDeprecated() {
       return this.deprecated;
     }
 
-    /**
-     * Converte o valor do XML para a enum correspondente.
-     *
-     * @param xmlValue Valor do XML (ex.: "0" a "6").
-     * @return Enum correspondente.
-     * @throws IllegalArgumentException Se for nulo, vazio ou desconhecido.
-     */
-    public static SEFAZ_modBCST valueOfXMLData(String xmlValue) {
-      if (xmlValue == null) {
-        throw new IllegalArgumentException("O valor de 'modBCST' no XML não pode ser nulo.");
-      }
-      final String v = xmlValue.trim();
-      if (v.isEmpty()) {
-        throw new IllegalArgumentException("O valor de 'modBCST' no XML não pode ser vazio.");
-      }
-      for (SEFAZ_modBCST e : SEFAZ_modBCST.values()) {
-        if (e.xmlData.equals(v)) {
-          return e;
-        }
-      }
-      throw new IllegalArgumentException("Valor XML desconhecido para 'modBCST': '" + xmlValue + "'.");
-    }
   }
 
   /**
@@ -1367,7 +1164,7 @@ public class SEFAZEnums {
    *
    * Observação: motivo 2 (Deficiente Físico) foi revogado e não é utilizado.
    */
-  public enum SEFAZ_motDesICMS {
+  public enum SEFAZ_motDesICMS implements SEFAZEnum<SEFAZ_motDesICMS> {
 
     /** 1 – Táxi. */
     TAXI("1", false),
@@ -1421,38 +1218,25 @@ public class SEFAZEnums {
       this.deprecated = deprecated;
     }
 
-    /** Retorna o valor utilizado no XML (campo motDesICMS). */
-    public String getXMLData() {
+    /**
+     * Retorna o valor utilizado no XML (campo motDesICMS).
+     *
+     * @return the XML data
+     */
+    @Override
+    public String getXmlData() {
       return this.xmlData;
     }
 
-    /** Indica se o tipo está obsoleto. */
+    /**
+     * Indica se o tipo está obsoleto.
+     *
+     * @return the indica se o tipo está obsoleto/descontinuado para uso atual
+     */
     public boolean isDeprecated() {
       return this.deprecated;
     }
 
-    /**
-     * Converte o valor do XML para a enum correspondente.
-     *
-     * @param xmlValue Valor do XML (ex.: "1", "3", "4", ..., "16", "90").
-     * @return Enum correspondente.
-     * @throws IllegalArgumentException Se for nulo, vazio ou desconhecido.
-     */
-    public static SEFAZ_motDesICMS valueOfXMLData(String xmlValue) {
-      if (xmlValue == null) {
-        throw new IllegalArgumentException("O valor de 'motDesICMS' no XML não pode ser nulo.");
-      }
-      final String v = xmlValue.trim();
-      if (v.isEmpty()) {
-        throw new IllegalArgumentException("O valor de 'motDesICMS' no XML não pode ser vazio.");
-      }
-      for (SEFAZ_motDesICMS e : SEFAZ_motDesICMS.values()) {
-        if (e.xmlData.equals(v)) {
-          return e;
-        }
-      }
-      throw new IllegalArgumentException("Valor XML desconhecido para 'motDesICMS': '" + xmlValue + "'.");
-    }
   }
 
   /**
@@ -1461,7 +1245,7 @@ public class SEFAZEnums {
    * Contempla até o momento: 101 – Tributada com permissão de crédito; 102 – Tributada sem permissão de crédito; 103 – Isenção do ICMS no Simples Nacional para faixa de receita bruta; 201 – Tributada com permissão de crédito e com ICMS ST; 202 – Tributada sem permissão de crédito e com ICMS ST; 203 – Isenção do ICMS no Simples Nacional para faixa de receita bruta e com ICMS ST; 300 – Imune; 400 –
    * Não tributada pelo Simples Nacional; 500 – ICMS cobrado anteriormente por substituição tributária ou por antecipação; 900 – Outros (Simples Nacional).
    */
-  public enum SEFAZ_CSOSN {
+  public enum SEFAZ_CSOSN implements SEFAZEnum<SEFAZ_CSOSN> {
 
     /** 101 – Tributada pelo Simples Nacional com permissão de crédito. */
     CSOSN_101_TRIBUTADA_COM_PERMISSAO_CREDITO("101", false),
@@ -1504,38 +1288,25 @@ public class SEFAZEnums {
       this.deprecated = deprecated;
     }
 
-    /** Retorna o valor utilizado no XML (campo CSOSN). */
-    public String getXMLData() {
+    /**
+     * Retorna o valor utilizado no XML (campo CSOSN).
+     *
+     * @return the XML data
+     */
+    @Override
+    public String getXmlData() {
       return this.xmlData;
     }
 
-    /** Indica se o tipo está obsoleto. */
+    /**
+     * Indica se o tipo está obsoleto.
+     *
+     * @return the indica se o tipo está obsoleto/descontinuado para uso atual
+     */
     public boolean isDeprecated() {
       return this.deprecated;
     }
 
-    /**
-     * Converte o valor do XML para a enum correspondente.
-     *
-     * @param xmlValue Valor do XML (ex.: "101", "102", "103", "201", "202", "203", "300", "400", "500", "900").
-     * @return Enum correspondente.
-     * @throws IllegalArgumentException Se for nulo, vazio ou desconhecido.
-     */
-    public static SEFAZ_CSOSN valueOfXMLData(String xmlValue) {
-      if (xmlValue == null) {
-        throw new IllegalArgumentException("O valor de 'CSOSN' no XML não pode ser nulo.");
-      }
-      final String v = xmlValue.trim();
-      if (v.isEmpty()) {
-        throw new IllegalArgumentException("O valor de 'CSOSN' no XML não pode ser vazio.");
-      }
-      for (SEFAZ_CSOSN e : SEFAZ_CSOSN.values()) {
-        if (e.xmlData.equals(v)) {
-          return e;
-        }
-      }
-      throw new IllegalArgumentException("Valor XML desconhecido para 'CSOSN': '" + xmlValue + "'.");
-    }
   }
 
   /**
@@ -1547,7 +1318,7 @@ public class SEFAZEnums {
    * <li>O09b (grupo O08 - IPINT): 01, 02, 03, 04, 05, 51, 52, 53, 54, 55.</li>
    * </ul>
    */
-  public enum SEFAZ_CST_IPI {
+  public enum SEFAZ_CST_IPI implements SEFAZEnum<SEFAZ_CST_IPI> {
 
     /** 00 = Entrada com recuperação de crédito. */
     CST_00_ENTRADA_RECUPERACAO_CREDITO("00", false),
@@ -1602,38 +1373,25 @@ public class SEFAZEnums {
       this.deprecated = deprecated;
     }
 
-    /** Retorna o valor utilizado no XML (campo CST). */
-    public String getXMLData() {
+    /**
+     * Retorna o valor utilizado no XML (campo CST).
+     *
+     * @return the XML data
+     */
+    @Override
+    public String getXmlData() {
       return this.xmlData;
     }
 
-    /** Indica se o tipo está obsoleto. */
+    /**
+     * Indica se o tipo está obsoleto.
+     *
+     * @return the indica se o tipo está obsoleto/descontinuado para uso atual
+     */
     public boolean isDeprecated() {
       return this.deprecated;
     }
 
-    /**
-     * Converte o valor do XML para a enum correspondente.
-     *
-     * @param xmlValue Valor do XML (ex.: "00", "49", "50", "99", "01", "02", "03", "04", "05", "51", "52", "53", "54", "55").
-     * @return Enum correspondente.
-     * @throws IllegalArgumentException Se for nulo, vazio ou desconhecido.
-     */
-    public static SEFAZ_CST_IPI valueOfXMLData(String xmlValue) {
-      if (xmlValue == null) {
-        throw new IllegalArgumentException("O valor de 'CST' do IPI no XML não pode ser nulo.");
-      }
-      final String v = xmlValue.trim();
-      if (v.isEmpty()) {
-        throw new IllegalArgumentException("O valor de 'CST' do IPI no XML não pode ser vazio.");
-      }
-      for (SEFAZ_CST_IPI e : SEFAZ_CST_IPI.values()) {
-        if (e.xmlData.equals(v)) {
-          return e;
-        }
-      }
-      throw new IllegalArgumentException("Valor XML desconhecido para 'CST' do IPI: '" + xmlValue + "'.");
-    }
   }
 
   /**
@@ -1647,7 +1405,7 @@ public class SEFAZEnums {
    * <li>Q05 - PISOutr (CST 49, 50–56, 60–67, 70–75, 98, 99).</li>
    * </ul>
    */
-  public enum SEFAZ_CST_PIS {
+  public enum SEFAZ_CST_PIS implements SEFAZEnum<SEFAZ_CST_PIS> {
 
     /** 01 = Operação Tributável (base de cálculo = valor da operação, alíquota normal). */
     CST_01_OPERACAO_TRIBUTAVEL_BC_VALOR_ALIQUOTA_NORMAL("01", false),
@@ -1759,38 +1517,25 @@ public class SEFAZEnums {
       this.deprecated = deprecated;
     }
 
-    /** Retorna o valor utilizado no XML (campo CST). */
-    public String getXMLData() {
+    /**
+     * Retorna o valor utilizado no XML (campo CST).
+     *
+     * @return the XML data
+     */
+    @Override
+    public String getXmlData() {
       return this.xmlData;
     }
 
-    /** Indica se o tipo está obsoleto. */
+    /**
+     * Indica se o tipo está obsoleto.
+     *
+     * @return the indica se o tipo está obsoleto/descontinuado para uso atual
+     */
     public boolean isDeprecated() {
       return this.deprecated;
     }
 
-    /**
-     * Converte o valor do XML para a enum correspondente.
-     *
-     * @param xmlValue Valor do XML (ex.: "01", "02", "03", "04", "05", "06", "07", "08", "09", "49", "50"–"56", "60"–"67", "70"–"75", "98", "99").
-     * @return Enum correspondente.
-     * @throws IllegalArgumentException Se for nulo, vazio ou desconhecido.
-     */
-    public static SEFAZ_CST_PIS valueOfXMLData(String xmlValue) {
-      if (xmlValue == null) {
-        throw new IllegalArgumentException("O valor de 'CST' do PIS no XML não pode ser nulo.");
-      }
-      final String v = xmlValue.trim();
-      if (v.isEmpty()) {
-        throw new IllegalArgumentException("O valor de 'CST' do PIS no XML não pode ser vazio.");
-      }
-      for (SEFAZ_CST_PIS e : SEFAZ_CST_PIS.values()) {
-        if (e.xmlData.equals(v)) {
-          return e;
-        }
-      }
-      throw new IllegalArgumentException("Valor XML desconhecido para 'CST' do PIS: '" + xmlValue + "'.");
-    }
   }
 
   /**
@@ -1798,7 +1543,7 @@ public class SEFAZEnums {
    *
    * Contempla todos os códigos do campo CST da COFINS nos grupos: - S02 - COFINSAliq (CST 01, 02); - S03 - COFINSQtde (CST 03); - S04 - COFINSNT (CST 04, 05, 06, 07, 08, 09); - S05 - COFINSOutr (CST 49, 50, 51, 52, 53, 54, 55, 56, 61–67, 70–73, 98, 99).
    */
-  public enum SEFAZ_CST_COFINS {
+  public enum SEFAZ_CST_COFINS implements SEFAZEnum<SEFAZ_CST_COFINS> {
 
     /** 01 = Operação Tributável (base de cálculo = valor da operação alíquota normal (cumulativo/não cumulativo)). */
     CST_01_OPERACAO_TRIBUTAVEL_BC_VALOR_ALIQUOTA_NORMAL("01", false),
@@ -1901,38 +1646,25 @@ public class SEFAZEnums {
       this.deprecated = deprecated;
     }
 
-    /** Retorna o valor utilizado no XML (campo CST). */
-    public String getXMLData() {
+    /**
+     * Retorna o valor utilizado no XML (campo CST).
+     *
+     * @return the XML data
+     */
+    @Override
+    public String getXmlData() {
       return this.xmlData;
     }
 
-    /** Indica se o tipo está obsoleto. */
+    /**
+     * Indica se o tipo está obsoleto.
+     *
+     * @return the indica se o tipo está obsoleto/descontinuado para uso atual
+     */
     public boolean isDeprecated() {
       return this.deprecated;
     }
 
-    /**
-     * Converte o valor do XML para a enum correspondente.
-     *
-     * @param xmlValue Valor do XML (ex.: \"01\", \"02\", \"03\", \"04\", \"05\", \"06\", \"07\", \"08\", \"09\", \"49\", \"50\", \"51\", \"52\", \"53\", \"54\", \"55\", \"56\", \"61\"–\"67\", \"70\"–\"73\", \"98\", \"99\").
-     * @return Enum correspondente.
-     * @throws IllegalArgumentException Se for nulo, vazio ou desconhecido.
-     */
-    public static SEFAZ_CST_COFINS valueOfXMLData(String xmlValue) {
-      if (xmlValue == null) {
-        throw new IllegalArgumentException("O valor de 'CST' da COFINS no XML não pode ser nulo.");
-      }
-      final String v = xmlValue.trim();
-      if (v.isEmpty()) {
-        throw new IllegalArgumentException("O valor de 'CST' da COFINS no XML não pode ser vazio.");
-      }
-      for (SEFAZ_CST_COFINS e : SEFAZ_CST_COFINS.values()) {
-        if (e.xmlData.equals(v)) {
-          return e;
-        }
-      }
-      throw new IllegalArgumentException("Valor XML desconhecido para 'CST' da COFINS: '" + xmlValue + "'.");
-    }
   }
 
   /**
@@ -1940,7 +1672,7 @@ public class SEFAZEnums {
    *
    * Valores: 1 = Microempresa Municipal 2 = Estimativa 3 = Sociedade de Profissionais 4 = Cooperativa 5 = Microempresário Individual (MEI) 6 = Microempresário e Empresa de Pequeno Porte
    */
-  public enum SEFAZ_cRegTrib {
+  public enum SEFAZ_cRegTrib implements SEFAZEnum<SEFAZ_cRegTrib> {
 
     /** 1 = Microempresa Municipal. */
     MICROEMPRESA_MUNICIPAL("1", false),
@@ -1971,38 +1703,25 @@ public class SEFAZEnums {
       this.deprecated = deprecated;
     }
 
-    /** Retorna o valor utilizado no XML (campo cRegTrib). */
-    public String getXMLData() {
+    /**
+     * Retorna o valor utilizado no XML (campo cRegTrib).
+     *
+     * @return the XML data
+     */
+    @Override
+    public String getXmlData() {
       return this.xmlData;
     }
 
-    /** Indica se o tipo está obsoleto. */
+    /**
+     * Indica se o tipo está obsoleto.
+     *
+     * @return the indica se o tipo está obsoleto/descontinuado para uso atual
+     */
     public boolean isDeprecated() {
       return this.deprecated;
     }
 
-    /**
-     * Converte o valor do XML para a enum correspondente.
-     *
-     * @param xmlValue Valor do XML (ex.: "1", "2", "3", "4", "5", "6").
-     * @return Enum correspondente.
-     * @throws IllegalArgumentException Se for nulo, vazio ou desconhecido.
-     */
-    public static SEFAZ_cRegTrib valueOfXMLData(String xmlValue) {
-      if (xmlValue == null) {
-        throw new IllegalArgumentException("O valor de 'cRegTrib' no XML não pode ser nulo.");
-      }
-      final String v = xmlValue.trim();
-      if (v.isEmpty()) {
-        throw new IllegalArgumentException("O valor de 'cRegTrib' no XML não pode ser vazio.");
-      }
-      for (SEFAZ_cRegTrib e : SEFAZ_cRegTrib.values()) {
-        if (e.xmlData.equals(v)) {
-          return e;
-        }
-      }
-      throw new IllegalArgumentException("Valor XML desconhecido para 'cRegTrib': '" + xmlValue + "'.");
-    }
   }
 
   /**
@@ -2010,7 +1729,7 @@ public class SEFAZEnums {
    *
    * Valores: 0 = Contratação do Frete por conta do Remetente (CIF) 1 = Contratação do Frete por conta do Destinatário (FOB) 2 = Contratação do Frete por conta de Terceiros 3 = Transporte Próprio por conta do Remetente 4 = Transporte Próprio por conta do Destinatário 9 = Sem Ocorrência de Transporte
    */
-  public enum SEFAZ_modFrete {
+  public enum SEFAZ_modFrete implements SEFAZEnum<SEFAZ_modFrete> {
 
     /** 0 = Contratação do Frete por conta do Remetente (CIF). */
     REMETENTE_CIF("0", false),
@@ -2041,38 +1760,25 @@ public class SEFAZEnums {
       this.deprecated = deprecated;
     }
 
-    /** Retorna o valor utilizado no XML (campo modFrete). */
-    public String getXMLData() {
+    /**
+     * Retorna o valor utilizado no XML (campo modFrete).
+     *
+     * @return the XML data
+     */
+    @Override
+    public String getXmlData() {
       return this.xmlData;
     }
 
-    /** Indica se o tipo está obsoleto. */
+    /**
+     * Indica se o tipo está obsoleto.
+     *
+     * @return the indica se o tipo está obsoleto/descontinuado para uso atual
+     */
     public boolean isDeprecated() {
       return this.deprecated;
     }
 
-    /**
-     * Converte o valor do XML para a enum correspondente.
-     *
-     * @param xmlValue Valor do XML (ex.: "0", "1", "2", "3", "4", "9").
-     * @return Enum correspondente.
-     * @throws IllegalArgumentException Se for nulo, vazio ou desconhecido.
-     */
-    public static SEFAZ_modFrete valueOfXMLData(String xmlValue) {
-      if (xmlValue == null) {
-        throw new IllegalArgumentException("O valor de 'modFrete' no XML não pode ser nulo.");
-      }
-      final String v = xmlValue.trim();
-      if (v.isEmpty()) {
-        throw new IllegalArgumentException("O valor de 'modFrete' no XML não pode ser vazio.");
-      }
-      for (SEFAZ_modFrete e : SEFAZ_modFrete.values()) {
-        if (e.xmlData.equals(v)) {
-          return e;
-        }
-      }
-      throw new IllegalArgumentException("Valor XML desconhecido para 'modFrete': '" + xmlValue + "'.");
-    }
   }
 
   /**
@@ -2080,7 +1786,7 @@ public class SEFAZEnums {
    *
    * Valores: 0 = Pagamento à Vista 1 = Pagamento à Prazo
    */
-  public enum SEFAZ_indPag {
+  public enum SEFAZ_indPag implements SEFAZEnum<SEFAZ_indPag> {
 
     /** 0 = Pagamento à Vista. */
     A_VISTA("0", false),
@@ -2099,38 +1805,25 @@ public class SEFAZEnums {
       this.deprecated = deprecated;
     }
 
-    /** Retorna o valor utilizado no XML (campo indPag). */
-    public String getXMLData() {
+    /**
+     * Retorna o valor utilizado no XML (campo indPag).
+     *
+     * @return the XML data
+     */
+    @Override
+    public String getXmlData() {
       return this.xmlData;
     }
 
-    /** Indica se o tipo está obsoleto. */
+    /**
+     * Indica se o tipo está obsoleto.
+     *
+     * @return the indica se o tipo está obsoleto/descontinuado para uso atual
+     */
     public boolean isDeprecated() {
       return this.deprecated;
     }
 
-    /**
-     * Converte o valor do XML para a enum correspondente.
-     *
-     * @param xmlValue Valor do XML (ex.: "0", "1").
-     * @return Enum correspondente.
-     * @throws IllegalArgumentException Se for nulo, vazio ou desconhecido.
-     */
-    public static SEFAZ_indPag valueOfXMLData(String xmlValue) {
-      if (xmlValue == null) {
-        throw new IllegalArgumentException("O valor de 'indPag' no XML não pode ser nulo.");
-      }
-      final String v = xmlValue.trim();
-      if (v.isEmpty()) {
-        throw new IllegalArgumentException("O valor de 'indPag' no XML não pode ser vazio.");
-      }
-      for (SEFAZ_indPag e : SEFAZ_indPag.values()) {
-        if (e.xmlData.equals(v)) {
-          return e;
-        }
-      }
-      throw new IllegalArgumentException("Valor XML desconhecido para 'indPag': '" + xmlValue + "'.");
-    }
   }
 
   /**
@@ -2138,7 +1831,7 @@ public class SEFAZEnums {
    *
    * Valores: 01 = Dinheiro 02 = Cheque 03 = Cartão de Crédito 04 = Cartão de Débito 05 = Crédito Loja 10 = Vale Alimentação 11 = Vale Refeição 12 = Vale Presente 13 = Vale Combustível 15 = Boleto Bancário 16 = Depósito Bancário 17 = Pagamento Instantâneo (PIX) 18 = Transferência bancária, Carteira Digital 19 = Programa de fidelidade, Cashback, Crédito Virtual 90 = Sem pagamento 99 = Outros
    */
-  public enum SEFAZ_tPag {
+  public enum SEFAZ_tPag implements SEFAZEnum<SEFAZ_tPag> {
 
     /** 01 = Dinheiro. */
     DINHEIRO("01", false),
@@ -2199,38 +1892,25 @@ public class SEFAZEnums {
       this.deprecated = deprecated;
     }
 
-    /** Retorna o valor utilizado no XML (campo tPag). */
-    public String getXMLData() {
+    /**
+     * Retorna o valor utilizado no XML (campo tPag).
+     *
+     * @return the XML data
+     */
+    @Override
+    public String getXmlData() {
       return this.xmlData;
     }
 
-    /** Indica se o tipo está obsoleto. */
+    /**
+     * Indica se o tipo está obsoleto.
+     *
+     * @return the indica se o tipo está obsoleto/descontinuado para uso atual
+     */
     public boolean isDeprecated() {
       return this.deprecated;
     }
 
-    /**
-     * Converte o valor do XML para a enum correspondente.
-     *
-     * @param xmlValue Valor do XML (ex.: "01", "02", "03", ..., "90", "99").
-     * @return Enum correspondente.
-     * @throws IllegalArgumentException Se for nulo, vazio ou desconhecido.
-     */
-    public static SEFAZ_tPag valueOfXMLData(String xmlValue) {
-      if (xmlValue == null) {
-        throw new IllegalArgumentException("O valor de 'tPag' no XML não pode ser nulo.");
-      }
-      final String v = xmlValue.trim();
-      if (v.isEmpty()) {
-        throw new IllegalArgumentException("O valor de 'tPag' no XML não pode ser vazio.");
-      }
-      for (SEFAZ_tPag e : SEFAZ_tPag.values()) {
-        if (e.xmlData.equals(v)) {
-          return e;
-        }
-      }
-      throw new IllegalArgumentException("Valor XML desconhecido para 'tPag': '" + xmlValue + "'.");
-    }
   }
 
   /**
@@ -2238,7 +1918,7 @@ public class SEFAZEnums {
    *
    * Valores: 1 = Pagamento integrado com o sistema de automação da empresa 2 = Pagamento não integrado com o sistema de automação da empresa
    */
-  public enum SEFAZ_tpIntegra {
+  public enum SEFAZ_tpIntegra implements SEFAZEnum<SEFAZ_tpIntegra> {
 
     /** 1 = Pagamento integrado com o sistema de automação da empresa. */
     INTEGRADO_AUTOMACAO("1", false),
@@ -2257,38 +1937,25 @@ public class SEFAZEnums {
       this.deprecated = deprecated;
     }
 
-    /** Retorna o valor utilizado no XML (campo tpIntegra). */
-    public String getXMLData() {
+    /**
+     * Retorna o valor utilizado no XML (campo tpIntegra).
+     *
+     * @return the XML data
+     */
+    @Override
+    public String getXmlData() {
       return this.xmlData;
     }
 
-    /** Indica se o tipo está obsoleto. */
+    /**
+     * Indica se o tipo está obsoleto.
+     *
+     * @return the indica se o tipo está obsoleto/descontinuado para uso atual
+     */
     public boolean isDeprecated() {
       return this.deprecated;
     }
 
-    /**
-     * Converte o valor do XML para a enum correspondente.
-     *
-     * @param xmlValue Valor do XML (ex.: "1", "2").
-     * @return Enum correspondente.
-     * @throws IllegalArgumentException Se for nulo, vazio ou desconhecido.
-     */
-    public static SEFAZ_tpIntegra valueOfXMLData(String xmlValue) {
-      if (xmlValue == null) {
-        throw new IllegalArgumentException("O valor de 'tpIntegra' no XML não pode ser nulo.");
-      }
-      final String v = xmlValue.trim();
-      if (v.isEmpty()) {
-        throw new IllegalArgumentException("O valor de 'tpIntegra' no XML não pode ser vazio.");
-      }
-      for (SEFAZ_tpIntegra e : SEFAZ_tpIntegra.values()) {
-        if (e.xmlData.equals(v)) {
-          return e;
-        }
-      }
-      throw new IllegalArgumentException("Valor XML desconhecido para 'tpIntegra': '" + xmlValue + "'.");
-    }
   }
 
   /**
@@ -2296,7 +1963,7 @@ public class SEFAZEnums {
    *
    * Valores: 01 = Visa 02 = Mastercard 03 = American Express 04 = Sorocred 05 = Diners Club 06 = Elo 07 = Hipercard 08 = Aura 09 = Cabal 99 = Outros
    */
-  public enum SEFAZ_tBand {
+  public enum SEFAZ_tBand implements SEFAZEnum<SEFAZ_tBand> {
 
     /** 01 = Visa. */
     VISA("01", false),
@@ -2339,38 +2006,25 @@ public class SEFAZEnums {
       this.deprecated = deprecated;
     }
 
-    /** Retorna o valor utilizado no XML (campo tBand). */
-    public String getXMLData() {
+    /**
+     * Retorna o valor utilizado no XML (campo tBand).
+     *
+     * @return the XML data
+     */
+    @Override
+    public String getXmlData() {
       return this.xmlData;
     }
 
-    /** Indica se o tipo está obsoleto. */
+    /**
+     * Indica se o tipo está obsoleto.
+     *
+     * @return the indica se o tipo está obsoleto/descontinuado para uso atual
+     */
     public boolean isDeprecated() {
       return this.deprecated;
     }
 
-    /**
-     * Converte o valor do XML para a enum correspondente.
-     *
-     * @param xmlValue Valor do XML (ex.: "01", "02", ..., "09", "99").
-     * @return Enum correspondente.
-     * @throws IllegalArgumentException Se for nulo, vazio ou desconhecido.
-     */
-    public static SEFAZ_tBand valueOfXMLData(String xmlValue) {
-      if (xmlValue == null) {
-        throw new IllegalArgumentException("O valor de 'tBand' no XML não pode ser nulo.");
-      }
-      final String v = xmlValue.trim();
-      if (v.isEmpty()) {
-        throw new IllegalArgumentException("O valor de 'tBand' no XML não pode ser vazio.");
-      }
-      for (SEFAZ_tBand e : SEFAZ_tBand.values()) {
-        if (e.xmlData.equals(v)) {
-          return e;
-        }
-      }
-      throw new IllegalArgumentException("Valor XML desconhecido para 'tBand': '" + xmlValue + "'.");
-    }
   }
 
   /**
@@ -2404,7 +2058,7 @@ public class SEFAZEnums {
    * <li>métodos: {@code getXMLData()}, {@code isDeprecated()}, {@code valueOfXMLData()}.</li>
    * </ul>
    */
-  public enum SEFAZ_indProc {
+  public enum SEFAZ_indProc implements SEFAZEnum<SEFAZ_indProc> {
 
     /**
      * 0 – SEFAZ.
@@ -2462,7 +2116,8 @@ public class SEFAZEnums {
      *
      * @return String contendo o valor correspondente no XML.
      */
-    public String getXMLData() {
+    @Override
+    public String getXmlData() {
       return this.xmlData;
     }
 
@@ -2475,28 +2130,6 @@ public class SEFAZEnums {
       return this.deprecated;
     }
 
-    /**
-     * Converte o valor do XML para a enum correspondente.
-     *
-     * @param xmlValue valor bruto do XML — não pode ser nulo ou vazio.
-     * @return a enum SEFAZ_indProc correspondente.
-     * @throws IllegalArgumentException se {@code xmlValue} for nulo, vazio ou não corresponder a nenhum valor permitido.
-     */
-    public static SEFAZ_indProc valueOfXMLData(String xmlValue) {
-      if (xmlValue == null) {
-        throw new IllegalArgumentException("O valor de 'indProc' no XML não pode ser nulo.");
-      }
-      final String v = xmlValue.trim();
-      if (v.isEmpty()) {
-        throw new IllegalArgumentException("O valor de 'indProc' no XML não pode ser vazio.");
-      }
-      for (SEFAZ_indProc e : SEFAZ_indProc.values()) {
-        if (e.xmlData.equals(v)) {
-          return e;
-        }
-      }
-      throw new IllegalArgumentException("Valor XML desconhecido para 'indProc': '" + xmlValue + "'.");
-    }
   }
 
   /**
@@ -2527,7 +2160,7 @@ public class SEFAZEnums {
    * <li>métodos utilitários: {@code getXMLData()}, {@code isDeprecated()}, {@code valueOfXMLData()}.</li>
    * </ul>
    */
-  public enum SEFAZ_indIncentivo {
+  public enum SEFAZ_indIncentivo implements SEFAZEnum<SEFAZ_indIncentivo> {
 
     /**
      * 1 – Sim.
@@ -2561,7 +2194,8 @@ public class SEFAZEnums {
      *
      * @return valor XML correspondente ao código da enum.
      */
-    public String getXMLData() {
+    @Override
+    public String getXmlData() {
       return this.xmlData;
     }
 
@@ -2574,28 +2208,6 @@ public class SEFAZEnums {
       return this.deprecated;
     }
 
-    /**
-     * Converte o valor recebido do XML para a enum correspondente.
-     *
-     * @param xmlValue valor bruto do XML.
-     * @return enum correspondente.
-     * @throws IllegalArgumentException se for nulo, vazio ou inválido.
-     */
-    public static SEFAZ_indIncentivo valueOfXMLData(String xmlValue) {
-      if (xmlValue == null) {
-        throw new IllegalArgumentException("O valor de 'indIncentivo' no XML não pode ser nulo.");
-      }
-      final String v = xmlValue.trim();
-      if (v.isEmpty()) {
-        throw new IllegalArgumentException("O valor de 'indIncentivo' no XML não pode ser vazio.");
-      }
-      for (SEFAZ_indIncentivo e : SEFAZ_indIncentivo.values()) {
-        if (e.xmlData.equals(v)) {
-          return e;
-        }
-      }
-      throw new IllegalArgumentException("Valor XML desconhecido para 'indIncentivo': '" + xmlValue + "'.");
-    }
   }
 
   /**
@@ -2631,7 +2243,7 @@ public class SEFAZEnums {
    * <li>métodos obrigatórios: {@code getXMLData()}, {@code isDeprecated()}, {@code valueOfXMLData()}.</li>
    * </ul>
    */
-  public enum SEFAZ_indISS {
+  public enum SEFAZ_indISS implements SEFAZEnum<SEFAZ_indISS> {
 
     /** 1 – Exigível. */
     EXIGIVEL("1", false),
@@ -2665,41 +2277,25 @@ public class SEFAZEnums {
       this.deprecated = deprecated;
     }
 
-    /** Retorna o valor utilizado no XML. */
-    public String getXMLData() {
+    /**
+     * Retorna o valor utilizado no XML.
+     *
+     * @return the XML data
+     */
+    @Override
+    public String getXmlData() {
       return this.xmlData;
     }
 
-    /** Indica se o valor está obsoleto/descontinuado. */
+    /**
+     * Indica se o valor está obsoleto/descontinuado.
+     *
+     * @return the indica se o valor está obsoleto/descontinuado
+     */
     public boolean isDeprecated() {
       return this.deprecated;
     }
 
-    /**
-     * Converte o valor do XML para o enum correspondente.
-     *
-     * @param xmlValue valor bruto do XML.
-     * @return enum correspondente.
-     * @throws IllegalArgumentException se for nulo, vazio ou desconhecido.
-     */
-    public static SEFAZ_indISS valueOfXMLData(String xmlValue) {
-      if (xmlValue == null) {
-        throw new IllegalArgumentException("O valor de 'indISS' no XML não pode ser nulo.");
-      }
-
-      final String v = xmlValue.trim();
-      if (v.isEmpty()) {
-        throw new IllegalArgumentException("O valor de 'indISS' no XML não pode ser vazio.");
-      }
-
-      for (SEFAZ_indISS e : SEFAZ_indISS.values()) {
-        if (e.xmlData.equals(v)) {
-          return e;
-        }
-      }
-
-      throw new IllegalArgumentException("Valor XML desconhecido para 'indISS': '" + xmlValue + "'.");
-    }
   }
 
   /**
@@ -2744,7 +2340,7 @@ public class SEFAZEnums {
    * <li>métodos padrão: {@code getXMLData()}, {@code isDeprecated()}, {@code valueOfXMLData()}.</li>
    * </ul>
    */
-  public enum SEFAZ_indSinc {
+  public enum SEFAZ_indSinc implements SEFAZEnum<SEFAZ_indSinc> {
 
     /** 0 – Não solicita processamento síncrono. */
     NAO("0", false),
@@ -2763,41 +2359,25 @@ public class SEFAZEnums {
       this.deprecated = deprecated;
     }
 
-    /** Retorna o valor utilizado no XML. */
-    public String getXMLData() {
+    /**
+     * Retorna o valor utilizado no XML.
+     *
+     * @return the XML data
+     */
+    @Override
+    public String getXmlData() {
       return this.xmlData;
     }
 
-    /** Indica se o valor está obsoleto/descontinuado. */
+    /**
+     * Indica se o valor está obsoleto/descontinuado.
+     *
+     * @return the indica se o valor está obsoleto/descontinuado
+     */
     public boolean isDeprecated() {
       return this.deprecated;
     }
 
-    /**
-     * Converte o valor do XML para a enum correspondente.
-     *
-     * @param xmlValue valor bruto do XML.
-     * @return enum correspondente.
-     * @throws IllegalArgumentException se for nulo, vazio ou desconhecido.
-     */
-    public static SEFAZ_indSinc valueOfXMLData(String xmlValue) {
-      if (xmlValue == null) {
-        throw new IllegalArgumentException("O valor de 'indSinc' no XML não pode ser nulo.");
-      }
-
-      final String v = xmlValue.trim();
-      if (v.isEmpty()) {
-        throw new IllegalArgumentException("O valor de 'indSinc' no XML não pode ser vazio.");
-      }
-
-      for (SEFAZ_indSinc e : SEFAZ_indSinc.values()) {
-        if (e.xmlData.equals(v)) {
-          return e;
-        }
-      }
-
-      throw new IllegalArgumentException("Valor XML desconhecido para 'indSinc': '" + xmlValue + "'.");
-    }
   }
 
   /**
@@ -2820,7 +2400,7 @@ public class SEFAZEnums {
    * A constante {@link #EX} representa o código utilizado em alguns campos de UF para endereços no exterior, e por isso não possui código IBGE nem URLs de NFC-e.
    * </p>
    */
-  public enum SEFAZ_uf {
+  public enum SEFAZ_uf implements SEFAZEnum<SEFAZ_uf> {
     AC("12", null, null, null, null),
     AL("27", null, null, null, null),
     AP("16", null, null, null, null),
@@ -2856,7 +2436,7 @@ public class SEFAZEnums {
     EX(null, null, null, null, null);
 
     /** Código IBGE da UF (ou {@code null} para EX). */
-    private final String ibgeCode;
+    private final String xmlData;
 
     /** URL base do QR-Code NFC-e em produção (pode ser {@code null}). */
     private final String qrCodeProdUrl;
@@ -2892,52 +2472,73 @@ public class SEFAZEnums {
      * A ideia é que, em um primeiro momento, as constantes sejam declaradas com {@code null} para todas as URLs, e o integrador vá preenchendo essas informações aos poucos, à medida que confirmar os endereços corretos diretamente na documentação de cada SEFAZ estadual.
      * </p>
      *
-     * @param ibgeCode Código IBGE da UF, ou {@code null} para EX.
+     * @param xmlData Código IBGE da UF, ou {@code null} para EX.
      * @param qrCodeProdUrl URL base do QR-Code NFC-e em produção (pode ser {@code null}).
      * @param qrCodeHomUrl URL base do QR-Code NFC-e em homologação (pode ser {@code null}).
      * @param consultaProdUrl URL de consulta pública da NFC-e em produção (pode ser {@code null}).
      * @param consultaHomUrl URL de consulta pública da NFC-e em homologação (pode ser {@code null}).
      */
-    SEFAZ_uf(String ibgeCode, String qrCodeProdUrl, String qrCodeHomUrl, String consultaProdUrl, String consultaHomUrl) {
-      this.ibgeCode = ibgeCode;
+    SEFAZ_uf(String xmlData, String qrCodeProdUrl, String qrCodeHomUrl, String consultaProdUrl, String consultaHomUrl) {
+      this.xmlData = xmlData;
       this.qrCodeProdUrl = qrCodeProdUrl;
       this.qrCodeHomUrl = qrCodeHomUrl;
       this.consultaProdUrl = consultaProdUrl;
       this.consultaHomUrl = consultaHomUrl;
     }
 
-    public String getIBGECode() {
-      return ibgeCode;
-    }
-
+    /**
+     * # uRL base do QR-Code NFC-e em produção (pode ser {@code null}).
+     *
+     * @return the uRL base do QR-Code NFC-e em produção (pode ser {@code null})
+     */
     public String getQrCodeProdUrl() {
       return qrCodeProdUrl;
     }
 
+    /**
+     * # uRL base do QR-Code NFC-e em homologação (pode ser {@code null}).
+     *
+     * @return the uRL base do QR-Code NFC-e em homologação (pode ser {@code null})
+     */
     public String getQrCodeHomUrl() {
       return qrCodeHomUrl;
     }
 
+    /**
+     * # uRL de consulta pública da NFC-e em produção (pode ser {@code null}).
+     *
+     * @return the uRL de consulta pública da NFC-e em produção (pode ser {@code null})
+     */
     public String getConsultaProdUrl() {
       return consultaProdUrl;
     }
 
+    /**
+     * # uRL de consulta pública da NFC-e em homologação (pode ser {@code null}).
+     *
+     * @return the uRL de consulta pública da NFC-e em homologação (pode ser {@code null})
+     */
     public String getConsultaHomUrl() {
       return consultaHomUrl;
     }
 
-    /** Sigla da UF (AC, AL, SP, EX, etc.). */
+    /**
+     * Sigla da UF (AC, AL, SP, EX, etc.).
+     *
+     * @return the acronym
+     */
     public String getAcronym() {
       return name();
     }
 
-    public static SEFAZ_uf valueOfIBGECode(String ibgeCode) {
-      for (SEFAZ_uf uf : values()) {
-        if (ibgeCode != null && ibgeCode.equals(uf.getIBGECode())) {
-          return uf;
-        }
-      }
-      return null;
+    /**
+     * Gets the XML data.
+     *
+     * @return the XML data
+     */
+    @Override
+    public String getXmlData() {
+      return this.xmlData;
     }
   }
 
@@ -2961,7 +2562,7 @@ public class SEFAZEnums {
    * Cada autorizador tem espaço para armazenar as URLs principais dos serviços de autorização de NF-e e NFC-e, em produção e homologação. Inicialmente, muitas delas podem ser {@code null} e devem ser preenchidas manualmente conforme a documentação oficial de cada autorizador.
    * </p>
    */
-  public enum SEFAZ_WebServices {
+  public enum SEFAZ_WebServices implements SEFAZEnum<SEFAZ_WebServices> {
 
     AM("13"),
     BA("29"),
@@ -3035,21 +2636,25 @@ public class SEFAZEnums {
      */
     AN(null);
 
-    private final String ibgeCode;
+    /**
+     * Código do IBGE utilizado no XML.
+     */
+    private final String xmlData;
 
     /**
      * Construtor da enum de autorizadores de WebService.
      *
-     * @param ibgeCode Código IBGE da UF quando o autorizador é estadual (ex.: "35" para SP) ou {@code null} para autorizadores virtuais / Ambiente Nacional (SVAN, SVRS, SVCAN, SVCRS, AN).
+     * @param xmlData Código IBGE da UF quando o autorizador é estadual (ex.: "35" para SP) ou {@code null} para autorizadores virtuais / Ambiente Nacional (SVAN, SVRS, SVCAN, SVCRS, AN).
      */
-    SEFAZ_WebServices(String ibgeCode) {
-      this.ibgeCode = ibgeCode;
+    SEFAZ_WebServices(String xmlData) {
+      this.xmlData = xmlData;
     }
 
-    public String getIBGECode() {
-      return this.ibgeCode;
-    }
-
+    /**
+     * Gets the acronym.
+     *
+     * @return the acronym
+     */
     public String getAcronym() {
       return this.name();
     }
@@ -3057,11 +2662,21 @@ public class SEFAZEnums {
     public static SEFAZ_WebServices valueOfIBGECode(String ibgeCode) {
       if (ibgeCode == null) return null;
       for (SEFAZ_WebServices service : SEFAZ_WebServices.values()) {
-        if (ibgeCode.equals(service.getIBGECode())) {
+        if (ibgeCode.equals(service.getXmlData())) {
           return service;
         }
       }
       return null;
+    }
+
+    /**
+     * # código do IBGE utilizado no XML.
+     *
+     * @return the código do IBGE utilizado no XML
+     */
+    @Override
+    public String getXmlData() {
+      return xmlData;
     }
   }
 

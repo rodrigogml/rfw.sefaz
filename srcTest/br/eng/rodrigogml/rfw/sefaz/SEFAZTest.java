@@ -146,30 +146,30 @@ public class SEFAZTest {
     final String emitXNome = RFW.getDevProperty("rfw.sefaz.nfce.xnome");
     final String emitXFant = RFW.getDevProperty("rfw.sefaz.nfce.xfant");
     final String emitIE = RFW.getDevProperty("rfw.sefaz.nfce.ie");
-    final String emitCRT = SEFAZ_CRT.REGIME_NORMAL.getXMLData();
+    final String emitCRT = SEFAZ_CRT.REGIME_NORMAL.getXmlData();
 
     // Dados de preenchimento do documento
     final LocalDateTime emissionDate = RFW.getDateTime();
     final String cNF = "87654321";
     final SEFAZ_tpAmb tpAmb = SEFAZ_tpAmb.HOMOLOGACAO;
-    final String tpEmis = SEFAZ_tpEmis.EMISSAO_NORMAL.getXMLData();
+    final String tpEmis = SEFAZ_tpEmis.EMISSAO_NORMAL.getXmlData();
     final DateTimeFormatter aammFormatter = DateTimeFormatter.ofPattern("yyMM", RFW.getLocale());
     final String aamm = emissionDate.atZone(RFW.getZoneId()).format(aammFormatter);
-    final String chaveSemDV = cUF + aamm + emitCnpj + SEFAZ_mod.NFCE_MODELO_65.getXMLData() + String.format(RFW.getLocale(), "%03d", serie) + String.format(Locale.ROOT, "%09d", numero) + tpEmis + cNF;
+    final String chaveSemDV = cUF + aamm + emitCnpj + SEFAZ_mod.NFCE_MODELO_65.getXmlData() + String.format(RFW.getLocale(), "%03d", serie) + String.format(Locale.ROOT, "%09d", numero) + tpEmis + cNF;
     final String dv = RUValueValidation.calcDVDANFeV400(chaveSemDV);
     final String chave = chaveSemDV + dv;
     final String cMunFG = "3509502";
 
     TEnviNFe enviNFe = new TEnviNFe();
-    enviNFe.setVersao(SEFAZ_versao.VERSAO_4_00.getXMLData());
+    enviNFe.setVersao(SEFAZ_versao.VERSAO_4_00.getXmlData());
     enviNFe.setIdLote("000000000000001");
-    enviNFe.setIndSinc(SEFAZ_indSinc.SOLICITA_SINCRONO.getXMLData());
+    enviNFe.setIndSinc(SEFAZ_indSinc.SOLICITA_SINCRONO.getXmlData());
 
     TNFe nfe = new TNFe();
     enviNFe.getNFe().add(nfe);
 
     TNFe.InfNFe infNFe = new TNFe.InfNFe();
-    infNFe.setVersao(SEFAZ_versao.VERSAO_4_00.getXMLData());
+    infNFe.setVersao(SEFAZ_versao.VERSAO_4_00.getXmlData());
     infNFe.setId("NFe" + chave);
     nfe.setInfNFe(infNFe);
 
@@ -179,22 +179,22 @@ public class SEFAZTest {
     ide.setCUF(cUF);
     ide.setCNF(cNF);
     ide.setNatOp("VENDA AO CONSUMIDOR");
-    ide.setMod(SEFAZ_mod.NFCE_MODELO_65.getXMLData());
+    ide.setMod(SEFAZ_mod.NFCE_MODELO_65.getXmlData());
     ide.setSerie(Integer.toString(serie));
     ide.setNNF(Integer.toString(numero));
     ide.setDhEmi(dhEmiUtc);
-    ide.setTpNF(SEFAZ_tpNF.SAIDA.getXMLData());
-    ide.setIdDest(SEFAZ_idDest.OPERACAO_INTERNA.getXMLData());
+    ide.setTpNF(SEFAZ_tpNF.SAIDA.getXmlData());
+    ide.setIdDest(SEFAZ_idDest.OPERACAO_INTERNA.getXmlData());
     ide.setCMunFG(cMunFG);
-    ide.setTpImp(SEFAZ_tpImp.DANFE_NFCE.getXMLData());
+    ide.setTpImp(SEFAZ_tpImp.DANFE_NFCE.getXmlData());
     ide.setTpEmis(tpEmis);
     ide.setCDV(dv);
-    ide.setTpAmb(tpAmb.getXMLData());
-    ide.setFinNFe(SEFAZ_finNFe.NFE_NORMAL.getXMLData());
-    ide.setIndFinal(SEFAZ_indFinal.CONSUMIDOR_FINAL.getXMLData());
-    ide.setIndPres(SEFAZ_indPres.OPERACAO_PRESENCIAL.getXMLData());
-    ide.setIndIntermed(SEFAZ_indIntermed.SEM_INTERMEDIADOR.getXMLData());
-    ide.setProcEmi(SEFAZ_procEmi.EMISSAO_CONTRIBUINTE.getXMLData());
+    ide.setTpAmb(tpAmb.getXmlData());
+    ide.setFinNFe(SEFAZ_finNFe.NFE_NORMAL.getXmlData());
+    ide.setIndFinal(SEFAZ_indFinal.CONSUMIDOR_FINAL.getXmlData());
+    ide.setIndPres(SEFAZ_indPres.OPERACAO_PRESENCIAL.getXmlData());
+    ide.setIndIntermed(SEFAZ_indIntermed.SEM_INTERMEDIADOR.getXmlData());
+    ide.setProcEmi(SEFAZ_procEmi.EMISSAO_CONTRIBUINTE.getXmlData());
     ide.setVerProc("RFW-TESTE 1.0.0");
     infNFe.setIde(ide);
 
@@ -279,13 +279,13 @@ public class SEFAZTest {
 
     TNFe.InfNFe.Det.Imposto.PIS pis = new TNFe.InfNFe.Det.Imposto.PIS();
     TNFe.InfNFe.Det.Imposto.PIS.PISNT pisnt = new TNFe.InfNFe.Det.Imposto.PIS.PISNT();
-    pisnt.setCST(SEFAZ_CST_PIS.CST_04_OPERACAO_TRIBUTAVEL_MONOFASICA_ALIQUOTA_ZERO.getXMLData());
+    pisnt.setCST(SEFAZ_CST_PIS.CST_04_OPERACAO_TRIBUTAVEL_MONOFASICA_ALIQUOTA_ZERO.getXmlData());
     pis.setPISNT(pisnt);
     imposto.getContent().add(SEFAZUtils.auxCreateJAXBElement("PIS", pis));
 
     TNFe.InfNFe.Det.Imposto.COFINS cofins = new TNFe.InfNFe.Det.Imposto.COFINS();
     TNFe.InfNFe.Det.Imposto.COFINS.COFINSNT cofinsnt = new TNFe.InfNFe.Det.Imposto.COFINS.COFINSNT();
-    cofinsnt.setCST(SEFAZ_CST_COFINS.CST_04_OPERACAO_TRIBUTAVEL_MONOFASICA_ALIQUOTA_ZERO.getXMLData());
+    cofinsnt.setCST(SEFAZ_CST_COFINS.CST_04_OPERACAO_TRIBUTAVEL_MONOFASICA_ALIQUOTA_ZERO.getXmlData());
     cofins.setCOFINSNT(cofinsnt);
     imposto.getContent().add(SEFAZUtils.auxCreateJAXBElement("COFINS", cofins));
     det.setImposto(imposto);

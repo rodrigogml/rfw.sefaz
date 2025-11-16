@@ -52,6 +52,7 @@ import br.eng.rodrigogml.rfw.kernel.utils.RUCert;
 import br.eng.rodrigogml.rfw.kernel.utils.RUFile;
 import br.eng.rodrigogml.rfw.kernel.utils.RUIO;
 import br.eng.rodrigogml.rfw.sefaz.SEFAZDefinitions.SefazContingency;
+import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums;
 import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_WebServices;
 import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_mod;
 import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_tpAmb;
@@ -361,7 +362,7 @@ public class SEFAZ {
     SEFAZ_mod mod = null;
     try {
       String value = root.getNFe().get(0).getInfNFe().getIde().getMod();
-      mod = SEFAZ_mod.valueOfXMLData(value);
+      mod = SEFAZEnums.valueOfXMLData(SEFAZ_mod.class, value);
     } catch (Exception e) {
     }
     if (mod == null) throw new RFWCriticalException("Falha ao detectar o modelo da NF!");
@@ -373,7 +374,7 @@ public class SEFAZ {
     for (int i = 1; i < root.getNFe().size(); i++) {
       TNFe tNFe = root.getNFe().get(i);
       try {
-        if (!mod.getXMLData().equals(tNFe.getInfNFe().getIde().getMod())) {
+        if (!mod.getXmlData().equals(tNFe.getInfNFe().getIde().getMod())) {
           throw new RFWCriticalException("Não é permitido misturar diferentes modelos de documentos no mesmo Lote para Autorização! Modelo do primeiro documento: '${0}'.", new String[] { RFWBundle.get(mod) });
         }
       } catch (Exception e) {
@@ -1263,7 +1264,7 @@ public class SEFAZ {
     PreProcess.requiredNonNullMatch(chaveNF, "\\d{44}", "É esperada uma chave da NFe válida com 44 dígitos, sem pontuação");
     TConsSitNFe root = new TConsSitNFe();
     root.setVersao("4.00");
-    root.setTpAmb(this.env.getXMLData());
+    root.setTpAmb(this.env.getXmlData());
     root.setChNFe(chaveNF);
     root.setXServ("CONSULTAR");
     return SEFAZUtils.readXMLToObject(nfeConsultaNFV400asXML(root), TRetConsSitNFe.class);
@@ -1281,7 +1282,7 @@ public class SEFAZ {
     PreProcess.requiredNonNullMatch(chaveNF, "\\d{44}", "É esperada uma chave da NFe válida com 44 dígitos, sem pontuação");
     TConsSitNFe root = new TConsSitNFe();
     root.setVersao("4.00");
-    root.setTpAmb(this.env.getXMLData());
+    root.setTpAmb(this.env.getXmlData());
     root.setChNFe(chaveNF);
     root.setXServ("CONSULTAR");
     return nfeConsultaNFV400asXML(root);
