@@ -8,11 +8,11 @@ import br.eng.rodrigogml.rfw.kernel.vo.RFWVO;
 import br.eng.rodrigogml.rfw.orm.dao.annotations.dao.RFWDAOAnnotation;
 
 /**
- * VO da tag {@code <enderEmit>} (Grupo C - Endereço do Emitente da NF-e).
+ * VO da tag {@code <enderEmit>} (Grupo C - EndereÃ§o do Emitente da NF-e).
  * <p>
- * Representa o endereço completo do emitente, incluindo logradouro, número, complemento, bairro, município, UF, CEP, país e telefone.
+ * Representa o endereÃ§o completo do emitente, incluindo logradouro, nÃºmero, complemento, bairro, municÃ­pio, UF, CEP, paÃ­s e telefone.
  * <p>
- * Observação sobre obrigatoriedade: embora a documentação da NF-e indique a obrigatoriedade de vários campos (através das colunas "Ele" e "Ocor."), neste VO todos os atributos estão marcados com {@code required = false} nas anotações de metadados, por solicitação explícita.
+ * ObservaÃ§Ã£o sobre obrigatoriedade: embora a documentaÃ§Ã£o da NF-e indique a obrigatoriedade de vÃ¡rios campos (atravÃ©s das colunas "Ele" e "Ocor."), neste VO todos os atributos estÃ£o marcados com {@code required = false} nas anotaÃ§Ãµes de metadados, por solicitaÃ§Ã£o explÃ­cita.
  */
 @RFWDAOAnnotation(schema = "_RFW.SEFAZ", table = "sefaz_enderemit")
 public class SEFAZEnderEmitVO extends RFWVO {
@@ -28,87 +28,87 @@ public class SEFAZEnderEmitVO extends RFWVO {
   /**
    * Logradouro (id: C06).
    * <p>
-   * Tipo: C, tamanho: 2-60, ocorrência: 1-1, Ele: E (obrigatório).
+   * Tipo: C, tamanho: 2-60, ocorrÃªncia: 1-1, Ele: E (obrigatÃ³rio).
    */
   @RFWMetaStringField(caption = "Logradouro do emitente", required = false, maxLength = 60, minLength = 2, preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
   private String xlgr;
 
   /**
-   * Número (id: C07).
+   * NÃºmero (id: C07).
    * <p>
-   * Tipo: C, tamanho: 1-60, ocorrência: 1-1, Ele: E (obrigatório).
+   * Tipo: C, tamanho: 1-60, ocorrÃªncia: 1-1, Ele: E (obrigatÃ³rio).
    */
-  @RFWMetaStringField(caption = "Número do endereço do emitente", required = false, maxLength = 60, minLength = 1, preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
+  @RFWMetaStringField(caption = "NÃºmero do endereÃ§o do emitente", required = false, maxLength = 60, minLength = 1, preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
   private String nro;
 
   /**
    * Complemento (id: C08).
    * <p>
-   * Tipo: C, tamanho: 1-60, ocorrência: 0-1, Ele: E (opcional).
+   * Tipo: C, tamanho: 1-60, ocorrÃªncia: 0-1, Ele: E (opcional).
    */
-  @RFWMetaStringField(caption = "Complemento do endereço do emitente", required = false, maxLength = 60, minLength = 1, preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
+  @RFWMetaStringField(caption = "Complemento do endereÃ§o do emitente", required = false, maxLength = 60, minLength = 1, preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
   private String xcpl;
 
   /**
    * Bairro (id: C09).
    * <p>
-   * Tipo: C, tamanho: 2-60, ocorrência: 1-1, Ele: E (obrigatório).
+   * Tipo: C, tamanho: 2-60, ocorrÃªncia: 1-1, Ele: E (obrigatÃ³rio).
    */
   @RFWMetaStringField(caption = "Bairro do emitente", required = false, maxLength = 60, minLength = 2, preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
   private String xbairro;
 
   /**
-   * Nome do município (id: C11).
+   * Nome do municÃ­pio (id: C11).
    * <p>
-   * Tipo: C, tamanho: 2-60, ocorrência: 1-1, Ele: E (obrigatório).
+   * Tipo: C, tamanho: 2-60, ocorrÃªncia: 1-1, Ele: E (obrigatÃ³rio).
    */
-  @RFWMetaStringField(caption = "Nome do município", required = false, maxLength = 60, minLength = 2, preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
+  @RFWMetaStringField(caption = "Nome do municÃ­pio", required = false, maxLength = 60, minLength = 2, preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
   private String xmun;
 
   /**
    * Sigla da UF (id: C12).
    * <p>
-   * Tipo: C, tamanho: 2, ocorrência: 1-1, Ele: E (obrigatório).
+   * Tipo: C, tamanho: 2, ocorrÃªncia: 1-1, Ele: E (obrigatÃ³rio).
    */
   @RFWMetaStringField(caption = "UF do emitente", required = false, maxLength = 2, minLength = 2, preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
   private String uf;
 
   /**
-   * Código do município (id: C10). Agora representado como String com validação de dígitos.
+   * CÃ³digo do municÃ­pio (id: C10). Agora representado como String com validaÃ§Ã£o de dÃ­gitos.
    */
-  @RFWMetaStringField(caption = "Código do município (IBGE)", required = false, maxLength = 7, pattern = "^[0-9]{7}$", preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
+  @RFWMetaStringField(caption = "CÃ³digo do municÃ­pio (IBGE)", required = false, maxLength = 7, pattern = "^[0-9]{7}$", preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
   private String cmun;
 
   /**
-   * CEP do emitente (id: C13). Agora representado como String com validação numérica.
+   * CEP do emitente (id: C13). Agora representado como String com validaÃ§Ã£o numÃ©rica.
    */
   @RFWMetaStringField(caption = "CEP do emitente", required = false, maxLength = 8, pattern = "^[0-9]{8}$", preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
   private String cep;
 
   /**
-   * Código do país (id: C14). Agora representado como String com validação numérica.
+   * CÃ³digo do paÃ­s (id: C14). Agora representado como String com validaÃ§Ã£o numÃ©rica.
    */
-  @RFWMetaStringField(caption = "Código do país", required = false, maxLength = 4, pattern = "^[0-9]{1,4}$", preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
+  @RFWMetaStringField(caption = "CÃ³digo do paÃ­s", required = false, maxLength = 4, pattern = "^[0-9]{1,4}$", preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
   private String cpais;
 
   /**
-   * Telefone do emitente (id: C16). Agora representado como String com validação numérica.
+   * Telefone do emitente (id: C16). Agora representado como String com validaÃ§Ã£o numÃ©rica.
    */
   @RFWMetaStringField(caption = "Telefone do emitente", required = false, maxLength = 14, pattern = "^[0-9]{6,14}$", preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
   private String fone;
 
   /**
-   * Nome do país (id: C15).
+   * Nome do paÃ­s (id: C15).
    * <p>
-   * Tipo: C, tamanho: 1-60, ocorrência: 0-1, Ele: E (opcional). Normalmente preenchido como "Brasil" ou "BRASIL".
+   * Tipo: C, tamanho: 1-60, ocorrÃªncia: 0-1, Ele: E (opcional). Normalmente preenchido como "Brasil" ou "BRASIL".
    */
-  @RFWMetaStringField(caption = "Nome do país", required = false, maxLength = 60, minLength = 1, preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
+  @RFWMetaStringField(caption = "Nome do paÃ­s", required = false, maxLength = 60, minLength = 1, preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
   private String xpais;
 
   /**
    * # logradouro (id: C06).
    * <p>
-   * Tipo: C, tamanho: 2-60, ocorrência: 1-1, Ele: E (obrigatório).
+   * Tipo: C, tamanho: 2-60, ocorrÃªncia: 1-1, Ele: E (obrigatÃ³rio).
    *
    * @return the logradouro (id: C06)
    */
@@ -119,7 +119,7 @@ public class SEFAZEnderEmitVO extends RFWVO {
   /**
    * # logradouro (id: C06).
    * <p>
-   * Tipo: C, tamanho: 2-60, ocorrência: 1-1, Ele: E (obrigatório).
+   * Tipo: C, tamanho: 2-60, ocorrÃªncia: 1-1, Ele: E (obrigatÃ³rio).
    *
    * @param xlgr the new logradouro (id: C06)
    */
@@ -128,22 +128,22 @@ public class SEFAZEnderEmitVO extends RFWVO {
   }
 
   /**
-   * # número (id: C07).
+   * # nÃºmero (id: C07).
    * <p>
-   * Tipo: C, tamanho: 1-60, ocorrência: 1-1, Ele: E (obrigatório).
+   * Tipo: C, tamanho: 1-60, ocorrÃªncia: 1-1, Ele: E (obrigatÃ³rio).
    *
-   * @return the número (id: C07)
+   * @return the nÃºmero (id: C07)
    */
   public String getNro() {
     return nro;
   }
 
   /**
-   * # número (id: C07).
+   * # nÃºmero (id: C07).
    * <p>
-   * Tipo: C, tamanho: 1-60, ocorrência: 1-1, Ele: E (obrigatório).
+   * Tipo: C, tamanho: 1-60, ocorrÃªncia: 1-1, Ele: E (obrigatÃ³rio).
    *
-   * @param nro the new número (id: C07)
+   * @param nro the new nÃºmero (id: C07)
    */
   public void setNro(String nro) {
     this.nro = nro;
@@ -152,7 +152,7 @@ public class SEFAZEnderEmitVO extends RFWVO {
   /**
    * # complemento (id: C08).
    * <p>
-   * Tipo: C, tamanho: 1-60, ocorrência: 0-1, Ele: E (opcional).
+   * Tipo: C, tamanho: 1-60, ocorrÃªncia: 0-1, Ele: E (opcional).
    *
    * @return the complemento (id: C08)
    */
@@ -163,7 +163,7 @@ public class SEFAZEnderEmitVO extends RFWVO {
   /**
    * # complemento (id: C08).
    * <p>
-   * Tipo: C, tamanho: 1-60, ocorrência: 0-1, Ele: E (opcional).
+   * Tipo: C, tamanho: 1-60, ocorrÃªncia: 0-1, Ele: E (opcional).
    *
    * @param xcpl the new complemento (id: C08)
    */
@@ -174,7 +174,7 @@ public class SEFAZEnderEmitVO extends RFWVO {
   /**
    * # bairro (id: C09).
    * <p>
-   * Tipo: C, tamanho: 2-60, ocorrência: 1-1, Ele: E (obrigatório).
+   * Tipo: C, tamanho: 2-60, ocorrÃªncia: 1-1, Ele: E (obrigatÃ³rio).
    *
    * @return the bairro (id: C09)
    */
@@ -185,7 +185,7 @@ public class SEFAZEnderEmitVO extends RFWVO {
   /**
    * # bairro (id: C09).
    * <p>
-   * Tipo: C, tamanho: 2-60, ocorrência: 1-1, Ele: E (obrigatório).
+   * Tipo: C, tamanho: 2-60, ocorrÃªncia: 1-1, Ele: E (obrigatÃ³rio).
    *
    * @param xbairro the new bairro (id: C09)
    */
@@ -194,22 +194,22 @@ public class SEFAZEnderEmitVO extends RFWVO {
   }
 
   /**
-   * # nome do município (id: C11).
+   * # nome do municÃ­pio (id: C11).
    * <p>
-   * Tipo: C, tamanho: 2-60, ocorrência: 1-1, Ele: E (obrigatório).
+   * Tipo: C, tamanho: 2-60, ocorrÃªncia: 1-1, Ele: E (obrigatÃ³rio).
    *
-   * @return the nome do município (id: C11)
+   * @return the nome do municÃ­pio (id: C11)
    */
   public String getXmun() {
     return xmun;
   }
 
   /**
-   * # nome do município (id: C11).
+   * # nome do municÃ­pio (id: C11).
    * <p>
-   * Tipo: C, tamanho: 2-60, ocorrência: 1-1, Ele: E (obrigatório).
+   * Tipo: C, tamanho: 2-60, ocorrÃªncia: 1-1, Ele: E (obrigatÃ³rio).
    *
-   * @param xmun the new nome do município (id: C11)
+   * @param xmun the new nome do municÃ­pio (id: C11)
    */
   public void setXmun(String xmun) {
     this.xmun = xmun;
@@ -218,7 +218,7 @@ public class SEFAZEnderEmitVO extends RFWVO {
   /**
    * # sigla da UF (id: C12).
    * <p>
-   * Tipo: C, tamanho: 2, ocorrência: 1-1, Ele: E (obrigatório).
+   * Tipo: C, tamanho: 2, ocorrÃªncia: 1-1, Ele: E (obrigatÃ³rio).
    *
    * @return the sigla da UF (id: C12)
    */
@@ -229,7 +229,7 @@ public class SEFAZEnderEmitVO extends RFWVO {
   /**
    * # sigla da UF (id: C12).
    * <p>
-   * Tipo: C, tamanho: 2, ocorrência: 1-1, Ele: E (obrigatório).
+   * Tipo: C, tamanho: 2, ocorrÃªncia: 1-1, Ele: E (obrigatÃ³rio).
    *
    * @param uf the new sigla da UF (id: C12)
    */
@@ -238,25 +238,25 @@ public class SEFAZEnderEmitVO extends RFWVO {
   }
 
   /**
-   * # código do município (id: C10). Agora representado como String com validação de dígitos.
+   * # cÃ³digo do municÃ­pio (id: C10). Agora representado como String com validaÃ§Ã£o de dÃ­gitos.
    *
-   * @return the código do município (id: C10)
+   * @return the cÃ³digo do municÃ­pio (id: C10)
    */
   public String getCmun() {
     return cmun;
   }
 
   /**
-   * # código do município (id: C10). Agora representado como String com validação de dígitos.
+   * # cÃ³digo do municÃ­pio (id: C10). Agora representado como String com validaÃ§Ã£o de dÃ­gitos.
    *
-   * @param cmun the new código do município (id: C10)
+   * @param cmun the new cÃ³digo do municÃ­pio (id: C10)
    */
   public void setCmun(String cmun) {
     this.cmun = cmun;
   }
 
   /**
-   * # cEP do emitente (id: C13). Agora representado como String com validação numérica.
+   * # cEP do emitente (id: C13). Agora representado como String com validaÃ§Ã£o numÃ©rica.
    *
    * @return the cEP do emitente (id: C13)
    */
@@ -265,7 +265,7 @@ public class SEFAZEnderEmitVO extends RFWVO {
   }
 
   /**
-   * # cEP do emitente (id: C13). Agora representado como String com validação numérica.
+   * # cEP do emitente (id: C13). Agora representado como String com validaÃ§Ã£o numÃ©rica.
    *
    * @param cep the new cEP do emitente (id: C13)
    */
@@ -274,25 +274,25 @@ public class SEFAZEnderEmitVO extends RFWVO {
   }
 
   /**
-   * # código do país (id: C14). Agora representado como String com validação numérica.
+   * # cÃ³digo do paÃ­s (id: C14). Agora representado como String com validaÃ§Ã£o numÃ©rica.
    *
-   * @return the código do país (id: C14)
+   * @return the cÃ³digo do paÃ­s (id: C14)
    */
   public String getCpais() {
     return cpais;
   }
 
   /**
-   * # código do país (id: C14). Agora representado como String com validação numérica.
+   * # cÃ³digo do paÃ­s (id: C14). Agora representado como String com validaÃ§Ã£o numÃ©rica.
    *
-   * @param cpais the new código do país (id: C14)
+   * @param cpais the new cÃ³digo do paÃ­s (id: C14)
    */
   public void setCpais(String cpais) {
     this.cpais = cpais;
   }
 
   /**
-   * # telefone do emitente (id: C16). Agora representado como String com validação numérica.
+   * # telefone do emitente (id: C16). Agora representado como String com validaÃ§Ã£o numÃ©rica.
    *
    * @return the telefone do emitente (id: C16)
    */
@@ -301,7 +301,7 @@ public class SEFAZEnderEmitVO extends RFWVO {
   }
 
   /**
-   * # telefone do emitente (id: C16). Agora representado como String com validação numérica.
+   * # telefone do emitente (id: C16). Agora representado como String com validaÃ§Ã£o numÃ©rica.
    *
    * @param fone the new telefone do emitente (id: C16)
    */
@@ -310,22 +310,22 @@ public class SEFAZEnderEmitVO extends RFWVO {
   }
 
   /**
-   * # nome do país (id: C15).
+   * # nome do paÃ­s (id: C15).
    * <p>
-   * Tipo: C, tamanho: 1-60, ocorrência: 0-1, Ele: E (opcional). Normalmente preenchido como "Brasil" ou "BRASIL".
+   * Tipo: C, tamanho: 1-60, ocorrÃªncia: 0-1, Ele: E (opcional). Normalmente preenchido como "Brasil" ou "BRASIL".
    *
-   * @return the nome do país (id: C15)
+   * @return the nome do paÃ­s (id: C15)
    */
   public String getXpais() {
     return xpais;
   }
 
   /**
-   * # nome do país (id: C15).
+   * # nome do paÃ­s (id: C15).
    * <p>
-   * Tipo: C, tamanho: 1-60, ocorrência: 0-1, Ele: E (opcional). Normalmente preenchido como "Brasil" ou "BRASIL".
+   * Tipo: C, tamanho: 1-60, ocorrÃªncia: 0-1, Ele: E (opcional). Normalmente preenchido como "Brasil" ou "BRASIL".
    *
-   * @param xpais the new nome do país (id: C15)
+   * @param xpais the new nome do paÃ­s (id: C15)
    */
   public void setXpais(String xpais) {
     this.xpais = xpais;

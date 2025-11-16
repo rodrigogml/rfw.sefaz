@@ -22,19 +22,19 @@ public class SEFAZReboqueVO extends RFWVO {
   private SEFAZTranspVO transpVO = null;
 
   /**
-   * X23 - placa: Placa do Veículo. Tipo: C, Tamanho: 7, Ocorrência: 1-1.
+   * X23 - placa: Placa do VeÃ­culo. Tipo: C, Tamanho: 7, OcorrÃªncia: 1-1.
    */
   @RFWMetaStringField(caption = "placa", required = false, unique = false, maxLength = 7, minLength = 7, preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
   private String placa;
 
   /**
-   * X24 - UF: Sigla da UF. Tipo: C, Tamanho: 2, Ocorrência: 1-1. Informar "EX" se exterior.
+   * X24 - UF: Sigla da UF. Tipo: C, Tamanho: 2, OcorrÃªncia: 1-1. Informar "EX" se exterior.
    */
   @RFWMetaStringField(caption = "UF", required = false, unique = false, maxLength = 2, minLength = 2, preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
   private String uf;
 
   /**
-   * X25 - RNTC: Registro Nacional do Transportador de Carga (ANTT). Tipo: C, Tamanho: 1-20, Ocorrência: 0-1.
+   * X25 - RNTC: Registro Nacional do Transportador de Carga (ANTT). Tipo: C, Tamanho: 1-20, OcorrÃªncia: 0-1.
    */
   @RFWMetaStringField(caption = "RNTC", required = false, unique = false, maxLength = 20, minLength = 1, preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
   private String rntc;
@@ -58,25 +58,25 @@ public class SEFAZReboqueVO extends RFWVO {
   }
 
   /**
-   * # x23 - placa: Placa do Veículo. Tipo: C, Tamanho: 7, Ocorrência: 1-1.
+   * # x23 - placa: Placa do VeÃ­culo. Tipo: C, Tamanho: 7, OcorrÃªncia: 1-1.
    *
-   * @return the x23 - placa: Placa do Veículo
+   * @return the x23 - placa: Placa do VeÃ­culo
    */
   public String getPlaca() {
     return placa;
   }
 
   /**
-   * # x23 - placa: Placa do Veículo. Tipo: C, Tamanho: 7, Ocorrência: 1-1.
+   * # x23 - placa: Placa do VeÃ­culo. Tipo: C, Tamanho: 7, OcorrÃªncia: 1-1.
    *
-   * @param placa the new x23 - placa: Placa do Veículo
+   * @param placa the new x23 - placa: Placa do VeÃ­culo
    */
   public void setPlaca(String placa) {
     this.placa = placa;
   }
 
   /**
-   * # x24 - UF: Sigla da UF. Tipo: C, Tamanho: 2, Ocorrência: 1-1. Informar "EX" se exterior.
+   * # x24 - UF: Sigla da UF. Tipo: C, Tamanho: 2, OcorrÃªncia: 1-1. Informar "EX" se exterior.
    *
    * @return the x24 - UF: Sigla da UF
    */
@@ -85,7 +85,7 @@ public class SEFAZReboqueVO extends RFWVO {
   }
 
   /**
-   * # x24 - UF: Sigla da UF. Tipo: C, Tamanho: 2, Ocorrência: 1-1. Informar "EX" se exterior.
+   * # x24 - UF: Sigla da UF. Tipo: C, Tamanho: 2, OcorrÃªncia: 1-1. Informar "EX" se exterior.
    *
    * @param uf the new x24 - UF: Sigla da UF
    */
@@ -94,7 +94,7 @@ public class SEFAZReboqueVO extends RFWVO {
   }
 
   /**
-   * # x25 - RNTC: Registro Nacional do Transportador de Carga (ANTT). Tipo: C, Tamanho: 1-20, Ocorrência: 0-1.
+   * # x25 - RNTC: Registro Nacional do Transportador de Carga (ANTT). Tipo: C, Tamanho: 1-20, OcorrÃªncia: 0-1.
    *
    * @return the x25 - RNTC: Registro Nacional do Transportador de Carga (ANTT)
    */
@@ -103,7 +103,7 @@ public class SEFAZReboqueVO extends RFWVO {
   }
 
   /**
-   * # x25 - RNTC: Registro Nacional do Transportador de Carga (ANTT). Tipo: C, Tamanho: 1-20, Ocorrência: 0-1.
+   * # x25 - RNTC: Registro Nacional do Transportador de Carga (ANTT). Tipo: C, Tamanho: 1-20, OcorrÃªncia: 0-1.
    *
    * @param rntc the new x25 - RNTC: Registro Nacional do Transportador de Carga (ANTT)
    */

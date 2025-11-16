@@ -7,11 +7,11 @@ import br.eng.rodrigogml.rfw.orm.dao.annotations.dao.RFWDAOAnnotation;
 
 /**
  * Description: Classe que representa a estrutura da tag NFe (TAG raiz da NF-e).<br>
- * Tabela: Campo=NFe | Ele=G | Pai=- | Tipo=- | Ocor.=1-1 | Tam.=- | ObservaÁ„o=TAG raiz da NF-e.
+ * Tabela: Campo=NFe | Ele=G | Pai=- | Tipo=- | Ocor.=1-1 | Tam.=- | Observa√ß√£o=TAG raiz da NF-e.
  *
- * N„o possui atributos diretos nesta tabela; elementos filhos ser„o modelados em VOs prÛprios.
+ * N√£o possui atributos diretos nesta tabela; elementos filhos ser√£o modelados em VOs pr√≥prios.
  *
- * @author Rodrigo Leit„o
+ * @author Rodrigo Leit√£o
  * @since (11 de nov. de 2025)
  */
 @RFWDAOAnnotation(schema = "_RFW.SEFAZ", table = "sefaz_nfe")

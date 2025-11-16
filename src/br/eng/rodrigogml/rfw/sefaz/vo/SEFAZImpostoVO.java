@@ -10,11 +10,11 @@ import br.eng.rodrigogml.rfw.kernel.vo.RFWVO;
 import br.eng.rodrigogml.rfw.orm.dao.annotations.dao.RFWDAOAnnotation;
 
 /**
- * Grupo M - Tributos incidentes no Produto ou Serviço (tag imposto / M01). Grupo de tributos do item da NF-e.
+ * Grupo M - Tributos incidentes no Produto ou ServiÃ§o (tag imposto / M01). Grupo de tributos do item da NF-e.
  *
- * Grupo ISSQN mutuamente exclusivo com os grupos ICMS e II. Se o grupo ISSQN for informado, os grupos ICMS e II não serão informados e vice-versa.
+ * Grupo ISSQN mutuamente exclusivo com os grupos ICMS e II. Se o grupo ISSQN for informado, os grupos ICMS e II nÃ£o serÃ£o informados e vice-versa.
  *
- * Observação: a obrigatoriedade dos campos segue o MOC, mas nas annotations o atributo {@code required} é sempre definido como false conforme solicitado.
+ * ObservaÃ§Ã£o: a obrigatoriedade dos campos segue o MOC, mas nas annotations o atributo {@code required} Ã© sempre definido como false conforme solicitado.
  */
 @RFWDAOAnnotation(schema = "_RFW.SEFAZ", table = "sefaz_imposto")
 public class SEFAZImpostoVO extends RFWVO implements Serializable {
@@ -60,7 +60,7 @@ public class SEFAZImpostoVO extends RFWVO implements Serializable {
   /**
    * M02 - vTotTrib. Valor aproximado total de tributos federais, estaduais e municipais. (NT 2013/003)
    *
-   * Ocor.: 0–1 / Tam.: 13v2 / Tipo: N. No MOC o campo é opcional.
+   * Ocor.: 0â€“1 / Tam.: 13v2 / Tipo: N. No MOC o campo Ã© opcional.
    */
   @RFWMetaBigDecimalField(caption = "Valor aproximado total de tributos", required = false, unique = false, scale = 2, absolute = true)
   private BigDecimal vtotTrib;
@@ -84,7 +84,7 @@ public class SEFAZImpostoVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # m02 - vTotTrib. Valor aproximado total de tributos federais, estaduais e municipais. (NT 2013/003) Ocor.: 0–1 / Tam.: 13v2 / Tipo: N. No MOC o campo é opcional.
+   * # m02 - vTotTrib. Valor aproximado total de tributos federais, estaduais e municipais. (NT 2013/003) Ocor.: 0â€“1 / Tam.: 13v2 / Tipo: N. No MOC o campo Ã© opcional.
    *
    * @return the m02 - vTotTrib
    */
@@ -93,7 +93,7 @@ public class SEFAZImpostoVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # m02 - vTotTrib. Valor aproximado total de tributos federais, estaduais e municipais. (NT 2013/003) Ocor.: 0–1 / Tam.: 13v2 / Tipo: N. No MOC o campo é opcional.
+   * # m02 - vTotTrib. Valor aproximado total de tributos federais, estaduais e municipais. (NT 2013/003) Ocor.: 0â€“1 / Tam.: 13v2 / Tipo: N. No MOC o campo Ã© opcional.
    *
    * @param vtotTrib the new m02 - vTotTrib
    */

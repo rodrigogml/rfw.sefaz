@@ -17,13 +17,13 @@ import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_motDesICMS;
 import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_orig;
 
 /**
- * Grupo N - InformaÁıes do ICMS da OperaÁ„o prÛpria e ST (tag ICMS / N01).
+ * Grupo N - Informa√ß√µes do ICMS da Opera√ß√£o pr√≥pria e ST (tag ICMS / N01).
  *
- * Nesta etapa, os campos do grupo ICMS00 (N02) s„o mapeados diretamente neste VO: orig, CST, modBC, vBC, pICMS, vICMS, pFCP, vFCP.
+ * Nesta etapa, os campos do grupo ICMS00 (N02) s√£o mapeados diretamente neste VO: orig, CST, modBC, vBC, pICMS, vICMS, pFCP, vFCP.
  *
- * Informar apenas um dos grupos de tributaÁ„o do ICMS (ICMS00, ICMS10, Ö) (v2.0).
+ * Informar apenas um dos grupos de tributa√ß√£o do ICMS (ICMS00, ICMS10, ‚Ä¶) (v2.0).
  *
- * ObservaÁ„o: nas annotations o atributo {@code required} È sempre definido como false conforme solicitado, mesmo que o MOC defina obrigatoriedade.
+ * Observa√ß√£o: nas annotations o atributo {@code required} √© sempre definido como false conforme solicitado, mesmo que o MOC defina obrigatoriedade.
  */
 @RFWDAOAnnotation(schema = "_RFW.SEFAZ", table = "sefaz_icms")
 public class SEFAZICMSVO extends RFWVO implements Serializable {
@@ -49,442 +49,442 @@ public class SEFAZICMSVO extends RFWVO implements Serializable {
   private SEFAZICMSSTVO icmsSTVO = null;
 
   /**
-   * N11 - orig. Origem da mercadoria. Ocor.: 1ñ1 / Tam.: 1 / Tipo: N. Ver valores em {@link SEFAZ_orig}. <br>
-   * ICMS00: origem da mercadoria para operaÁıes tributadas integralmente. <br>
-   * ICMS10: origem da mercadoria para operaÁıes tributadas com ICMS e ICMS ST. <br>
-   * ICMS20: origem da mercadoria para operaÁıes com reduÁ„o de base de c·lculo. <br>
-   * ICMS30: origem da mercadoria para operaÁıes isentas/n„o tributadas com cobranÁa de ICMS ST. <br>
-   * ICMS40: origem da mercadoria para operaÁıes isentas, n„o tributadas ou com suspens„o de ICMS. <br>
-   * ICMS51: origem da mercadoria para operaÁıes com diferimento do ICMS. <br>
-   * ICMS60: origem da mercadoria em operaÁıes com ICMS cobrado anteriormente por ST. <br>
-   * ICMS70: origem da mercadoria em operaÁıes com reduÁ„o de BC e cobranÁa de ICMS ST. <br>
-   * ICMS90: origem da mercadoria em operaÁıes enquadradas no grupo ìOutrosî (CST 90). <br>
-   * ICMSSN101: origem da mercadoria em operaÁıes do Simples Nacional com CSOSN=101. <br>
-   * ICMSSN102: origem da mercadoria em operaÁıes do Simples Nacional com CSOSN=102, 103, 300 ou 400. <br>
-   * ICMSSN201: origem da mercadoria em operaÁıes do Simples Nacional com CSOSN=201 (permite crÈdito e tem ICMS ST). <br>
-   * ICMSSN202: origem da mercadoria em operaÁıes do Simples Nacional com CSOSN=202 ou 203 (sem crÈdito ou com isenÁ„o, ambas com ST). <br>
-   * ICMSSN500: origem da mercadoria em operaÁıes do Simples Nacional com CSOSN=500, nas quais o ICMS foi cobrado anteriormente por substituiÁ„o tribut·ria ou antecipaÁ„o. <br>
-   * ICMSSN900: origem da mercadoria em operaÁıes do Simples Nacional enquadradas como ìOutrosî (CSOSN=900), tanto para ICMS prÛprio quanto, quando aplic·vel, para ICMS ST.
+   * N11 - orig. Origem da mercadoria. Ocor.: 1‚Äì1 / Tam.: 1 / Tipo: N. Ver valores em {@link SEFAZ_orig}. <br>
+   * ICMS00: origem da mercadoria para opera√ß√µes tributadas integralmente. <br>
+   * ICMS10: origem da mercadoria para opera√ß√µes tributadas com ICMS e ICMS ST. <br>
+   * ICMS20: origem da mercadoria para opera√ß√µes com redu√ß√£o de base de c√°lculo. <br>
+   * ICMS30: origem da mercadoria para opera√ß√µes isentas/n√£o tributadas com cobran√ßa de ICMS ST. <br>
+   * ICMS40: origem da mercadoria para opera√ß√µes isentas, n√£o tributadas ou com suspens√£o de ICMS. <br>
+   * ICMS51: origem da mercadoria para opera√ß√µes com diferimento do ICMS. <br>
+   * ICMS60: origem da mercadoria em opera√ß√µes com ICMS cobrado anteriormente por ST. <br>
+   * ICMS70: origem da mercadoria em opera√ß√µes com redu√ß√£o de BC e cobran√ßa de ICMS ST. <br>
+   * ICMS90: origem da mercadoria em opera√ß√µes enquadradas no grupo ‚ÄúOutros‚Äù (CST 90). <br>
+   * ICMSSN101: origem da mercadoria em opera√ß√µes do Simples Nacional com CSOSN=101. <br>
+   * ICMSSN102: origem da mercadoria em opera√ß√µes do Simples Nacional com CSOSN=102, 103, 300 ou 400. <br>
+   * ICMSSN201: origem da mercadoria em opera√ß√µes do Simples Nacional com CSOSN=201 (permite cr√©dito e tem ICMS ST). <br>
+   * ICMSSN202: origem da mercadoria em opera√ß√µes do Simples Nacional com CSOSN=202 ou 203 (sem cr√©dito ou com isen√ß√£o, ambas com ST). <br>
+   * ICMSSN500: origem da mercadoria em opera√ß√µes do Simples Nacional com CSOSN=500, nas quais o ICMS foi cobrado anteriormente por substitui√ß√£o tribut√°ria ou antecipa√ß√£o. <br>
+   * ICMSSN900: origem da mercadoria em opera√ß√µes do Simples Nacional enquadradas como ‚ÄúOutros‚Äù (CSOSN=900), tanto para ICMS pr√≥prio quanto, quando aplic√°vel, para ICMS ST.
    */
   @RFWMetaEnumField(caption = "Origem da mercadoria", required = false)
   private SEFAZ_orig orig;
 
   /**
-   * N12a - CSOSN. CÛdigo de SituaÁ„o da OperaÁ„o ñ Simples Nacional. Ocor.: 1ñ1 / Tam.: 3 / Tipo: N. <br>
-   * ICMSSN101: CSOSN = 101 ñ Tributada pelo Simples Nacional com permiss„o de crÈdito. <br>
-   * ICMSSN102: CSOSN = 102 ñ Tributada pelo Simples Nacional sem permiss„o de crÈdito. <br>
-   * ICMSSN102: CSOSN = 103 ñ IsenÁ„o do ICMS no Simples Nacional para faixa de receita bruta. <br>
-   * ICMSSN102: CSOSN = 300 ñ Imune. <br>
-   * ICMSSN102: CSOSN = 400 ñ N„o tributada pelo Simples Nacional. <br>
-   * ICMSSN201: CSOSN = 201 ñ Tributada pelo Simples Nacional com permiss„o de crÈdito e com cobranÁa do ICMS por substituiÁ„o tribut·ria. <br>
-   * ICMSSN202: CSOSN = 202 ñ Tributada pelo Simples Nacional sem permiss„o de crÈdito e com cobranÁa do ICMS por substituiÁ„o tribut·ria. <br>
-   * ICMSSN202: CSOSN = 203 ñ IsenÁ„o do ICMS no Simples Nacional para faixa de receita bruta e com cobranÁa do ICMS por substituiÁ„o tribut·ria. <br>
-   * ICMSSN500: CSOSN = 500 ñ ICMS cobrado anteriormente por substituiÁ„o tribut·ria (substituÌdo) ou por antecipaÁ„o. <br>
-   * ICMSSN900: CSOSN = 900 ñ Outros, para operaÁıes do Simples Nacional com regras especÌficas de ICMS prÛprio, reduÁ„o de base, ST e crÈdito conforme a legislaÁ„o estadual. <br>
-   * Mapeado para {@link SEFAZ_CSOSN}. Outros cÛdigos poder„o ser utilizados por outros grupos ICMSSN* conforme forem implementados.
+   * N12a - CSOSN. C√≥digo de Situa√ß√£o da Opera√ß√£o ‚Äì Simples Nacional. Ocor.: 1‚Äì1 / Tam.: 3 / Tipo: N. <br>
+   * ICMSSN101: CSOSN = 101 ‚Äì Tributada pelo Simples Nacional com permiss√£o de cr√©dito. <br>
+   * ICMSSN102: CSOSN = 102 ‚Äì Tributada pelo Simples Nacional sem permiss√£o de cr√©dito. <br>
+   * ICMSSN102: CSOSN = 103 ‚Äì Isen√ß√£o do ICMS no Simples Nacional para faixa de receita bruta. <br>
+   * ICMSSN102: CSOSN = 300 ‚Äì Imune. <br>
+   * ICMSSN102: CSOSN = 400 ‚Äì N√£o tributada pelo Simples Nacional. <br>
+   * ICMSSN201: CSOSN = 201 ‚Äì Tributada pelo Simples Nacional com permiss√£o de cr√©dito e com cobran√ßa do ICMS por substitui√ß√£o tribut√°ria. <br>
+   * ICMSSN202: CSOSN = 202 ‚Äì Tributada pelo Simples Nacional sem permiss√£o de cr√©dito e com cobran√ßa do ICMS por substitui√ß√£o tribut√°ria. <br>
+   * ICMSSN202: CSOSN = 203 ‚Äì Isen√ß√£o do ICMS no Simples Nacional para faixa de receita bruta e com cobran√ßa do ICMS por substitui√ß√£o tribut√°ria. <br>
+   * ICMSSN500: CSOSN = 500 ‚Äì ICMS cobrado anteriormente por substitui√ß√£o tribut√°ria (substitu√≠do) ou por antecipa√ß√£o. <br>
+   * ICMSSN900: CSOSN = 900 ‚Äì Outros, para opera√ß√µes do Simples Nacional com regras espec√≠ficas de ICMS pr√≥prio, redu√ß√£o de base, ST e cr√©dito conforme a legisla√ß√£o estadual. <br>
+   * Mapeado para {@link SEFAZ_CSOSN}. Outros c√≥digos poder√£o ser utilizados por outros grupos ICMSSN* conforme forem implementados.
    */
   @RFWMetaEnumField(caption = "CSOSN (Simples Nacional)", required = false)
   private SEFAZ_CSOSN csosn;
 
   /**
-   * N13 - modBC. Modalidade de determinaÁ„o da BC do ICMS. 0 = Margem Valor Agregado (%); 1 = Pauta (valor); 2 = PreÁo tabelado m·ximo (valor); 3 = Valor da operaÁ„o. Ocor.: 1ñ1 (ou 0ñ1 no ICMS51) / Tam.: 1 / Tipo: N. Ver valores em {@link SEFAZ_modBC}. <br>
-   * ICMS00: modalidade para c·lculo da BC do ICMS prÛprio. <br>
-   * ICMS10: modalidade para c·lculo da BC do ICMS prÛprio (antes da ST). <br>
-   * ICMS20: modalidade para c·lculo da BC do ICMS em operaÁıes com reduÁ„o de BC. <br>
-   * ICMS51: modalidade da BC do ICMS em operaÁıes com diferimento (campo opcional, a critÈrio da UF). <br>
-   * ICMS70: modalidade para c·lculo da BC do ICMS prÛprio em operaÁ„o com reduÁ„o de BC e com ST. <br>
-   * ICMS90: modalidade para c·lculo da BC do ICMS prÛprio em operaÁıes enquadradas como ìOutrosî. <br>
-   * ICMSSN900: modalidade para determinaÁ„o da BC do ICMS prÛprio em operaÁıes do Simples Nacional com CSOSN=900, seguindo as mesmas modalidades 0ñ3 previstas no MOC.
+   * N13 - modBC. Modalidade de determina√ß√£o da BC do ICMS. 0 = Margem Valor Agregado (%); 1 = Pauta (valor); 2 = Pre√ßo tabelado m√°ximo (valor); 3 = Valor da opera√ß√£o. Ocor.: 1‚Äì1 (ou 0‚Äì1 no ICMS51) / Tam.: 1 / Tipo: N. Ver valores em {@link SEFAZ_modBC}. <br>
+   * ICMS00: modalidade para c√°lculo da BC do ICMS pr√≥prio. <br>
+   * ICMS10: modalidade para c√°lculo da BC do ICMS pr√≥prio (antes da ST). <br>
+   * ICMS20: modalidade para c√°lculo da BC do ICMS em opera√ß√µes com redu√ß√£o de BC. <br>
+   * ICMS51: modalidade da BC do ICMS em opera√ß√µes com diferimento (campo opcional, a crit√©rio da UF). <br>
+   * ICMS70: modalidade para c√°lculo da BC do ICMS pr√≥prio em opera√ß√£o com redu√ß√£o de BC e com ST. <br>
+   * ICMS90: modalidade para c√°lculo da BC do ICMS pr√≥prio em opera√ß√µes enquadradas como ‚ÄúOutros‚Äù. <br>
+   * ICMSSN900: modalidade para determina√ß√£o da BC do ICMS pr√≥prio em opera√ß√µes do Simples Nacional com CSOSN=900, seguindo as mesmas modalidades 0‚Äì3 previstas no MOC.
    */
-  @RFWMetaEnumField(caption = "Modalidade de determinaÁ„o da BC do ICMS", required = false)
+  @RFWMetaEnumField(caption = "Modalidade de determina√ß√£o da BC do ICMS", required = false)
   private SEFAZ_modBC modBC;
 
   /**
-   * N15 - vBC. Valor da base de c·lculo do ICMS. Ocor.: 1ñ1 / Tam.: 13v2 / Tipo: N. <br>
-   * ICMS00: valor da BC do ICMS prÛprio. <br>
-   * ICMS10: valor da BC do ICMS prÛprio (antes da substituiÁ„o tribut·ria). <br>
-   * ICMS20: valor da BC do ICMS apÛs a aplicaÁ„o da reduÁ„o de base de c·lculo. <br>
-   * ICMS51: valor da BC do ICMS utilizada para c·lculo do ICMS da operaÁ„o com diferimento. <br>
-   * ICMS70: valor da BC do ICMS prÛprio, j· considerando a reduÁ„o de base de c·lculo. <br>
-   * ICMS90: valor da BC do ICMS prÛprio nas operaÁıes do grupo ìOutrosî. <br>
-   * ICMSSN900: valor da BC do ICMS prÛprio nas operaÁıes do Simples Nacional com CSOSN=900, de acordo com a modalidade de c·lculo definida em modBC.
+   * N15 - vBC. Valor da base de c√°lculo do ICMS. Ocor.: 1‚Äì1 / Tam.: 13v2 / Tipo: N. <br>
+   * ICMS00: valor da BC do ICMS pr√≥prio. <br>
+   * ICMS10: valor da BC do ICMS pr√≥prio (antes da substitui√ß√£o tribut√°ria). <br>
+   * ICMS20: valor da BC do ICMS ap√≥s a aplica√ß√£o da redu√ß√£o de base de c√°lculo. <br>
+   * ICMS51: valor da BC do ICMS utilizada para c√°lculo do ICMS da opera√ß√£o com diferimento. <br>
+   * ICMS70: valor da BC do ICMS pr√≥prio, j√° considerando a redu√ß√£o de base de c√°lculo. <br>
+   * ICMS90: valor da BC do ICMS pr√≥prio nas opera√ß√µes do grupo ‚ÄúOutros‚Äù. <br>
+   * ICMSSN900: valor da BC do ICMS pr√≥prio nas opera√ß√µes do Simples Nacional com CSOSN=900, de acordo com a modalidade de c√°lculo definida em modBC.
    */
   @RFWMetaBigDecimalField(caption = "Valor da BC do ICMS", required = false, unique = false, scale = 2, absolute = true)
   private BigDecimal vbc;
 
   /**
-   * N14 (ICMS20 / ICMS51 / ICMS70 / ICMSSN900) - pRedBC. Percentual de reduÁ„o da base de c·lculo do ICMS. <br>
-   * Ocor.: ICMS20: 1ñ1 / Tam.: 3v2ñ4; ICMS51: 0ñ1 / Tam.: 3v2ñ4; demais conforme a UF. Tipo: N. <br>
-   * ICMS20: percentual de reduÁ„o da BC do ICMS. <br>
-   * ICMS51: percentual de reduÁ„o da BC do ICMS quando aplic·vel ao diferimento. <br>
-   * ICMS70: percentual de reduÁ„o da BC do ICMS prÛprio (antes da ST). <br>
-   * ICMSSN900: percentual de reduÁ„o da BC do ICMS prÛprio em operaÁıes do Simples Nacional com CSOSN=900, quando a legislaÁ„o estadual prever reduÁ„o de base.
+   * N14 (ICMS20 / ICMS51 / ICMS70 / ICMSSN900) - pRedBC. Percentual de redu√ß√£o da base de c√°lculo do ICMS. <br>
+   * Ocor.: ICMS20: 1‚Äì1 / Tam.: 3v2‚Äì4; ICMS51: 0‚Äì1 / Tam.: 3v2‚Äì4; demais conforme a UF. Tipo: N. <br>
+   * ICMS20: percentual de redu√ß√£o da BC do ICMS. <br>
+   * ICMS51: percentual de redu√ß√£o da BC do ICMS quando aplic√°vel ao diferimento. <br>
+   * ICMS70: percentual de redu√ß√£o da BC do ICMS pr√≥prio (antes da ST). <br>
+   * ICMSSN900: percentual de redu√ß√£o da BC do ICMS pr√≥prio em opera√ß√µes do Simples Nacional com CSOSN=900, quando a legisla√ß√£o estadual prever redu√ß√£o de base.
    */
-  @RFWMetaBigDecimalField(caption = "Percentual de reduÁ„o da BC do ICMS", required = false, unique = false, scaleMax = 4, absolute = true)
+  @RFWMetaBigDecimalField(caption = "Percentual de redu√ß√£o da BC do ICMS", required = false, unique = false, scaleMax = 4, absolute = true)
   private BigDecimal predBC;
   /**
-   * N16 - pICMS. AlÌquota do imposto ICMS. <br>
-   * Ocor.: ICMS00/ICMS20: 1ñ1 / Tam.: 3v2ñ4; ICMS51: 0ñ1 / Tam.: 3v2ñ4; demais conforme grupo. Tipo: N. <br>
-   * ICMS00: alÌquota do ICMS prÛprio. <br>
-   * ICMS10: alÌquota do ICMS prÛprio (sem incluir ICMS ST). <br>
-   * ICMS20: alÌquota do ICMS prÛprio sem o FCP, aplicada sobre a base reduzida. <br>
-   * ICMS51: alÌquota do ICMS da operaÁ„o (sem FCP) para c·lculo do ICMS da operaÁ„o e do diferimento. <br>
-   * ICMS70: alÌquota do ICMS prÛprio aplicada sobre a base reduzida da operaÁ„o com ST. <br>
-   * ICMS90: alÌquota do ICMS prÛprio nas operaÁıes do grupo ìOutrosî. <br>
-   * ICMSSN900: alÌquota do ICMS prÛprio em operaÁıes do Simples Nacional com CSOSN=900, utilizada na apuraÁ„o do dÈbito normal dentro do regime do Simples (quando aplic·vel).
+   * N16 - pICMS. Al√≠quota do imposto ICMS. <br>
+   * Ocor.: ICMS00/ICMS20: 1‚Äì1 / Tam.: 3v2‚Äì4; ICMS51: 0‚Äì1 / Tam.: 3v2‚Äì4; demais conforme grupo. Tipo: N. <br>
+   * ICMS00: al√≠quota do ICMS pr√≥prio. <br>
+   * ICMS10: al√≠quota do ICMS pr√≥prio (sem incluir ICMS ST). <br>
+   * ICMS20: al√≠quota do ICMS pr√≥prio sem o FCP, aplicada sobre a base reduzida. <br>
+   * ICMS51: al√≠quota do ICMS da opera√ß√£o (sem FCP) para c√°lculo do ICMS da opera√ß√£o e do diferimento. <br>
+   * ICMS70: al√≠quota do ICMS pr√≥prio aplicada sobre a base reduzida da opera√ß√£o com ST. <br>
+   * ICMS90: al√≠quota do ICMS pr√≥prio nas opera√ß√µes do grupo ‚ÄúOutros‚Äù. <br>
+   * ICMSSN900: al√≠quota do ICMS pr√≥prio em opera√ß√µes do Simples Nacional com CSOSN=900, utilizada na apura√ß√£o do d√©bito normal dentro do regime do Simples (quando aplic√°vel).
    */
-  @RFWMetaBigDecimalField(caption = "AlÌquota do ICMS", required = false, unique = false, scaleMax = 4, absolute = true)
+  @RFWMetaBigDecimalField(caption = "Al√≠quota do ICMS", required = false, unique = false, scaleMax = 4, absolute = true)
   private BigDecimal picms;
 
   /**
-   * N18 - modBCST. Modalidade de determinaÁ„o da BC do ICMS ST. Ocor.: 1ñ1 / Tam.: 1 / Tipo: N. <br>
-   * 0 = PreÁo tabelado ou m·ximo sugerido; <br>
+   * N18 - modBCST. Modalidade de determina√ß√£o da BC do ICMS ST. Ocor.: 1‚Äì1 / Tam.: 1 / Tipo: N. <br>
+   * 0 = Pre√ßo tabelado ou m√°ximo sugerido; <br>
    * 1 = Lista Negativa (valor); <br>
    * 2 = Lista Positiva (valor); <br>
    * 3 = Lista Neutra (valor); <br>
    * 4 = Margem Valor Agregado (%); <br>
    * 5 = Pauta (valor). <br>
    * Ver {@link SEFAZ_modBCST}. <br>
-   * ICMS10: modalidade da BC ST em operaÁıes tributadas com ICMS e ICMS ST. <br>
-   * ICMS30: modalidade da BC ST em operaÁıes isentas/n„o tributadas com ICMS ST. <br>
-   * ICMS70: modalidade da BC do ICMS ST em operaÁıes com reduÁ„o de BC e cobranÁa de ICMS ST. <br>
+   * ICMS10: modalidade da BC ST em opera√ß√µes tributadas com ICMS e ICMS ST. <br>
+   * ICMS30: modalidade da BC ST em opera√ß√µes isentas/n√£o tributadas com ICMS ST. <br>
+   * ICMS70: modalidade da BC do ICMS ST em opera√ß√µes com redu√ß√£o de BC e cobran√ßa de ICMS ST. <br>
    * ICMS90: modalidade da BC do ICMS ST no grupo ICMS90 (quando houver ST). <br>
-   * ICMSSN201: modalidade de determinaÁ„o da BC do ICMS ST nas operaÁıes do Simples Nacional com CSOSN=201 (com crÈdito e ST). <br>
-   * ICMSSN202: modalidade de determinaÁ„o da BC do ICMS ST nas operaÁıes do Simples Nacional com CSOSN=202 ou 203 (sem crÈdito ou com isenÁ„o, ambas com ST). <br>
-   * ICMSSN900: modalidade de determinaÁ„o da BC do ICMS ST nas operaÁıes do Simples Nacional com CSOSN=900, quando houver incidÍncia de substituiÁ„o tribut·ria.
+   * ICMSSN201: modalidade de determina√ß√£o da BC do ICMS ST nas opera√ß√µes do Simples Nacional com CSOSN=201 (com cr√©dito e ST). <br>
+   * ICMSSN202: modalidade de determina√ß√£o da BC do ICMS ST nas opera√ß√µes do Simples Nacional com CSOSN=202 ou 203 (sem cr√©dito ou com isen√ß√£o, ambas com ST). <br>
+   * ICMSSN900: modalidade de determina√ß√£o da BC do ICMS ST nas opera√ß√µes do Simples Nacional com CSOSN=900, quando houver incid√™ncia de substitui√ß√£o tribut√°ria.
    */
-  @RFWMetaEnumField(caption = "Modalidade de determinaÁ„o da BC do ICMS ST", required = false)
+  @RFWMetaEnumField(caption = "Modalidade de determina√ß√£o da BC do ICMS ST", required = false)
   private SEFAZ_modBCST modBCST;
 
   /**
    * N19 - pMVAST. Percentual da margem de valor adicionado do ICMS ST. <br>
-   * Ocor.: 0ñ1 / Tam.: 3v2ñ4 / Tipo: N. <br>
-   * ICMS10: MVA utilizada para formaÁ„o da BC do ICMS ST em operaÁıes tributadas com ST. <br>
-   * ICMS30: MVA utilizada em operaÁıes isentas/n„o tributadas com ST. <br>
-   * ICMS70: MVA aplicada na BC do ICMS ST em operaÁıes com reduÁ„o de BC e ST. <br>
-   * ICMS90: MVA em operaÁıes do grupo ìOutrosî quando houver ST. <br>
-   * ICMSSN201: MVA utilizada na formaÁ„o da BC do ICMS ST para operaÁıes do Simples Nacional com CSOSN=201. <br>
-   * ICMSSN202: MVA utilizada na formaÁ„o da BC do ICMS ST para operaÁıes do Simples Nacional com CSOSN=202 ou 203. <br>
-   * ICMSSN900: MVA utilizada na formaÁ„o da BC do ICMS ST em operaÁıes do Simples Nacional com CSOSN=900, quando houver ST.
+   * Ocor.: 0‚Äì1 / Tam.: 3v2‚Äì4 / Tipo: N. <br>
+   * ICMS10: MVA utilizada para forma√ß√£o da BC do ICMS ST em opera√ß√µes tributadas com ST. <br>
+   * ICMS30: MVA utilizada em opera√ß√µes isentas/n√£o tributadas com ST. <br>
+   * ICMS70: MVA aplicada na BC do ICMS ST em opera√ß√µes com redu√ß√£o de BC e ST. <br>
+   * ICMS90: MVA em opera√ß√µes do grupo ‚ÄúOutros‚Äù quando houver ST. <br>
+   * ICMSSN201: MVA utilizada na forma√ß√£o da BC do ICMS ST para opera√ß√µes do Simples Nacional com CSOSN=201. <br>
+   * ICMSSN202: MVA utilizada na forma√ß√£o da BC do ICMS ST para opera√ß√µes do Simples Nacional com CSOSN=202 ou 203. <br>
+   * ICMSSN900: MVA utilizada na forma√ß√£o da BC do ICMS ST em opera√ß√µes do Simples Nacional com CSOSN=900, quando houver ST.
    */
   @RFWMetaBigDecimalField(caption = "Percentual da MVA do ICMS ST", required = false, unique = false, scaleMax = 4, absolute = true)
   private BigDecimal pmvaST;
 
   /**
-   * N20 - pRedBCST. Percentual da reduÁ„o da base de c·lculo do ICMS ST. <br>
-   * Ocor.: 0ñ1 / Tam.: 3v2ñ4 / Tipo: N. <br>
-   * ICMS10: reduÁ„o aplicada sobre a BC do ICMS ST. <br>
-   * ICMS30: reduÁ„o da BC do ICMS ST em operaÁıes isentas/n„o tributadas com ST. <br>
-   * ICMS70: reduÁ„o da BC do ICMS ST em operaÁıes com reduÁ„o de BC e ST. <br>
-   * ICMS90: reduÁ„o da BC do ICMS ST em operaÁıes do grupo ìOutrosî (quando aplic·vel). <br>
-   * ICMSSN201: reduÁ„o da BC do ICMS ST nas operaÁıes do Simples Nacional com CSOSN=201. <br>
-   * ICMSSN202: reduÁ„o da BC do ICMS ST nas operaÁıes do Simples Nacional com CSOSN=202 ou 203. <br>
-   * ICMSSN900: reduÁ„o da BC do ICMS ST nas operaÁıes do Simples Nacional com CSOSN=900, quando legislado pela UF.
+   * N20 - pRedBCST. Percentual da redu√ß√£o da base de c√°lculo do ICMS ST. <br>
+   * Ocor.: 0‚Äì1 / Tam.: 3v2‚Äì4 / Tipo: N. <br>
+   * ICMS10: redu√ß√£o aplicada sobre a BC do ICMS ST. <br>
+   * ICMS30: redu√ß√£o da BC do ICMS ST em opera√ß√µes isentas/n√£o tributadas com ST. <br>
+   * ICMS70: redu√ß√£o da BC do ICMS ST em opera√ß√µes com redu√ß√£o de BC e ST. <br>
+   * ICMS90: redu√ß√£o da BC do ICMS ST em opera√ß√µes do grupo ‚ÄúOutros‚Äù (quando aplic√°vel). <br>
+   * ICMSSN201: redu√ß√£o da BC do ICMS ST nas opera√ß√µes do Simples Nacional com CSOSN=201. <br>
+   * ICMSSN202: redu√ß√£o da BC do ICMS ST nas opera√ß√µes do Simples Nacional com CSOSN=202 ou 203. <br>
+   * ICMSSN900: redu√ß√£o da BC do ICMS ST nas opera√ß√µes do Simples Nacional com CSOSN=900, quando legislado pela UF.
    */
-  @RFWMetaBigDecimalField(caption = "Percentual de reduÁ„o da BC do ICMS ST", required = false, unique = false, scaleMax = 4, absolute = true)
+  @RFWMetaBigDecimalField(caption = "Percentual de redu√ß√£o da BC do ICMS ST", required = false, unique = false, scaleMax = 4, absolute = true)
   private BigDecimal predBCST;
 
   /**
-   * N21 - vBCST. Valor da base de c·lculo do ICMS ST. Ocor.: 1ñ1 / Tam.: 13v2 / Tipo: N. <br>
-   * ICMS10: BC do ICMS ST em operaÁıes tributadas com ST. <br>
-   * ICMS30: BC do ICMS ST em operaÁıes isentas/n„o tributadas com ST. <br>
-   * ICMS70: BC do ICMS ST em operaÁıes com reduÁ„o de BC e ST. <br>
+   * N21 - vBCST. Valor da base de c√°lculo do ICMS ST. Ocor.: 1‚Äì1 / Tam.: 13v2 / Tipo: N. <br>
+   * ICMS10: BC do ICMS ST em opera√ß√µes tributadas com ST. <br>
+   * ICMS30: BC do ICMS ST em opera√ß√µes isentas/n√£o tributadas com ST. <br>
+   * ICMS70: BC do ICMS ST em opera√ß√µes com redu√ß√£o de BC e ST. <br>
    * ICMS90: BC do ICMS ST no grupo ICMS90 (quando houver ST). <br>
-   * ICMSSN201: BC do ICMS ST nas operaÁıes do Simples Nacional com CSOSN=201. <br>
-   * ICMSSN202: BC do ICMS ST nas operaÁıes do Simples Nacional com CSOSN=202 ou 203. <br>
-   * ICMSSN900: BC do ICMS ST nas operaÁıes do Simples Nacional com CSOSN=900 quando houver substituiÁ„o tribut·ria.
+   * ICMSSN201: BC do ICMS ST nas opera√ß√µes do Simples Nacional com CSOSN=201. <br>
+   * ICMSSN202: BC do ICMS ST nas opera√ß√µes do Simples Nacional com CSOSN=202 ou 203. <br>
+   * ICMSSN900: BC do ICMS ST nas opera√ß√µes do Simples Nacional com CSOSN=900 quando houver substitui√ß√£o tribut√°ria.
    */
   @RFWMetaBigDecimalField(caption = "Valor da BC do ICMS ST", required = false, unique = false, scale = 2, absolute = true)
   private BigDecimal vbcST;
 
   /**
-   * N22 - pICMSST. AlÌquota do imposto do ICMS ST. Ocor.: 1ñ1 / Tam.: 3v2ñ4 / Tipo: N. <br>
-   * AlÌquota do ICMS ST sem o FCP; quando houver FCP, informar a alÌquota do FCP em pFCPST. <br>
-   * ICMS10: alÌquota do ICMS ST em operaÁıes tributadas com ST. <br>
-   * ICMS30: alÌquota do ICMS ST em operaÁıes isentas/n„o tributadas com ST. <br>
-   * ICMS70: alÌquota do ICMS ST em operaÁıes com reduÁ„o de BC e ST. <br>
-   * ICMS90: alÌquota do ICMS ST no grupo ICMS90 (quando houver ST). <br>
-   * ICMSSN201: alÌquota do ICMS ST nas operaÁıes do Simples Nacional com CSOSN=201. <br>
-   * ICMSSN202: alÌquota do ICMS ST nas operaÁıes do Simples Nacional com CSOSN=202 ou 203. <br>
-   * ICMSSN900: alÌquota do ICMS ST nas operaÁıes do Simples Nacional com CSOSN=900, quando houver retenÁ„o ST para o item.
+   * N22 - pICMSST. Al√≠quota do imposto do ICMS ST. Ocor.: 1‚Äì1 / Tam.: 3v2‚Äì4 / Tipo: N. <br>
+   * Al√≠quota do ICMS ST sem o FCP; quando houver FCP, informar a al√≠quota do FCP em pFCPST. <br>
+   * ICMS10: al√≠quota do ICMS ST em opera√ß√µes tributadas com ST. <br>
+   * ICMS30: al√≠quota do ICMS ST em opera√ß√µes isentas/n√£o tributadas com ST. <br>
+   * ICMS70: al√≠quota do ICMS ST em opera√ß√µes com redu√ß√£o de BC e ST. <br>
+   * ICMS90: al√≠quota do ICMS ST no grupo ICMS90 (quando houver ST). <br>
+   * ICMSSN201: al√≠quota do ICMS ST nas opera√ß√µes do Simples Nacional com CSOSN=201. <br>
+   * ICMSSN202: al√≠quota do ICMS ST nas opera√ß√µes do Simples Nacional com CSOSN=202 ou 203. <br>
+   * ICMSSN900: al√≠quota do ICMS ST nas opera√ß√µes do Simples Nacional com CSOSN=900, quando houver reten√ß√£o ST para o item.
    */
-  @RFWMetaBigDecimalField(caption = "AlÌquota do ICMS ST", required = false, unique = false, scaleMax = 4, absolute = true)
+  @RFWMetaBigDecimalField(caption = "Al√≠quota do ICMS ST", required = false, unique = false, scaleMax = 4, absolute = true)
   private BigDecimal picmsST;
 
   /**
-   * N23 - vICMSST. Valor do ICMS ST. Ocor.: 1ñ1 / Tam.: 13v2 / Tipo: N. <br>
+   * N23 - vICMSST. Valor do ICMS ST. Ocor.: 1‚Äì1 / Tam.: 13v2 / Tipo: N. <br>
    * ICMS10: valor do ICMS ST retido. <br>
-   * ICMS30: valor do ICMS ST em operaÁıes isentas/n„o tributadas com ST. <br>
-   * ICMS70: valor do ICMS ST em operaÁıes com reduÁ„o de BC e ST. <br>
+   * ICMS30: valor do ICMS ST em opera√ß√µes isentas/n√£o tributadas com ST. <br>
+   * ICMS70: valor do ICMS ST em opera√ß√µes com redu√ß√£o de BC e ST. <br>
    * ICMS90: valor do ICMS ST no grupo ICMS90 (quando houver ST). <br>
-   * ICMSSN201: valor do ICMS ST retido nas operaÁıes do Simples Nacional com CSOSN=201. <br>
-   * ICMSSN202: valor do ICMS ST retido nas operaÁıes do Simples Nacional com CSOSN=202 ou 203. <br>
-   * ICMSSN900: valor do ICMS ST retido nas operaÁıes do Simples Nacional com CSOSN=900 sempre que houver substituiÁ„o tribut·ria aplic·vel ao item.
+   * ICMSSN201: valor do ICMS ST retido nas opera√ß√µes do Simples Nacional com CSOSN=201. <br>
+   * ICMSSN202: valor do ICMS ST retido nas opera√ß√µes do Simples Nacional com CSOSN=202 ou 203. <br>
+   * ICMSSN900: valor do ICMS ST retido nas opera√ß√µes do Simples Nacional com CSOSN=900 sempre que houver substitui√ß√£o tribut√°ria aplic√°vel ao item.
    */
   @RFWMetaBigDecimalField(caption = "Valor do ICMS ST", required = false, unique = false, scale = 2, absolute = true)
   private BigDecimal vicmsST;
 
   /**
-   * N23a - vBCFCPST. Valor da base de c·lculo do FCP retido por substituiÁ„o tribut·ria. <br>
-   * Ocor.: 1ñ1 / Tam.: 13v2 / Tipo: N (quando o grupo FCP ST estiver presente). <br>
-   * ICMS10: base de c·lculo do FCP-ST em operaÁıes tributadas com ST. <br>
-   * ICMS30: base de c·lculo do FCP-ST em operaÁıes isentas/n„o tributadas com ST. <br>
-   * ICMS70: base de c·lculo do FCP-ST em operaÁıes com reduÁ„o de BC e ST. <br>
-   * ICMS90: base de c·lculo do FCP-ST no grupo ICMS90 (quando houver ST). <br>
-   * ICMSSN201: base de c·lculo do FCP-ST nas operaÁıes do Simples Nacional com CSOSN=201. <br>
-   * ICMSSN202: base de c·lculo do FCP-ST nas operaÁıes do Simples Nacional com CSOSN=202 ou 203. <br>
-   * ICMSSN900: base de c·lculo do FCP-ST nas operaÁıes do Simples Nacional com CSOSN=900, quando houver FCP retido por ST.
+   * N23a - vBCFCPST. Valor da base de c√°lculo do FCP retido por substitui√ß√£o tribut√°ria. <br>
+   * Ocor.: 1‚Äì1 / Tam.: 13v2 / Tipo: N (quando o grupo FCP ST estiver presente). <br>
+   * ICMS10: base de c√°lculo do FCP-ST em opera√ß√µes tributadas com ST. <br>
+   * ICMS30: base de c√°lculo do FCP-ST em opera√ß√µes isentas/n√£o tributadas com ST. <br>
+   * ICMS70: base de c√°lculo do FCP-ST em opera√ß√µes com redu√ß√£o de BC e ST. <br>
+   * ICMS90: base de c√°lculo do FCP-ST no grupo ICMS90 (quando houver ST). <br>
+   * ICMSSN201: base de c√°lculo do FCP-ST nas opera√ß√µes do Simples Nacional com CSOSN=201. <br>
+   * ICMSSN202: base de c√°lculo do FCP-ST nas opera√ß√µes do Simples Nacional com CSOSN=202 ou 203. <br>
+   * ICMSSN900: base de c√°lculo do FCP-ST nas opera√ß√µes do Simples Nacional com CSOSN=900, quando houver FCP retido por ST.
    */
-  @RFWMetaBigDecimalField(caption = "Base de c·lculo do FCP ST", required = false, unique = false, scale = 2, absolute = true)
+  @RFWMetaBigDecimalField(caption = "Base de c√°lculo do FCP ST", required = false, unique = false, scale = 2, absolute = true)
   private BigDecimal vbcFCPST;
 
   /**
-   * N23b/N23c - pFCPST. Percentual do FCP retido por substituiÁ„o tribut·ria. <br>
-   * Ocor.: 1ñ1 / Tam.: 3v2ñ4 / Tipo: N. <br>
-   * ICMS10: percentual do FCP-ST em operaÁıes tributadas com ST. <br>
-   * ICMS30: percentual do FCP-ST em operaÁıes isentas/n„o tributadas com ST. <br>
-   * ICMS70: percentual do FCP-ST em operaÁıes com reduÁ„o de BC e ST. <br>
+   * N23b/N23c - pFCPST. Percentual do FCP retido por substitui√ß√£o tribut√°ria. <br>
+   * Ocor.: 1‚Äì1 / Tam.: 3v2‚Äì4 / Tipo: N. <br>
+   * ICMS10: percentual do FCP-ST em opera√ß√µes tributadas com ST. <br>
+   * ICMS30: percentual do FCP-ST em opera√ß√µes isentas/n√£o tributadas com ST. <br>
+   * ICMS70: percentual do FCP-ST em opera√ß√µes com redu√ß√£o de BC e ST. <br>
    * ICMS90: percentual do FCP-ST no grupo ICMS90 (quando houver ST). <br>
-   * ICMSSN201: percentual do FCP-ST nas operaÁıes do Simples Nacional com CSOSN=201. <br>
-   * ICMSSN202: percentual do FCP-ST nas operaÁıes do Simples Nacional com CSOSN=202 ou 203, respeitando o limite legal de FCP. <br>
-   * ICMSSN900: percentual do FCP-ST nas operaÁıes do Simples Nacional com CSOSN=900, quando houver FCP retido por substituiÁ„o tribut·ria.
+   * ICMSSN201: percentual do FCP-ST nas opera√ß√µes do Simples Nacional com CSOSN=201. <br>
+   * ICMSSN202: percentual do FCP-ST nas opera√ß√µes do Simples Nacional com CSOSN=202 ou 203, respeitando o limite legal de FCP. <br>
+   * ICMSSN900: percentual do FCP-ST nas opera√ß√µes do Simples Nacional com CSOSN=900, quando houver FCP retido por substitui√ß√£o tribut√°ria.
    */
   @RFWMetaBigDecimalField(caption = "Percentual FCP ST", required = false, unique = false, scaleMax = 4, absolute = true)
   private BigDecimal pfcpST;
 
   /**
-   * N23c/N23d - vFCPST. Valor do FCP retido por substituiÁ„o tribut·ria. <br>
-   * Ocor.: 1ñ1 / Tam.: 13v2 / Tipo: N. <br>
-   * ICMS10: valor do FCP-ST em operaÁıes tributadas com ST. <br>
-   * ICMS30: valor do FCP-ST em operaÁıes isentas/n„o tributadas com ST. <br>
-   * ICMS70: valor do FCP-ST em operaÁıes com reduÁ„o de BC e ST. <br>
+   * N23c/N23d - vFCPST. Valor do FCP retido por substitui√ß√£o tribut√°ria. <br>
+   * Ocor.: 1‚Äì1 / Tam.: 13v2 / Tipo: N. <br>
+   * ICMS10: valor do FCP-ST em opera√ß√µes tributadas com ST. <br>
+   * ICMS30: valor do FCP-ST em opera√ß√µes isentas/n√£o tributadas com ST. <br>
+   * ICMS70: valor do FCP-ST em opera√ß√µes com redu√ß√£o de BC e ST. <br>
    * ICMS90: valor do FCP-ST no grupo ICMS90 (quando houver ST). <br>
-   * ICMSSN201: valor do FCP-ST nas operaÁıes do Simples Nacional com CSOSN=201. <br>
-   * ICMSSN202: valor do FCP-ST nas operaÁıes do Simples Nacional com CSOSN=202 ou 203. <br>
-   * ICMSSN900: valor do FCP-ST nas operaÁıes do Simples Nacional com CSOSN=900, quando houver FCP retido por substituiÁ„o tribut·ria.
+   * ICMSSN201: valor do FCP-ST nas opera√ß√µes do Simples Nacional com CSOSN=201. <br>
+   * ICMSSN202: valor do FCP-ST nas opera√ß√µes do Simples Nacional com CSOSN=202 ou 203. <br>
+   * ICMSSN900: valor do FCP-ST nas opera√ß√µes do Simples Nacional com CSOSN=900, quando houver FCP retido por substitui√ß√£o tribut√°ria.
    */
   @RFWMetaBigDecimalField(caption = "Valor do FCP ST", required = false, unique = false, scale = 2, absolute = true)
   private BigDecimal vfcpST;
 
   /**
-   * N29 - pCredSN. AlÌquota aplic·vel de c·lculo do crÈdito (Simples Nacional). Ocor.: 1ñ1 / Tam.: 3v2ñ4 / Tipo: N. <br>
-   * ICMSSN101: alÌquota utilizada para c·lculo do crÈdito de ICMS permitido pelo art. 23 da LC 123/2006. <br>
-   * ICMSSN201: alÌquota de crÈdito nas operaÁıes do Simples Nacional com CSOSN=201 (com permiss„o de crÈdito e ICMS ST). <br>
-   * ICMSSN900: alÌquota de crÈdito aplic·vel nas operaÁıes do Simples Nacional com CSOSN=900, quando a legislaÁ„o estadual permitir crÈdito de ICMS ao destinat·rio conforme art. 23 da LC 123.
+   * N29 - pCredSN. Al√≠quota aplic√°vel de c√°lculo do cr√©dito (Simples Nacional). Ocor.: 1‚Äì1 / Tam.: 3v2‚Äì4 / Tipo: N. <br>
+   * ICMSSN101: al√≠quota utilizada para c√°lculo do cr√©dito de ICMS permitido pelo art. 23 da LC 123/2006. <br>
+   * ICMSSN201: al√≠quota de cr√©dito nas opera√ß√µes do Simples Nacional com CSOSN=201 (com permiss√£o de cr√©dito e ICMS ST). <br>
+   * ICMSSN900: al√≠quota de cr√©dito aplic√°vel nas opera√ß√µes do Simples Nacional com CSOSN=900, quando a legisla√ß√£o estadual permitir cr√©dito de ICMS ao destinat√°rio conforme art. 23 da LC 123.
    */
-  @RFWMetaBigDecimalField(caption = "AlÌquota de crÈdito (Simples Nacional)", required = false, unique = false, scaleMax = 4, absolute = true)
+  @RFWMetaBigDecimalField(caption = "Al√≠quota de cr√©dito (Simples Nacional)", required = false, unique = false, scaleMax = 4, absolute = true)
   private BigDecimal pcredSN;
 
   /**
-   * N30 - vCredICMSSN. Valor do crÈdito do ICMS que pode ser aproveitado nos termos do art. 23 da LC 123/2006 (Simples Nacional). Ocor.: 1ñ1 / Tam.: 13v2 / Tipo: N. <br>
-   * ICMSSN101: valor do crÈdito de ICMS calculado a partir de pCredSN e da base definida para o regime do Simples Nacional. <br>
-   * ICMSSN201: valor de crÈdito de ICMS aproveit·vel em operaÁıes com CSOSN=201 (com crÈdito e ICMS ST), conforme pCredSN e legislaÁ„o da UF. <br>
-   * ICMSSN900: valor de crÈdito de ICMS em operaÁıes do Simples Nacional com CSOSN=900, quando a operaÁ„o se enquadrar nas hipÛteses de crÈdito previstas no art. 23 da LC 123/2006 e na legislaÁ„o estadual.
+   * N30 - vCredICMSSN. Valor do cr√©dito do ICMS que pode ser aproveitado nos termos do art. 23 da LC 123/2006 (Simples Nacional). Ocor.: 1‚Äì1 / Tam.: 13v2 / Tipo: N. <br>
+   * ICMSSN101: valor do cr√©dito de ICMS calculado a partir de pCredSN e da base definida para o regime do Simples Nacional. <br>
+   * ICMSSN201: valor de cr√©dito de ICMS aproveit√°vel em opera√ß√µes com CSOSN=201 (com cr√©dito e ICMS ST), conforme pCredSN e legisla√ß√£o da UF. <br>
+   * ICMSSN900: valor de cr√©dito de ICMS em opera√ß√µes do Simples Nacional com CSOSN=900, quando a opera√ß√£o se enquadrar nas hip√≥teses de cr√©dito previstas no art. 23 da LC 123/2006 e na legisla√ß√£o estadual.
    */
-  @RFWMetaBigDecimalField(caption = "Valor do crÈdito de ICMS (Simples Nacional)", required = false, unique = false, scale = 2, absolute = true)
+  @RFWMetaBigDecimalField(caption = "Valor do cr√©dito de ICMS (Simples Nacional)", required = false, unique = false, scale = 2, absolute = true)
   private BigDecimal vcredICMSSN;
 
   /**
    * N26 - vBCSTRet (ICMS60 / ICMSSN500). Valor da BC do ICMS ST retido. <br>
-   * Ocor.: 1ñ1 / Tam.: 13v2 / Tipo: N. <br>
-   * ICMS60: valor da base de c·lculo do ICMS ST cobrado anteriormente por substituiÁ„o tribut·ria; pode ser omitido quando a legislaÁ„o n„o exigir sua informaÁ„o. <br>
-   * ICMSSN500: valor da base de c·lculo do ICMS ST cobrado anteriormente por substituiÁ„o tribut·ria ou por antecipaÁ„o, na UF de origem, podendo ser omitido quando a legislaÁ„o n„o exigir.
+   * Ocor.: 1‚Äì1 / Tam.: 13v2 / Tipo: N. <br>
+   * ICMS60: valor da base de c√°lculo do ICMS ST cobrado anteriormente por substitui√ß√£o tribut√°ria; pode ser omitido quando a legisla√ß√£o n√£o exigir sua informa√ß√£o. <br>
+   * ICMSSN500: valor da base de c√°lculo do ICMS ST cobrado anteriormente por substitui√ß√£o tribut√°ria ou por antecipa√ß√£o, na UF de origem, podendo ser omitido quando a legisla√ß√£o n√£o exigir.
    */
   @RFWMetaBigDecimalField(caption = "BC do ICMS ST retido anteriormente", required = false, unique = false, scale = 2, absolute = true)
   private BigDecimal vbcSTRet;
 
   /**
-   * N26a - pST (ICMS60 / ICMSSN500). AlÌquota suportada pelo consumidor final, utilizada no c·lculo da retenÁ„o de ICMS ST. <br>
-   * Ocor.: 1ñ1 / Tam.: 3v2ñ4 / Tipo: N. <br>
-   * Deve ser informada a alÌquota efetiva usada na retenÁ„o, j· incluindo o FCP quando aplic·vel. Exemplo: 18% + 2% FCP = 20%. <br>
-   * ICMS60: alÌquota efetiva da retenÁ„o de ICMS ST em operaÁ„o anterior. <br>
-   * ICMSSN500: alÌquota efetiva suportada pelo consumidor final para c·lculo do ICMS-ST cobrado anteriormente por substituiÁ„o tribut·ria ou antecipaÁ„o.
+   * N26a - pST (ICMS60 / ICMSSN500). Al√≠quota suportada pelo consumidor final, utilizada no c√°lculo da reten√ß√£o de ICMS ST. <br>
+   * Ocor.: 1‚Äì1 / Tam.: 3v2‚Äì4 / Tipo: N. <br>
+   * Deve ser informada a al√≠quota efetiva usada na reten√ß√£o, j√° incluindo o FCP quando aplic√°vel. Exemplo: 18% + 2% FCP = 20%. <br>
+   * ICMS60: al√≠quota efetiva da reten√ß√£o de ICMS ST em opera√ß√£o anterior. <br>
+   * ICMSSN500: al√≠quota efetiva suportada pelo consumidor final para c√°lculo do ICMS-ST cobrado anteriormente por substitui√ß√£o tribut√°ria ou antecipa√ß√£o.
    */
-  @RFWMetaBigDecimalField(caption = "AlÌquota suportada pelo consumidor final (pST)", required = false, unique = false, scaleMax = 4, absolute = true)
+  @RFWMetaBigDecimalField(caption = "Al√≠quota suportada pelo consumidor final (pST)", required = false, unique = false, scaleMax = 4, absolute = true)
   private BigDecimal pst;
 
   /**
-   * N26b - vICMSSubstituto (ICMS60 / ICMSSN500). Valor do ICMS prÛprio do Substituto cobrado em operaÁ„o anterior. <br>
-   * Ocor.: 0ñ1 / Tam.: 13v2 / Tipo: N. <br>
-   * ICMS60: valor do ICMS prÛprio do contribuinte substituto referente ‡ retenÁ„o anterior. <br>
-   * ICMSSN500: valor do ICMS prÛprio do substituto cobrado em operaÁ„o anterior, em cen·rios de ICMS-ST j· recolhido (substituÌdo ou antecipado).
+   * N26b - vICMSSubstituto (ICMS60 / ICMSSN500). Valor do ICMS pr√≥prio do Substituto cobrado em opera√ß√£o anterior. <br>
+   * Ocor.: 0‚Äì1 / Tam.: 13v2 / Tipo: N. <br>
+   * ICMS60: valor do ICMS pr√≥prio do contribuinte substituto referente √† reten√ß√£o anterior. <br>
+   * ICMSSN500: valor do ICMS pr√≥prio do substituto cobrado em opera√ß√£o anterior, em cen√°rios de ICMS-ST j√° recolhido (substitu√≠do ou antecipado).
    */
-  @RFWMetaBigDecimalField(caption = "Valor do ICMS prÛprio do substituto", required = false, unique = false, scale = 2, absolute = true)
+  @RFWMetaBigDecimalField(caption = "Valor do ICMS pr√≥prio do substituto", required = false, unique = false, scale = 2, absolute = true)
   private BigDecimal vicmsSubstituto;
 
   /**
    * N27 - vICMSSTRet (ICMS60 / ICMSSN500). Valor do ICMS ST retido anteriormente. <br>
-   * Ocor.: 1ñ1 / Tam.: 13v2 / Tipo: N. <br>
-   * ICMS60: valor do ICMS ST cobrado anteriormente por substituiÁ„o tribut·ria; pode ser omitido se a legislaÁ„o n„o exigir. <br>
-   * ICMSSN500: valor do ICMS ST cobrado anteriormente por substituiÁ„o tribut·ria ou por antecipaÁ„o, cujo destaque/repasse est· sendo informado pelo contribuinte enquadrado no Simples Nacional.
+   * Ocor.: 1‚Äì1 / Tam.: 13v2 / Tipo: N. <br>
+   * ICMS60: valor do ICMS ST cobrado anteriormente por substitui√ß√£o tribut√°ria; pode ser omitido se a legisla√ß√£o n√£o exigir. <br>
+   * ICMSSN500: valor do ICMS ST cobrado anteriormente por substitui√ß√£o tribut√°ria ou por antecipa√ß√£o, cujo destaque/repasse est√° sendo informado pelo contribuinte enquadrado no Simples Nacional.
    */
   @RFWMetaBigDecimalField(caption = "Valor do ICMS ST retido anteriormente", required = false, unique = false, scale = 2, absolute = true)
   private BigDecimal vicmsSTRet;
 
   /**
-   * N27a - vBCFCPSTRet (ICMS60 / ICMSSN500). Valor da base de c·lculo do FCP retido anteriormente por substituiÁ„o tribut·ria. <br>
-   * Ocor.: 1ñ1 / Tam.: 13v2 / Tipo: N. <br>
+   * N27a - vBCFCPSTRet (ICMS60 / ICMSSN500). Valor da base de c√°lculo do FCP retido anteriormente por substitui√ß√£o tribut√°ria. <br>
+   * Ocor.: 1‚Äì1 / Tam.: 13v2 / Tipo: N. <br>
    * ICMS60: valor da base do FCP-ST retido anteriormente. <br>
-   * ICMSSN500: valor da base de c·lculo do FCP relativo ao ICMS-ST retido anteriormente (substituiÁ„o tribut·ria ou antecipaÁ„o) em operaÁıes do Simples Nacional com CSOSN=500.
+   * ICMSSN500: valor da base de c√°lculo do FCP relativo ao ICMS-ST retido anteriormente (substitui√ß√£o tribut√°ria ou antecipa√ß√£o) em opera√ß√µes do Simples Nacional com CSOSN=500.
    */
   @RFWMetaBigDecimalField(caption = "BC do FCP ST retido anteriormente", required = false, unique = false, scale = 2, absolute = true)
   private BigDecimal vbcFCPSTRet;
 
   /**
-   * N27b - pFCPSTRet (ICMS60 / ICMSSN500). Percentual do FCP retido anteriormente por substituiÁ„o tribut·ria. <br>
-   * Ocor.: 1ñ1 / Tam.: 3v2ñ4 / Tipo: N. <br>
+   * N27b - pFCPSTRet (ICMS60 / ICMSSN500). Percentual do FCP retido anteriormente por substitui√ß√£o tribut√°ria. <br>
+   * Ocor.: 1‚Äì1 / Tam.: 3v2‚Äì4 / Tipo: N. <br>
    * ICMS60: percentual aplicado ao FCP-ST retido anteriormente. <br>
-   * ICMSSN500: percentual do FCP-ST retido anteriormente em operaÁıes do Simples Nacional com CSOSN=500, normalmente limitado ao percentual m·ximo de FCP definido em lei.
+   * ICMSSN500: percentual do FCP-ST retido anteriormente em opera√ß√µes do Simples Nacional com CSOSN=500, normalmente limitado ao percentual m√°ximo de FCP definido em lei.
    */
   @RFWMetaBigDecimalField(caption = "Percentual do FCP ST retido anteriormente", required = false, unique = false, scaleMax = 4, absolute = true)
   private BigDecimal pfcpSTRet;
 
   /**
-   * N27d - vFCPSTRet (ICMS60 / ICMSSN500). Valor do FCP retido anteriormente por substituiÁ„o tribut·ria. <br>
-   * Ocor.: 1ñ1 / Tam.: 13v2 / Tipo: N. <br>
+   * N27d - vFCPSTRet (ICMS60 / ICMSSN500). Valor do FCP retido anteriormente por substitui√ß√£o tribut√°ria. <br>
+   * Ocor.: 1‚Äì1 / Tam.: 13v2 / Tipo: N. <br>
    * ICMS60: valor do ICMS relativo ao FCP-ST retido anteriormente. <br>
-   * ICMSSN500: valor do ICMS relativo ao Fundo de Combate ‡ Pobreza (FCP) retido anteriormente por substituiÁ„o tribut·ria em operaÁıes do Simples Nacional (CSOSN=500).
+   * ICMSSN500: valor do ICMS relativo ao Fundo de Combate √† Pobreza (FCP) retido anteriormente por substitui√ß√£o tribut√°ria em opera√ß√µes do Simples Nacional (CSOSN=500).
    */
   @RFWMetaBigDecimalField(caption = "Valor do FCP ST retido anteriormente", required = false, unique = false, scale = 2, absolute = true)
   private BigDecimal vfcpSTRet;
 
   /**
-   * N34 - pRedBCEfet (ICMS60 / ICMSSN500). Percentual de reduÁ„o da base de c·lculo efetiva. <br>
-   * Ocor.: 1ñ1 / Tam.: 3v2ñ4 / Tipo: N. Campo opcional, a critÈrio da UF. <br>
-   * ICMS60: percentual de reduÁ„o que seria aplicado caso o contribuinte estivesse no regime comum, para obtenÁ„o da base de c·lculo efetiva (vBCEfet). <br>
-   * ICMSSN500: percentual de reduÁ„o da base de c·lculo efetiva em operaÁıes do Simples Nacional com CSOSN=500, para fins de c·lculo de ICMS efetivo em simulaÁıes de regime comum.
+   * N34 - pRedBCEfet (ICMS60 / ICMSSN500). Percentual de redu√ß√£o da base de c√°lculo efetiva. <br>
+   * Ocor.: 1‚Äì1 / Tam.: 3v2‚Äì4 / Tipo: N. Campo opcional, a crit√©rio da UF. <br>
+   * ICMS60: percentual de redu√ß√£o que seria aplicado caso o contribuinte estivesse no regime comum, para obten√ß√£o da base de c√°lculo efetiva (vBCEfet). <br>
+   * ICMSSN500: percentual de redu√ß√£o da base de c√°lculo efetiva em opera√ß√µes do Simples Nacional com CSOSN=500, para fins de c√°lculo de ICMS efetivo em simula√ß√µes de regime comum.
    */
-  @RFWMetaBigDecimalField(caption = "Percentual de reduÁ„o da BC efetiva (ICMS60 / ICMSSN500)", required = false, unique = false, scaleMax = 4, absolute = true)
+  @RFWMetaBigDecimalField(caption = "Percentual de redu√ß√£o da BC efetiva (ICMS60 / ICMSSN500)", required = false, unique = false, scaleMax = 4, absolute = true)
   private BigDecimal predBCEfet;
 
   /**
-   * N35 - vBCEfet (ICMS60 / ICMSSN500). Valor da base de c·lculo efetiva do ICMS. <br>
-   * Ocor.: 1ñ1 / Tam.: 13v2 / Tipo: N. Campo opcional, a critÈrio da UF. <br>
-   * FÛrmula sugerida: vBCEfet = vProd ◊ (1 - pRedBCEfet). <br>
-   * ICMS60: base de c·lculo que seria utilizada caso a operaÁ„o estivesse no regime comum. <br>
-   * ICMSSN500: base de c·lculo efetiva simulada para operaÁıes de contribuinte do Simples Nacional com CSOSN=500, considerando o regime comum (para c·lculo de ICMS efetivo).
+   * N35 - vBCEfet (ICMS60 / ICMSSN500). Valor da base de c√°lculo efetiva do ICMS. <br>
+   * Ocor.: 1‚Äì1 / Tam.: 13v2 / Tipo: N. Campo opcional, a crit√©rio da UF. <br>
+   * F√≥rmula sugerida: vBCEfet = vProd √ó (1 - pRedBCEfet). <br>
+   * ICMS60: base de c√°lculo que seria utilizada caso a opera√ß√£o estivesse no regime comum. <br>
+   * ICMSSN500: base de c√°lculo efetiva simulada para opera√ß√µes de contribuinte do Simples Nacional com CSOSN=500, considerando o regime comum (para c√°lculo de ICMS efetivo).
    */
-  @RFWMetaBigDecimalField(caption = "Base de c·lculo efetiva do ICMS (ICMS60 / ICMSSN500)", required = false, unique = false, scale = 2, absolute = true)
+  @RFWMetaBigDecimalField(caption = "Base de c√°lculo efetiva do ICMS (ICMS60 / ICMSSN500)", required = false, unique = false, scale = 2, absolute = true)
   private BigDecimal vbcEfet;
 
   /**
-   * N36 - pICMSEfet (ICMS60 / ICMSSN500). AlÌquota efetiva do ICMS. <br>
-   * Ocor.: 1ñ1 / Tam.: 3v2ñ4 / Tipo: N. Campo opcional, a critÈrio da UF. <br>
-   * ICMS60: alÌquota que seria aplicada no regime comum para obtenÁ„o do ICMS efetivo. <br>
-   * ICMSSN500: alÌquota efetiva do ICMS em operaÁıes do Simples Nacional com CSOSN=500, simulando a tributaÁ„o no regime comum para c·lculo de vICMSEfet.
+   * N36 - pICMSEfet (ICMS60 / ICMSSN500). Al√≠quota efetiva do ICMS. <br>
+   * Ocor.: 1‚Äì1 / Tam.: 3v2‚Äì4 / Tipo: N. Campo opcional, a crit√©rio da UF. <br>
+   * ICMS60: al√≠quota que seria aplicada no regime comum para obten√ß√£o do ICMS efetivo. <br>
+   * ICMSSN500: al√≠quota efetiva do ICMS em opera√ß√µes do Simples Nacional com CSOSN=500, simulando a tributa√ß√£o no regime comum para c√°lculo de vICMSEfet.
    */
-  @RFWMetaBigDecimalField(caption = "AlÌquota efetiva do ICMS (ICMS60 / ICMSSN500)", required = false, unique = false, scaleMax = 4, absolute = true)
+  @RFWMetaBigDecimalField(caption = "Al√≠quota efetiva do ICMS (ICMS60 / ICMSSN500)", required = false, unique = false, scaleMax = 4, absolute = true)
   private BigDecimal picmsEfet;
 
   /**
    * N37 - vICMSEfet (ICMS60 / ICMSSN500). Valor do ICMS efetivo. <br>
-   * Ocor.: 1ñ1 / Tam.: 13v2 / Tipo: N. Campo opcional, a critÈrio da UF. <br>
-   * FÛrmula sugerida: vICMSEfet = vBCEfet ◊ pICMSEfet. <br>
-   * ICMS60: valor do ICMS efetivo que seria devido no regime comum, calculado a partir da base e alÌquota efetivas. <br>
-   * ICMSSN500: valor do ICMS efetivo estimado para operaÁıes do Simples Nacional com CSOSN=500, considerando o cen·rio de regime comum (usado para controles e an·lises fiscais especÌficas definidas pela UF).
+   * Ocor.: 1‚Äì1 / Tam.: 13v2 / Tipo: N. Campo opcional, a crit√©rio da UF. <br>
+   * F√≥rmula sugerida: vICMSEfet = vBCEfet √ó pICMSEfet. <br>
+   * ICMS60: valor do ICMS efetivo que seria devido no regime comum, calculado a partir da base e al√≠quota efetivas. <br>
+   * ICMSSN500: valor do ICMS efetivo estimado para opera√ß√µes do Simples Nacional com CSOSN=500, considerando o cen√°rio de regime comum (usado para controles e an√°lises fiscais espec√≠ficas definidas pela UF).
    */
   @RFWMetaBigDecimalField(caption = "Valor do ICMS efetivo (ICMS60 / ICMSSN500)", required = false, unique = false, scale = 2, absolute = true)
   private BigDecimal vicmsEfet;
 
   /**
-   * N17c - vFCP. Valor do Fundo de Combate ‡ Pobreza (FCP). Ocor.: 1ñ1 / Tam.: 13v2 / Tipo: N (quando o grupo FCP estiver presente). <br>
-   * ICMS00: valor do FCP relativo ao ICMS prÛprio. <br>
-   * ICMS10: valor do FCP relativo ao ICMS prÛprio (quando aplic·vel). <br>
-   * ICMS20: valor do FCP calculado sobre a base de c·lculo do FCP do ICMS com reduÁ„o de BC. <br>
-   * ICMS51: valor do FCP relativo ‡ operaÁ„o com diferimento (quando aplic·vel). <br>
-   * ICMS70: valor do FCP relativo ao ICMS prÛprio em operaÁ„o com reduÁ„o de BC e ST. <br>
-   * ICMS90: valor do FCP relativo ao ICMS prÛprio no grupo ICMS90.
+   * N17c - vFCP. Valor do Fundo de Combate √† Pobreza (FCP). Ocor.: 1‚Äì1 / Tam.: 13v2 / Tipo: N (quando o grupo FCP estiver presente). <br>
+   * ICMS00: valor do FCP relativo ao ICMS pr√≥prio. <br>
+   * ICMS10: valor do FCP relativo ao ICMS pr√≥prio (quando aplic√°vel). <br>
+   * ICMS20: valor do FCP calculado sobre a base de c√°lculo do FCP do ICMS com redu√ß√£o de BC. <br>
+   * ICMS51: valor do FCP relativo √† opera√ß√£o com diferimento (quando aplic√°vel). <br>
+   * ICMS70: valor do FCP relativo ao ICMS pr√≥prio em opera√ß√£o com redu√ß√£o de BC e ST. <br>
+   * ICMS90: valor do FCP relativo ao ICMS pr√≥prio no grupo ICMS90.
    */
   @RFWMetaBigDecimalField(caption = "Valor do FCP", required = false, unique = false, scale = 2, absolute = true)
   private BigDecimal vfcp;
 
   /**
-   * N28a - vICMSDeson (ICMS20, ICMS30, ICMS40, ICMS70, ICMS90). Valor do ICMS desonerado. Ocor.: 1ñ1 / Tam.: 13v2 / Tipo: N. <br>
-   * ICMS20: valor do ICMS desonerado conforme motivo de desoneraÁ„o. <br>
-   * ICMS30: valor do ICMS desonerado aplicado a operaÁıes isentas/n„o tributadas com ICMS ST. <br>
-   * ICMS40: valor do ICMS que seria devido se n„o houvesse isenÁ„o/n„o tributaÁ„o/suspens„o, de acordo com o motivo de desoneraÁ„o informado. <br>
-   * ICMS70: valor do ICMS desonerado em operaÁıes com reduÁ„o de BC e ICMS ST, conforme motivo informado em motDesICMS. <br>
-   * ICMS90: valor do ICMS desonerado nas operaÁıes ìOutrosî, quando houver motivo de desoneraÁ„o informado.
+   * N28a - vICMSDeson (ICMS20, ICMS30, ICMS40, ICMS70, ICMS90). Valor do ICMS desonerado. Ocor.: 1‚Äì1 / Tam.: 13v2 / Tipo: N. <br>
+   * ICMS20: valor do ICMS desonerado conforme motivo de desonera√ß√£o. <br>
+   * ICMS30: valor do ICMS desonerado aplicado a opera√ß√µes isentas/n√£o tributadas com ICMS ST. <br>
+   * ICMS40: valor do ICMS que seria devido se n√£o houvesse isen√ß√£o/n√£o tributa√ß√£o/suspens√£o, de acordo com o motivo de desonera√ß√£o informado. <br>
+   * ICMS70: valor do ICMS desonerado em opera√ß√µes com redu√ß√£o de BC e ICMS ST, conforme motivo informado em motDesICMS. <br>
+   * ICMS90: valor do ICMS desonerado nas opera√ß√µes ‚ÄúOutros‚Äù, quando houver motivo de desonera√ß√£o informado.
    */
   @RFWMetaBigDecimalField(caption = "Valor do ICMS desonerado", required = false, unique = false, scale = 2, absolute = true)
   private BigDecimal vicmsDeson;
   /**
-   * N28 - motDesICMS (ICMS20, ICMS30, ICMS40, ICMS70, ICMS90). Motivo da desoneraÁ„o do ICMS. Ver {@link SEFAZ_motDesICMS}. <br>
-   * ICMS20: motivos de desoneraÁ„o aplic·veis ‡s operaÁıes com reduÁ„o de BC. <br>
-   * ICMS30: motivos aplic·veis ‡s operaÁıes isentas/n„o tributadas com ICMS ST. <br>
-   * ICMS40: motivos aplic·veis ‡s operaÁıes isentas, n„o tributadas ou com suspens„o (incluindo SUFRAMA, venda a Ûrg„o p˙blico, OlimpÌadas Rio 2016, solicitado pelo Fisco, etc.). <br>
-   * ICMS70: motivos de desoneraÁ„o aplic·veis ao grupo ICMS70, utilizando os cÛdigos 1, 3, 4, 5, 6, 7, 8, 9, 10, 11 e 12 conforme tabela do MOC. <br>
-   * ICMS90: motivos de desoneraÁ„o aplic·veis ao grupo ICMS90, utilizando os cÛdigos 3 (Uso na agropecu·ria), 9 (Outros) e 12 (”rg„o de fomento e desenvolvimento agropecu·rio).
+   * N28 - motDesICMS (ICMS20, ICMS30, ICMS40, ICMS70, ICMS90). Motivo da desonera√ß√£o do ICMS. Ver {@link SEFAZ_motDesICMS}. <br>
+   * ICMS20: motivos de desonera√ß√£o aplic√°veis √†s opera√ß√µes com redu√ß√£o de BC. <br>
+   * ICMS30: motivos aplic√°veis √†s opera√ß√µes isentas/n√£o tributadas com ICMS ST. <br>
+   * ICMS40: motivos aplic√°veis √†s opera√ß√µes isentas, n√£o tributadas ou com suspens√£o (incluindo SUFRAMA, venda a √≥rg√£o p√∫blico, Olimp√≠adas Rio 2016, solicitado pelo Fisco, etc.). <br>
+   * ICMS70: motivos de desonera√ß√£o aplic√°veis ao grupo ICMS70, utilizando os c√≥digos 1, 3, 4, 5, 6, 7, 8, 9, 10, 11 e 12 conforme tabela do MOC. <br>
+   * ICMS90: motivos de desonera√ß√£o aplic√°veis ao grupo ICMS90, utilizando os c√≥digos 3 (Uso na agropecu√°ria), 9 (Outros) e 12 (√ìrg√£o de fomento e desenvolvimento agropecu√°rio).
    */
-  @RFWMetaEnumField(caption = "Motivo da desoneraÁ„o do ICMS", required = false)
+  @RFWMetaEnumField(caption = "Motivo da desonera√ß√£o do ICMS", required = false)
   private SEFAZ_motDesICMS motDesICMS;
 
   /**
-   * N12 - CST. TributaÁ„o do ICMS. Ocor.: 1ñ1 / Tam.: 2 / Tipo: N. Ver valores em {@link SEFAZ_CST_ICMS}. <br>
-   * ICMS00: CST = 00 ñ Tributado integralmente. <br>
-   * ICMS10: CST = 10 ñ Tributado e com cobranÁa do ICMS por substituiÁ„o tribut·ria. <br>
-   * ICMS20: CST = 20 ñ Com reduÁ„o da base de c·lculo. <br>
-   * ICMS30: CST = 30 ñ Isenta ou n„o tributada e com cobranÁa do ICMS por substituiÁ„o tribut·ria. <br>
-   * ICMS40: CST = 40 (Isenta), 41 (N„o tributada) ou 50 (Suspens„o). <br>
-   * ICMS51: CST = 51 ñ Diferimento. <br>
-   * ICMS60: CST = 60 ñ ICMS cobrado anteriormente por substituiÁ„o tribut·ria. <br>
-   * ICMS70: CST = 70 ñ Com reduÁ„o de base de c·lculo e cobranÁa do ICMS por substituiÁ„o tribut·ria. <br>
-   * ICMS90: CST = 90 ñ Outros.
+   * N12 - CST. Tributa√ß√£o do ICMS. Ocor.: 1‚Äì1 / Tam.: 2 / Tipo: N. Ver valores em {@link SEFAZ_CST_ICMS}. <br>
+   * ICMS00: CST = 00 ‚Äì Tributado integralmente. <br>
+   * ICMS10: CST = 10 ‚Äì Tributado e com cobran√ßa do ICMS por substitui√ß√£o tribut√°ria. <br>
+   * ICMS20: CST = 20 ‚Äì Com redu√ß√£o da base de c√°lculo. <br>
+   * ICMS30: CST = 30 ‚Äì Isenta ou n√£o tributada e com cobran√ßa do ICMS por substitui√ß√£o tribut√°ria. <br>
+   * ICMS40: CST = 40 (Isenta), 41 (N√£o tributada) ou 50 (Suspens√£o). <br>
+   * ICMS51: CST = 51 ‚Äì Diferimento. <br>
+   * ICMS60: CST = 60 ‚Äì ICMS cobrado anteriormente por substitui√ß√£o tribut√°ria. <br>
+   * ICMS70: CST = 70 ‚Äì Com redu√ß√£o de base de c√°lculo e cobran√ßa do ICMS por substitui√ß√£o tribut√°ria. <br>
+   * ICMS90: CST = 90 ‚Äì Outros.
    */
   @RFWMetaEnumField(caption = "CST do ICMS", required = false)
   private SEFAZ_CST_ICMS cst;
 
   /**
-   * N16a - vICMSOp (ICMS51). Valor do ICMS da operaÁ„o como se n„o houvesse diferimento. Ocor.: 0ñ1 / Tam.: 13v2 / Tipo: N.
+   * N16a - vICMSOp (ICMS51). Valor do ICMS da opera√ß√£o como se n√£o houvesse diferimento. Ocor.: 0‚Äì1 / Tam.: 13v2 / Tipo: N.
    */
-  @RFWMetaBigDecimalField(caption = "Valor do ICMS da operaÁ„o", required = false, unique = false, scale = 2, absolute = true)
+  @RFWMetaBigDecimalField(caption = "Valor do ICMS da opera√ß√£o", required = false, unique = false, scale = 2, absolute = true)
   private BigDecimal vicmsOp;
 
   /**
-   * N16b - pDif (ICMS51). Percentual do diferimento. No caso de diferimento total, informar ì100î. Ocor.: 0ñ1 / Tam.: 3v2ñ4 / Tipo: N.
+   * N16b - pDif (ICMS51). Percentual do diferimento. No caso de diferimento total, informar ‚Äú100‚Äù. Ocor.: 0‚Äì1 / Tam.: 3v2‚Äì4 / Tipo: N.
    */
   @RFWMetaBigDecimalField(caption = "Percentual do diferimento", required = false, unique = false, scaleMax = 4, absolute = true)
   private BigDecimal pdif;
 
   /**
-   * N16c - vICMSDif (ICMS51). Valor do ICMS diferido. Ocor.: 0ñ1 / Tam.: 13v2 / Tipo: N.
+   * N16c - vICMSDif (ICMS51). Valor do ICMS diferido. Ocor.: 0‚Äì1 / Tam.: 13v2 / Tipo: N.
    */
   @RFWMetaBigDecimalField(caption = "Valor do ICMS diferido", required = false, unique = false, scale = 2, absolute = true)
   private BigDecimal vicmsDif;
 
   /**
-   * N17 - vICMS. Valor do ICMS. Ocor.: 1ñ1 / Tam.: 13v2 / Tipo: N. <br>
-   * ICMS00: valor do ICMS prÛprio devido. <br>
-   * ICMS10: valor do ICMS prÛprio (sem considerar o ICMS ST). <br>
+   * N17 - vICMS. Valor do ICMS. Ocor.: 1‚Äì1 / Tam.: 13v2 / Tipo: N. <br>
+   * ICMS00: valor do ICMS pr√≥prio devido. <br>
+   * ICMS10: valor do ICMS pr√≥prio (sem considerar o ICMS ST). <br>
    * ICMS20: valor do ICMS calculado sobre a base reduzida. <br>
-   * ICMS51: valor do ICMS realmente devido apÛs o diferimento (por exemplo, vICMSOp - vICMSDif, conforme regra da UF). <br>
-   * ICMS70: valor do ICMS prÛprio calculado sobre a BC reduzida (antes da ST). <br>
-   * ICMS90: valor do ICMS prÛprio devido no grupo ICMS90 (TributaÁ„o ìOutrosî).
+   * ICMS51: valor do ICMS realmente devido ap√≥s o diferimento (por exemplo, vICMSOp - vICMSDif, conforme regra da UF). <br>
+   * ICMS70: valor do ICMS pr√≥prio calculado sobre a BC reduzida (antes da ST). <br>
+   * ICMS90: valor do ICMS pr√≥prio devido no grupo ICMS90 (Tributa√ß√£o ‚ÄúOutros‚Äù).
    */
   @RFWMetaBigDecimalField(caption = "Valor do ICMS", required = false, unique = false, scale = 2, absolute = true)
   private BigDecimal vicms;
 
   /**
-   * N17a/N17b (ICMS10, ICMS20, ICMS51, ICMS70, ICMS90) - vBCFCP. Valor da Base de C·lculo do FCP. <br>
-   * Ocor.: 1ñ1 / Tam.: 13v2 / Tipo: N (quando o grupo FCP estiver presente). <br>
-   * ICMS10: valor da base de c·lculo do FCP do ICMS prÛprio. <br>
-   * ICMS20: valor da base de c·lculo do FCP em operaÁıes com reduÁ„o de BC. <br>
-   * ICMS51: base de c·lculo do FCP nas operaÁıes com diferimento (quando exigido pela UF). <br>
-   * ICMS70: base de c·lculo do FCP relativo ao ICMS prÛprio em operaÁ„o com reduÁ„o de BC e ST. <br>
-   * ICMS90: base de c·lculo do FCP relativo ao ICMS prÛprio no grupo ICMS90.
+   * N17a/N17b (ICMS10, ICMS20, ICMS51, ICMS70, ICMS90) - vBCFCP. Valor da Base de C√°lculo do FCP. <br>
+   * Ocor.: 1‚Äì1 / Tam.: 13v2 / Tipo: N (quando o grupo FCP estiver presente). <br>
+   * ICMS10: valor da base de c√°lculo do FCP do ICMS pr√≥prio. <br>
+   * ICMS20: valor da base de c√°lculo do FCP em opera√ß√µes com redu√ß√£o de BC. <br>
+   * ICMS51: base de c√°lculo do FCP nas opera√ß√µes com diferimento (quando exigido pela UF). <br>
+   * ICMS70: base de c√°lculo do FCP relativo ao ICMS pr√≥prio em opera√ß√£o com redu√ß√£o de BC e ST. <br>
+   * ICMS90: base de c√°lculo do FCP relativo ao ICMS pr√≥prio no grupo ICMS90.
    */
-  @RFWMetaBigDecimalField(caption = "Base de c·lculo do FCP", required = false, unique = false, scale = 2, absolute = true)
+  @RFWMetaBigDecimalField(caption = "Base de c√°lculo do FCP", required = false, unique = false, scale = 2, absolute = true)
   private BigDecimal vbcFCP;
 
   /**
-   * N17b - pFCP. Percentual do ICMS relativo ao Fundo de Combate ‡ Pobreza (FCP). <br>
-   * Ocor.: 1ñ1 / Tam.: 3v2ñ4 / Tipo: N (quando o grupo FCP estiver presente). <br>
-   * ICMS00: percentual aplicado sobre a BC do ICMS para c·lculo do FCP. <br>
+   * N17b - pFCP. Percentual do ICMS relativo ao Fundo de Combate √† Pobreza (FCP). <br>
+   * Ocor.: 1‚Äì1 / Tam.: 3v2‚Äì4 / Tipo: N (quando o grupo FCP estiver presente). <br>
+   * ICMS00: percentual aplicado sobre a BC do ICMS para c√°lculo do FCP. <br>
    * ICMS10: percentual aplicado sobre vBCFCP e/ou vBCFCPST, conforme o caso. <br>
-   * ICMS20: percentual aplicado sobre a base de c·lculo do FCP em operaÁıes com reduÁ„o de BC. <br>
-   * ICMS51: percentual do FCP aplicado sobre a base de c·lculo do FCP na operaÁ„o com diferimento. <br>
-   * ICMS70: percentual do FCP relativo ao ICMS prÛprio em operaÁ„o com reduÁ„o de BC e ST. <br>
-   * ICMS90: percentual do FCP relativo ao ICMS prÛprio em operaÁıes ìOutrosî.
+   * ICMS20: percentual aplicado sobre a base de c√°lculo do FCP em opera√ß√µes com redu√ß√£o de BC. <br>
+   * ICMS51: percentual do FCP aplicado sobre a base de c√°lculo do FCP na opera√ß√£o com diferimento. <br>
+   * ICMS70: percentual do FCP relativo ao ICMS pr√≥prio em opera√ß√£o com redu√ß√£o de BC e ST. <br>
+   * ICMS90: percentual do FCP relativo ao ICMS pr√≥prio em opera√ß√µes ‚ÄúOutros‚Äù.
    */
   @RFWMetaBigDecimalField(caption = "Percentual FCP", required = false, unique = false, scaleMax = 4, absolute = true)
   private BigDecimal pfcp;
@@ -544,22 +544,22 @@ public class SEFAZICMSVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # n11 - orig. Origem da mercadoria. Ocor.: 1ñ1 / Tam.: 1 / Tipo: N. Ver valores em {@link SEFAZ_orig}. <br>
-   * ICMS00: origem da mercadoria para operaÁıes tributadas integralmente. <br>
-   * ICMS10: origem da mercadoria para operaÁıes tributadas com ICMS e ICMS ST. <br>
-   * ICMS20: origem da mercadoria para operaÁıes com reduÁ„o de base de c·lculo. <br>
-   * ICMS30: origem da mercadoria para operaÁıes isentas/n„o tributadas com cobranÁa de ICMS ST. <br>
-   * ICMS40: origem da mercadoria para operaÁıes isentas, n„o tributadas ou com suspens„o de ICMS. <br>
-   * ICMS51: origem da mercadoria para operaÁıes com diferimento do ICMS. <br>
-   * ICMS60: origem da mercadoria em operaÁıes com ICMS cobrado anteriormente por ST. <br>
-   * ICMS70: origem da mercadoria em operaÁıes com reduÁ„o de BC e cobranÁa de ICMS ST. <br>
-   * ICMS90: origem da mercadoria em operaÁıes enquadradas no grupo ìOutrosî (CST 90). <br>
-   * ICMSSN101: origem da mercadoria em operaÁıes do Simples Nacional com CSOSN=101. <br>
-   * ICMSSN102: origem da mercadoria em operaÁıes do Simples Nacional com CSOSN=102, 103, 300 ou 400. <br>
-   * ICMSSN201: origem da mercadoria em operaÁıes do Simples Nacional com CSOSN=201 (permite crÈdito e tem ICMS ST). <br>
-   * ICMSSN202: origem da mercadoria em operaÁıes do Simples Nacional com CSOSN=202 ou 203 (sem crÈdito ou com isenÁ„o, ambas com ST). <br>
-   * ICMSSN500: origem da mercadoria em operaÁıes do Simples Nacional com CSOSN=500, nas quais o ICMS foi cobrado anteriormente por substituiÁ„o tribut·ria ou antecipaÁ„o. <br>
-   * ICMSSN900: origem da mercadoria em operaÁıes do Simples Nacional enquadradas como ìOutrosî (CSOSN=900), tanto para ICMS prÛprio quanto, quando aplic·vel, para ICMS ST.
+   * # n11 - orig. Origem da mercadoria. Ocor.: 1‚Äì1 / Tam.: 1 / Tipo: N. Ver valores em {@link SEFAZ_orig}. <br>
+   * ICMS00: origem da mercadoria para opera√ß√µes tributadas integralmente. <br>
+   * ICMS10: origem da mercadoria para opera√ß√µes tributadas com ICMS e ICMS ST. <br>
+   * ICMS20: origem da mercadoria para opera√ß√µes com redu√ß√£o de base de c√°lculo. <br>
+   * ICMS30: origem da mercadoria para opera√ß√µes isentas/n√£o tributadas com cobran√ßa de ICMS ST. <br>
+   * ICMS40: origem da mercadoria para opera√ß√µes isentas, n√£o tributadas ou com suspens√£o de ICMS. <br>
+   * ICMS51: origem da mercadoria para opera√ß√µes com diferimento do ICMS. <br>
+   * ICMS60: origem da mercadoria em opera√ß√µes com ICMS cobrado anteriormente por ST. <br>
+   * ICMS70: origem da mercadoria em opera√ß√µes com redu√ß√£o de BC e cobran√ßa de ICMS ST. <br>
+   * ICMS90: origem da mercadoria em opera√ß√µes enquadradas no grupo ‚ÄúOutros‚Äù (CST 90). <br>
+   * ICMSSN101: origem da mercadoria em opera√ß√µes do Simples Nacional com CSOSN=101. <br>
+   * ICMSSN102: origem da mercadoria em opera√ß√µes do Simples Nacional com CSOSN=102, 103, 300 ou 400. <br>
+   * ICMSSN201: origem da mercadoria em opera√ß√µes do Simples Nacional com CSOSN=201 (permite cr√©dito e tem ICMS ST). <br>
+   * ICMSSN202: origem da mercadoria em opera√ß√µes do Simples Nacional com CSOSN=202 ou 203 (sem cr√©dito ou com isen√ß√£o, ambas com ST). <br>
+   * ICMSSN500: origem da mercadoria em opera√ß√µes do Simples Nacional com CSOSN=500, nas quais o ICMS foi cobrado anteriormente por substitui√ß√£o tribut√°ria ou antecipa√ß√£o. <br>
+   * ICMSSN900: origem da mercadoria em opera√ß√µes do Simples Nacional enquadradas como ‚ÄúOutros‚Äù (CSOSN=900), tanto para ICMS pr√≥prio quanto, quando aplic√°vel, para ICMS ST.
    *
    * @return the n11 - orig
    */
@@ -568,22 +568,22 @@ public class SEFAZICMSVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # n11 - orig. Origem da mercadoria. Ocor.: 1ñ1 / Tam.: 1 / Tipo: N. Ver valores em {@link SEFAZ_orig}. <br>
-   * ICMS00: origem da mercadoria para operaÁıes tributadas integralmente. <br>
-   * ICMS10: origem da mercadoria para operaÁıes tributadas com ICMS e ICMS ST. <br>
-   * ICMS20: origem da mercadoria para operaÁıes com reduÁ„o de base de c·lculo. <br>
-   * ICMS30: origem da mercadoria para operaÁıes isentas/n„o tributadas com cobranÁa de ICMS ST. <br>
-   * ICMS40: origem da mercadoria para operaÁıes isentas, n„o tributadas ou com suspens„o de ICMS. <br>
-   * ICMS51: origem da mercadoria para operaÁıes com diferimento do ICMS. <br>
-   * ICMS60: origem da mercadoria em operaÁıes com ICMS cobrado anteriormente por ST. <br>
-   * ICMS70: origem da mercadoria em operaÁıes com reduÁ„o de BC e cobranÁa de ICMS ST. <br>
-   * ICMS90: origem da mercadoria em operaÁıes enquadradas no grupo ìOutrosî (CST 90). <br>
-   * ICMSSN101: origem da mercadoria em operaÁıes do Simples Nacional com CSOSN=101. <br>
-   * ICMSSN102: origem da mercadoria em operaÁıes do Simples Nacional com CSOSN=102, 103, 300 ou 400. <br>
-   * ICMSSN201: origem da mercadoria em operaÁıes do Simples Nacional com CSOSN=201 (permite crÈdito e tem ICMS ST). <br>
-   * ICMSSN202: origem da mercadoria em operaÁıes do Simples Nacional com CSOSN=202 ou 203 (sem crÈdito ou com isenÁ„o, ambas com ST). <br>
-   * ICMSSN500: origem da mercadoria em operaÁıes do Simples Nacional com CSOSN=500, nas quais o ICMS foi cobrado anteriormente por substituiÁ„o tribut·ria ou antecipaÁ„o. <br>
-   * ICMSSN900: origem da mercadoria em operaÁıes do Simples Nacional enquadradas como ìOutrosî (CSOSN=900), tanto para ICMS prÛprio quanto, quando aplic·vel, para ICMS ST.
+   * # n11 - orig. Origem da mercadoria. Ocor.: 1‚Äì1 / Tam.: 1 / Tipo: N. Ver valores em {@link SEFAZ_orig}. <br>
+   * ICMS00: origem da mercadoria para opera√ß√µes tributadas integralmente. <br>
+   * ICMS10: origem da mercadoria para opera√ß√µes tributadas com ICMS e ICMS ST. <br>
+   * ICMS20: origem da mercadoria para opera√ß√µes com redu√ß√£o de base de c√°lculo. <br>
+   * ICMS30: origem da mercadoria para opera√ß√µes isentas/n√£o tributadas com cobran√ßa de ICMS ST. <br>
+   * ICMS40: origem da mercadoria para opera√ß√µes isentas, n√£o tributadas ou com suspens√£o de ICMS. <br>
+   * ICMS51: origem da mercadoria para opera√ß√µes com diferimento do ICMS. <br>
+   * ICMS60: origem da mercadoria em opera√ß√µes com ICMS cobrado anteriormente por ST. <br>
+   * ICMS70: origem da mercadoria em opera√ß√µes com redu√ß√£o de BC e cobran√ßa de ICMS ST. <br>
+   * ICMS90: origem da mercadoria em opera√ß√µes enquadradas no grupo ‚ÄúOutros‚Äù (CST 90). <br>
+   * ICMSSN101: origem da mercadoria em opera√ß√µes do Simples Nacional com CSOSN=101. <br>
+   * ICMSSN102: origem da mercadoria em opera√ß√µes do Simples Nacional com CSOSN=102, 103, 300 ou 400. <br>
+   * ICMSSN201: origem da mercadoria em opera√ß√µes do Simples Nacional com CSOSN=201 (permite cr√©dito e tem ICMS ST). <br>
+   * ICMSSN202: origem da mercadoria em opera√ß√µes do Simples Nacional com CSOSN=202 ou 203 (sem cr√©dito ou com isen√ß√£o, ambas com ST). <br>
+   * ICMSSN500: origem da mercadoria em opera√ß√µes do Simples Nacional com CSOSN=500, nas quais o ICMS foi cobrado anteriormente por substitui√ß√£o tribut√°ria ou antecipa√ß√£o. <br>
+   * ICMSSN900: origem da mercadoria em opera√ß√µes do Simples Nacional enquadradas como ‚ÄúOutros‚Äù (CSOSN=900), tanto para ICMS pr√≥prio quanto, quando aplic√°vel, para ICMS ST.
    *
    * @param orig the new n11 - orig
    */
@@ -592,18 +592,18 @@ public class SEFAZICMSVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # n12a - CSOSN. CÛdigo de SituaÁ„o da OperaÁ„o ñ Simples Nacional. Ocor.: 1ñ1 / Tam.: 3 / Tipo: N. <br>
-   * ICMSSN101: CSOSN = 101 ñ Tributada pelo Simples Nacional com permiss„o de crÈdito. <br>
-   * ICMSSN102: CSOSN = 102 ñ Tributada pelo Simples Nacional sem permiss„o de crÈdito. <br>
-   * ICMSSN102: CSOSN = 103 ñ IsenÁ„o do ICMS no Simples Nacional para faixa de receita bruta. <br>
-   * ICMSSN102: CSOSN = 300 ñ Imune. <br>
-   * ICMSSN102: CSOSN = 400 ñ N„o tributada pelo Simples Nacional. <br>
-   * ICMSSN201: CSOSN = 201 ñ Tributada pelo Simples Nacional com permiss„o de crÈdito e com cobranÁa do ICMS por substituiÁ„o tribut·ria. <br>
-   * ICMSSN202: CSOSN = 202 ñ Tributada pelo Simples Nacional sem permiss„o de crÈdito e com cobranÁa do ICMS por substituiÁ„o tribut·ria. <br>
-   * ICMSSN202: CSOSN = 203 ñ IsenÁ„o do ICMS no Simples Nacional para faixa de receita bruta e com cobranÁa do ICMS por substituiÁ„o tribut·ria. <br>
-   * ICMSSN500: CSOSN = 500 ñ ICMS cobrado anteriormente por substituiÁ„o tribut·ria (substituÌdo) ou por antecipaÁ„o. <br>
-   * ICMSSN900: CSOSN = 900 ñ Outros, para operaÁıes do Simples Nacional com regras especÌficas de ICMS prÛprio, reduÁ„o de base, ST e crÈdito conforme a legislaÁ„o estadual. <br>
-   * Mapeado para {@link SEFAZ_CSOSN}. Outros cÛdigos poder„o ser utilizados por outros grupos ICMSSN* conforme forem implementados.
+   * # n12a - CSOSN. C√≥digo de Situa√ß√£o da Opera√ß√£o ‚Äì Simples Nacional. Ocor.: 1‚Äì1 / Tam.: 3 / Tipo: N. <br>
+   * ICMSSN101: CSOSN = 101 ‚Äì Tributada pelo Simples Nacional com permiss√£o de cr√©dito. <br>
+   * ICMSSN102: CSOSN = 102 ‚Äì Tributada pelo Simples Nacional sem permiss√£o de cr√©dito. <br>
+   * ICMSSN102: CSOSN = 103 ‚Äì Isen√ß√£o do ICMS no Simples Nacional para faixa de receita bruta. <br>
+   * ICMSSN102: CSOSN = 300 ‚Äì Imune. <br>
+   * ICMSSN102: CSOSN = 400 ‚Äì N√£o tributada pelo Simples Nacional. <br>
+   * ICMSSN201: CSOSN = 201 ‚Äì Tributada pelo Simples Nacional com permiss√£o de cr√©dito e com cobran√ßa do ICMS por substitui√ß√£o tribut√°ria. <br>
+   * ICMSSN202: CSOSN = 202 ‚Äì Tributada pelo Simples Nacional sem permiss√£o de cr√©dito e com cobran√ßa do ICMS por substitui√ß√£o tribut√°ria. <br>
+   * ICMSSN202: CSOSN = 203 ‚Äì Isen√ß√£o do ICMS no Simples Nacional para faixa de receita bruta e com cobran√ßa do ICMS por substitui√ß√£o tribut√°ria. <br>
+   * ICMSSN500: CSOSN = 500 ‚Äì ICMS cobrado anteriormente por substitui√ß√£o tribut√°ria (substitu√≠do) ou por antecipa√ß√£o. <br>
+   * ICMSSN900: CSOSN = 900 ‚Äì Outros, para opera√ß√µes do Simples Nacional com regras espec√≠ficas de ICMS pr√≥prio, redu√ß√£o de base, ST e cr√©dito conforme a legisla√ß√£o estadual. <br>
+   * Mapeado para {@link SEFAZ_CSOSN}. Outros c√≥digos poder√£o ser utilizados por outros grupos ICMSSN* conforme forem implementados.
    *
    * @return the n12a - CSOSN
    */
@@ -612,18 +612,18 @@ public class SEFAZICMSVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # n12a - CSOSN. CÛdigo de SituaÁ„o da OperaÁ„o ñ Simples Nacional. Ocor.: 1ñ1 / Tam.: 3 / Tipo: N. <br>
-   * ICMSSN101: CSOSN = 101 ñ Tributada pelo Simples Nacional com permiss„o de crÈdito. <br>
-   * ICMSSN102: CSOSN = 102 ñ Tributada pelo Simples Nacional sem permiss„o de crÈdito. <br>
-   * ICMSSN102: CSOSN = 103 ñ IsenÁ„o do ICMS no Simples Nacional para faixa de receita bruta. <br>
-   * ICMSSN102: CSOSN = 300 ñ Imune. <br>
-   * ICMSSN102: CSOSN = 400 ñ N„o tributada pelo Simples Nacional. <br>
-   * ICMSSN201: CSOSN = 201 ñ Tributada pelo Simples Nacional com permiss„o de crÈdito e com cobranÁa do ICMS por substituiÁ„o tribut·ria. <br>
-   * ICMSSN202: CSOSN = 202 ñ Tributada pelo Simples Nacional sem permiss„o de crÈdito e com cobranÁa do ICMS por substituiÁ„o tribut·ria. <br>
-   * ICMSSN202: CSOSN = 203 ñ IsenÁ„o do ICMS no Simples Nacional para faixa de receita bruta e com cobranÁa do ICMS por substituiÁ„o tribut·ria. <br>
-   * ICMSSN500: CSOSN = 500 ñ ICMS cobrado anteriormente por substituiÁ„o tribut·ria (substituÌdo) ou por antecipaÁ„o. <br>
-   * ICMSSN900: CSOSN = 900 ñ Outros, para operaÁıes do Simples Nacional com regras especÌficas de ICMS prÛprio, reduÁ„o de base, ST e crÈdito conforme a legislaÁ„o estadual. <br>
-   * Mapeado para {@link SEFAZ_CSOSN}. Outros cÛdigos poder„o ser utilizados por outros grupos ICMSSN* conforme forem implementados.
+   * # n12a - CSOSN. C√≥digo de Situa√ß√£o da Opera√ß√£o ‚Äì Simples Nacional. Ocor.: 1‚Äì1 / Tam.: 3 / Tipo: N. <br>
+   * ICMSSN101: CSOSN = 101 ‚Äì Tributada pelo Simples Nacional com permiss√£o de cr√©dito. <br>
+   * ICMSSN102: CSOSN = 102 ‚Äì Tributada pelo Simples Nacional sem permiss√£o de cr√©dito. <br>
+   * ICMSSN102: CSOSN = 103 ‚Äì Isen√ß√£o do ICMS no Simples Nacional para faixa de receita bruta. <br>
+   * ICMSSN102: CSOSN = 300 ‚Äì Imune. <br>
+   * ICMSSN102: CSOSN = 400 ‚Äì N√£o tributada pelo Simples Nacional. <br>
+   * ICMSSN201: CSOSN = 201 ‚Äì Tributada pelo Simples Nacional com permiss√£o de cr√©dito e com cobran√ßa do ICMS por substitui√ß√£o tribut√°ria. <br>
+   * ICMSSN202: CSOSN = 202 ‚Äì Tributada pelo Simples Nacional sem permiss√£o de cr√©dito e com cobran√ßa do ICMS por substitui√ß√£o tribut√°ria. <br>
+   * ICMSSN202: CSOSN = 203 ‚Äì Isen√ß√£o do ICMS no Simples Nacional para faixa de receita bruta e com cobran√ßa do ICMS por substitui√ß√£o tribut√°ria. <br>
+   * ICMSSN500: CSOSN = 500 ‚Äì ICMS cobrado anteriormente por substitui√ß√£o tribut√°ria (substitu√≠do) ou por antecipa√ß√£o. <br>
+   * ICMSSN900: CSOSN = 900 ‚Äì Outros, para opera√ß√µes do Simples Nacional com regras espec√≠ficas de ICMS pr√≥prio, redu√ß√£o de base, ST e cr√©dito conforme a legisla√ß√£o estadual. <br>
+   * Mapeado para {@link SEFAZ_CSOSN}. Outros c√≥digos poder√£o ser utilizados por outros grupos ICMSSN* conforme forem implementados.
    *
    * @param csosn the new n12a - CSOSN
    */
@@ -632,14 +632,14 @@ public class SEFAZICMSVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # n13 - modBC. Modalidade de determinaÁ„o da BC do ICMS. 0 = Margem Valor Agregado (%); 1 = Pauta (valor); 2 = PreÁo tabelado m·ximo (valor); 3 = Valor da operaÁ„o. Ocor.: 1ñ1 (ou 0ñ1 no ICMS51) / Tam.: 1 / Tipo: N. Ver valores em {@link SEFAZ_modBC}. <br>
-   * ICMS00: modalidade para c·lculo da BC do ICMS prÛprio. <br>
-   * ICMS10: modalidade para c·lculo da BC do ICMS prÛprio (antes da ST). <br>
-   * ICMS20: modalidade para c·lculo da BC do ICMS em operaÁıes com reduÁ„o de BC. <br>
-   * ICMS51: modalidade da BC do ICMS em operaÁıes com diferimento (campo opcional, a critÈrio da UF). <br>
-   * ICMS70: modalidade para c·lculo da BC do ICMS prÛprio em operaÁ„o com reduÁ„o de BC e com ST. <br>
-   * ICMS90: modalidade para c·lculo da BC do ICMS prÛprio em operaÁıes enquadradas como ìOutrosî. <br>
-   * ICMSSN900: modalidade para determinaÁ„o da BC do ICMS prÛprio em operaÁıes do Simples Nacional com CSOSN=900, seguindo as mesmas modalidades 0ñ3 previstas no MOC.
+   * # n13 - modBC. Modalidade de determina√ß√£o da BC do ICMS. 0 = Margem Valor Agregado (%); 1 = Pauta (valor); 2 = Pre√ßo tabelado m√°ximo (valor); 3 = Valor da opera√ß√£o. Ocor.: 1‚Äì1 (ou 0‚Äì1 no ICMS51) / Tam.: 1 / Tipo: N. Ver valores em {@link SEFAZ_modBC}. <br>
+   * ICMS00: modalidade para c√°lculo da BC do ICMS pr√≥prio. <br>
+   * ICMS10: modalidade para c√°lculo da BC do ICMS pr√≥prio (antes da ST). <br>
+   * ICMS20: modalidade para c√°lculo da BC do ICMS em opera√ß√µes com redu√ß√£o de BC. <br>
+   * ICMS51: modalidade da BC do ICMS em opera√ß√µes com diferimento (campo opcional, a crit√©rio da UF). <br>
+   * ICMS70: modalidade para c√°lculo da BC do ICMS pr√≥prio em opera√ß√£o com redu√ß√£o de BC e com ST. <br>
+   * ICMS90: modalidade para c√°lculo da BC do ICMS pr√≥prio em opera√ß√µes enquadradas como ‚ÄúOutros‚Äù. <br>
+   * ICMSSN900: modalidade para determina√ß√£o da BC do ICMS pr√≥prio em opera√ß√µes do Simples Nacional com CSOSN=900, seguindo as mesmas modalidades 0‚Äì3 previstas no MOC.
    *
    * @return the n13 - modBC
    */
@@ -648,14 +648,14 @@ public class SEFAZICMSVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # n13 - modBC. Modalidade de determinaÁ„o da BC do ICMS. 0 = Margem Valor Agregado (%); 1 = Pauta (valor); 2 = PreÁo tabelado m·ximo (valor); 3 = Valor da operaÁ„o. Ocor.: 1ñ1 (ou 0ñ1 no ICMS51) / Tam.: 1 / Tipo: N. Ver valores em {@link SEFAZ_modBC}. <br>
-   * ICMS00: modalidade para c·lculo da BC do ICMS prÛprio. <br>
-   * ICMS10: modalidade para c·lculo da BC do ICMS prÛprio (antes da ST). <br>
-   * ICMS20: modalidade para c·lculo da BC do ICMS em operaÁıes com reduÁ„o de BC. <br>
-   * ICMS51: modalidade da BC do ICMS em operaÁıes com diferimento (campo opcional, a critÈrio da UF). <br>
-   * ICMS70: modalidade para c·lculo da BC do ICMS prÛprio em operaÁ„o com reduÁ„o de BC e com ST. <br>
-   * ICMS90: modalidade para c·lculo da BC do ICMS prÛprio em operaÁıes enquadradas como ìOutrosî. <br>
-   * ICMSSN900: modalidade para determinaÁ„o da BC do ICMS prÛprio em operaÁıes do Simples Nacional com CSOSN=900, seguindo as mesmas modalidades 0ñ3 previstas no MOC.
+   * # n13 - modBC. Modalidade de determina√ß√£o da BC do ICMS. 0 = Margem Valor Agregado (%); 1 = Pauta (valor); 2 = Pre√ßo tabelado m√°ximo (valor); 3 = Valor da opera√ß√£o. Ocor.: 1‚Äì1 (ou 0‚Äì1 no ICMS51) / Tam.: 1 / Tipo: N. Ver valores em {@link SEFAZ_modBC}. <br>
+   * ICMS00: modalidade para c√°lculo da BC do ICMS pr√≥prio. <br>
+   * ICMS10: modalidade para c√°lculo da BC do ICMS pr√≥prio (antes da ST). <br>
+   * ICMS20: modalidade para c√°lculo da BC do ICMS em opera√ß√µes com redu√ß√£o de BC. <br>
+   * ICMS51: modalidade da BC do ICMS em opera√ß√µes com diferimento (campo opcional, a crit√©rio da UF). <br>
+   * ICMS70: modalidade para c√°lculo da BC do ICMS pr√≥prio em opera√ß√£o com redu√ß√£o de BC e com ST. <br>
+   * ICMS90: modalidade para c√°lculo da BC do ICMS pr√≥prio em opera√ß√µes enquadradas como ‚ÄúOutros‚Äù. <br>
+   * ICMSSN900: modalidade para determina√ß√£o da BC do ICMS pr√≥prio em opera√ß√µes do Simples Nacional com CSOSN=900, seguindo as mesmas modalidades 0‚Äì3 previstas no MOC.
    *
    * @param modBC the new n13 - modBC
    */
@@ -664,14 +664,14 @@ public class SEFAZICMSVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # n15 - vBC. Valor da base de c·lculo do ICMS. Ocor.: 1ñ1 / Tam.: 13v2 / Tipo: N. <br>
-   * ICMS00: valor da BC do ICMS prÛprio. <br>
-   * ICMS10: valor da BC do ICMS prÛprio (antes da substituiÁ„o tribut·ria). <br>
-   * ICMS20: valor da BC do ICMS apÛs a aplicaÁ„o da reduÁ„o de base de c·lculo. <br>
-   * ICMS51: valor da BC do ICMS utilizada para c·lculo do ICMS da operaÁ„o com diferimento. <br>
-   * ICMS70: valor da BC do ICMS prÛprio, j· considerando a reduÁ„o de base de c·lculo. <br>
-   * ICMS90: valor da BC do ICMS prÛprio nas operaÁıes do grupo ìOutrosî. <br>
-   * ICMSSN900: valor da BC do ICMS prÛprio nas operaÁıes do Simples Nacional com CSOSN=900, de acordo com a modalidade de c·lculo definida em modBC.
+   * # n15 - vBC. Valor da base de c√°lculo do ICMS. Ocor.: 1‚Äì1 / Tam.: 13v2 / Tipo: N. <br>
+   * ICMS00: valor da BC do ICMS pr√≥prio. <br>
+   * ICMS10: valor da BC do ICMS pr√≥prio (antes da substitui√ß√£o tribut√°ria). <br>
+   * ICMS20: valor da BC do ICMS ap√≥s a aplica√ß√£o da redu√ß√£o de base de c√°lculo. <br>
+   * ICMS51: valor da BC do ICMS utilizada para c√°lculo do ICMS da opera√ß√£o com diferimento. <br>
+   * ICMS70: valor da BC do ICMS pr√≥prio, j√° considerando a redu√ß√£o de base de c√°lculo. <br>
+   * ICMS90: valor da BC do ICMS pr√≥prio nas opera√ß√µes do grupo ‚ÄúOutros‚Äù. <br>
+   * ICMSSN900: valor da BC do ICMS pr√≥prio nas opera√ß√µes do Simples Nacional com CSOSN=900, de acordo com a modalidade de c√°lculo definida em modBC.
    *
    * @return the n15 - vBC
    */
@@ -680,14 +680,14 @@ public class SEFAZICMSVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # n15 - vBC. Valor da base de c·lculo do ICMS. Ocor.: 1ñ1 / Tam.: 13v2 / Tipo: N. <br>
-   * ICMS00: valor da BC do ICMS prÛprio. <br>
-   * ICMS10: valor da BC do ICMS prÛprio (antes da substituiÁ„o tribut·ria). <br>
-   * ICMS20: valor da BC do ICMS apÛs a aplicaÁ„o da reduÁ„o de base de c·lculo. <br>
-   * ICMS51: valor da BC do ICMS utilizada para c·lculo do ICMS da operaÁ„o com diferimento. <br>
-   * ICMS70: valor da BC do ICMS prÛprio, j· considerando a reduÁ„o de base de c·lculo. <br>
-   * ICMS90: valor da BC do ICMS prÛprio nas operaÁıes do grupo ìOutrosî. <br>
-   * ICMSSN900: valor da BC do ICMS prÛprio nas operaÁıes do Simples Nacional com CSOSN=900, de acordo com a modalidade de c·lculo definida em modBC.
+   * # n15 - vBC. Valor da base de c√°lculo do ICMS. Ocor.: 1‚Äì1 / Tam.: 13v2 / Tipo: N. <br>
+   * ICMS00: valor da BC do ICMS pr√≥prio. <br>
+   * ICMS10: valor da BC do ICMS pr√≥prio (antes da substitui√ß√£o tribut√°ria). <br>
+   * ICMS20: valor da BC do ICMS ap√≥s a aplica√ß√£o da redu√ß√£o de base de c√°lculo. <br>
+   * ICMS51: valor da BC do ICMS utilizada para c√°lculo do ICMS da opera√ß√£o com diferimento. <br>
+   * ICMS70: valor da BC do ICMS pr√≥prio, j√° considerando a redu√ß√£o de base de c√°lculo. <br>
+   * ICMS90: valor da BC do ICMS pr√≥prio nas opera√ß√µes do grupo ‚ÄúOutros‚Äù. <br>
+   * ICMSSN900: valor da BC do ICMS pr√≥prio nas opera√ß√µes do Simples Nacional com CSOSN=900, de acordo com a modalidade de c√°lculo definida em modBC.
    *
    * @param vbc the new n15 - vBC
    */
@@ -696,12 +696,12 @@ public class SEFAZICMSVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # n14 (ICMS20 / ICMS51 / ICMS70 / ICMSSN900) - pRedBC. Percentual de reduÁ„o da base de c·lculo do ICMS. <br>
-   * Ocor.: ICMS20: 1ñ1 / Tam.: 3v2ñ4; ICMS51: 0ñ1 / Tam.: 3v2ñ4; demais conforme a UF. Tipo: N. <br>
-   * ICMS20: percentual de reduÁ„o da BC do ICMS. <br>
-   * ICMS51: percentual de reduÁ„o da BC do ICMS quando aplic·vel ao diferimento. <br>
-   * ICMS70: percentual de reduÁ„o da BC do ICMS prÛprio (antes da ST). <br>
-   * ICMSSN900: percentual de reduÁ„o da BC do ICMS prÛprio em operaÁıes do Simples Nacional com CSOSN=900, quando a legislaÁ„o estadual prever reduÁ„o de base.
+   * # n14 (ICMS20 / ICMS51 / ICMS70 / ICMSSN900) - pRedBC. Percentual de redu√ß√£o da base de c√°lculo do ICMS. <br>
+   * Ocor.: ICMS20: 1‚Äì1 / Tam.: 3v2‚Äì4; ICMS51: 0‚Äì1 / Tam.: 3v2‚Äì4; demais conforme a UF. Tipo: N. <br>
+   * ICMS20: percentual de redu√ß√£o da BC do ICMS. <br>
+   * ICMS51: percentual de redu√ß√£o da BC do ICMS quando aplic√°vel ao diferimento. <br>
+   * ICMS70: percentual de redu√ß√£o da BC do ICMS pr√≥prio (antes da ST). <br>
+   * ICMSSN900: percentual de redu√ß√£o da BC do ICMS pr√≥prio em opera√ß√µes do Simples Nacional com CSOSN=900, quando a legisla√ß√£o estadual prever redu√ß√£o de base.
    *
    * @return the n14 (ICMS20 / ICMS51 / ICMS70 / ICMSSN900) - pRedBC
    */
@@ -710,12 +710,12 @@ public class SEFAZICMSVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # n14 (ICMS20 / ICMS51 / ICMS70 / ICMSSN900) - pRedBC. Percentual de reduÁ„o da base de c·lculo do ICMS. <br>
-   * Ocor.: ICMS20: 1ñ1 / Tam.: 3v2ñ4; ICMS51: 0ñ1 / Tam.: 3v2ñ4; demais conforme a UF. Tipo: N. <br>
-   * ICMS20: percentual de reduÁ„o da BC do ICMS. <br>
-   * ICMS51: percentual de reduÁ„o da BC do ICMS quando aplic·vel ao diferimento. <br>
-   * ICMS70: percentual de reduÁ„o da BC do ICMS prÛprio (antes da ST). <br>
-   * ICMSSN900: percentual de reduÁ„o da BC do ICMS prÛprio em operaÁıes do Simples Nacional com CSOSN=900, quando a legislaÁ„o estadual prever reduÁ„o de base.
+   * # n14 (ICMS20 / ICMS51 / ICMS70 / ICMSSN900) - pRedBC. Percentual de redu√ß√£o da base de c√°lculo do ICMS. <br>
+   * Ocor.: ICMS20: 1‚Äì1 / Tam.: 3v2‚Äì4; ICMS51: 0‚Äì1 / Tam.: 3v2‚Äì4; demais conforme a UF. Tipo: N. <br>
+   * ICMS20: percentual de redu√ß√£o da BC do ICMS. <br>
+   * ICMS51: percentual de redu√ß√£o da BC do ICMS quando aplic√°vel ao diferimento. <br>
+   * ICMS70: percentual de redu√ß√£o da BC do ICMS pr√≥prio (antes da ST). <br>
+   * ICMSSN900: percentual de redu√ß√£o da BC do ICMS pr√≥prio em opera√ß√µes do Simples Nacional com CSOSN=900, quando a legisla√ß√£o estadual prever redu√ß√£o de base.
    *
    * @param predBC the new n14 (ICMS20 / ICMS51 / ICMS70 / ICMSSN900) - pRedBC
    */
@@ -724,15 +724,15 @@ public class SEFAZICMSVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # n16 - pICMS. AlÌquota do imposto ICMS. <br>
-   * Ocor.: ICMS00/ICMS20: 1ñ1 / Tam.: 3v2ñ4; ICMS51: 0ñ1 / Tam.: 3v2ñ4; demais conforme grupo. Tipo: N. <br>
-   * ICMS00: alÌquota do ICMS prÛprio. <br>
-   * ICMS10: alÌquota do ICMS prÛprio (sem incluir ICMS ST). <br>
-   * ICMS20: alÌquota do ICMS prÛprio sem o FCP, aplicada sobre a base reduzida. <br>
-   * ICMS51: alÌquota do ICMS da operaÁ„o (sem FCP) para c·lculo do ICMS da operaÁ„o e do diferimento. <br>
-   * ICMS70: alÌquota do ICMS prÛprio aplicada sobre a base reduzida da operaÁ„o com ST. <br>
-   * ICMS90: alÌquota do ICMS prÛprio nas operaÁıes do grupo ìOutrosî. <br>
-   * ICMSSN900: alÌquota do ICMS prÛprio em operaÁıes do Simples Nacional com CSOSN=900, utilizada na apuraÁ„o do dÈbito normal dentro do regime do Simples (quando aplic·vel).
+   * # n16 - pICMS. Al√≠quota do imposto ICMS. <br>
+   * Ocor.: ICMS00/ICMS20: 1‚Äì1 / Tam.: 3v2‚Äì4; ICMS51: 0‚Äì1 / Tam.: 3v2‚Äì4; demais conforme grupo. Tipo: N. <br>
+   * ICMS00: al√≠quota do ICMS pr√≥prio. <br>
+   * ICMS10: al√≠quota do ICMS pr√≥prio (sem incluir ICMS ST). <br>
+   * ICMS20: al√≠quota do ICMS pr√≥prio sem o FCP, aplicada sobre a base reduzida. <br>
+   * ICMS51: al√≠quota do ICMS da opera√ß√£o (sem FCP) para c√°lculo do ICMS da opera√ß√£o e do diferimento. <br>
+   * ICMS70: al√≠quota do ICMS pr√≥prio aplicada sobre a base reduzida da opera√ß√£o com ST. <br>
+   * ICMS90: al√≠quota do ICMS pr√≥prio nas opera√ß√µes do grupo ‚ÄúOutros‚Äù. <br>
+   * ICMSSN900: al√≠quota do ICMS pr√≥prio em opera√ß√µes do Simples Nacional com CSOSN=900, utilizada na apura√ß√£o do d√©bito normal dentro do regime do Simples (quando aplic√°vel).
    *
    * @return the n16 - pICMS
    */
@@ -741,15 +741,15 @@ public class SEFAZICMSVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # n16 - pICMS. AlÌquota do imposto ICMS. <br>
-   * Ocor.: ICMS00/ICMS20: 1ñ1 / Tam.: 3v2ñ4; ICMS51: 0ñ1 / Tam.: 3v2ñ4; demais conforme grupo. Tipo: N. <br>
-   * ICMS00: alÌquota do ICMS prÛprio. <br>
-   * ICMS10: alÌquota do ICMS prÛprio (sem incluir ICMS ST). <br>
-   * ICMS20: alÌquota do ICMS prÛprio sem o FCP, aplicada sobre a base reduzida. <br>
-   * ICMS51: alÌquota do ICMS da operaÁ„o (sem FCP) para c·lculo do ICMS da operaÁ„o e do diferimento. <br>
-   * ICMS70: alÌquota do ICMS prÛprio aplicada sobre a base reduzida da operaÁ„o com ST. <br>
-   * ICMS90: alÌquota do ICMS prÛprio nas operaÁıes do grupo ìOutrosî. <br>
-   * ICMSSN900: alÌquota do ICMS prÛprio em operaÁıes do Simples Nacional com CSOSN=900, utilizada na apuraÁ„o do dÈbito normal dentro do regime do Simples (quando aplic·vel).
+   * # n16 - pICMS. Al√≠quota do imposto ICMS. <br>
+   * Ocor.: ICMS00/ICMS20: 1‚Äì1 / Tam.: 3v2‚Äì4; ICMS51: 0‚Äì1 / Tam.: 3v2‚Äì4; demais conforme grupo. Tipo: N. <br>
+   * ICMS00: al√≠quota do ICMS pr√≥prio. <br>
+   * ICMS10: al√≠quota do ICMS pr√≥prio (sem incluir ICMS ST). <br>
+   * ICMS20: al√≠quota do ICMS pr√≥prio sem o FCP, aplicada sobre a base reduzida. <br>
+   * ICMS51: al√≠quota do ICMS da opera√ß√£o (sem FCP) para c√°lculo do ICMS da opera√ß√£o e do diferimento. <br>
+   * ICMS70: al√≠quota do ICMS pr√≥prio aplicada sobre a base reduzida da opera√ß√£o com ST. <br>
+   * ICMS90: al√≠quota do ICMS pr√≥prio nas opera√ß√µes do grupo ‚ÄúOutros‚Äù. <br>
+   * ICMSSN900: al√≠quota do ICMS pr√≥prio em opera√ß√µes do Simples Nacional com CSOSN=900, utilizada na apura√ß√£o do d√©bito normal dentro do regime do Simples (quando aplic√°vel).
    *
    * @param picms the new n16 - pICMS
    */
@@ -758,21 +758,21 @@ public class SEFAZICMSVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # n18 - modBCST. Modalidade de determinaÁ„o da BC do ICMS ST. Ocor.: 1ñ1 / Tam.: 1 / Tipo: N. <br>
-   * 0 = PreÁo tabelado ou m·ximo sugerido; <br>
+   * # n18 - modBCST. Modalidade de determina√ß√£o da BC do ICMS ST. Ocor.: 1‚Äì1 / Tam.: 1 / Tipo: N. <br>
+   * 0 = Pre√ßo tabelado ou m√°ximo sugerido; <br>
    * 1 = Lista Negativa (valor); <br>
    * 2 = Lista Positiva (valor); <br>
    * 3 = Lista Neutra (valor); <br>
    * 4 = Margem Valor Agregado (%); <br>
    * 5 = Pauta (valor). <br>
    * Ver {@link SEFAZ_modBCST}. <br>
-   * ICMS10: modalidade da BC ST em operaÁıes tributadas com ICMS e ICMS ST. <br>
-   * ICMS30: modalidade da BC ST em operaÁıes isentas/n„o tributadas com ICMS ST. <br>
-   * ICMS70: modalidade da BC do ICMS ST em operaÁıes com reduÁ„o de BC e cobranÁa de ICMS ST. <br>
+   * ICMS10: modalidade da BC ST em opera√ß√µes tributadas com ICMS e ICMS ST. <br>
+   * ICMS30: modalidade da BC ST em opera√ß√µes isentas/n√£o tributadas com ICMS ST. <br>
+   * ICMS70: modalidade da BC do ICMS ST em opera√ß√µes com redu√ß√£o de BC e cobran√ßa de ICMS ST. <br>
    * ICMS90: modalidade da BC do ICMS ST no grupo ICMS90 (quando houver ST). <br>
-   * ICMSSN201: modalidade de determinaÁ„o da BC do ICMS ST nas operaÁıes do Simples Nacional com CSOSN=201 (com crÈdito e ST). <br>
-   * ICMSSN202: modalidade de determinaÁ„o da BC do ICMS ST nas operaÁıes do Simples Nacional com CSOSN=202 ou 203 (sem crÈdito ou com isenÁ„o, ambas com ST). <br>
-   * ICMSSN900: modalidade de determinaÁ„o da BC do ICMS ST nas operaÁıes do Simples Nacional com CSOSN=900, quando houver incidÍncia de substituiÁ„o tribut·ria.
+   * ICMSSN201: modalidade de determina√ß√£o da BC do ICMS ST nas opera√ß√µes do Simples Nacional com CSOSN=201 (com cr√©dito e ST). <br>
+   * ICMSSN202: modalidade de determina√ß√£o da BC do ICMS ST nas opera√ß√µes do Simples Nacional com CSOSN=202 ou 203 (sem cr√©dito ou com isen√ß√£o, ambas com ST). <br>
+   * ICMSSN900: modalidade de determina√ß√£o da BC do ICMS ST nas opera√ß√µes do Simples Nacional com CSOSN=900, quando houver incid√™ncia de substitui√ß√£o tribut√°ria.
    *
    * @return the n18 - modBCST
    */
@@ -781,21 +781,21 @@ public class SEFAZICMSVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # n18 - modBCST. Modalidade de determinaÁ„o da BC do ICMS ST. Ocor.: 1ñ1 / Tam.: 1 / Tipo: N. <br>
-   * 0 = PreÁo tabelado ou m·ximo sugerido; <br>
+   * # n18 - modBCST. Modalidade de determina√ß√£o da BC do ICMS ST. Ocor.: 1‚Äì1 / Tam.: 1 / Tipo: N. <br>
+   * 0 = Pre√ßo tabelado ou m√°ximo sugerido; <br>
    * 1 = Lista Negativa (valor); <br>
    * 2 = Lista Positiva (valor); <br>
    * 3 = Lista Neutra (valor); <br>
    * 4 = Margem Valor Agregado (%); <br>
    * 5 = Pauta (valor). <br>
    * Ver {@link SEFAZ_modBCST}. <br>
-   * ICMS10: modalidade da BC ST em operaÁıes tributadas com ICMS e ICMS ST. <br>
-   * ICMS30: modalidade da BC ST em operaÁıes isentas/n„o tributadas com ICMS ST. <br>
-   * ICMS70: modalidade da BC do ICMS ST em operaÁıes com reduÁ„o de BC e cobranÁa de ICMS ST. <br>
+   * ICMS10: modalidade da BC ST em opera√ß√µes tributadas com ICMS e ICMS ST. <br>
+   * ICMS30: modalidade da BC ST em opera√ß√µes isentas/n√£o tributadas com ICMS ST. <br>
+   * ICMS70: modalidade da BC do ICMS ST em opera√ß√µes com redu√ß√£o de BC e cobran√ßa de ICMS ST. <br>
    * ICMS90: modalidade da BC do ICMS ST no grupo ICMS90 (quando houver ST). <br>
-   * ICMSSN201: modalidade de determinaÁ„o da BC do ICMS ST nas operaÁıes do Simples Nacional com CSOSN=201 (com crÈdito e ST). <br>
-   * ICMSSN202: modalidade de determinaÁ„o da BC do ICMS ST nas operaÁıes do Simples Nacional com CSOSN=202 ou 203 (sem crÈdito ou com isenÁ„o, ambas com ST). <br>
-   * ICMSSN900: modalidade de determinaÁ„o da BC do ICMS ST nas operaÁıes do Simples Nacional com CSOSN=900, quando houver incidÍncia de substituiÁ„o tribut·ria.
+   * ICMSSN201: modalidade de determina√ß√£o da BC do ICMS ST nas opera√ß√µes do Simples Nacional com CSOSN=201 (com cr√©dito e ST). <br>
+   * ICMSSN202: modalidade de determina√ß√£o da BC do ICMS ST nas opera√ß√µes do Simples Nacional com CSOSN=202 ou 203 (sem cr√©dito ou com isen√ß√£o, ambas com ST). <br>
+   * ICMSSN900: modalidade de determina√ß√£o da BC do ICMS ST nas opera√ß√µes do Simples Nacional com CSOSN=900, quando houver incid√™ncia de substitui√ß√£o tribut√°ria.
    *
    * @param modBCST the new n18 - modBCST
    */
@@ -805,14 +805,14 @@ public class SEFAZICMSVO extends RFWVO implements Serializable {
 
   /**
    * # n19 - pMVAST. Percentual da margem de valor adicionado do ICMS ST. <br>
-   * Ocor.: 0ñ1 / Tam.: 3v2ñ4 / Tipo: N. <br>
-   * ICMS10: MVA utilizada para formaÁ„o da BC do ICMS ST em operaÁıes tributadas com ST. <br>
-   * ICMS30: MVA utilizada em operaÁıes isentas/n„o tributadas com ST. <br>
-   * ICMS70: MVA aplicada na BC do ICMS ST em operaÁıes com reduÁ„o de BC e ST. <br>
-   * ICMS90: MVA em operaÁıes do grupo ìOutrosî quando houver ST. <br>
-   * ICMSSN201: MVA utilizada na formaÁ„o da BC do ICMS ST para operaÁıes do Simples Nacional com CSOSN=201. <br>
-   * ICMSSN202: MVA utilizada na formaÁ„o da BC do ICMS ST para operaÁıes do Simples Nacional com CSOSN=202 ou 203. <br>
-   * ICMSSN900: MVA utilizada na formaÁ„o da BC do ICMS ST em operaÁıes do Simples Nacional com CSOSN=900, quando houver ST.
+   * Ocor.: 0‚Äì1 / Tam.: 3v2‚Äì4 / Tipo: N. <br>
+   * ICMS10: MVA utilizada para forma√ß√£o da BC do ICMS ST em opera√ß√µes tributadas com ST. <br>
+   * ICMS30: MVA utilizada em opera√ß√µes isentas/n√£o tributadas com ST. <br>
+   * ICMS70: MVA aplicada na BC do ICMS ST em opera√ß√µes com redu√ß√£o de BC e ST. <br>
+   * ICMS90: MVA em opera√ß√µes do grupo ‚ÄúOutros‚Äù quando houver ST. <br>
+   * ICMSSN201: MVA utilizada na forma√ß√£o da BC do ICMS ST para opera√ß√µes do Simples Nacional com CSOSN=201. <br>
+   * ICMSSN202: MVA utilizada na forma√ß√£o da BC do ICMS ST para opera√ß√µes do Simples Nacional com CSOSN=202 ou 203. <br>
+   * ICMSSN900: MVA utilizada na forma√ß√£o da BC do ICMS ST em opera√ß√µes do Simples Nacional com CSOSN=900, quando houver ST.
    *
    * @return the n19 - pMVAST
    */
@@ -822,14 +822,14 @@ public class SEFAZICMSVO extends RFWVO implements Serializable {
 
   /**
    * # n19 - pMVAST. Percentual da margem de valor adicionado do ICMS ST. <br>
-   * Ocor.: 0ñ1 / Tam.: 3v2ñ4 / Tipo: N. <br>
-   * ICMS10: MVA utilizada para formaÁ„o da BC do ICMS ST em operaÁıes tributadas com ST. <br>
-   * ICMS30: MVA utilizada em operaÁıes isentas/n„o tributadas com ST. <br>
-   * ICMS70: MVA aplicada na BC do ICMS ST em operaÁıes com reduÁ„o de BC e ST. <br>
-   * ICMS90: MVA em operaÁıes do grupo ìOutrosî quando houver ST. <br>
-   * ICMSSN201: MVA utilizada na formaÁ„o da BC do ICMS ST para operaÁıes do Simples Nacional com CSOSN=201. <br>
-   * ICMSSN202: MVA utilizada na formaÁ„o da BC do ICMS ST para operaÁıes do Simples Nacional com CSOSN=202 ou 203. <br>
-   * ICMSSN900: MVA utilizada na formaÁ„o da BC do ICMS ST em operaÁıes do Simples Nacional com CSOSN=900, quando houver ST.
+   * Ocor.: 0‚Äì1 / Tam.: 3v2‚Äì4 / Tipo: N. <br>
+   * ICMS10: MVA utilizada para forma√ß√£o da BC do ICMS ST em opera√ß√µes tributadas com ST. <br>
+   * ICMS30: MVA utilizada em opera√ß√µes isentas/n√£o tributadas com ST. <br>
+   * ICMS70: MVA aplicada na BC do ICMS ST em opera√ß√µes com redu√ß√£o de BC e ST. <br>
+   * ICMS90: MVA em opera√ß√µes do grupo ‚ÄúOutros‚Äù quando houver ST. <br>
+   * ICMSSN201: MVA utilizada na forma√ß√£o da BC do ICMS ST para opera√ß√µes do Simples Nacional com CSOSN=201. <br>
+   * ICMSSN202: MVA utilizada na forma√ß√£o da BC do ICMS ST para opera√ß√µes do Simples Nacional com CSOSN=202 ou 203. <br>
+   * ICMSSN900: MVA utilizada na forma√ß√£o da BC do ICMS ST em opera√ß√µes do Simples Nacional com CSOSN=900, quando houver ST.
    *
    * @param pmvaST the new n19 - pMVAST
    */
@@ -838,15 +838,15 @@ public class SEFAZICMSVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # n20 - pRedBCST. Percentual da reduÁ„o da base de c·lculo do ICMS ST. <br>
-   * Ocor.: 0ñ1 / Tam.: 3v2ñ4 / Tipo: N. <br>
-   * ICMS10: reduÁ„o aplicada sobre a BC do ICMS ST. <br>
-   * ICMS30: reduÁ„o da BC do ICMS ST em operaÁıes isentas/n„o tributadas com ST. <br>
-   * ICMS70: reduÁ„o da BC do ICMS ST em operaÁıes com reduÁ„o de BC e ST. <br>
-   * ICMS90: reduÁ„o da BC do ICMS ST em operaÁıes do grupo ìOutrosî (quando aplic·vel). <br>
-   * ICMSSN201: reduÁ„o da BC do ICMS ST nas operaÁıes do Simples Nacional com CSOSN=201. <br>
-   * ICMSSN202: reduÁ„o da BC do ICMS ST nas operaÁıes do Simples Nacional com CSOSN=202 ou 203. <br>
-   * ICMSSN900: reduÁ„o da BC do ICMS ST nas operaÁıes do Simples Nacional com CSOSN=900, quando legislado pela UF.
+   * # n20 - pRedBCST. Percentual da redu√ß√£o da base de c√°lculo do ICMS ST. <br>
+   * Ocor.: 0‚Äì1 / Tam.: 3v2‚Äì4 / Tipo: N. <br>
+   * ICMS10: redu√ß√£o aplicada sobre a BC do ICMS ST. <br>
+   * ICMS30: redu√ß√£o da BC do ICMS ST em opera√ß√µes isentas/n√£o tributadas com ST. <br>
+   * ICMS70: redu√ß√£o da BC do ICMS ST em opera√ß√µes com redu√ß√£o de BC e ST. <br>
+   * ICMS90: redu√ß√£o da BC do ICMS ST em opera√ß√µes do grupo ‚ÄúOutros‚Äù (quando aplic√°vel). <br>
+   * ICMSSN201: redu√ß√£o da BC do ICMS ST nas opera√ß√µes do Simples Nacional com CSOSN=201. <br>
+   * ICMSSN202: redu√ß√£o da BC do ICMS ST nas opera√ß√µes do Simples Nacional com CSOSN=202 ou 203. <br>
+   * ICMSSN900: redu√ß√£o da BC do ICMS ST nas opera√ß√µes do Simples Nacional com CSOSN=900, quando legislado pela UF.
    *
    * @return the n20 - pRedBCST
    */
@@ -855,15 +855,15 @@ public class SEFAZICMSVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # n20 - pRedBCST. Percentual da reduÁ„o da base de c·lculo do ICMS ST. <br>
-   * Ocor.: 0ñ1 / Tam.: 3v2ñ4 / Tipo: N. <br>
-   * ICMS10: reduÁ„o aplicada sobre a BC do ICMS ST. <br>
-   * ICMS30: reduÁ„o da BC do ICMS ST em operaÁıes isentas/n„o tributadas com ST. <br>
-   * ICMS70: reduÁ„o da BC do ICMS ST em operaÁıes com reduÁ„o de BC e ST. <br>
-   * ICMS90: reduÁ„o da BC do ICMS ST em operaÁıes do grupo ìOutrosî (quando aplic·vel). <br>
-   * ICMSSN201: reduÁ„o da BC do ICMS ST nas operaÁıes do Simples Nacional com CSOSN=201. <br>
-   * ICMSSN202: reduÁ„o da BC do ICMS ST nas operaÁıes do Simples Nacional com CSOSN=202 ou 203. <br>
-   * ICMSSN900: reduÁ„o da BC do ICMS ST nas operaÁıes do Simples Nacional com CSOSN=900, quando legislado pela UF.
+   * # n20 - pRedBCST. Percentual da redu√ß√£o da base de c√°lculo do ICMS ST. <br>
+   * Ocor.: 0‚Äì1 / Tam.: 3v2‚Äì4 / Tipo: N. <br>
+   * ICMS10: redu√ß√£o aplicada sobre a BC do ICMS ST. <br>
+   * ICMS30: redu√ß√£o da BC do ICMS ST em opera√ß√µes isentas/n√£o tributadas com ST. <br>
+   * ICMS70: redu√ß√£o da BC do ICMS ST em opera√ß√µes com redu√ß√£o de BC e ST. <br>
+   * ICMS90: redu√ß√£o da BC do ICMS ST em opera√ß√µes do grupo ‚ÄúOutros‚Äù (quando aplic√°vel). <br>
+   * ICMSSN201: redu√ß√£o da BC do ICMS ST nas opera√ß√µes do Simples Nacional com CSOSN=201. <br>
+   * ICMSSN202: redu√ß√£o da BC do ICMS ST nas opera√ß√µes do Simples Nacional com CSOSN=202 ou 203. <br>
+   * ICMSSN900: redu√ß√£o da BC do ICMS ST nas opera√ß√µes do Simples Nacional com CSOSN=900, quando legislado pela UF.
    *
    * @param predBCST the new n20 - pRedBCST
    */
@@ -872,14 +872,14 @@ public class SEFAZICMSVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # n21 - vBCST. Valor da base de c·lculo do ICMS ST. Ocor.: 1ñ1 / Tam.: 13v2 / Tipo: N. <br>
-   * ICMS10: BC do ICMS ST em operaÁıes tributadas com ST. <br>
-   * ICMS30: BC do ICMS ST em operaÁıes isentas/n„o tributadas com ST. <br>
-   * ICMS70: BC do ICMS ST em operaÁıes com reduÁ„o de BC e ST. <br>
+   * # n21 - vBCST. Valor da base de c√°lculo do ICMS ST. Ocor.: 1‚Äì1 / Tam.: 13v2 / Tipo: N. <br>
+   * ICMS10: BC do ICMS ST em opera√ß√µes tributadas com ST. <br>
+   * ICMS30: BC do ICMS ST em opera√ß√µes isentas/n√£o tributadas com ST. <br>
+   * ICMS70: BC do ICMS ST em opera√ß√µes com redu√ß√£o de BC e ST. <br>
    * ICMS90: BC do ICMS ST no grupo ICMS90 (quando houver ST). <br>
-   * ICMSSN201: BC do ICMS ST nas operaÁıes do Simples Nacional com CSOSN=201. <br>
-   * ICMSSN202: BC do ICMS ST nas operaÁıes do Simples Nacional com CSOSN=202 ou 203. <br>
-   * ICMSSN900: BC do ICMS ST nas operaÁıes do Simples Nacional com CSOSN=900 quando houver substituiÁ„o tribut·ria.
+   * ICMSSN201: BC do ICMS ST nas opera√ß√µes do Simples Nacional com CSOSN=201. <br>
+   * ICMSSN202: BC do ICMS ST nas opera√ß√µes do Simples Nacional com CSOSN=202 ou 203. <br>
+   * ICMSSN900: BC do ICMS ST nas opera√ß√µes do Simples Nacional com CSOSN=900 quando houver substitui√ß√£o tribut√°ria.
    *
    * @return the n21 - vBCST
    */
@@ -888,14 +888,14 @@ public class SEFAZICMSVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # n21 - vBCST. Valor da base de c·lculo do ICMS ST. Ocor.: 1ñ1 / Tam.: 13v2 / Tipo: N. <br>
-   * ICMS10: BC do ICMS ST em operaÁıes tributadas com ST. <br>
-   * ICMS30: BC do ICMS ST em operaÁıes isentas/n„o tributadas com ST. <br>
-   * ICMS70: BC do ICMS ST em operaÁıes com reduÁ„o de BC e ST. <br>
+   * # n21 - vBCST. Valor da base de c√°lculo do ICMS ST. Ocor.: 1‚Äì1 / Tam.: 13v2 / Tipo: N. <br>
+   * ICMS10: BC do ICMS ST em opera√ß√µes tributadas com ST. <br>
+   * ICMS30: BC do ICMS ST em opera√ß√µes isentas/n√£o tributadas com ST. <br>
+   * ICMS70: BC do ICMS ST em opera√ß√µes com redu√ß√£o de BC e ST. <br>
    * ICMS90: BC do ICMS ST no grupo ICMS90 (quando houver ST). <br>
-   * ICMSSN201: BC do ICMS ST nas operaÁıes do Simples Nacional com CSOSN=201. <br>
-   * ICMSSN202: BC do ICMS ST nas operaÁıes do Simples Nacional com CSOSN=202 ou 203. <br>
-   * ICMSSN900: BC do ICMS ST nas operaÁıes do Simples Nacional com CSOSN=900 quando houver substituiÁ„o tribut·ria.
+   * ICMSSN201: BC do ICMS ST nas opera√ß√µes do Simples Nacional com CSOSN=201. <br>
+   * ICMSSN202: BC do ICMS ST nas opera√ß√µes do Simples Nacional com CSOSN=202 ou 203. <br>
+   * ICMSSN900: BC do ICMS ST nas opera√ß√µes do Simples Nacional com CSOSN=900 quando houver substitui√ß√£o tribut√°ria.
    *
    * @param vbcST the new n21 - vBCST
    */
@@ -904,15 +904,15 @@ public class SEFAZICMSVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # n22 - pICMSST. AlÌquota do imposto do ICMS ST. Ocor.: 1ñ1 / Tam.: 3v2ñ4 / Tipo: N. <br>
-   * AlÌquota do ICMS ST sem o FCP; quando houver FCP, informar a alÌquota do FCP em pFCPST. <br>
-   * ICMS10: alÌquota do ICMS ST em operaÁıes tributadas com ST. <br>
-   * ICMS30: alÌquota do ICMS ST em operaÁıes isentas/n„o tributadas com ST. <br>
-   * ICMS70: alÌquota do ICMS ST em operaÁıes com reduÁ„o de BC e ST. <br>
-   * ICMS90: alÌquota do ICMS ST no grupo ICMS90 (quando houver ST). <br>
-   * ICMSSN201: alÌquota do ICMS ST nas operaÁıes do Simples Nacional com CSOSN=201. <br>
-   * ICMSSN202: alÌquota do ICMS ST nas operaÁıes do Simples Nacional com CSOSN=202 ou 203. <br>
-   * ICMSSN900: alÌquota do ICMS ST nas operaÁıes do Simples Nacional com CSOSN=900, quando houver retenÁ„o ST para o item.
+   * # n22 - pICMSST. Al√≠quota do imposto do ICMS ST. Ocor.: 1‚Äì1 / Tam.: 3v2‚Äì4 / Tipo: N. <br>
+   * Al√≠quota do ICMS ST sem o FCP; quando houver FCP, informar a al√≠quota do FCP em pFCPST. <br>
+   * ICMS10: al√≠quota do ICMS ST em opera√ß√µes tributadas com ST. <br>
+   * ICMS30: al√≠quota do ICMS ST em opera√ß√µes isentas/n√£o tributadas com ST. <br>
+   * ICMS70: al√≠quota do ICMS ST em opera√ß√µes com redu√ß√£o de BC e ST. <br>
+   * ICMS90: al√≠quota do ICMS ST no grupo ICMS90 (quando houver ST). <br>
+   * ICMSSN201: al√≠quota do ICMS ST nas opera√ß√µes do Simples Nacional com CSOSN=201. <br>
+   * ICMSSN202: al√≠quota do ICMS ST nas opera√ß√µes do Simples Nacional com CSOSN=202 ou 203. <br>
+   * ICMSSN900: al√≠quota do ICMS ST nas opera√ß√µes do Simples Nacional com CSOSN=900, quando houver reten√ß√£o ST para o item.
    *
    * @return the n22 - pICMSST
    */
@@ -921,15 +921,15 @@ public class SEFAZICMSVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # n22 - pICMSST. AlÌquota do imposto do ICMS ST. Ocor.: 1ñ1 / Tam.: 3v2ñ4 / Tipo: N. <br>
-   * AlÌquota do ICMS ST sem o FCP; quando houver FCP, informar a alÌquota do FCP em pFCPST. <br>
-   * ICMS10: alÌquota do ICMS ST em operaÁıes tributadas com ST. <br>
-   * ICMS30: alÌquota do ICMS ST em operaÁıes isentas/n„o tributadas com ST. <br>
-   * ICMS70: alÌquota do ICMS ST em operaÁıes com reduÁ„o de BC e ST. <br>
-   * ICMS90: alÌquota do ICMS ST no grupo ICMS90 (quando houver ST). <br>
-   * ICMSSN201: alÌquota do ICMS ST nas operaÁıes do Simples Nacional com CSOSN=201. <br>
-   * ICMSSN202: alÌquota do ICMS ST nas operaÁıes do Simples Nacional com CSOSN=202 ou 203. <br>
-   * ICMSSN900: alÌquota do ICMS ST nas operaÁıes do Simples Nacional com CSOSN=900, quando houver retenÁ„o ST para o item.
+   * # n22 - pICMSST. Al√≠quota do imposto do ICMS ST. Ocor.: 1‚Äì1 / Tam.: 3v2‚Äì4 / Tipo: N. <br>
+   * Al√≠quota do ICMS ST sem o FCP; quando houver FCP, informar a al√≠quota do FCP em pFCPST. <br>
+   * ICMS10: al√≠quota do ICMS ST em opera√ß√µes tributadas com ST. <br>
+   * ICMS30: al√≠quota do ICMS ST em opera√ß√µes isentas/n√£o tributadas com ST. <br>
+   * ICMS70: al√≠quota do ICMS ST em opera√ß√µes com redu√ß√£o de BC e ST. <br>
+   * ICMS90: al√≠quota do ICMS ST no grupo ICMS90 (quando houver ST). <br>
+   * ICMSSN201: al√≠quota do ICMS ST nas opera√ß√µes do Simples Nacional com CSOSN=201. <br>
+   * ICMSSN202: al√≠quota do ICMS ST nas opera√ß√µes do Simples Nacional com CSOSN=202 ou 203. <br>
+   * ICMSSN900: al√≠quota do ICMS ST nas opera√ß√µes do Simples Nacional com CSOSN=900, quando houver reten√ß√£o ST para o item.
    *
    * @param picmsST the new n22 - pICMSST
    */
@@ -938,14 +938,14 @@ public class SEFAZICMSVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # n23 - vICMSST. Valor do ICMS ST. Ocor.: 1ñ1 / Tam.: 13v2 / Tipo: N. <br>
+   * # n23 - vICMSST. Valor do ICMS ST. Ocor.: 1‚Äì1 / Tam.: 13v2 / Tipo: N. <br>
    * ICMS10: valor do ICMS ST retido. <br>
-   * ICMS30: valor do ICMS ST em operaÁıes isentas/n„o tributadas com ST. <br>
-   * ICMS70: valor do ICMS ST em operaÁıes com reduÁ„o de BC e ST. <br>
+   * ICMS30: valor do ICMS ST em opera√ß√µes isentas/n√£o tributadas com ST. <br>
+   * ICMS70: valor do ICMS ST em opera√ß√µes com redu√ß√£o de BC e ST. <br>
    * ICMS90: valor do ICMS ST no grupo ICMS90 (quando houver ST). <br>
-   * ICMSSN201: valor do ICMS ST retido nas operaÁıes do Simples Nacional com CSOSN=201. <br>
-   * ICMSSN202: valor do ICMS ST retido nas operaÁıes do Simples Nacional com CSOSN=202 ou 203. <br>
-   * ICMSSN900: valor do ICMS ST retido nas operaÁıes do Simples Nacional com CSOSN=900 sempre que houver substituiÁ„o tribut·ria aplic·vel ao item.
+   * ICMSSN201: valor do ICMS ST retido nas opera√ß√µes do Simples Nacional com CSOSN=201. <br>
+   * ICMSSN202: valor do ICMS ST retido nas opera√ß√µes do Simples Nacional com CSOSN=202 ou 203. <br>
+   * ICMSSN900: valor do ICMS ST retido nas opera√ß√µes do Simples Nacional com CSOSN=900 sempre que houver substitui√ß√£o tribut√°ria aplic√°vel ao item.
    *
    * @return the n23 - vICMSST
    */
@@ -954,14 +954,14 @@ public class SEFAZICMSVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # n23 - vICMSST. Valor do ICMS ST. Ocor.: 1ñ1 / Tam.: 13v2 / Tipo: N. <br>
+   * # n23 - vICMSST. Valor do ICMS ST. Ocor.: 1‚Äì1 / Tam.: 13v2 / Tipo: N. <br>
    * ICMS10: valor do ICMS ST retido. <br>
-   * ICMS30: valor do ICMS ST em operaÁıes isentas/n„o tributadas com ST. <br>
-   * ICMS70: valor do ICMS ST em operaÁıes com reduÁ„o de BC e ST. <br>
+   * ICMS30: valor do ICMS ST em opera√ß√µes isentas/n√£o tributadas com ST. <br>
+   * ICMS70: valor do ICMS ST em opera√ß√µes com redu√ß√£o de BC e ST. <br>
    * ICMS90: valor do ICMS ST no grupo ICMS90 (quando houver ST). <br>
-   * ICMSSN201: valor do ICMS ST retido nas operaÁıes do Simples Nacional com CSOSN=201. <br>
-   * ICMSSN202: valor do ICMS ST retido nas operaÁıes do Simples Nacional com CSOSN=202 ou 203. <br>
-   * ICMSSN900: valor do ICMS ST retido nas operaÁıes do Simples Nacional com CSOSN=900 sempre que houver substituiÁ„o tribut·ria aplic·vel ao item.
+   * ICMSSN201: valor do ICMS ST retido nas opera√ß√µes do Simples Nacional com CSOSN=201. <br>
+   * ICMSSN202: valor do ICMS ST retido nas opera√ß√µes do Simples Nacional com CSOSN=202 ou 203. <br>
+   * ICMSSN900: valor do ICMS ST retido nas opera√ß√µes do Simples Nacional com CSOSN=900 sempre que houver substitui√ß√£o tribut√°ria aplic√°vel ao item.
    *
    * @param vicmsST the new n23 - vICMSST
    */
@@ -970,15 +970,15 @@ public class SEFAZICMSVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # n23a - vBCFCPST. Valor da base de c·lculo do FCP retido por substituiÁ„o tribut·ria. <br>
-   * Ocor.: 1ñ1 / Tam.: 13v2 / Tipo: N (quando o grupo FCP ST estiver presente). <br>
-   * ICMS10: base de c·lculo do FCP-ST em operaÁıes tributadas com ST. <br>
-   * ICMS30: base de c·lculo do FCP-ST em operaÁıes isentas/n„o tributadas com ST. <br>
-   * ICMS70: base de c·lculo do FCP-ST em operaÁıes com reduÁ„o de BC e ST. <br>
-   * ICMS90: base de c·lculo do FCP-ST no grupo ICMS90 (quando houver ST). <br>
-   * ICMSSN201: base de c·lculo do FCP-ST nas operaÁıes do Simples Nacional com CSOSN=201. <br>
-   * ICMSSN202: base de c·lculo do FCP-ST nas operaÁıes do Simples Nacional com CSOSN=202 ou 203. <br>
-   * ICMSSN900: base de c·lculo do FCP-ST nas operaÁıes do Simples Nacional com CSOSN=900, quando houver FCP retido por ST.
+   * # n23a - vBCFCPST. Valor da base de c√°lculo do FCP retido por substitui√ß√£o tribut√°ria. <br>
+   * Ocor.: 1‚Äì1 / Tam.: 13v2 / Tipo: N (quando o grupo FCP ST estiver presente). <br>
+   * ICMS10: base de c√°lculo do FCP-ST em opera√ß√µes tributadas com ST. <br>
+   * ICMS30: base de c√°lculo do FCP-ST em opera√ß√µes isentas/n√£o tributadas com ST. <br>
+   * ICMS70: base de c√°lculo do FCP-ST em opera√ß√µes com redu√ß√£o de BC e ST. <br>
+   * ICMS90: base de c√°lculo do FCP-ST no grupo ICMS90 (quando houver ST). <br>
+   * ICMSSN201: base de c√°lculo do FCP-ST nas opera√ß√µes do Simples Nacional com CSOSN=201. <br>
+   * ICMSSN202: base de c√°lculo do FCP-ST nas opera√ß√µes do Simples Nacional com CSOSN=202 ou 203. <br>
+   * ICMSSN900: base de c√°lculo do FCP-ST nas opera√ß√µes do Simples Nacional com CSOSN=900, quando houver FCP retido por ST.
    *
    * @return the n23a - vBCFCPST
    */
@@ -987,15 +987,15 @@ public class SEFAZICMSVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # n23a - vBCFCPST. Valor da base de c·lculo do FCP retido por substituiÁ„o tribut·ria. <br>
-   * Ocor.: 1ñ1 / Tam.: 13v2 / Tipo: N (quando o grupo FCP ST estiver presente). <br>
-   * ICMS10: base de c·lculo do FCP-ST em operaÁıes tributadas com ST. <br>
-   * ICMS30: base de c·lculo do FCP-ST em operaÁıes isentas/n„o tributadas com ST. <br>
-   * ICMS70: base de c·lculo do FCP-ST em operaÁıes com reduÁ„o de BC e ST. <br>
-   * ICMS90: base de c·lculo do FCP-ST no grupo ICMS90 (quando houver ST). <br>
-   * ICMSSN201: base de c·lculo do FCP-ST nas operaÁıes do Simples Nacional com CSOSN=201. <br>
-   * ICMSSN202: base de c·lculo do FCP-ST nas operaÁıes do Simples Nacional com CSOSN=202 ou 203. <br>
-   * ICMSSN900: base de c·lculo do FCP-ST nas operaÁıes do Simples Nacional com CSOSN=900, quando houver FCP retido por ST.
+   * # n23a - vBCFCPST. Valor da base de c√°lculo do FCP retido por substitui√ß√£o tribut√°ria. <br>
+   * Ocor.: 1‚Äì1 / Tam.: 13v2 / Tipo: N (quando o grupo FCP ST estiver presente). <br>
+   * ICMS10: base de c√°lculo do FCP-ST em opera√ß√µes tributadas com ST. <br>
+   * ICMS30: base de c√°lculo do FCP-ST em opera√ß√µes isentas/n√£o tributadas com ST. <br>
+   * ICMS70: base de c√°lculo do FCP-ST em opera√ß√µes com redu√ß√£o de BC e ST. <br>
+   * ICMS90: base de c√°lculo do FCP-ST no grupo ICMS90 (quando houver ST). <br>
+   * ICMSSN201: base de c√°lculo do FCP-ST nas opera√ß√µes do Simples Nacional com CSOSN=201. <br>
+   * ICMSSN202: base de c√°lculo do FCP-ST nas opera√ß√µes do Simples Nacional com CSOSN=202 ou 203. <br>
+   * ICMSSN900: base de c√°lculo do FCP-ST nas opera√ß√µes do Simples Nacional com CSOSN=900, quando houver FCP retido por ST.
    *
    * @param vbcFCPST the new n23a - vBCFCPST
    */
@@ -1004,15 +1004,15 @@ public class SEFAZICMSVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # n23b/N23c - pFCPST. Percentual do FCP retido por substituiÁ„o tribut·ria. <br>
-   * Ocor.: 1ñ1 / Tam.: 3v2ñ4 / Tipo: N. <br>
-   * ICMS10: percentual do FCP-ST em operaÁıes tributadas com ST. <br>
-   * ICMS30: percentual do FCP-ST em operaÁıes isentas/n„o tributadas com ST. <br>
-   * ICMS70: percentual do FCP-ST em operaÁıes com reduÁ„o de BC e ST. <br>
+   * # n23b/N23c - pFCPST. Percentual do FCP retido por substitui√ß√£o tribut√°ria. <br>
+   * Ocor.: 1‚Äì1 / Tam.: 3v2‚Äì4 / Tipo: N. <br>
+   * ICMS10: percentual do FCP-ST em opera√ß√µes tributadas com ST. <br>
+   * ICMS30: percentual do FCP-ST em opera√ß√µes isentas/n√£o tributadas com ST. <br>
+   * ICMS70: percentual do FCP-ST em opera√ß√µes com redu√ß√£o de BC e ST. <br>
    * ICMS90: percentual do FCP-ST no grupo ICMS90 (quando houver ST). <br>
-   * ICMSSN201: percentual do FCP-ST nas operaÁıes do Simples Nacional com CSOSN=201. <br>
-   * ICMSSN202: percentual do FCP-ST nas operaÁıes do Simples Nacional com CSOSN=202 ou 203, respeitando o limite legal de FCP. <br>
-   * ICMSSN900: percentual do FCP-ST nas operaÁıes do Simples Nacional com CSOSN=900, quando houver FCP retido por substituiÁ„o tribut·ria.
+   * ICMSSN201: percentual do FCP-ST nas opera√ß√µes do Simples Nacional com CSOSN=201. <br>
+   * ICMSSN202: percentual do FCP-ST nas opera√ß√µes do Simples Nacional com CSOSN=202 ou 203, respeitando o limite legal de FCP. <br>
+   * ICMSSN900: percentual do FCP-ST nas opera√ß√µes do Simples Nacional com CSOSN=900, quando houver FCP retido por substitui√ß√£o tribut√°ria.
    *
    * @return the n23b/N23c - pFCPST
    */
@@ -1021,15 +1021,15 @@ public class SEFAZICMSVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # n23b/N23c - pFCPST. Percentual do FCP retido por substituiÁ„o tribut·ria. <br>
-   * Ocor.: 1ñ1 / Tam.: 3v2ñ4 / Tipo: N. <br>
-   * ICMS10: percentual do FCP-ST em operaÁıes tributadas com ST. <br>
-   * ICMS30: percentual do FCP-ST em operaÁıes isentas/n„o tributadas com ST. <br>
-   * ICMS70: percentual do FCP-ST em operaÁıes com reduÁ„o de BC e ST. <br>
+   * # n23b/N23c - pFCPST. Percentual do FCP retido por substitui√ß√£o tribut√°ria. <br>
+   * Ocor.: 1‚Äì1 / Tam.: 3v2‚Äì4 / Tipo: N. <br>
+   * ICMS10: percentual do FCP-ST em opera√ß√µes tributadas com ST. <br>
+   * ICMS30: percentual do FCP-ST em opera√ß√µes isentas/n√£o tributadas com ST. <br>
+   * ICMS70: percentual do FCP-ST em opera√ß√µes com redu√ß√£o de BC e ST. <br>
    * ICMS90: percentual do FCP-ST no grupo ICMS90 (quando houver ST). <br>
-   * ICMSSN201: percentual do FCP-ST nas operaÁıes do Simples Nacional com CSOSN=201. <br>
-   * ICMSSN202: percentual do FCP-ST nas operaÁıes do Simples Nacional com CSOSN=202 ou 203, respeitando o limite legal de FCP. <br>
-   * ICMSSN900: percentual do FCP-ST nas operaÁıes do Simples Nacional com CSOSN=900, quando houver FCP retido por substituiÁ„o tribut·ria.
+   * ICMSSN201: percentual do FCP-ST nas opera√ß√µes do Simples Nacional com CSOSN=201. <br>
+   * ICMSSN202: percentual do FCP-ST nas opera√ß√µes do Simples Nacional com CSOSN=202 ou 203, respeitando o limite legal de FCP. <br>
+   * ICMSSN900: percentual do FCP-ST nas opera√ß√µes do Simples Nacional com CSOSN=900, quando houver FCP retido por substitui√ß√£o tribut√°ria.
    *
    * @param pfcpST the new n23b/N23c - pFCPST
    */
@@ -1038,15 +1038,15 @@ public class SEFAZICMSVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # n23c/N23d - vFCPST. Valor do FCP retido por substituiÁ„o tribut·ria. <br>
-   * Ocor.: 1ñ1 / Tam.: 13v2 / Tipo: N. <br>
-   * ICMS10: valor do FCP-ST em operaÁıes tributadas com ST. <br>
-   * ICMS30: valor do FCP-ST em operaÁıes isentas/n„o tributadas com ST. <br>
-   * ICMS70: valor do FCP-ST em operaÁıes com reduÁ„o de BC e ST. <br>
+   * # n23c/N23d - vFCPST. Valor do FCP retido por substitui√ß√£o tribut√°ria. <br>
+   * Ocor.: 1‚Äì1 / Tam.: 13v2 / Tipo: N. <br>
+   * ICMS10: valor do FCP-ST em opera√ß√µes tributadas com ST. <br>
+   * ICMS30: valor do FCP-ST em opera√ß√µes isentas/n√£o tributadas com ST. <br>
+   * ICMS70: valor do FCP-ST em opera√ß√µes com redu√ß√£o de BC e ST. <br>
    * ICMS90: valor do FCP-ST no grupo ICMS90 (quando houver ST). <br>
-   * ICMSSN201: valor do FCP-ST nas operaÁıes do Simples Nacional com CSOSN=201. <br>
-   * ICMSSN202: valor do FCP-ST nas operaÁıes do Simples Nacional com CSOSN=202 ou 203. <br>
-   * ICMSSN900: valor do FCP-ST nas operaÁıes do Simples Nacional com CSOSN=900, quando houver FCP retido por substituiÁ„o tribut·ria.
+   * ICMSSN201: valor do FCP-ST nas opera√ß√µes do Simples Nacional com CSOSN=201. <br>
+   * ICMSSN202: valor do FCP-ST nas opera√ß√µes do Simples Nacional com CSOSN=202 ou 203. <br>
+   * ICMSSN900: valor do FCP-ST nas opera√ß√µes do Simples Nacional com CSOSN=900, quando houver FCP retido por substitui√ß√£o tribut√°ria.
    *
    * @return the n23c/N23d - vFCPST
    */
@@ -1055,15 +1055,15 @@ public class SEFAZICMSVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # n23c/N23d - vFCPST. Valor do FCP retido por substituiÁ„o tribut·ria. <br>
-   * Ocor.: 1ñ1 / Tam.: 13v2 / Tipo: N. <br>
-   * ICMS10: valor do FCP-ST em operaÁıes tributadas com ST. <br>
-   * ICMS30: valor do FCP-ST em operaÁıes isentas/n„o tributadas com ST. <br>
-   * ICMS70: valor do FCP-ST em operaÁıes com reduÁ„o de BC e ST. <br>
+   * # n23c/N23d - vFCPST. Valor do FCP retido por substitui√ß√£o tribut√°ria. <br>
+   * Ocor.: 1‚Äì1 / Tam.: 13v2 / Tipo: N. <br>
+   * ICMS10: valor do FCP-ST em opera√ß√µes tributadas com ST. <br>
+   * ICMS30: valor do FCP-ST em opera√ß√µes isentas/n√£o tributadas com ST. <br>
+   * ICMS70: valor do FCP-ST em opera√ß√µes com redu√ß√£o de BC e ST. <br>
    * ICMS90: valor do FCP-ST no grupo ICMS90 (quando houver ST). <br>
-   * ICMSSN201: valor do FCP-ST nas operaÁıes do Simples Nacional com CSOSN=201. <br>
-   * ICMSSN202: valor do FCP-ST nas operaÁıes do Simples Nacional com CSOSN=202 ou 203. <br>
-   * ICMSSN900: valor do FCP-ST nas operaÁıes do Simples Nacional com CSOSN=900, quando houver FCP retido por substituiÁ„o tribut·ria.
+   * ICMSSN201: valor do FCP-ST nas opera√ß√µes do Simples Nacional com CSOSN=201. <br>
+   * ICMSSN202: valor do FCP-ST nas opera√ß√µes do Simples Nacional com CSOSN=202 ou 203. <br>
+   * ICMSSN900: valor do FCP-ST nas opera√ß√µes do Simples Nacional com CSOSN=900, quando houver FCP retido por substitui√ß√£o tribut√°ria.
    *
    * @param vfcpST the new n23c/N23d - vFCPST
    */
@@ -1073,9 +1073,9 @@ public class SEFAZICMSVO extends RFWVO implements Serializable {
 
   /**
    * # n26 - vBCSTRet (ICMS60 / ICMSSN500). Valor da BC do ICMS ST retido. <br>
-   * Ocor.: 1ñ1 / Tam.: 13v2 / Tipo: N. <br>
-   * ICMS60: valor da base de c·lculo do ICMS ST cobrado anteriormente por substituiÁ„o tribut·ria; pode ser omitido quando a legislaÁ„o n„o exigir sua informaÁ„o. <br>
-   * ICMSSN500: valor da base de c·lculo do ICMS ST cobrado anteriormente por substituiÁ„o tribut·ria ou por antecipaÁ„o, na UF de origem, podendo ser omitido quando a legislaÁ„o n„o exigir.
+   * Ocor.: 1‚Äì1 / Tam.: 13v2 / Tipo: N. <br>
+   * ICMS60: valor da base de c√°lculo do ICMS ST cobrado anteriormente por substitui√ß√£o tribut√°ria; pode ser omitido quando a legisla√ß√£o n√£o exigir sua informa√ß√£o. <br>
+   * ICMSSN500: valor da base de c√°lculo do ICMS ST cobrado anteriormente por substitui√ß√£o tribut√°ria ou por antecipa√ß√£o, na UF de origem, podendo ser omitido quando a legisla√ß√£o n√£o exigir.
    *
    * @return the n26 - vBCSTRet (ICMS60 / ICMSSN500)
    */
@@ -1085,9 +1085,9 @@ public class SEFAZICMSVO extends RFWVO implements Serializable {
 
   /**
    * # n26 - vBCSTRet (ICMS60 / ICMSSN500). Valor da BC do ICMS ST retido. <br>
-   * Ocor.: 1ñ1 / Tam.: 13v2 / Tipo: N. <br>
-   * ICMS60: valor da base de c·lculo do ICMS ST cobrado anteriormente por substituiÁ„o tribut·ria; pode ser omitido quando a legislaÁ„o n„o exigir sua informaÁ„o. <br>
-   * ICMSSN500: valor da base de c·lculo do ICMS ST cobrado anteriormente por substituiÁ„o tribut·ria ou por antecipaÁ„o, na UF de origem, podendo ser omitido quando a legislaÁ„o n„o exigir.
+   * Ocor.: 1‚Äì1 / Tam.: 13v2 / Tipo: N. <br>
+   * ICMS60: valor da base de c√°lculo do ICMS ST cobrado anteriormente por substitui√ß√£o tribut√°ria; pode ser omitido quando a legisla√ß√£o n√£o exigir sua informa√ß√£o. <br>
+   * ICMSSN500: valor da base de c√°lculo do ICMS ST cobrado anteriormente por substitui√ß√£o tribut√°ria ou por antecipa√ß√£o, na UF de origem, podendo ser omitido quando a legisla√ß√£o n√£o exigir.
    *
    * @param vbcSTRet the new n26 - vBCSTRet (ICMS60 / ICMSSN500)
    */
@@ -1096,11 +1096,11 @@ public class SEFAZICMSVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # n26a - pST (ICMS60 / ICMSSN500). AlÌquota suportada pelo consumidor final, utilizada no c·lculo da retenÁ„o de ICMS ST. <br>
-   * Ocor.: 1ñ1 / Tam.: 3v2ñ4 / Tipo: N. <br>
-   * Deve ser informada a alÌquota efetiva usada na retenÁ„o, j· incluindo o FCP quando aplic·vel. Exemplo: 18% + 2% FCP = 20%. <br>
-   * ICMS60: alÌquota efetiva da retenÁ„o de ICMS ST em operaÁ„o anterior. <br>
-   * ICMSSN500: alÌquota efetiva suportada pelo consumidor final para c·lculo do ICMS-ST cobrado anteriormente por substituiÁ„o tribut·ria ou antecipaÁ„o.
+   * # n26a - pST (ICMS60 / ICMSSN500). Al√≠quota suportada pelo consumidor final, utilizada no c√°lculo da reten√ß√£o de ICMS ST. <br>
+   * Ocor.: 1‚Äì1 / Tam.: 3v2‚Äì4 / Tipo: N. <br>
+   * Deve ser informada a al√≠quota efetiva usada na reten√ß√£o, j√° incluindo o FCP quando aplic√°vel. Exemplo: 18% + 2% FCP = 20%. <br>
+   * ICMS60: al√≠quota efetiva da reten√ß√£o de ICMS ST em opera√ß√£o anterior. <br>
+   * ICMSSN500: al√≠quota efetiva suportada pelo consumidor final para c√°lculo do ICMS-ST cobrado anteriormente por substitui√ß√£o tribut√°ria ou antecipa√ß√£o.
    *
    * @return the n26a - pST (ICMS60 / ICMSSN500)
    */
@@ -1109,11 +1109,11 @@ public class SEFAZICMSVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # n26a - pST (ICMS60 / ICMSSN500). AlÌquota suportada pelo consumidor final, utilizada no c·lculo da retenÁ„o de ICMS ST. <br>
-   * Ocor.: 1ñ1 / Tam.: 3v2ñ4 / Tipo: N. <br>
-   * Deve ser informada a alÌquota efetiva usada na retenÁ„o, j· incluindo o FCP quando aplic·vel. Exemplo: 18% + 2% FCP = 20%. <br>
-   * ICMS60: alÌquota efetiva da retenÁ„o de ICMS ST em operaÁ„o anterior. <br>
-   * ICMSSN500: alÌquota efetiva suportada pelo consumidor final para c·lculo do ICMS-ST cobrado anteriormente por substituiÁ„o tribut·ria ou antecipaÁ„o.
+   * # n26a - pST (ICMS60 / ICMSSN500). Al√≠quota suportada pelo consumidor final, utilizada no c√°lculo da reten√ß√£o de ICMS ST. <br>
+   * Ocor.: 1‚Äì1 / Tam.: 3v2‚Äì4 / Tipo: N. <br>
+   * Deve ser informada a al√≠quota efetiva usada na reten√ß√£o, j√° incluindo o FCP quando aplic√°vel. Exemplo: 18% + 2% FCP = 20%. <br>
+   * ICMS60: al√≠quota efetiva da reten√ß√£o de ICMS ST em opera√ß√£o anterior. <br>
+   * ICMSSN500: al√≠quota efetiva suportada pelo consumidor final para c√°lculo do ICMS-ST cobrado anteriormente por substitui√ß√£o tribut√°ria ou antecipa√ß√£o.
    *
    * @param pst the new n26a - pST (ICMS60 / ICMSSN500)
    */
@@ -1122,10 +1122,10 @@ public class SEFAZICMSVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # n26b - vICMSSubstituto (ICMS60 / ICMSSN500). Valor do ICMS prÛprio do Substituto cobrado em operaÁ„o anterior. <br>
-   * Ocor.: 0ñ1 / Tam.: 13v2 / Tipo: N. <br>
-   * ICMS60: valor do ICMS prÛprio do contribuinte substituto referente ‡ retenÁ„o anterior. <br>
-   * ICMSSN500: valor do ICMS prÛprio do substituto cobrado em operaÁ„o anterior, em cen·rios de ICMS-ST j· recolhido (substituÌdo ou antecipado).
+   * # n26b - vICMSSubstituto (ICMS60 / ICMSSN500). Valor do ICMS pr√≥prio do Substituto cobrado em opera√ß√£o anterior. <br>
+   * Ocor.: 0‚Äì1 / Tam.: 13v2 / Tipo: N. <br>
+   * ICMS60: valor do ICMS pr√≥prio do contribuinte substituto referente √† reten√ß√£o anterior. <br>
+   * ICMSSN500: valor do ICMS pr√≥prio do substituto cobrado em opera√ß√£o anterior, em cen√°rios de ICMS-ST j√° recolhido (substitu√≠do ou antecipado).
    *
    * @return the n26b - vICMSSubstituto (ICMS60 / ICMSSN500)
    */
@@ -1134,10 +1134,10 @@ public class SEFAZICMSVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # n26b - vICMSSubstituto (ICMS60 / ICMSSN500). Valor do ICMS prÛprio do Substituto cobrado em operaÁ„o anterior. <br>
-   * Ocor.: 0ñ1 / Tam.: 13v2 / Tipo: N. <br>
-   * ICMS60: valor do ICMS prÛprio do contribuinte substituto referente ‡ retenÁ„o anterior. <br>
-   * ICMSSN500: valor do ICMS prÛprio do substituto cobrado em operaÁ„o anterior, em cen·rios de ICMS-ST j· recolhido (substituÌdo ou antecipado).
+   * # n26b - vICMSSubstituto (ICMS60 / ICMSSN500). Valor do ICMS pr√≥prio do Substituto cobrado em opera√ß√£o anterior. <br>
+   * Ocor.: 0‚Äì1 / Tam.: 13v2 / Tipo: N. <br>
+   * ICMS60: valor do ICMS pr√≥prio do contribuinte substituto referente √† reten√ß√£o anterior. <br>
+   * ICMSSN500: valor do ICMS pr√≥prio do substituto cobrado em opera√ß√£o anterior, em cen√°rios de ICMS-ST j√° recolhido (substitu√≠do ou antecipado).
    *
    * @param vicmsSubstituto the new n26b - vICMSSubstituto (ICMS60 / ICMSSN500)
    */
@@ -1147,9 +1147,9 @@ public class SEFAZICMSVO extends RFWVO implements Serializable {
 
   /**
    * # n27 - vICMSSTRet (ICMS60 / ICMSSN500). Valor do ICMS ST retido anteriormente. <br>
-   * Ocor.: 1ñ1 / Tam.: 13v2 / Tipo: N. <br>
-   * ICMS60: valor do ICMS ST cobrado anteriormente por substituiÁ„o tribut·ria; pode ser omitido se a legislaÁ„o n„o exigir. <br>
-   * ICMSSN500: valor do ICMS ST cobrado anteriormente por substituiÁ„o tribut·ria ou por antecipaÁ„o, cujo destaque/repasse est· sendo informado pelo contribuinte enquadrado no Simples Nacional.
+   * Ocor.: 1‚Äì1 / Tam.: 13v2 / Tipo: N. <br>
+   * ICMS60: valor do ICMS ST cobrado anteriormente por substitui√ß√£o tribut√°ria; pode ser omitido se a legisla√ß√£o n√£o exigir. <br>
+   * ICMSSN500: valor do ICMS ST cobrado anteriormente por substitui√ß√£o tribut√°ria ou por antecipa√ß√£o, cujo destaque/repasse est√° sendo informado pelo contribuinte enquadrado no Simples Nacional.
    *
    * @return the n27 - vICMSSTRet (ICMS60 / ICMSSN500)
    */
@@ -1159,9 +1159,9 @@ public class SEFAZICMSVO extends RFWVO implements Serializable {
 
   /**
    * # n27 - vICMSSTRet (ICMS60 / ICMSSN500). Valor do ICMS ST retido anteriormente. <br>
-   * Ocor.: 1ñ1 / Tam.: 13v2 / Tipo: N. <br>
-   * ICMS60: valor do ICMS ST cobrado anteriormente por substituiÁ„o tribut·ria; pode ser omitido se a legislaÁ„o n„o exigir. <br>
-   * ICMSSN500: valor do ICMS ST cobrado anteriormente por substituiÁ„o tribut·ria ou por antecipaÁ„o, cujo destaque/repasse est· sendo informado pelo contribuinte enquadrado no Simples Nacional.
+   * Ocor.: 1‚Äì1 / Tam.: 13v2 / Tipo: N. <br>
+   * ICMS60: valor do ICMS ST cobrado anteriormente por substitui√ß√£o tribut√°ria; pode ser omitido se a legisla√ß√£o n√£o exigir. <br>
+   * ICMSSN500: valor do ICMS ST cobrado anteriormente por substitui√ß√£o tribut√°ria ou por antecipa√ß√£o, cujo destaque/repasse est√° sendo informado pelo contribuinte enquadrado no Simples Nacional.
    *
    * @param vicmsSTRet the new n27 - vICMSSTRet (ICMS60 / ICMSSN500)
    */
@@ -1170,10 +1170,10 @@ public class SEFAZICMSVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # n27a - vBCFCPSTRet (ICMS60 / ICMSSN500). Valor da base de c·lculo do FCP retido anteriormente por substituiÁ„o tribut·ria. <br>
-   * Ocor.: 1ñ1 / Tam.: 13v2 / Tipo: N. <br>
+   * # n27a - vBCFCPSTRet (ICMS60 / ICMSSN500). Valor da base de c√°lculo do FCP retido anteriormente por substitui√ß√£o tribut√°ria. <br>
+   * Ocor.: 1‚Äì1 / Tam.: 13v2 / Tipo: N. <br>
    * ICMS60: valor da base do FCP-ST retido anteriormente. <br>
-   * ICMSSN500: valor da base de c·lculo do FCP relativo ao ICMS-ST retido anteriormente (substituiÁ„o tribut·ria ou antecipaÁ„o) em operaÁıes do Simples Nacional com CSOSN=500.
+   * ICMSSN500: valor da base de c√°lculo do FCP relativo ao ICMS-ST retido anteriormente (substitui√ß√£o tribut√°ria ou antecipa√ß√£o) em opera√ß√µes do Simples Nacional com CSOSN=500.
    *
    * @return the n27a - vBCFCPSTRet (ICMS60 / ICMSSN500)
    */
@@ -1182,10 +1182,10 @@ public class SEFAZICMSVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # n27a - vBCFCPSTRet (ICMS60 / ICMSSN500). Valor da base de c·lculo do FCP retido anteriormente por substituiÁ„o tribut·ria. <br>
-   * Ocor.: 1ñ1 / Tam.: 13v2 / Tipo: N. <br>
+   * # n27a - vBCFCPSTRet (ICMS60 / ICMSSN500). Valor da base de c√°lculo do FCP retido anteriormente por substitui√ß√£o tribut√°ria. <br>
+   * Ocor.: 1‚Äì1 / Tam.: 13v2 / Tipo: N. <br>
    * ICMS60: valor da base do FCP-ST retido anteriormente. <br>
-   * ICMSSN500: valor da base de c·lculo do FCP relativo ao ICMS-ST retido anteriormente (substituiÁ„o tribut·ria ou antecipaÁ„o) em operaÁıes do Simples Nacional com CSOSN=500.
+   * ICMSSN500: valor da base de c√°lculo do FCP relativo ao ICMS-ST retido anteriormente (substitui√ß√£o tribut√°ria ou antecipa√ß√£o) em opera√ß√µes do Simples Nacional com CSOSN=500.
    *
    * @param vbcFCPSTRet the new n27a - vBCFCPSTRet (ICMS60 / ICMSSN500)
    */
@@ -1194,10 +1194,10 @@ public class SEFAZICMSVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # n27b - pFCPSTRet (ICMS60 / ICMSSN500). Percentual do FCP retido anteriormente por substituiÁ„o tribut·ria. <br>
-   * Ocor.: 1ñ1 / Tam.: 3v2ñ4 / Tipo: N. <br>
+   * # n27b - pFCPSTRet (ICMS60 / ICMSSN500). Percentual do FCP retido anteriormente por substitui√ß√£o tribut√°ria. <br>
+   * Ocor.: 1‚Äì1 / Tam.: 3v2‚Äì4 / Tipo: N. <br>
    * ICMS60: percentual aplicado ao FCP-ST retido anteriormente. <br>
-   * ICMSSN500: percentual do FCP-ST retido anteriormente em operaÁıes do Simples Nacional com CSOSN=500, normalmente limitado ao percentual m·ximo de FCP definido em lei.
+   * ICMSSN500: percentual do FCP-ST retido anteriormente em opera√ß√µes do Simples Nacional com CSOSN=500, normalmente limitado ao percentual m√°ximo de FCP definido em lei.
    *
    * @return the n27b - pFCPSTRet (ICMS60 / ICMSSN500)
    */
@@ -1206,10 +1206,10 @@ public class SEFAZICMSVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # n27b - pFCPSTRet (ICMS60 / ICMSSN500). Percentual do FCP retido anteriormente por substituiÁ„o tribut·ria. <br>
-   * Ocor.: 1ñ1 / Tam.: 3v2ñ4 / Tipo: N. <br>
+   * # n27b - pFCPSTRet (ICMS60 / ICMSSN500). Percentual do FCP retido anteriormente por substitui√ß√£o tribut√°ria. <br>
+   * Ocor.: 1‚Äì1 / Tam.: 3v2‚Äì4 / Tipo: N. <br>
    * ICMS60: percentual aplicado ao FCP-ST retido anteriormente. <br>
-   * ICMSSN500: percentual do FCP-ST retido anteriormente em operaÁıes do Simples Nacional com CSOSN=500, normalmente limitado ao percentual m·ximo de FCP definido em lei.
+   * ICMSSN500: percentual do FCP-ST retido anteriormente em opera√ß√µes do Simples Nacional com CSOSN=500, normalmente limitado ao percentual m√°ximo de FCP definido em lei.
    *
    * @param pfcpSTRet the new n27b - pFCPSTRet (ICMS60 / ICMSSN500)
    */
@@ -1218,10 +1218,10 @@ public class SEFAZICMSVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # n27d - vFCPSTRet (ICMS60 / ICMSSN500). Valor do FCP retido anteriormente por substituiÁ„o tribut·ria. <br>
-   * Ocor.: 1ñ1 / Tam.: 13v2 / Tipo: N. <br>
+   * # n27d - vFCPSTRet (ICMS60 / ICMSSN500). Valor do FCP retido anteriormente por substitui√ß√£o tribut√°ria. <br>
+   * Ocor.: 1‚Äì1 / Tam.: 13v2 / Tipo: N. <br>
    * ICMS60: valor do ICMS relativo ao FCP-ST retido anteriormente. <br>
-   * ICMSSN500: valor do ICMS relativo ao Fundo de Combate ‡ Pobreza (FCP) retido anteriormente por substituiÁ„o tribut·ria em operaÁıes do Simples Nacional (CSOSN=500).
+   * ICMSSN500: valor do ICMS relativo ao Fundo de Combate √† Pobreza (FCP) retido anteriormente por substitui√ß√£o tribut√°ria em opera√ß√µes do Simples Nacional (CSOSN=500).
    *
    * @return the n27d - vFCPSTRet (ICMS60 / ICMSSN500)
    */
@@ -1230,10 +1230,10 @@ public class SEFAZICMSVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # n27d - vFCPSTRet (ICMS60 / ICMSSN500). Valor do FCP retido anteriormente por substituiÁ„o tribut·ria. <br>
-   * Ocor.: 1ñ1 / Tam.: 13v2 / Tipo: N. <br>
+   * # n27d - vFCPSTRet (ICMS60 / ICMSSN500). Valor do FCP retido anteriormente por substitui√ß√£o tribut√°ria. <br>
+   * Ocor.: 1‚Äì1 / Tam.: 13v2 / Tipo: N. <br>
    * ICMS60: valor do ICMS relativo ao FCP-ST retido anteriormente. <br>
-   * ICMSSN500: valor do ICMS relativo ao Fundo de Combate ‡ Pobreza (FCP) retido anteriormente por substituiÁ„o tribut·ria em operaÁıes do Simples Nacional (CSOSN=500).
+   * ICMSSN500: valor do ICMS relativo ao Fundo de Combate √† Pobreza (FCP) retido anteriormente por substitui√ß√£o tribut√°ria em opera√ß√µes do Simples Nacional (CSOSN=500).
    *
    * @param vfcpSTRet the new n27d - vFCPSTRet (ICMS60 / ICMSSN500)
    */
@@ -1242,10 +1242,10 @@ public class SEFAZICMSVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # n34 - pRedBCEfet (ICMS60 / ICMSSN500). Percentual de reduÁ„o da base de c·lculo efetiva. <br>
-   * Ocor.: 1ñ1 / Tam.: 3v2ñ4 / Tipo: N. Campo opcional, a critÈrio da UF. <br>
-   * ICMS60: percentual de reduÁ„o que seria aplicado caso o contribuinte estivesse no regime comum, para obtenÁ„o da base de c·lculo efetiva (vBCEfet). <br>
-   * ICMSSN500: percentual de reduÁ„o da base de c·lculo efetiva em operaÁıes do Simples Nacional com CSOSN=500, para fins de c·lculo de ICMS efetivo em simulaÁıes de regime comum.
+   * # n34 - pRedBCEfet (ICMS60 / ICMSSN500). Percentual de redu√ß√£o da base de c√°lculo efetiva. <br>
+   * Ocor.: 1‚Äì1 / Tam.: 3v2‚Äì4 / Tipo: N. Campo opcional, a crit√©rio da UF. <br>
+   * ICMS60: percentual de redu√ß√£o que seria aplicado caso o contribuinte estivesse no regime comum, para obten√ß√£o da base de c√°lculo efetiva (vBCEfet). <br>
+   * ICMSSN500: percentual de redu√ß√£o da base de c√°lculo efetiva em opera√ß√µes do Simples Nacional com CSOSN=500, para fins de c√°lculo de ICMS efetivo em simula√ß√µes de regime comum.
    *
    * @return the n34 - pRedBCEfet (ICMS60 / ICMSSN500)
    */
@@ -1254,10 +1254,10 @@ public class SEFAZICMSVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # n34 - pRedBCEfet (ICMS60 / ICMSSN500). Percentual de reduÁ„o da base de c·lculo efetiva. <br>
-   * Ocor.: 1ñ1 / Tam.: 3v2ñ4 / Tipo: N. Campo opcional, a critÈrio da UF. <br>
-   * ICMS60: percentual de reduÁ„o que seria aplicado caso o contribuinte estivesse no regime comum, para obtenÁ„o da base de c·lculo efetiva (vBCEfet). <br>
-   * ICMSSN500: percentual de reduÁ„o da base de c·lculo efetiva em operaÁıes do Simples Nacional com CSOSN=500, para fins de c·lculo de ICMS efetivo em simulaÁıes de regime comum.
+   * # n34 - pRedBCEfet (ICMS60 / ICMSSN500). Percentual de redu√ß√£o da base de c√°lculo efetiva. <br>
+   * Ocor.: 1‚Äì1 / Tam.: 3v2‚Äì4 / Tipo: N. Campo opcional, a crit√©rio da UF. <br>
+   * ICMS60: percentual de redu√ß√£o que seria aplicado caso o contribuinte estivesse no regime comum, para obten√ß√£o da base de c√°lculo efetiva (vBCEfet). <br>
+   * ICMSSN500: percentual de redu√ß√£o da base de c√°lculo efetiva em opera√ß√µes do Simples Nacional com CSOSN=500, para fins de c√°lculo de ICMS efetivo em simula√ß√µes de regime comum.
    *
    * @param predBCEfet the new n34 - pRedBCEfet (ICMS60 / ICMSSN500)
    */
@@ -1266,11 +1266,11 @@ public class SEFAZICMSVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # n35 - vBCEfet (ICMS60 / ICMSSN500). Valor da base de c·lculo efetiva do ICMS. <br>
-   * Ocor.: 1ñ1 / Tam.: 13v2 / Tipo: N. Campo opcional, a critÈrio da UF. <br>
-   * FÛrmula sugerida: vBCEfet = vProd ◊ (1 - pRedBCEfet). <br>
-   * ICMS60: base de c·lculo que seria utilizada caso a operaÁ„o estivesse no regime comum. <br>
-   * ICMSSN500: base de c·lculo efetiva simulada para operaÁıes de contribuinte do Simples Nacional com CSOSN=500, considerando o regime comum (para c·lculo de ICMS efetivo).
+   * # n35 - vBCEfet (ICMS60 / ICMSSN500). Valor da base de c√°lculo efetiva do ICMS. <br>
+   * Ocor.: 1‚Äì1 / Tam.: 13v2 / Tipo: N. Campo opcional, a crit√©rio da UF. <br>
+   * F√≥rmula sugerida: vBCEfet = vProd √ó (1 - pRedBCEfet). <br>
+   * ICMS60: base de c√°lculo que seria utilizada caso a opera√ß√£o estivesse no regime comum. <br>
+   * ICMSSN500: base de c√°lculo efetiva simulada para opera√ß√µes de contribuinte do Simples Nacional com CSOSN=500, considerando o regime comum (para c√°lculo de ICMS efetivo).
    *
    * @return the n35 - vBCEfet (ICMS60 / ICMSSN500)
    */
@@ -1279,11 +1279,11 @@ public class SEFAZICMSVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # n35 - vBCEfet (ICMS60 / ICMSSN500). Valor da base de c·lculo efetiva do ICMS. <br>
-   * Ocor.: 1ñ1 / Tam.: 13v2 / Tipo: N. Campo opcional, a critÈrio da UF. <br>
-   * FÛrmula sugerida: vBCEfet = vProd ◊ (1 - pRedBCEfet). <br>
-   * ICMS60: base de c·lculo que seria utilizada caso a operaÁ„o estivesse no regime comum. <br>
-   * ICMSSN500: base de c·lculo efetiva simulada para operaÁıes de contribuinte do Simples Nacional com CSOSN=500, considerando o regime comum (para c·lculo de ICMS efetivo).
+   * # n35 - vBCEfet (ICMS60 / ICMSSN500). Valor da base de c√°lculo efetiva do ICMS. <br>
+   * Ocor.: 1‚Äì1 / Tam.: 13v2 / Tipo: N. Campo opcional, a crit√©rio da UF. <br>
+   * F√≥rmula sugerida: vBCEfet = vProd √ó (1 - pRedBCEfet). <br>
+   * ICMS60: base de c√°lculo que seria utilizada caso a opera√ß√£o estivesse no regime comum. <br>
+   * ICMSSN500: base de c√°lculo efetiva simulada para opera√ß√µes de contribuinte do Simples Nacional com CSOSN=500, considerando o regime comum (para c√°lculo de ICMS efetivo).
    *
    * @param vbcEfet the new n35 - vBCEfet (ICMS60 / ICMSSN500)
    */
@@ -1292,10 +1292,10 @@ public class SEFAZICMSVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # n36 - pICMSEfet (ICMS60 / ICMSSN500). AlÌquota efetiva do ICMS. <br>
-   * Ocor.: 1ñ1 / Tam.: 3v2ñ4 / Tipo: N. Campo opcional, a critÈrio da UF. <br>
-   * ICMS60: alÌquota que seria aplicada no regime comum para obtenÁ„o do ICMS efetivo. <br>
-   * ICMSSN500: alÌquota efetiva do ICMS em operaÁıes do Simples Nacional com CSOSN=500, simulando a tributaÁ„o no regime comum para c·lculo de vICMSEfet.
+   * # n36 - pICMSEfet (ICMS60 / ICMSSN500). Al√≠quota efetiva do ICMS. <br>
+   * Ocor.: 1‚Äì1 / Tam.: 3v2‚Äì4 / Tipo: N. Campo opcional, a crit√©rio da UF. <br>
+   * ICMS60: al√≠quota que seria aplicada no regime comum para obten√ß√£o do ICMS efetivo. <br>
+   * ICMSSN500: al√≠quota efetiva do ICMS em opera√ß√µes do Simples Nacional com CSOSN=500, simulando a tributa√ß√£o no regime comum para c√°lculo de vICMSEfet.
    *
    * @return the n36 - pICMSEfet (ICMS60 / ICMSSN500)
    */
@@ -1304,10 +1304,10 @@ public class SEFAZICMSVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # n36 - pICMSEfet (ICMS60 / ICMSSN500). AlÌquota efetiva do ICMS. <br>
-   * Ocor.: 1ñ1 / Tam.: 3v2ñ4 / Tipo: N. Campo opcional, a critÈrio da UF. <br>
-   * ICMS60: alÌquota que seria aplicada no regime comum para obtenÁ„o do ICMS efetivo. <br>
-   * ICMSSN500: alÌquota efetiva do ICMS em operaÁıes do Simples Nacional com CSOSN=500, simulando a tributaÁ„o no regime comum para c·lculo de vICMSEfet.
+   * # n36 - pICMSEfet (ICMS60 / ICMSSN500). Al√≠quota efetiva do ICMS. <br>
+   * Ocor.: 1‚Äì1 / Tam.: 3v2‚Äì4 / Tipo: N. Campo opcional, a crit√©rio da UF. <br>
+   * ICMS60: al√≠quota que seria aplicada no regime comum para obten√ß√£o do ICMS efetivo. <br>
+   * ICMSSN500: al√≠quota efetiva do ICMS em opera√ß√µes do Simples Nacional com CSOSN=500, simulando a tributa√ß√£o no regime comum para c√°lculo de vICMSEfet.
    *
    * @param picmsEfet the new n36 - pICMSEfet (ICMS60 / ICMSSN500)
    */
@@ -1317,10 +1317,10 @@ public class SEFAZICMSVO extends RFWVO implements Serializable {
 
   /**
    * # n37 - vICMSEfet (ICMS60 / ICMSSN500). Valor do ICMS efetivo. <br>
-   * Ocor.: 1ñ1 / Tam.: 13v2 / Tipo: N. Campo opcional, a critÈrio da UF. <br>
-   * FÛrmula sugerida: vICMSEfet = vBCEfet ◊ pICMSEfet. <br>
-   * ICMS60: valor do ICMS efetivo que seria devido no regime comum, calculado a partir da base e alÌquota efetivas. <br>
-   * ICMSSN500: valor do ICMS efetivo estimado para operaÁıes do Simples Nacional com CSOSN=500, considerando o cen·rio de regime comum (usado para controles e an·lises fiscais especÌficas definidas pela UF).
+   * Ocor.: 1‚Äì1 / Tam.: 13v2 / Tipo: N. Campo opcional, a crit√©rio da UF. <br>
+   * F√≥rmula sugerida: vICMSEfet = vBCEfet √ó pICMSEfet. <br>
+   * ICMS60: valor do ICMS efetivo que seria devido no regime comum, calculado a partir da base e al√≠quota efetivas. <br>
+   * ICMSSN500: valor do ICMS efetivo estimado para opera√ß√µes do Simples Nacional com CSOSN=500, considerando o cen√°rio de regime comum (usado para controles e an√°lises fiscais espec√≠ficas definidas pela UF).
    *
    * @return the n37 - vICMSEfet (ICMS60 / ICMSSN500)
    */
@@ -1330,10 +1330,10 @@ public class SEFAZICMSVO extends RFWVO implements Serializable {
 
   /**
    * # n37 - vICMSEfet (ICMS60 / ICMSSN500). Valor do ICMS efetivo. <br>
-   * Ocor.: 1ñ1 / Tam.: 13v2 / Tipo: N. Campo opcional, a critÈrio da UF. <br>
-   * FÛrmula sugerida: vICMSEfet = vBCEfet ◊ pICMSEfet. <br>
-   * ICMS60: valor do ICMS efetivo que seria devido no regime comum, calculado a partir da base e alÌquota efetivas. <br>
-   * ICMSSN500: valor do ICMS efetivo estimado para operaÁıes do Simples Nacional com CSOSN=500, considerando o cen·rio de regime comum (usado para controles e an·lises fiscais especÌficas definidas pela UF).
+   * Ocor.: 1‚Äì1 / Tam.: 13v2 / Tipo: N. Campo opcional, a crit√©rio da UF. <br>
+   * F√≥rmula sugerida: vICMSEfet = vBCEfet √ó pICMSEfet. <br>
+   * ICMS60: valor do ICMS efetivo que seria devido no regime comum, calculado a partir da base e al√≠quota efetivas. <br>
+   * ICMSSN500: valor do ICMS efetivo estimado para opera√ß√µes do Simples Nacional com CSOSN=500, considerando o cen√°rio de regime comum (usado para controles e an√°lises fiscais espec√≠ficas definidas pela UF).
    *
    * @param vicmsEfet the new n37 - vICMSEfet (ICMS60 / ICMSSN500)
    */
@@ -1342,9 +1342,9 @@ public class SEFAZICMSVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # n29 - pCredSN. AlÌquota aplic·vel de c·lculo do crÈdito (Simples Nacional). <br>
-   * Ocor.: 1ñ1 / Tam.: 3v2ñ4 / Tipo: N. (v2.0) <br>
-   * ICMSSN101: percentual utilizado para c·lculo do crÈdito de ICMS permitido nos termos do art. 23 da LC 123.
+   * # n29 - pCredSN. Al√≠quota aplic√°vel de c√°lculo do cr√©dito (Simples Nacional). <br>
+   * Ocor.: 1‚Äì1 / Tam.: 3v2‚Äì4 / Tipo: N. (v2.0) <br>
+   * ICMSSN101: percentual utilizado para c√°lculo do cr√©dito de ICMS permitido nos termos do art. 23 da LC 123.
    *
    * @return the n29 - pCredSN
    */
@@ -1353,9 +1353,9 @@ public class SEFAZICMSVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # n29 - pCredSN. AlÌquota aplic·vel de c·lculo do crÈdito (Simples Nacional). <br>
-   * Ocor.: 1ñ1 / Tam.: 3v2ñ4 / Tipo: N. (v2.0) <br>
-   * ICMSSN101: percentual utilizado para c·lculo do crÈdito de ICMS permitido nos termos do art. 23 da LC 123.
+   * # n29 - pCredSN. Al√≠quota aplic√°vel de c√°lculo do cr√©dito (Simples Nacional). <br>
+   * Ocor.: 1‚Äì1 / Tam.: 3v2‚Äì4 / Tipo: N. (v2.0) <br>
+   * ICMSSN101: percentual utilizado para c√°lculo do cr√©dito de ICMS permitido nos termos do art. 23 da LC 123.
    *
    * @param pcredSN the new n29 - pCredSN
    */
@@ -1364,9 +1364,9 @@ public class SEFAZICMSVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # n30 - vCredICMSSN. Valor do crÈdito do ICMS que pode ser aproveitado nos termos do art. 23 da LC 123 (Simples Nacional). <br>
-   * Ocor.: 1ñ1 / Tam.: 13v2 / Tipo: N. (v2.0) <br>
-   * ICMSSN101: valor do crÈdito de ICMS calculado com base em pCredSN aplicado sobre a base correspondente, conforme regras do Simples Nacional.
+   * # n30 - vCredICMSSN. Valor do cr√©dito do ICMS que pode ser aproveitado nos termos do art. 23 da LC 123 (Simples Nacional). <br>
+   * Ocor.: 1‚Äì1 / Tam.: 13v2 / Tipo: N. (v2.0) <br>
+   * ICMSSN101: valor do cr√©dito de ICMS calculado com base em pCredSN aplicado sobre a base correspondente, conforme regras do Simples Nacional.
    *
    * @return the n30 - vCredICMSSN
    */
@@ -1375,9 +1375,9 @@ public class SEFAZICMSVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # n30 - vCredICMSSN. Valor do crÈdito do ICMS que pode ser aproveitado nos termos do art. 23 da LC 123 (Simples Nacional). <br>
-   * Ocor.: 1ñ1 / Tam.: 13v2 / Tipo: N. (v2.0) <br>
-   * ICMSSN101: valor do crÈdito de ICMS calculado com base em pCredSN aplicado sobre a base correspondente, conforme regras do Simples Nacional.
+   * # n30 - vCredICMSSN. Valor do cr√©dito do ICMS que pode ser aproveitado nos termos do art. 23 da LC 123 (Simples Nacional). <br>
+   * Ocor.: 1‚Äì1 / Tam.: 13v2 / Tipo: N. (v2.0) <br>
+   * ICMSSN101: valor do cr√©dito de ICMS calculado com base em pCredSN aplicado sobre a base correspondente, conforme regras do Simples Nacional.
    *
    * @param vcredICMSSN the new n30 - vCredICMSSN
    */
@@ -1386,13 +1386,13 @@ public class SEFAZICMSVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # n17c - vFCP. Valor do Fundo de Combate ‡ Pobreza (FCP). Ocor.: 1ñ1 / Tam.: 13v2 / Tipo: N (quando o grupo FCP estiver presente). <br>
-   * ICMS00: valor do FCP relativo ao ICMS prÛprio. <br>
-   * ICMS10: valor do FCP relativo ao ICMS prÛprio (quando aplic·vel). <br>
-   * ICMS20: valor do FCP calculado sobre a base de c·lculo do FCP do ICMS com reduÁ„o de BC. <br>
-   * ICMS51: valor do FCP relativo ‡ operaÁ„o com diferimento (quando aplic·vel). <br>
-   * ICMS70: valor do FCP relativo ao ICMS prÛprio em operaÁ„o com reduÁ„o de BC e ST. <br>
-   * ICMS90: valor do FCP relativo ao ICMS prÛprio no grupo ICMS90.
+   * # n17c - vFCP. Valor do Fundo de Combate √† Pobreza (FCP). Ocor.: 1‚Äì1 / Tam.: 13v2 / Tipo: N (quando o grupo FCP estiver presente). <br>
+   * ICMS00: valor do FCP relativo ao ICMS pr√≥prio. <br>
+   * ICMS10: valor do FCP relativo ao ICMS pr√≥prio (quando aplic√°vel). <br>
+   * ICMS20: valor do FCP calculado sobre a base de c√°lculo do FCP do ICMS com redu√ß√£o de BC. <br>
+   * ICMS51: valor do FCP relativo √† opera√ß√£o com diferimento (quando aplic√°vel). <br>
+   * ICMS70: valor do FCP relativo ao ICMS pr√≥prio em opera√ß√£o com redu√ß√£o de BC e ST. <br>
+   * ICMS90: valor do FCP relativo ao ICMS pr√≥prio no grupo ICMS90.
    *
    * @return the n17c - vFCP
    */
@@ -1401,13 +1401,13 @@ public class SEFAZICMSVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # n17c - vFCP. Valor do Fundo de Combate ‡ Pobreza (FCP). Ocor.: 1ñ1 / Tam.: 13v2 / Tipo: N (quando o grupo FCP estiver presente). <br>
-   * ICMS00: valor do FCP relativo ao ICMS prÛprio. <br>
-   * ICMS10: valor do FCP relativo ao ICMS prÛprio (quando aplic·vel). <br>
-   * ICMS20: valor do FCP calculado sobre a base de c·lculo do FCP do ICMS com reduÁ„o de BC. <br>
-   * ICMS51: valor do FCP relativo ‡ operaÁ„o com diferimento (quando aplic·vel). <br>
-   * ICMS70: valor do FCP relativo ao ICMS prÛprio em operaÁ„o com reduÁ„o de BC e ST. <br>
-   * ICMS90: valor do FCP relativo ao ICMS prÛprio no grupo ICMS90.
+   * # n17c - vFCP. Valor do Fundo de Combate √† Pobreza (FCP). Ocor.: 1‚Äì1 / Tam.: 13v2 / Tipo: N (quando o grupo FCP estiver presente). <br>
+   * ICMS00: valor do FCP relativo ao ICMS pr√≥prio. <br>
+   * ICMS10: valor do FCP relativo ao ICMS pr√≥prio (quando aplic√°vel). <br>
+   * ICMS20: valor do FCP calculado sobre a base de c√°lculo do FCP do ICMS com redu√ß√£o de BC. <br>
+   * ICMS51: valor do FCP relativo √† opera√ß√£o com diferimento (quando aplic√°vel). <br>
+   * ICMS70: valor do FCP relativo ao ICMS pr√≥prio em opera√ß√£o com redu√ß√£o de BC e ST. <br>
+   * ICMS90: valor do FCP relativo ao ICMS pr√≥prio no grupo ICMS90.
    *
    * @param vfcp the new n17c - vFCP
    */
@@ -1416,12 +1416,12 @@ public class SEFAZICMSVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # n28a - vICMSDeson (ICMS20, ICMS30, ICMS40, ICMS70, ICMS90). Valor do ICMS desonerado. Ocor.: 1ñ1 / Tam.: 13v2 / Tipo: N. <br>
-   * ICMS20: valor do ICMS desonerado conforme motivo de desoneraÁ„o. <br>
-   * ICMS30: valor do ICMS desonerado aplicado a operaÁıes isentas/n„o tributadas com ICMS ST. <br>
-   * ICMS40: valor do ICMS que seria devido se n„o houvesse isenÁ„o/n„o tributaÁ„o/suspens„o, de acordo com o motivo de desoneraÁ„o informado. <br>
-   * ICMS70: valor do ICMS desonerado em operaÁıes com reduÁ„o de BC e ICMS ST, conforme motivo informado em motDesICMS. <br>
-   * ICMS90: valor do ICMS desonerado nas operaÁıes ìOutrosî, quando houver motivo de desoneraÁ„o informado.
+   * # n28a - vICMSDeson (ICMS20, ICMS30, ICMS40, ICMS70, ICMS90). Valor do ICMS desonerado. Ocor.: 1‚Äì1 / Tam.: 13v2 / Tipo: N. <br>
+   * ICMS20: valor do ICMS desonerado conforme motivo de desonera√ß√£o. <br>
+   * ICMS30: valor do ICMS desonerado aplicado a opera√ß√µes isentas/n√£o tributadas com ICMS ST. <br>
+   * ICMS40: valor do ICMS que seria devido se n√£o houvesse isen√ß√£o/n√£o tributa√ß√£o/suspens√£o, de acordo com o motivo de desonera√ß√£o informado. <br>
+   * ICMS70: valor do ICMS desonerado em opera√ß√µes com redu√ß√£o de BC e ICMS ST, conforme motivo informado em motDesICMS. <br>
+   * ICMS90: valor do ICMS desonerado nas opera√ß√µes ‚ÄúOutros‚Äù, quando houver motivo de desonera√ß√£o informado.
    *
    * @return the n28a - vICMSDeson (ICMS20, ICMS30, ICMS40, ICMS70, ICMS90)
    */
@@ -1430,12 +1430,12 @@ public class SEFAZICMSVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # n28a - vICMSDeson (ICMS20, ICMS30, ICMS40, ICMS70, ICMS90). Valor do ICMS desonerado. Ocor.: 1ñ1 / Tam.: 13v2 / Tipo: N. <br>
-   * ICMS20: valor do ICMS desonerado conforme motivo de desoneraÁ„o. <br>
-   * ICMS30: valor do ICMS desonerado aplicado a operaÁıes isentas/n„o tributadas com ICMS ST. <br>
-   * ICMS40: valor do ICMS que seria devido se n„o houvesse isenÁ„o/n„o tributaÁ„o/suspens„o, de acordo com o motivo de desoneraÁ„o informado. <br>
-   * ICMS70: valor do ICMS desonerado em operaÁıes com reduÁ„o de BC e ICMS ST, conforme motivo informado em motDesICMS. <br>
-   * ICMS90: valor do ICMS desonerado nas operaÁıes ìOutrosî, quando houver motivo de desoneraÁ„o informado.
+   * # n28a - vICMSDeson (ICMS20, ICMS30, ICMS40, ICMS70, ICMS90). Valor do ICMS desonerado. Ocor.: 1‚Äì1 / Tam.: 13v2 / Tipo: N. <br>
+   * ICMS20: valor do ICMS desonerado conforme motivo de desonera√ß√£o. <br>
+   * ICMS30: valor do ICMS desonerado aplicado a opera√ß√µes isentas/n√£o tributadas com ICMS ST. <br>
+   * ICMS40: valor do ICMS que seria devido se n√£o houvesse isen√ß√£o/n√£o tributa√ß√£o/suspens√£o, de acordo com o motivo de desonera√ß√£o informado. <br>
+   * ICMS70: valor do ICMS desonerado em opera√ß√µes com redu√ß√£o de BC e ICMS ST, conforme motivo informado em motDesICMS. <br>
+   * ICMS90: valor do ICMS desonerado nas opera√ß√µes ‚ÄúOutros‚Äù, quando houver motivo de desonera√ß√£o informado.
    *
    * @param vicmsDeson the new n28a - vICMSDeson (ICMS20, ICMS30, ICMS40, ICMS70, ICMS90)
    */
@@ -1444,12 +1444,12 @@ public class SEFAZICMSVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # n28 - motDesICMS (ICMS20, ICMS30, ICMS40, ICMS70, ICMS90). Motivo da desoneraÁ„o do ICMS. Ver {@link SEFAZ_motDesICMS}. <br>
-   * ICMS20: motivos de desoneraÁ„o aplic·veis ‡s operaÁıes com reduÁ„o de BC. <br>
-   * ICMS30: motivos aplic·veis ‡s operaÁıes isentas/n„o tributadas com ICMS ST. <br>
-   * ICMS40: motivos aplic·veis ‡s operaÁıes isentas, n„o tributadas ou com suspens„o (incluindo SUFRAMA, venda a Ûrg„o p˙blico, OlimpÌadas Rio 2016, solicitado pelo Fisco, etc.). <br>
-   * ICMS70: motivos de desoneraÁ„o aplic·veis ao grupo ICMS70, utilizando os cÛdigos 1, 3, 4, 5, 6, 7, 8, 9, 10, 11 e 12 conforme tabela do MOC. <br>
-   * ICMS90: motivos de desoneraÁ„o aplic·veis ao grupo ICMS90, utilizando os cÛdigos 3 (Uso na agropecu·ria), 9 (Outros) e 12 (”rg„o de fomento e desenvolvimento agropecu·rio).
+   * # n28 - motDesICMS (ICMS20, ICMS30, ICMS40, ICMS70, ICMS90). Motivo da desonera√ß√£o do ICMS. Ver {@link SEFAZ_motDesICMS}. <br>
+   * ICMS20: motivos de desonera√ß√£o aplic√°veis √†s opera√ß√µes com redu√ß√£o de BC. <br>
+   * ICMS30: motivos aplic√°veis √†s opera√ß√µes isentas/n√£o tributadas com ICMS ST. <br>
+   * ICMS40: motivos aplic√°veis √†s opera√ß√µes isentas, n√£o tributadas ou com suspens√£o (incluindo SUFRAMA, venda a √≥rg√£o p√∫blico, Olimp√≠adas Rio 2016, solicitado pelo Fisco, etc.). <br>
+   * ICMS70: motivos de desonera√ß√£o aplic√°veis ao grupo ICMS70, utilizando os c√≥digos 1, 3, 4, 5, 6, 7, 8, 9, 10, 11 e 12 conforme tabela do MOC. <br>
+   * ICMS90: motivos de desonera√ß√£o aplic√°veis ao grupo ICMS90, utilizando os c√≥digos 3 (Uso na agropecu√°ria), 9 (Outros) e 12 (√ìrg√£o de fomento e desenvolvimento agropecu√°rio).
    *
    * @return the n28 - motDesICMS (ICMS20, ICMS30, ICMS40, ICMS70, ICMS90)
    */
@@ -1458,12 +1458,12 @@ public class SEFAZICMSVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # n28 - motDesICMS (ICMS20, ICMS30, ICMS40, ICMS70, ICMS90). Motivo da desoneraÁ„o do ICMS. Ver {@link SEFAZ_motDesICMS}. <br>
-   * ICMS20: motivos de desoneraÁ„o aplic·veis ‡s operaÁıes com reduÁ„o de BC. <br>
-   * ICMS30: motivos aplic·veis ‡s operaÁıes isentas/n„o tributadas com ICMS ST. <br>
-   * ICMS40: motivos aplic·veis ‡s operaÁıes isentas, n„o tributadas ou com suspens„o (incluindo SUFRAMA, venda a Ûrg„o p˙blico, OlimpÌadas Rio 2016, solicitado pelo Fisco, etc.). <br>
-   * ICMS70: motivos de desoneraÁ„o aplic·veis ao grupo ICMS70, utilizando os cÛdigos 1, 3, 4, 5, 6, 7, 8, 9, 10, 11 e 12 conforme tabela do MOC. <br>
-   * ICMS90: motivos de desoneraÁ„o aplic·veis ao grupo ICMS90, utilizando os cÛdigos 3 (Uso na agropecu·ria), 9 (Outros) e 12 (”rg„o de fomento e desenvolvimento agropecu·rio).
+   * # n28 - motDesICMS (ICMS20, ICMS30, ICMS40, ICMS70, ICMS90). Motivo da desonera√ß√£o do ICMS. Ver {@link SEFAZ_motDesICMS}. <br>
+   * ICMS20: motivos de desonera√ß√£o aplic√°veis √†s opera√ß√µes com redu√ß√£o de BC. <br>
+   * ICMS30: motivos aplic√°veis √†s opera√ß√µes isentas/n√£o tributadas com ICMS ST. <br>
+   * ICMS40: motivos aplic√°veis √†s opera√ß√µes isentas, n√£o tributadas ou com suspens√£o (incluindo SUFRAMA, venda a √≥rg√£o p√∫blico, Olimp√≠adas Rio 2016, solicitado pelo Fisco, etc.). <br>
+   * ICMS70: motivos de desonera√ß√£o aplic√°veis ao grupo ICMS70, utilizando os c√≥digos 1, 3, 4, 5, 6, 7, 8, 9, 10, 11 e 12 conforme tabela do MOC. <br>
+   * ICMS90: motivos de desonera√ß√£o aplic√°veis ao grupo ICMS90, utilizando os c√≥digos 3 (Uso na agropecu√°ria), 9 (Outros) e 12 (√ìrg√£o de fomento e desenvolvimento agropecu√°rio).
    *
    * @param motDesICMS the new n28 - motDesICMS (ICMS20, ICMS30, ICMS40, ICMS70, ICMS90)
    */
@@ -1472,16 +1472,16 @@ public class SEFAZICMSVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # n12 - CST. TributaÁ„o do ICMS. Ocor.: 1ñ1 / Tam.: 2 / Tipo: N. Ver valores em {@link SEFAZ_CST_ICMS}. <br>
-   * ICMS00: CST = 00 ñ Tributado integralmente. <br>
-   * ICMS10: CST = 10 ñ Tributado e com cobranÁa do ICMS por substituiÁ„o tribut·ria. <br>
-   * ICMS20: CST = 20 ñ Com reduÁ„o da base de c·lculo. <br>
-   * ICMS30: CST = 30 ñ Isenta ou n„o tributada e com cobranÁa do ICMS por substituiÁ„o tribut·ria. <br>
-   * ICMS40: CST = 40 (Isenta), 41 (N„o tributada) ou 50 (Suspens„o). <br>
-   * ICMS51: CST = 51 ñ Diferimento. <br>
-   * ICMS60: CST = 60 ñ ICMS cobrado anteriormente por substituiÁ„o tribut·ria. <br>
-   * ICMS70: CST = 70 ñ Com reduÁ„o de base de c·lculo e cobranÁa do ICMS por substituiÁ„o tribut·ria. <br>
-   * ICMS90: CST = 90 ñ Outros.
+   * # n12 - CST. Tributa√ß√£o do ICMS. Ocor.: 1‚Äì1 / Tam.: 2 / Tipo: N. Ver valores em {@link SEFAZ_CST_ICMS}. <br>
+   * ICMS00: CST = 00 ‚Äì Tributado integralmente. <br>
+   * ICMS10: CST = 10 ‚Äì Tributado e com cobran√ßa do ICMS por substitui√ß√£o tribut√°ria. <br>
+   * ICMS20: CST = 20 ‚Äì Com redu√ß√£o da base de c√°lculo. <br>
+   * ICMS30: CST = 30 ‚Äì Isenta ou n√£o tributada e com cobran√ßa do ICMS por substitui√ß√£o tribut√°ria. <br>
+   * ICMS40: CST = 40 (Isenta), 41 (N√£o tributada) ou 50 (Suspens√£o). <br>
+   * ICMS51: CST = 51 ‚Äì Diferimento. <br>
+   * ICMS60: CST = 60 ‚Äì ICMS cobrado anteriormente por substitui√ß√£o tribut√°ria. <br>
+   * ICMS70: CST = 70 ‚Äì Com redu√ß√£o de base de c√°lculo e cobran√ßa do ICMS por substitui√ß√£o tribut√°ria. <br>
+   * ICMS90: CST = 90 ‚Äì Outros.
    *
    * @return the n12 - CST
    */
@@ -1490,16 +1490,16 @@ public class SEFAZICMSVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # n12 - CST. TributaÁ„o do ICMS. Ocor.: 1ñ1 / Tam.: 2 / Tipo: N. Ver valores em {@link SEFAZ_CST_ICMS}. <br>
-   * ICMS00: CST = 00 ñ Tributado integralmente. <br>
-   * ICMS10: CST = 10 ñ Tributado e com cobranÁa do ICMS por substituiÁ„o tribut·ria. <br>
-   * ICMS20: CST = 20 ñ Com reduÁ„o da base de c·lculo. <br>
-   * ICMS30: CST = 30 ñ Isenta ou n„o tributada e com cobranÁa do ICMS por substituiÁ„o tribut·ria. <br>
-   * ICMS40: CST = 40 (Isenta), 41 (N„o tributada) ou 50 (Suspens„o). <br>
-   * ICMS51: CST = 51 ñ Diferimento. <br>
-   * ICMS60: CST = 60 ñ ICMS cobrado anteriormente por substituiÁ„o tribut·ria. <br>
-   * ICMS70: CST = 70 ñ Com reduÁ„o de base de c·lculo e cobranÁa do ICMS por substituiÁ„o tribut·ria. <br>
-   * ICMS90: CST = 90 ñ Outros.
+   * # n12 - CST. Tributa√ß√£o do ICMS. Ocor.: 1‚Äì1 / Tam.: 2 / Tipo: N. Ver valores em {@link SEFAZ_CST_ICMS}. <br>
+   * ICMS00: CST = 00 ‚Äì Tributado integralmente. <br>
+   * ICMS10: CST = 10 ‚Äì Tributado e com cobran√ßa do ICMS por substitui√ß√£o tribut√°ria. <br>
+   * ICMS20: CST = 20 ‚Äì Com redu√ß√£o da base de c√°lculo. <br>
+   * ICMS30: CST = 30 ‚Äì Isenta ou n√£o tributada e com cobran√ßa do ICMS por substitui√ß√£o tribut√°ria. <br>
+   * ICMS40: CST = 40 (Isenta), 41 (N√£o tributada) ou 50 (Suspens√£o). <br>
+   * ICMS51: CST = 51 ‚Äì Diferimento. <br>
+   * ICMS60: CST = 60 ‚Äì ICMS cobrado anteriormente por substitui√ß√£o tribut√°ria. <br>
+   * ICMS70: CST = 70 ‚Äì Com redu√ß√£o de base de c√°lculo e cobran√ßa do ICMS por substitui√ß√£o tribut√°ria. <br>
+   * ICMS90: CST = 90 ‚Äì Outros.
    *
    * @param cst the new n12 - CST
    */
@@ -1508,7 +1508,7 @@ public class SEFAZICMSVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # n16a - vICMSOp (ICMS51). Valor do ICMS da operaÁ„o como se n„o houvesse diferimento. Ocor.: 0ñ1 / Tam.: 13v2 / Tipo: N.
+   * # n16a - vICMSOp (ICMS51). Valor do ICMS da opera√ß√£o como se n√£o houvesse diferimento. Ocor.: 0‚Äì1 / Tam.: 13v2 / Tipo: N.
    *
    * @return the n16a - vICMSOp (ICMS51)
    */
@@ -1517,7 +1517,7 @@ public class SEFAZICMSVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # n16a - vICMSOp (ICMS51). Valor do ICMS da operaÁ„o como se n„o houvesse diferimento. Ocor.: 0ñ1 / Tam.: 13v2 / Tipo: N.
+   * # n16a - vICMSOp (ICMS51). Valor do ICMS da opera√ß√£o como se n√£o houvesse diferimento. Ocor.: 0‚Äì1 / Tam.: 13v2 / Tipo: N.
    *
    * @param vicmsOp the new n16a - vICMSOp (ICMS51)
    */
@@ -1526,7 +1526,7 @@ public class SEFAZICMSVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # n16b - pDif (ICMS51). Percentual do diferimento. No caso de diferimento total, informar ì100î. Ocor.: 0ñ1 / Tam.: 3v2ñ4 / Tipo: N.
+   * # n16b - pDif (ICMS51). Percentual do diferimento. No caso de diferimento total, informar ‚Äú100‚Äù. Ocor.: 0‚Äì1 / Tam.: 3v2‚Äì4 / Tipo: N.
    *
    * @return the n16b - pDif (ICMS51)
    */
@@ -1535,7 +1535,7 @@ public class SEFAZICMSVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # n16b - pDif (ICMS51). Percentual do diferimento. No caso de diferimento total, informar ì100î. Ocor.: 0ñ1 / Tam.: 3v2ñ4 / Tipo: N.
+   * # n16b - pDif (ICMS51). Percentual do diferimento. No caso de diferimento total, informar ‚Äú100‚Äù. Ocor.: 0‚Äì1 / Tam.: 3v2‚Äì4 / Tipo: N.
    *
    * @param pdif the new n16b - pDif (ICMS51)
    */
@@ -1544,7 +1544,7 @@ public class SEFAZICMSVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # n16c - vICMSDif (ICMS51). Valor do ICMS diferido. Ocor.: 0ñ1 / Tam.: 13v2 / Tipo: N.
+   * # n16c - vICMSDif (ICMS51). Valor do ICMS diferido. Ocor.: 0‚Äì1 / Tam.: 13v2 / Tipo: N.
    *
    * @return the n16c - vICMSDif (ICMS51)
    */
@@ -1553,7 +1553,7 @@ public class SEFAZICMSVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # n16c - vICMSDif (ICMS51). Valor do ICMS diferido. Ocor.: 0ñ1 / Tam.: 13v2 / Tipo: N.
+   * # n16c - vICMSDif (ICMS51). Valor do ICMS diferido. Ocor.: 0‚Äì1 / Tam.: 13v2 / Tipo: N.
    *
    * @param vicmsDif the new n16c - vICMSDif (ICMS51)
    */
@@ -1562,13 +1562,13 @@ public class SEFAZICMSVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # n17 - vICMS. Valor do ICMS. Ocor.: 1ñ1 / Tam.: 13v2 / Tipo: N. <br>
-   * ICMS00: valor do ICMS prÛprio devido. <br>
-   * ICMS10: valor do ICMS prÛprio (sem considerar o ICMS ST). <br>
+   * # n17 - vICMS. Valor do ICMS. Ocor.: 1‚Äì1 / Tam.: 13v2 / Tipo: N. <br>
+   * ICMS00: valor do ICMS pr√≥prio devido. <br>
+   * ICMS10: valor do ICMS pr√≥prio (sem considerar o ICMS ST). <br>
    * ICMS20: valor do ICMS calculado sobre a base reduzida. <br>
-   * ICMS51: valor do ICMS realmente devido apÛs o diferimento (por exemplo, vICMSOp - vICMSDif, conforme regra da UF). <br>
-   * ICMS70: valor do ICMS prÛprio calculado sobre a BC reduzida (antes da ST). <br>
-   * ICMS90: valor do ICMS prÛprio devido no grupo ICMS90 (TributaÁ„o ìOutrosî).
+   * ICMS51: valor do ICMS realmente devido ap√≥s o diferimento (por exemplo, vICMSOp - vICMSDif, conforme regra da UF). <br>
+   * ICMS70: valor do ICMS pr√≥prio calculado sobre a BC reduzida (antes da ST). <br>
+   * ICMS90: valor do ICMS pr√≥prio devido no grupo ICMS90 (Tributa√ß√£o ‚ÄúOutros‚Äù).
    *
    * @return the n17 - vICMS
    */
@@ -1577,13 +1577,13 @@ public class SEFAZICMSVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # n17 - vICMS. Valor do ICMS. Ocor.: 1ñ1 / Tam.: 13v2 / Tipo: N. <br>
-   * ICMS00: valor do ICMS prÛprio devido. <br>
-   * ICMS10: valor do ICMS prÛprio (sem considerar o ICMS ST). <br>
+   * # n17 - vICMS. Valor do ICMS. Ocor.: 1‚Äì1 / Tam.: 13v2 / Tipo: N. <br>
+   * ICMS00: valor do ICMS pr√≥prio devido. <br>
+   * ICMS10: valor do ICMS pr√≥prio (sem considerar o ICMS ST). <br>
    * ICMS20: valor do ICMS calculado sobre a base reduzida. <br>
-   * ICMS51: valor do ICMS realmente devido apÛs o diferimento (por exemplo, vICMSOp - vICMSDif, conforme regra da UF). <br>
-   * ICMS70: valor do ICMS prÛprio calculado sobre a BC reduzida (antes da ST). <br>
-   * ICMS90: valor do ICMS prÛprio devido no grupo ICMS90 (TributaÁ„o ìOutrosî).
+   * ICMS51: valor do ICMS realmente devido ap√≥s o diferimento (por exemplo, vICMSOp - vICMSDif, conforme regra da UF). <br>
+   * ICMS70: valor do ICMS pr√≥prio calculado sobre a BC reduzida (antes da ST). <br>
+   * ICMS90: valor do ICMS pr√≥prio devido no grupo ICMS90 (Tributa√ß√£o ‚ÄúOutros‚Äù).
    *
    * @param vicms the new n17 - vICMS
    */
@@ -1592,13 +1592,13 @@ public class SEFAZICMSVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # n17a/N17b (ICMS10, ICMS20, ICMS51, ICMS70, ICMS90) - vBCFCP. Valor da Base de C·lculo do FCP. <br>
-   * Ocor.: 1ñ1 / Tam.: 13v2 / Tipo: N (quando o grupo FCP estiver presente). <br>
-   * ICMS10: valor da base de c·lculo do FCP do ICMS prÛprio. <br>
-   * ICMS20: valor da base de c·lculo do FCP em operaÁıes com reduÁ„o de BC. <br>
-   * ICMS51: base de c·lculo do FCP nas operaÁıes com diferimento (quando exigido pela UF). <br>
-   * ICMS70: base de c·lculo do FCP relativo ao ICMS prÛprio em operaÁ„o com reduÁ„o de BC e ST. <br>
-   * ICMS90: base de c·lculo do FCP relativo ao ICMS prÛprio no grupo ICMS90.
+   * # n17a/N17b (ICMS10, ICMS20, ICMS51, ICMS70, ICMS90) - vBCFCP. Valor da Base de C√°lculo do FCP. <br>
+   * Ocor.: 1‚Äì1 / Tam.: 13v2 / Tipo: N (quando o grupo FCP estiver presente). <br>
+   * ICMS10: valor da base de c√°lculo do FCP do ICMS pr√≥prio. <br>
+   * ICMS20: valor da base de c√°lculo do FCP em opera√ß√µes com redu√ß√£o de BC. <br>
+   * ICMS51: base de c√°lculo do FCP nas opera√ß√µes com diferimento (quando exigido pela UF). <br>
+   * ICMS70: base de c√°lculo do FCP relativo ao ICMS pr√≥prio em opera√ß√£o com redu√ß√£o de BC e ST. <br>
+   * ICMS90: base de c√°lculo do FCP relativo ao ICMS pr√≥prio no grupo ICMS90.
    *
    * @return the n17a/N17b (ICMS10, ICMS20, ICMS51, ICMS70, ICMS90) - vBCFCP
    */
@@ -1607,13 +1607,13 @@ public class SEFAZICMSVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # n17a/N17b (ICMS10, ICMS20, ICMS51, ICMS70, ICMS90) - vBCFCP. Valor da Base de C·lculo do FCP. <br>
-   * Ocor.: 1ñ1 / Tam.: 13v2 / Tipo: N (quando o grupo FCP estiver presente). <br>
-   * ICMS10: valor da base de c·lculo do FCP do ICMS prÛprio. <br>
-   * ICMS20: valor da base de c·lculo do FCP em operaÁıes com reduÁ„o de BC. <br>
-   * ICMS51: base de c·lculo do FCP nas operaÁıes com diferimento (quando exigido pela UF). <br>
-   * ICMS70: base de c·lculo do FCP relativo ao ICMS prÛprio em operaÁ„o com reduÁ„o de BC e ST. <br>
-   * ICMS90: base de c·lculo do FCP relativo ao ICMS prÛprio no grupo ICMS90.
+   * # n17a/N17b (ICMS10, ICMS20, ICMS51, ICMS70, ICMS90) - vBCFCP. Valor da Base de C√°lculo do FCP. <br>
+   * Ocor.: 1‚Äì1 / Tam.: 13v2 / Tipo: N (quando o grupo FCP estiver presente). <br>
+   * ICMS10: valor da base de c√°lculo do FCP do ICMS pr√≥prio. <br>
+   * ICMS20: valor da base de c√°lculo do FCP em opera√ß√µes com redu√ß√£o de BC. <br>
+   * ICMS51: base de c√°lculo do FCP nas opera√ß√µes com diferimento (quando exigido pela UF). <br>
+   * ICMS70: base de c√°lculo do FCP relativo ao ICMS pr√≥prio em opera√ß√£o com redu√ß√£o de BC e ST. <br>
+   * ICMS90: base de c√°lculo do FCP relativo ao ICMS pr√≥prio no grupo ICMS90.
    *
    * @param vbcFCP the new n17a/N17b (ICMS10, ICMS20, ICMS51, ICMS70, ICMS90) - vBCFCP
    */
@@ -1622,14 +1622,14 @@ public class SEFAZICMSVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # n17b - pFCP. Percentual do ICMS relativo ao Fundo de Combate ‡ Pobreza (FCP). <br>
-   * Ocor.: 1ñ1 / Tam.: 3v2ñ4 / Tipo: N (quando o grupo FCP estiver presente). <br>
-   * ICMS00: percentual aplicado sobre a BC do ICMS para c·lculo do FCP. <br>
+   * # n17b - pFCP. Percentual do ICMS relativo ao Fundo de Combate √† Pobreza (FCP). <br>
+   * Ocor.: 1‚Äì1 / Tam.: 3v2‚Äì4 / Tipo: N (quando o grupo FCP estiver presente). <br>
+   * ICMS00: percentual aplicado sobre a BC do ICMS para c√°lculo do FCP. <br>
    * ICMS10: percentual aplicado sobre vBCFCP e/ou vBCFCPST, conforme o caso. <br>
-   * ICMS20: percentual aplicado sobre a base de c·lculo do FCP em operaÁıes com reduÁ„o de BC. <br>
-   * ICMS51: percentual do FCP aplicado sobre a base de c·lculo do FCP na operaÁ„o com diferimento. <br>
-   * ICMS70: percentual do FCP relativo ao ICMS prÛprio em operaÁ„o com reduÁ„o de BC e ST. <br>
-   * ICMS90: percentual do FCP relativo ao ICMS prÛprio em operaÁıes ìOutrosî.
+   * ICMS20: percentual aplicado sobre a base de c√°lculo do FCP em opera√ß√µes com redu√ß√£o de BC. <br>
+   * ICMS51: percentual do FCP aplicado sobre a base de c√°lculo do FCP na opera√ß√£o com diferimento. <br>
+   * ICMS70: percentual do FCP relativo ao ICMS pr√≥prio em opera√ß√£o com redu√ß√£o de BC e ST. <br>
+   * ICMS90: percentual do FCP relativo ao ICMS pr√≥prio em opera√ß√µes ‚ÄúOutros‚Äù.
    *
    * @return the n17b - pFCP
    */
@@ -1638,14 +1638,14 @@ public class SEFAZICMSVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # n17b - pFCP. Percentual do ICMS relativo ao Fundo de Combate ‡ Pobreza (FCP). <br>
-   * Ocor.: 1ñ1 / Tam.: 3v2ñ4 / Tipo: N (quando o grupo FCP estiver presente). <br>
-   * ICMS00: percentual aplicado sobre a BC do ICMS para c·lculo do FCP. <br>
+   * # n17b - pFCP. Percentual do ICMS relativo ao Fundo de Combate √† Pobreza (FCP). <br>
+   * Ocor.: 1‚Äì1 / Tam.: 3v2‚Äì4 / Tipo: N (quando o grupo FCP estiver presente). <br>
+   * ICMS00: percentual aplicado sobre a BC do ICMS para c√°lculo do FCP. <br>
    * ICMS10: percentual aplicado sobre vBCFCP e/ou vBCFCPST, conforme o caso. <br>
-   * ICMS20: percentual aplicado sobre a base de c·lculo do FCP em operaÁıes com reduÁ„o de BC. <br>
-   * ICMS51: percentual do FCP aplicado sobre a base de c·lculo do FCP na operaÁ„o com diferimento. <br>
-   * ICMS70: percentual do FCP relativo ao ICMS prÛprio em operaÁ„o com reduÁ„o de BC e ST. <br>
-   * ICMS90: percentual do FCP relativo ao ICMS prÛprio em operaÁıes ìOutrosî.
+   * ICMS20: percentual aplicado sobre a base de c√°lculo do FCP em opera√ß√µes com redu√ß√£o de BC. <br>
+   * ICMS51: percentual do FCP aplicado sobre a base de c√°lculo do FCP na opera√ß√£o com diferimento. <br>
+   * ICMS70: percentual do FCP relativo ao ICMS pr√≥prio em opera√ß√£o com redu√ß√£o de BC e ST. <br>
+   * ICMS90: percentual do FCP relativo ao ICMS pr√≥prio em opera√ß√µes ‚ÄúOutros‚Äù.
    *
    * @param pfcp the new n17b - pFCP
    */

@@ -15,7 +15,7 @@ import br.eng.rodrigogml.rfw.orm.dao.annotations.dao.RFWDAOAnnotation;
 /**
  * Grupo Y07 - dup: Parcelas (duplicatas).
  * <p>
- * Ocorre 0-120 vezes dentro do grupo Y01 (cobr). Cada inst‚ncia representa uma parcela da fatura.
+ * Ocorre 0-120 vezes dentro do grupo Y01 (cobr). Cada inst√¢ncia representa uma parcela da fatura.
  */
 @RFWDAOAnnotation(schema = "_RFW.SEFAZ", table = "sefaz_dup")
 public class SEFAZDupVO extends RFWVO {
@@ -29,15 +29,15 @@ public class SEFAZDupVO extends RFWVO {
   private SEFAZCobrVO cobrVO = null;
 
   /**
-   * Y08 - nDup: N˙mero da Parcela. Tipo: C, Tamanho: 1-60, OcorrÍncia: 0-1 (campo opcional).
+   * Y08 - nDup: N√∫mero da Parcela. Tipo: C, Tamanho: 1-60, Ocorr√™ncia: 0-1 (campo opcional).
    * <p>
-   * Recomenda-se numeraÁ„o com 3 algarismos, sequenciais e consecutivos (ex.: "001", "002", "003"...), obrigatÛria a partir de 03/09/2018 conforme NT.
+   * Recomenda-se numera√ß√£o com 3 algarismos, sequenciais e consecutivos (ex.: "001", "002", "003"...), obrigat√≥ria a partir de 03/09/2018 conforme NT.
    */
   @RFWMetaStringField(caption = "nDup", required = false, unique = false, maxLength = 60, minLength = 1, preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
   private String ndup;
 
   /**
-   * Y09 - dVenc: Data de vencimento. Tipo: D (data), Formato: ìAAAA-MM-DDî, OcorrÍncia: 0-1 (campo opcional).
+   * Y09 - dVenc: Data de vencimento. Tipo: D (data), Formato: ‚ÄúAAAA-MM-DD‚Äù, Ocorr√™ncia: 0-1 (campo opcional).
    * <p>
    * As datas de vencimento devem ser informadas em ordem crescente.
    */
@@ -45,7 +45,7 @@ public class SEFAZDupVO extends RFWVO {
   private Date dvenc;
 
   /**
-   * Y10 - vDup: Valor da Parcela. Tipo: N, Tamanho: 13v2, OcorrÍncia: 1-1 (obrigatÛrio na estrutura da parcela).
+   * Y10 - vDup: Valor da Parcela. Tipo: N, Tamanho: 13v2, Ocorr√™ncia: 1-1 (obrigat√≥rio na estrutura da parcela).
    */
   @RFWMetaBigDecimalField(caption = "vDup", required = false, unique = false, maxValue = "", minValue = "", scale = 2, absolute = false)
   private BigDecimal vdup;
@@ -69,29 +69,29 @@ public class SEFAZDupVO extends RFWVO {
   }
 
   /**
-   * # y08 - nDup: N˙mero da Parcela. Tipo: C, Tamanho: 1-60, OcorrÍncia: 0-1 (campo opcional).
+   * # y08 - nDup: N√∫mero da Parcela. Tipo: C, Tamanho: 1-60, Ocorr√™ncia: 0-1 (campo opcional).
    * <p>
-   * Recomenda-se numeraÁ„o com 3 algarismos, sequenciais e consecutivos (ex.: "001", "002", "003"..), obrigatÛria a partir de 03/09/2018 conforme NT.
+   * Recomenda-se numera√ß√£o com 3 algarismos, sequenciais e consecutivos (ex.: "001", "002", "003"..), obrigat√≥ria a partir de 03/09/2018 conforme NT.
    *
-   * @return the y08 - nDup: N˙mero da Parcela
+   * @return the y08 - nDup: N√∫mero da Parcela
    */
   public String getNdup() {
     return ndup;
   }
 
   /**
-   * # y08 - nDup: N˙mero da Parcela. Tipo: C, Tamanho: 1-60, OcorrÍncia: 0-1 (campo opcional).
+   * # y08 - nDup: N√∫mero da Parcela. Tipo: C, Tamanho: 1-60, Ocorr√™ncia: 0-1 (campo opcional).
    * <p>
-   * Recomenda-se numeraÁ„o com 3 algarismos, sequenciais e consecutivos (ex.: "001", "002", "003"..), obrigatÛria a partir de 03/09/2018 conforme NT.
+   * Recomenda-se numera√ß√£o com 3 algarismos, sequenciais e consecutivos (ex.: "001", "002", "003"..), obrigat√≥ria a partir de 03/09/2018 conforme NT.
    *
-   * @param ndup the new y08 - nDup: N˙mero da Parcela
+   * @param ndup the new y08 - nDup: N√∫mero da Parcela
    */
   public void setNdup(String ndup) {
     this.ndup = ndup;
   }
 
   /**
-   * # y09 - dVenc: Data de vencimento. Tipo: D (data), Formato: ìAAAA-MM-DDî, OcorrÍncia: 0-1 (campo opcional).
+   * # y09 - dVenc: Data de vencimento. Tipo: D (data), Formato: ‚ÄúAAAA-MM-DD‚Äù, Ocorr√™ncia: 0-1 (campo opcional).
    * <p>
    * As datas de vencimento devem ser informadas em ordem crescente.
    *
@@ -102,7 +102,7 @@ public class SEFAZDupVO extends RFWVO {
   }
 
   /**
-   * # y09 - dVenc: Data de vencimento. Tipo: D (data), Formato: ìAAAA-MM-DDî, OcorrÍncia: 0-1 (campo opcional).
+   * # y09 - dVenc: Data de vencimento. Tipo: D (data), Formato: ‚ÄúAAAA-MM-DD‚Äù, Ocorr√™ncia: 0-1 (campo opcional).
    * <p>
    * As datas de vencimento devem ser informadas em ordem crescente.
    *
@@ -113,7 +113,7 @@ public class SEFAZDupVO extends RFWVO {
   }
 
   /**
-   * # y10 - vDup: Valor da Parcela. Tipo: N, Tamanho: 13v2, OcorrÍncia: 1-1 (obrigatÛrio na estrutura da parcela).
+   * # y10 - vDup: Valor da Parcela. Tipo: N, Tamanho: 13v2, Ocorr√™ncia: 1-1 (obrigat√≥rio na estrutura da parcela).
    *
    * @return the y10 - vDup: Valor da Parcela
    */
@@ -122,7 +122,7 @@ public class SEFAZDupVO extends RFWVO {
   }
 
   /**
-   * # y10 - vDup: Valor da Parcela. Tipo: N, Tamanho: 13v2, OcorrÍncia: 1-1 (obrigatÛrio na estrutura da parcela).
+   * # y10 - vDup: Valor da Parcela. Tipo: N, Tamanho: 13v2, Ocorr√™ncia: 1-1 (obrigat√≥rio na estrutura da parcela).
    *
    * @param vdup the new y10 - vDup: Valor da Parcela
    */

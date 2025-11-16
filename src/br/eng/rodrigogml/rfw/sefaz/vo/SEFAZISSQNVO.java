@@ -11,8 +11,8 @@ import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_indISS;
 import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_indIncentivo;
 
 /**
- * Description: Informações do ISSQN do item da NF-e (TAG {@code ISSQN}, ID U01).<br>
- * Consolida todos os campos do grupo ISSQN, incluindo base, alíquota, valores, local da ocorrência do fato gerador e indicadores de exigibilidade/incentivo.
+ * Description: InformaÃ§Ãµes do ISSQN do item da NF-e (TAG {@code ISSQN}, ID U01).<br>
+ * Consolida todos os campos do grupo ISSQN, incluindo base, alÃ­quota, valores, local da ocorrÃªncia do fato gerador e indicadores de exigibilidade/incentivo.
  *
  * @author BIS DEVil
  * @since (11 de nov. de 2025)
@@ -24,18 +24,18 @@ public class SEFAZISSQNVO extends RFWVO {
 
   /**
    * ID: U02<br>
-   * Valor da base de cálculo do ISSQN (vBC).<br>
+   * Valor da base de cÃ¡lculo do ISSQN (vBC).<br>
    * Tamanho 13v2.
    */
-  @RFWMetaBigDecimalField(caption = "Base de cálculo ISSQN", required = false, scale = 2, absolute = true, minValue = "0")
+  @RFWMetaBigDecimalField(caption = "Base de cÃ¡lculo ISSQN", required = false, scale = 2, absolute = true, minValue = "0")
   private BigDecimal vBC = null;
 
   /**
    * ID: U03<br>
-   * Alíquota do ISSQN (vAliq), em percentual.<br>
+   * AlÃ­quota do ISSQN (vAliq), em percentual.<br>
    * Tamanho 3v2-4.
    */
-  @RFWMetaBigDecimalField(caption = "Alíquota ISSQN", required = false, scale = 2, scaleMax = 4, absolute = true, minValue = "0")
+  @RFWMetaBigDecimalField(caption = "AlÃ­quota ISSQN", required = false, scale = 2, scaleMax = 4, absolute = true, minValue = "0")
   private BigDecimal vAliq = null;
 
   /**
@@ -48,34 +48,34 @@ public class SEFAZISSQNVO extends RFWVO {
 
   /**
    * ID: U05<br>
-   * Código do município de ocorrência do fato gerador do ISSQN (cMunFG).<br>
-   * Tabela do IBGE, 7 dígitos.
+   * CÃ³digo do municÃ­pio de ocorrÃªncia do fato gerador do ISSQN (cMunFG).<br>
+   * Tabela do IBGE, 7 dÃ­gitos.
    */
-  @RFWMetaStringField(caption = "Município do fato gerador", required = false, maxLength = 7, pattern = "[0-9]{7}")
+  @RFWMetaStringField(caption = "MunicÃ­pio do fato gerador", required = false, maxLength = 7, pattern = "[0-9]{7}")
   private String cMunFG = null;
 
   /**
    * ID: U06<br>
-   * Item da Lista de Serviços (cListServ).<br>
-   * Formato NN.NN (padrão ABRASF).
+   * Item da Lista de ServiÃ§os (cListServ).<br>
+   * Formato NN.NN (padrÃ£o ABRASF).
    */
-  @RFWMetaStringField(caption = "Item da lista de serviços", required = false, maxLength = 5, pattern = "[0-9]{2}\\.[0-9]{2}")
+  @RFWMetaStringField(caption = "Item da lista de serviÃ§os", required = false, maxLength = 5, pattern = "[0-9]{2}\\.[0-9]{2}")
   private String cListServ = null;
 
   /**
    * ID: U07<br>
-   * Valor da dedução para redução da base de cálculo (vDeducao).<br>
+   * Valor da deduÃ§Ã£o para reduÃ§Ã£o da base de cÃ¡lculo (vDeducao).<br>
    * Tamanho 13v2.
    */
-  @RFWMetaBigDecimalField(caption = "Valor da dedução", required = false, scale = 2, absolute = true, minValue = "0")
+  @RFWMetaBigDecimalField(caption = "Valor da deduÃ§Ã£o", required = false, scale = 2, absolute = true, minValue = "0")
   private BigDecimal vDeducao = null;
 
   /**
    * ID: U08<br>
-   * Valor de outras retenções de ISS (vOutro).<br>
+   * Valor de outras retenÃ§Ãµes de ISS (vOutro).<br>
    * Tamanho 13v2.
    */
-  @RFWMetaBigDecimalField(caption = "Outras retenções", required = false, scale = 2, absolute = true, minValue = "0")
+  @RFWMetaBigDecimalField(caption = "Outras retenÃ§Ãµes", required = false, scale = 2, absolute = true, minValue = "0")
   private BigDecimal vOutro = null;
 
   /**
@@ -96,7 +96,7 @@ public class SEFAZISSQNVO extends RFWVO {
 
   /**
    * ID: U11<br>
-   * Valor da retenção de ISS (vISSRet).<br>
+   * Valor da retenÃ§Ã£o de ISS (vISSRet).<br>
    * Tamanho 13v2.
    */
   @RFWMetaBigDecimalField(caption = "ISS retido", required = false, scale = 2, absolute = true, minValue = "0")
@@ -112,34 +112,34 @@ public class SEFAZISSQNVO extends RFWVO {
 
   /**
    * ID: U13<br>
-   * Código do serviço prestado dentro do município (cServico).<br>
-   * Definido pela legislação municipal, tamanho 1-20.
+   * CÃ³digo do serviÃ§o prestado dentro do municÃ­pio (cServico).<br>
+   * Definido pela legislaÃ§Ã£o municipal, tamanho 1-20.
    */
-  @RFWMetaStringField(caption = "Código do serviço", required = false, maxLength = 20)
+  @RFWMetaStringField(caption = "CÃ³digo do serviÃ§o", required = false, maxLength = 20)
   private String cServico = null;
 
   /**
    * ID: U14<br>
-   * Código do município de incidência do imposto (cMun).<br>
-   * Tabela do IBGE, 7 dígitos. Utilizar "9999999" para serviço fora do País.
+   * CÃ³digo do municÃ­pio de incidÃªncia do imposto (cMun).<br>
+   * Tabela do IBGE, 7 dÃ­gitos. Utilizar "9999999" para serviÃ§o fora do PaÃ­s.
    */
-  @RFWMetaStringField(caption = "Município do imposto", required = false, maxLength = 7, pattern = "[0-9]{7}")
+  @RFWMetaStringField(caption = "MunicÃ­pio do imposto", required = false, maxLength = 7, pattern = "[0-9]{7}")
   private String cMun = null;
 
   /**
    * ID: U15<br>
-   * Código do país onde o serviço foi prestado (cPais).<br>
-   * Tabela do BACEN, 4 dígitos. Obrigatório quando cMun = "9999999".
+   * CÃ³digo do paÃ­s onde o serviÃ§o foi prestado (cPais).<br>
+   * Tabela do BACEN, 4 dÃ­gitos. ObrigatÃ³rio quando cMun = "9999999".
    */
-  @RFWMetaStringField(caption = "País do serviço", required = false, maxLength = 4, pattern = "[0-9]{4}")
+  @RFWMetaStringField(caption = "PaÃ­s do serviÃ§o", required = false, maxLength = 4, pattern = "[0-9]{4}")
   private String cPais = null;
 
   /**
    * ID: U16<br>
-   * Número do processo judicial ou administrativo de suspensão da exigibilidade (nProcesso).<br>
+   * NÃºmero do processo judicial ou administrativo de suspensÃ£o da exigibilidade (nProcesso).<br>
    * Tamanho 1-30.
    */
-  @RFWMetaStringField(caption = "Processo de suspensão", required = false, maxLength = 30)
+  @RFWMetaStringField(caption = "Processo de suspensÃ£o", required = false, maxLength = 30)
   private String nProcesso = null;
 
   /**
@@ -152,11 +152,11 @@ public class SEFAZISSQNVO extends RFWVO {
 
   /**
    * # iD: U02<br>
-   * Valor da base de cálculo do ISSQN (vBC).<br>
+   * Valor da base de cÃ¡lculo do ISSQN (vBC).<br>
    * Tamanho 13v2.
    *
    * @return the iD: U02<br>
-   *         Valor da base de cálculo do ISSQN (vBC)
+   *         Valor da base de cÃ¡lculo do ISSQN (vBC)
    */
   public BigDecimal getVBC() {
     return vBC;
@@ -164,11 +164,11 @@ public class SEFAZISSQNVO extends RFWVO {
 
   /**
    * # iD: U02<br>
-   * Valor da base de cálculo do ISSQN (vBC).<br>
+   * Valor da base de cÃ¡lculo do ISSQN (vBC).<br>
    * Tamanho 13v2.
    *
    * @param vBC the new iD: U02<br>
-   *          Valor da base de cálculo do ISSQN (vBC)
+   *          Valor da base de cÃ¡lculo do ISSQN (vBC)
    */
   public void setVBC(BigDecimal vBC) {
     this.vBC = vBC;
@@ -176,11 +176,11 @@ public class SEFAZISSQNVO extends RFWVO {
 
   /**
    * # iD: U03<br>
-   * Alíquota do ISSQN (vAliq), em percentual.<br>
+   * AlÃ­quota do ISSQN (vAliq), em percentual.<br>
    * Tamanho 3v2-4.
    *
    * @return the iD: U03<br>
-   *         Alíquota do ISSQN (vAliq), em percentual
+   *         AlÃ­quota do ISSQN (vAliq), em percentual
    */
   public BigDecimal getVAliq() {
     return vAliq;
@@ -188,11 +188,11 @@ public class SEFAZISSQNVO extends RFWVO {
 
   /**
    * # iD: U03<br>
-   * Alíquota do ISSQN (vAliq), em percentual.<br>
+   * AlÃ­quota do ISSQN (vAliq), em percentual.<br>
    * Tamanho 3v2-4.
    *
    * @param vAliq the new iD: U03<br>
-   *          Alíquota do ISSQN (vAliq), em percentual
+   *          AlÃ­quota do ISSQN (vAliq), em percentual
    */
   public void setVAliq(BigDecimal vAliq) {
     this.vAliq = vAliq;
@@ -224,11 +224,11 @@ public class SEFAZISSQNVO extends RFWVO {
 
   /**
    * # iD: U05<br>
-   * Código do município de ocorrência do fato gerador do ISSQN (cMunFG).<br>
-   * Tabela do IBGE, 7 dígitos.
+   * CÃ³digo do municÃ­pio de ocorrÃªncia do fato gerador do ISSQN (cMunFG).<br>
+   * Tabela do IBGE, 7 dÃ­gitos.
    *
    * @return the iD: U05<br>
-   *         Código do município de ocorrência do fato gerador do ISSQN (cMunFG)
+   *         CÃ³digo do municÃ­pio de ocorrÃªncia do fato gerador do ISSQN (cMunFG)
    */
   public String getCMunFG() {
     return cMunFG;
@@ -236,11 +236,11 @@ public class SEFAZISSQNVO extends RFWVO {
 
   /**
    * # iD: U05<br>
-   * Código do município de ocorrência do fato gerador do ISSQN (cMunFG).<br>
-   * Tabela do IBGE, 7 dígitos.
+   * CÃ³digo do municÃ­pio de ocorrÃªncia do fato gerador do ISSQN (cMunFG).<br>
+   * Tabela do IBGE, 7 dÃ­gitos.
    *
    * @param cMunFG the new iD: U05<br>
-   *          Código do município de ocorrência do fato gerador do ISSQN (cMunFG)
+   *          CÃ³digo do municÃ­pio de ocorrÃªncia do fato gerador do ISSQN (cMunFG)
    */
   public void setCMunFG(String cMunFG) {
     this.cMunFG = cMunFG;
@@ -248,11 +248,11 @@ public class SEFAZISSQNVO extends RFWVO {
 
   /**
    * # iD: U06<br>
-   * Item da Lista de Serviços (cListServ).<br>
-   * Formato NN.NN (padrão ABRASF).
+   * Item da Lista de ServiÃ§os (cListServ).<br>
+   * Formato NN.NN (padrÃ£o ABRASF).
    *
    * @return the iD: U06<br>
-   *         Item da Lista de Serviços (cListServ)
+   *         Item da Lista de ServiÃ§os (cListServ)
    */
   public String getCListServ() {
     return cListServ;
@@ -260,11 +260,11 @@ public class SEFAZISSQNVO extends RFWVO {
 
   /**
    * # iD: U06<br>
-   * Item da Lista de Serviços (cListServ).<br>
-   * Formato NN.NN (padrão ABRASF).
+   * Item da Lista de ServiÃ§os (cListServ).<br>
+   * Formato NN.NN (padrÃ£o ABRASF).
    *
    * @param cListServ the new iD: U06<br>
-   *          Item da Lista de Serviços (cListServ)
+   *          Item da Lista de ServiÃ§os (cListServ)
    */
   public void setCListServ(String cListServ) {
     this.cListServ = cListServ;
@@ -272,11 +272,11 @@ public class SEFAZISSQNVO extends RFWVO {
 
   /**
    * # iD: U07<br>
-   * Valor da dedução para redução da base de cálculo (vDeducao).<br>
+   * Valor da deduÃ§Ã£o para reduÃ§Ã£o da base de cÃ¡lculo (vDeducao).<br>
    * Tamanho 13v2.
    *
    * @return the iD: U07<br>
-   *         Valor da dedução para redução da base de cálculo (vDeducao)
+   *         Valor da deduÃ§Ã£o para reduÃ§Ã£o da base de cÃ¡lculo (vDeducao)
    */
   public BigDecimal getVDeducao() {
     return vDeducao;
@@ -284,11 +284,11 @@ public class SEFAZISSQNVO extends RFWVO {
 
   /**
    * # iD: U07<br>
-   * Valor da dedução para redução da base de cálculo (vDeducao).<br>
+   * Valor da deduÃ§Ã£o para reduÃ§Ã£o da base de cÃ¡lculo (vDeducao).<br>
    * Tamanho 13v2.
    *
    * @param vDeducao the new iD: U07<br>
-   *          Valor da dedução para redução da base de cálculo (vDeducao)
+   *          Valor da deduÃ§Ã£o para reduÃ§Ã£o da base de cÃ¡lculo (vDeducao)
    */
   public void setVDeducao(BigDecimal vDeducao) {
     this.vDeducao = vDeducao;
@@ -296,11 +296,11 @@ public class SEFAZISSQNVO extends RFWVO {
 
   /**
    * # iD: U08<br>
-   * Valor de outras retenções de ISS (vOutro).<br>
+   * Valor de outras retenÃ§Ãµes de ISS (vOutro).<br>
    * Tamanho 13v2.
    *
    * @return the iD: U08<br>
-   *         Valor de outras retenções de ISS (vOutro)
+   *         Valor de outras retenÃ§Ãµes de ISS (vOutro)
    */
   public BigDecimal getVOutro() {
     return vOutro;
@@ -308,11 +308,11 @@ public class SEFAZISSQNVO extends RFWVO {
 
   /**
    * # iD: U08<br>
-   * Valor de outras retenções de ISS (vOutro).<br>
+   * Valor de outras retenÃ§Ãµes de ISS (vOutro).<br>
    * Tamanho 13v2.
    *
    * @param vOutro the new iD: U08<br>
-   *          Valor de outras retenções de ISS (vOutro)
+   *          Valor de outras retenÃ§Ãµes de ISS (vOutro)
    */
   public void setVOutro(BigDecimal vOutro) {
     this.vOutro = vOutro;
@@ -368,11 +368,11 @@ public class SEFAZISSQNVO extends RFWVO {
 
   /**
    * # iD: U11<br>
-   * Valor da retenção de ISS (vISSRet).<br>
+   * Valor da retenÃ§Ã£o de ISS (vISSRet).<br>
    * Tamanho 13v2.
    *
    * @return the iD: U11<br>
-   *         Valor da retenção de ISS (vISSRet)
+   *         Valor da retenÃ§Ã£o de ISS (vISSRet)
    */
   public BigDecimal getVISSRet() {
     return vISSRet;
@@ -380,11 +380,11 @@ public class SEFAZISSQNVO extends RFWVO {
 
   /**
    * # iD: U11<br>
-   * Valor da retenção de ISS (vISSRet).<br>
+   * Valor da retenÃ§Ã£o de ISS (vISSRet).<br>
    * Tamanho 13v2.
    *
    * @param vISSRet the new iD: U11<br>
-   *          Valor da retenção de ISS (vISSRet)
+   *          Valor da retenÃ§Ã£o de ISS (vISSRet)
    */
   public void setVISSRet(BigDecimal vISSRet) {
     this.vISSRet = vISSRet;
@@ -416,11 +416,11 @@ public class SEFAZISSQNVO extends RFWVO {
 
   /**
    * # iD: U13<br>
-   * Código do serviço prestado dentro do município (cServico).<br>
-   * Definido pela legislação municipal, tamanho 1-20.
+   * CÃ³digo do serviÃ§o prestado dentro do municÃ­pio (cServico).<br>
+   * Definido pela legislaÃ§Ã£o municipal, tamanho 1-20.
    *
    * @return the iD: U13<br>
-   *         Código do serviço prestado dentro do município (cServico)
+   *         CÃ³digo do serviÃ§o prestado dentro do municÃ­pio (cServico)
    */
   public String getCServico() {
     return cServico;
@@ -428,11 +428,11 @@ public class SEFAZISSQNVO extends RFWVO {
 
   /**
    * # iD: U13<br>
-   * Código do serviço prestado dentro do município (cServico).<br>
-   * Definido pela legislação municipal, tamanho 1-20.
+   * CÃ³digo do serviÃ§o prestado dentro do municÃ­pio (cServico).<br>
+   * Definido pela legislaÃ§Ã£o municipal, tamanho 1-20.
    *
    * @param cServico the new iD: U13<br>
-   *          Código do serviço prestado dentro do município (cServico)
+   *          CÃ³digo do serviÃ§o prestado dentro do municÃ­pio (cServico)
    */
   public void setCServico(String cServico) {
     this.cServico = cServico;
@@ -440,11 +440,11 @@ public class SEFAZISSQNVO extends RFWVO {
 
   /**
    * # iD: U14<br>
-   * Código do município de incidência do imposto (cMun).<br>
-   * Tabela do IBGE, 7 dígitos. Utilizar "9999999" para serviço fora do País.
+   * CÃ³digo do municÃ­pio de incidÃªncia do imposto (cMun).<br>
+   * Tabela do IBGE, 7 dÃ­gitos. Utilizar "9999999" para serviÃ§o fora do PaÃ­s.
    *
    * @return the iD: U14<br>
-   *         Código do município de incidência do imposto (cMun)
+   *         CÃ³digo do municÃ­pio de incidÃªncia do imposto (cMun)
    */
   public String getCMun() {
     return cMun;
@@ -452,11 +452,11 @@ public class SEFAZISSQNVO extends RFWVO {
 
   /**
    * # iD: U14<br>
-   * Código do município de incidência do imposto (cMun).<br>
-   * Tabela do IBGE, 7 dígitos. Utilizar "9999999" para serviço fora do País.
+   * CÃ³digo do municÃ­pio de incidÃªncia do imposto (cMun).<br>
+   * Tabela do IBGE, 7 dÃ­gitos. Utilizar "9999999" para serviÃ§o fora do PaÃ­s.
    *
    * @param cMun the new iD: U14<br>
-   *          Código do município de incidência do imposto (cMun)
+   *          CÃ³digo do municÃ­pio de incidÃªncia do imposto (cMun)
    */
   public void setCMun(String cMun) {
     this.cMun = cMun;
@@ -464,11 +464,11 @@ public class SEFAZISSQNVO extends RFWVO {
 
   /**
    * # iD: U15<br>
-   * Código do país onde o serviço foi prestado (cPais).<br>
-   * Tabela do BACEN, 4 dígitos. Obrigatório quando cMun = "9999999".
+   * CÃ³digo do paÃ­s onde o serviÃ§o foi prestado (cPais).<br>
+   * Tabela do BACEN, 4 dÃ­gitos. ObrigatÃ³rio quando cMun = "9999999".
    *
    * @return the iD: U15<br>
-   *         Código do país onde o serviço foi prestado (cPais)
+   *         CÃ³digo do paÃ­s onde o serviÃ§o foi prestado (cPais)
    */
   public String getCPais() {
     return cPais;
@@ -476,11 +476,11 @@ public class SEFAZISSQNVO extends RFWVO {
 
   /**
    * # iD: U15<br>
-   * Código do país onde o serviço foi prestado (cPais).<br>
-   * Tabela do BACEN, 4 dígitos. Obrigatório quando cMun = "9999999".
+   * CÃ³digo do paÃ­s onde o serviÃ§o foi prestado (cPais).<br>
+   * Tabela do BACEN, 4 dÃ­gitos. ObrigatÃ³rio quando cMun = "9999999".
    *
    * @param cPais the new iD: U15<br>
-   *          Código do país onde o serviço foi prestado (cPais)
+   *          CÃ³digo do paÃ­s onde o serviÃ§o foi prestado (cPais)
    */
   public void setCPais(String cPais) {
     this.cPais = cPais;
@@ -488,11 +488,11 @@ public class SEFAZISSQNVO extends RFWVO {
 
   /**
    * # iD: U16<br>
-   * Número do processo judicial ou administrativo de suspensão da exigibilidade (nProcesso).<br>
+   * NÃºmero do processo judicial ou administrativo de suspensÃ£o da exigibilidade (nProcesso).<br>
    * Tamanho 1-30.
    *
    * @return the iD: U16<br>
-   *         Número do processo judicial ou administrativo de suspensão da exigibilidade (nProcesso)
+   *         NÃºmero do processo judicial ou administrativo de suspensÃ£o da exigibilidade (nProcesso)
    */
   public String getNProcesso() {
     return nProcesso;
@@ -500,11 +500,11 @@ public class SEFAZISSQNVO extends RFWVO {
 
   /**
    * # iD: U16<br>
-   * Número do processo judicial ou administrativo de suspensão da exigibilidade (nProcesso).<br>
+   * NÃºmero do processo judicial ou administrativo de suspensÃ£o da exigibilidade (nProcesso).<br>
    * Tamanho 1-30.
    *
    * @param nProcesso the new iD: U16<br>
-   *          Número do processo judicial ou administrativo de suspensão da exigibilidade (nProcesso)
+   *          NÃºmero do processo judicial ou administrativo de suspensÃ£o da exigibilidade (nProcesso)
    */
   public void setNProcesso(String nProcesso) {
     this.nProcesso = nProcesso;

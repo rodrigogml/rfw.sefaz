@@ -16,7 +16,7 @@ import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_tPag;
  * <p>
  * Ocorre 1-100 dentro do grupo YA01 (pag).
  * <p>
- * Representa um meio de pagamento (tPag), com valor (vPag) e, opcionalmente, detalhes de cartão (card) quando aplicável.
+ * Representa um meio de pagamento (tPag), com valor (vPag) e, opcionalmente, detalhes de cartÃ£o (card) quando aplicÃ¡vel.
  */
 @RFWDAOAnnotation(schema = "_RFW.SEFAZ", table = "sefaz_detpag")
 public class SEFAZDetPagVO extends RFWVO {
@@ -30,27 +30,27 @@ public class SEFAZDetPagVO extends RFWVO {
   private SEFAZPagVO pagVO = null;
 
   /**
-   * YA04 - card: Grupo de Cartões. Ocorrência: 0-1.
+   * YA04 - card: Grupo de CartÃµes. OcorrÃªncia: 0-1.
    * <p>
-   * Informado quando o meio de pagamento (tPag) envolver cartão de crédito ou débito.
+   * Informado quando o meio de pagamento (tPag) envolver cartÃ£o de crÃ©dito ou dÃ©bito.
    */
   @RFWMetaRelationshipField(caption = "Card", relationship = RelationshipTypes.COMPOSITION, required = false, column = "idsefaz_detpag")
   private SEFAZCardVO card;
 
   /**
-   * YA01b - indPag: Indicador da Forma de Pagamento. Tipo: N, Tamanho: 1, Ocorrência: 0-1 (campo opcional). Valores: 0 = Pagamento à Vista, 1 = Pagamento à Prazo.
+   * YA01b - indPag: Indicador da Forma de Pagamento. Tipo: N, Tamanho: 1, OcorrÃªncia: 0-1 (campo opcional). Valores: 0 = Pagamento Ã  Vista, 1 = Pagamento Ã  Prazo.
    */
   @RFWMetaEnumField(caption = "indPag", required = false)
   private SEFAZ_indPag indPag;
 
   /**
-   * YA02 - tPag: Meio de pagamento. Tipo: N, Tamanho: 2, Ocorrência: 1-1 (obrigatório na estrutura). Ex.: 01=Dinheiro, 03=Cartão de Crédito, 17=PIX, 90=Sem pagamento, etc.
+   * YA02 - tPag: Meio de pagamento. Tipo: N, Tamanho: 2, OcorrÃªncia: 1-1 (obrigatÃ³rio na estrutura). Ex.: 01=Dinheiro, 03=CartÃ£o de CrÃ©dito, 17=PIX, 90=Sem pagamento, etc.
    */
   @RFWMetaEnumField(caption = "tPag", required = false)
   private SEFAZ_tPag tpag;
 
   /**
-   * YA03 - vPag: Valor do Pagamento. Tipo: N, Tamanho: 13v2, Ocorrência: 1-1 (obrigatório na estrutura).
+   * YA03 - vPag: Valor do Pagamento. Tipo: N, Tamanho: 13v2, OcorrÃªncia: 1-1 (obrigatÃ³rio na estrutura).
    */
   @RFWMetaBigDecimalField(caption = "vPag", required = false, unique = false, maxValue = "", minValue = "", scale = 2, absolute = false)
   private BigDecimal vpag;

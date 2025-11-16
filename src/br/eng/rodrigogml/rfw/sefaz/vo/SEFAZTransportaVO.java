@@ -25,43 +25,43 @@ public class SEFAZTransportaVO extends RFWVO {
   private SEFAZTranspVO transpVO = null;
 
   /**
-   * X04 - CNPJ: CNPJ do Transportador. Tipo: N, Tamanho: 14, OcorrÍncia: 0-1. Preencher com zeros n„o significativos.
+   * X04 - CNPJ: CNPJ do Transportador. Tipo: N, Tamanho: 14, Ocorr√™ncia: 0-1. Preencher com zeros n√£o significativos.
    */
   @RFWMetaStringCNPJField(caption = "CNPJ", required = false, unique = false)
   private String cnpj;
 
   /**
-   * X05 - CPF: CPF do Transportador. Tipo: N, Tamanho: 11, OcorrÍncia: 0-1.
+   * X05 - CPF: CPF do Transportador. Tipo: N, Tamanho: 11, Ocorr√™ncia: 0-1.
    */
   @RFWMetaStringCPFField(caption = "CPF", required = false, unique = false)
   private String cpf;
 
   /**
-   * X06 - xNome: Raz„o Social ou nome. Tipo: C, Tamanho: 2-60, OcorrÍncia: 0-1.
+   * X06 - xNome: Raz√£o Social ou nome. Tipo: C, Tamanho: 2-60, Ocorr√™ncia: 0-1.
    */
   @RFWMetaStringField(caption = "xNome", required = false, unique = false, maxLength = 60, minLength = 2, preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
   private String xnome;
 
   /**
-   * X07 - IE: InscriÁ„o Estadual do Transportador. Tipo: C, Tamanho: 2-14, OcorrÍncia: 0-1. Informar ìISENTOî se isento. A UF deve ser informada se informada uma IE.
+   * X07 - IE: Inscri√ß√£o Estadual do Transportador. Tipo: C, Tamanho: 2-14, Ocorr√™ncia: 0-1. Informar ‚ÄúISENTO‚Äù se isento. A UF deve ser informada se informada uma IE.
    */
   @RFWMetaStringIEField(caption = "IE", required = false, unique = false)
   private String ie;
 
   /**
-   * X08 - xEnder: EndereÁo completo. Tipo: C, Tamanho: 1-60, OcorrÍncia: 0-1.
+   * X08 - xEnder: Endere√ßo completo. Tipo: C, Tamanho: 1-60, Ocorr√™ncia: 0-1.
    */
   @RFWMetaStringField(caption = "xEnder", required = false, unique = false, maxLength = 60, minLength = 1, preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
   private String xender;
 
   /**
-   * X09 - xMun: Nome do municÌpio. Tipo: C, Tamanho: 1-60, OcorrÍncia: 0-1.
+   * X09 - xMun: Nome do munic√≠pio. Tipo: C, Tamanho: 1-60, Ocorr√™ncia: 0-1.
    */
   @RFWMetaStringField(caption = "xMun", required = false, unique = false, maxLength = 60, minLength = 1, preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
   private String xmun;
 
   /**
-   * X10 - UF: Sigla da UF. Tipo: C, Tamanho: 2, OcorrÍncia: 0-1. Informar "EX" para exterior.
+   * X10 - UF: Sigla da UF. Tipo: C, Tamanho: 2, Ocorr√™ncia: 0-1. Informar "EX" para exterior.
    */
   @RFWMetaStringField(caption = "UF", required = false, unique = false, maxLength = 2, minLength = 2, preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
   private String uf;
@@ -85,7 +85,7 @@ public class SEFAZTransportaVO extends RFWVO {
   }
 
   /**
-   * # x04 - CNPJ: CNPJ do Transportador. Tipo: N, Tamanho: 14, OcorrÍncia: 0-1. Preencher com zeros n„o significativos.
+   * # x04 - CNPJ: CNPJ do Transportador. Tipo: N, Tamanho: 14, Ocorr√™ncia: 0-1. Preencher com zeros n√£o significativos.
    *
    * @return the x04 - CNPJ: CNPJ do Transportador
    */
@@ -94,7 +94,7 @@ public class SEFAZTransportaVO extends RFWVO {
   }
 
   /**
-   * # x04 - CNPJ: CNPJ do Transportador. Tipo: N, Tamanho: 14, OcorrÍncia: 0-1. Preencher com zeros n„o significativos.
+   * # x04 - CNPJ: CNPJ do Transportador. Tipo: N, Tamanho: 14, Ocorr√™ncia: 0-1. Preencher com zeros n√£o significativos.
    *
    * @param cnpj the new x04 - CNPJ: CNPJ do Transportador
    */
@@ -103,7 +103,7 @@ public class SEFAZTransportaVO extends RFWVO {
   }
 
   /**
-   * # x05 - CPF: CPF do Transportador. Tipo: N, Tamanho: 11, OcorrÍncia: 0-1.
+   * # x05 - CPF: CPF do Transportador. Tipo: N, Tamanho: 11, Ocorr√™ncia: 0-1.
    *
    * @return the x05 - CPF: CPF do Transportador
    */
@@ -112,7 +112,7 @@ public class SEFAZTransportaVO extends RFWVO {
   }
 
   /**
-   * # x05 - CPF: CPF do Transportador. Tipo: N, Tamanho: 11, OcorrÍncia: 0-1.
+   * # x05 - CPF: CPF do Transportador. Tipo: N, Tamanho: 11, Ocorr√™ncia: 0-1.
    *
    * @param cpf the new x05 - CPF: CPF do Transportador
    */
@@ -121,79 +121,79 @@ public class SEFAZTransportaVO extends RFWVO {
   }
 
   /**
-   * # x06 - xNome: Raz„o Social ou nome. Tipo: C, Tamanho: 2-60, OcorrÍncia: 0-1.
+   * # x06 - xNome: Raz√£o Social ou nome. Tipo: C, Tamanho: 2-60, Ocorr√™ncia: 0-1.
    *
-   * @return the x06 - xNome: Raz„o Social ou nome
+   * @return the x06 - xNome: Raz√£o Social ou nome
    */
   public String getXnome() {
     return xnome;
   }
 
   /**
-   * # x06 - xNome: Raz„o Social ou nome. Tipo: C, Tamanho: 2-60, OcorrÍncia: 0-1.
+   * # x06 - xNome: Raz√£o Social ou nome. Tipo: C, Tamanho: 2-60, Ocorr√™ncia: 0-1.
    *
-   * @param xnome the new x06 - xNome: Raz„o Social ou nome
+   * @param xnome the new x06 - xNome: Raz√£o Social ou nome
    */
   public void setXnome(String xnome) {
     this.xnome = xnome;
   }
 
   /**
-   * # x07 - IE: InscriÁ„o Estadual do Transportador. Tipo: C, Tamanho: 2-14, OcorrÍncia: 0-1. Informar ìISENTOî se isento. A UF deve ser informada se informada uma IE.
+   * # x07 - IE: Inscri√ß√£o Estadual do Transportador. Tipo: C, Tamanho: 2-14, Ocorr√™ncia: 0-1. Informar ‚ÄúISENTO‚Äù se isento. A UF deve ser informada se informada uma IE.
    *
-   * @return the x07 - IE: InscriÁ„o Estadual do Transportador
+   * @return the x07 - IE: Inscri√ß√£o Estadual do Transportador
    */
   public String getIe() {
     return ie;
   }
 
   /**
-   * # x07 - IE: InscriÁ„o Estadual do Transportador. Tipo: C, Tamanho: 2-14, OcorrÍncia: 0-1. Informar ìISENTOî se isento. A UF deve ser informada se informada uma IE.
+   * # x07 - IE: Inscri√ß√£o Estadual do Transportador. Tipo: C, Tamanho: 2-14, Ocorr√™ncia: 0-1. Informar ‚ÄúISENTO‚Äù se isento. A UF deve ser informada se informada uma IE.
    *
-   * @param ie the new x07 - IE: InscriÁ„o Estadual do Transportador
+   * @param ie the new x07 - IE: Inscri√ß√£o Estadual do Transportador
    */
   public void setIe(String ie) {
     this.ie = ie;
   }
 
   /**
-   * # x08 - xEnder: EndereÁo completo. Tipo: C, Tamanho: 1-60, OcorrÍncia: 0-1.
+   * # x08 - xEnder: Endere√ßo completo. Tipo: C, Tamanho: 1-60, Ocorr√™ncia: 0-1.
    *
-   * @return the x08 - xEnder: EndereÁo completo
+   * @return the x08 - xEnder: Endere√ßo completo
    */
   public String getXender() {
     return xender;
   }
 
   /**
-   * # x08 - xEnder: EndereÁo completo. Tipo: C, Tamanho: 1-60, OcorrÍncia: 0-1.
+   * # x08 - xEnder: Endere√ßo completo. Tipo: C, Tamanho: 1-60, Ocorr√™ncia: 0-1.
    *
-   * @param xender the new x08 - xEnder: EndereÁo completo
+   * @param xender the new x08 - xEnder: Endere√ßo completo
    */
   public void setXender(String xender) {
     this.xender = xender;
   }
 
   /**
-   * # x09 - xMun: Nome do municÌpio. Tipo: C, Tamanho: 1-60, OcorrÍncia: 0-1.
+   * # x09 - xMun: Nome do munic√≠pio. Tipo: C, Tamanho: 1-60, Ocorr√™ncia: 0-1.
    *
-   * @return the x09 - xMun: Nome do municÌpio
+   * @return the x09 - xMun: Nome do munic√≠pio
    */
   public String getXmun() {
     return xmun;
   }
 
   /**
-   * # x09 - xMun: Nome do municÌpio. Tipo: C, Tamanho: 1-60, OcorrÍncia: 0-1.
+   * # x09 - xMun: Nome do munic√≠pio. Tipo: C, Tamanho: 1-60, Ocorr√™ncia: 0-1.
    *
-   * @param xmun the new x09 - xMun: Nome do municÌpio
+   * @param xmun the new x09 - xMun: Nome do munic√≠pio
    */
   public void setXmun(String xmun) {
     this.xmun = xmun;
   }
 
   /**
-   * # x10 - UF: Sigla da UF. Tipo: C, Tamanho: 2, OcorrÍncia: 0-1. Informar "EX" para exterior.
+   * # x10 - UF: Sigla da UF. Tipo: C, Tamanho: 2, Ocorr√™ncia: 0-1. Informar "EX" para exterior.
    *
    * @return the x10 - UF: Sigla da UF
    */
@@ -202,7 +202,7 @@ public class SEFAZTransportaVO extends RFWVO {
   }
 
   /**
-   * # x10 - UF: Sigla da UF. Tipo: C, Tamanho: 2, OcorrÍncia: 0-1. Informar "EX" para exterior.
+   * # x10 - UF: Sigla da UF. Tipo: C, Tamanho: 2, Ocorr√™ncia: 0-1. Informar "EX" para exterior.
    *
    * @param uf the new x10 - UF: Sigla da UF
    */

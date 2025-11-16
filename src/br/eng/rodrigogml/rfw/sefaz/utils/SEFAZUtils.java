@@ -37,7 +37,7 @@ import xsdobjects.consStatServ400.TConsStatServ;
 import xsdobjects.enviNFe400.TEnviNFe;
 
 /**
- * Description: Esta classe contÈm mÈtodos utilit·rios para processar e trabalhar com o XML (ou objeto) da NFe.<br>
+ * Description: Esta classe cont√©m m√©todos utilit√°rios para processar e trabalhar com o XML (ou objeto) da NFe.<br>
  *
  * @author Rodrigo GML
  * @since 1.0.0 (17 de ago. de 2023)
@@ -46,13 +46,13 @@ import xsdobjects.enviNFe400.TEnviNFe;
 public class SEFAZUtils {
 
   /**
-   * Construtor privado para garantir mÈtodos exclusivamente est·ticos.
+   * Construtor privado para garantir m√©todos exclusivamente est√°ticos.
    */
   public SEFAZUtils() {
   }
 
   /**
-   * Faz o parser de um XML convertendo-o em objeto compatÌvel utilizando o Unmarshaller do JAXB.
+   * Faz o parser de um XML convertendo-o em objeto compat√≠vel utilizando o Unmarshaller do JAXB.
    *
    * @param xml XML para ser lido.
    * @param rootClass Classe do objeto que repreta a tag rais do XML.
@@ -73,7 +73,7 @@ public class SEFAZUtils {
       if (matcher.find()) {
         xml = matcher.group(1);
       } else {
-        // Se n„o encontrou a tag fragment, utiliza o conte˙do recebido;
+        // Se n√£o encontrou a tag fragment, utiliza o conte√∫do recebido;
       }
 
       Object element = um.unmarshal(new StringReader(xml));
@@ -91,8 +91,8 @@ public class SEFAZUtils {
    * Converte um objeto em XML utilizando o Marshal do JAXB.
    *
    * @param root Objecto raiz para ser serializado em XML.
-   * @return String xml representando o conte˙do do objeto sem formataÁ„o.
-   * @throws RFWException LanÁado em caso de falha ou dados inv·lidos.
+   * @return String xml representando o conte√∫do do objeto sem formata√ß√£o.
+   * @throws RFWException Lan√ßado em caso de falha ou dados inv√°lidos.
    */
   public static String writeXMLFromObject(Object root) throws RFWException {
     PreProcess.requiredNonNull(root);
@@ -109,10 +109,10 @@ public class SEFAZUtils {
   }
 
   /**
-   * Monta o objeto de mensagem para o serviÁo nfeRetAutorizacao utilizando o layout v4.00 a partir do n˙mero do recibo de consulta.
+   * Monta o objeto de mensagem para o servi√ßo nfeRetAutorizacao utilizando o layout v4.00 a partir do n√∫mero do recibo de consulta.
    *
    * @param env Ambiente a ser consultado
-   * @param nRec N˙mero do recbido a ser consultado, obtido durente a chamada de AutorizaÁ„oLote.
+   * @param nRec N√∫mero do recbido a ser consultado, obtido durente a chamada de Autoriza√ß√£oLote.
    * @return
    * @throws RFWException
    */
@@ -125,7 +125,7 @@ public class SEFAZUtils {
   }
 
   /**
-   * Monta o objeto de mensagem utilizado no serviÁo "NfeStatusServicoNF".<Br>
+   * Monta o objeto de mensagem utilizado no servi√ßo "NfeStatusServicoNF".<Br>
    *
    * @param env Ambiente a ser consultado
    * @param ws Servidor de WebService a ser consultado
@@ -142,8 +142,8 @@ public class SEFAZUtils {
   }
 
   /**
-   * Monta o objeto de mensagem utilizado no serviÁo "NfeConsultaCadastro" a partir dos XML da NFe<Br>
-   * Apenas um dos par‚metros deve ser informado. Ao informar m˙ltipls apenas um deles ser· utilizado, na mesma ordem de preferÍncia em que est„o definidos na assinatura do mÈtodo.
+   * Monta o objeto de mensagem utilizado no servi√ßo "NfeConsultaCadastro" a partir dos XML da NFe<Br>
+   * Apenas um dos par√¢metros deve ser informado. Ao informar m√∫ltipls apenas um deles ser√° utilizado, na mesma ordem de prefer√™ncia em que est√£o definidos na assinatura do m√©todo.
    *
    * @param ws Servidor de WebService a ser consultado
    * @param cpf CPF a ser consultado.
@@ -170,10 +170,10 @@ public class SEFAZUtils {
 
   /**
    * Faz a leitura de um XML para o objeto {@link TNfeProc}<br>
-   * Este mÈtodo È apenas um facilitador de chamada do mÈtodo {@link #readTNfeProcXML(String)}.<br>
+   * Este m√©todo √© apenas um facilitador de chamada do m√©todo {@link #readTNfeProcXML(String)}.<br>
    *
    * @param xml XML a ser lido
-   * @return objeto com o conte˙do do XML
+   * @return objeto com o conte√∫do do XML
    * @throws RFWException
    */
   public static TNfeProc readTNfeProcXML(String xml) throws RFWException {
@@ -181,13 +181,13 @@ public class SEFAZUtils {
   }
 
   /**
-   * Extrai o valor da vers„o da tag &ltnfeProc&gt; encontrada no XML.<br>
-   * Procura o valor utilizando express„o regular, sem realizar qualquer parser ou convers„o do XML, o que tente a ser mais r·pido.<Br>
-   * O objetivo deste mÈtodo È ajudar a identificar a vers„o do layout sem passar por processos mais lentos de parser do XML.<Br>
-   * A implementaÁ„o leva em conta que a tag pode estar em qualquer parte do XML (contendo ou n„o cabeÁalhos ou tags pais), mas que a tag seja ˙nica. Em caso de conter v·rias, retorna o valor da primeira encontrada.
+   * Extrai o valor da vers√£o da tag &ltnfeProc&gt; encontrada no XML.<br>
+   * Procura o valor utilizando express√£o regular, sem realizar qualquer parser ou convers√£o do XML, o que tente a ser mais r√°pido.<Br>
+   * O objetivo deste m√©todo √© ajudar a identificar a vers√£o do layout sem passar por processos mais lentos de parser do XML.<Br>
+   * A implementa√ß√£o leva em conta que a tag pode estar em qualquer parte do XML (contendo ou n√£o cabe√ßalhos ou tags pais), mas que a tag seja √∫nica. Em caso de conter v√°rias, retorna o valor da primeira encontrada.
    *
    * @param xml XML a ser ser analisado.
-   * @return valor do atributo versao se a tag for encontrada, ou null caso a tag n„o seja encontrada.
+   * @return valor do atributo versao se a tag for encontrada, ou null caso a tag n√£o seja encontrada.
    */
   public static String extractNFeProcVersion(String xml) {
     Pattern pattern = Pattern.compile("<nfeProc[^>]+versao=\"([^\"]+)\"");
@@ -202,12 +202,12 @@ public class SEFAZUtils {
 
   /**
    * Faz o parser de um valor decimal encontrado na NFe para BigDecimal.<Br>
-   * Faz o mesmo que 'new BigDecimal(value)', porÈm j· trata o conte˙do entre nulo e vazio, e valida se o conte˙do È v·lido com mensagem personalizada.
+   * Faz o mesmo que 'new BigDecimal(value)', por√©m j√° trata o conte√∫do entre nulo e vazio, e valida se o conte√∫do √© v√°lido com mensagem personalizada.
    *
    * @param value Valor a ser transformado em BigDecimal
    * @return BigDecimal com o valor encontrato, ou nulo caso a string esteja vazia/nula.
    * @throws RFWException
-   * @TODO Refatorar esse mÈtodo para um prefixo 'parse', mais comum
+   * @TODO Refatorar esse m√©todo para um prefixo 'parse', mais comum
    */
   public static BigDecimal convertBigDecimalToJava(String value) throws RFWException {
     value = PreProcess.processStringToNull(value);
@@ -222,14 +222,14 @@ public class SEFAZUtils {
 
   /**
    * Faz o parser de um valor decimal encontrado na NFe para BigDecimal.<Br>
-   * Faz o mesmo que 'new BigDecimal(value)', porÈm j· trata o conte˙do entre nulo e vazio, e valida se o conte˙do È v·lido com mensagem personalizada. <br>
-   * Permite definir o BigDecimal com um n˙mero exato de casas decimais.
+   * Faz o mesmo que 'new BigDecimal(value)', por√©m j√° trata o conte√∫do entre nulo e vazio, e valida se o conte√∫do √© v√°lido com mensagem personalizada. <br>
+   * Permite definir o BigDecimal com um n√∫mero exato de casas decimais.
    *
    * @param value Valor a ser transformado em BigDecimal
    * @param decimals Quantidade de casas decimais.
    * @return BigDecimal com o valor encontrato, ou nulo caso a string esteja vazia/nula.
    * @throws RFWException
-   * @TODO Refatorar esse mÈtodo para um prefixo 'parse', mais comum
+   * @TODO Refatorar esse m√©todo para um prefixo 'parse', mais comum
    */
   public static BigDecimal convertBigDecimalToJava(String value, Integer decimals) throws RFWException {
     BigDecimal v = convertBigDecimalToJava(value);
@@ -238,18 +238,18 @@ public class SEFAZUtils {
   }
 
   /**
-   * Este mÈtodo junta todas as informaÁıes necess·rias para montar a linha de informaÁ„o ser usada para gerar o QRCode da NFCe.
+   * Este m√©todo junta todas as informa√ß√µes necess√°rias para montar a linha de informa√ß√£o ser usada para gerar o QRCode da NFCe.
    *
    * @param uf Estado do webservice usado para emitir a NFCe
    * @param env Ambiente usado para emitir a NFCe
    * @param chave chave de acesso da NFCe. (44 Bytes)
-   * @param destCPFCNPJ Documento CPF/CNPJ de identificaÁ„o do cliente. Passar nulo caso o consumidor n„o seja identificado.
-   * @param dhEmi Data e Hora de emiss„o da NFCe.
-   * @param vNF Valor total da NFCe. BigDecimal j· com escala correta de 2 dÌgitos.
-   * @param vICMS Valor total do ICMS da NFCe. BigDecimal j· com escala correta de 2 dÌgitos.
-   * @param digestValue DigestValue da NFCe, retornado da SEFAZ apÛs autorizaÁ„o. … espero um byte array em base 64. Esse padr„o foi escolhido pois È assim que ele È retornado da SEFAZ.
-   * @param tokenID ID do token (cÛdigo de seguranÁa) sendo utilizado. Normalmente o identificador È "000001" ou "000002" dependendo do token gerado pelo estado.
-   * @param token Token (cÛdigo de seguranÁa) de conhecimento apenas da empresa e da Receita Federal Estadual. Obtido pelo site ou diretamente da aplicaÁ„o pelo webservice.
+   * @param destCPFCNPJ Documento CPF/CNPJ de identifica√ß√£o do cliente. Passar nulo caso o consumidor n√£o seja identificado.
+   * @param dhEmi Data e Hora de emiss√£o da NFCe.
+   * @param vNF Valor total da NFCe. BigDecimal j√° com escala correta de 2 d√≠gitos.
+   * @param vICMS Valor total do ICMS da NFCe. BigDecimal j√° com escala correta de 2 d√≠gitos.
+   * @param digestValue DigestValue da NFCe, retornado da SEFAZ ap√≥s autoriza√ß√£o. √â espero um byte array em base 64. Esse padr√£o foi escolhido pois √© assim que ele √© retornado da SEFAZ.
+   * @param tokenID ID do token (c√≥digo de seguran√ßa) sendo utilizado. Normalmente o identificador √© "000001" ou "000002" dependendo do token gerado pelo estado.
+   * @param token Token (c√≥digo de seguran√ßa) de conhecimento apenas da empresa e da Receita Federal Estadual. Obtido pelo site ou diretamente da aplica√ß√£o pelo webservice.
    *
    * @return
    */
@@ -258,18 +258,18 @@ public class SEFAZUtils {
   }
 
   /**
-   * Este mÈtodo junta todas as informaÁıes necess·rias para montar a linha de informaÁ„o ser usada para gerar o QRCode da NFCe.
+   * Este m√©todo junta todas as informa√ß√µes necess√°rias para montar a linha de informa√ß√£o ser usada para gerar o QRCode da NFCe.
    *
    * @param uf Estado do webservice usado para emitir a NFCe
    * @param env Ambiente usado para emitir a NFCe
    * @param chave chave de acesso da NFCe. (44 Bytes)
-   * @param destCPFCNPJ Documento CPF/CNPJ de identificaÁ„o do cliente. Passar nulo caso o consumidor n„o seja identificado.
-   * @param dhEmi Data e Hora de emiss„o da NFCe.
-   * @param vNF Valor total da NFCe. BigDecimal j· com escala correta de 2 dÌgitos.
-   * @param vICMS Valor total do ICMS da NFCe. BigDecimal j· com escala correta de 2 dÌgitos.
-   * @param digestValue DigestValue da NFCe, retornado da SEFAZ apÛs autorizaÁ„o. … espero um byte array em base 64. Esse padr„o foi escolhido pois È assim que ele È retornado da SEFAZ.
-   * @param tokenID ID do token (cÛdigo de seguranÁa) sendo utilizado. Normalmente o identificador È "000001" ou "000002" dependendo do token gerado pelo estado.
-   * @param token Token (cÛdigo de seguranÁa) de conhecimento apenas da empresa e da Receita Federal Estadual. Obtido pelo site ou diretamente da aplicaÁ„o pelo webservice.
+   * @param destCPFCNPJ Documento CPF/CNPJ de identifica√ß√£o do cliente. Passar nulo caso o consumidor n√£o seja identificado.
+   * @param dhEmi Data e Hora de emiss√£o da NFCe.
+   * @param vNF Valor total da NFCe. BigDecimal j√° com escala correta de 2 d√≠gitos.
+   * @param vICMS Valor total do ICMS da NFCe. BigDecimal j√° com escala correta de 2 d√≠gitos.
+   * @param digestValue DigestValue da NFCe, retornado da SEFAZ ap√≥s autoriza√ß√£o. √â espero um byte array em base 64. Esse padr√£o foi escolhido pois √© assim que ele √© retornado da SEFAZ.
+   * @param tokenID ID do token (c√≥digo de seguran√ßa) sendo utilizado. Normalmente o identificador √© "000001" ou "000002" dependendo do token gerado pelo estado.
+   * @param token Token (c√≥digo de seguran√ßa) de conhecimento apenas da empresa e da Receita Federal Estadual. Obtido pelo site ou diretamente da aplica√ß√£o pelo webservice.
    *
    * @return
    */
@@ -278,23 +278,23 @@ public class SEFAZUtils {
   }
 
   /**
-   * Este mÈtodo junta todas as informaÁıes necess·rias para montar a linha de informaÁ„o ser usada para gerar o QRCode da NFCe.
+   * Este m√©todo junta todas as informa√ß√µes necess√°rias para montar a linha de informa√ß√£o ser usada para gerar o QRCode da NFCe.
    *
    * @param uf Estado do webservice usado para emitir a NFCe
    * @param env Ambiente usado para emitir a NFCe
    * @param chave chave de acesso da NFCe. (44 Bytes)
-   * @param destCPFCNPJ Documento CPF/CNPJ de identificaÁ„o do cliente. Passar nulo caso o consumidor n„o seja identificado.
-   * @param dhEmi Data e Hora de emiss„o da NFCe no formato UTC utilizado no XML.
-   * @param vNF Valor total da NFCe. BigDecimal j· com escala correta de 2 dÌgitos.
-   * @param vICMS Valor total do ICMS da NFCe. BigDecimal j· com escala correta de 2 dÌgitos.
-   * @param digestValue DigestValue da NFCe, retornado da SEFAZ apÛs autorizaÁ„o. … espero um byte array em base 64. Esse padr„o foi escolhido pois È assim que ele È retornado da SEFAZ.
-   * @param tokenID ID do token (cÛdigo de seguranÁa) sendo utilizado. Normalmente o identificador È "000001" ou "000002" dependendo do token gerado pelo estado.
-   * @param token Token (cÛdigo de seguranÁa) de conhecimento apenas da empresa e da Receita Federal Estadual. Obtido pelo site ou diretamente da aplicaÁ„o pelo webservice.
+   * @param destCPFCNPJ Documento CPF/CNPJ de identifica√ß√£o do cliente. Passar nulo caso o consumidor n√£o seja identificado.
+   * @param dhEmi Data e Hora de emiss√£o da NFCe no formato UTC utilizado no XML.
+   * @param vNF Valor total da NFCe. BigDecimal j√° com escala correta de 2 d√≠gitos.
+   * @param vICMS Valor total do ICMS da NFCe. BigDecimal j√° com escala correta de 2 d√≠gitos.
+   * @param digestValue DigestValue da NFCe, retornado da SEFAZ ap√≥s autoriza√ß√£o. √â espero um byte array em base 64. Esse padr√£o foi escolhido pois √© assim que ele √© retornado da SEFAZ.
+   * @param tokenID ID do token (c√≥digo de seguran√ßa) sendo utilizado. Normalmente o identificador √© "000001" ou "000002" dependendo do token gerado pelo estado.
+   * @param token Token (c√≥digo de seguran√ßa) de conhecimento apenas da empresa e da Receita Federal Estadual. Obtido pelo site ou diretamente da aplica√ß√£o pelo webservice.
    *
    * @return
    */
   public static String generateQRCodeData(SEFAZ_uf uf, SEFAZ_tpAmb env, String chave, String destCPFCNPJ, String dhEmi, BigDecimal vNF, BigDecimal vICMS, byte[] digestValue, String tokenID, String token) throws RFWException {
-    // Parte 1: EndereÁo de consulta
+    // Parte 1: Endere√ßo de consulta
     String address = null;
     if (uf == SEFAZ_uf.SP) {
       if (env == SEFAZ_tpAmb.HOMOLOGACAO) {
@@ -310,7 +310,7 @@ public class SEFAZUtils {
       }
     }
 
-    // Valida se temos um endereÁo
+    // Valida se temos um endere√ßo
     if (address == null) {
       throw new RFWCriticalException("BISModules_000095", new String[] { "" + uf, "" + env });
     }
@@ -327,19 +327,19 @@ public class SEFAZUtils {
     buff.append("&digVal=").append(RUString.toHexFromBase64(digestValue));
     buff.append("&cIdToken=").append(tokenID);
 
-    // Parte 3 - Calculamos a Hash com base nos parametros concatenados na parte 2 e a chave de seguranÁa. Do resultado È criado o parmetro hashQRCode e concatenado no final.
+    // Parte 3 - Calculamos a Hash com base nos parametros concatenados na parte 2 e a chave de seguran√ßa. Do resultado √© criado o parmetro hashQRCode e concatenado no final.
     String tosha = buff.toString() + token; // String da qual precisamos calcular a hash sha1
     String hash = RUString.calcSHA1ToHex(tosha);
     buff.append("&cHashQRCode=").append(hash);
 
-    // Por fim retornamos o endereÁo base, os parametros da parte 2 (e 3 que foi includo no buffer da parte 2)
+    // Por fim retornamos o endere√ßo base, os parametros da parte 2 (e 3 que foi includo no buffer da parte 2)
     return address + buff.toString();
   }
 
   /**
-   * Este mÈtodo interpreta todos os formatos j· encontrados de datas que podem vir na NFe para o formato do Java. Atualmente os formatos reconhecidos s„o:<br>
-   * <li>"yyyy-MM-dd'T'HH:mm:ssXXX" (Padr„o UTC)</li>
-   * <li>"yyyy-MM-dd'T'HH:mm:ss" (Padr„o UTC Sem TimeZone)</li>
+   * Este m√©todo interpreta todos os formatos j√° encontrados de datas que podem vir na NFe para o formato do Java. Atualmente os formatos reconhecidos s√£o:<br>
+   * <li>"yyyy-MM-dd'T'HH:mm:ssXXX" (Padr√£o UTC)</li>
+   * <li>"yyyy-MM-dd'T'HH:mm:ss" (Padr√£o UTC Sem TimeZone)</li>
    * <li>"yyyy-MM-dd"</li>
    *
    * @param date
@@ -353,7 +353,7 @@ public class SEFAZUtils {
   /**
    * Interpreta diversos formatos de data encontrados na NF-e e os converte para {@link LocalDateTime}.
    * <p>
-   * Os formatos suportados s„o:
+   * Os formatos suportados s√£o:
    * <ul>
    * <li>"yyyy-MM-dd'T'HH:mm:ssXXX" Exemplo: "2024-02-20T15:30:00-07:00" (UTC com timezone)</li>
    * <li>"yyyy-MM-dd'T'HH:mm:ssZ" Exemplo: "2024-02-20T15:30:00-0700" (UTC com timezone)</li>
@@ -362,34 +362,34 @@ public class SEFAZUtils {
    * <li>"dd/MM/yyyy" Exemplo: "20/02/2024"</li>
    * </ul>
    * <p>
-   * Quando o timezone est· ausente, assume-se o fuso hor·rio do sistema.
+   * Quando o timezone est√° ausente, assume-se o fuso hor√°rio do sistema.
    *
    * @param date String representando a data.
    * @return {@link LocalDateTime} correspondente.
-   * @throws RFWException Se o formato da data n„o for reconhecido ou se ocorrer um erro de convers„o.
+   * @throws RFWException Se o formato da data n√£o for reconhecido ou se ocorrer um erro de convers√£o.
    */
   public static LocalDateTime parseLocalDateTime(String date) throws RFWException {
     return RUTypes.parseLocalDateTime(date);
   }
 
   /**
-   * A partir de um objeto {@link TEnviNFe} cria o XML como esperado para enviar para o WebService e assina as tags "infNFe" como solicitado pelo padr„o NFe.<br>
+   * A partir de um objeto {@link TEnviNFe} cria o XML como esperado para enviar para o WebService e assina as tags "infNFe" como solicitado pelo padr√£o NFe.<br>
    *
    * @param cert Certificado utilizado para assinar o documento. Deve conter chave privada.
-   * @param root Tag Raiz completamente preenchida para ser convertida em XML e assinada para transmiss„o.
-   * @return XML com a tag raiz enviNFe com os XMLs dentro j· assinados e prontos para serem transmitidos.
+   * @param root Tag Raiz completamente preenchida para ser convertida em XML e assinada para transmiss√£o.
+   * @return XML com a tag raiz enviNFe com os XMLs dentro j√° assinados e prontos para serem transmitidos.
    * @throws RFWException
    */
   public static String signNfeAutorizacaoLoteV400Message(RFWCertificate cert, TEnviNFe root) throws RFWException {
     String rawMsg = SEFAZUtils.writeXMLFromObject(root);
-    rawMsg = rawMsg.replaceAll(" xmlns:ns2=\"http://www.w3.org/2000/09/xmldsig#\"", ""); // Se houver outro namespace alÈm do xmlns="http://www.portalfiscal.inf.br/nfe" a assinatura falha, pois a receita retira o namespace antes de validar a assinatura
-    rawMsg = RUString.removeAccents(rawMsg); // Remove os acentos que o sistema possa ter escrito nos campos, pois o charset da NFe n„o suporta.
+    rawMsg = rawMsg.replaceAll(" xmlns:ns2=\"http://www.w3.org/2000/09/xmldsig#\"", ""); // Se houver outro namespace al√©m do xmlns="http://www.portalfiscal.inf.br/nfe" a assinatura falha, pois a receita retira o namespace antes de validar a assinatura
+    rawMsg = RUString.removeAccents(rawMsg); // Remove os acentos que o sistema possa ter escrito nos campos, pois o charset da NFe n√£o suporta.
     String xml = RUXML.signXmlDocument(rawMsg, "infNFe", cert);
     return xml;
   }
 
   /**
-   * MÈtodo auxiliar genÈrico para simplificar a criaÁ„o de um JAXBElement de qualquer tipo (String, BigDecimal, ICMS, IPI, etc.) para os elemebtos genÈricos.
+   * M√©todo auxiliar gen√©rico para simplificar a cria√ß√£o de um JAXBElement de qualquer tipo (String, BigDecimal, ICMS, IPI, etc.) para os elemebtos gen√©ricos.
    *
    * @param tagName Nome da tag XML (ex: "vTotTrib", "ICMS", "IPI").
    * @param value Objeto a ser inserido dentro do JAXBElement (String, BigDecimal, ICMS, etc.).

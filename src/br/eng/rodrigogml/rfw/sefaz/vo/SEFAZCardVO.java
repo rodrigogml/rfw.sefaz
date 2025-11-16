@@ -12,7 +12,7 @@ import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_tBand;
 import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_tpIntegra;
 
 /**
- * Grupo YA04 - card: Informações de pagamento com cartão.
+ * Grupo YA04 - card: InformaÃ§Ãµes de pagamento com cartÃ£o.
  * <p>
  * Ocorre 0-1 dentro de YA01a (detPag).
  */
@@ -28,29 +28,29 @@ public class SEFAZCardVO extends RFWVO {
   private SEFAZDetPagVO detPagVO = null;
 
   /**
-   * YA04a - tpIntegra: Tipo de Integração para pagamento. Tipo: N, Tamanho: 1, Ocorrência: 1-1 (obrigatório na estrutura do grupo card). Valores: 1 = Pagamento integrado com o sistema de automação da empresa (TEF, e-commerce etc.); 2 = Pagamento não integrado (POS, etc.).
+   * YA04a - tpIntegra: Tipo de IntegraÃ§Ã£o para pagamento. Tipo: N, Tamanho: 1, OcorrÃªncia: 1-1 (obrigatÃ³rio na estrutura do grupo card). Valores: 1 = Pagamento integrado com o sistema de automaÃ§Ã£o da empresa (TEF, e-commerce etc.); 2 = Pagamento nÃ£o integrado (POS, etc.).
    */
   @RFWMetaEnumField(caption = "tpIntegra", required = false)
   private SEFAZ_tpIntegra tpIntegra;
 
   /**
-   * YA05 - CNPJ: CNPJ da instituição de pagamento. Tipo: C, Tamanho: 14, Ocorrência: 0-1.
+   * YA05 - CNPJ: CNPJ da instituiÃ§Ã£o de pagamento. Tipo: C, Tamanho: 14, OcorrÃªncia: 0-1.
    * <p>
-   * Informar o CNPJ da instituição de pagamento, adquirente ou subadquirente. Caso o pagamento seja processado por intermediador da transação, informar o CNPJ deste.
+   * Informar o CNPJ da instituiÃ§Ã£o de pagamento, adquirente ou subadquirente. Caso o pagamento seja processado por intermediador da transaÃ§Ã£o, informar o CNPJ deste.
    */
   @RFWMetaStringCNPJField(caption = "CNPJ", required = false, unique = false)
   private String cnpj;
 
   /**
-   * YA06 - tBand: Bandeira da operadora de cartão de crédito e/ou débito. Tipo: N, Tamanho: 2, Ocorrência: 0-1. Exemplos: 01=Visa, 02=Mastercard, 06=Elo, 99=Outros.
+   * YA06 - tBand: Bandeira da operadora de cartÃ£o de crÃ©dito e/ou dÃ©bito. Tipo: N, Tamanho: 2, OcorrÃªncia: 0-1. Exemplos: 01=Visa, 02=Mastercard, 06=Elo, 99=Outros.
    */
   @RFWMetaEnumField(caption = "tBand", required = false)
   private SEFAZ_tBand tband;
 
   /**
-   * YA07 - cAut: Número de autorização da operação com cartão. Tipo: C, Tamanho: 1-20, Ocorrência: 0-1.
+   * YA07 - cAut: NÃºmero de autorizaÃ§Ã£o da operaÃ§Ã£o com cartÃ£o. Tipo: C, Tamanho: 1-20, OcorrÃªncia: 0-1.
    * <p>
-   * Identifica o número de autorização da transação da operação com cartão de crédito e/ou débito.
+   * Identifica o nÃºmero de autorizaÃ§Ã£o da transaÃ§Ã£o da operaÃ§Ã£o com cartÃ£o de crÃ©dito e/ou dÃ©bito.
    */
   @RFWMetaStringField(caption = "cAut", required = false, unique = false, maxLength = 20, minLength = 1, preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
   private String caut;
@@ -74,80 +74,80 @@ public class SEFAZCardVO extends RFWVO {
   }
 
   /**
-   * # yA04a - tpIntegra: Tipo de Integração para pagamento. Tipo: N, Tamanho: 1, Ocorrência: 1-1 (obrigatório na estrutura do grupo card). Valores: 1 = Pagamento integrado com o sistema de automação da empresa (TEF, e-commerce etc.); 2 = Pagamento não integrado (POS, etc.).
+   * # yA04a - tpIntegra: Tipo de IntegraÃ§Ã£o para pagamento. Tipo: N, Tamanho: 1, OcorrÃªncia: 1-1 (obrigatÃ³rio na estrutura do grupo card). Valores: 1 = Pagamento integrado com o sistema de automaÃ§Ã£o da empresa (TEF, e-commerce etc.); 2 = Pagamento nÃ£o integrado (POS, etc.).
    *
-   * @return the yA04a - tpIntegra: Tipo de Integração para pagamento
+   * @return the yA04a - tpIntegra: Tipo de IntegraÃ§Ã£o para pagamento
    */
   public SEFAZ_tpIntegra getTpIntegra() {
     return tpIntegra;
   }
 
   /**
-   * # yA04a - tpIntegra: Tipo de Integração para pagamento. Tipo: N, Tamanho: 1, Ocorrência: 1-1 (obrigatório na estrutura do grupo card). Valores: 1 = Pagamento integrado com o sistema de automação da empresa (TEF, e-commerce etc.); 2 = Pagamento não integrado (POS, etc.).
+   * # yA04a - tpIntegra: Tipo de IntegraÃ§Ã£o para pagamento. Tipo: N, Tamanho: 1, OcorrÃªncia: 1-1 (obrigatÃ³rio na estrutura do grupo card). Valores: 1 = Pagamento integrado com o sistema de automaÃ§Ã£o da empresa (TEF, e-commerce etc.); 2 = Pagamento nÃ£o integrado (POS, etc.).
    *
-   * @param tpIntegra the new yA04a - tpIntegra: Tipo de Integração para pagamento
+   * @param tpIntegra the new yA04a - tpIntegra: Tipo de IntegraÃ§Ã£o para pagamento
    */
   public void setTpIntegra(SEFAZ_tpIntegra tpIntegra) {
     this.tpIntegra = tpIntegra;
   }
 
   /**
-   * # yA05 - CNPJ: CNPJ da instituição de pagamento. Tipo: C, Tamanho: 14, Ocorrência: 0-1.
+   * # yA05 - CNPJ: CNPJ da instituiÃ§Ã£o de pagamento. Tipo: C, Tamanho: 14, OcorrÃªncia: 0-1.
    * <p>
-   * Informar o CNPJ da instituição de pagamento, adquirente ou subadquirente. Caso o pagamento seja processado por intermediador da transação, informar o CNPJ deste.
+   * Informar o CNPJ da instituiÃ§Ã£o de pagamento, adquirente ou subadquirente. Caso o pagamento seja processado por intermediador da transaÃ§Ã£o, informar o CNPJ deste.
    *
-   * @return the yA05 - CNPJ: CNPJ da instituição de pagamento
+   * @return the yA05 - CNPJ: CNPJ da instituiÃ§Ã£o de pagamento
    */
   public String getCnpj() {
     return cnpj;
   }
 
   /**
-   * # yA05 - CNPJ: CNPJ da instituição de pagamento. Tipo: C, Tamanho: 14, Ocorrência: 0-1.
+   * # yA05 - CNPJ: CNPJ da instituiÃ§Ã£o de pagamento. Tipo: C, Tamanho: 14, OcorrÃªncia: 0-1.
    * <p>
-   * Informar o CNPJ da instituição de pagamento, adquirente ou subadquirente. Caso o pagamento seja processado por intermediador da transação, informar o CNPJ deste.
+   * Informar o CNPJ da instituiÃ§Ã£o de pagamento, adquirente ou subadquirente. Caso o pagamento seja processado por intermediador da transaÃ§Ã£o, informar o CNPJ deste.
    *
-   * @param cnpj the new yA05 - CNPJ: CNPJ da instituição de pagamento
+   * @param cnpj the new yA05 - CNPJ: CNPJ da instituiÃ§Ã£o de pagamento
    */
   public void setCnpj(String cnpj) {
     this.cnpj = cnpj;
   }
 
   /**
-   * # yA06 - tBand: Bandeira da operadora de cartão de crédito e/ou débito. Tipo: N, Tamanho: 2, Ocorrência: 0-1. Exemplos: 01=Visa, 02=Mastercard, 06=Elo, 99=Outros.
+   * # yA06 - tBand: Bandeira da operadora de cartÃ£o de crÃ©dito e/ou dÃ©bito. Tipo: N, Tamanho: 2, OcorrÃªncia: 0-1. Exemplos: 01=Visa, 02=Mastercard, 06=Elo, 99=Outros.
    *
-   * @return the yA06 - tBand: Bandeira da operadora de cartão de crédito e/ou débito
+   * @return the yA06 - tBand: Bandeira da operadora de cartÃ£o de crÃ©dito e/ou dÃ©bito
    */
   public SEFAZ_tBand getTband() {
     return tband;
   }
 
   /**
-   * # yA06 - tBand: Bandeira da operadora de cartão de crédito e/ou débito. Tipo: N, Tamanho: 2, Ocorrência: 0-1. Exemplos: 01=Visa, 02=Mastercard, 06=Elo, 99=Outros.
+   * # yA06 - tBand: Bandeira da operadora de cartÃ£o de crÃ©dito e/ou dÃ©bito. Tipo: N, Tamanho: 2, OcorrÃªncia: 0-1. Exemplos: 01=Visa, 02=Mastercard, 06=Elo, 99=Outros.
    *
-   * @param tband the new yA06 - tBand: Bandeira da operadora de cartão de crédito e/ou débito
+   * @param tband the new yA06 - tBand: Bandeira da operadora de cartÃ£o de crÃ©dito e/ou dÃ©bito
    */
   public void setTband(SEFAZ_tBand tband) {
     this.tband = tband;
   }
 
   /**
-   * # yA07 - cAut: Número de autorização da operação com cartão. Tipo: C, Tamanho: 1-20, Ocorrência: 0-1.
+   * # yA07 - cAut: NÃºmero de autorizaÃ§Ã£o da operaÃ§Ã£o com cartÃ£o. Tipo: C, Tamanho: 1-20, OcorrÃªncia: 0-1.
    * <p>
-   * Identifica o número de autorização da transação da operação com cartão de crédito e/ou débito.
+   * Identifica o nÃºmero de autorizaÃ§Ã£o da transaÃ§Ã£o da operaÃ§Ã£o com cartÃ£o de crÃ©dito e/ou dÃ©bito.
    *
-   * @return the yA07 - cAut: Número de autorização da operação com cartão
+   * @return the yA07 - cAut: NÃºmero de autorizaÃ§Ã£o da operaÃ§Ã£o com cartÃ£o
    */
   public String getCaut() {
     return caut;
   }
 
   /**
-   * # yA07 - cAut: Número de autorização da operação com cartão. Tipo: C, Tamanho: 1-20, Ocorrência: 0-1.
+   * # yA07 - cAut: NÃºmero de autorizaÃ§Ã£o da operaÃ§Ã£o com cartÃ£o. Tipo: C, Tamanho: 1-20, OcorrÃªncia: 0-1.
    * <p>
-   * Identifica o número de autorização da transação da operação com cartão de crédito e/ou débito.
+   * Identifica o nÃºmero de autorizaÃ§Ã£o da transaÃ§Ã£o da operaÃ§Ã£o com cartÃ£o de crÃ©dito e/ou dÃ©bito.
    *
-   * @param caut the new yA07 - cAut: Número de autorização da operação com cartão
+   * @param caut the new yA07 - cAut: NÃºmero de autorizaÃ§Ã£o da operaÃ§Ã£o com cartÃ£o
    */
   public void setCaut(String caut) {
     this.caut = caut;

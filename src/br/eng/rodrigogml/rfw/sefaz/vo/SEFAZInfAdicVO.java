@@ -10,12 +10,12 @@ import br.eng.rodrigogml.rfw.kernel.vo.RFWVO;
 import br.eng.rodrigogml.rfw.orm.dao.annotations.dao.RFWDAOAnnotation;
 
 /**
- * Z01 - infAdic: Grupo de Informações Adicionais.
+ * Z01 - infAdic: Grupo de InformaÃ§Ãµes Adicionais.
  * <p>
- * Ocorrência: 0-1 no grupo A01.
+ * OcorrÃªncia: 0-1 no grupo A01.
  * </p>
  * <p>
- * Contém:
+ * ContÃ©m:
  * </p>
  * <ul>
  * <li>Z02 - infAdFisco</li>
@@ -37,31 +37,31 @@ public class SEFAZInfAdicVO extends RFWVO {
   private SEFAZInfNFeVO infNFeVO = null;
 
   /**
-   * Z04 - obsCont: Grupo Campo de uso livre do contribuinte. Ocorrência 0-10.
+   * Z04 - obsCont: Grupo Campo de uso livre do contribuinte. OcorrÃªncia 0-10.
    */
   @RFWMetaRelationshipField(caption = "ObsCont", relationship = RelationshipTypes.COMPOSITION, required = false, column = "idsefaz_infadic", minSize = 0, maxSize = 10)
   private List<SEFAZObsContVO> obsCont;
 
   /**
-   * Z07 - obsFisco: Grupo Campo de uso livre do Fisco. Ocorrência 0-10.
+   * Z07 - obsFisco: Grupo Campo de uso livre do Fisco. OcorrÃªncia 0-10.
    */
   @RFWMetaRelationshipField(caption = "ObsFisco", relationship = RelationshipTypes.COMPOSITION, required = false, column = "idsefaz_infadic", minSize = 0, maxSize = 10)
   private List<SEFAZObsFiscoVO> obsFisco;
 
   /**
-   * Z10 - procRef: Grupo Processo Referenciado. Ocorrência 0-100.
+   * Z10 - procRef: Grupo Processo Referenciado. OcorrÃªncia 0-100.
    */
   @RFWMetaRelationshipField(caption = "ProcRef", relationship = RelationshipTypes.COMPOSITION, required = false, column = "idsefaz_infadic", minSize = 0, maxSize = 100)
   private List<SEFAZProcRefVO> procRef;
 
   /**
-   * Z02 - infAdFisco: Informações Adicionais de Interesse do Fisco. Tipo C, tamanho 1-2000, ocorrência 0-1.
+   * Z02 - infAdFisco: InformaÃ§Ãµes Adicionais de Interesse do Fisco. Tipo C, tamanho 1-2000, ocorrÃªncia 0-1.
    */
   @RFWMetaStringField(caption = "infAdFisco", required = false, unique = false, maxLength = 2000, minLength = 1, preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
   private String infAdFisco;
 
   /**
-   * Z03 - infCpl: Informações Complementares de interesse do contribuinte. Tipo C, tamanho 1-5000, ocorrência 0-1.
+   * Z03 - infCpl: InformaÃ§Ãµes Complementares de interesse do contribuinte. Tipo C, tamanho 1-5000, ocorrÃªncia 0-1.
    */
   @RFWMetaStringField(caption = "infCpl", required = false, unique = false, maxLength = 5000, minLength = 1, preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
   private String infCpl;
@@ -85,7 +85,7 @@ public class SEFAZInfAdicVO extends RFWVO {
   }
 
   /**
-   * # z04 - obsCont: Grupo Campo de uso livre do contribuinte. Ocorrência 0-10.
+   * # z04 - obsCont: Grupo Campo de uso livre do contribuinte. OcorrÃªncia 0-10.
    *
    * @return the z04 - obsCont: Grupo Campo de uso livre do contribuinte
    */
@@ -94,7 +94,7 @@ public class SEFAZInfAdicVO extends RFWVO {
   }
 
   /**
-   * # z04 - obsCont: Grupo Campo de uso livre do contribuinte. Ocorrência 0-10.
+   * # z04 - obsCont: Grupo Campo de uso livre do contribuinte. OcorrÃªncia 0-10.
    *
    * @param obsCont the new z04 - obsCont: Grupo Campo de uso livre do contribuinte
    */
@@ -103,7 +103,7 @@ public class SEFAZInfAdicVO extends RFWVO {
   }
 
   /**
-   * # z07 - obsFisco: Grupo Campo de uso livre do Fisco. Ocorrência 0-10.
+   * # z07 - obsFisco: Grupo Campo de uso livre do Fisco. OcorrÃªncia 0-10.
    *
    * @return the z07 - obsFisco: Grupo Campo de uso livre do Fisco
    */
@@ -112,7 +112,7 @@ public class SEFAZInfAdicVO extends RFWVO {
   }
 
   /**
-   * # z07 - obsFisco: Grupo Campo de uso livre do Fisco. Ocorrência 0-10.
+   * # z07 - obsFisco: Grupo Campo de uso livre do Fisco. OcorrÃªncia 0-10.
    *
    * @param obsFisco the new z07 - obsFisco: Grupo Campo de uso livre do Fisco
    */
@@ -121,7 +121,7 @@ public class SEFAZInfAdicVO extends RFWVO {
   }
 
   /**
-   * # z10 - procRef: Grupo Processo Referenciado. Ocorrência 0-100.
+   * # z10 - procRef: Grupo Processo Referenciado. OcorrÃªncia 0-100.
    *
    * @return the z10 - procRef: Grupo Processo Referenciado
    */
@@ -130,7 +130,7 @@ public class SEFAZInfAdicVO extends RFWVO {
   }
 
   /**
-   * # z10 - procRef: Grupo Processo Referenciado. Ocorrência 0-100.
+   * # z10 - procRef: Grupo Processo Referenciado. OcorrÃªncia 0-100.
    *
    * @param procRef the new z10 - procRef: Grupo Processo Referenciado
    */
@@ -139,36 +139,36 @@ public class SEFAZInfAdicVO extends RFWVO {
   }
 
   /**
-   * # z02 - infAdFisco: Informações Adicionais de Interesse do Fisco. Tipo C, tamanho 1-2000, ocorrência 0-1.
+   * # z02 - infAdFisco: InformaÃ§Ãµes Adicionais de Interesse do Fisco. Tipo C, tamanho 1-2000, ocorrÃªncia 0-1.
    *
-   * @return the z02 - infAdFisco: Informações Adicionais de Interesse do Fisco
+   * @return the z02 - infAdFisco: InformaÃ§Ãµes Adicionais de Interesse do Fisco
    */
   public String getInfAdFisco() {
     return infAdFisco;
   }
 
   /**
-   * # z02 - infAdFisco: Informações Adicionais de Interesse do Fisco. Tipo C, tamanho 1-2000, ocorrência 0-1.
+   * # z02 - infAdFisco: InformaÃ§Ãµes Adicionais de Interesse do Fisco. Tipo C, tamanho 1-2000, ocorrÃªncia 0-1.
    *
-   * @param infAdFisco the new z02 - infAdFisco: Informações Adicionais de Interesse do Fisco
+   * @param infAdFisco the new z02 - infAdFisco: InformaÃ§Ãµes Adicionais de Interesse do Fisco
    */
   public void setInfAdFisco(String infAdFisco) {
     this.infAdFisco = infAdFisco;
   }
 
   /**
-   * # z03 - infCpl: Informações Complementares de interesse do contribuinte. Tipo C, tamanho 1-5000, ocorrência 0-1.
+   * # z03 - infCpl: InformaÃ§Ãµes Complementares de interesse do contribuinte. Tipo C, tamanho 1-5000, ocorrÃªncia 0-1.
    *
-   * @return the z03 - infCpl: Informações Complementares de interesse do contribuinte
+   * @return the z03 - infCpl: InformaÃ§Ãµes Complementares de interesse do contribuinte
    */
   public String getInfCpl() {
     return infCpl;
   }
 
   /**
-   * # z03 - infCpl: Informações Complementares de interesse do contribuinte. Tipo C, tamanho 1-5000, ocorrência 0-1.
+   * # z03 - infCpl: InformaÃ§Ãµes Complementares de interesse do contribuinte. Tipo C, tamanho 1-5000, ocorrÃªncia 0-1.
    *
-   * @param infCpl the new z03 - infCpl: Informações Complementares de interesse do contribuinte
+   * @param infCpl the new z03 - infCpl: InformaÃ§Ãµes Complementares de interesse do contribuinte
    */
   public void setInfCpl(String infCpl) {
     this.infCpl = infCpl;

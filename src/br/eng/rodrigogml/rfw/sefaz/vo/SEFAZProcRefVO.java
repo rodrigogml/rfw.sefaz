@@ -10,12 +10,12 @@ import br.eng.rodrigogml.rfw.orm.dao.annotations.dao.RFWDAOAnnotation;
 import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_indProc;
 
 /**
- * Z10 - procRef: Grupo Processo Referenciado. Ocorrência: 0-100.
+ * Z10 - procRef: Grupo Processo Referenciado. OcorrÃªncia: 0-100.
  * <p>
- * Contém:
+ * ContÃ©m:
  * </p>
  * <ul>
- * <li>Z11 - nProc: Identificador do processo ou ato concessório;</li>
+ * <li>Z11 - nProc: Identificador do processo ou ato concessÃ³rio;</li>
  * <li>Z12 - indProc: Indicador da origem do processo (enum SEFAZ_indProc).</li>
  * </ul>
  */
@@ -31,13 +31,13 @@ public class SEFAZProcRefVO extends RFWVO {
   private SEFAZInfAdicVO infAdicVO = null;
 
   /**
-   * Z11 - nProc: Identificador do processo ou ato concessório. Tipo C, tamanho 1-60, ocorrência 1-1.
+   * Z11 - nProc: Identificador do processo ou ato concessÃ³rio. Tipo C, tamanho 1-60, ocorrÃªncia 1-1.
    */
   @RFWMetaStringField(caption = "nProc", required = false, unique = false, maxLength = 60, minLength = 1, preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
   private String nproc;
 
   /**
-   * Z12 - indProc: Indicador da origem do processo. Tipo N, tamanho 1, ocorrência 1-1. Valores: 0 = SEFAZ, 1 = Justiça Federal, 2 = Justiça Estadual, 3 = Secex/RFB, 9 = Outros.
+   * Z12 - indProc: Indicador da origem do processo. Tipo N, tamanho 1, ocorrÃªncia 1-1. Valores: 0 = SEFAZ, 1 = JustiÃ§a Federal, 2 = JustiÃ§a Estadual, 3 = Secex/RFB, 9 = Outros.
    */
   @RFWMetaEnumField(caption = "indProc", required = false)
   private SEFAZ_indProc indProc;
@@ -61,25 +61,25 @@ public class SEFAZProcRefVO extends RFWVO {
   }
 
   /**
-   * # z11 - nProc: Identificador do processo ou ato concessório. Tipo C, tamanho 1-60, ocorrência 1-1.
+   * # z11 - nProc: Identificador do processo ou ato concessÃ³rio. Tipo C, tamanho 1-60, ocorrÃªncia 1-1.
    *
-   * @return the z11 - nProc: Identificador do processo ou ato concessório
+   * @return the z11 - nProc: Identificador do processo ou ato concessÃ³rio
    */
   public String getNproc() {
     return nproc;
   }
 
   /**
-   * # z11 - nProc: Identificador do processo ou ato concessório. Tipo C, tamanho 1-60, ocorrência 1-1.
+   * # z11 - nProc: Identificador do processo ou ato concessÃ³rio. Tipo C, tamanho 1-60, ocorrÃªncia 1-1.
    *
-   * @param nproc the new z11 - nProc: Identificador do processo ou ato concessório
+   * @param nproc the new z11 - nProc: Identificador do processo ou ato concessÃ³rio
    */
   public void setNproc(String nproc) {
     this.nproc = nproc;
   }
 
   /**
-   * # z12 - indProc: Indicador da origem do processo. Tipo N, tamanho 1, ocorrência 1-1. Valores: 0 = SEFAZ, 1 = Justiça Federal, 2 = Justiça Estadual, 3 = Secex/RFB, 9 = Outros.
+   * # z12 - indProc: Indicador da origem do processo. Tipo N, tamanho 1, ocorrÃªncia 1-1. Valores: 0 = SEFAZ, 1 = JustiÃ§a Federal, 2 = JustiÃ§a Estadual, 3 = Secex/RFB, 9 = Outros.
    *
    * @return the z12 - indProc: Indicador da origem do processo
    */
@@ -88,7 +88,7 @@ public class SEFAZProcRefVO extends RFWVO {
   }
 
   /**
-   * # z12 - indProc: Indicador da origem do processo. Tipo N, tamanho 1, ocorrência 1-1. Valores: 0 = SEFAZ, 1 = Justiça Federal, 2 = Justiça Estadual, 3 = Secex/RFB, 9 = Outros.
+   * # z12 - indProc: Indicador da origem do processo. Tipo N, tamanho 1, ocorrÃªncia 1-1. Valores: 0 = SEFAZ, 1 = JustiÃ§a Federal, 2 = JustiÃ§a Estadual, 3 = Secex/RFB, 9 = Outros.
    *
    * @param indProc the new z12 - indProc: Indicador da origem do processo
    */

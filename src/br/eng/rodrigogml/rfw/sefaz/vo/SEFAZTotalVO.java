@@ -8,9 +8,9 @@ import br.eng.rodrigogml.rfw.orm.dao.annotations.dao.RFWDAOAnnotation;
 /**
  * Grupo W01 - total: Totais da NF-e.
  * <p>
- * Ocorre 1-1 dentro do grupo A01 (infNFe). O grupo de valores totais da NF-e deve ser informado com o somatório do campo correspondente dos itens.
+ * Ocorre 1-1 dentro do grupo A01 (infNFe). O grupo de valores totais da NF-e deve ser informado com o somatÃ³rio do campo correspondente dos itens.
  * <p>
- * Contém:
+ * ContÃ©m:
  * <ul>
  * <li>W02 - ICMSTot: Totais referentes ao ICMS (mapeado em {@link SEFAZICMSTotVO});</li>
  * <li>W17 - ISSQNtot: Totais referentes ao ISSQN (campos abaixo neste mesmo VO).</li>

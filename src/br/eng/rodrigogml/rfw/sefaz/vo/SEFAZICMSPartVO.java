@@ -19,11 +19,11 @@ import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_orig;
 /**
  * Grupo N10a - ICMSPart.
  *
- * Grupo de Partilha do ICMS entre a UF de origem e a UF de destino ou a UF definida na legislação (tag ICMSPart / N10a).
+ * Grupo de Partilha do ICMS entre a UF de origem e a UF de destino ou a UF definida na legislaÃ§Ã£o (tag ICMSPart / N10a).
  *
- * Operação interestadual para consumidor final com partilha do ICMS devido na operação entre a UF de origem e a do destinatário, ou a UF definida na legislação (ex.: UF da concessionária de entrega do veículo).
+ * OperaÃ§Ã£o interestadual para consumidor final com partilha do ICMS devido na operaÃ§Ã£o entre a UF de origem e a do destinatÃ¡rio, ou a UF definida na legislaÃ§Ã£o (ex.: UF da concessionÃ¡ria de entrega do veÃ­culo).
  *
- * Observação: nas annotations o atributo {@code required} é sempre definido como false conforme solicitado, mesmo que o MOC defina obrigatoriedade.
+ * ObservaÃ§Ã£o: nas annotations o atributo {@code required} Ã© sempre definido como false conforme solicitado, mesmo que o MOC defina obrigatoriedade.
  */
 @RFWDAOAnnotation(schema = "_RFW.SEFAZ", table = "sefaz_icmspart")
 public class SEFAZICMSPartVO extends RFWVO implements Serializable {
@@ -31,70 +31,70 @@ public class SEFAZICMSPartVO extends RFWVO implements Serializable {
   private static final long serialVersionUID = 1L;
 
   /**
-   * Relação com o ICMS da operação (tag ICMS / N01).
+   * RelaÃ§Ã£o com o ICMS da operaÃ§Ã£o (tag ICMS / N01).
    */
   @RFWMetaRelationshipField(caption = "ICMS", relationship = RelationshipTypes.PARENT_ASSOCIATION, required = true, column = "idsefaz_icms")
   private SEFAZICMSVO icmsVO = null;
 
   /**
-   * N11 - orig. Origem da mercadoria. Ocor.: 1–1 / Tam.: 1 / Tipo: N. Ver valores em {@link SEFAZ_orig}. <br>
-   * Utilizada no contexto de operações interestaduais para consumidor final com partilha do ICMS entre a UF de origem e a UF de destino (ou UF definida na legislação).
+   * N11 - orig. Origem da mercadoria. Ocor.: 1â€“1 / Tam.: 1 / Tipo: N. Ver valores em {@link SEFAZ_orig}. <br>
+   * Utilizada no contexto de operaÃ§Ãµes interestaduais para consumidor final com partilha do ICMS entre a UF de origem e a UF de destino (ou UF definida na legislaÃ§Ã£o).
    */
   @RFWMetaEnumField(caption = "Origem da mercadoria", required = false)
   private SEFAZ_orig orig;
 
   /**
-   * N12 - CST. Tributação do ICMS. Ocor.: 1–1 / Tam.: 2 / Tipo: N. <br>
+   * N12 - CST. TributaÃ§Ã£o do ICMS. Ocor.: 1â€“1 / Tam.: 2 / Tipo: N. <br>
    * Valores permitidos para ICMSPart: <br>
-   * 10 – Tributada e com cobrança do ICMS por substituição tributária; <br>
-   * 90 – Outros. <br>
+   * 10 â€“ Tributada e com cobranÃ§a do ICMS por substituiÃ§Ã£o tributÃ¡ria; <br>
+   * 90 â€“ Outros. <br>
    * Mapeado para {@link SEFAZ_CST_ICMS}.
    */
   @RFWMetaEnumField(caption = "CST do ICMS (partilha)", required = false)
   private SEFAZ_CST_ICMS cst;
 
   /**
-   * N13 - modBC. Modalidade de determinação da BC do ICMS. Ocor.: 1–1 / Tam.: 1 / Tipo: N. <br>
+   * N13 - modBC. Modalidade de determinaÃ§Ã£o da BC do ICMS. Ocor.: 1â€“1 / Tam.: 1 / Tipo: N. <br>
    * 0 = Margem Valor Agregado (%); <br>
    * 1 = Pauta (Valor); <br>
-   * 2 = Preço Tabelado Máx. (valor); <br>
-   * 3 = Valor da operação. <br>
+   * 2 = PreÃ§o Tabelado MÃ¡x. (valor); <br>
+   * 3 = Valor da operaÃ§Ã£o. <br>
    * Mapeado para {@link SEFAZ_modBC}.
    */
-  @RFWMetaEnumField(caption = "Modalidade de determinação da BC do ICMS", required = false)
+  @RFWMetaEnumField(caption = "Modalidade de determinaÃ§Ã£o da BC do ICMS", required = false)
   private SEFAZ_modBC modBC;
 
   /**
-   * N15 - vBC. Valor da base de cálculo do ICMS. Ocor.: 1–1 / Tam.: 13v2 / Tipo: N. (v2.0) <br>
-   * Base de cálculo do ICMS próprio utilizada para a partilha entre as UFs.
+   * N15 - vBC. Valor da base de cÃ¡lculo do ICMS. Ocor.: 1â€“1 / Tam.: 13v2 / Tipo: N. (v2.0) <br>
+   * Base de cÃ¡lculo do ICMS prÃ³prio utilizada para a partilha entre as UFs.
    */
   @RFWMetaBigDecimalField(caption = "Valor da BC do ICMS (partilha)", required = false, unique = false, scale = 2, absolute = true)
   private BigDecimal vbc;
 
   /**
-   * N14 - pRedBC. Percentual da redução da base de cálculo do ICMS. Ocor.: 0–1 / Tam.: 3v2–4 / Tipo: N. (v2.0) <br>
-   * Percentual utilizado para redução da BC do ICMS próprio antes da partilha.
+   * N14 - pRedBC. Percentual da reduÃ§Ã£o da base de cÃ¡lculo do ICMS. Ocor.: 0â€“1 / Tam.: 3v2â€“4 / Tipo: N. (v2.0) <br>
+   * Percentual utilizado para reduÃ§Ã£o da BC do ICMS prÃ³prio antes da partilha.
    */
-  @RFWMetaBigDecimalField(caption = "Percentual de redução da BC do ICMS (partilha)", required = false, unique = false, scaleMax = 4, absolute = true)
+  @RFWMetaBigDecimalField(caption = "Percentual de reduÃ§Ã£o da BC do ICMS (partilha)", required = false, unique = false, scaleMax = 4, absolute = true)
   private BigDecimal predBC;
 
   /**
-   * N16 - pICMS. Alíquota do imposto ICMS. Ocor.: 1–1 / Tam.: 3v2–4 / Tipo: N. (v2.0) <br>
-   * Alíquota do ICMS próprio utilizada para cálculo do ICMS devido na operação objeto de partilha (sem considerar FCP; quando houver FCP, utilizar campos específicos).
+   * N16 - pICMS. AlÃ­quota do imposto ICMS. Ocor.: 1â€“1 / Tam.: 3v2â€“4 / Tipo: N. (v2.0) <br>
+   * AlÃ­quota do ICMS prÃ³prio utilizada para cÃ¡lculo do ICMS devido na operaÃ§Ã£o objeto de partilha (sem considerar FCP; quando houver FCP, utilizar campos especÃ­ficos).
    */
-  @RFWMetaBigDecimalField(caption = "Alíquota do ICMS (partilha)", required = false, unique = false, scaleMax = 4, absolute = true)
+  @RFWMetaBigDecimalField(caption = "AlÃ­quota do ICMS (partilha)", required = false, unique = false, scaleMax = 4, absolute = true)
   private BigDecimal picms;
 
   /**
-   * N17 - vICMS. Valor do ICMS. Ocor.: 1–1 / Tam.: 13v2 / Tipo: N. (v2.0) <br>
-   * Valor do ICMS próprio calculado sobre vBC com a alíquota pICMS, referente à operação na qual haverá partilha do ICMS entre as UFs.
+   * N17 - vICMS. Valor do ICMS. Ocor.: 1â€“1 / Tam.: 13v2 / Tipo: N. (v2.0) <br>
+   * Valor do ICMS prÃ³prio calculado sobre vBC com a alÃ­quota pICMS, referente Ã  operaÃ§Ã£o na qual haverÃ¡ partilha do ICMS entre as UFs.
    */
   @RFWMetaBigDecimalField(caption = "Valor do ICMS (partilha)", required = false, unique = false, scale = 2, absolute = true)
   private BigDecimal vicms;
 
   /**
-   * N18 - modBCST. Modalidade de determinação da BC do ICMS ST. Ocor.: 1–1 / Tam.: 1 / Tipo: N. <br>
-   * 0 = Preço tabelado ou máximo sugerido; <br>
+   * N18 - modBCST. Modalidade de determinaÃ§Ã£o da BC do ICMS ST. Ocor.: 1â€“1 / Tam.: 1 / Tipo: N. <br>
+   * 0 = PreÃ§o tabelado ou mÃ¡ximo sugerido; <br>
    * 1 = Lista Negativa (valor); <br>
    * 2 = Lista Positiva (valor); <br>
    * 3 = Lista Neutra (valor); <br>
@@ -102,80 +102,80 @@ public class SEFAZICMSPartVO extends RFWVO implements Serializable {
    * 5 = Pauta (valor). <br>
    * Mapeado para {@link SEFAZ_modBCST}.
    */
-  @RFWMetaEnumField(caption = "Modalidade de determinação da BC do ICMS ST (partilha)", required = false)
+  @RFWMetaEnumField(caption = "Modalidade de determinaÃ§Ã£o da BC do ICMS ST (partilha)", required = false)
   private SEFAZ_modBCST modBCST;
 
   /**
-   * N19 - pMVAST. Percentual da margem de valor adicionado do ICMS ST. Ocor.: 0–1 / Tam.: 3v2–4 / Tipo: N. (v2.0) <br>
-   * Percentual de MVA utilizado na formação da base de cálculo do ICMS ST no contexto da partilha.
+   * N19 - pMVAST. Percentual da margem de valor adicionado do ICMS ST. Ocor.: 0â€“1 / Tam.: 3v2â€“4 / Tipo: N. (v2.0) <br>
+   * Percentual de MVA utilizado na formaÃ§Ã£o da base de cÃ¡lculo do ICMS ST no contexto da partilha.
    */
   @RFWMetaBigDecimalField(caption = "Percentual da MVA do ICMS ST (partilha)", required = false, unique = false, scaleMax = 4, absolute = true)
   private BigDecimal pmvaST;
 
   /**
-   * N20 - pRedBCST. Percentual da redução da base de cálculo do ICMS ST. Ocor.: 0–1 / Tam.: 3v2–4 / Tipo: N. (v2.0) <br>
-   * Percentual utilizado para reduzir a BC do ICMS ST no cálculo da partilha.
+   * N20 - pRedBCST. Percentual da reduÃ§Ã£o da base de cÃ¡lculo do ICMS ST. Ocor.: 0â€“1 / Tam.: 3v2â€“4 / Tipo: N. (v2.0) <br>
+   * Percentual utilizado para reduzir a BC do ICMS ST no cÃ¡lculo da partilha.
    */
-  @RFWMetaBigDecimalField(caption = "Percentual de redução da BC do ICMS ST (partilha)", required = false, unique = false, scaleMax = 4, absolute = true)
+  @RFWMetaBigDecimalField(caption = "Percentual de reduÃ§Ã£o da BC do ICMS ST (partilha)", required = false, unique = false, scaleMax = 4, absolute = true)
   private BigDecimal predBCST;
 
   /**
-   * N21 - vBCST. Valor da base de cálculo do ICMS ST. Ocor.: 1–1 / Tam.: 13v2 / Tipo: N. (v2.0) <br>
-   * Base de cálculo do ICMS ST utilizada para apuração do valor do ICMS ST devido na operação com partilha.
+   * N21 - vBCST. Valor da base de cÃ¡lculo do ICMS ST. Ocor.: 1â€“1 / Tam.: 13v2 / Tipo: N. (v2.0) <br>
+   * Base de cÃ¡lculo do ICMS ST utilizada para apuraÃ§Ã£o do valor do ICMS ST devido na operaÃ§Ã£o com partilha.
    */
   @RFWMetaBigDecimalField(caption = "Valor da BC do ICMS ST (partilha)", required = false, unique = false, scale = 2, absolute = true)
   private BigDecimal vbcST;
 
   /**
-   * N22 - pICMSST. Alíquota do imposto do ICMS ST. Ocor.: 1–1 / Tam.: 3v2–4 / Tipo: N. (v2.0) <br>
-   * Alíquota do ICMS ST utilizada para cálculo do ICMS ST devido na operação objeto de partilha.
+   * N22 - pICMSST. AlÃ­quota do imposto do ICMS ST. Ocor.: 1â€“1 / Tam.: 3v2â€“4 / Tipo: N. (v2.0) <br>
+   * AlÃ­quota do ICMS ST utilizada para cÃ¡lculo do ICMS ST devido na operaÃ§Ã£o objeto de partilha.
    */
-  @RFWMetaBigDecimalField(caption = "Alíquota do ICMS ST (partilha)", required = false, unique = false, scaleMax = 4, absolute = true)
+  @RFWMetaBigDecimalField(caption = "AlÃ­quota do ICMS ST (partilha)", required = false, unique = false, scaleMax = 4, absolute = true)
   private BigDecimal picmsST;
 
   /**
-   * N23 - vICMSST. Valor do ICMS ST. Ocor.: 1–1 / Tam.: 13v2 / Tipo: N. (v2.0) <br>
-   * Valor do ICMS ST calculado sobre vBCST com a alíquota pICMSST, referente à operação com partilha do ICMS entre as UFs.
+   * N23 - vICMSST. Valor do ICMS ST. Ocor.: 1â€“1 / Tam.: 13v2 / Tipo: N. (v2.0) <br>
+   * Valor do ICMS ST calculado sobre vBCST com a alÃ­quota pICMSST, referente Ã  operaÃ§Ã£o com partilha do ICMS entre as UFs.
    */
   @RFWMetaBigDecimalField(caption = "Valor do ICMS ST (partilha)", required = false, unique = false, scale = 2, absolute = true)
   private BigDecimal vicmsST;
 
   /**
-   * N25 - pBCOp. Percentual da BC operação própria. Ocor.: 0–1 / Tam.: 3v2–4 / Tipo: N. (v2.0) <br>
-   * Percentual utilizado para determinação do valor da base de cálculo da operação própria na partilha do ICMS.
+   * N25 - pBCOp. Percentual da BC operaÃ§Ã£o prÃ³pria. Ocor.: 0â€“1 / Tam.: 3v2â€“4 / Tipo: N. (v2.0) <br>
+   * Percentual utilizado para determinaÃ§Ã£o do valor da base de cÃ¡lculo da operaÃ§Ã£o prÃ³pria na partilha do ICMS.
    */
-  @RFWMetaBigDecimalField(caption = "Percentual da BC da operação própria (partilha)", required = false, unique = false, scaleMax = 4, absolute = true)
+  @RFWMetaBigDecimalField(caption = "Percentual da BC da operaÃ§Ã£o prÃ³pria (partilha)", required = false, unique = false, scaleMax = 4, absolute = true)
   private BigDecimal pbcOp;
 
   /**
-   * N24 - UFST. UF para qual é devido o ICMS ST. Ocor.: 1–1 / Tam.: 2 / Tipo: C. (v2.0) <br>
-   * Sigla da UF para qual é devido o ICMS ST da operação. Informar "EX" para Exterior. <br>
+   * N24 - UFST. UF para qual Ã© devido o ICMS ST. Ocor.: 1â€“1 / Tam.: 2 / Tipo: C. (v2.0) <br>
+   * Sigla da UF para qual Ã© devido o ICMS ST da operaÃ§Ã£o. Informar "EX" para Exterior. <br>
    * Exemplos: "SP", "RJ", "MG", "EX".
    */
   @RFWMetaStringField(caption = "UF de destino do ICMS ST (partilha)", required = false, unique = false, maxLength = 2, minLength = 2, preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
   private String ufST;
 
   /**
-   * # relação com o ICMS da operação (tag ICMS / N01).
+   * # relaÃ§Ã£o com o ICMS da operaÃ§Ã£o (tag ICMS / N01).
    *
-   * @return the relação com o ICMS da operação (tag ICMS / N01)
+   * @return the relaÃ§Ã£o com o ICMS da operaÃ§Ã£o (tag ICMS / N01)
    */
   public SEFAZICMSVO getIcmsVO() {
     return icmsVO;
   }
 
   /**
-   * # relação com o ICMS da operação (tag ICMS / N01).
+   * # relaÃ§Ã£o com o ICMS da operaÃ§Ã£o (tag ICMS / N01).
    *
-   * @param icmsVO the new relação com o ICMS da operação (tag ICMS / N01)
+   * @param icmsVO the new relaÃ§Ã£o com o ICMS da operaÃ§Ã£o (tag ICMS / N01)
    */
   public void setIcmsVO(SEFAZICMSVO icmsVO) {
     this.icmsVO = icmsVO;
   }
 
   /**
-   * # n11 - orig. Origem da mercadoria. Ocor.: 1–1 / Tam.: 1 / Tipo: N. Ver valores em {@link SEFAZ_orig}. <br>
-   * Utilizada no contexto de operações interestaduais para consumidor final com partilha do ICMS entre a UF de origem e a UF de destino (ou UF definida na legislação).
+   * # n11 - orig. Origem da mercadoria. Ocor.: 1â€“1 / Tam.: 1 / Tipo: N. Ver valores em {@link SEFAZ_orig}. <br>
+   * Utilizada no contexto de operaÃ§Ãµes interestaduais para consumidor final com partilha do ICMS entre a UF de origem e a UF de destino (ou UF definida na legislaÃ§Ã£o).
    *
    * @return the n11 - orig
    */
@@ -184,8 +184,8 @@ public class SEFAZICMSPartVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # n11 - orig. Origem da mercadoria. Ocor.: 1–1 / Tam.: 1 / Tipo: N. Ver valores em {@link SEFAZ_orig}. <br>
-   * Utilizada no contexto de operações interestaduais para consumidor final com partilha do ICMS entre a UF de origem e a UF de destino (ou UF definida na legislação).
+   * # n11 - orig. Origem da mercadoria. Ocor.: 1â€“1 / Tam.: 1 / Tipo: N. Ver valores em {@link SEFAZ_orig}. <br>
+   * Utilizada no contexto de operaÃ§Ãµes interestaduais para consumidor final com partilha do ICMS entre a UF de origem e a UF de destino (ou UF definida na legislaÃ§Ã£o).
    *
    * @param orig the new n11 - orig
    */
@@ -194,10 +194,10 @@ public class SEFAZICMSPartVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # n12 - CST. Tributação do ICMS. Ocor.: 1–1 / Tam.: 2 / Tipo: N. <br>
+   * # n12 - CST. TributaÃ§Ã£o do ICMS. Ocor.: 1â€“1 / Tam.: 2 / Tipo: N. <br>
    * Valores permitidos para ICMSPart: <br>
-   * 10 – Tributada e com cobrança do ICMS por substituição tributária; <br>
-   * 90 – Outros. <br>
+   * 10 â€“ Tributada e com cobranÃ§a do ICMS por substituiÃ§Ã£o tributÃ¡ria; <br>
+   * 90 â€“ Outros. <br>
    * Mapeado para {@link SEFAZ_CST_ICMS}.
    *
    * @return the n12 - CST
@@ -207,10 +207,10 @@ public class SEFAZICMSPartVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # n12 - CST. Tributação do ICMS. Ocor.: 1–1 / Tam.: 2 / Tipo: N. <br>
+   * # n12 - CST. TributaÃ§Ã£o do ICMS. Ocor.: 1â€“1 / Tam.: 2 / Tipo: N. <br>
    * Valores permitidos para ICMSPart: <br>
-   * 10 – Tributada e com cobrança do ICMS por substituição tributária; <br>
-   * 90 – Outros. <br>
+   * 10 â€“ Tributada e com cobranÃ§a do ICMS por substituiÃ§Ã£o tributÃ¡ria; <br>
+   * 90 â€“ Outros. <br>
    * Mapeado para {@link SEFAZ_CST_ICMS}.
    *
    * @param cst the new n12 - CST
@@ -220,11 +220,11 @@ public class SEFAZICMSPartVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # n13 - modBC. Modalidade de determinação da BC do ICMS. Ocor.: 1–1 / Tam.: 1 / Tipo: N. <br>
+   * # n13 - modBC. Modalidade de determinaÃ§Ã£o da BC do ICMS. Ocor.: 1â€“1 / Tam.: 1 / Tipo: N. <br>
    * 0 = Margem Valor Agregado (%); <br>
    * 1 = Pauta (Valor); <br>
-   * 2 = Preço Tabelado Máx. (valor); <br>
-   * 3 = Valor da operação. <br>
+   * 2 = PreÃ§o Tabelado MÃ¡x. (valor); <br>
+   * 3 = Valor da operaÃ§Ã£o. <br>
    * Mapeado para {@link SEFAZ_modBC}.
    *
    * @return the n13 - modBC
@@ -234,11 +234,11 @@ public class SEFAZICMSPartVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # n13 - modBC. Modalidade de determinação da BC do ICMS. Ocor.: 1–1 / Tam.: 1 / Tipo: N. <br>
+   * # n13 - modBC. Modalidade de determinaÃ§Ã£o da BC do ICMS. Ocor.: 1â€“1 / Tam.: 1 / Tipo: N. <br>
    * 0 = Margem Valor Agregado (%); <br>
    * 1 = Pauta (Valor); <br>
-   * 2 = Preço Tabelado Máx. (valor); <br>
-   * 3 = Valor da operação. <br>
+   * 2 = PreÃ§o Tabelado MÃ¡x. (valor); <br>
+   * 3 = Valor da operaÃ§Ã£o. <br>
    * Mapeado para {@link SEFAZ_modBC}.
    *
    * @param modBC the new n13 - modBC
@@ -248,8 +248,8 @@ public class SEFAZICMSPartVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # n15 - vBC. Valor da base de cálculo do ICMS. Ocor.: 1–1 / Tam.: 13v2 / Tipo: N. (v2.0) <br>
-   * Base de cálculo do ICMS próprio utilizada para a partilha entre as UFs.
+   * # n15 - vBC. Valor da base de cÃ¡lculo do ICMS. Ocor.: 1â€“1 / Tam.: 13v2 / Tipo: N. (v2.0) <br>
+   * Base de cÃ¡lculo do ICMS prÃ³prio utilizada para a partilha entre as UFs.
    *
    * @return the n15 - vBC
    */
@@ -258,8 +258,8 @@ public class SEFAZICMSPartVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # n15 - vBC. Valor da base de cálculo do ICMS. Ocor.: 1–1 / Tam.: 13v2 / Tipo: N. (v2.0) <br>
-   * Base de cálculo do ICMS próprio utilizada para a partilha entre as UFs.
+   * # n15 - vBC. Valor da base de cÃ¡lculo do ICMS. Ocor.: 1â€“1 / Tam.: 13v2 / Tipo: N. (v2.0) <br>
+   * Base de cÃ¡lculo do ICMS prÃ³prio utilizada para a partilha entre as UFs.
    *
    * @param vbc the new n15 - vBC
    */
@@ -268,8 +268,8 @@ public class SEFAZICMSPartVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # n14 - pRedBC. Percentual da redução da base de cálculo do ICMS. Ocor.: 0–1 / Tam.: 3v2–4 / Tipo: N. (v2.0) <br>
-   * Percentual utilizado para redução da BC do ICMS próprio antes da partilha.
+   * # n14 - pRedBC. Percentual da reduÃ§Ã£o da base de cÃ¡lculo do ICMS. Ocor.: 0â€“1 / Tam.: 3v2â€“4 / Tipo: N. (v2.0) <br>
+   * Percentual utilizado para reduÃ§Ã£o da BC do ICMS prÃ³prio antes da partilha.
    *
    * @return the n14 - pRedBC
    */
@@ -278,8 +278,8 @@ public class SEFAZICMSPartVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # n14 - pRedBC. Percentual da redução da base de cálculo do ICMS. Ocor.: 0–1 / Tam.: 3v2–4 / Tipo: N. (v2.0) <br>
-   * Percentual utilizado para redução da BC do ICMS próprio antes da partilha.
+   * # n14 - pRedBC. Percentual da reduÃ§Ã£o da base de cÃ¡lculo do ICMS. Ocor.: 0â€“1 / Tam.: 3v2â€“4 / Tipo: N. (v2.0) <br>
+   * Percentual utilizado para reduÃ§Ã£o da BC do ICMS prÃ³prio antes da partilha.
    *
    * @param predBC the new n14 - pRedBC
    */
@@ -288,8 +288,8 @@ public class SEFAZICMSPartVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # n16 - pICMS. Alíquota do imposto ICMS. Ocor.: 1–1 / Tam.: 3v2–4 / Tipo: N. (v2.0) <br>
-   * Alíquota do ICMS próprio utilizada para cálculo do ICMS devido na operação objeto de partilha (sem considerar FCP; quando houver FCP, utilizar campos específicos).
+   * # n16 - pICMS. AlÃ­quota do imposto ICMS. Ocor.: 1â€“1 / Tam.: 3v2â€“4 / Tipo: N. (v2.0) <br>
+   * AlÃ­quota do ICMS prÃ³prio utilizada para cÃ¡lculo do ICMS devido na operaÃ§Ã£o objeto de partilha (sem considerar FCP; quando houver FCP, utilizar campos especÃ­ficos).
    *
    * @return the n16 - pICMS
    */
@@ -298,8 +298,8 @@ public class SEFAZICMSPartVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # n16 - pICMS. Alíquota do imposto ICMS. Ocor.: 1–1 / Tam.: 3v2–4 / Tipo: N. (v2.0) <br>
-   * Alíquota do ICMS próprio utilizada para cálculo do ICMS devido na operação objeto de partilha (sem considerar FCP; quando houver FCP, utilizar campos específicos).
+   * # n16 - pICMS. AlÃ­quota do imposto ICMS. Ocor.: 1â€“1 / Tam.: 3v2â€“4 / Tipo: N. (v2.0) <br>
+   * AlÃ­quota do ICMS prÃ³prio utilizada para cÃ¡lculo do ICMS devido na operaÃ§Ã£o objeto de partilha (sem considerar FCP; quando houver FCP, utilizar campos especÃ­ficos).
    *
    * @param picms the new n16 - pICMS
    */
@@ -308,8 +308,8 @@ public class SEFAZICMSPartVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # n17 - vICMS. Valor do ICMS. Ocor.: 1–1 / Tam.: 13v2 / Tipo: N. (v2.0) <br>
-   * Valor do ICMS próprio calculado sobre vBC com a alíquota pICMS, referente à operação na qual haverá partilha do ICMS entre as UFs.
+   * # n17 - vICMS. Valor do ICMS. Ocor.: 1â€“1 / Tam.: 13v2 / Tipo: N. (v2.0) <br>
+   * Valor do ICMS prÃ³prio calculado sobre vBC com a alÃ­quota pICMS, referente Ã  operaÃ§Ã£o na qual haverÃ¡ partilha do ICMS entre as UFs.
    *
    * @return the n17 - vICMS
    */
@@ -318,8 +318,8 @@ public class SEFAZICMSPartVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # n17 - vICMS. Valor do ICMS. Ocor.: 1–1 / Tam.: 13v2 / Tipo: N. (v2.0) <br>
-   * Valor do ICMS próprio calculado sobre vBC com a alíquota pICMS, referente à operação na qual haverá partilha do ICMS entre as UFs.
+   * # n17 - vICMS. Valor do ICMS. Ocor.: 1â€“1 / Tam.: 13v2 / Tipo: N. (v2.0) <br>
+   * Valor do ICMS prÃ³prio calculado sobre vBC com a alÃ­quota pICMS, referente Ã  operaÃ§Ã£o na qual haverÃ¡ partilha do ICMS entre as UFs.
    *
    * @param vicms the new n17 - vICMS
    */
@@ -328,8 +328,8 @@ public class SEFAZICMSPartVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # n18 - modBCST. Modalidade de determinação da BC do ICMS ST. Ocor.: 1–1 / Tam.: 1 / Tipo: N. <br>
-   * 0 = Preço tabelado ou máximo sugerido; <br>
+   * # n18 - modBCST. Modalidade de determinaÃ§Ã£o da BC do ICMS ST. Ocor.: 1â€“1 / Tam.: 1 / Tipo: N. <br>
+   * 0 = PreÃ§o tabelado ou mÃ¡ximo sugerido; <br>
    * 1 = Lista Negativa (valor); <br>
    * 2 = Lista Positiva (valor); <br>
    * 3 = Lista Neutra (valor); <br>
@@ -344,8 +344,8 @@ public class SEFAZICMSPartVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # n18 - modBCST. Modalidade de determinação da BC do ICMS ST. Ocor.: 1–1 / Tam.: 1 / Tipo: N. <br>
-   * 0 = Preço tabelado ou máximo sugerido; <br>
+   * # n18 - modBCST. Modalidade de determinaÃ§Ã£o da BC do ICMS ST. Ocor.: 1â€“1 / Tam.: 1 / Tipo: N. <br>
+   * 0 = PreÃ§o tabelado ou mÃ¡ximo sugerido; <br>
    * 1 = Lista Negativa (valor); <br>
    * 2 = Lista Positiva (valor); <br>
    * 3 = Lista Neutra (valor); <br>
@@ -360,8 +360,8 @@ public class SEFAZICMSPartVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # n19 - pMVAST. Percentual da margem de valor adicionado do ICMS ST. Ocor.: 0–1 / Tam.: 3v2–4 / Tipo: N. (v2.0) <br>
-   * Percentual de MVA utilizado na formação da base de cálculo do ICMS ST no contexto da partilha.
+   * # n19 - pMVAST. Percentual da margem de valor adicionado do ICMS ST. Ocor.: 0â€“1 / Tam.: 3v2â€“4 / Tipo: N. (v2.0) <br>
+   * Percentual de MVA utilizado na formaÃ§Ã£o da base de cÃ¡lculo do ICMS ST no contexto da partilha.
    *
    * @return the n19 - pMVAST
    */
@@ -370,8 +370,8 @@ public class SEFAZICMSPartVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # n19 - pMVAST. Percentual da margem de valor adicionado do ICMS ST. Ocor.: 0–1 / Tam.: 3v2–4 / Tipo: N. (v2.0) <br>
-   * Percentual de MVA utilizado na formação da base de cálculo do ICMS ST no contexto da partilha.
+   * # n19 - pMVAST. Percentual da margem de valor adicionado do ICMS ST. Ocor.: 0â€“1 / Tam.: 3v2â€“4 / Tipo: N. (v2.0) <br>
+   * Percentual de MVA utilizado na formaÃ§Ã£o da base de cÃ¡lculo do ICMS ST no contexto da partilha.
    *
    * @param pmvaST the new n19 - pMVAST
    */
@@ -380,8 +380,8 @@ public class SEFAZICMSPartVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # n20 - pRedBCST. Percentual da redução da base de cálculo do ICMS ST. Ocor.: 0–1 / Tam.: 3v2–4 / Tipo: N. (v2.0) <br>
-   * Percentual utilizado para reduzir a BC do ICMS ST no cálculo da partilha.
+   * # n20 - pRedBCST. Percentual da reduÃ§Ã£o da base de cÃ¡lculo do ICMS ST. Ocor.: 0â€“1 / Tam.: 3v2â€“4 / Tipo: N. (v2.0) <br>
+   * Percentual utilizado para reduzir a BC do ICMS ST no cÃ¡lculo da partilha.
    *
    * @return the n20 - pRedBCST
    */
@@ -390,8 +390,8 @@ public class SEFAZICMSPartVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # n20 - pRedBCST. Percentual da redução da base de cálculo do ICMS ST. Ocor.: 0–1 / Tam.: 3v2–4 / Tipo: N. (v2.0) <br>
-   * Percentual utilizado para reduzir a BC do ICMS ST no cálculo da partilha.
+   * # n20 - pRedBCST. Percentual da reduÃ§Ã£o da base de cÃ¡lculo do ICMS ST. Ocor.: 0â€“1 / Tam.: 3v2â€“4 / Tipo: N. (v2.0) <br>
+   * Percentual utilizado para reduzir a BC do ICMS ST no cÃ¡lculo da partilha.
    *
    * @param predBCST the new n20 - pRedBCST
    */
@@ -400,8 +400,8 @@ public class SEFAZICMSPartVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # n21 - vBCST. Valor da base de cálculo do ICMS ST. Ocor.: 1–1 / Tam.: 13v2 / Tipo: N. (v2.0) <br>
-   * Base de cálculo do ICMS ST utilizada para apuração do valor do ICMS ST devido na operação com partilha.
+   * # n21 - vBCST. Valor da base de cÃ¡lculo do ICMS ST. Ocor.: 1â€“1 / Tam.: 13v2 / Tipo: N. (v2.0) <br>
+   * Base de cÃ¡lculo do ICMS ST utilizada para apuraÃ§Ã£o do valor do ICMS ST devido na operaÃ§Ã£o com partilha.
    *
    * @return the n21 - vBCST
    */
@@ -410,8 +410,8 @@ public class SEFAZICMSPartVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # n21 - vBCST. Valor da base de cálculo do ICMS ST. Ocor.: 1–1 / Tam.: 13v2 / Tipo: N. (v2.0) <br>
-   * Base de cálculo do ICMS ST utilizada para apuração do valor do ICMS ST devido na operação com partilha.
+   * # n21 - vBCST. Valor da base de cÃ¡lculo do ICMS ST. Ocor.: 1â€“1 / Tam.: 13v2 / Tipo: N. (v2.0) <br>
+   * Base de cÃ¡lculo do ICMS ST utilizada para apuraÃ§Ã£o do valor do ICMS ST devido na operaÃ§Ã£o com partilha.
    *
    * @param vbcST the new n21 - vBCST
    */
@@ -420,8 +420,8 @@ public class SEFAZICMSPartVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # n22 - pICMSST. Alíquota do imposto do ICMS ST. Ocor.: 1–1 / Tam.: 3v2–4 / Tipo: N. (v2.0) <br>
-   * Alíquota do ICMS ST utilizada para cálculo do ICMS ST devido na operação objeto de partilha.
+   * # n22 - pICMSST. AlÃ­quota do imposto do ICMS ST. Ocor.: 1â€“1 / Tam.: 3v2â€“4 / Tipo: N. (v2.0) <br>
+   * AlÃ­quota do ICMS ST utilizada para cÃ¡lculo do ICMS ST devido na operaÃ§Ã£o objeto de partilha.
    *
    * @return the n22 - pICMSST
    */
@@ -430,8 +430,8 @@ public class SEFAZICMSPartVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # n22 - pICMSST. Alíquota do imposto do ICMS ST. Ocor.: 1–1 / Tam.: 3v2–4 / Tipo: N. (v2.0) <br>
-   * Alíquota do ICMS ST utilizada para cálculo do ICMS ST devido na operação objeto de partilha.
+   * # n22 - pICMSST. AlÃ­quota do imposto do ICMS ST. Ocor.: 1â€“1 / Tam.: 3v2â€“4 / Tipo: N. (v2.0) <br>
+   * AlÃ­quota do ICMS ST utilizada para cÃ¡lculo do ICMS ST devido na operaÃ§Ã£o objeto de partilha.
    *
    * @param picmsST the new n22 - pICMSST
    */
@@ -440,8 +440,8 @@ public class SEFAZICMSPartVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # n23 - vICMSST. Valor do ICMS ST. Ocor.: 1–1 / Tam.: 13v2 / Tipo: N. (v2.0) <br>
-   * Valor do ICMS ST calculado sobre vBCST com a alíquota pICMSST, referente à operação com partilha do ICMS entre as UFs.
+   * # n23 - vICMSST. Valor do ICMS ST. Ocor.: 1â€“1 / Tam.: 13v2 / Tipo: N. (v2.0) <br>
+   * Valor do ICMS ST calculado sobre vBCST com a alÃ­quota pICMSST, referente Ã  operaÃ§Ã£o com partilha do ICMS entre as UFs.
    *
    * @return the n23 - vICMSST
    */
@@ -450,8 +450,8 @@ public class SEFAZICMSPartVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # n23 - vICMSST. Valor do ICMS ST. Ocor.: 1–1 / Tam.: 13v2 / Tipo: N. (v2.0) <br>
-   * Valor do ICMS ST calculado sobre vBCST com a alíquota pICMSST, referente à operação com partilha do ICMS entre as UFs.
+   * # n23 - vICMSST. Valor do ICMS ST. Ocor.: 1â€“1 / Tam.: 13v2 / Tipo: N. (v2.0) <br>
+   * Valor do ICMS ST calculado sobre vBCST com a alÃ­quota pICMSST, referente Ã  operaÃ§Ã£o com partilha do ICMS entre as UFs.
    *
    * @param vicmsST the new n23 - vICMSST
    */
@@ -460,8 +460,8 @@ public class SEFAZICMSPartVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # n25 - pBCOp. Percentual da BC operação própria. Ocor.: 0–1 / Tam.: 3v2–4 / Tipo: N. (v2.0) <br>
-   * Percentual utilizado para determinação do valor da base de cálculo da operação própria na partilha do ICMS.
+   * # n25 - pBCOp. Percentual da BC operaÃ§Ã£o prÃ³pria. Ocor.: 0â€“1 / Tam.: 3v2â€“4 / Tipo: N. (v2.0) <br>
+   * Percentual utilizado para determinaÃ§Ã£o do valor da base de cÃ¡lculo da operaÃ§Ã£o prÃ³pria na partilha do ICMS.
    *
    * @return the n25 - pBCOp
    */
@@ -470,8 +470,8 @@ public class SEFAZICMSPartVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # n25 - pBCOp. Percentual da BC operação própria. Ocor.: 0–1 / Tam.: 3v2–4 / Tipo: N. (v2.0) <br>
-   * Percentual utilizado para determinação do valor da base de cálculo da operação própria na partilha do ICMS.
+   * # n25 - pBCOp. Percentual da BC operaÃ§Ã£o prÃ³pria. Ocor.: 0â€“1 / Tam.: 3v2â€“4 / Tipo: N. (v2.0) <br>
+   * Percentual utilizado para determinaÃ§Ã£o do valor da base de cÃ¡lculo da operaÃ§Ã£o prÃ³pria na partilha do ICMS.
    *
    * @param pbcOp the new n25 - pBCOp
    */
@@ -480,8 +480,8 @@ public class SEFAZICMSPartVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # n24 - UFST. UF para qual é devido o ICMS ST. Ocor.: 1–1 / Tam.: 2 / Tipo: C. (v2.0) <br>
-   * Sigla da UF para qual é devido o ICMS ST da operação. Informar "EX" para Exterior. <br>
+   * # n24 - UFST. UF para qual Ã© devido o ICMS ST. Ocor.: 1â€“1 / Tam.: 2 / Tipo: C. (v2.0) <br>
+   * Sigla da UF para qual Ã© devido o ICMS ST da operaÃ§Ã£o. Informar "EX" para Exterior. <br>
    * Exemplos: "SP", "RJ", "MG", "EX".
    *
    * @return the n24 - UFST
@@ -491,8 +491,8 @@ public class SEFAZICMSPartVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # n24 - UFST. UF para qual é devido o ICMS ST. Ocor.: 1–1 / Tam.: 2 / Tipo: C. (v2.0) <br>
-   * Sigla da UF para qual é devido o ICMS ST da operação. Informar "EX" para Exterior. <br>
+   * # n24 - UFST. UF para qual Ã© devido o ICMS ST. Ocor.: 1â€“1 / Tam.: 2 / Tipo: C. (v2.0) <br>
+   * Sigla da UF para qual Ã© devido o ICMS ST da operaÃ§Ã£o. Informar "EX" para Exterior. <br>
    * Exemplos: "SP", "RJ", "MG", "EX".
    *
    * @param ufST the new n24 - UFST

@@ -22,7 +22,7 @@ public class SEFAZLacresVO extends RFWVO {
   private SEFAZVolVO volVO = null;
 
   /**
-   * X34 - nLacre: Número dos Lacres. Tipo: C, Tamanho: 1-60, Ocorrência: 1-1.
+   * X34 - nLacre: NÃºmero dos Lacres. Tipo: C, Tamanho: 1-60, OcorrÃªncia: 1-1.
    */
   @RFWMetaStringField(caption = "nLacre", required = false, unique = false, maxLength = 60, minLength = 1, preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
   private String nlacre;
@@ -46,18 +46,18 @@ public class SEFAZLacresVO extends RFWVO {
   }
 
   /**
-   * # x34 - nLacre: Número dos Lacres. Tipo: C, Tamanho: 1-60, Ocorrência: 1-1.
+   * # x34 - nLacre: NÃºmero dos Lacres. Tipo: C, Tamanho: 1-60, OcorrÃªncia: 1-1.
    *
-   * @return the x34 - nLacre: Número dos Lacres
+   * @return the x34 - nLacre: NÃºmero dos Lacres
    */
   public String getNlacre() {
     return nlacre;
   }
 
   /**
-   * # x34 - nLacre: Número dos Lacres. Tipo: C, Tamanho: 1-60, Ocorrência: 1-1.
+   * # x34 - nLacre: NÃºmero dos Lacres. Tipo: C, Tamanho: 1-60, OcorrÃªncia: 1-1.
    *
-   * @param nlacre the new x34 - nLacre: Número dos Lacres
+   * @param nlacre the new x34 - nLacre: NÃºmero dos Lacres
    */
   public void setNlacre(String nlacre) {
     this.nlacre = nlacre;

@@ -13,7 +13,7 @@ import br.eng.rodrigogml.rfw.orm.dao.annotations.dao.RFWDAOAnnotation;
  * <p>
  * Ocorre 1-1 dentro do grupo W01 (total da NF-e).
  * <p>
- * O grupo de valores totais da NF-e deve ser informado com o somatório do campo correspondente dos itens.
+ * O grupo de valores totais da NF-e deve ser informado com o somatÃ³rio do campo correspondente dos itens.
  */
 @RFWDAOAnnotation(schema = "_RFW.SEFAZ", table = "sefaz_icmstot")
 public class SEFAZICMSTotVO extends RFWVO {
@@ -27,139 +27,139 @@ public class SEFAZICMSTotVO extends RFWVO {
   private SEFAZTotalVO totalVO = null;
 
   /**
-   * W03 - vBC: Base de Cálculo do ICMS. Tipo: N, Tamanho: 13v2, Ocorrência: 1-1 (obrigatório na estrutura).
+   * W03 - vBC: Base de CÃ¡lculo do ICMS. Tipo: N, Tamanho: 13v2, OcorrÃªncia: 1-1 (obrigatÃ³rio na estrutura).
    */
   @RFWMetaBigDecimalField(caption = "vBC", required = false, unique = false, maxValue = "", minValue = "", scale = 2, absolute = false)
   private BigDecimal vbc;
 
   /**
-   * W04 - vICMS: Valor Total do ICMS. Tipo: N, Tamanho: 13v2, Ocorrência: 1-1 (obrigatório na estrutura).
+   * W04 - vICMS: Valor Total do ICMS. Tipo: N, Tamanho: 13v2, OcorrÃªncia: 1-1 (obrigatÃ³rio na estrutura).
    */
   @RFWMetaBigDecimalField(caption = "vICMS", required = false, unique = false, maxValue = "", minValue = "", scale = 2, absolute = false)
   private BigDecimal vicms;
 
   /**
-   * W04a - vICMSDeson: Valor Total do ICMS desonerado. Tipo: N, Tamanho: 13v2, Ocorrência: 1-1 (obrigatório na estrutura).
+   * W04a - vICMSDeson: Valor Total do ICMS desonerado. Tipo: N, Tamanho: 13v2, OcorrÃªncia: 1-1 (obrigatÃ³rio na estrutura).
    */
   @RFWMetaBigDecimalField(caption = "vICMSDeson", required = false, unique = false, maxValue = "", minValue = "", scale = 2, absolute = false)
   private BigDecimal vicmsDeson;
 
   /**
-   * W04c - vFCPUFDest: Valor total do ICMS relativo ao FCP da UF de destino. Tipo: N, Tamanho: 13v2, Ocorrência: 0-1 (campo opcional). Incluído na NT 2015/003.
+   * W04c - vFCPUFDest: Valor total do ICMS relativo ao FCP da UF de destino. Tipo: N, Tamanho: 13v2, OcorrÃªncia: 0-1 (campo opcional). IncluÃ­do na NT 2015/003.
    */
   @RFWMetaBigDecimalField(caption = "vFCPUFDest", required = false, unique = false, maxValue = "", minValue = "", scale = 2, absolute = false)
   private BigDecimal vfcpUFDest;
 
   /**
-   * W04e - vICMSUFDest: Valor total do ICMS Interestadual para a UF de destino. Tipo: N, Tamanho: 13v2, Ocorrência: 0-1 (campo opcional). Já considera o valor do ICMS relativo ao FCP na UF de destino. Incluído na NT 2015/003.
+   * W04e - vICMSUFDest: Valor total do ICMS Interestadual para a UF de destino. Tipo: N, Tamanho: 13v2, OcorrÃªncia: 0-1 (campo opcional). JÃ¡ considera o valor do ICMS relativo ao FCP na UF de destino. IncluÃ­do na NT 2015/003.
    */
   @RFWMetaBigDecimalField(caption = "vICMSUFDest", required = false, unique = false, maxValue = "", minValue = "", scale = 2, absolute = false)
   private BigDecimal vicmsUFDest;
 
   /**
-   * W04g - vICMSUFRemet: Valor total do ICMS Interestadual para a UF do remetente. Tipo: N, Tamanho: 13v2, Ocorrência: 0-1 (campo opcional). A partir de 2019 este valor será zero. Incluído na NT 2015/003.
+   * W04g - vICMSUFRemet: Valor total do ICMS Interestadual para a UF do remetente. Tipo: N, Tamanho: 13v2, OcorrÃªncia: 0-1 (campo opcional). A partir de 2019 este valor serÃ¡ zero. IncluÃ­do na NT 2015/003.
    */
   @RFWMetaBigDecimalField(caption = "vICMSUFRemet", required = false, unique = false, maxValue = "", minValue = "", scale = 2, absolute = false)
   private BigDecimal vicmsUFRemet;
 
   /**
-   * W04h - vFCP: Valor Total do FCP (Fundo de Combate à Pobreza). Tipo: N, Tamanho: 13v2, Ocorrência: 1-1 (obrigatório na estrutura). Corresponde ao total da soma dos campos id:N17c. Incluído na NT 2016.002.
+   * W04h - vFCP: Valor Total do FCP (Fundo de Combate Ã  Pobreza). Tipo: N, Tamanho: 13v2, OcorrÃªncia: 1-1 (obrigatÃ³rio na estrutura). Corresponde ao total da soma dos campos id:N17c. IncluÃ­do na NT 2016.002.
    */
   @RFWMetaBigDecimalField(caption = "vFCP", required = false, unique = false, maxValue = "", minValue = "", scale = 2, absolute = false)
   private BigDecimal vfcp;
 
   /**
-   * W05 - vBCST: Base de Cálculo do ICMS ST. Tipo: N, Tamanho: 13v2, Ocorrência: 1-1 (obrigatório na estrutura).
+   * W05 - vBCST: Base de CÃ¡lculo do ICMS ST. Tipo: N, Tamanho: 13v2, OcorrÃªncia: 1-1 (obrigatÃ³rio na estrutura).
    */
   @RFWMetaBigDecimalField(caption = "vBCST", required = false, unique = false, maxValue = "", minValue = "", scale = 2, absolute = false)
   private BigDecimal vbcST;
 
   /**
-   * W06 - vST: Valor Total do ICMS ST. Tipo: N, Tamanho: 13v2, Ocorrência: 1-1 (obrigatório na estrutura).
+   * W06 - vST: Valor Total do ICMS ST. Tipo: N, Tamanho: 13v2, OcorrÃªncia: 1-1 (obrigatÃ³rio na estrutura).
    */
   @RFWMetaBigDecimalField(caption = "vST", required = false, unique = false, maxValue = "", minValue = "", scale = 2, absolute = false)
   private BigDecimal vst;
 
   /**
-   * W06a - vFCPST: Valor Total do FCP retido por substituição tributária. Tipo: N, Tamanho: 13v2, Ocorrência: 1-1 (obrigatório na estrutura). Corresponde ao total da soma dos campos id:N23d. Incluído na NT 2016.002.
+   * W06a - vFCPST: Valor Total do FCP retido por substituiÃ§Ã£o tributÃ¡ria. Tipo: N, Tamanho: 13v2, OcorrÃªncia: 1-1 (obrigatÃ³rio na estrutura). Corresponde ao total da soma dos campos id:N23d. IncluÃ­do na NT 2016.002.
    */
   @RFWMetaBigDecimalField(caption = "vFCPST", required = false, unique = false, maxValue = "", minValue = "", scale = 2, absolute = false)
   private BigDecimal vfcpST;
 
   /**
-   * W06b - vFCPSTRet: Valor Total do FCP retido anteriormente por ST. Tipo: N, Tamanho: 13v2, Ocorrência: 1-1 (obrigatório na estrutura). Corresponde ao total da soma dos campos id:N27d. Incluído na NT 2016.002.
+   * W06b - vFCPSTRet: Valor Total do FCP retido anteriormente por ST. Tipo: N, Tamanho: 13v2, OcorrÃªncia: 1-1 (obrigatÃ³rio na estrutura). Corresponde ao total da soma dos campos id:N27d. IncluÃ­do na NT 2016.002.
    */
   @RFWMetaBigDecimalField(caption = "vFCPSTRet", required = false, unique = false, maxValue = "", minValue = "", scale = 2, absolute = false)
   private BigDecimal vfcpSTRet;
 
   /**
-   * W07 - vProd: Valor Total dos produtos e serviços. Tipo: N, Tamanho: 13v2, Ocorrência: 1-1 (obrigatório).
+   * W07 - vProd: Valor Total dos produtos e serviÃ§os. Tipo: N, Tamanho: 13v2, OcorrÃªncia: 1-1 (obrigatÃ³rio).
    */
   @RFWMetaBigDecimalField(caption = "vProd", required = false, unique = false, maxValue = "", minValue = "", scale = 2, absolute = false)
   private BigDecimal vprod;
 
   /**
-   * W08 - vFrete: Valor Total do Frete. Tipo: N, Tamanho: 13v2, Ocorrência: 1-1 (obrigatório).
+   * W08 - vFrete: Valor Total do Frete. Tipo: N, Tamanho: 13v2, OcorrÃªncia: 1-1 (obrigatÃ³rio).
    */
   @RFWMetaBigDecimalField(caption = "vFrete", required = false, unique = false, maxValue = "", minValue = "", scale = 2, absolute = false)
   private BigDecimal vfrete;
 
   /**
-   * W09 - vSeg: Valor Total do Seguro. Tipo: N, Tamanho: 13v2, Ocorrência: 1-1 (obrigatório).
+   * W09 - vSeg: Valor Total do Seguro. Tipo: N, Tamanho: 13v2, OcorrÃªncia: 1-1 (obrigatÃ³rio).
    */
   @RFWMetaBigDecimalField(caption = "vSeg", required = false, unique = false, maxValue = "", minValue = "", scale = 2, absolute = false)
   private BigDecimal vseg;
 
   /**
-   * W10 - vDesc: Valor Total do Desconto. Tipo: N, Tamanho: 13v2, Ocorrência: 1-1 (obrigatório).
+   * W10 - vDesc: Valor Total do Desconto. Tipo: N, Tamanho: 13v2, OcorrÃªncia: 1-1 (obrigatÃ³rio).
    */
   @RFWMetaBigDecimalField(caption = "vDesc", required = false, unique = false, maxValue = "", minValue = "", scale = 2, absolute = false)
   private BigDecimal vdesc;
 
   /**
-   * W11 - vII: Valor Total do Imposto de Importação (II). Tipo: N, Tamanho: 13v2, Ocorrência: 1-1 (obrigatório).
+   * W11 - vII: Valor Total do Imposto de ImportaÃ§Ã£o (II). Tipo: N, Tamanho: 13v2, OcorrÃªncia: 1-1 (obrigatÃ³rio).
    */
   @RFWMetaBigDecimalField(caption = "vII", required = false, unique = false, maxValue = "", minValue = "", scale = 2, absolute = false)
   private BigDecimal vii;
 
   /**
-   * W12 - vIPI: Valor Total do IPI. Tipo: N, Tamanho: 13v2, Ocorrência: 1-1 (obrigatório).
+   * W12 - vIPI: Valor Total do IPI. Tipo: N, Tamanho: 13v2, OcorrÃªncia: 1-1 (obrigatÃ³rio).
    */
   @RFWMetaBigDecimalField(caption = "vIPI", required = false, unique = false, maxValue = "", minValue = "", scale = 2, absolute = false)
   private BigDecimal vipi;
 
   /**
-   * W12a - vIPIDevol: Valor Total do IPI devolvido. Tipo: N, Tamanho: 13v2, Ocorrência: 1-1 (obrigatório na estrutura quando usado). Deve ser informado quando preenchido o Grupo Tributos Devolvidos na emissão de NF-e de devolução (finNFe=4) em operações com não contribuintes do IPI. Corresponde ao total da soma dos campos id:UA04. Incluído na NT 2016.002.
+   * W12a - vIPIDevol: Valor Total do IPI devolvido. Tipo: N, Tamanho: 13v2, OcorrÃªncia: 1-1 (obrigatÃ³rio na estrutura quando usado). Deve ser informado quando preenchido o Grupo Tributos Devolvidos na emissÃ£o de NF-e de devoluÃ§Ã£o (finNFe=4) em operaÃ§Ãµes com nÃ£o contribuintes do IPI. Corresponde ao total da soma dos campos id:UA04. IncluÃ­do na NT 2016.002.
    */
   @RFWMetaBigDecimalField(caption = "vIPIDevol", required = false, unique = false, maxValue = "", minValue = "", scale = 2, absolute = false)
   private BigDecimal vipiDevol;
 
   /**
-   * W13 - vPIS: Valor do PIS. Tipo: N, Tamanho: 13v2, Ocorrência: 1-1 (obrigatório).
+   * W13 - vPIS: Valor do PIS. Tipo: N, Tamanho: 13v2, OcorrÃªncia: 1-1 (obrigatÃ³rio).
    */
   @RFWMetaBigDecimalField(caption = "vPIS", required = false, unique = false, maxValue = "", minValue = "", scale = 2, absolute = false)
   private BigDecimal vpis;
 
   /**
-   * W14 - vCOFINS: Valor da COFINS. Tipo: N, Tamanho: 13v2, Ocorrência: 1-1 (obrigatório).
+   * W14 - vCOFINS: Valor da COFINS. Tipo: N, Tamanho: 13v2, OcorrÃªncia: 1-1 (obrigatÃ³rio).
    */
   @RFWMetaBigDecimalField(caption = "vCOFINS", required = false, unique = false, maxValue = "", minValue = "", scale = 2, absolute = false)
   private BigDecimal vcofins;
 
   /**
-   * W15 - vOutro: Outras Despesas acessórias. Tipo: N, Tamanho: 13v2, Ocorrência: 1-1 (obrigatório).
+   * W15 - vOutro: Outras Despesas acessÃ³rias. Tipo: N, Tamanho: 13v2, OcorrÃªncia: 1-1 (obrigatÃ³rio).
    */
   @RFWMetaBigDecimalField(caption = "vOutro", required = false, unique = false, maxValue = "", minValue = "", scale = 2, absolute = false)
   private BigDecimal voutro;
 
   /**
-   * W16 - vNF: Valor Total da NF-e. Tipo: N, Tamanho: 13v2, Ocorrência: 1-1 (obrigatório). Vide regras de validação W16-xx no MOC.
+   * W16 - vNF: Valor Total da NF-e. Tipo: N, Tamanho: 13v2, OcorrÃªncia: 1-1 (obrigatÃ³rio). Vide regras de validaÃ§Ã£o W16-xx no MOC.
    */
   @RFWMetaBigDecimalField(caption = "vNF", required = false, unique = false, maxValue = "", minValue = "", scale = 2, absolute = false)
   private BigDecimal vnf;
 
   /**
-   * W16a - vTotTrib: Valor aproximado total de tributos federais, estaduais e municipais. Tipo: N, Tamanho: 13v2, Ocorrência: 0-1 (campo opcional). Incluído na NT 2013/003.
+   * W16a - vTotTrib: Valor aproximado total de tributos federais, estaduais e municipais. Tipo: N, Tamanho: 13v2, OcorrÃªncia: 0-1 (campo opcional). IncluÃ­do na NT 2013/003.
    */
   @RFWMetaBigDecimalField(caption = "vTotTrib", required = false, unique = false, maxValue = "", minValue = "", scale = 2, absolute = false)
   private BigDecimal vtotTrib;
@@ -183,25 +183,25 @@ public class SEFAZICMSTotVO extends RFWVO {
   }
 
   /**
-   * # w03 - vBC: Base de Cálculo do ICMS. Tipo: N, Tamanho: 13v2, Ocorrência: 1-1 (obrigatório na estrutura).
+   * # w03 - vBC: Base de CÃ¡lculo do ICMS. Tipo: N, Tamanho: 13v2, OcorrÃªncia: 1-1 (obrigatÃ³rio na estrutura).
    *
-   * @return the w03 - vBC: Base de Cálculo do ICMS
+   * @return the w03 - vBC: Base de CÃ¡lculo do ICMS
    */
   public BigDecimal getVbc() {
     return vbc;
   }
 
   /**
-   * # w03 - vBC: Base de Cálculo do ICMS. Tipo: N, Tamanho: 13v2, Ocorrência: 1-1 (obrigatório na estrutura).
+   * # w03 - vBC: Base de CÃ¡lculo do ICMS. Tipo: N, Tamanho: 13v2, OcorrÃªncia: 1-1 (obrigatÃ³rio na estrutura).
    *
-   * @param vbc the new w03 - vBC: Base de Cálculo do ICMS
+   * @param vbc the new w03 - vBC: Base de CÃ¡lculo do ICMS
    */
   public void setVbc(BigDecimal vbc) {
     this.vbc = vbc;
   }
 
   /**
-   * # w04 - vICMS: Valor Total do ICMS. Tipo: N, Tamanho: 13v2, Ocorrência: 1-1 (obrigatório na estrutura).
+   * # w04 - vICMS: Valor Total do ICMS. Tipo: N, Tamanho: 13v2, OcorrÃªncia: 1-1 (obrigatÃ³rio na estrutura).
    *
    * @return the w04 - vICMS: Valor Total do ICMS
    */
@@ -210,7 +210,7 @@ public class SEFAZICMSTotVO extends RFWVO {
   }
 
   /**
-   * # w04 - vICMS: Valor Total do ICMS. Tipo: N, Tamanho: 13v2, Ocorrência: 1-1 (obrigatório na estrutura).
+   * # w04 - vICMS: Valor Total do ICMS. Tipo: N, Tamanho: 13v2, OcorrÃªncia: 1-1 (obrigatÃ³rio na estrutura).
    *
    * @param vicms the new w04 - vICMS: Valor Total do ICMS
    */
@@ -219,7 +219,7 @@ public class SEFAZICMSTotVO extends RFWVO {
   }
 
   /**
-   * # w04a - vICMSDeson: Valor Total do ICMS desonerado. Tipo: N, Tamanho: 13v2, Ocorrência: 1-1 (obrigatório na estrutura).
+   * # w04a - vICMSDeson: Valor Total do ICMS desonerado. Tipo: N, Tamanho: 13v2, OcorrÃªncia: 1-1 (obrigatÃ³rio na estrutura).
    *
    * @return the w04a - vICMSDeson: Valor Total do ICMS desonerado
    */
@@ -228,7 +228,7 @@ public class SEFAZICMSTotVO extends RFWVO {
   }
 
   /**
-   * # w04a - vICMSDeson: Valor Total do ICMS desonerado. Tipo: N, Tamanho: 13v2, Ocorrência: 1-1 (obrigatório na estrutura).
+   * # w04a - vICMSDeson: Valor Total do ICMS desonerado. Tipo: N, Tamanho: 13v2, OcorrÃªncia: 1-1 (obrigatÃ³rio na estrutura).
    *
    * @param vicmsDeson the new w04a - vICMSDeson: Valor Total do ICMS desonerado
    */
@@ -237,7 +237,7 @@ public class SEFAZICMSTotVO extends RFWVO {
   }
 
   /**
-   * # w04c - vFCPUFDest: Valor total do ICMS relativo ao FCP da UF de destino. Tipo: N, Tamanho: 13v2, Ocorrência: 0-1 (campo opcional). Incluído na NT 2015/003.
+   * # w04c - vFCPUFDest: Valor total do ICMS relativo ao FCP da UF de destino. Tipo: N, Tamanho: 13v2, OcorrÃªncia: 0-1 (campo opcional). IncluÃ­do na NT 2015/003.
    *
    * @return the w04c - vFCPUFDest: Valor total do ICMS relativo ao FCP da UF de destino
    */
@@ -246,7 +246,7 @@ public class SEFAZICMSTotVO extends RFWVO {
   }
 
   /**
-   * # w04c - vFCPUFDest: Valor total do ICMS relativo ao FCP da UF de destino. Tipo: N, Tamanho: 13v2, Ocorrência: 0-1 (campo opcional). Incluído na NT 2015/003.
+   * # w04c - vFCPUFDest: Valor total do ICMS relativo ao FCP da UF de destino. Tipo: N, Tamanho: 13v2, OcorrÃªncia: 0-1 (campo opcional). IncluÃ­do na NT 2015/003.
    *
    * @param vfcpUFDest the new w04c - vFCPUFDest: Valor total do ICMS relativo ao FCP da UF de destino
    */
@@ -255,7 +255,7 @@ public class SEFAZICMSTotVO extends RFWVO {
   }
 
   /**
-   * # w04e - vICMSUFDest: Valor total do ICMS Interestadual para a UF de destino. Tipo: N, Tamanho: 13v2, Ocorrência: 0-1 (campo opcional). Já considera o valor do ICMS relativo ao FCP na UF de destino. Incluído na NT 2015/003.
+   * # w04e - vICMSUFDest: Valor total do ICMS Interestadual para a UF de destino. Tipo: N, Tamanho: 13v2, OcorrÃªncia: 0-1 (campo opcional). JÃ¡ considera o valor do ICMS relativo ao FCP na UF de destino. IncluÃ­do na NT 2015/003.
    *
    * @return the w04e - vICMSUFDest: Valor total do ICMS Interestadual para a UF de destino
    */
@@ -264,7 +264,7 @@ public class SEFAZICMSTotVO extends RFWVO {
   }
 
   /**
-   * # w04e - vICMSUFDest: Valor total do ICMS Interestadual para a UF de destino. Tipo: N, Tamanho: 13v2, Ocorrência: 0-1 (campo opcional). Já considera o valor do ICMS relativo ao FCP na UF de destino. Incluído na NT 2015/003.
+   * # w04e - vICMSUFDest: Valor total do ICMS Interestadual para a UF de destino. Tipo: N, Tamanho: 13v2, OcorrÃªncia: 0-1 (campo opcional). JÃ¡ considera o valor do ICMS relativo ao FCP na UF de destino. IncluÃ­do na NT 2015/003.
    *
    * @param vicmsUFDest the new w04e - vICMSUFDest: Valor total do ICMS Interestadual para a UF de destino
    */
@@ -273,7 +273,7 @@ public class SEFAZICMSTotVO extends RFWVO {
   }
 
   /**
-   * # w04g - vICMSUFRemet: Valor total do ICMS Interestadual para a UF do remetente. Tipo: N, Tamanho: 13v2, Ocorrência: 0-1 (campo opcional). A partir de 2019 este valor será zero. Incluído na NT 2015/003.
+   * # w04g - vICMSUFRemet: Valor total do ICMS Interestadual para a UF do remetente. Tipo: N, Tamanho: 13v2, OcorrÃªncia: 0-1 (campo opcional). A partir de 2019 este valor serÃ¡ zero. IncluÃ­do na NT 2015/003.
    *
    * @return the w04g - vICMSUFRemet: Valor total do ICMS Interestadual para a UF do remetente
    */
@@ -282,7 +282,7 @@ public class SEFAZICMSTotVO extends RFWVO {
   }
 
   /**
-   * # w04g - vICMSUFRemet: Valor total do ICMS Interestadual para a UF do remetente. Tipo: N, Tamanho: 13v2, Ocorrência: 0-1 (campo opcional). A partir de 2019 este valor será zero. Incluído na NT 2015/003.
+   * # w04g - vICMSUFRemet: Valor total do ICMS Interestadual para a UF do remetente. Tipo: N, Tamanho: 13v2, OcorrÃªncia: 0-1 (campo opcional). A partir de 2019 este valor serÃ¡ zero. IncluÃ­do na NT 2015/003.
    *
    * @param vicmsUFRemet the new w04g - vICMSUFRemet: Valor total do ICMS Interestadual para a UF do remetente
    */
@@ -291,43 +291,43 @@ public class SEFAZICMSTotVO extends RFWVO {
   }
 
   /**
-   * # w04h - vFCP: Valor Total do FCP (Fundo de Combate à Pobreza). Tipo: N, Tamanho: 13v2, Ocorrência: 1-1 (obrigatório na estrutura). Corresponde ao total da soma dos campos id:N17c. Incluído na NT 2016.002.
+   * # w04h - vFCP: Valor Total do FCP (Fundo de Combate Ã  Pobreza). Tipo: N, Tamanho: 13v2, OcorrÃªncia: 1-1 (obrigatÃ³rio na estrutura). Corresponde ao total da soma dos campos id:N17c. IncluÃ­do na NT 2016.002.
    *
-   * @return the w04h - vFCP: Valor Total do FCP (Fundo de Combate à Pobreza)
+   * @return the w04h - vFCP: Valor Total do FCP (Fundo de Combate Ã  Pobreza)
    */
   public BigDecimal getVfcp() {
     return vfcp;
   }
 
   /**
-   * # w04h - vFCP: Valor Total do FCP (Fundo de Combate à Pobreza). Tipo: N, Tamanho: 13v2, Ocorrência: 1-1 (obrigatório na estrutura). Corresponde ao total da soma dos campos id:N17c. Incluído na NT 2016.002.
+   * # w04h - vFCP: Valor Total do FCP (Fundo de Combate Ã  Pobreza). Tipo: N, Tamanho: 13v2, OcorrÃªncia: 1-1 (obrigatÃ³rio na estrutura). Corresponde ao total da soma dos campos id:N17c. IncluÃ­do na NT 2016.002.
    *
-   * @param vfcp the new w04h - vFCP: Valor Total do FCP (Fundo de Combate à Pobreza)
+   * @param vfcp the new w04h - vFCP: Valor Total do FCP (Fundo de Combate Ã  Pobreza)
    */
   public void setVfcp(BigDecimal vfcp) {
     this.vfcp = vfcp;
   }
 
   /**
-   * # w05 - vBCST: Base de Cálculo do ICMS ST. Tipo: N, Tamanho: 13v2, Ocorrência: 1-1 (obrigatório na estrutura).
+   * # w05 - vBCST: Base de CÃ¡lculo do ICMS ST. Tipo: N, Tamanho: 13v2, OcorrÃªncia: 1-1 (obrigatÃ³rio na estrutura).
    *
-   * @return the w05 - vBCST: Base de Cálculo do ICMS ST
+   * @return the w05 - vBCST: Base de CÃ¡lculo do ICMS ST
    */
   public BigDecimal getVbcST() {
     return vbcST;
   }
 
   /**
-   * # w05 - vBCST: Base de Cálculo do ICMS ST. Tipo: N, Tamanho: 13v2, Ocorrência: 1-1 (obrigatório na estrutura).
+   * # w05 - vBCST: Base de CÃ¡lculo do ICMS ST. Tipo: N, Tamanho: 13v2, OcorrÃªncia: 1-1 (obrigatÃ³rio na estrutura).
    *
-   * @param vbcST the new w05 - vBCST: Base de Cálculo do ICMS ST
+   * @param vbcST the new w05 - vBCST: Base de CÃ¡lculo do ICMS ST
    */
   public void setVbcST(BigDecimal vbcST) {
     this.vbcST = vbcST;
   }
 
   /**
-   * # w06 - vST: Valor Total do ICMS ST. Tipo: N, Tamanho: 13v2, Ocorrência: 1-1 (obrigatório na estrutura).
+   * # w06 - vST: Valor Total do ICMS ST. Tipo: N, Tamanho: 13v2, OcorrÃªncia: 1-1 (obrigatÃ³rio na estrutura).
    *
    * @return the w06 - vST: Valor Total do ICMS ST
    */
@@ -336,7 +336,7 @@ public class SEFAZICMSTotVO extends RFWVO {
   }
 
   /**
-   * # w06 - vST: Valor Total do ICMS ST. Tipo: N, Tamanho: 13v2, Ocorrência: 1-1 (obrigatório na estrutura).
+   * # w06 - vST: Valor Total do ICMS ST. Tipo: N, Tamanho: 13v2, OcorrÃªncia: 1-1 (obrigatÃ³rio na estrutura).
    *
    * @param vst the new w06 - vST: Valor Total do ICMS ST
    */
@@ -345,25 +345,25 @@ public class SEFAZICMSTotVO extends RFWVO {
   }
 
   /**
-   * # w06a - vFCPST: Valor Total do FCP retido por substituição tributária. Tipo: N, Tamanho: 13v2, Ocorrência: 1-1 (obrigatório na estrutura). Corresponde ao total da soma dos campos id:N23d. Incluído na NT 2016.002.
+   * # w06a - vFCPST: Valor Total do FCP retido por substituiÃ§Ã£o tributÃ¡ria. Tipo: N, Tamanho: 13v2, OcorrÃªncia: 1-1 (obrigatÃ³rio na estrutura). Corresponde ao total da soma dos campos id:N23d. IncluÃ­do na NT 2016.002.
    *
-   * @return the w06a - vFCPST: Valor Total do FCP retido por substituição tributária
+   * @return the w06a - vFCPST: Valor Total do FCP retido por substituiÃ§Ã£o tributÃ¡ria
    */
   public BigDecimal getVfcpST() {
     return vfcpST;
   }
 
   /**
-   * # w06a - vFCPST: Valor Total do FCP retido por substituição tributária. Tipo: N, Tamanho: 13v2, Ocorrência: 1-1 (obrigatório na estrutura). Corresponde ao total da soma dos campos id:N23d. Incluído na NT 2016.002.
+   * # w06a - vFCPST: Valor Total do FCP retido por substituiÃ§Ã£o tributÃ¡ria. Tipo: N, Tamanho: 13v2, OcorrÃªncia: 1-1 (obrigatÃ³rio na estrutura). Corresponde ao total da soma dos campos id:N23d. IncluÃ­do na NT 2016.002.
    *
-   * @param vfcpST the new w06a - vFCPST: Valor Total do FCP retido por substituição tributária
+   * @param vfcpST the new w06a - vFCPST: Valor Total do FCP retido por substituiÃ§Ã£o tributÃ¡ria
    */
   public void setVfcpST(BigDecimal vfcpST) {
     this.vfcpST = vfcpST;
   }
 
   /**
-   * # w06b - vFCPSTRet: Valor Total do FCP retido anteriormente por ST. Tipo: N, Tamanho: 13v2, Ocorrência: 1-1 (obrigatório na estrutura). Corresponde ao total da soma dos campos id:N27d. Incluído na NT 2016.002.
+   * # w06b - vFCPSTRet: Valor Total do FCP retido anteriormente por ST. Tipo: N, Tamanho: 13v2, OcorrÃªncia: 1-1 (obrigatÃ³rio na estrutura). Corresponde ao total da soma dos campos id:N27d. IncluÃ­do na NT 2016.002.
    *
    * @return the w06b - vFCPSTRet: Valor Total do FCP retido anteriormente por ST
    */
@@ -372,7 +372,7 @@ public class SEFAZICMSTotVO extends RFWVO {
   }
 
   /**
-   * # w06b - vFCPSTRet: Valor Total do FCP retido anteriormente por ST. Tipo: N, Tamanho: 13v2, Ocorrência: 1-1 (obrigatório na estrutura). Corresponde ao total da soma dos campos id:N27d. Incluído na NT 2016.002.
+   * # w06b - vFCPSTRet: Valor Total do FCP retido anteriormente por ST. Tipo: N, Tamanho: 13v2, OcorrÃªncia: 1-1 (obrigatÃ³rio na estrutura). Corresponde ao total da soma dos campos id:N27d. IncluÃ­do na NT 2016.002.
    *
    * @param vfcpSTRet the new w06b - vFCPSTRet: Valor Total do FCP retido anteriormente por ST
    */
@@ -381,25 +381,25 @@ public class SEFAZICMSTotVO extends RFWVO {
   }
 
   /**
-   * # w07 - vProd: Valor Total dos produtos e serviços. Tipo: N, Tamanho: 13v2, Ocorrência: 1-1 (obrigatório).
+   * # w07 - vProd: Valor Total dos produtos e serviÃ§os. Tipo: N, Tamanho: 13v2, OcorrÃªncia: 1-1 (obrigatÃ³rio).
    *
-   * @return the w07 - vProd: Valor Total dos produtos e serviços
+   * @return the w07 - vProd: Valor Total dos produtos e serviÃ§os
    */
   public BigDecimal getVprod() {
     return vprod;
   }
 
   /**
-   * # w07 - vProd: Valor Total dos produtos e serviços. Tipo: N, Tamanho: 13v2, Ocorrência: 1-1 (obrigatório).
+   * # w07 - vProd: Valor Total dos produtos e serviÃ§os. Tipo: N, Tamanho: 13v2, OcorrÃªncia: 1-1 (obrigatÃ³rio).
    *
-   * @param vprod the new w07 - vProd: Valor Total dos produtos e serviços
+   * @param vprod the new w07 - vProd: Valor Total dos produtos e serviÃ§os
    */
   public void setVprod(BigDecimal vprod) {
     this.vprod = vprod;
   }
 
   /**
-   * # w08 - vFrete: Valor Total do Frete. Tipo: N, Tamanho: 13v2, Ocorrência: 1-1 (obrigatório).
+   * # w08 - vFrete: Valor Total do Frete. Tipo: N, Tamanho: 13v2, OcorrÃªncia: 1-1 (obrigatÃ³rio).
    *
    * @return the w08 - vFrete: Valor Total do Frete
    */
@@ -408,7 +408,7 @@ public class SEFAZICMSTotVO extends RFWVO {
   }
 
   /**
-   * # w08 - vFrete: Valor Total do Frete. Tipo: N, Tamanho: 13v2, Ocorrência: 1-1 (obrigatório).
+   * # w08 - vFrete: Valor Total do Frete. Tipo: N, Tamanho: 13v2, OcorrÃªncia: 1-1 (obrigatÃ³rio).
    *
    * @param vfrete the new w08 - vFrete: Valor Total do Frete
    */
@@ -417,7 +417,7 @@ public class SEFAZICMSTotVO extends RFWVO {
   }
 
   /**
-   * # w09 - vSeg: Valor Total do Seguro. Tipo: N, Tamanho: 13v2, Ocorrência: 1-1 (obrigatório).
+   * # w09 - vSeg: Valor Total do Seguro. Tipo: N, Tamanho: 13v2, OcorrÃªncia: 1-1 (obrigatÃ³rio).
    *
    * @return the w09 - vSeg: Valor Total do Seguro
    */
@@ -426,7 +426,7 @@ public class SEFAZICMSTotVO extends RFWVO {
   }
 
   /**
-   * # w09 - vSeg: Valor Total do Seguro. Tipo: N, Tamanho: 13v2, Ocorrência: 1-1 (obrigatório).
+   * # w09 - vSeg: Valor Total do Seguro. Tipo: N, Tamanho: 13v2, OcorrÃªncia: 1-1 (obrigatÃ³rio).
    *
    * @param vseg the new w09 - vSeg: Valor Total do Seguro
    */
@@ -435,7 +435,7 @@ public class SEFAZICMSTotVO extends RFWVO {
   }
 
   /**
-   * # w10 - vDesc: Valor Total do Desconto. Tipo: N, Tamanho: 13v2, Ocorrência: 1-1 (obrigatório).
+   * # w10 - vDesc: Valor Total do Desconto. Tipo: N, Tamanho: 13v2, OcorrÃªncia: 1-1 (obrigatÃ³rio).
    *
    * @return the w10 - vDesc: Valor Total do Desconto
    */
@@ -444,7 +444,7 @@ public class SEFAZICMSTotVO extends RFWVO {
   }
 
   /**
-   * # w10 - vDesc: Valor Total do Desconto. Tipo: N, Tamanho: 13v2, Ocorrência: 1-1 (obrigatório).
+   * # w10 - vDesc: Valor Total do Desconto. Tipo: N, Tamanho: 13v2, OcorrÃªncia: 1-1 (obrigatÃ³rio).
    *
    * @param vdesc the new w10 - vDesc: Valor Total do Desconto
    */
@@ -453,25 +453,25 @@ public class SEFAZICMSTotVO extends RFWVO {
   }
 
   /**
-   * # w11 - vII: Valor Total do Imposto de Importação (II). Tipo: N, Tamanho: 13v2, Ocorrência: 1-1 (obrigatório).
+   * # w11 - vII: Valor Total do Imposto de ImportaÃ§Ã£o (II). Tipo: N, Tamanho: 13v2, OcorrÃªncia: 1-1 (obrigatÃ³rio).
    *
-   * @return the w11 - vII: Valor Total do Imposto de Importação (II)
+   * @return the w11 - vII: Valor Total do Imposto de ImportaÃ§Ã£o (II)
    */
   public BigDecimal getVii() {
     return vii;
   }
 
   /**
-   * # w11 - vII: Valor Total do Imposto de Importação (II). Tipo: N, Tamanho: 13v2, Ocorrência: 1-1 (obrigatório).
+   * # w11 - vII: Valor Total do Imposto de ImportaÃ§Ã£o (II). Tipo: N, Tamanho: 13v2, OcorrÃªncia: 1-1 (obrigatÃ³rio).
    *
-   * @param vii the new w11 - vII: Valor Total do Imposto de Importação (II)
+   * @param vii the new w11 - vII: Valor Total do Imposto de ImportaÃ§Ã£o (II)
    */
   public void setVii(BigDecimal vii) {
     this.vii = vii;
   }
 
   /**
-   * # w12 - vIPI: Valor Total do IPI. Tipo: N, Tamanho: 13v2, Ocorrência: 1-1 (obrigatório).
+   * # w12 - vIPI: Valor Total do IPI. Tipo: N, Tamanho: 13v2, OcorrÃªncia: 1-1 (obrigatÃ³rio).
    *
    * @return the w12 - vIPI: Valor Total do IPI
    */
@@ -480,7 +480,7 @@ public class SEFAZICMSTotVO extends RFWVO {
   }
 
   /**
-   * # w12 - vIPI: Valor Total do IPI. Tipo: N, Tamanho: 13v2, Ocorrência: 1-1 (obrigatório).
+   * # w12 - vIPI: Valor Total do IPI. Tipo: N, Tamanho: 13v2, OcorrÃªncia: 1-1 (obrigatÃ³rio).
    *
    * @param vipi the new w12 - vIPI: Valor Total do IPI
    */
@@ -489,7 +489,7 @@ public class SEFAZICMSTotVO extends RFWVO {
   }
 
   /**
-   * # w12a - vIPIDevol: Valor Total do IPI devolvido. Tipo: N, Tamanho: 13v2, Ocorrência: 1-1 (obrigatório na estrutura quando usado). Deve ser informado quando preenchido o Grupo Tributos Devolvidos na emissão de NF-e de devolução (finNFe=4) em operações com não contribuintes do IPI. Corresponde ao total da soma dos campos id:UA04. Incluído na NT 2016.002.
+   * # w12a - vIPIDevol: Valor Total do IPI devolvido. Tipo: N, Tamanho: 13v2, OcorrÃªncia: 1-1 (obrigatÃ³rio na estrutura quando usado). Deve ser informado quando preenchido o Grupo Tributos Devolvidos na emissÃ£o de NF-e de devoluÃ§Ã£o (finNFe=4) em operaÃ§Ãµes com nÃ£o contribuintes do IPI. Corresponde ao total da soma dos campos id:UA04. IncluÃ­do na NT 2016.002.
    *
    * @return the w12a - vIPIDevol: Valor Total do IPI devolvido
    */
@@ -498,7 +498,7 @@ public class SEFAZICMSTotVO extends RFWVO {
   }
 
   /**
-   * # w12a - vIPIDevol: Valor Total do IPI devolvido. Tipo: N, Tamanho: 13v2, Ocorrência: 1-1 (obrigatório na estrutura quando usado). Deve ser informado quando preenchido o Grupo Tributos Devolvidos na emissão de NF-e de devolução (finNFe=4) em operações com não contribuintes do IPI. Corresponde ao total da soma dos campos id:UA04. Incluído na NT 2016.002.
+   * # w12a - vIPIDevol: Valor Total do IPI devolvido. Tipo: N, Tamanho: 13v2, OcorrÃªncia: 1-1 (obrigatÃ³rio na estrutura quando usado). Deve ser informado quando preenchido o Grupo Tributos Devolvidos na emissÃ£o de NF-e de devoluÃ§Ã£o (finNFe=4) em operaÃ§Ãµes com nÃ£o contribuintes do IPI. Corresponde ao total da soma dos campos id:UA04. IncluÃ­do na NT 2016.002.
    *
    * @param vipiDevol the new w12a - vIPIDevol: Valor Total do IPI devolvido
    */
@@ -507,7 +507,7 @@ public class SEFAZICMSTotVO extends RFWVO {
   }
 
   /**
-   * # w13 - vPIS: Valor do PIS. Tipo: N, Tamanho: 13v2, Ocorrência: 1-1 (obrigatório).
+   * # w13 - vPIS: Valor do PIS. Tipo: N, Tamanho: 13v2, OcorrÃªncia: 1-1 (obrigatÃ³rio).
    *
    * @return the w13 - vPIS: Valor do PIS
    */
@@ -516,7 +516,7 @@ public class SEFAZICMSTotVO extends RFWVO {
   }
 
   /**
-   * # w13 - vPIS: Valor do PIS. Tipo: N, Tamanho: 13v2, Ocorrência: 1-1 (obrigatório).
+   * # w13 - vPIS: Valor do PIS. Tipo: N, Tamanho: 13v2, OcorrÃªncia: 1-1 (obrigatÃ³rio).
    *
    * @param vpis the new w13 - vPIS: Valor do PIS
    */
@@ -525,7 +525,7 @@ public class SEFAZICMSTotVO extends RFWVO {
   }
 
   /**
-   * # w14 - vCOFINS: Valor da COFINS. Tipo: N, Tamanho: 13v2, Ocorrência: 1-1 (obrigatório).
+   * # w14 - vCOFINS: Valor da COFINS. Tipo: N, Tamanho: 13v2, OcorrÃªncia: 1-1 (obrigatÃ³rio).
    *
    * @return the w14 - vCOFINS: Valor da COFINS
    */
@@ -534,7 +534,7 @@ public class SEFAZICMSTotVO extends RFWVO {
   }
 
   /**
-   * # w14 - vCOFINS: Valor da COFINS. Tipo: N, Tamanho: 13v2, Ocorrência: 1-1 (obrigatório).
+   * # w14 - vCOFINS: Valor da COFINS. Tipo: N, Tamanho: 13v2, OcorrÃªncia: 1-1 (obrigatÃ³rio).
    *
    * @param vcofins the new w14 - vCOFINS: Valor da COFINS
    */
@@ -543,25 +543,25 @@ public class SEFAZICMSTotVO extends RFWVO {
   }
 
   /**
-   * # w15 - vOutro: Outras Despesas acessórias. Tipo: N, Tamanho: 13v2, Ocorrência: 1-1 (obrigatório).
+   * # w15 - vOutro: Outras Despesas acessÃ³rias. Tipo: N, Tamanho: 13v2, OcorrÃªncia: 1-1 (obrigatÃ³rio).
    *
-   * @return the w15 - vOutro: Outras Despesas acessórias
+   * @return the w15 - vOutro: Outras Despesas acessÃ³rias
    */
   public BigDecimal getVoutro() {
     return voutro;
   }
 
   /**
-   * # w15 - vOutro: Outras Despesas acessórias. Tipo: N, Tamanho: 13v2, Ocorrência: 1-1 (obrigatório).
+   * # w15 - vOutro: Outras Despesas acessÃ³rias. Tipo: N, Tamanho: 13v2, OcorrÃªncia: 1-1 (obrigatÃ³rio).
    *
-   * @param voutro the new w15 - vOutro: Outras Despesas acessórias
+   * @param voutro the new w15 - vOutro: Outras Despesas acessÃ³rias
    */
   public void setVoutro(BigDecimal voutro) {
     this.voutro = voutro;
   }
 
   /**
-   * # w16 - vNF: Valor Total da NF-e. Tipo: N, Tamanho: 13v2, Ocorrência: 1-1 (obrigatório). Vide regras de validação W16-xx no MOC.
+   * # w16 - vNF: Valor Total da NF-e. Tipo: N, Tamanho: 13v2, OcorrÃªncia: 1-1 (obrigatÃ³rio). Vide regras de validaÃ§Ã£o W16-xx no MOC.
    *
    * @return the w16 - vNF: Valor Total da NF-e
    */
@@ -570,7 +570,7 @@ public class SEFAZICMSTotVO extends RFWVO {
   }
 
   /**
-   * # w16 - vNF: Valor Total da NF-e. Tipo: N, Tamanho: 13v2, Ocorrência: 1-1 (obrigatório). Vide regras de validação W16-xx no MOC.
+   * # w16 - vNF: Valor Total da NF-e. Tipo: N, Tamanho: 13v2, OcorrÃªncia: 1-1 (obrigatÃ³rio). Vide regras de validaÃ§Ã£o W16-xx no MOC.
    *
    * @param vnf the new w16 - vNF: Valor Total da NF-e
    */
@@ -579,7 +579,7 @@ public class SEFAZICMSTotVO extends RFWVO {
   }
 
   /**
-   * # w16a - vTotTrib: Valor aproximado total de tributos federais, estaduais e municipais. Tipo: N, Tamanho: 13v2, Ocorrência: 0-1 (campo opcional). Incluído na NT 2013/003.
+   * # w16a - vTotTrib: Valor aproximado total de tributos federais, estaduais e municipais. Tipo: N, Tamanho: 13v2, OcorrÃªncia: 0-1 (campo opcional). IncluÃ­do na NT 2013/003.
    *
    * @return the w16a - vTotTrib: Valor aproximado total de tributos federais, estaduais e municipais
    */
@@ -588,7 +588,7 @@ public class SEFAZICMSTotVO extends RFWVO {
   }
 
   /**
-   * # w16a - vTotTrib: Valor aproximado total de tributos federais, estaduais e municipais. Tipo: N, Tamanho: 13v2, Ocorrência: 0-1 (campo opcional). Incluído na NT 2013/003.
+   * # w16a - vTotTrib: Valor aproximado total de tributos federais, estaduais e municipais. Tipo: N, Tamanho: 13v2, OcorrÃªncia: 0-1 (campo opcional). IncluÃ­do na NT 2013/003.
    *
    * @param vtotTrib the new w16a - vTotTrib: Valor aproximado total de tributos federais, estaduais e municipais
    */

@@ -10,7 +10,7 @@ import br.eng.rodrigogml.rfw.kernel.vo.RFWVO;
 import br.eng.rodrigogml.rfw.orm.dao.annotations.dao.RFWDAOAnnotation;
 
 /**
- * VO para o grupo BA01 (NRef) – Informação de Documentos Fiscais referenciados. Utilizado nas hipóteses previstas na legislação (ex.: devolução de mercadorias, substituição de NF cancelada, complementação de NF etc.), para vincular a NF-e atual a documentos fiscais anteriormente emitidos.
+ * VO para o grupo BA01 (NRef) â€“ InformaÃ§Ã£o de Documentos Fiscais referenciados. Utilizado nas hipÃ³teses previstas na legislaÃ§Ã£o (ex.: devoluÃ§Ã£o de mercadorias, substituiÃ§Ã£o de NF cancelada, complementaÃ§Ã£o de NF etc.), para vincular a NF-e atual a documentos fiscais anteriormente emitidos.
  */
 @RFWDAOAnnotation(schema = "_RFW.SEFAZ", table = "sefaz_nfref")
 public class SEFAZNFRefVO extends RFWVO implements Serializable {
@@ -42,19 +42,19 @@ public class SEFAZNFRefVO extends RFWVO implements Serializable {
   private SEFAZRefNFPVO refNFPVO = null;
 
   /**
-   * BA02 - Chave de acesso da NF-e ou NFC-e referenciada. Referencia uma NF-e (modelo 55) emitida anteriormente, ou uma NFC-e (modelo 65), vinculada à NF-e atual. Ocorrência: 0-1 dentro do grupo NRef.
+   * BA02 - Chave de acesso da NF-e ou NFC-e referenciada. Referencia uma NF-e (modelo 55) emitida anteriormente, ou uma NFC-e (modelo 65), vinculada Ã  NF-e atual. OcorrÃªncia: 0-1 dentro do grupo NRef.
    */
   @RFWMetaStringField(caption = "Chave de acesso da NF-e ou NFC-e referenciada", required = false, unique = false, maxLength = 44, minLength = 44, pattern = "", preProcess = { PreProcessOption.NONE })
   private String refNFe;
 
   /**
-   * BA19 - Chave de acesso do CT-e referenciado. Utilizada para referenciar um CT-e emitido anteriormente, vinculado à NF-e atual. Ocorrência: 0-1 dentro do grupo NRef.
+   * BA19 - Chave de acesso do CT-e referenciado. Utilizada para referenciar um CT-e emitido anteriormente, vinculado Ã  NF-e atual. OcorrÃªncia: 0-1 dentro do grupo NRef.
    */
   @RFWMetaStringField(caption = "Chave de acesso do CT-e referenciado", required = false, unique = false, maxLength = 44, minLength = 44, pattern = "", preProcess = { PreProcessOption.NONE })
   private String refCte;
 
   /**
-   * # bA02 - Chave de acesso da NF-e ou NFC-e referenciada. Referencia uma NF-e (modelo 55) emitida anteriormente, ou uma NFC-e (modelo 65), vinculada à NF-e atual. Ocorrência: 0-1 dentro do grupo NRef.
+   * # bA02 - Chave de acesso da NF-e ou NFC-e referenciada. Referencia uma NF-e (modelo 55) emitida anteriormente, ou uma NFC-e (modelo 65), vinculada Ã  NF-e atual. OcorrÃªncia: 0-1 dentro do grupo NRef.
    *
    * @return the bA02 - Chave de acesso da NF-e ou NFC-e referenciada
    */
@@ -63,7 +63,7 @@ public class SEFAZNFRefVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # bA02 - Chave de acesso da NF-e ou NFC-e referenciada. Referencia uma NF-e (modelo 55) emitida anteriormente, ou uma NFC-e (modelo 65), vinculada à NF-e atual. Ocorrência: 0-1 dentro do grupo NRef.
+   * # bA02 - Chave de acesso da NF-e ou NFC-e referenciada. Referencia uma NF-e (modelo 55) emitida anteriormente, ou uma NFC-e (modelo 65), vinculada Ã  NF-e atual. OcorrÃªncia: 0-1 dentro do grupo NRef.
    *
    * @param refNFe the new bA02 - Chave de acesso da NF-e ou NFC-e referenciada
    */
@@ -72,7 +72,7 @@ public class SEFAZNFRefVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # bA19 - Chave de acesso do CT-e referenciado. Utilizada para referenciar um CT-e emitido anteriormente, vinculado à NF-e atual. Ocorrência: 0-1 dentro do grupo NRef.
+   * # bA19 - Chave de acesso do CT-e referenciado. Utilizada para referenciar um CT-e emitido anteriormente, vinculado Ã  NF-e atual. OcorrÃªncia: 0-1 dentro do grupo NRef.
    *
    * @return the bA19 - Chave de acesso do CT-e referenciado
    */
@@ -81,7 +81,7 @@ public class SEFAZNFRefVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # bA19 - Chave de acesso do CT-e referenciado. Utilizada para referenciar um CT-e emitido anteriormente, vinculado à NF-e atual. Ocorrência: 0-1 dentro do grupo NRef.
+   * # bA19 - Chave de acesso do CT-e referenciado. Utilizada para referenciar um CT-e emitido anteriormente, vinculado Ã  NF-e atual. OcorrÃªncia: 0-1 dentro do grupo NRef.
    *
    * @param refCte the new bA19 - Chave de acesso do CT-e referenciado
    */

@@ -86,8 +86,8 @@ import xsdobjects.inutNFe400.TInutNFe;
 import xsdobjects.inutNFe400.TRetInutNFe;
 
 /**
- * Description: Objeto utilizado para abstrair toda a comunicação com o servidor da SEFAZ.<br>
- * Devemos expor os métodos nesta classe como se fossem uma chamada direta nos serviços disponibilizados pela SEFAZ.
+ * Description: Objeto utilizado para abstrair toda a comunicaÃ§Ã£o com o servidor da SEFAZ.<br>
+ * Devemos expor os mÃ©todos nesta classe como se fossem uma chamada direta nos serviÃ§os disponibilizados pela SEFAZ.
  *
  * @author Rodrigo GML
  * @since 1.0.0 (24 de ago. de 2023)
@@ -96,38 +96,38 @@ import xsdobjects.inutNFe400.TRetInutNFe;
 public class SEFAZ {
 
   /**
-   * Definição do estado/servidor de comunicação
+   * DefiniÃ§Ã£o do estado/servidor de comunicaÃ§Ã£o
    */
   private final SEFAZ_WebServices ws;
 
   /**
-   * Definição do ambiente de comunicação (Homologação/Produção).
+   * DefiniÃ§Ã£o do ambiente de comunicaÃ§Ã£o (HomologaÃ§Ã£o/ProduÃ§Ã£o).
    */
   private final SEFAZ_tpAmb env;
 
   /**
-   * Mantém a referência para o certificado para assinar os documentos necessários em alguns métodos
+   * MantÃ©m a referÃªncia para o certificado para assinar os documentos necessÃ¡rios em alguns mÃ©todos
    */
   private final RFWCertificate cert;
 
   /**
-   * Define o tipo de contingência que o sistema está usando no momento.<br>
-   * NULL indica que não estamos em contingência, e estamos usando o ambiente normal.
+   * Define o tipo de contingÃªncia que o sistema estÃ¡ usando no momento.<br>
+   * NULL indica que nÃ£o estamos em contingÃªncia, e estamos usando o ambiente normal.
    */
   private SefazContingency contingency = null;
 
   /**
-   * HttpClient criado com o SSLContext personalizado com o certificado de assinatura do cliente e os certificados confiáveis do servidor da SEFAZ.
+   * HttpClient criado com o SSLContext personalizado com o certificado de assinatura do cliente e os certificados confiÃ¡veis do servidor da SEFAZ.
    */
   private final CloseableHttpClient httpClientCustom;
 
   /**
-   * Instancia o objeto para comunicação com o WS da SEFAZ.<br>
-   * Carrega o trustCert inserido na distribuição do módulo RFW.SEFAZ, a depender da versão pode conter certificados vencidos e causar problemas de comunicação.<br>
+   * Instancia o objeto para comunicaÃ§Ã£o com o WS da SEFAZ.<br>
+   * Carrega o trustCert inserido na distribuiÃ§Ã£o do mÃ³dulo RFW.SEFAZ, a depender da versÃ£o pode conter certificados vencidos e causar problemas de comunicaÃ§Ã£o.<br>
    *
-   * @param cert Certificado a ser utilizado nas operações de assinatura e transmissão. Se passado nulo faremos a conexão sem a identificação do certificado cliente. Geralmente um Certificado do Tipo A1.
-   * @param uf UF do emitente do documento, utilizado para determinar o ambiente e outros parametros de comunicação.
-   * @param env Ambiente a ser utilizado na emissão de documentos e comunicação.
+   * @param cert Certificado a ser utilizado nas operaÃ§Ãµes de assinatura e transmissÃ£o. Se passado nulo faremos a conexÃ£o sem a identificaÃ§Ã£o do certificado cliente. Geralmente um Certificado do Tipo A1.
+   * @param uf UF do emitente do documento, utilizado para determinar o ambiente e outros parametros de comunicaÃ§Ã£o.
+   * @param env Ambiente a ser utilizado na emissÃ£o de documentos e comunicaÃ§Ã£o.
    * @throws RFWException
    */
   public SEFAZ(RFWCertificate cert, SEFAZ_WebServices ws, SEFAZ_tpAmb env) throws RFWException {
@@ -154,12 +154,12 @@ public class SEFAZ {
   }
 
   /**
-   * Instancia o objeto para comunicação com o WS da SEFAZ
+   * Instancia o objeto para comunicaÃ§Ã£o com o WS da SEFAZ
    *
-   * @param cert Certificado a ser utilizado nas operações de assinatura e transmissão. Se passado nulo faremos a conexão sem a identificação do certificado cliente. Geralmente um Certificado do Tipo A1.
-   * @param trustCert Certificados aceitos como assinatura do servidor da SEFAZ. Geralmente um JKS com os certificados públicos das CAs atuais da SEFAZ.
-   * @param ws WebService a ser utilizado na comunicação.
-   * @param env Ambiente a ser utilizado na emissão de documentos e comunicação.
+   * @param cert Certificado a ser utilizado nas operaÃ§Ãµes de assinatura e transmissÃ£o. Se passado nulo faremos a conexÃ£o sem a identificaÃ§Ã£o do certificado cliente. Geralmente um Certificado do Tipo A1.
+   * @param trustCert Certificados aceitos como assinatura do servidor da SEFAZ. Geralmente um JKS com os certificados pÃºblicos das CAs atuais da SEFAZ.
+   * @param ws WebService a ser utilizado na comunicaÃ§Ã£o.
+   * @param env Ambiente a ser utilizado na emissÃ£o de documentos e comunicaÃ§Ã£o.
    * @throws RFWException
    */
   public SEFAZ(RFWCertificate cert, RFWCertificate trustCert, SEFAZ_WebServices ws, SEFAZ_tpAmb env) throws RFWException {
@@ -184,7 +184,7 @@ public class SEFAZ {
       tm = RUCert.createTrustManager(trustKStore);
     }
 
-    // Inicializa o Contexto SSL que será utilizado nos Stubs do axis para autenticar e validar a conexão com a SEFAZ.
+    // Inicializa o Contexto SSL que serÃ¡ utilizado nos Stubs do axis para autenticar e validar a conexÃ£o com a SEFAZ.
     try {
       if (km != null || tm != null) {
         final SSLContext sc = SSLContext.getInstance("TLS");
@@ -198,14 +198,14 @@ public class SEFAZ {
         this.httpClientCustom = null;
       }
     } catch (Exception e) {
-      throw new RFWCriticalException("Falha ao inicializar o contexto de segurança para conexão!", e);
+      throw new RFWCriticalException("Falha ao inicializar o contexto de seguranÃ§a para conexÃ£o!", e);
     }
   }
 
   /**
-   * Chama o método "consultaCadastro v2.00" disponibilizado no WebSerice da SEFAZ para consultar o contribuinte. <Br>
+   * Chama o mÃ©todo "consultaCadastro v2.00" disponibilizado no WebSerice da SEFAZ para consultar o contribuinte. <Br>
    *
-   * @param root Objeto representando o XML para envio da requisição.
+   * @param root Objeto representando o XML para envio da requisiÃ§Ã£o.
    * @return Objeto do XML da mensagem de retorno do WebService.
    * @throws RFWException
    */
@@ -215,9 +215,9 @@ public class SEFAZ {
   }
 
   /**
-   * Chama o método "consultaCadastro v2.00" disponibilizado no WebSerice da SEFAZ para consultar o contribuinte. <Br>
+   * Chama o mÃ©todo "consultaCadastro v2.00" disponibilizado no WebSerice da SEFAZ para consultar o contribuinte. <Br>
    *
-   * @param root Objeto representando o XML para envio da requisição.
+   * @param root Objeto representando o XML para envio da requisiÃ§Ã£o.
    * @return XML da mensagem de retorno do WebService.
    * @throws RFWException
    */
@@ -230,7 +230,7 @@ public class SEFAZ {
     String msg = SEFAZUtils.writeXMLFromObject(root);
     try {
 
-      // Valida o XML com o schema antes de tentar a conexão
+      // Valida o XML com o schema antes de tentar a conexÃ£o
       SEFAZXMLValidator.validateNfeStatusServicoNFV400(msg);
 
       req.set(XmlObject.Factory.parse(msg));
@@ -246,20 +246,20 @@ public class SEFAZ {
       return result.getNfeResultMsg().toString();
     } catch (RemoteException e) {
       if ("Transport error: 403 Error: Forbidden".equals(e.getMessage())) {
-        throw new RFWWarningException("Não foi possível comunicar com o servidor da SEFAZ.", e);
+        throw new RFWWarningException("NÃ£o foi possÃ­vel comunicar com o servidor da SEFAZ.", e);
       } else if ("Read timed out".equals(e.getMessage())) {
-        throw new RFWWarningException("Não foi possível comunicar com o servidor da SEFAZ.", e);
+        throw new RFWWarningException("NÃ£o foi possÃ­vel comunicar com o servidor da SEFAZ.", e);
       } else {
-        RFWLogger.logError("Mensagem não mapeada de erro durante comunicação com a SEFAZ: " + e.getMessage());
-        throw new RFWWarningException("Não foi possível comunicar com o servidor da SEFAZ.", e);
+        RFWLogger.logError("Mensagem nÃ£o mapeada de erro durante comunicaÃ§Ã£o com a SEFAZ: " + e.getMessage());
+        throw new RFWWarningException("NÃ£o foi possÃ­vel comunicar com o servidor da SEFAZ.", e);
       }
     }
   }
 
   /**
-   * Chama o método "consultaCadastro" disponibilizado no WebSerice da SEFAZ para consultar o contribuinte.
+   * Chama o mÃ©todo "consultaCadastro" disponibilizado no WebSerice da SEFAZ para consultar o contribuinte.
    *
-   * @param cpf Número do CPF a ser consultado.
+   * @param cpf NÃºmero do CPF a ser consultado.
    * @return XML da mensagem de retorno do WebService.
    * @throws RFWException
    */
@@ -269,9 +269,9 @@ public class SEFAZ {
   }
 
   /**
-   * Chama o método "consultaCadastro" disponibilizado no WebSerice da SEFAZ para consultar o contribuinte.
+   * Chama o mÃ©todo "consultaCadastro" disponibilizado no WebSerice da SEFAZ para consultar o contribuinte.
    *
-   * @param cnpj Número do CNPJ a ser consultado.
+   * @param cnpj NÃºmero do CNPJ a ser consultado.
    * @return XML da mensagem de retorno do WebService.
    * @throws RFWException
    */
@@ -281,9 +281,9 @@ public class SEFAZ {
   }
 
   /**
-   * Chama o método "consultaCadastro" disponibilizado no WebSerice da SEFAZ para consultar o contribuinte.
+   * Chama o mÃ©todo "consultaCadastro" disponibilizado no WebSerice da SEFAZ para consultar o contribuinte.
    *
-   * @param ie Número da Inscrução Estadual a ser consultada.
+   * @param ie NÃºmero da InscruÃ§Ã£o Estadual a ser consultada.
    * @return XML da mensagem de retorno do WebService.
    * @throws RFWException
    */
@@ -293,9 +293,9 @@ public class SEFAZ {
   }
 
   /**
-   * Chama o método "consultaCadastro v2.00" disponibilizado no WebSerice da SEFAZ para consultar o contribuinte. <Br>
+   * Chama o mÃ©todo "consultaCadastro v2.00" disponibilizado no WebSerice da SEFAZ para consultar o contribuinte. <Br>
    *
-   * @param root Objeto representando o XML para envio da requisição.
+   * @param root Objeto representando o XML para envio da requisiÃ§Ã£o.
    * @return Objeto do XML da mensagem de retorno do WebService.
    * @throws RFWException
    */
@@ -304,9 +304,9 @@ public class SEFAZ {
   }
 
   /**
-   * Chama o método "consultaCadastro v2.00" disponibilizado no WebSerice da SEFAZ para consultar o contribuinte. <Br>
+   * Chama o mÃ©todo "consultaCadastro v2.00" disponibilizado no WebSerice da SEFAZ para consultar o contribuinte. <Br>
    *
-   * @param root Objeto representando o XML para envio da requisição.
+   * @param root Objeto representando o XML para envio da requisiÃ§Ã£o.
    * @return XML da mensagem de retorno do WebService.
    * @throws RFWException
    */
@@ -329,21 +329,21 @@ public class SEFAZ {
       return result.getNfeResultMsg().toString();
     } catch (RemoteException e) {
       if ("Transport error: 403 Error: Forbidden".equals(e.getMessage())) {
-        throw new RFWWarningException("Não foi possível comunicar com o servidor da SEFAZ.", e);
+        throw new RFWWarningException("NÃ£o foi possÃ­vel comunicar com o servidor da SEFAZ.", e);
       } else if ("Read timed out".equals(e.getMessage())) {
-        throw new RFWWarningException("Não foi possível comunicar com o servidor da SEFAZ.", e);
+        throw new RFWWarningException("NÃ£o foi possÃ­vel comunicar com o servidor da SEFAZ.", e);
       } else {
-        RFWLogger.logError("Mensagem não mapeada de erro durante comunicação com a SEFAZ: " + e.getMessage());
-        throw new RFWWarningException("Não foi possível comunicar com o servidor da SEFAZ.", e);
+        RFWLogger.logError("Mensagem nÃ£o mapeada de erro durante comunicaÃ§Ã£o com a SEFAZ: " + e.getMessage());
+        throw new RFWWarningException("NÃ£o foi possÃ­vel comunicar com o servidor da SEFAZ.", e);
       }
     }
   }
 
   /**
-   * Chama o método "nfeAutorizacaoLote v4.00" disponibilizado no WebSerice da SEFAZ para consultar o contribuinte. <Br>
+   * Chama o mÃ©todo "nfeAutorizacaoLote v4.00" disponibilizado no WebSerice da SEFAZ para consultar o contribuinte. <Br>
    *
-   * @param root Objeto representando o XML para envio da requisição.
-   * @return Object[] com 2 posições onde: 0 - String com o XML enviado como msg para a SEFAZ, tag raiz &lt;enviNFe&gt; cm todas as NFes assinadas dentro (para arquivamento do sistema ou conferência); 1 - TRetEnviNFe equivalente ao XML de retorno da SEFAZ.
+   * @param root Objeto representando o XML para envio da requisiÃ§Ã£o.
+   * @return Object[] com 2 posiÃ§Ãµes onde: 0 - String com o XML enviado como msg para a SEFAZ, tag raiz &lt;enviNFe&gt; cm todas as NFes assinadas dentro (para arquivamento do sistema ou conferÃªncia); 1 - TRetEnviNFe equivalente ao XML de retorno da SEFAZ.
    * @throws RFWException
    */
   public Object[] nfeAutorizacaoLoteV400(TEnviNFe root) throws RFWException {
@@ -352,10 +352,10 @@ public class SEFAZ {
   }
 
   /**
-   * Chama o método "nfeAutorizacaoLote v4.00" disponibilizado no WebSerice da SEFAZ para consultar o contribuinte. <Br>
+   * Chama o mÃ©todo "nfeAutorizacaoLote v4.00" disponibilizado no WebSerice da SEFAZ para consultar o contribuinte. <Br>
    *
-   * @param root Objeto representando o XML para envio da requisição.
-   * @return String[] com 2 posições onde: 0 - XML enviado como msg para a SEFAZ, tag raiz &lt;enviNFe&gt; cm todas as NFes assinadas dentro (para arquivamento do sistema ou conferência); 1 - XML de retorno da SEFAZ.
+   * @param root Objeto representando o XML para envio da requisiÃ§Ã£o.
+   * @return String[] com 2 posiÃ§Ãµes onde: 0 - XML enviado como msg para a SEFAZ, tag raiz &lt;enviNFe&gt; cm todas as NFes assinadas dentro (para arquivamento do sistema ou conferÃªncia); 1 - XML de retorno da SEFAZ.
    * @throws RFWException
    */
   public String[] nfeAutorizacaoLoteV400asXML(TEnviNFe root) throws RFWException {
@@ -368,14 +368,14 @@ public class SEFAZ {
     if (mod == null) throw new RFWCriticalException("Falha ao detectar o modelo da NF!");
 
     if (!SEFAZ_mod.NFE_MODELO_55.equals(mod) && !SEFAZ_mod.NFCE_MODELO_65.equals(mod)) {
-      throw new RFWCriticalException("Este método só permite a emissão de documentos fo tipo NFe ou NFCe (não simultâneamente). Documento inválido: '${0}'.", new String[] { RFWBundle.get(mod) });
+      throw new RFWCriticalException("Este mÃ©todo sÃ³ permite a emissÃ£o de documentos fo tipo NFe ou NFCe (nÃ£o simultÃ¢neamente). Documento invÃ¡lido: '${0}'.", new String[] { RFWBundle.get(mod) });
     }
 
     for (int i = 1; i < root.getNFe().size(); i++) {
       TNFe tNFe = root.getNFe().get(i);
       try {
         if (!mod.getXmlData().equals(tNFe.getInfNFe().getIde().getMod())) {
-          throw new RFWCriticalException("Não é permitido misturar diferentes modelos de documentos no mesmo Lote para Autorização! Modelo do primeiro documento: '${0}'.", new String[] { RFWBundle.get(mod) });
+          throw new RFWCriticalException("NÃ£o Ã© permitido misturar diferentes modelos de documentos no mesmo Lote para AutorizaÃ§Ã£o! Modelo do primeiro documento: '${0}'.", new String[] { RFWBundle.get(mod) });
         }
       } catch (Exception e) {
         throw new RFWCriticalException("Falha ao identificar o modelo do documento. Index: '${0}'.", new String[] { "" + i }, e);
@@ -413,28 +413,28 @@ public class SEFAZ {
       return new String[] { msg, xmlRet };
     } catch (RemoteException e) {
       if ("Transport error: 403 Error: Forbidden".equals(e.getMessage())) {
-        throw new RFWWarningException("Não foi possível comunicar com o servidor da SEFAZ.", e);
+        throw new RFWWarningException("NÃ£o foi possÃ­vel comunicar com o servidor da SEFAZ.", e);
       } else if ("Read timed out".equals(e.getMessage())) {
-        throw new RFWWarningException("Não foi possível comunicar com o servidor da SEFAZ.", e);
+        throw new RFWWarningException("NÃ£o foi possÃ­vel comunicar com o servidor da SEFAZ.", e);
       } else {
-        RFWLogger.logError("Mensagem não mapeada de erro durante comunicação com a SEFAZ: " + e.getMessage());
-        throw new RFWWarningException("Não foi possível comunicar com o servidor da SEFAZ.", e);
+        RFWLogger.logError("Mensagem nÃ£o mapeada de erro durante comunicaÃ§Ã£o com a SEFAZ: " + e.getMessage());
+        throw new RFWWarningException("NÃ£o foi possÃ­vel comunicar com o servidor da SEFAZ.", e);
       }
     }
   }
 
   /**
-   * Gera e insere a tag <infNFeSupl> com o QR-Code versão 3 da NFC-e diretamente no XML já assinado (tag <Signature> já presente).
+   * Gera e insere a tag <infNFeSupl> com o QR-Code versÃ£o 3 da NFC-e diretamente no XML jÃ¡ assinado (tag <Signature> jÃ¡ presente).
    *
-   * - Emissão normal (tpEmis = "1"): QR-Code v3 ONLINE: p = <chave_acesso>|3|<tpAmb>
+   * - EmissÃ£o normal (tpEmis = "1"): QR-Code v3 ONLINE: p = <chave_acesso>|3|<tpAmb>
    *
-   * - Emissão em contingência offline (tpEmis = "9"): QR-Code v3 OFFLINE: p = <chave_acesso>|3|<tpAmb>|<dia_data_emissao>|<vNF>|<tp_idDest>|<idDest>|<assinatura> A assinatura é RSA-SHA1 em Base64 da concatenação dos parâmetros de 1 a 7, mantendo os separadores "|", usando o mesmo certificado que assina a NFC-e.
+   * - EmissÃ£o em contingÃªncia offline (tpEmis = "9"): QR-Code v3 OFFLINE: p = <chave_acesso>|3|<tpAmb>|<dia_data_emissao>|<vNF>|<tp_idDest>|<idDest>|<assinatura> A assinatura Ã© RSA-SHA1 em Base64 da concatenaÃ§Ã£o dos parÃ¢metros de 1 a 7, mantendo os separadores "|", usando o mesmo certificado que assina a NFC-e.
    *
-   * A <infNFeSupl> é inserida logo após <infNFe> e antes de <Signature>.
+   * A <infNFeSupl> Ã© inserida logo apÃ³s <infNFe> e antes de <Signature>.
    *
-   * @param msg XML de envio (<enviNFe>) já assinado.
+   * @param msg XML de envio (<enviNFe>) jÃ¡ assinado.
    * @return XML com as tags <infNFeSupl> preenchidas para cada NFC-e (modelo 65).
-   * @throws RFWException Em caso de falha na montagem ou manipulação do XML.
+   * @throws RFWException Em caso de falha na montagem ou manipulaÃ§Ã£o do XML.
    */
   private String preencherInfNFeSuplComQRCode(String msg) throws RFWException {
     final String NFE_NS = "http://www.portalfiscal.inf.br/nfe";
@@ -474,10 +474,10 @@ public class SEFAZ {
       for (int i = 0; i < nfeList.getLength(); i++) {
         Element nfeEl = (Element) nfeList.item(i);
 
-        // Não aceitar infNFeSupl pré-preenchida
+        // NÃ£o aceitar infNFeSupl prÃ©-preenchida
         Element existingSupl = (Element) nfeEl.getElementsByTagNameNS(NFE_NS, "infNFeSupl").item(0);
         if (existingSupl != null) {
-          throw new RFWCriticalException("Não é esperado que a tag 'infNFeSupl' esteja preenchida na NFCe. Ela será gerada automaticamente após a assinatura do XML.");
+          throw new RFWCriticalException("NÃ£o Ã© esperado que a tag 'infNFeSupl' esteja preenchida na NFCe. Ela serÃ¡ gerada automaticamente apÃ³s a assinatura do XML.");
         }
 
         // <infNFe>
@@ -496,16 +496,16 @@ public class SEFAZ {
         // Ambiente
         String tpAmb = getTextContent(xpath, infNFeEl, "nfe:ide/nfe:tpAmb");
         if (tpAmb == null || tpAmb.isEmpty()) {
-          throw new RFWCriticalException("Campo tpAmb não encontrado na NFCe para montagem do QR-Code.");
+          throw new RFWCriticalException("Campo tpAmb nÃ£o encontrado na NFCe para montagem do QR-Code.");
         }
 
-        // Tipo de emissão
+        // Tipo de emissÃ£o
         String tpEmis = getTextContent(xpath, infNFeEl, "nfe:ide/nfe:tpEmis");
         if (tpEmis == null || tpEmis.isEmpty()) {
-          throw new RFWCriticalException("Campo tpEmis não encontrado na NFCe para montagem do QR-Code.");
+          throw new RFWCriticalException("Campo tpEmis nÃ£o encontrado na NFCe para montagem do QR-Code.");
         }
 
-        // Versão do QR-Code
+        // VersÃ£o do QR-Code
         final String versaoQR = "3";
 
         // URL base de consulta do QR-Code e da chave, por ambiente (SP)
@@ -513,15 +513,15 @@ public class SEFAZ {
         final String urlChave;
 
         // Recupera a UF a partir do ambiente que estamos utilizando, para recuperar as URLs do QRcode e consulta.
-        // TODO Quando entender melhor quando os ambientes SVN forrem utilizados, melhor esse código, pois os valores de WS não estão 100% como UFs.
+        // TODO Quando entender melhor quando os ambientes SVN forrem utilizados, melhor esse cÃ³digo, pois os valores de WS nÃ£o estÃ£o 100% como UFs.
         SEFAZ_uf uf = SEFAZ_uf.valueOf(this.ws.toString());
 
         if ("2".equals(tpAmb)) {
-          // Homologação
+          // HomologaÃ§Ã£o
           baseQrUrl = uf.getQrCodeHomUrl();
           urlChave = uf.getConsultaHomUrl();
         } else {
-          // Produção
+          // ProduÃ§Ã£o
           baseQrUrl = uf.getQrCodeProdUrl();
           urlChave = uf.getConsultaProdUrl();
         }
@@ -529,7 +529,7 @@ public class SEFAZ {
         final String p;
         if ("1".equals(tpEmis)) {
           // -----------------------------
-          // EMISSÃO NORMAL – ONLINE (v3)
+          // EMISSÃƒO NORMAL â€“ ONLINE (v3)
           // p = chave|3|tpAmb
           // -----------------------------
           StringBuilder sb = new StringBuilder();
@@ -537,24 +537,24 @@ public class SEFAZ {
           p = sb.toString();
         } else if ("9".equals(tpEmis)) {
           // ----------------------------------------
-          // CONTINGÊNCIA OFFLINE – v3
+          // CONTINGÃŠNCIA OFFLINE â€“ v3
           // p = chave|3|tpAmb|dia|vNF|tp_idDest|idDest|assinatura
           // ----------------------------------------
 
-          // dhEmi (ISO 8601) – usamos apenas o dia (dois dígitos)
+          // dhEmi (ISO 8601) â€“ usamos apenas o dia (dois dÃ­gitos)
           String dhEmi = getTextContent(xpath, infNFeEl, "nfe:ide/nfe:dhEmi");
           if (dhEmi == null || dhEmi.length() < 10) {
-            throw new RFWCriticalException("Campo dhEmi inválido para emissão em contingência (QR-Code v3).");
+            throw new RFWCriticalException("Campo dhEmi invÃ¡lido para emissÃ£o em contingÃªncia (QR-Code v3).");
           }
           String diaEmissao = dhEmi.substring(8, 10); // yyyy-MM-dd...
 
           // vNF total
           String vNF = getTextContent(xpath, infNFeEl, "nfe:total/nfe:ICMSTot/nfe:vNF");
           if (vNF == null || vNF.isEmpty()) {
-            throw new RFWCriticalException("Campo vNF não encontrado para montagem do QR-Code v3 offline.");
+            throw new RFWCriticalException("Campo vNF nÃ£o encontrado para montagem do QR-Code v3 offline.");
           }
 
-          // Destinatário
+          // DestinatÃ¡rio
           String tpIdDest = "";
           String idDest = "";
           Element destEl = (Element) infNFeEl.getElementsByTagNameNS(NFE_NS, "dest").item(0);
@@ -588,12 +588,12 @@ public class SEFAZ {
             }
           }
 
-          // Monta string base (parâmetros 1..7)
+          // Monta string base (parÃ¢metros 1..7)
           StringBuilder payload = new StringBuilder();
           payload.append(chave).append('|').append(versaoQR).append('|').append(tpAmb).append('|').append(diaEmissao).append('|').append(vNF).append('|');
 
           if (tpIdDest.isEmpty() || idDest.isEmpty()) {
-            // Destinatário não identificado -> apenas separadores
+            // DestinatÃ¡rio nÃ£o identificado -> apenas separadores
             payload.append('|').append('|');
           } else {
             payload.append(tpIdDest).append('|').append(idDest);
@@ -611,8 +611,8 @@ public class SEFAZ {
           payload.append('|').append(assinatura);
           p = payload.toString();
         } else {
-          // Outros tipos de emissão não tratados ainda para QR-Code v3
-          throw new RFWCriticalException("tpEmis '" + tpEmis + "' não suportado para geração do QR-Code v3 da NFC-e.");
+          // Outros tipos de emissÃ£o nÃ£o tratados ainda para QR-Code v3
+          throw new RFWCriticalException("tpEmis '" + tpEmis + "' nÃ£o suportado para geraÃ§Ã£o do QR-Code v3 da NFC-e.");
         }
 
         // Monta URL final do QR-Code
@@ -647,7 +647,7 @@ public class SEFAZ {
         if (signatureChild != null) {
           nfeEl.insertBefore(infNFeSuplEl, signatureChild);
         } else {
-          // fallback: não achou Signature (caso anormal)
+          // fallback: nÃ£o achou Signature (caso anormal)
           nfeEl.appendChild(infNFeSuplEl);
         }
       }
@@ -671,7 +671,7 @@ public class SEFAZ {
   }
 
   /**
-   * Helper simples para ler texto via XPath relativo ao nó de contexto.
+   * Helper simples para ler texto via XPath relativo ao nÃ³ de contexto.
    */
   private String getTextContent(XPath xpath, Element context, String expr) throws XPathExpressionException {
     String value = (String) xpath.evaluate(expr, context, XPathConstants.STRING);
@@ -721,9 +721,9 @@ public class SEFAZ {
   //
   // // tpEMis
   // String tpEmis = getTextContent(xpath, infNFeEl, "nfe:ide/nfe:tpEmis");
-  // // Somente layout ONLINE (tpEmis = 1). Offline é outro layout.
+  // // Somente layout ONLINE (tpEmis = 1). Offline Ã© outro layout.
   // if (!SEFAZ_tpEmis.EMISSAO_NORMAL.getXMLData().equals(tpEmis)) {
-  // throw new RFWCriticalException("Tipo de emissão não suportada para NFCe!");
+  // throw new RFWCriticalException("Tipo de emissÃ£o nÃ£o suportada para NFCe!");
   // }
   //
   // // tpAmb
@@ -745,20 +745,20 @@ public class SEFAZ {
   // // Passo 3: SHA-1 em hexa (40 caracteres)
   // String cHashQRCode = RUString.calcSHA1ToHex(conteudoHash, StandardCharsets.UTF_8);
   //
-  // // Parâmetro "p"
+  // // ParÃ¢metro "p"
   // String p = chave + "|" + versaoQR + "|" + tpAmb + "|" + getCscId() + "|" + cHashQRCode;
   //
   // // URLs por ambiente
   // String baseQrUrl;
   // String urlChave;
   // if ("2".equals(tpAmb)) {
-  // // Homologação SP
+  // // HomologaÃ§Ã£o SP
   // // baseQrUrl = "https://www.homologacao.nfce.fazenda.sp.gov.br/NFCeConsultaPublica/Paginas/ConsultaQRCode.aspx";
   // baseQrUrl = "https://www.homologacao.nfce.fazenda.sp.gov.br/qrcode";
   // // urlChave = "https://www.homologacao.nfce.fazenda.sp.gov.br/NFCeConsultaPublica";
   // urlChave = "https://www.homologacao.nfce.fazenda.sp.gov.br/consulta";
   // } else {
-  // // Produção SP
+  // // ProduÃ§Ã£o SP
   // // baseQrUrl = "https://www.nfce.fazenda.sp.gov.br/NFCeConsultaPublica/Paginas/ConsultaQRCode.aspx";
   // baseQrUrl = "https://www.nfce.fazenda.sp.gov.br/qrcode";
   // // urlChave = "https://www.nfce.fazenda.sp.gov.br/NFCeConsultaPublica/Paginas/ConsultaNFCe.aspx";
@@ -798,7 +798,7 @@ public class SEFAZ {
   // // Insere imediatamente antes da assinatura
   // nfeEl.insertBefore(infNFeSuplEl, signatureChild);
   // } else {
-  // // Caso improvável: ainda não exista Signature
+  // // Caso improvÃ¡vel: ainda nÃ£o exista Signature
   // nfeEl.appendChild(infNFeSuplEl);
   // }
   // }
@@ -827,9 +827,9 @@ public class SEFAZ {
   // }
 
   /**
-   * Chama o método "nfeRetAutorizacao v4.00" disponibilizado no WebSerice da SEFAZ para consultar o contribuinte passando um recibo de consulta.<Br>
+   * Chama o mÃ©todo "nfeRetAutorizacao v4.00" disponibilizado no WebSerice da SEFAZ para consultar o contribuinte passando um recibo de consulta.<Br>
    *
-   * @param nRec Número do recibo obtido na entrega do documento para realizar a consulta.
+   * @param nRec NÃºmero do recibo obtido na entrega do documento para realizar a consulta.
    * @return Objeto do XML da mensagem de retorno do WebService.
    * @throws RFWException
    */
@@ -839,9 +839,9 @@ public class SEFAZ {
   }
 
   /**
-   * Chama o método "nfeRetAutorizacao v4.00" disponibilizado no WebSerice da SEFAZ para consultar o contribuinte passando um recibo de consulta.<Br>
+   * Chama o mÃ©todo "nfeRetAutorizacao v4.00" disponibilizado no WebSerice da SEFAZ para consultar o contribuinte passando um recibo de consulta.<Br>
    *
-   * @param nRec Número do recibo obtido na entrega do documento para realizar a consulta.
+   * @param nRec NÃºmero do recibo obtido na entrega do documento para realizar a consulta.
    * @return XML da mensagem de retorno do WebService.
    * @throws RFWException
    */
@@ -851,9 +851,9 @@ public class SEFAZ {
   }
 
   /**
-   * Chama o método "nfeRetAutorizacao v4.00" disponibilizado no WebSerice da SEFAZ para consultar o contribuinte. <Br>
+   * Chama o mÃ©todo "nfeRetAutorizacao v4.00" disponibilizado no WebSerice da SEFAZ para consultar o contribuinte. <Br>
    *
-   * @param root Objeto representando o XML para envio da requisição.
+   * @param root Objeto representando o XML para envio da requisiÃ§Ã£o.
    * @return Objeto do XML da mensagem de retorno do WebService.
    * @throws RFWException
    */
@@ -862,9 +862,9 @@ public class SEFAZ {
   }
 
   /**
-   * Chama o método "nfeRetAutorizacao v4.00" disponibilizado no WebSerice da SEFAZ para consultar o contribuinte. <Br>
+   * Chama o mÃ©todo "nfeRetAutorizacao v4.00" disponibilizado no WebSerice da SEFAZ para consultar o contribuinte. <Br>
    *
-   * @param root Objeto representando o XML para envio da requisição.
+   * @param root Objeto representando o XML para envio da requisiÃ§Ã£o.
    * @return XML da mensagem de retorno do WebService.
    * @throws RFWException
    */
@@ -893,23 +893,23 @@ public class SEFAZ {
       return xmlRet;
     } catch (RemoteException e) {
       if ("Transport error: 403 Error: Forbidden".equals(e.getMessage())) {
-        throw new RFWWarningException("Não foi possível comunicar com o servidor da SEFAZ.", e);
+        throw new RFWWarningException("NÃ£o foi possÃ­vel comunicar com o servidor da SEFAZ.", e);
       } else if ("Read timed out".equals(e.getMessage())) {
-        throw new RFWWarningException("Não foi possível comunicar com o servidor da SEFAZ.", e);
+        throw new RFWWarningException("NÃ£o foi possÃ­vel comunicar com o servidor da SEFAZ.", e);
       } else {
-        RFWLogger.logError("Mensagem não mapeada de erro durante comunicação com a SEFAZ: " + e.getMessage());
-        throw new RFWWarningException("Não foi possível comunicar com o servidor da SEFAZ.", e);
+        RFWLogger.logError("Mensagem nÃ£o mapeada de erro durante comunicaÃ§Ã£o com a SEFAZ: " + e.getMessage());
+        throw new RFWWarningException("NÃ£o foi possÃ­vel comunicar com o servidor da SEFAZ.", e);
       }
     }
   }
 
   /**
-   * Cria o STUB de conexão para o serviço NfeConsultaCadastro.
+   * Cria o STUB de conexÃ£o para o serviÃ§o NfeConsultaCadastro.
    *
-   * @param env ambiente de conexão.
-   * @param ws Servidor para conexão.
-   * @param contingency Método de contingência ou null para nenhuma contingência.
-   * @return Stub pronto para conexão.
+   * @param env ambiente de conexÃ£o.
+   * @param ws Servidor para conexÃ£o.
+   * @param contingency MÃ©todo de contingÃªncia ou null para nenhuma contingÃªncia.
+   * @return Stub pronto para conexÃ£o.
    * @throws RFWException
    */
   private CadConsultaCadastro4Stub createCadConsultaCadastro4Stub(SEFAZ_tpAmb env, SEFAZ_WebServices ws, SefazContingency contingency) throws RFWException {
@@ -933,22 +933,22 @@ public class SEFAZ {
         }
       }
     } catch (AxisFault e) {
-      throw new RFWCriticalException("Falha ao criar Stub para o ambiente '${0}', UF '${1}', contingência: '${2}'.", new String[] { env.toString(), ws.toString(), "" + contingency }, e);
+      throw new RFWCriticalException("Falha ao criar Stub para o ambiente '${0}', UF '${1}', contingÃªncia: '${2}'.", new String[] { env.toString(), ws.toString(), "" + contingency }, e);
     }
     if (stub == null) {
-      throw new RFWCriticalException("Falha ao criar Stub para o ambiente '${0}', UF '${1}', contingência: '${2}'.", new String[] { env.toString(), ws.toString(), "" + contingency });
+      throw new RFWCriticalException("Falha ao criar Stub para o ambiente '${0}', UF '${1}', contingÃªncia: '${2}'.", new String[] { env.toString(), ws.toString(), "" + contingency });
     }
     stub._getServiceClient().getOptions().setProperty(HTTPConstants.CACHED_HTTP_CLIENT, this.httpClientCustom);
     return stub;
   }
 
   /**
-   * Cria o STUB de conexão para o serviço nfeStatusServicoNF.
+   * Cria o STUB de conexÃ£o para o serviÃ§o nfeStatusServicoNF.
    *
-   * @param env ambiente de conexão.
-   * @param ws Servidor para conexão.
-   * @param contingency Método de contingência ou null para nenhuma contingência.
-   * @return Stub pronto para conexão.
+   * @param env ambiente de conexÃ£o.
+   * @param ws Servidor para conexÃ£o.
+   * @param contingency MÃ©todo de contingÃªncia ou null para nenhuma contingÃªncia.
+   * @return Stub pronto para conexÃ£o.
    * @throws RFWException
    */
   private NFeStatusServico4Stub createNfeStatusServicoNFStub(SEFAZ_tpAmb env, SEFAZ_WebServices ws, SefazContingency contingency) throws RFWException {
@@ -972,23 +972,23 @@ public class SEFAZ {
         }
       }
     } catch (AxisFault e) {
-      throw new RFWCriticalException("Falha ao criar Stub para o ambiente '${0}', UF '${1}', contingência: '${2}'.", new String[] { env.toString(), ws.toString(), "" + contingency }, e);
+      throw new RFWCriticalException("Falha ao criar Stub para o ambiente '${0}', UF '${1}', contingÃªncia: '${2}'.", new String[] { env.toString(), ws.toString(), "" + contingency }, e);
     }
     if (stub == null) {
-      throw new RFWCriticalException("Falha ao criar Stub para o ambiente '${0}', UF '${1}', contingência: '${2}'.", new String[] { env.toString(), ws.toString(), "" + contingency });
+      throw new RFWCriticalException("Falha ao criar Stub para o ambiente '${0}', UF '${1}', contingÃªncia: '${2}'.", new String[] { env.toString(), ws.toString(), "" + contingency });
     }
     stub._getServiceClient().getOptions().setProperty(HTTPConstants.CACHED_HTTP_CLIENT, this.httpClientCustom);
     return stub;
   }
 
   /**
-   * Cria o STUB de conexão para o serviço NfeAutorizacao.
+   * Cria o STUB de conexÃ£o para o serviÃ§o NfeAutorizacao.
    *
-   * @param mod Define o modelo do Stub a ser criado, aceita NFe e NFCe, cada um utiliza um endereço de endpoint diferente.
-   * @param env ambiente de conexão.
-   * @param ws Servidor para conexão.
-   * @param contingency Método de contingência ou null para nenhuma contingência.
-   * @return Stub pronto para conexão.
+   * @param mod Define o modelo do Stub a ser criado, aceita NFe e NFCe, cada um utiliza um endereÃ§o de endpoint diferente.
+   * @param env ambiente de conexÃ£o.
+   * @param ws Servidor para conexÃ£o.
+   * @param contingency MÃ©todo de contingÃªncia ou null para nenhuma contingÃªncia.
+   * @return Stub pronto para conexÃ£o.
    * @throws RFWException
    */
   private NFeAutorizacao4Stub createNFeAutorizacao4Stub(SEFAZ_mod mod, SEFAZ_tpAmb env, SEFAZ_WebServices ws, SefazContingency contingency) throws RFWException {
@@ -1032,22 +1032,22 @@ public class SEFAZ {
         }
       }
     } catch (AxisFault e) {
-      throw new RFWCriticalException("Falha ao criar Stub para o ambiente '${0}', UF '${1}', contingência: '${2}', modelo '${3}'.", new String[] { env.toString(), ws.toString(), "" + contingency, "" + mod.toString() }, e);
+      throw new RFWCriticalException("Falha ao criar Stub para o ambiente '${0}', UF '${1}', contingÃªncia: '${2}', modelo '${3}'.", new String[] { env.toString(), ws.toString(), "" + contingency, "" + mod.toString() }, e);
     }
     if (stub == null) {
-      throw new RFWCriticalException("Falha ao criar Stub para o ambiente '${0}', UF '${1}', contingência: '${2}', modelo '${3}'.", new String[] { env.toString(), ws.toString(), "" + contingency, "" + mod.toString() });
+      throw new RFWCriticalException("Falha ao criar Stub para o ambiente '${0}', UF '${1}', contingÃªncia: '${2}', modelo '${3}'.", new String[] { env.toString(), ws.toString(), "" + contingency, "" + mod.toString() });
     }
     stub._getServiceClient().getOptions().setProperty(HTTPConstants.CACHED_HTTP_CLIENT, this.httpClientCustom);
     return stub;
   }
 
   /**
-   * Cria o STUB de conexão para o serviço NfeRetAutorizacao.
+   * Cria o STUB de conexÃ£o para o serviÃ§o NfeRetAutorizacao.
    *
-   * @param env ambiente de conexão.
-   * @param ws Servidor para conexão.
-   * @param contingency Método de contingência ou null para nenhuma contingência.
-   * @return Stub pronto para conexão.
+   * @param env ambiente de conexÃ£o.
+   * @param ws Servidor para conexÃ£o.
+   * @param contingency MÃ©todo de contingÃªncia ou null para nenhuma contingÃªncia.
+   * @return Stub pronto para conexÃ£o.
    * @throws RFWException
    */
   private NFeRetAutorizacao4Stub createNFeRetAutorizacao4Stub(SEFAZ_tpAmb env, SEFAZ_WebServices ws, SefazContingency contingency) throws RFWException {
@@ -1071,19 +1071,19 @@ public class SEFAZ {
         }
       }
     } catch (AxisFault e) {
-      throw new RFWCriticalException("Falha ao criar Stub para o ambiente '${0}', UF '${1}', contingência: '${2}'.", new String[] { env.toString(), ws.toString(), "" + contingency }, e);
+      throw new RFWCriticalException("Falha ao criar Stub para o ambiente '${0}', UF '${1}', contingÃªncia: '${2}'.", new String[] { env.toString(), ws.toString(), "" + contingency }, e);
     }
     if (stub == null) {
-      throw new RFWCriticalException("Falha ao criar Stub para o ambiente '${0}', UF '${1}', contingência: '${2}'.", new String[] { env.toString(), ws.toString(), "" + contingency });
+      throw new RFWCriticalException("Falha ao criar Stub para o ambiente '${0}', UF '${1}', contingÃªncia: '${2}'.", new String[] { env.toString(), ws.toString(), "" + contingency });
     }
     stub._getServiceClient().getOptions().setProperty(HTTPConstants.CACHED_HTTP_CLIENT, this.httpClientCustom);
     return stub;
   }
 
   /**
-   * Chama o método "consultaCadastro v2.00" disponibilizado no WebSerice da SEFAZ para consultar o contribuinte. <Br>
+   * Chama o mÃ©todo "consultaCadastro v2.00" disponibilizado no WebSerice da SEFAZ para consultar o contribuinte. <Br>
    *
-   * @param root Objeto representando o XML para envio da requisição.
+   * @param root Objeto representando o XML para envio da requisiÃ§Ã£o.
    * @return Objeto do XML da mensagem de retorno do WebService.
    * @throws RFWException
    */
@@ -1092,9 +1092,9 @@ public class SEFAZ {
   }
 
   /**
-   * Chama o método "consultaCadastro v2.00" disponibilizado no WebSerice da SEFAZ para consultar o contribuinte. <Br>
+   * Chama o mÃ©todo "consultaCadastro v2.00" disponibilizado no WebSerice da SEFAZ para consultar o contribuinte. <Br>
    *
-   * @param root Objeto representando o XML para envio da requisição.
+   * @param root Objeto representando o XML para envio da requisiÃ§Ã£o.
    * @return XML da mensagem de retorno do WebService.
    * @throws RFWException
    */
@@ -1117,23 +1117,23 @@ public class SEFAZ {
       return result.getNfeResultMsg().toString();
     } catch (RemoteException e) {
       if ("Transport error: 403 Error: Forbidden".equals(e.getMessage())) {
-        throw new RFWWarningException("Não foi possível comunicar com o servidor da SEFAZ.", e);
+        throw new RFWWarningException("NÃ£o foi possÃ­vel comunicar com o servidor da SEFAZ.", e);
       } else if ("Read timed out".equals(e.getMessage())) {
-        throw new RFWWarningException("Não foi possível comunicar com o servidor da SEFAZ.", e);
+        throw new RFWWarningException("NÃ£o foi possÃ­vel comunicar com o servidor da SEFAZ.", e);
       } else {
-        RFWLogger.logError("Mensagem não mapeada de erro durante comunicação com a SEFAZ: " + e.getMessage());
-        throw new RFWWarningException("Não foi possível comunicar com o servidor da SEFAZ.", e);
+        RFWLogger.logError("Mensagem nÃ£o mapeada de erro durante comunicaÃ§Ã£o com a SEFAZ: " + e.getMessage());
+        throw new RFWWarningException("NÃ£o foi possÃ­vel comunicar com o servidor da SEFAZ.", e);
       }
     }
   }
 
   /**
-   * Cria o STUB de conexão para o serviço nfeInutilizacaoNFV400.
+   * Cria o STUB de conexÃ£o para o serviÃ§o nfeInutilizacaoNFV400.
    *
-   * @param env ambiente de conexão.
-   * @param ws Servidor para conexão.
-   * @param contingency Método de contingência ou null para nenhuma contingência.
-   * @return Stub pronto para conexão.
+   * @param env ambiente de conexÃ£o.
+   * @param ws Servidor para conexÃ£o.
+   * @param contingency MÃ©todo de contingÃªncia ou null para nenhuma contingÃªncia.
+   * @return Stub pronto para conexÃ£o.
    * @throws RFWException
    */
   private NFeInutilizacao4Stub createNFeInutilizacao4Stub(SEFAZ_tpAmb env, SEFAZ_WebServices ws, SefazContingency contingency) throws RFWException {
@@ -1157,19 +1157,19 @@ public class SEFAZ {
         }
       }
     } catch (AxisFault e) {
-      throw new RFWCriticalException("Falha ao criar Stub para o ambiente '${0}', UF '${1}', contingência: '${2}'.", new String[] { env.toString(), ws.toString(), "" + contingency }, e);
+      throw new RFWCriticalException("Falha ao criar Stub para o ambiente '${0}', UF '${1}', contingÃªncia: '${2}'.", new String[] { env.toString(), ws.toString(), "" + contingency }, e);
     }
     if (stub == null) {
-      throw new RFWCriticalException("Falha ao criar Stub para o ambiente '${0}', UF '${1}', contingência: '${2}'.", new String[] { env.toString(), ws.toString(), "" + contingency });
+      throw new RFWCriticalException("Falha ao criar Stub para o ambiente '${0}', UF '${1}', contingÃªncia: '${2}'.", new String[] { env.toString(), ws.toString(), "" + contingency });
     }
     stub._getServiceClient().getOptions().setProperty(HTTPConstants.CACHED_HTTP_CLIENT, this.httpClientCustom);
     return stub;
   }
 
   /**
-   * Chama o método "nfeRecepcaoEventoV400asXML v4.00" disponibilizado no WebSerice da SEFAZ para consultar o contribuinte. <Br>
+   * Chama o mÃ©todo "nfeRecepcaoEventoV400asXML v4.00" disponibilizado no WebSerice da SEFAZ para consultar o contribuinte. <Br>
    *
-   * @param root Objeto representando o XML para envio da requisição.
+   * @param root Objeto representando o XML para envio da requisiÃ§Ã£o.
    * @return Objeto do XML da mensagem de retorno do WebService.
    * @throws RFWException
    */
@@ -1178,9 +1178,9 @@ public class SEFAZ {
   }
 
   /**
-   * Chama o método "nfeRecepcaoEventoV400asXML v4.00" disponibilizado no WebSerice da SEFAZ para consultar o contribuinte. <Br>
+   * Chama o mÃ©todo "nfeRecepcaoEventoV400asXML v4.00" disponibilizado no WebSerice da SEFAZ para consultar o contribuinte. <Br>
    *
-   * @param root Objeto representando o XML para envio da requisição.
+   * @param root Objeto representando o XML para envio da requisiÃ§Ã£o.
    * @return XML da mensagem de retorno do WebService.
    * @throws RFWException
    */
@@ -1203,23 +1203,23 @@ public class SEFAZ {
       return result.getNfeResultMsg().toString();
     } catch (RemoteException e) {
       if ("Transport error: 403 Error: Forbidden".equals(e.getMessage())) {
-        throw new RFWWarningException("Não foi possível comunicar com o servidor da SEFAZ.", e);
+        throw new RFWWarningException("NÃ£o foi possÃ­vel comunicar com o servidor da SEFAZ.", e);
       } else if ("Read timed out".equals(e.getMessage())) {
-        throw new RFWWarningException("Não foi possível comunicar com o servidor da SEFAZ.", e);
+        throw new RFWWarningException("NÃ£o foi possÃ­vel comunicar com o servidor da SEFAZ.", e);
       } else {
-        RFWLogger.logError("Mensagem não mapeada de erro durante comunicação com a SEFAZ: " + e.getMessage());
-        throw new RFWWarningException("Não foi possível comunicar com o servidor da SEFAZ.", e);
+        RFWLogger.logError("Mensagem nÃ£o mapeada de erro durante comunicaÃ§Ã£o com a SEFAZ: " + e.getMessage());
+        throw new RFWWarningException("NÃ£o foi possÃ­vel comunicar com o servidor da SEFAZ.", e);
       }
     }
   }
 
   /**
-   * Cria o STUB de conexão para o serviço nfeRecepcaoEventoV400.
+   * Cria o STUB de conexÃ£o para o serviÃ§o nfeRecepcaoEventoV400.
    *
-   * @param env ambiente de conexão.
-   * @param ws Servidor para conexão.
-   * @param contingency Método de contingência ou null para nenhuma contingência.
-   * @return Stub pronto para conexão.
+   * @param env ambiente de conexÃ£o.
+   * @param ws Servidor para conexÃ£o.
+   * @param contingency MÃ©todo de contingÃªncia ou null para nenhuma contingÃªncia.
+   * @return Stub pronto para conexÃ£o.
    * @throws RFWException
    */
   private NFeRecepcaoEvento4Stub createNFeRecepcaoEvento4Stub(SEFAZ_tpAmb env, SEFAZ_WebServices ws, SefazContingency contingency) throws RFWException {
@@ -1243,25 +1243,25 @@ public class SEFAZ {
         }
       }
     } catch (AxisFault e) {
-      throw new RFWCriticalException("Falha ao criar Stub para o ambiente '${0}', UF '${1}', contingência: '${2}'.", new String[] { env.toString(), ws.toString(), "" + contingency }, e);
+      throw new RFWCriticalException("Falha ao criar Stub para o ambiente '${0}', UF '${1}', contingÃªncia: '${2}'.", new String[] { env.toString(), ws.toString(), "" + contingency }, e);
     }
     if (stub == null) {
-      throw new RFWCriticalException("Falha ao criar Stub para o ambiente '${0}', UF '${1}', contingência: '${2}'.", new String[] { env.toString(), ws.toString(), "" + contingency });
+      throw new RFWCriticalException("Falha ao criar Stub para o ambiente '${0}', UF '${1}', contingÃªncia: '${2}'.", new String[] { env.toString(), ws.toString(), "" + contingency });
     }
     stub._getServiceClient().getOptions().setProperty(HTTPConstants.CACHED_HTTP_CLIENT, this.httpClientCustom);
     return stub;
   }
 
   /**
-   * Chama o método "nfeConsulta" do Web Service "NfeConsultaProtocolo v4.00".<Br>
-   * <b>Função:</b> serviço destinado ao atendimento de solicitações de consulta da situação atual da NF-e na Base de Dados do Portal da Secretaria de Fazenda Estadual.
+   * Chama o mÃ©todo "nfeConsulta" do Web Service "NfeConsultaProtocolo v4.00".<Br>
+   * <b>FunÃ§Ã£o:</b> serviÃ§o destinado ao atendimento de solicitaÃ§Ãµes de consulta da situaÃ§Ã£o atual da NF-e na Base de Dados do Portal da Secretaria de Fazenda Estadual.
    *
    * @param chaveNF Chave da NFe para consulta.
    * @return XML da mensagem de retorno do WebService.
    * @throws RFWException
    */
   public TRetConsSitNFe nfeConsultaNFV400byChaveNF(String chaveNF) throws RFWException {
-    PreProcess.requiredNonNullMatch(chaveNF, "\\d{44}", "É esperada uma chave da NFe válida com 44 dígitos, sem pontuação");
+    PreProcess.requiredNonNullMatch(chaveNF, "\\d{44}", "Ã‰ esperada uma chave da NFe vÃ¡lida com 44 dÃ­gitos, sem pontuaÃ§Ã£o");
     TConsSitNFe root = new TConsSitNFe();
     root.setVersao("4.00");
     root.setTpAmb(this.env.getXmlData());
@@ -1271,15 +1271,15 @@ public class SEFAZ {
   }
 
   /**
-   * Chama o método "nfeConsulta" do Web Service "NfeConsultaProtocolo v4.00".<Br>
-   * <b>Função:</b> serviço destinado ao atendimento de solicitações de consulta da situação atual da NF-e na Base de Dados do Portal da Secretaria de Fazenda Estadual.
+   * Chama o mÃ©todo "nfeConsulta" do Web Service "NfeConsultaProtocolo v4.00".<Br>
+   * <b>FunÃ§Ã£o:</b> serviÃ§o destinado ao atendimento de solicitaÃ§Ãµes de consulta da situaÃ§Ã£o atual da NF-e na Base de Dados do Portal da Secretaria de Fazenda Estadual.
    *
    * @param chaveNF Chave da NFe para consulta.
    * @return XML da mensagem de retorno do WebService.
    * @throws RFWException
    */
   public String nfeConsultaNFV400byChaveNFasXML(String chaveNF) throws RFWException {
-    PreProcess.requiredNonNullMatch(chaveNF, "\\d{44}", "É esperada uma chave da NFe válida com 44 dígitos, sem pontuação");
+    PreProcess.requiredNonNullMatch(chaveNF, "\\d{44}", "Ã‰ esperada uma chave da NFe vÃ¡lida com 44 dÃ­gitos, sem pontuaÃ§Ã£o");
     TConsSitNFe root = new TConsSitNFe();
     root.setVersao("4.00");
     root.setTpAmb(this.env.getXmlData());
@@ -1289,10 +1289,10 @@ public class SEFAZ {
   }
 
   /**
-   * Chama o método "nfeConsulta" do Web Service "NfeConsultaProtocolo v4.00". <Br>
-   * <b>Função:</b> serviço destinado ao atendimento de solicitações de consulta da situação atual da NF-e na Base de Dados do Portal da Secretaria de Fazenda Estadual.
+   * Chama o mÃ©todo "nfeConsulta" do Web Service "NfeConsultaProtocolo v4.00". <Br>
+   * <b>FunÃ§Ã£o:</b> serviÃ§o destinado ao atendimento de solicitaÃ§Ãµes de consulta da situaÃ§Ã£o atual da NF-e na Base de Dados do Portal da Secretaria de Fazenda Estadual.
    *
-   * @param root Objeto representando o XML para envio da requisição.
+   * @param root Objeto representando o XML para envio da requisiÃ§Ã£o.
    * @return Objeto JAXB representando o XML da mensagem de retorno do WebService.
    * @throws RFWException
    */
@@ -1301,10 +1301,10 @@ public class SEFAZ {
   }
 
   /**
-   * Chama o método "nfeConsulta" do Web Service "NfeConsultaProtocolo v4.00". <Br>
-   * <b>Função:</b> serviço destinado ao atendimento de solicitações de consulta da situação atual da NF-e na Base de Dados do Portal da Secretaria de Fazenda Estadual.
+   * Chama o mÃ©todo "nfeConsulta" do Web Service "NfeConsultaProtocolo v4.00". <Br>
+   * <b>FunÃ§Ã£o:</b> serviÃ§o destinado ao atendimento de solicitaÃ§Ãµes de consulta da situaÃ§Ã£o atual da NF-e na Base de Dados do Portal da Secretaria de Fazenda Estadual.
    *
-   * @param root Objeto representando o XML para envio da requisição.
+   * @param root Objeto representando o XML para envio da requisiÃ§Ã£o.
    * @return XML da mensagem de retorno do WebService.
    * @throws RFWException
    */
@@ -1327,23 +1327,23 @@ public class SEFAZ {
       return result.getNfeResultMsg().toString();
     } catch (RemoteException e) {
       if ("Transport error: 403 Error: Forbidden".equals(e.getMessage())) {
-        throw new RFWWarningException("Não foi possível comunicar com o servidor da SEFAZ.", e);
+        throw new RFWWarningException("NÃ£o foi possÃ­vel comunicar com o servidor da SEFAZ.", e);
       } else if ("Read timed out".equals(e.getMessage())) {
-        throw new RFWWarningException("Não foi possível comunicar com o servidor da SEFAZ.", e);
+        throw new RFWWarningException("NÃ£o foi possÃ­vel comunicar com o servidor da SEFAZ.", e);
       } else {
-        RFWLogger.logError("Mensagem não mapeada de erro durante comunicação com a SEFAZ: " + e.getMessage());
-        throw new RFWWarningException("Não foi possível comunicar com o servidor da SEFAZ.", e);
+        RFWLogger.logError("Mensagem nÃ£o mapeada de erro durante comunicaÃ§Ã£o com a SEFAZ: " + e.getMessage());
+        throw new RFWWarningException("NÃ£o foi possÃ­vel comunicar com o servidor da SEFAZ.", e);
       }
     }
   }
 
   /**
-   * Cria o STUB de conexão para o serviço "NfeConsultaProtocolo".
+   * Cria o STUB de conexÃ£o para o serviÃ§o "NfeConsultaProtocolo".
    *
-   * @param env ambiente de conexão.
-   * @param ws Servidor para conexão.
-   * @param contingency Método de contingência ou null para nenhuma contingência.
-   * @return Stub pronto para conexão.
+   * @param env ambiente de conexÃ£o.
+   * @param ws Servidor para conexÃ£o.
+   * @param contingency MÃ©todo de contingÃªncia ou null para nenhuma contingÃªncia.
+   * @return Stub pronto para conexÃ£o.
    * @throws RFWException
    */
   private NFeConsultaProtocolo4Stub createNFeConsultaProtocolo4Stub(SEFAZ_tpAmb env, SEFAZ_WebServices ws, SefazContingency contingency) throws RFWException {
@@ -1367,10 +1367,10 @@ public class SEFAZ {
         }
       }
     } catch (AxisFault e) {
-      throw new RFWCriticalException("Falha ao criar Stub para o ambiente '${0}', UF '${1}', contingência: '${2}'.", new String[] { env.toString(), ws.toString(), "" + contingency }, e);
+      throw new RFWCriticalException("Falha ao criar Stub para o ambiente '${0}', UF '${1}', contingÃªncia: '${2}'.", new String[] { env.toString(), ws.toString(), "" + contingency }, e);
     }
     if (stub == null) {
-      throw new RFWCriticalException("Falha ao criar Stub para o ambiente '${0}', UF '${1}', contingência: '${2}'.", new String[] { env.toString(), ws.toString(), "" + contingency });
+      throw new RFWCriticalException("Falha ao criar Stub para o ambiente '${0}', UF '${1}', contingÃªncia: '${2}'.", new String[] { env.toString(), ws.toString(), "" + contingency });
     }
     stub._getServiceClient().getOptions().setProperty(HTTPConstants.CACHED_HTTP_CLIENT, this.httpClientCustom);
     return stub;

@@ -4,14 +4,14 @@ import br.eng.rodrigogml.rfw.kernel.RFW;
 import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums;
 
 /**
- * Description: Classe de definiÁıes do mÛdulo. Apresenta funcionalidade similar a CLasse {@link RFW} do mÛdulo principal.<br>
+ * Description: Classe de defini√ß√µes do m√≥dulo. Apresenta funcionalidade similar a CLasse {@link RFW} do m√≥dulo principal.<br>
  *
  * @author Rodrigo GML
  * @since 10.0 (29 de out de 2020)
  */
 public class SEFAZDefinitions {
 
-  // Ambientes de ProduÁ„o
+  // Ambientes de Produ√ß√£o
   public static final String NFE_SP_PRODUCTION_V400_NFEAUTORIZACAO4 = "https://nfe.fazenda.sp.gov.br/ws/nfeautorizacao4.asmx";
   public static final String NFE_SP_PRODUCTION_V400_NFEINUTILIZACAO4 = "https://nfe.fazenda.sp.gov.br/ws/nfeinutilizacao4.asmx";
   public static final String NFE_SP_PRODUCTION_V400_CADCONSULTACADASTRO4 = "https://nfe.fazenda.sp.gov.br/ws/cadconsultacadastro4.asmx";
@@ -21,7 +21,7 @@ public class SEFAZDefinitions {
   public static final String NFE_SP_PRODUCTION_V400_NFECONSULTAPROTOCOLO4 = "https://nfe.fazenda.sp.gov.br/ws/nfeconsultaprotocolo4.asmx";
   public static final String NFCE_SP_PRODUCTION_V400_NFEAUTORIZACAO4 = "https://nfce.fazenda.sp.gov.br/ws/NFeAutorizacao4.asmx";
 
-  // Ambientes de HomologaÁ„o
+  // Ambientes de Homologa√ß√£o
   public static final String NFE_SP_TEST_V400_NFEAUTORIZACAO4 = "https://homologacao.nfe.fazenda.sp.gov.br/ws/NFeAutorizacao4.asmx";
   public static final String NFE_SP_TEST_V400_NFEINUTILIZACAO4 = "https://homologacao.nfe.fazenda.sp.gov.br/ws/nfeinutilizacao4.asmx";
   public static final String NFE_SP_TEST_V400_CADCONSULTACADASTRO4 = "https://homologacao.nfe.fazenda.sp.gov.br/ws/cadconsultacadastro4.asmx";
@@ -32,49 +32,49 @@ public class SEFAZDefinitions {
   public static final String NFCE_SP_TEST_V400_NFEAUTORIZACAO4 = "https://homologacao.nfce.fazenda.sp.gov.br/ws/NFeAutorizacao4.asmx";
 
   /**
-   * Construtor privado para classe totalmente est·tica.
+   * Construtor privado para classe totalmente est√°tica.
    */
   private SEFAZDefinitions() {
   }
 
   /**
-   * Define o Status possÌveis da manifestaÁ„o do destinat·rio com a SEFAZ.<br>
-   * N„o È utilizada no XML, mas representa todos os estados possÌvels.
+   * Define o Status poss√≠veis da manifesta√ß√£o do destinat√°rio com a SEFAZ.<br>
+   * N√£o √© utilizada no XML, mas representa todos os estados poss√≠vels.
    */
   public static enum SefazRecipientManifestation {
     /**
-     * Indica que nenhuma minisfestaÁ„o foi dada ao SEFAZ.
+     * Indica que nenhuma minisfesta√ß√£o foi dada ao SEFAZ.
      */
     NONE,
     /**
-     * Indica que o documento foi sinalizado na SEFAZ como "Conhecimento da Emiss„o".
+     * Indica que o documento foi sinalizado na SEFAZ como "Conhecimento da Emiss√£o".
      */
     EMISSION_KNOWLEDGE,
     /**
-     * Infica que a operaÁ„o foi sinalizada como n„o realizada. Por devoluÁ„o ou qualquer outro motivo.
+     * Infica que a opera√ß√£o foi sinalizada como n√£o realizada. Por devolu√ß√£o ou qualquer outro motivo.
      */
     UNFINISHED,
     /**
-     * Indica que a manifestaÁ„o foi feita indicando a conclus„o da operaÁ„o.
+     * Indica que a manifesta√ß√£o foi feita indicando a conclus√£o da opera√ß√£o.
      */
     FINISHED,
     /**
-     * Indica que a nota È desconhecida pela empresa. Ou seja, a empresa n„o tem conhecimento desta operaÁ„o.
+     * Indica que a nota √© desconhecida pela empresa. Ou seja, a empresa n√£o tem conhecimento desta opera√ß√£o.
      */
     UNKNOW
   }
 
   /**
-   * Define os tipos de contingÍncias que o sistema pode adotar.<br>
-   * Esta enumeration È utilizada no momento de criaÁ„o do Objeto SEFAZ para indicar o ambiente de contingÍncia.
+   * Define os tipos de conting√™ncias que o sistema pode adotar.<br>
+   * Esta enumeration √© utilizada no momento de cria√ß√£o do Objeto SEFAZ para indicar o ambiente de conting√™ncia.
    */
   public static enum SefazContingency {
     /**
-     * Define o uso da contingÍncia SVC (SEFAZ Virtual de ContingÍncia). Pode ser usado apenas para NFe.
+     * Define o uso da conting√™ncia SVC (SEFAZ Virtual de Conting√™ncia). Pode ser usado apenas para NFe.
      */
     SVC,
     /**
-     * Define a contingÍncia em Evento PrÈvio de Emiss„o em ContingÍncia.
+     * Define a conting√™ncia em Evento Pr√©vio de Emiss√£o em Conting√™ncia.
      */
     EPEC,
   }
@@ -86,52 +86,52 @@ public class SEFAZDefinitions {
    * <li>nfe\infNFe\ide\NFref\refNFP\mod
    * <li>nfe\infNFe\ide\NFref\refECF\mod
    *
-   * @deprecated EnumeraÁıes est„o sendo concentradas na classe {@link SEFAZEnums}, com nova convenÁ„o de nomes e formato.
+   * @deprecated Enumera√ß√µes est√£o sendo concentradas na classe {@link SEFAZEnums}, com nova conven√ß√£o de nomes e formato.
    */
   @Deprecated
   public static enum SefazXMLmod {
     /**
-     * Modelo de Notas Fiscais de tal„o.<br>
-     * Este modelo n„o por ser emitido de forma eletrÙnica, mas pode ser referenciado por notas eletrÙnicas.
+     * Modelo de Notas Fiscais de tal√£o.<br>
+     * Este modelo n√£o por ser emitido de forma eletr√¥nica, mas pode ser referenciado por notas eletr√¥nicas.
      */
     MODEL01("01"),
     /**
-     * Este modelo foi incluÌdo na (incluÌdo na NT2016.002).<br>
-     * Modelo de Notas Fiscais de tal„o.<br>
-     * Este modelo n„o por ser emitido de forma eletrÙnica, mas pode ser referenciado por notas eletrÙnicas.
+     * Este modelo foi inclu√≠do na (inclu√≠do na NT2016.002).<br>
+     * Modelo de Notas Fiscais de tal√£o.<br>
+     * Este modelo n√£o por ser emitido de forma eletr√¥nica, mas pode ser referenciado por notas eletr√¥nicas.
      */
     MODEL02("02"),
     /**
      * Modelo de Notas Fiscais de Produtor.<br>
-     * Este modelo n„o por ser emitido de forma eletrÙnica, mas pode ser referenciado por notas eletrÙnicas.
+     * Este modelo n√£o por ser emitido de forma eletr√¥nica, mas pode ser referenciado por notas eletr√¥nicas.
      */
     MODEL04("04"),
     /**
-     * Modelo de Cupom Fiscal emitido por m·quina registradora (n„o ECF).<br>
-     * Este modelo n„o por ser emitido de forma eletrÙnica, mas pode ser referenciado por notas eletrÙnicas.
+     * Modelo de Cupom Fiscal emitido por m√°quina registradora (n√£o ECF).<br>
+     * Este modelo n√£o por ser emitido de forma eletr√¥nica, mas pode ser referenciado por notas eletr√¥nicas.
      */
     MODEL2B("2B"),
     /**
      * Modelo de Cupom Fiscal PDV.<br>
-     * Este modelo n„o por ser emitido de forma eletrÙnica, mas pode ser referenciado por notas eletrÙnicas.
+     * Este modelo n√£o por ser emitido de forma eletr√¥nica, mas pode ser referenciado por notas eletr√¥nicas.
      */
     MODEL2C("2C"),
     /**
      * Modelo de Cupom Fiscal (Emitido por ECF).<br>
-     * Este modelo n„o por ser emitido de forma eletrÙnica, mas pode ser referenciado por notas eletrÙnicas.
+     * Este modelo n√£o por ser emitido de forma eletr√¥nica, mas pode ser referenciado por notas eletr√¥nicas.
      */
     MODEL2D("2D"),
     /**
-     * Modelo de Nota Fiscal EletrÙnica (NFe).
+     * Modelo de Nota Fiscal Eletr√¥nica (NFe).
      */
     MODEL55("55"),
     /**
-     * Modelo de Nota Fiscal de Consumidor EletrÙnica (NFCe).
+     * Modelo de Nota Fiscal de Consumidor Eletr√¥nica (NFCe).
      */
     MODEL65("65");
 
     /**
-     * CÛdigo de identificaÁ„o do modelo do documento. (Cat·logo utilizado na NFe.)
+     * C√≥digo de identifica√ß√£o do modelo do documento. (Cat√°logo utilizado na NFe.)
      */
     private final String xmlCode;
 
@@ -145,10 +145,10 @@ public class SEFAZDefinitions {
     }
 
     /**
-     * Recupera o item da Enumeration de acordo com o cÛdigo no XML.
+     * Recupera o item da Enumeration de acordo com o c√≥digo no XML.
      *
      * @param xmlCode Valor encontrado no XML
-     * @return Item da enumeraÁ„o encontrato, null caso o valor n„o seja encontrado.
+     * @return Item da enumera√ß√£o encontrato, null caso o valor n√£o seja encontrado.
      */
     public static SefazXMLmod valueOfXmlCode(String xmlCode) {
       for (SefazXMLmod v : values())
@@ -157,16 +157,16 @@ public class SEFAZDefinitions {
     }
 
     /**
-     * # cÛdigo de identificaÁ„o do modelo do documento. (Cat·logo utilizado na NFe.).
+     * # c√≥digo de identifica√ß√£o do modelo do documento. (Cat√°logo utilizado na NFe.).
      *
-     * @return # cÛdigo de identificaÁ„o do modelo do documento
+     * @return # c√≥digo de identifica√ß√£o do modelo do documento
      */
     public String getXmlCode() {
       return xmlCode;
     }
 
     /**
-     * Retorna os valores atualmente v·lidos, n„o retorna os valores que foram removidos da vers„o mais atual.<br>
+     * Retorna os valores atualmente v√°lidos, n√£o retorna os valores que foram removidos da vers√£o mais atual.<br>
      *
      * @return valores aceitos na tag nfe\infNFe\ide\mod.
      */
@@ -175,7 +175,7 @@ public class SEFAZDefinitions {
     }
 
     /**
-     * Retorna os valores atualmente v·lidos, n„o retorna os valores que foram removidos da vers„o mais atual.<br>
+     * Retorna os valores atualmente v√°lidos, n√£o retorna os valores que foram removidos da vers√£o mais atual.<br>
      *
      * @return valores aceitos na tag nfe\infNFe\ide\refECF\mod.
      */
@@ -184,7 +184,7 @@ public class SEFAZDefinitions {
     }
 
     /**
-     * Retorna os valores atualmente v·lidos, n„o retorna os valores que foram removidos da vers„o mais atual.<br>
+     * Retorna os valores atualmente v√°lidos, n√£o retorna os valores que foram removidos da vers√£o mais atual.<br>
      *
      * @return valores aceitos na tag nfe\infNFe\ide\NFref\mod.
      */
@@ -193,7 +193,7 @@ public class SEFAZDefinitions {
     }
 
     /**
-     * Retorna os valores atualmente v·lidos, n„o retorna os valores que foram removidos da vers„o mais atual.<br>
+     * Retorna os valores atualmente v√°lidos, n√£o retorna os valores que foram removidos da vers√£o mais atual.<br>
      *
      * @return valores aceitos na tag nfe\infNFe\ide\NFref\mod.
      */
@@ -204,11 +204,11 @@ public class SEFAZDefinitions {
   }
 
   /**
-   * Define o Regime Tribut·rio da empresa para qual a regra se aplica.<br>
+   * Define o Regime Tribut√°rio da empresa para qual a regra se aplica.<br>
    * Utilizado nas Tags:<br>
    * <li>nfe\infNFe\emit\CRT
    *
-   * @deprecated EnumeraÁıes est„o sendo concentradas na classe {@link SEFAZEnums}, com nova convenÁ„o de nomes e formato.
+   * @deprecated Enumera√ß√µes est√£o sendo concentradas na classe {@link SEFAZEnums}, com nova conven√ß√£o de nomes e formato.
    */
   @Deprecated
   public static enum SefazXMLCRT {
@@ -226,7 +226,7 @@ public class SEFAZDefinitions {
     REGIMENORMAL("3");
 
     /**
-     * CÛdigo de identificaÁ„o do modelo do documento. (Cat·logo utilizado na NFe.)
+     * C√≥digo de identifica√ß√£o do modelo do documento. (Cat√°logo utilizado na NFe.)
      */
     private final String xmlCode;
 
@@ -235,19 +235,19 @@ public class SEFAZDefinitions {
     }
 
     /**
-     * # cÛdigo de identificaÁ„o do modelo do documento. (Cat·logo utilizado na NFe.).
+     * # c√≥digo de identifica√ß√£o do modelo do documento. (Cat√°logo utilizado na NFe.).
      *
-     * @return # cÛdigo de identificaÁ„o do modelo do documento
+     * @return # c√≥digo de identifica√ß√£o do modelo do documento
      */
     public String getXmlCode() {
       return xmlCode;
     }
 
     /**
-     * Recupera o item da Enumeration de acordo com o cÛdigo no XML.
+     * Recupera o item da Enumeration de acordo com o c√≥digo no XML.
      *
      * @param xmlCode Valor encontrado no XML
-     * @return Item da enumeraÁ„o encontrato, null caso o valor n„o seja encontrado.
+     * @return Item da enumera√ß√£o encontrato, null caso o valor n√£o seja encontrado.
      */
     public static SefazXMLCRT valueOfXmlCode(String xmlCode) {
       for (SefazXMLCRT v : values())
@@ -257,12 +257,12 @@ public class SEFAZDefinitions {
   }
 
   /**
-   * Define a finalidade da emiss„o da nota: Normal, Complementar, devoluÁ„o, etc.<Br>
+   * Define a finalidade da emiss√£o da nota: Normal, Complementar, devolu√ß√£o, etc.<Br>
    * <br>
    * Usado em:
    * <li>nfe\infNFe\ide\finNFe
    *
-   * @deprecated EnumeraÁıes est„o sendo concentradas na classe {@link SEFAZEnums}, com nova convenÁ„o de nomes e formato.
+   * @deprecated Enumera√ß√µes est√£o sendo concentradas na classe {@link SEFAZEnums}, com nova conven√ß√£o de nomes e formato.
    */
   @Deprecated
   public static enum SefazXMLfinNFe {
@@ -282,12 +282,12 @@ public class SEFAZDefinitions {
     ADJUSTMENT("3"),
 
     /**
-     * DevoluÁ„o de Mercadoria.
+     * Devolu√ß√£o de Mercadoria.
      */
     RETURNGOODS("4");
 
     /**
-     * CÛdigo de identificaÁ„o do modelo do documento. (Cat·logo utilizado na NFe.)
+     * C√≥digo de identifica√ß√£o do modelo do documento. (Cat√°logo utilizado na NFe.)
      */
     private final String xmlCode;
 
@@ -296,10 +296,10 @@ public class SEFAZDefinitions {
     }
 
     /**
-     * Recupera o item da Enumeration de acordo com o cÛdigo no XML.
+     * Recupera o item da Enumeration de acordo com o c√≥digo no XML.
      *
      * @param xmlCode Valor encontrado no XML
-     * @return Item da enumeraÁ„o encontrato, null caso o valor n„o seja encontrado.
+     * @return Item da enumera√ß√£o encontrato, null caso o valor n√£o seja encontrado.
      */
     public static SefazXMLfinNFe valueOfXmlCode(String xmlCode) {
       for (SefazXMLfinNFe v : values())
@@ -308,9 +308,9 @@ public class SEFAZDefinitions {
     }
 
     /**
-     * # cÛdigo de identificaÁ„o do modelo do documento. (Cat·logo utilizado na NFe.).
+     * # c√≥digo de identifica√ß√£o do modelo do documento. (Cat√°logo utilizado na NFe.).
      *
-     * @return # cÛdigo de identificaÁ„o do modelo do documento
+     * @return # c√≥digo de identifica√ß√£o do modelo do documento
      */
     public String getXmlCode() {
       return xmlCode;
@@ -318,26 +318,26 @@ public class SEFAZDefinitions {
   }
 
   /**
-   * Enum que define o tipo da OperaÁ„o da NFe conforme definido pela SEFAZ entre notas de entrada ou saÌda.<br>
+   * Enum que define o tipo da Opera√ß√£o da NFe conforme definido pela SEFAZ entre notas de entrada ou sa√≠da.<br>
    * De acordo com o fluxo da marcadoria no fluxo do emitente da NF.<br>
    * Usado em:
    * <li>nfe\infNFe\ide\tpNF
    *
-   * @deprecated EnumeraÁıes est„o sendo concentradas na classe {@link SEFAZEnums}, com nova convenÁ„o de nomes e formato.
+   * @deprecated Enumera√ß√µes est√£o sendo concentradas na classe {@link SEFAZEnums}, com nova conven√ß√£o de nomes e formato.
    */
   @Deprecated
   public static enum SefazXMLtpNF {
     /**
-     * Define que È uma nota de entrada de mercadorias em relaÁ„o ao emitente da NFe.
+     * Define que √© uma nota de entrada de mercadorias em rela√ß√£o ao emitente da NFe.
      */
     ENTRY("0"),
     /**
-     * Define que È uma nota de saÌda de mercadorias em relaÁ„o ao emitente da NFe.
+     * Define que √© uma nota de sa√≠da de mercadorias em rela√ß√£o ao emitente da NFe.
      */
     EXIT("1");
 
     /**
-     * CÛdigo de identificaÁ„o do modelo do documento. (Cat·logo utilizado na NFe.)
+     * C√≥digo de identifica√ß√£o do modelo do documento. (Cat√°logo utilizado na NFe.)
      */
     private final String xmlCode;
 
@@ -346,10 +346,10 @@ public class SEFAZDefinitions {
     }
 
     /**
-     * Recupera o item da Enumeration de acordo com o cÛdigo no XML.
+     * Recupera o item da Enumeration de acordo com o c√≥digo no XML.
      *
      * @param xmlCode Valor encontrado no XML
-     * @return Item da enumeraÁ„o encontrato, null caso o valor n„o seja encontrado.
+     * @return Item da enumera√ß√£o encontrato, null caso o valor n√£o seja encontrado.
      */
     public static SefazXMLtpNF valueOfXmlCode(String xmlCode) {
       for (SefazXMLtpNF v : values())
@@ -358,9 +358,9 @@ public class SEFAZDefinitions {
     }
 
     /**
-     * # cÛdigo de identificaÁ„o do modelo do documento. (Cat·logo utilizado na NFe.).
+     * # c√≥digo de identifica√ß√£o do modelo do documento. (Cat√°logo utilizado na NFe.).
      *
-     * @return # cÛdigo de identificaÁ„o do modelo do documento
+     * @return # c√≥digo de identifica√ß√£o do modelo do documento
      */
     public String getXmlCode() {
       return xmlCode;
@@ -368,16 +368,16 @@ public class SEFAZDefinitions {
   }
 
   /**
-   * Indicador de presenÁa do comprador no estabelecimento comercial no momento da operaÁ„o.<br>
+   * Indicador de presen√ßa do comprador no estabelecimento comercial no momento da opera√ß√£o.<br>
    * Utilizado em:<br>
    * <li>nfe\infNFe\ide\indPres
    *
-   * @deprecated EnumeraÁıes est„o sendo concentradas na classe {@link SEFAZEnums}, com nova convenÁ„o de nomes e formato.
+   * @deprecated Enumera√ß√µes est√£o sendo concentradas na classe {@link SEFAZEnums}, com nova conven√ß√£o de nomes e formato.
    */
   @Deprecated
   public enum SefazXMLindPres {
     /**
-     * N„o se aplica para o tipo de operaÁ„o da NF.
+     * N√£o se aplica para o tipo de opera√ß√£o da NF.
      */
     NOTAPPLICABLE("0"),
 
@@ -390,11 +390,11 @@ public class SEFAZDefinitions {
     /** Televendas/telemarketing. */
     TELEMARKETING("3"),
     /**
-     * NFC-e em operaÁ„o com entrega a domicÌlio.
+     * NFC-e em opera√ß√£o com entrega a domic√≠lio.
      */
     NFCe_DELIVERY("4"),
     /**
-     * OperaÁ„o presencial, fora do estabelecimento; NT2016.002.
+     * Opera√ß√£o presencial, fora do estabelecimento; NT2016.002.
      */
     PRESENTIAL_OUTSIDE("5"),
     /**
@@ -403,7 +403,7 @@ public class SEFAZDefinitions {
     OTHER("9");
 
     /**
-     * CÛdigo de identificaÁ„o do modelo do documento. (Cat·logo utilizado na NFe.)
+     * C√≥digo de identifica√ß√£o do modelo do documento. (Cat√°logo utilizado na NFe.)
      */
     private final String xmlCode;
 
@@ -412,10 +412,10 @@ public class SEFAZDefinitions {
     }
 
     /**
-     * Recupera o item da Enumeration de acordo com o cÛdigo no XML.
+     * Recupera o item da Enumeration de acordo com o c√≥digo no XML.
      *
      * @param xmlCode Valor encontrado no XML
-     * @return Item da enumeraÁ„o encontrato, null caso o valor n„o seja encontrado.
+     * @return Item da enumera√ß√£o encontrato, null caso o valor n√£o seja encontrado.
      */
     public static SefazXMLindPres valueOfXmlCode(String xmlCode) {
       for (SefazXMLindPres v : values())
@@ -424,9 +424,9 @@ public class SEFAZDefinitions {
     }
 
     /**
-     * # cÛdigo de identificaÁ„o do modelo do documento. (Cat·logo utilizado na NFe.).
+     * # c√≥digo de identifica√ß√£o do modelo do documento. (Cat√°logo utilizado na NFe.).
      *
-     * @return # cÛdigo de identificaÁ„o do modelo do documento
+     * @return # c√≥digo de identifica√ß√£o do modelo do documento
      */
     public String getXmlCode() {
       return xmlCode;
@@ -434,30 +434,30 @@ public class SEFAZDefinitions {
   }
 
   /**
-   * Define o tipo de operaÁ„o desta NF. Utilizado em:<br>
+   * Define o tipo de opera√ß√£o desta NF. Utilizado em:<br>
    * <li>nfe\infNFe\ide\idDest
    *
-   * @deprecated EnumeraÁıes est„o sendo concentradas na classe {@link SEFAZEnums}, com nova convenÁ„o de nomes e formato.
+   * @deprecated Enumera√ß√µes est√£o sendo concentradas na classe {@link SEFAZEnums}, com nova conven√ß√£o de nomes e formato.
    */
   @Deprecated
   public enum SefazXMLidDest {
     /**
-     * OperaÁ„o interna (ao estado).
+     * Opera√ß√£o interna (ao estado).
      */
     INTERNAL("1"),
 
     /**
-     * OperaÁ„o Interestadual.
+     * Opera√ß√£o Interestadual.
      */
     INTERSTATE("2"),
 
     /**
-     * OperaÁ„o com o exterior.
+     * Opera√ß√£o com o exterior.
      */
     FOREIGN("3");
 
     /**
-     * CÛdigo de identificaÁ„o do modelo do documento. (Cat·logo utilizado na NFe.)
+     * C√≥digo de identifica√ß√£o do modelo do documento. (Cat√°logo utilizado na NFe.)
      */
     private final String xmlCode;
 
@@ -466,10 +466,10 @@ public class SEFAZDefinitions {
     }
 
     /**
-     * Recupera o item da Enumeration de acordo com o cÛdigo no XML.
+     * Recupera o item da Enumeration de acordo com o c√≥digo no XML.
      *
      * @param xmlCode Valor encontrado no XML
-     * @return Item da enumeraÁ„o encontrato, null caso o valor n„o seja encontrado.
+     * @return Item da enumera√ß√£o encontrato, null caso o valor n√£o seja encontrado.
      */
     public static SefazXMLidDest valueOfXmlCode(String xmlCode) {
       for (SefazXMLidDest v : values())
@@ -478,9 +478,9 @@ public class SEFAZDefinitions {
     }
 
     /**
-     * # cÛdigo de identificaÁ„o do modelo do documento. (Cat·logo utilizado na NFe.).
+     * # c√≥digo de identifica√ß√£o do modelo do documento. (Cat√°logo utilizado na NFe.).
      *
-     * @return # cÛdigo de identificaÁ„o do modelo do documento
+     * @return # c√≥digo de identifica√ß√£o do modelo do documento
      */
     public String getXmlCode() {
       return xmlCode;
@@ -492,62 +492,62 @@ public class SEFAZDefinitions {
    * Utilizado nas tags:
    * <li>ICMS\**\orig
    *
-   * @deprecated EnumeraÁıes est„o sendo concentradas na classe {@link SEFAZEnums}, com nova convenÁ„o de nomes e formato.
+   * @deprecated Enumera√ß√µes est√£o sendo concentradas na classe {@link SEFAZEnums}, com nova conven√ß√£o de nomes e formato.
    */
   @Deprecated
   public static enum SefazXMLorig {
     /**
-     * 0 - Produto de origem nacional, exceto as indicadas nos cÛdigos 3 a 5.
+     * 0 - Produto de origem nacional, exceto as indicadas nos c√≥digos 3 a 5.
      */
     NATIONAL(true, "0"),
     /**
-     * 1 - Produto de origem importada, sendo adiquirida diretamente por importaÁ„o, exceto a indicada no cÛdigo 6.
+     * 1 - Produto de origem importada, sendo adiquirida diretamente por importa√ß√£o, exceto a indicada no c√≥digo 6.
      */
     IMPORTED_DIRECTED(false, "1"),
     /**
-     * 2 - Produto de origem importada, sendo adiquirida no mercado interno, exceto a indicada no cÛdigo 7.
+     * 2 - Produto de origem importada, sendo adiquirida no mercado interno, exceto a indicada no c√≥digo 7.
      */
     IMPORTED_INDIRECTED(false, "2"),
     /**
-     * 3 - Nacional, mercadoria ou bem com Conte˙do de ImportaÁ„o superior a 40% (quarenta por cento) e inferior ou igual a 70%.
+     * 3 - Nacional, mercadoria ou bem com Conte√∫do de Importa√ß√£o superior a 40% (quarenta por cento) e inferior ou igual a 70%.
      */
     NATIONAL_IMPORTEDCOMPOSED_MORETHAN40_LESSEQUALTHAN70(true, "3"),
     /**
-     * 4 - Nacional, cuja produÁ„o tenha sido feita em conformidade com os processos produtivos b·sicos de que tratam o Decreto-Lei n∫ 288/67, e as Leis n∫s 8.248/91, 8.387/91, 10.176/01 e 11 . 4 8 4 / 0 7
+     * 4 - Nacional, cuja produ√ß√£o tenha sido feita em conformidade com os processos produtivos b√°sicos de que tratam o Decreto-Lei n¬∫ 288/67, e as Leis n¬∫s 8.248/91, 8.387/91, 10.176/01 e 11 . 4 8 4 / 0 7
      */
     NATIONAL_BASICPRODUCTIONPROCESS(true, "4"),
     /**
-     * 5 - Nacional, mercadoria ou bem com Conte˙do de ImportaÁ„o superior a 40% (quarenta por cento).
+     * 5 - Nacional, mercadoria ou bem com Conte√∫do de Importa√ß√£o superior a 40% (quarenta por cento).
      */
     NATIONAL_IMPORTEDCOMPOSED_LESSTHAN40(true, "5"),
     /**
-     * 6 - Estrangeira - ImportaÁ„o direta, sem similar nacional, constante em lista de ResoluÁ„o CAMEX.
+     * 6 - Estrangeira - Importa√ß√£o direta, sem similar nacional, constante em lista de Resolu√ß√£o CAMEX.
      */
     IMPORTED_DIRECTED_NONATIONALSIMILAR(false, "6"),
     /**
-     * 7 - Estrangeira - Adquirida no mercado interno, sem similar nacional, constante em lista de ResoluÁ„o CAMEXî.
+     * 7 - Estrangeira - Adquirida no mercado interno, sem similar nacional, constante em lista de Resolu√ß√£o CAMEX‚Äù.
      */
     IMPORTED_INDIRECTED_NONATIONALSIMILAR(false, "7"),
     /**
-     * 8 - Nacional, mercadoria ou bem com Conte˙do de ImportaÁ„o superior a 70%;
+     * 8 - Nacional, mercadoria ou bem com Conte√∫do de Importa√ß√£o superior a 70%;
      */
     NATIONAL_IMPORTEDCOMPOSED_MORETHAN70(true, "8");
 
     /**
-     * Retorna se o item È nacional, ou n„o.
+     * Retorna se o item √© nacional, ou n√£o.
      */
     private final boolean national;
 
     /**
-     * CÛdigo a ser utilizado no XML da NFe.
+     * C√≥digo a ser utilizado no XML da NFe.
      */
     private final String xmlCode;
 
     /**
      * Instantiates a new item origin.
      *
-     * @param national retorna se o item È nacional, ou n„o.
-     * @param xmlCode cÛdigo a ser utilizado no XML da NFe.
+     * @param national retorna se o item √© nacional, ou n√£o.
+     * @param xmlCode c√≥digo a ser utilizado no XML da NFe.
      */
     SefazXMLorig(boolean national, String xmlCode) {
       this.national = national;
@@ -555,28 +555,28 @@ public class SEFAZDefinitions {
     }
 
     /**
-     * # retorna se o item È nacional, ou n„o.
+     * # retorna se o item √© nacional, ou n√£o.
      *
-     * @return the retorna se o item È nacional, ou n„o
+     * @return the retorna se o item √© nacional, ou n√£o
      */
     public boolean isNational() {
       return this.national;
     }
 
     /**
-     * # cÛdigo a ser utilizado no XML da NFe.
+     * # c√≥digo a ser utilizado no XML da NFe.
      *
-     * @return the cÛdigo a ser utilizado no XML da NFe
+     * @return the c√≥digo a ser utilizado no XML da NFe
      */
     public String getXmlCode() {
       return xmlCode;
     }
 
     /**
-     * Retorna o ITEMORIGIN correspondente ao cÛdigo.
+     * Retorna o ITEMORIGIN correspondente ao c√≥digo.
      *
-     * @param xmlCode passar apenas o cÛdigo referente a origem do item, n„o incluir o cÛdigo de tributaÁ„o do ICMS.
-     * @return {@link SefazXMLorig} com base no cÛdigo do XML.
+     * @param xmlCode passar apenas o c√≥digo referente a origem do item, n√£o incluir o c√≥digo de tributa√ß√£o do ICMS.
+     * @return {@link SefazXMLorig} com base no c√≥digo do XML.
      */
     public static SefazXMLorig valueOfXmlCode(String xmlCode) {
       for (SefazXMLorig v : values())
@@ -586,9 +586,9 @@ public class SEFAZDefinitions {
   }
 
   /**
-   * DefiniÁıes dos cÛdigos de CST que podem ser utilizados para preenchimento de documento fiscal.
+   * Defini√ß√µes dos c√≥digos de CST que podem ser utilizados para preenchimento de documento fiscal.
    *
-   * @deprecated EnumeraÁıes est„o sendo concentradas na classe {@link SEFAZEnums}, com nova convenÁ„o de nomes e formato.
+   * @deprecated Enumera√ß√µes est√£o sendo concentradas na classe {@link SEFAZEnums}, com nova conven√ß√£o de nomes e formato.
    */
   @Deprecated
   public static enum SefazXMLCST {
@@ -597,15 +597,15 @@ public class SEFAZDefinitions {
      */
     ICMS_CST_00("00", false, false, false),
     /**
-     * Tributada e com cobranÁa do ICMS por substituiÁ„o tribut·ria
+     * Tributada e com cobran√ßa do ICMS por substitui√ß√£o tribut√°ria
      */
     ICMS_CST_10("10", false, true, false),
     /**
-     * Com reduÁ„o de base de c·lculo
+     * Com redu√ß√£o de base de c√°lculo
      */
     ICMS_CST_20("20", false, false, true),
     /**
-     * Isenta ou n„o tributada e com cobranÁa do ICMS por substituiÁ„o tribut·ria
+     * Isenta ou n√£o tributada e com cobran√ßa do ICMS por substitui√ß√£o tribut√°ria
      */
     ICMS_CST_30("30", false, true, false),
     /**
@@ -613,11 +613,11 @@ public class SEFAZDefinitions {
      */
     ICMS_CST_40("40", false, false, false),
     /**
-     * N„o tributada
+     * N√£o tributada
      */
     ICMS_CST_41("41", false, false, false),
     /**
-     * Suspens„o
+     * Suspens√£o
      */
     ICMS_CST_50("50", false, false, false),
     /**
@@ -625,11 +625,11 @@ public class SEFAZDefinitions {
      */
     ICMS_CST_51("51", false, false, false),
     /**
-     * ICMS cobrado anteriormente por substituiÁ„o tribut·ria
+     * ICMS cobrado anteriormente por substitui√ß√£o tribut√°ria
      */
     ICMS_CST_60("60", false, true, false),
     /**
-     * Com reduÁ„o de base de c·lculo e cobranÁa do ICMS por substituiÁ„o tribut·ria
+     * Com redu√ß√£o de base de c√°lculo e cobran√ßa do ICMS por substitui√ß√£o tribut√°ria
      */
     ICMS_CST_70("70", false, true, true),
     /**
@@ -649,19 +649,19 @@ public class SEFAZDefinitions {
     ICMS_CSOSN_900("900", true, false, false);
 
     /**
-     * CÛdigo da SituaÁ„o Tribut·ria que representa o
+     * C√≥digo da Situa√ß√£o Tribut√°ria que representa o
      */
     private final String cst;
     /**
-     * Indicador se o cÛdigo È do Simples Nacional (CSOSN)
+     * Indicador se o c√≥digo √© do Simples Nacional (CSOSN)
      */
     private final boolean simplesNacional;
     /**
-     * Indicador se o cÛdigo È referente a SubstituiÁ„o Tribut·ria de ICMS
+     * Indicador se o c√≥digo √© referente a Substitui√ß√£o Tribut√°ria de ICMS
      */
     private final boolean st;
     /**
-     * Indicador se o cÛdigo È referente a ReduÁ„o na Base de C·lculo.
+     * Indicador se o c√≥digo √© referente a Redu√ß√£o na Base de C√°lculo.
      */
     private final boolean redBC;
 
@@ -673,27 +673,27 @@ public class SEFAZDefinitions {
     }
 
     /**
-     * # indicador se o cÛdigo È referente a SubstituiÁ„o Tribut·ria de ICMS.
+     * # indicador se o c√≥digo √© referente a Substitui√ß√£o Tribut√°ria de ICMS.
      *
-     * @return # indicador se o cÛdigo È referente a SubstituiÁ„o Tribut·ria de ICMS
+     * @return # indicador se o c√≥digo √© referente a Substitui√ß√£o Tribut√°ria de ICMS
      */
     public boolean isSt() {
       return st;
     }
 
     /**
-     * # indicador se o cÛdigo È referente a ReduÁ„o na Base de C·lculo.
+     * # indicador se o c√≥digo √© referente a Redu√ß√£o na Base de C√°lculo.
      *
-     * @return # indicador se o cÛdigo È referente a ReduÁ„o na Base de C·lculo
+     * @return # indicador se o c√≥digo √© referente a Redu√ß√£o na Base de C√°lculo
      */
     public boolean isRedBC() {
       return redBC;
     }
 
     /**
-     * Recupera o ICMSCST pelo cÛdigo da tabela.
+     * Recupera o ICMSCST pelo c√≥digo da tabela.
      *
-     * @param cst cÛdigo da tabela a ser procurao. Ex: "00", "10", "30". Ou CSOSN: "101", "202", "500"
+     * @param cst c√≥digo da tabela a ser procurao. Ex: "00", "10", "30". Ou CSOSN: "101", "202", "500"
      * @return
      */
     public static SefazXMLCST valueOfCode(String cst) {
@@ -703,18 +703,18 @@ public class SEFAZDefinitions {
     }
 
     /**
-     * # cÛdigo da SituaÁ„o Tribut·ria que representa o.
+     * # c√≥digo da Situa√ß√£o Tribut√°ria que representa o.
      *
-     * @return # cÛdigo da SituaÁ„o Tribut·ria que representa o
+     * @return # c√≥digo da Situa√ß√£o Tribut√°ria que representa o
      */
     public String getCst() {
       return cst;
     }
 
     /**
-     * # indicador se o cÛdigo È do Simples Nacional (CSOSN).
+     * # indicador se o c√≥digo √© do Simples Nacional (CSOSN).
      *
-     * @return # indicador se o cÛdigo È do Simples Nacional (CSOSN)
+     * @return # indicador se o c√≥digo √© do Simples Nacional (CSOSN)
      */
     public boolean isSimplesNacional() {
       return simplesNacional;
@@ -722,16 +722,16 @@ public class SEFAZDefinitions {
   }
 
   /**
-   * EnumeraÁ„o da Modalidade de determinaÁ„o da BC do ICMS
+   * Enumera√ß√£o da Modalidade de determina√ß√£o da BC do ICMS
    *
-   * @deprecated EnumeraÁıes est„o sendo concentradas na classe {@link SEFAZEnums}, com nova convenÁ„o de nomes e formato.
+   * @deprecated Enumera√ß√µes est√£o sendo concentradas na classe {@link SEFAZEnums}, com nova conven√ß√£o de nomes e formato.
    */
   @Deprecated
   public static enum SefazXMLmodBC {
     MVA("0"), PAUTA("1"), FIXED_SHEET("2"), OPERATION_VALUE("3");
 
     /**
-     * CÛdigo que È atribuÌdo na TAG XML da NFe
+     * C√≥digo que √© atribu√≠do na TAG XML da NFe
      */
     String xmlCode;
 
@@ -740,9 +740,9 @@ public class SEFAZDefinitions {
     }
 
     /**
-     * # cÛdigo que È atribuÌdo na TAG XML da NFe.
+     * # c√≥digo que √© atribu√≠do na TAG XML da NFe.
      *
-     * @return the cÛdigo que È atribuÌdo na TAG XML da NFe
+     * @return the c√≥digo que √© atribu√≠do na TAG XML da NFe
      */
     public String getXmlCode() {
       return xmlCode;
@@ -756,16 +756,16 @@ public class SEFAZDefinitions {
   }
 
   /**
-   * EnumeraÁ„o da Modalidade de determinaÁ„o da BC do ICMS ST.
+   * Enumera√ß√£o da Modalidade de determina√ß√£o da BC do ICMS ST.
    *
-   * @deprecated EnumeraÁıes est„o sendo concentradas na classe {@link SEFAZEnums}, com nova convenÁ„o de nomes e formato.
+   * @deprecated Enumera√ß√µes est√£o sendo concentradas na classe {@link SEFAZEnums}, com nova conven√ß√£o de nomes e formato.
    */
   @Deprecated
   public static enum SefazXMLmodBCST {
     FIXED_SHEET("0"), LIST_NEGATIVE("1"), LIST_POSITIVE("2"), LIST_NEUTRAL("3"), MVA("4"), PAUTA("5");
 
     /**
-     * CÛdigo que È atribuÌdo na TAG XML da NFe.
+     * C√≥digo que √© atribu√≠do na TAG XML da NFe.
      */
     private final String xmlCode;
 
@@ -774,9 +774,9 @@ public class SEFAZDefinitions {
     }
 
     /**
-     * # cÛdigo que È atribuÌdo na TAG XML da NFe.
+     * # c√≥digo que √© atribu√≠do na TAG XML da NFe.
      *
-     * @return the cÛdigo que È atribuÌdo na TAG XML da NFe
+     * @return the c√≥digo que √© atribu√≠do na TAG XML da NFe
      */
     public String getXmlCode() {
       return xmlCode;
@@ -790,64 +790,64 @@ public class SEFAZDefinitions {
   }
 
   /**
-   * Define o motivo da desoneraÁ„o do ICMS
+   * Define o motivo da desonera√ß√£o do ICMS
    *
-   * @deprecated EnumeraÁıes est„o sendo concentradas na classe {@link SEFAZEnums}, com nova convenÁ„o de nomes e formato.
+   * @deprecated Enumera√ß√µes est√£o sendo concentradas na classe {@link SEFAZEnums}, com nova conven√ß√£o de nomes e formato.
    */
   @Deprecated
   public static enum SefazXMLmotDesICMS {
     /**
-     * Define o motivo da desoneraÁ„o por: 1 - T·xi
+     * Define o motivo da desonera√ß√£o por: 1 - T√°xi
      */
     TAXI("1"),
     /**
-     * Define o motivo da desoneraÁ„o por: 2 - Deficiente<br>
-     * Desde a vers„o 3.1 esse motivo n„o pode mais ser utilizado, deve ser especificado o 10 {@link #DEFICIENT_NOTCONDUCTOR} ou 11 {@link #DEFICIENT_NOTCONDUCTOR}.
+     * Define o motivo da desonera√ß√£o por: 2 - Deficiente<br>
+     * Desde a vers√£o 3.1 esse motivo n√£o pode mais ser utilizado, deve ser especificado o 10 {@link #DEFICIENT_NOTCONDUCTOR} ou 11 {@link #DEFICIENT_NOTCONDUCTOR}.
      */
     DEFICIENT("2"),
     /**
-     * Define o motivo da desoneraÁ„o por: 3 - Uso na agropecu·ria
+     * Define o motivo da desonera√ß√£o por: 3 - Uso na agropecu√°ria
      */
     AGROPECUARIA("3"),
     /**
-     * Define o motivo da desoneraÁ„o por: 4 - Frotista/Locadora
+     * Define o motivo da desonera√ß√£o por: 4 - Frotista/Locadora
      */
     FLEETOWNER("4"),
     /**
-     * Define o motivo da desoneraÁ„o por: 5 - Diplom·tico/Consular
+     * Define o motivo da desonera√ß√£o por: 5 - Diplom√°tico/Consular
      */
     DIPLOMATIC("5"),
     /**
-     * Define o motivo de desoneraÁ„o por: 6 - Utilit·rios e Motocicletas da AmazÙnia Ocidental e ¡reas de Livre ComÈrcio (ResoluÁ„o 714/88 e 790/94 ñ CONTRAN e suas alteraÁıes)
+     * Define o motivo de desonera√ß√£o por: 6 - Utilit√°rios e Motocicletas da Amaz√¥nia Ocidental e √Åreas de Livre Com√©rcio (Resolu√ß√£o 714/88 e 790/94 ‚Äì CONTRAN e suas altera√ß√µes)
      */
     UTILITARIOSLIVRECOMERCIO("6"),
     /**
-     * Define o motivo de desoneraÁ„o por: 7 - SUFRAM
+     * Define o motivo de desonera√ß√£o por: 7 - SUFRAM
      */
     SUFRAM("7"),
     /**
-     * Define o motivo de desoneraÁ„o por: 8 - Venda a ”rg„o P˙blico
+     * Define o motivo de desonera√ß√£o por: 8 - Venda a √ìrg√£o P√∫blico
      */
     ORGAOPULICO("8"),
     /**
-     * Define o motivo da desoneraÁ„o por: 9 - Outros
+     * Define o motivo da desonera√ß√£o por: 9 - Outros
      */
     OTHERS("9"),
     /**
-     * Define o motivo da desoneraÁ„o por: 10 - Deficiente condutor (ConvÍnio ICMS 38/12)
+     * Define o motivo da desonera√ß√£o por: 10 - Deficiente condutor (Conv√™nio ICMS 38/12)
      */
     DEFICIENT_CONDUCTOR("10"),
     /**
-     * Define o motivo da desoneraÁ„o por: 11 - Deficiente N√O condutor (ConvÍnio ICMS 38/12)
+     * Define o motivo da desonera√ß√£o por: 11 - Deficiente N√ÉO condutor (Conv√™nio ICMS 38/12)
      */
     DEFICIENT_NOTCONDUCTOR("11"),
     /**
-     * Define o motivo da desoneraÁ„o por: 12 - ”rg„o de fomento e desenvolvimento agropecu·rio
+     * Define o motivo da desonera√ß√£o por: 12 - √ìrg√£o de fomento e desenvolvimento agropecu√°rio
      */
     ORGAODEFOMENTO("12");
 
     /**
-     * CÛdigo que È atribuÌdo na TAG XML da NFe
+     * C√≥digo que √© atribu√≠do na TAG XML da NFe
      */
     private final String xmlCode;
 
@@ -856,9 +856,9 @@ public class SEFAZDefinitions {
     }
 
     /**
-     * # cÛdigo que È atribuÌdo na TAG XML da NFe.
+     * # c√≥digo que √© atribu√≠do na TAG XML da NFe.
      *
-     * @return the cÛdigo que È atribuÌdo na TAG XML da NFe
+     * @return the c√≥digo que √© atribu√≠do na TAG XML da NFe
      */
     public String getXmlCode() {
       return xmlCode;
@@ -879,17 +879,17 @@ public class SEFAZDefinitions {
     /** Frete Contratado Pelo Emitente da NFe. */
     BYEMITTER("0"),
 
-    /** Frete Contratado Pelo Destinat·rio da Nota. */
+    /** Frete Contratado Pelo Destinat√°rio da Nota. */
     BYRECIPIENT("1"),
 
     /** Frete Contratado Por terceiros. */
     BYOTHERS("2"),
     /**
-     * Transporte PrÛprio por conta do Remetente.
+     * Transporte Pr√≥prio por conta do Remetente.
      */
     OWNFREIGHTAGE_BYEMITTER("3"),
     /**
-     * Transporte PrÛprio por conta do Destinat·rio.
+     * Transporte Pr√≥prio por conta do Destinat√°rio.
      */
     OWNFREIGHTAGE_BYRECIPIENT("4"),
 
@@ -897,7 +897,7 @@ public class SEFAZDefinitions {
     NO_FREIGHTAGE("9");
 
     /**
-     * CÛdigo de identificaÁ„o do modelo do documento. (Cat·logo utilizado na NFe.)
+     * C√≥digo de identifica√ß√£o do modelo do documento. (Cat√°logo utilizado na NFe.)
      */
     final String xmlCode;
 
@@ -906,9 +906,9 @@ public class SEFAZDefinitions {
     }
 
     /**
-     * # cÛdigo de identificaÁ„o do modelo do documento. (Cat·logo utilizado na NFe.).
+     * # c√≥digo de identifica√ß√£o do modelo do documento. (Cat√°logo utilizado na NFe.).
      *
-     * @return # cÛdigo de identificaÁ„o do modelo do documento
+     * @return # c√≥digo de identifica√ß√£o do modelo do documento
      */
     public String getXmlCode() {
       return xmlCode;

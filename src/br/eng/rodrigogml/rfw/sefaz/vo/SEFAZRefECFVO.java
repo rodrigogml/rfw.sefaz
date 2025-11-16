@@ -12,7 +12,7 @@ import br.eng.rodrigogml.rfw.orm.dao.annotations.dao.RFWDAOAnnotation;
 import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_mod;
 
 /**
- * VO para o grupo BA20 (refECF) – Informações do Cupom Fiscal referenciado. Utilizado para vincular à NF-e um Cupom Fiscal emitido por equipamento ECF/PDV ou máquina registradora.
+ * VO para o grupo BA20 (refECF) â€“ InformaÃ§Ãµes do Cupom Fiscal referenciado. Utilizado para vincular Ã  NF-e um Cupom Fiscal emitido por equipamento ECF/PDV ou mÃ¡quina registradora.
  */
 @RFWDAOAnnotation(schema = "_RFW.SEFAZ", table = "sefaz_refecf")
 public class SEFAZRefECFVO extends RFWVO implements Serializable {
@@ -26,21 +26,21 @@ public class SEFAZRefECFVO extends RFWVO implements Serializable {
   private SEFAZNFRefVO nfRefVO = null;
 
   /**
-   * BA21 - Modelo do Documento Fiscal. Valores possíveis: "2B" = Cupom Fiscal emitido por máquina registradora (não ECF) "2C" = Cupom Fiscal PDV "2D" = Cupom Fiscal emitido por ECF. Ocorrência: 1-1 (campo condicional).
+   * BA21 - Modelo do Documento Fiscal. Valores possÃ­veis: "2B" = Cupom Fiscal emitido por mÃ¡quina registradora (nÃ£o ECF) "2C" = Cupom Fiscal PDV "2D" = Cupom Fiscal emitido por ECF. OcorrÃªncia: 1-1 (campo condicional).
    */
   @RFWMetaEnumField(caption = "Modelo do Documento Fiscal (01 ou 02)", required = false)
   private SEFAZ_mod mod;
 
   /**
-   * BA22 - Número de ordem sequencial do ECF. Identifica o equipamento que emitiu o Cupom Fiscal vinculado à NF-e. Tamanho 3 caracteres numéricos. Ocorrência: 1-1.
+   * BA22 - NÃºmero de ordem sequencial do ECF. Identifica o equipamento que emitiu o Cupom Fiscal vinculado Ã  NF-e. Tamanho 3 caracteres numÃ©ricos. OcorrÃªncia: 1-1.
    */
-  @RFWMetaStringField(caption = "Número de ordem sequencial do ECF", required = true, unique = false, maxLength = 3, minLength = 3, pattern = "", preProcess = { PreProcessOption.NONE })
+  @RFWMetaStringField(caption = "NÃºmero de ordem sequencial do ECF", required = true, unique = false, maxLength = 3, minLength = 3, pattern = "", preProcess = { PreProcessOption.NONE })
   private String necf;
 
   /**
-   * BA23 - Número do Contador de Ordem de Operação (COO). Número do COO do Cupom Fiscal vinculado à NF-e. Tamanho 6 caracteres numéricos. Ocorrência: 1-1.
+   * BA23 - NÃºmero do Contador de Ordem de OperaÃ§Ã£o (COO). NÃºmero do COO do Cupom Fiscal vinculado Ã  NF-e. Tamanho 6 caracteres numÃ©ricos. OcorrÃªncia: 1-1.
    */
-  @RFWMetaStringField(caption = "Número do Contador de Ordem de Operação (COO)", required = true, unique = false, maxLength = 6, minLength = 6, pattern = "", preProcess = { PreProcessOption.NONE })
+  @RFWMetaStringField(caption = "NÃºmero do Contador de Ordem de OperaÃ§Ã£o (COO)", required = true, unique = false, maxLength = 6, minLength = 6, pattern = "", preProcess = { PreProcessOption.NONE })
   private String ncoo;
 
   /**
@@ -62,7 +62,7 @@ public class SEFAZRefECFVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # bA21 - Modelo do Documento Fiscal. Valores possíveis: "2B" = Cupom Fiscal emitido por máquina registradora (não ECF) "2C" = Cupom Fiscal PDV "2D" = Cupom Fiscal emitido por ECF. Ocorrência: 1-1 (campo condicional).
+   * # bA21 - Modelo do Documento Fiscal. Valores possÃ­veis: "2B" = Cupom Fiscal emitido por mÃ¡quina registradora (nÃ£o ECF) "2C" = Cupom Fiscal PDV "2D" = Cupom Fiscal emitido por ECF. OcorrÃªncia: 1-1 (campo condicional).
    *
    * @return the bA21 - Modelo do Documento Fiscal
    */
@@ -71,7 +71,7 @@ public class SEFAZRefECFVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # bA21 - Modelo do Documento Fiscal. Valores possíveis: "2B" = Cupom Fiscal emitido por máquina registradora (não ECF) "2C" = Cupom Fiscal PDV "2D" = Cupom Fiscal emitido por ECF. Ocorrência: 1-1 (campo condicional).
+   * # bA21 - Modelo do Documento Fiscal. Valores possÃ­veis: "2B" = Cupom Fiscal emitido por mÃ¡quina registradora (nÃ£o ECF) "2C" = Cupom Fiscal PDV "2D" = Cupom Fiscal emitido por ECF. OcorrÃªncia: 1-1 (campo condicional).
    *
    * @param mod the new bA21 - Modelo do Documento Fiscal
    */
@@ -80,36 +80,36 @@ public class SEFAZRefECFVO extends RFWVO implements Serializable {
   }
 
   /**
-   * # bA22 - Número de ordem sequencial do ECF. Identifica o equipamento que emitiu o Cupom Fiscal vinculado à NF-e. Tamanho 3 caracteres numéricos. Ocorrência: 1-1.
+   * # bA22 - NÃºmero de ordem sequencial do ECF. Identifica o equipamento que emitiu o Cupom Fiscal vinculado Ã  NF-e. Tamanho 3 caracteres numÃ©ricos. OcorrÃªncia: 1-1.
    *
-   * @return the bA22 - Número de ordem sequencial do ECF
+   * @return the bA22 - NÃºmero de ordem sequencial do ECF
    */
   public String getNecf() {
     return necf;
   }
 
   /**
-   * # bA22 - Número de ordem sequencial do ECF. Identifica o equipamento que emitiu o Cupom Fiscal vinculado à NF-e. Tamanho 3 caracteres numéricos. Ocorrência: 1-1.
+   * # bA22 - NÃºmero de ordem sequencial do ECF. Identifica o equipamento que emitiu o Cupom Fiscal vinculado Ã  NF-e. Tamanho 3 caracteres numÃ©ricos. OcorrÃªncia: 1-1.
    *
-   * @param necf the new bA22 - Número de ordem sequencial do ECF
+   * @param necf the new bA22 - NÃºmero de ordem sequencial do ECF
    */
   public void setNecf(String necf) {
     this.necf = necf;
   }
 
   /**
-   * # bA23 - Número do Contador de Ordem de Operação (COO). Número do COO do Cupom Fiscal vinculado à NF-e. Tamanho 6 caracteres numéricos. Ocorrência: 1-1.
+   * # bA23 - NÃºmero do Contador de Ordem de OperaÃ§Ã£o (COO). NÃºmero do COO do Cupom Fiscal vinculado Ã  NF-e. Tamanho 6 caracteres numÃ©ricos. OcorrÃªncia: 1-1.
    *
-   * @return the bA23 - Número do Contador de Ordem de Operação (COO)
+   * @return the bA23 - NÃºmero do Contador de Ordem de OperaÃ§Ã£o (COO)
    */
   public String getNcoo() {
     return ncoo;
   }
 
   /**
-   * # bA23 - Número do Contador de Ordem de Operação (COO). Número do COO do Cupom Fiscal vinculado à NF-e. Tamanho 6 caracteres numéricos. Ocorrência: 1-1.
+   * # bA23 - NÃºmero do Contador de Ordem de OperaÃ§Ã£o (COO). NÃºmero do COO do Cupom Fiscal vinculado Ã  NF-e. Tamanho 6 caracteres numÃ©ricos. OcorrÃªncia: 1-1.
    *
-   * @param ncoo the new bA23 - Número do Contador de Ordem de Operação (COO)
+   * @param ncoo the new bA23 - NÃºmero do Contador de Ordem de OperaÃ§Ã£o (COO)
    */
   public void setNcoo(String ncoo) {
     this.ncoo = ncoo;

@@ -13,11 +13,11 @@ import br.eng.rodrigogml.rfw.orm.dao.annotations.dao.RFWDAOAnnotation;
 import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_CRT;
 
 /**
- * VO da tag {@code <emit>} (Grupo C - Identificação do Emitente da NF-e).
+ * VO da tag {@code <emit>} (Grupo C - IdentificaÃ§Ã£o do Emitente da NF-e).
  * <p>
- * Representa os dados cadastrais do emitente/remetente da NF-e, incluindo CNPJ/CPF, razão social, inscrições estadual/municipal e regime tributário.
+ * Representa os dados cadastrais do emitente/remetente da NF-e, incluindo CNPJ/CPF, razÃ£o social, inscriÃ§Ãµes estadual/municipal e regime tributÃ¡rio.
  * <p>
- * Observação sobre obrigatoriedade: embora a documentação da NF-e indique a obrigatoriedade de vários campos (através das colunas "Ele" e "Ocor."), neste VO todos os atributos estão marcados com {@code required = false} nas anotações de metadados, por solicitação explícita.
+ * ObservaÃ§Ã£o sobre obrigatoriedade: embora a documentaÃ§Ã£o da NF-e indique a obrigatoriedade de vÃ¡rios campos (atravÃ©s das colunas "Ele" e "Ocor."), neste VO todos os atributos estÃ£o marcados com {@code required = false} nas anotaÃ§Ãµes de metadados, por solicitaÃ§Ã£o explÃ­cita.
  */
 @RFWDAOAnnotation(schema = "_RFW.SEFAZ", table = "sefaz_emit")
 public class SEFAZEmitVO extends RFWVO {
@@ -39,7 +39,7 @@ public class SEFAZEmitVO extends RFWVO {
   /**
    * CNPJ do emitente (id: C02).
    * <p>
-   * Tipo: N, tamanho: 14, ocorrência: 1-1, Ele: CE (condicional). Informar o CNPJ do emitente com zeros não significativos. Na emissão de NF-e avulsa pelo Fisco, as informações do remetente são informadas neste grupo.
+   * Tipo: N, tamanho: 14, ocorrÃªncia: 1-1, Ele: CE (condicional). Informar o CNPJ do emitente com zeros nÃ£o significativos. Na emissÃ£o de NF-e avulsa pelo Fisco, as informaÃ§Ãµes do remetente sÃ£o informadas neste grupo.
    */
   @RFWMetaStringCNPJField(caption = "CNPJ do emitente", required = false)
   private String cnpj;
@@ -47,51 +47,51 @@ public class SEFAZEmitVO extends RFWVO {
   /**
    * CPF do remetente (id: C02a).
    * <p>
-   * Tipo: N, tamanho: 11, ocorrência: 1-1, Ele: CE (condicional). CPF somente com dígitos e zeros não significativos quando aplicável.
+   * Tipo: N, tamanho: 11, ocorrÃªncia: 1-1, Ele: CE (condicional). CPF somente com dÃ­gitos e zeros nÃ£o significativos quando aplicÃ¡vel.
    */
   @RFWMetaStringCPFField(caption = "CPF do remetente", required = false)
   private String cpf;
 
   /**
-   * Razão Social ou Nome do emitente (id: C03).
+   * RazÃ£o Social ou Nome do emitente (id: C03).
    * <p>
-   * Tipo: C, tamanho: 2-60, ocorrência: 1-1, Ele: E (obrigatório).
+   * Tipo: C, tamanho: 2-60, ocorrÃªncia: 1-1, Ele: E (obrigatÃ³rio).
    */
-  @RFWMetaStringField(caption = "Razão social ou nome do emitente", required = false, maxLength = 60, minLength = 2, preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
+  @RFWMetaStringField(caption = "RazÃ£o social ou nome do emitente", required = false, maxLength = 60, minLength = 2, preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
   private String xnome;
 
   /**
    * Nome fantasia do emitente (id: C04).
    * <p>
-   * Tipo: C, tamanho: 2-60, ocorrência: 0-1, Ele: E (obrigatório quando existir).
+   * Tipo: C, tamanho: 2-60, ocorrÃªncia: 0-1, Ele: E (obrigatÃ³rio quando existir).
    */
   @RFWMetaStringField(caption = "Nome fantasia do emitente", required = false, maxLength = 60, minLength = 2, preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
   private String xfant;
 
   /**
-   * Inscrição Estadual do emitente (id: C17).
+   * InscriÃ§Ã£o Estadual do emitente (id: C17).
    * <p>
-   * Tipo: C, tamanho: 2-14, ocorrência: 1-1, Ele: E (obrigatório).
+   * Tipo: C, tamanho: 2-14, ocorrÃªncia: 1-1, Ele: E (obrigatÃ³rio).
    */
-  @RFWMetaStringIEField(caption = "Inscrição Estadual do emitente", required = false)
+  @RFWMetaStringIEField(caption = "InscriÃ§Ã£o Estadual do emitente", required = false)
   private String ie;
 
   /**
-   * Inscrição Estadual do Substituto Tributário (id: C18).
+   * InscriÃ§Ã£o Estadual do Substituto TributÃ¡rio (id: C18).
    * <p>
-   * Tipo: N, tamanho: 2-14, ocorrência: 0-1, Ele: E (obrigatório quando houver retenção de ICMS-ST para UF de destino). Representa a IE do Substituto Tributário da UF de destino da mercadoria.
+   * Tipo: N, tamanho: 2-14, ocorrÃªncia: 0-1, Ele: E (obrigatÃ³rio quando houver retenÃ§Ã£o de ICMS-ST para UF de destino). Representa a IE do Substituto TributÃ¡rio da UF de destino da mercadoria.
    */
-  @RFWMetaStringIEField(caption = "IE do Substituto Tributário", required = false)
+  @RFWMetaStringIEField(caption = "IE do Substituto TributÃ¡rio", required = false)
   private String iest;
 
   /**
-   * Inscrição Municipal do prestador de serviço (id: C19).
+   * InscriÃ§Ã£o Municipal do prestador de serviÃ§o (id: C19).
    * <p>
-   * Tipo: C, tamanho: 1-15, ocorrência: 1-1 dentro do grupo opcional -x- (id: C18.1), Ele: E (obrigatório quando o grupo for informado).
+   * Tipo: C, tamanho: 1-15, ocorrÃªncia: 1-1 dentro do grupo opcional -x- (id: C18.1), Ele: E (obrigatÃ³rio quando o grupo for informado).
    * <p>
-   * Campo do grupo "-x-" definido diretamente na classe pai, conforme instrução.
+   * Campo do grupo "-x-" definido diretamente na classe pai, conforme instruÃ§Ã£o.
    */
-  @RFWMetaStringField(caption = "Inscrição Municipal do prestador de serviço", required = false, maxLength = 15, minLength = 1, preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
+  @RFWMetaStringField(caption = "InscriÃ§Ã£o Municipal do prestador de serviÃ§o", required = false, maxLength = 15, minLength = 1, preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
   private String im;
 
   /**
@@ -101,17 +101,17 @@ public class SEFAZEmitVO extends RFWVO {
   private String cnae;
 
   /**
-   * Código de Regime Tributário (CRT) (id: C21).
+   * CÃ³digo de Regime TributÃ¡rio (CRT) (id: C21).
    * <p>
-   * Tipo: N (1 dígito), ocorrência: 1-1, Ele: E (obrigatório).
+   * Tipo: N (1 dÃ­gito), ocorrÃªncia: 1-1, Ele: E (obrigatÃ³rio).
    * <ul>
    * <li>1 = Simples Nacional</li>
    * <li>2 = Simples Nacional, excesso sublimite de receita bruta</li>
    * <li>3 = Regime Normal</li>
    * </ul>
-   * Representado pela enumeração {@link SEFAZ_CRT}.
+   * Representado pela enumeraÃ§Ã£o {@link SEFAZ_CRT}.
    */
-  @RFWMetaEnumField(caption = "Código de regime tributário", required = false)
+  @RFWMetaEnumField(caption = "CÃ³digo de regime tributÃ¡rio", required = false)
   private SEFAZ_CRT crt;
 
   /**
@@ -135,7 +135,7 @@ public class SEFAZEmitVO extends RFWVO {
   /**
    * # cNPJ do emitente (id: C02).
    * <p>
-   * Tipo: N, tamanho: 14, ocorrência: 1-1, Ele: CE (condicional). Informar o CNPJ do emitente com zeros não significativos. Na emissão de NF-e avulsa pelo Fisco, as informações do remetente são informadas neste grupo.
+   * Tipo: N, tamanho: 14, ocorrÃªncia: 1-1, Ele: CE (condicional). Informar o CNPJ do emitente com zeros nÃ£o significativos. Na emissÃ£o de NF-e avulsa pelo Fisco, as informaÃ§Ãµes do remetente sÃ£o informadas neste grupo.
    *
    * @return the cNPJ do emitente (id: C02)
    */
@@ -146,7 +146,7 @@ public class SEFAZEmitVO extends RFWVO {
   /**
    * # cNPJ do emitente (id: C02).
    * <p>
-   * Tipo: N, tamanho: 14, ocorrência: 1-1, Ele: CE (condicional). Informar o CNPJ do emitente com zeros não significativos. Na emissão de NF-e avulsa pelo Fisco, as informações do remetente são informadas neste grupo.
+   * Tipo: N, tamanho: 14, ocorrÃªncia: 1-1, Ele: CE (condicional). Informar o CNPJ do emitente com zeros nÃ£o significativos. Na emissÃ£o de NF-e avulsa pelo Fisco, as informaÃ§Ãµes do remetente sÃ£o informadas neste grupo.
    *
    * @param cnpj the new cNPJ do emitente (id: C02)
    */
@@ -157,7 +157,7 @@ public class SEFAZEmitVO extends RFWVO {
   /**
    * # cPF do remetente (id: C02a).
    * <p>
-   * Tipo: N, tamanho: 11, ocorrência: 1-1, Ele: CE (condicional). CPF somente com dígitos e zeros não significativos quando aplicável.
+   * Tipo: N, tamanho: 11, ocorrÃªncia: 1-1, Ele: CE (condicional). CPF somente com dÃ­gitos e zeros nÃ£o significativos quando aplicÃ¡vel.
    *
    * @return the cPF do remetente (id: C02a)
    */
@@ -168,7 +168,7 @@ public class SEFAZEmitVO extends RFWVO {
   /**
    * # cPF do remetente (id: C02a).
    * <p>
-   * Tipo: N, tamanho: 11, ocorrência: 1-1, Ele: CE (condicional). CPF somente com dígitos e zeros não significativos quando aplicável.
+   * Tipo: N, tamanho: 11, ocorrÃªncia: 1-1, Ele: CE (condicional). CPF somente com dÃ­gitos e zeros nÃ£o significativos quando aplicÃ¡vel.
    *
    * @param cpf the new cPF do remetente (id: C02a)
    */
@@ -177,22 +177,22 @@ public class SEFAZEmitVO extends RFWVO {
   }
 
   /**
-   * # razão Social ou Nome do emitente (id: C03).
+   * # razÃ£o Social ou Nome do emitente (id: C03).
    * <p>
-   * Tipo: C, tamanho: 2-60, ocorrência: 1-1, Ele: E (obrigatório).
+   * Tipo: C, tamanho: 2-60, ocorrÃªncia: 1-1, Ele: E (obrigatÃ³rio).
    *
-   * @return the razão Social ou Nome do emitente (id: C03)
+   * @return the razÃ£o Social ou Nome do emitente (id: C03)
    */
   public String getXnome() {
     return xnome;
   }
 
   /**
-   * # razão Social ou Nome do emitente (id: C03).
+   * # razÃ£o Social ou Nome do emitente (id: C03).
    * <p>
-   * Tipo: C, tamanho: 2-60, ocorrência: 1-1, Ele: E (obrigatório).
+   * Tipo: C, tamanho: 2-60, ocorrÃªncia: 1-1, Ele: E (obrigatÃ³rio).
    *
-   * @param xnome the new razão Social ou Nome do emitente (id: C03)
+   * @param xnome the new razÃ£o Social ou Nome do emitente (id: C03)
    */
   public void setXnome(String xnome) {
     this.xnome = xnome;
@@ -201,7 +201,7 @@ public class SEFAZEmitVO extends RFWVO {
   /**
    * # nome fantasia do emitente (id: C04).
    * <p>
-   * Tipo: C, tamanho: 2-60, ocorrência: 0-1, Ele: E (obrigatório quando existir).
+   * Tipo: C, tamanho: 2-60, ocorrÃªncia: 0-1, Ele: E (obrigatÃ³rio quando existir).
    *
    * @return the nome fantasia do emitente (id: C04)
    */
@@ -212,7 +212,7 @@ public class SEFAZEmitVO extends RFWVO {
   /**
    * # nome fantasia do emitente (id: C04).
    * <p>
-   * Tipo: C, tamanho: 2-60, ocorrência: 0-1, Ele: E (obrigatório quando existir).
+   * Tipo: C, tamanho: 2-60, ocorrÃªncia: 0-1, Ele: E (obrigatÃ³rio quando existir).
    *
    * @param xfant the new nome fantasia do emitente (id: C04)
    */
@@ -221,70 +221,70 @@ public class SEFAZEmitVO extends RFWVO {
   }
 
   /**
-   * # inscrição Estadual do emitente (id: C17).
+   * # inscriÃ§Ã£o Estadual do emitente (id: C17).
    * <p>
-   * Tipo: C, tamanho: 2-14, ocorrência: 1-1, Ele: E (obrigatório).
+   * Tipo: C, tamanho: 2-14, ocorrÃªncia: 1-1, Ele: E (obrigatÃ³rio).
    *
-   * @return the inscrição Estadual do emitente (id: C17)
+   * @return the inscriÃ§Ã£o Estadual do emitente (id: C17)
    */
   public String getIe() {
     return ie;
   }
 
   /**
-   * # inscrição Estadual do emitente (id: C17).
+   * # inscriÃ§Ã£o Estadual do emitente (id: C17).
    * <p>
-   * Tipo: C, tamanho: 2-14, ocorrência: 1-1, Ele: E (obrigatório).
+   * Tipo: C, tamanho: 2-14, ocorrÃªncia: 1-1, Ele: E (obrigatÃ³rio).
    *
-   * @param ie the new inscrição Estadual do emitente (id: C17)
+   * @param ie the new inscriÃ§Ã£o Estadual do emitente (id: C17)
    */
   public void setIe(String ie) {
     this.ie = ie;
   }
 
   /**
-   * # inscrição Estadual do Substituto Tributário (id: C18).
+   * # inscriÃ§Ã£o Estadual do Substituto TributÃ¡rio (id: C18).
    * <p>
-   * Tipo: N, tamanho: 2-14, ocorrência: 0-1, Ele: E (obrigatório quando houver retenção de ICMS-ST para UF de destino). Representa a IE do Substituto Tributário da UF de destino da mercadoria.
+   * Tipo: N, tamanho: 2-14, ocorrÃªncia: 0-1, Ele: E (obrigatÃ³rio quando houver retenÃ§Ã£o de ICMS-ST para UF de destino). Representa a IE do Substituto TributÃ¡rio da UF de destino da mercadoria.
    *
-   * @return the inscrição Estadual do Substituto Tributário (id: C18)
+   * @return the inscriÃ§Ã£o Estadual do Substituto TributÃ¡rio (id: C18)
    */
   public String getIest() {
     return iest;
   }
 
   /**
-   * # inscrição Estadual do Substituto Tributário (id: C18).
+   * # inscriÃ§Ã£o Estadual do Substituto TributÃ¡rio (id: C18).
    * <p>
-   * Tipo: N, tamanho: 2-14, ocorrência: 0-1, Ele: E (obrigatório quando houver retenção de ICMS-ST para UF de destino). Representa a IE do Substituto Tributário da UF de destino da mercadoria.
+   * Tipo: N, tamanho: 2-14, ocorrÃªncia: 0-1, Ele: E (obrigatÃ³rio quando houver retenÃ§Ã£o de ICMS-ST para UF de destino). Representa a IE do Substituto TributÃ¡rio da UF de destino da mercadoria.
    *
-   * @param iest the new inscrição Estadual do Substituto Tributário (id: C18)
+   * @param iest the new inscriÃ§Ã£o Estadual do Substituto TributÃ¡rio (id: C18)
    */
   public void setIest(String iest) {
     this.iest = iest;
   }
 
   /**
-   * # inscrição Municipal do prestador de serviço (id: C19).
+   * # inscriÃ§Ã£o Municipal do prestador de serviÃ§o (id: C19).
    * <p>
-   * Tipo: C, tamanho: 1-15, ocorrência: 1-1 dentro do grupo opcional -x- (id: C18.1), Ele: E (obrigatório quando o grupo for informado).
+   * Tipo: C, tamanho: 1-15, ocorrÃªncia: 1-1 dentro do grupo opcional -x- (id: C18.1), Ele: E (obrigatÃ³rio quando o grupo for informado).
    * <p>
-   * Campo do grupo "-x-" definido diretamente na classe pai, conforme instrução.
+   * Campo do grupo "-x-" definido diretamente na classe pai, conforme instruÃ§Ã£o.
    *
-   * @return the inscrição Municipal do prestador de serviço (id: C19)
+   * @return the inscriÃ§Ã£o Municipal do prestador de serviÃ§o (id: C19)
    */
   public String getIm() {
     return im;
   }
 
   /**
-   * # inscrição Municipal do prestador de serviço (id: C19).
+   * # inscriÃ§Ã£o Municipal do prestador de serviÃ§o (id: C19).
    * <p>
-   * Tipo: C, tamanho: 1-15, ocorrência: 1-1 dentro do grupo opcional -x- (id: C18.1), Ele: E (obrigatório quando o grupo for informado).
+   * Tipo: C, tamanho: 1-15, ocorrÃªncia: 1-1 dentro do grupo opcional -x- (id: C18.1), Ele: E (obrigatÃ³rio quando o grupo for informado).
    * <p>
-   * Campo do grupo "-x-" definido diretamente na classe pai, conforme instrução.
+   * Campo do grupo "-x-" definido diretamente na classe pai, conforme instruÃ§Ã£o.
    *
-   * @param im the new inscrição Municipal do prestador de serviço (id: C19)
+   * @param im the new inscriÃ§Ã£o Municipal do prestador de serviÃ§o (id: C19)
    */
   public void setIm(String im) {
     this.im = im;
@@ -309,34 +309,34 @@ public class SEFAZEmitVO extends RFWVO {
   }
 
   /**
-   * # código de Regime Tributário (CRT) (id: C21).
+   * # cÃ³digo de Regime TributÃ¡rio (CRT) (id: C21).
    * <p>
-   * Tipo: N (1 dígito), ocorrência: 1-1, Ele: E (obrigatório).
+   * Tipo: N (1 dÃ­gito), ocorrÃªncia: 1-1, Ele: E (obrigatÃ³rio).
    * <ul>
    * <li>1 = Simples Nacional</li>
    * <li>2 = Simples Nacional, excesso sublimite de receita bruta</li>
    * <li>3 = Regime Normal</li>
    * </ul>
-   * Representado pela enumeração {@link SEFAZ_CRT}.
+   * Representado pela enumeraÃ§Ã£o {@link SEFAZ_CRT}.
    *
-   * @return the código de Regime Tributário (CRT) (id: C21)
+   * @return the cÃ³digo de Regime TributÃ¡rio (CRT) (id: C21)
    */
   public SEFAZ_CRT getCrt() {
     return crt;
   }
 
   /**
-   * # código de Regime Tributário (CRT) (id: C21).
+   * # cÃ³digo de Regime TributÃ¡rio (CRT) (id: C21).
    * <p>
-   * Tipo: N (1 dígito), ocorrência: 1-1, Ele: E (obrigatório).
+   * Tipo: N (1 dÃ­gito), ocorrÃªncia: 1-1, Ele: E (obrigatÃ³rio).
    * <ul>
    * <li>1 = Simples Nacional</li>
    * <li>2 = Simples Nacional, excesso sublimite de receita bruta</li>
    * <li>3 = Regime Normal</li>
    * </ul>
-   * Representado pela enumeração {@link SEFAZ_CRT}.
+   * Representado pela enumeraÃ§Ã£o {@link SEFAZ_CRT}.
    *
-   * @param crt the new código de Regime Tributário (CRT) (id: C21)
+   * @param crt the new cÃ³digo de Regime TributÃ¡rio (CRT) (id: C21)
    */
   public void setCrt(SEFAZ_CRT crt) {
     this.crt = crt;
