@@ -4,15 +4,16 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
+
+import javax.xml.bind.JAXBElement;
 
 import br.eng.rodrigogml.rfw.kernel.exceptions.RFWException;
 import br.eng.rodrigogml.rfw.kernel.utils.RUTypes;
 import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums;
+import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.IndIEDestEnum;
 import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_CRT;
 import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_CST_COFINS;
 import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_CST_PIS;
-import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.IndIEDestEnum;
 import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_finNFe;
 import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_idDest;
 import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_indFinal;
@@ -29,35 +30,33 @@ import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_tpNF;
 import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_versao;
 import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZUtils;
 import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZCOFINSVO;
-import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZDetVO;
 import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZDestVO;
+import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZDetVO;
 import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZEmitVO;
 import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZEnderDestVO;
 import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZEnderEmitVO;
 import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZEnviNFeVO;
-import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZImpostoVO;
 import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZIdeVO;
+import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZImpostoVO;
 import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZInfNFeVO;
 import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZLacresVO;
 import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZNFRefVO;
 import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZNFeVO;
 import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZPISVO;
 import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZProdVO;
+import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZReboqueVO;
 import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZRefECFVO;
 import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZRefNFPVO;
 import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZRefNFVO;
-import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZReboqueVO;
 import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZRetTranspVO;
-import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZTransportaVO;
 import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZTranspVO;
+import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZTransportaVO;
 import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZVeicTranspVO;
 import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZVolVO;
 
-import javax.xml.bind.JAXBElement;
-
+import xsdobjects.enviNFe400.TEnderEmi;
 import xsdobjects.enviNFe400.TEndereco;
 import xsdobjects.enviNFe400.TEnviNFe;
-import xsdobjects.enviNFe400.TEnderEmi;
 import xsdobjects.enviNFe400.TNFe;
 import xsdobjects.enviNFe400.TUf;
 import xsdobjects.enviNFe400.TUfEmi;
@@ -956,7 +955,6 @@ public final class MapperForNfeAutorizacaoLoteV400 {
     target.setFone(source.getFone());
     return target;
   }
-
 
   private static TNFe.InfNFe.Transp toJaxb(SEFAZTranspVO source) {
     if (source == null) {

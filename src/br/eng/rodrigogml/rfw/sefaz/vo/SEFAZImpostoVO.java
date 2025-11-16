@@ -155,4 +155,40 @@ public class SEFAZImpostoVO extends RFWVO implements Serializable {
     this.ipiVO = ipiVO;
   }
 
+  /**
+   * # {@link SEFAZPISVO}.
+   *
+   * @return the {@link SEFAZPISVO}
+   */
+  public SEFAZPISVO getPisVO() {
+    return pisVO;
+  }
+
+  /**
+   * # {@link SEFAZPISVO}.
+   *
+   * @param pisVO the new {@link SEFAZPISVO}
+   */
+  public void setPisVO(SEFAZPISVO pisVO) {
+    this.pisVO = pisVO;
+  }
+
+  /**
+   * # {@link SEFAZCOFINSVO}.
+   *
+   * @return the {@link SEFAZCOFINSVO}
+   */
+  public SEFAZCOFINSVO getCofinsVO() {
+    return cofinsVO;
+  }
+
+  /**
+   * # {@link SEFAZCOFINSVO}.
+   *
+   * @param cofinsVO the new {@link SEFAZCOFINSVO}
+   */
+  public void setCofinsVO(SEFAZCOFINSVO cofinsVO) {
+    this.cofinsVO = cofinsVO;
+  }
+
 }

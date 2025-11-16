@@ -1,5 +1,7 @@
 package br.eng.rodrigogml.rfw.sefaz.vo;
 
+import java.util.List;
+
 import br.eng.rodrigogml.rfw.kernel.rfwmeta.RFWMetaEnumField;
 import br.eng.rodrigogml.rfw.kernel.rfwmeta.RFWMetaRelationshipField;
 import br.eng.rodrigogml.rfw.kernel.rfwmeta.RFWMetaRelationshipField.RelationshipTypes;
@@ -40,13 +42,19 @@ public class SEFAZInfNFeVO extends RFWVO {
    * {@link SEFAZEmitVO}
    */
   @RFWMetaRelationshipField(caption = "Emit", relationship = RelationshipTypes.COMPOSITION, required = false, columnMapped = "idsefaz_infnfe")
+  private SEFAZDestVO destVO = null;
+
+  /**
+   * {@link SEFAZDestVO}
+   */
+  @RFWMetaRelationshipField(caption = "Dest", relationship = RelationshipTypes.COMPOSITION, required = false, columnMapped = "idsefaz_infnfe")
   private SEFAZEmitVO emitVO = null;
 
   /**
    * {@link SEFAZDetVO}
    */
-  @RFWMetaRelationshipField(caption = "Det", relationship = RelationshipTypes.COMPOSITION, required = false, columnMapped = "idsefaz_infnfe")
-  private SEFAZDetVO detVO = null;
+  @RFWMetaRelationshipField(caption = "Det", relationship = RelationshipTypes.COMPOSITION, required = false, columnMapped = "idsefaz_infnfe", minSize = 1, maxSize = 990)
+  private List<SEFAZDetVO> detList = null;
 
   /**
    * {@link SEFAZTranspVO}
@@ -217,24 +225,6 @@ public class SEFAZInfNFeVO extends RFWVO {
   }
 
   /**
-   * # {@link SEFAZDetVO}.
-   *
-   * @return the {@link SEFAZDetVO}
-   */
-  public SEFAZDetVO getDetVO() {
-    return detVO;
-  }
-
-  /**
-   * # {@link SEFAZDetVO}.
-   *
-   * @param detVO the new {@link SEFAZDetVO}
-   */
-  public void setDetVO(SEFAZDetVO detVO) {
-    this.detVO = detVO;
-  }
-
-  /**
    * # {@link SEFAZTranspVO}.
    *
    * @return the {@link SEFAZTranspVO}
@@ -250,6 +240,42 @@ public class SEFAZInfNFeVO extends RFWVO {
    */
   public void setTranspVO(SEFAZTranspVO transpVO) {
     this.transpVO = transpVO;
+  }
+
+  /**
+   * # {@link SEFAZEmitVO}.
+   *
+   * @return the {@link SEFAZEmitVO}
+   */
+  public SEFAZDestVO getDestVO() {
+    return destVO;
+  }
+
+  /**
+   * # {@link SEFAZEmitVO}.
+   *
+   * @param destVO the new {@link SEFAZEmitVO}
+   */
+  public void setDestVO(SEFAZDestVO destVO) {
+    this.destVO = destVO;
+  }
+
+  /**
+   * # {@link SEFAZDetVO}.
+   *
+   * @return the {@link SEFAZDetVO}
+   */
+  public List<SEFAZDetVO> getDetList() {
+    return detList;
+  }
+
+  /**
+   * # {@link SEFAZDetVO}.
+   *
+   * @param detList the new {@link SEFAZDetVO}
+   */
+  public void setDetList(List<SEFAZDetVO> detList) {
+    this.detList = detList;
   }
 
 }

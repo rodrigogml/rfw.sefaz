@@ -289,4 +289,22 @@ public class SEFAZEnderDestVO extends RFWVO implements Serializable {
     this.fone = fone;
   }
 
+  /**
+   * # {@link SEFAZDestVO}.
+   *
+   * @return the {@link SEFAZDestVO}
+   */
+  public SEFAZDestVO getDestVO() {
+    return destVO;
+  }
+
+  /**
+   * # {@link SEFAZDestVO}.
+   *
+   * @param destVO the new {@link SEFAZDestVO}
+   */
+  public void setDestVO(SEFAZDestVO destVO) {
+    this.destVO = destVO;
+  }
+
 }

@@ -78,4 +78,40 @@ public class SEFAZDetVO extends RFWVO implements Serializable {
     this.impostoVO = impostoVO;
   }
 
+  /**
+   * # {@link SEFAZInfNFeVO}.
+   *
+   * @return the {@link SEFAZInfNFeVO}
+   */
+  public SEFAZInfNFeVO getInfNFeVO() {
+    return infNFeVO;
+  }
+
+  /**
+   * # {@link SEFAZInfNFeVO}.
+   *
+   * @param infNFeVO the new {@link SEFAZInfNFeVO}
+   */
+  public void setInfNFeVO(SEFAZInfNFeVO infNFeVO) {
+    this.infNFeVO = infNFeVO;
+  }
+
+  /**
+   * # {@link SEFAZProdVO}.
+   *
+   * @return the {@link SEFAZProdVO}
+   */
+  public SEFAZProdVO getProdVO() {
+    return prodVO;
+  }
+
+  /**
+   * # {@link SEFAZProdVO}.
+   *
+   * @param prodVO the new {@link SEFAZProdVO}
+   */
+  public void setProdVO(SEFAZProdVO prodVO) {
+    this.prodVO = prodVO;
+  }
+
 }

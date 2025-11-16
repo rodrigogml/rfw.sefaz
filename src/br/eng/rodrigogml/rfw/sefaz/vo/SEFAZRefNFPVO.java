@@ -217,4 +217,22 @@ public class SEFAZRefNFPVO extends RFWVO {
   public void setNnf(String nnf) {
     this.nnf = nnf;
   }
+
+  /**
+   * # bA16 - Modelo do Documento Fiscal. Valores possíveis: 04 = NF de Produtor 01 = NF. Ocorrência: 1-1.
+   *
+   * @return the bA16 - Modelo do Documento Fiscal
+   */
+  public SEFAZ_mod getMod() {
+    return mod;
+  }
+
+  /**
+   * # bA16 - Modelo do Documento Fiscal. Valores possíveis: 04 = NF de Produtor 01 = NF. Ocorrência: 1-1.
+   *
+   * @param mod the new bA16 - Modelo do Documento Fiscal
+   */
+  public void setMod(SEFAZ_mod mod) {
+    this.mod = mod;
+  }
 }
