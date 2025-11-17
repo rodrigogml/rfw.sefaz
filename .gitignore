@@ -1,7 +1,6 @@
 /target/
 /**/*VO_.java
-
-# Pastas e metadados de IDE (Eclipse) — manter fora do versionamento
 /.settings/
 /.project
 /.classpath
+/bin/

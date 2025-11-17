@@ -40,10 +40,7 @@ import javax.xml.bind.annotation.XmlType;
  *
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "TNfeProc", propOrder = {
-    "nFe",
-    "protNFe"
-})
+@XmlType(name = "TNfeProc", propOrder = { "nFe", "protNFe" })
 @XmlRootElement(name = "nfeProc")
 public class TNfeProc {
 
@@ -56,9 +53,9 @@ public class TNfeProc {
 
   /**
    * Obtém o valor da propriedade nFe.
-   * 
+   *
    * @return possible object is {@link TNFe }
-   * 
+   *
    */
   public TNFe getNFe() {
     return nFe;
@@ -66,9 +63,9 @@ public class TNfeProc {
 
   /**
    * Define o valor da propriedade nFe.
-   * 
+   *
    * @param value allowed object is {@link TNFe }
-   * 
+   *
    */
   public void setNFe(TNFe value) {
     this.nFe = value;
@@ -76,9 +73,9 @@ public class TNfeProc {
 
   /**
    * Obtém o valor da propriedade protNFe.
-   * 
+   *
    * @return possible object is {@link TProtNFe }
-   * 
+   *
    */
   public TProtNFe getProtNFe() {
     return protNFe;
@@ -86,9 +83,9 @@ public class TNfeProc {
 
   /**
    * Define o valor da propriedade protNFe.
-   * 
+   *
    * @param value allowed object is {@link TProtNFe }
-   * 
+   *
    */
   public void setProtNFe(TProtNFe value) {
     this.protNFe = value;
@@ -96,9 +93,9 @@ public class TNfeProc {
 
   /**
    * Obtém o valor da propriedade versao.
-   * 
+   *
    * @return possible object is {@link String }
-   * 
+   *
    */
   public String getVersao() {
     return versao;
@@ -106,9 +103,9 @@ public class TNfeProc {
 
   /**
    * Define o valor da propriedade versao.
-   * 
+   *
    * @param value allowed object is {@link String }
-   * 
+   *
    */
   public void setVersao(String value) {
     this.versao = value;
