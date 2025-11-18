@@ -355,7 +355,7 @@ public final class MapperForNfeAutorizacaoLoteV400 {
     }
     TNFe.InfNFe.Ide.NFref target = new TNFe.InfNFe.Ide.NFref();
     target.setRefNFe(source.getRefNFe());
-    target.setRefCTe(source.getRefCte());
+    target.setRefCTe(source.getRefCTe());
     if (source.getRefNFVO() != null) {
       target.setRefNF(toJaxb(source.getRefNFVO()));
     }
@@ -375,7 +375,7 @@ public final class MapperForNfeAutorizacaoLoteV400 {
     SEFAZNFRefVO target = new SEFAZNFRefVO();
     target.setIdeVO(parent);
     target.setRefNFe(source.getRefNFe());
-    target.setRefCte(source.getRefCTe());
+    target.setRefCTe(source.getRefCTe());
     if (source.getRefNF() != null) {
       target.setRefNFVO(toVO(source.getRefNF(), target));
     }

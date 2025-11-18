@@ -36,26 +36,26 @@ public class SEFAZImpostoVO extends RFWVO implements Serializable {
   /**
    * {@link SEFAZICMSUFDestVO}
    */
-  @RFWMetaRelationshipField(caption = "ICMSUFDest", relationship = RelationshipTypes.COMPOSITION, required = false, columnMapped = "idsefaz_icmsufdest")
+  @RFWMetaRelationshipField(caption = "ICMSUFDest", relationship = RelationshipTypes.COMPOSITION, required = false, columnMapped = "idsefaz_imposto")
+  private SEFAZICMSUFDestVO icmsUFDestVO = null;
+
+  /**
+   * {@link SEFAZIPIVO}
+   */
+  @RFWMetaRelationshipField(caption = "IPI", relationship = RelationshipTypes.COMPOSITION, required = false, columnMapped = "idsefaz_imposto")
   private SEFAZIPIVO ipiVO = null;
 
   /**
    * {@link SEFAZPISVO}
    */
-  @RFWMetaRelationshipField(caption = "PIS", relationship = RelationshipTypes.COMPOSITION, required = false, columnMapped = "idsefaz_pis")
+  @RFWMetaRelationshipField(caption = "PIS", relationship = RelationshipTypes.COMPOSITION, required = false, columnMapped = "idsefaz_imposto")
   private SEFAZPISVO pisVO = null;
 
   /**
    * {@link SEFAZCOFINSVO}
    */
-  @RFWMetaRelationshipField(caption = "COFINS", relationship = RelationshipTypes.COMPOSITION, required = false, columnMapped = "idsefaz_cofins")
+  @RFWMetaRelationshipField(caption = "COFINS", relationship = RelationshipTypes.COMPOSITION, required = false, columnMapped = "idsefaz_imposto")
   private SEFAZCOFINSVO cofinsVO = null;
-
-  /**
-   * {@link SEFAZIPIVO}
-   */
-  @RFWMetaRelationshipField(caption = "IPI", relationship = RelationshipTypes.COMPOSITION, required = false, columnMapped = "idsefaz_ipi")
-  private SEFAZICMSUFDestVO icmsUFDestVO = null;
 
   /**
    * M02 - vTotTrib. Valor aproximado total de tributos federais, estaduais e municipais. (NT 2013/003)

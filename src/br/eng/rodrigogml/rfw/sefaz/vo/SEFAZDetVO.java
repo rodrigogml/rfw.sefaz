@@ -2,9 +2,11 @@ package br.eng.rodrigogml.rfw.sefaz.vo;
 
 import java.io.Serializable;
 
+import br.eng.rodrigogml.rfw.kernel.preprocess.PreProcess.PreProcessOption;
 import br.eng.rodrigogml.rfw.kernel.rfwmeta.RFWMetaIntegerField;
 import br.eng.rodrigogml.rfw.kernel.rfwmeta.RFWMetaRelationshipField;
 import br.eng.rodrigogml.rfw.kernel.rfwmeta.RFWMetaRelationshipField.RelationshipTypes;
+import br.eng.rodrigogml.rfw.kernel.rfwmeta.RFWMetaStringField;
 import br.eng.rodrigogml.rfw.kernel.vo.RFWVO;
 import br.eng.rodrigogml.rfw.orm.dao.annotations.dao.RFWDAOAnnotation;
 
@@ -41,6 +43,12 @@ public class SEFAZDetVO extends RFWVO implements Serializable {
    */
   @RFWMetaIntegerField(caption = "Número do item", required = false, unique = false, minValue = 1, maxValue = 990)
   private Integer nitem;
+
+  /**
+   * V01 infAdProd Informações Adicionais do Produto E H01 C 0-1 1-500 Norma referenciada, informações complementares, etc.
+   */
+  @RFWMetaStringField(caption = "Informação Adicional Produto", required = false, minLength = 1, maxLength = 500, preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
+  private String infAdProd = null;
 
   /**
    * # h02 - nItem. Número do item na NF-e. Contador sequencial do item (1–990). Ocor.: 1–1 / Tam.: 1–3 / Tipo: N.
@@ -112,6 +120,24 @@ public class SEFAZDetVO extends RFWVO implements Serializable {
    */
   public void setProdVO(SEFAZProdVO prodVO) {
     this.prodVO = prodVO;
+  }
+
+  /**
+   * # v01 infAdProd Informações Adicionais do Produto E H01 C 0-1 1-500 Norma referenciada, informações complementares, etc.
+   *
+   * @return the v01 infAdProd Informações Adicionais do Produto E H01 C 0-1 1-500 Norma referenciada, informações complementares, etc
+   */
+  public String getInfAdProd() {
+    return infAdProd;
+  }
+
+  /**
+   * # v01 infAdProd Informações Adicionais do Produto E H01 C 0-1 1-500 Norma referenciada, informações complementares, etc.
+   *
+   * @param infAdProd the new v01 infAdProd Informações Adicionais do Produto E H01 C 0-1 1-500 Norma referenciada, informações complementares, etc
+   */
+  public void setInfAdProd(String infAdProd) {
+    this.infAdProd = infAdProd;
   }
 
 }

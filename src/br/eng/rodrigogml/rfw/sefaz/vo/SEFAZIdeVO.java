@@ -2,6 +2,7 @@ package br.eng.rodrigogml.rfw.sefaz.vo;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
 
 import br.eng.rodrigogml.rfw.kernel.rfwmeta.RFWMetaBigDecimalField;
 import br.eng.rodrigogml.rfw.kernel.rfwmeta.RFWMetaDateField;
@@ -42,8 +43,8 @@ public class SEFAZIdeVO extends RFWVO {
   /**
    * {@link SEFAZNFRefVO}
    */
-  @RFWMetaRelationshipField(caption = "NFRef", relationship = RelationshipTypes.COMPOSITION, required = false, columnMapped = "idsefaz_nfref")
-  private SEFAZNFRefVO nfRefVO = null;
+  @RFWMetaRelationshipField(caption = "NFRef", relationship = RelationshipTypes.COMPOSITION, required = false, columnMapped = "idsefaz_nfref", minSize = 0, maxSize = 500)
+  private List<SEFAZNFRefVO> nfRefList = null;
 
   /**
    * Código da UF do emitente do Documento Fiscal ({@code cUF}).
@@ -1008,17 +1009,17 @@ public class SEFAZIdeVO extends RFWVO {
    *
    * @return the {@link SEFAZNFRefVO}
    */
-  public SEFAZNFRefVO getNfRefVO() {
-    return nfRefVO;
+  public List<SEFAZNFRefVO> getNfRefList() {
+    return nfRefList;
   }
 
   /**
    * # {@link SEFAZNFRefVO}.
    *
-   * @param nfRefVO the new {@link SEFAZNFRefVO}
+   * @param nfRefList the new {@link SEFAZNFRefVO}
    */
-  public void setNfRefVO(SEFAZNFRefVO nfRefVO) {
-    this.nfRefVO = nfRefVO;
+  public void setNfRefList(List<SEFAZNFRefVO> nfRefList) {
+    this.nfRefList = nfRefList;
   }
 
 }

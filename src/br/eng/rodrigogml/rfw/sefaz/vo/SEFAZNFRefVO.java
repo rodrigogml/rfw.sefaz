@@ -30,16 +30,16 @@ public class SEFAZNFRefVO extends RFWVO implements Serializable {
   private SEFAZRefNFVO refNFVO = null;
 
   /**
-   * {@link SEFAZRefNFPVO}
-   */
-  @RFWMetaRelationshipField(caption = "RefNFP", relationship = RelationshipTypes.COMPOSITION, required = false, columnMapped = "idsefaz_nfref")
-  private SEFAZRefECFVO refECFVO = null;
-
-  /**
    * {@link SEFAZRefECFVO}
    */
   @RFWMetaRelationshipField(caption = "RefECF", relationship = RelationshipTypes.COMPOSITION, required = false, columnMapped = "idsefaz_nfref")
   private SEFAZRefNFPVO refNFPVO = null;
+
+  /**
+   * {@link SEFAZRefNFPVO}
+   */
+  @RFWMetaRelationshipField(caption = "RefNFP", relationship = RelationshipTypes.COMPOSITION, required = false, columnMapped = "idsefaz_nfref")
+  private SEFAZRefECFVO refECFVO = null;
 
   /**
    * BA02 - Chave de acesso da NF-e ou NFC-e referenciada. Referencia uma NF-e (modelo 55) emitida anteriormente, ou uma NFC-e (modelo 65), vinculada à NF-e atual. Ocorrência: 0-1 dentro do grupo NRef.
@@ -51,7 +51,7 @@ public class SEFAZNFRefVO extends RFWVO implements Serializable {
    * BA19 - Chave de acesso do CT-e referenciado. Utilizada para referenciar um CT-e emitido anteriormente, vinculado à NF-e atual. Ocorrência: 0-1 dentro do grupo NRef.
    */
   @RFWMetaStringField(caption = "Chave de acesso do CT-e referenciado", required = false, unique = false, maxLength = 44, minLength = 44, pattern = "", preProcess = { PreProcessOption.NONE })
-  private String refCte;
+  private String refCTe;
 
   /**
    * # bA02 - Chave de acesso da NF-e ou NFC-e referenciada. Referencia uma NF-e (modelo 55) emitida anteriormente, ou uma NFC-e (modelo 65), vinculada à NF-e atual. Ocorrência: 0-1 dentro do grupo NRef.
@@ -76,17 +76,17 @@ public class SEFAZNFRefVO extends RFWVO implements Serializable {
    *
    * @return the bA19 - Chave de acesso do CT-e referenciado
    */
-  public String getRefCte() {
-    return refCte;
+  public String getRefCTe() {
+    return refCTe;
   }
 
   /**
    * # bA19 - Chave de acesso do CT-e referenciado. Utilizada para referenciar um CT-e emitido anteriormente, vinculado à NF-e atual. Ocorrência: 0-1 dentro do grupo NRef.
    *
-   * @param refCte the new bA19 - Chave de acesso do CT-e referenciado
+   * @param refCTe the new bA19 - Chave de acesso do CT-e referenciado
    */
-  public void setRefCte(String refCte) {
-    this.refCte = refCte;
+  public void setRefCTe(String refCte) {
+    this.refCTe = refCte;
   }
 
   /**

@@ -39,16 +39,16 @@ public class SEFAZInfNFeVO extends RFWVO {
   private SEFAZIdeVO ideVO = null;
 
   /**
-   * {@link SEFAZEmitVO}
-   */
-  @RFWMetaRelationshipField(caption = "Emit", relationship = RelationshipTypes.COMPOSITION, required = false, columnMapped = "idsefaz_infnfe")
-  private SEFAZDestVO destVO = null;
-
-  /**
    * {@link SEFAZDestVO}
    */
   @RFWMetaRelationshipField(caption = "Dest", relationship = RelationshipTypes.COMPOSITION, required = false, columnMapped = "idsefaz_infnfe")
   private SEFAZEmitVO emitVO = null;
+
+  /**
+   * {@link SEFAZEmitVO}
+   */
+  @RFWMetaRelationshipField(caption = "Emit", relationship = RelationshipTypes.COMPOSITION, required = false, columnMapped = "idsefaz_infnfe")
+  private SEFAZDestVO destVO = null;
 
   /**
    * {@link SEFAZDetVO}
@@ -57,10 +57,34 @@ public class SEFAZInfNFeVO extends RFWVO {
   private List<SEFAZDetVO> detList = null;
 
   /**
+   * {@link SEFAZTotalVO}
+   */
+  @RFWMetaRelationshipField(caption = "Total", relationship = RelationshipTypes.COMPOSITION, required = false, columnMapped = "idsefaz_infnfe")
+  private SEFAZTotalVO totalVO = null;
+
+  /**
    * {@link SEFAZTranspVO}
    */
   @RFWMetaRelationshipField(caption = "Transp", relationship = RelationshipTypes.COMPOSITION, required = false, columnMapped = "idsefaz_transp")
   private SEFAZTranspVO transpVO = null;
+
+  /**
+   * {@link SEFAZCobrVO}
+   */
+  @RFWMetaRelationshipField(caption = "Cobr", relationship = RelationshipTypes.COMPOSITION, required = false, columnMapped = "idsefaz_infnfe")
+  private SEFAZCobrVO cobrVO = null;
+
+  /**
+   * {@link SEFAZPagVO}
+   */
+  @RFWMetaRelationshipField(caption = "Pag", relationship = RelationshipTypes.COMPOSITION, required = false, columnMapped = "idsefaz_infnfe")
+  private SEFAZPagVO pagVO = null;
+
+  /**
+   * {@link SEFAZInfAdicVO}
+   */
+  @RFWMetaRelationshipField(caption = "infAdic", relationship = RelationshipTypes.COMPOSITION, required = false, columnMapped = "idsefaz_infnfe")
+  private SEFAZInfAdicVO infAdicVO = null;
 
   /**
    * Versão do leiaute da NF-e.
@@ -276,6 +300,78 @@ public class SEFAZInfNFeVO extends RFWVO {
    */
   public void setDetList(List<SEFAZDetVO> detList) {
     this.detList = detList;
+  }
+
+  /**
+   * # {@link SEFAZTotalVO}.
+   *
+   * @return the {@link SEFAZTotalVO}
+   */
+  public SEFAZTotalVO getTotalVO() {
+    return totalVO;
+  }
+
+  /**
+   * # {@link SEFAZTotalVO}.
+   *
+   * @param totalVO the new {@link SEFAZTotalVO}
+   */
+  public void setTotalVO(SEFAZTotalVO totalVO) {
+    this.totalVO = totalVO;
+  }
+
+  /**
+   * # {@link SEFAZCobrVO}.
+   *
+   * @return the {@link SEFAZCobrVO}
+   */
+  public SEFAZCobrVO getCobrVO() {
+    return cobrVO;
+  }
+
+  /**
+   * # {@link SEFAZCobrVO}.
+   *
+   * @param cobrVO the new {@link SEFAZCobrVO}
+   */
+  public void setCobrVO(SEFAZCobrVO cobrVO) {
+    this.cobrVO = cobrVO;
+  }
+
+  /**
+   * # {@link SEFAZPagVO}.
+   *
+   * @return the {@link SEFAZPagVO}
+   */
+  public SEFAZPagVO getPagVO() {
+    return pagVO;
+  }
+
+  /**
+   * # {@link SEFAZPagVO}.
+   *
+   * @param pagVO the new {@link SEFAZPagVO}
+   */
+  public void setPagVO(SEFAZPagVO pagVO) {
+    this.pagVO = pagVO;
+  }
+
+  /**
+   * # {@link SEFAZInfAdicVO}.
+   *
+   * @return the {@link SEFAZInfAdicVO}
+   */
+  public SEFAZInfAdicVO getInfAdicVO() {
+    return infAdicVO;
+  }
+
+  /**
+   * # {@link SEFAZInfAdicVO}.
+   *
+   * @param infAdicVO the new {@link SEFAZInfAdicVO}
+   */
+  public void setInfAdicVO(SEFAZInfAdicVO infAdicVO) {
+    this.infAdicVO = infAdicVO;
   }
 
 }
