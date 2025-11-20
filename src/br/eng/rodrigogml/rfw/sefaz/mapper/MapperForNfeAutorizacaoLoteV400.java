@@ -2,7 +2,6 @@ package br.eng.rodrigogml.rfw.sefaz.mapper;
 
 // Codificação UTF-8 – caracteres de exemplo: á, é, í, ó, ú, ç.
 
-
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -61,6 +60,7 @@ import xsdobjects.enviNFe400.TEnderEmi;
 import xsdobjects.enviNFe400.TEndereco;
 import xsdobjects.enviNFe400.TEnviNFe;
 import xsdobjects.enviNFe400.TNFe;
+import xsdobjects.enviNFe400.TNFe.InfNFe.Ide.NFref;
 import xsdobjects.enviNFe400.TUf;
 import xsdobjects.enviNFe400.TUfEmi;
 import xsdobjects.enviNFe400.TVeiculo;
@@ -283,10 +283,12 @@ public final class MapperForNfeAutorizacaoLoteV400 {
       target.setDhCont(formatDateTime(source.getDhCont()));
     }
     target.setXJust(source.getXjust());
-    if (source.getNfRefVO() != null) {
-      TNFe.InfNFe.Ide.NFref nfref = toJaxb(source.getNfRefVO());
-      if (nfref != null) {
-        target.getNFref().add(nfref);
+    if (source.getNfRefList() != null) {
+      for (SEFAZNFRefVO nfRefVO : source.getNfRefList()) {
+        TNFe.InfNFe.Ide.NFref nfref = toJaxb(nfRefVO);
+        if (nfref != null) {
+          target.getNFref().add(nfref);
+        }
       }
     }
     return target;
@@ -343,8 +345,13 @@ public final class MapperForNfeAutorizacaoLoteV400 {
     target.setVerProc(source.getVerProc());
     target.setDhCont(parseDateTime(source.getDhCont()));
     target.setXjust(source.getXJust());
+
     if (source.getNFref() != null && !source.getNFref().isEmpty()) {
-      target.setNfRefVO(toVO(source.getNFref().get(0), target));
+      ArrayList<SEFAZNFRefVO> nfRefList = new ArrayList<>();
+      for (NFref nfRef : source.getNFref()) {
+        nfRefList.add(toVO(nfRef, target));
+      }
+      target.setNfRefList(nfRefList);
     }
     return target;
   }
