@@ -1,8 +1,5 @@
 package br.eng.rodrigogml.rfw.sefaz.mapper;
 
-// Codificação UTF-8 – caracteres de exemplo: á, é, í, ó, ú, ç.
-
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -221,20 +218,20 @@ public final class MapperForNfeAutorizacaoLoteV400 {
     }
     TNFe.InfNFe.Ide target = new TNFe.InfNFe.Ide();
     if (source.getCuf() != null) {
-      target.setCUF(toPlainString(source.getCuf()));
+      target.setCUF(RUTypes.toString(source.getCuf()));
     }
     if (source.getCnf() != null) {
-      target.setCNF(toPlainString(source.getCnf()));
+      target.setCNF(RUTypes.toString(source.getCnf()));
     }
     target.setNatOp(source.getNatOp());
     if (source.getMod() != null) {
       target.setMod(source.getMod().getXmlData());
     }
     if (source.getSerie() != null) {
-      target.setSerie(toPlainString(source.getSerie()));
+      target.setSerie(RUTypes.toString(source.getSerie()));
     }
     if (source.getNnf() != null) {
-      target.setNNF(toPlainString(source.getNnf()));
+      target.setNNF(RUTypes.toString(source.getNnf()));
     }
     if (source.getDhEmi() != null) {
       target.setDhEmi(formatDateTime(source.getDhEmi()));
@@ -249,7 +246,7 @@ public final class MapperForNfeAutorizacaoLoteV400 {
       target.setIdDest(source.getIdDest().getXmlData());
     }
     if (source.getCmunFG() != null) {
-      target.setCMunFG(toPlainString(source.getCmunFG()));
+      target.setCMunFG(RUTypes.toString(source.getCmunFG()));
     }
     if (source.getTpImp() != null) {
       target.setTpImp(source.getTpImp().getXmlData());
@@ -258,7 +255,7 @@ public final class MapperForNfeAutorizacaoLoteV400 {
       target.setTpEmis(source.getTpEmis().getXmlData());
     }
     if (source.getCdv() != null) {
-      target.setCDV(toPlainString(source.getCdv()));
+      target.setCDV(RUTypes.toString(source.getCdv()));
     }
     if (source.getTpAmb() != null) {
       target.setTpAmb(source.getTpAmb().getXmlData());
@@ -300,14 +297,14 @@ public final class MapperForNfeAutorizacaoLoteV400 {
     }
     SEFAZIdeVO target = new SEFAZIdeVO();
     target.setInfNFeVO(parent);
-    target.setCuf(toBigDecimal(source.getCUF()));
-    target.setCnf(toBigDecimal(source.getCNF()));
+    target.setCuf(RUTypes.toBigDecimal(source.getCUF()));
+    target.setCnf(RUTypes.toBigDecimal(source.getCNF()));
     target.setNatOp(source.getNatOp());
     if (source.getMod() != null) {
       target.setMod(SEFAZEnums.valueOfXMLData(SEFAZ_mod.class, source.getMod()));
     }
-    target.setSerie(toBigDecimal(source.getSerie()));
-    target.setNnf(toBigDecimal(source.getNNF()));
+    target.setSerie(RUTypes.toBigDecimal(source.getSerie()));
+    target.setNnf(RUTypes.toBigDecimal(source.getNNF()));
     target.setDhEmi(parseDateTime(source.getDhEmi()));
     target.setDhSaiEnt(parseDateTime(source.getDhSaiEnt()));
     if (source.getTpNF() != null) {
@@ -316,14 +313,14 @@ public final class MapperForNfeAutorizacaoLoteV400 {
     if (source.getIdDest() != null) {
       target.setIdDest(SEFAZEnums.valueOfXMLData(SEFAZ_idDest.class, source.getIdDest()));
     }
-    target.setCmunFG(toBigDecimal(source.getCMunFG()));
+    target.setCmunFG(RUTypes.toBigDecimal(source.getCMunFG()));
     if (source.getTpImp() != null) {
       target.setTpImp(SEFAZEnums.valueOfXMLData(SEFAZ_tpImp.class, source.getTpImp()));
     }
     if (source.getTpEmis() != null) {
       target.setTpEmis(SEFAZEnums.valueOfXMLData(SEFAZ_tpEmis.class, source.getTpEmis()));
     }
-    target.setCdv(toBigDecimal(source.getCDV()));
+    target.setCdv(RUTypes.toBigDecimal(source.getCDV()));
     if (source.getTpAmb() != null) {
       target.setTpAmb(SEFAZEnums.valueOfXMLData(SEFAZ_tpAmb.class, source.getTpAmb()));
     }
@@ -616,7 +613,7 @@ public final class MapperForNfeAutorizacaoLoteV400 {
     SEFAZDetVO target = new SEFAZDetVO();
     target.setInfNFeVO(parent);
     if (source.getNItem() != null) {
-      target.setNitem(parseInteger(source.getNItem()));
+      target.setNitem(RUTypes.parseInteger(source.getNItem()));
     }
     target.setProdVO(toVO(source.getProd(), target));
     target.setImpostoVO(toVO(source.getImposto(), target));
@@ -642,17 +639,17 @@ public final class MapperForNfeAutorizacaoLoteV400 {
     target.setEXTIPI(source.getExtipi());
     target.setCFOP(source.getCfop());
     target.setUCom(source.getUcom());
-    target.setQCom(toPlainString(source.getQcom()));
-    target.setVUnCom(toPlainString(source.getVunCom()));
-    target.setVProd(toPlainString(source.getVprod()));
+    target.setQCom(RUTypes.toString(source.getQcom()));
+    target.setVUnCom(RUTypes.toString(source.getVunCom()));
+    target.setVProd(RUTypes.toString(source.getVprod()));
     target.setCEANTrib(source.getCeanTrib());
     target.setUTrib(source.getUtrib());
-    target.setQTrib(toPlainString(source.getQtrib()));
-    target.setVUnTrib(toPlainString(source.getVunTrib()));
-    target.setVFrete(toPlainString(source.getVfrete()));
-    target.setVSeg(toPlainString(source.getVseg()));
-    target.setVDesc(toPlainString(source.getVdesc()));
-    target.setVOutro(toPlainString(source.getVoutro()));
+    target.setQTrib(RUTypes.toString(source.getQtrib()));
+    target.setVUnTrib(RUTypes.toString(source.getVunTrib()));
+    target.setVFrete(RUTypes.toString(source.getVfrete()));
+    target.setVSeg(RUTypes.toString(source.getVseg()));
+    target.setVDesc(RUTypes.toString(source.getVdesc()));
+    target.setVOutro(RUTypes.toString(source.getVoutro()));
     if (source.getIndTot() != null) {
       target.setIndTot(source.getIndTot().getXmlData());
     }
@@ -679,17 +676,17 @@ public final class MapperForNfeAutorizacaoLoteV400 {
     target.setExtipi(source.getEXTIPI());
     target.setCfop(source.getCFOP());
     target.setUcom(source.getUCom());
-    target.setQcom(toBigDecimal(source.getQCom()));
-    target.setVunCom(toBigDecimal(source.getVUnCom()));
-    target.setVprod(toBigDecimal(source.getVProd()));
+    target.setQcom(RUTypes.toBigDecimal(source.getQCom()));
+    target.setVunCom(RUTypes.toBigDecimal(source.getVUnCom()));
+    target.setVprod(RUTypes.toBigDecimal(source.getVProd()));
     target.setCeanTrib(source.getCEANTrib());
     target.setUtrib(source.getUTrib());
-    target.setQtrib(toBigDecimal(source.getQTrib()));
-    target.setVunTrib(toBigDecimal(source.getVUnTrib()));
-    target.setVfrete(toBigDecimal(source.getVFrete()));
-    target.setVseg(toBigDecimal(source.getVSeg()));
-    target.setVdesc(toBigDecimal(source.getVDesc()));
-    target.setVoutro(toBigDecimal(source.getVOutro()));
+    target.setQtrib(RUTypes.toBigDecimal(source.getQTrib()));
+    target.setVunTrib(RUTypes.toBigDecimal(source.getVUnTrib()));
+    target.setVfrete(RUTypes.toBigDecimal(source.getVFrete()));
+    target.setVseg(RUTypes.toBigDecimal(source.getVSeg()));
+    target.setVdesc(RUTypes.toBigDecimal(source.getVDesc()));
+    target.setVoutro(RUTypes.toBigDecimal(source.getVOutro()));
     if (source.getIndTot() != null) {
       target.setIndTot(SEFAZEnums.valueOfXMLData(SEFAZ_indTot.class, source.getIndTot()));
     }
@@ -702,7 +699,7 @@ public final class MapperForNfeAutorizacaoLoteV400 {
     }
     TNFe.InfNFe.Det.Imposto target = new TNFe.InfNFe.Det.Imposto();
     if (source.getVtotTrib() != null) {
-      target.getContent().add(SEFAZUtils.auxCreateJAXBElement("vTotTrib", toPlainString(source.getVtotTrib())));
+      target.getContent().add(SEFAZUtils.auxCreateJAXBElement("vTotTrib", RUTypes.toString(source.getVtotTrib())));
     }
     TNFe.InfNFe.Det.Imposto.PIS pis = toJaxb(source.getPisVO());
     if (pis != null) {
@@ -729,7 +726,7 @@ public final class MapperForNfeAutorizacaoLoteV400 {
         Object value = element.getValue();
         String localName = element.getName().getLocalPart();
         if ("vTotTrib".equals(localName) && value instanceof String) {
-          target.setVtotTrib(toBigDecimal((String) value));
+          target.setVtotTrib(RUTypes.toBigDecimal((String) value));
         } else if ("PIS".equals(localName) && value instanceof TNFe.InfNFe.Det.Imposto.PIS) {
           target.setPisVO(toVO((TNFe.InfNFe.Det.Imposto.PIS) value, target));
         } else if ("COFINS".equals(localName) && value instanceof TNFe.InfNFe.Det.Imposto.COFINS) {
@@ -751,17 +748,17 @@ public final class MapperForNfeAutorizacaoLoteV400 {
       case CST_02_OPERACAO_TRIBUTAVEL_BC_VALOR_ALIQUOTA_DIFERENCIADA:
         TNFe.InfNFe.Det.Imposto.PIS.PISAliq pisAliq = new TNFe.InfNFe.Det.Imposto.PIS.PISAliq();
         pisAliq.setCST(cst);
-        pisAliq.setVBC(toPlainString(source.getVbc()));
-        pisAliq.setPPIS(toPlainString(source.getPpis()));
-        pisAliq.setVPIS(toPlainString(source.getVpis()));
+        pisAliq.setVBC(RUTypes.toString(source.getVbc()));
+        pisAliq.setPPIS(RUTypes.toString(source.getPpis()));
+        pisAliq.setVPIS(RUTypes.toString(source.getVpis()));
         target.setPISAliq(pisAliq);
         break;
       case CST_03_OPERACAO_TRIBUTAVEL_BC_QTDE_ALIQUOTA_POR_UNIDADE:
         TNFe.InfNFe.Det.Imposto.PIS.PISQtde pisQtde = new TNFe.InfNFe.Det.Imposto.PIS.PISQtde();
         pisQtde.setCST(cst);
-        pisQtde.setQBCProd(toPlainString(source.getQbcProd()));
-        pisQtde.setVAliqProd(toPlainString(source.getValiqProd()));
-        pisQtde.setVPIS(toPlainString(source.getVpis()));
+        pisQtde.setQBCProd(RUTypes.toString(source.getQbcProd()));
+        pisQtde.setVAliqProd(RUTypes.toString(source.getValiqProd()));
+        pisQtde.setVPIS(RUTypes.toString(source.getVpis()));
         target.setPISQtde(pisQtde);
         break;
       case CST_04_OPERACAO_TRIBUTAVEL_MONOFASICA_ALIQUOTA_ZERO:
@@ -777,11 +774,11 @@ public final class MapperForNfeAutorizacaoLoteV400 {
       default:
         TNFe.InfNFe.Det.Imposto.PIS.PISOutr pisOutr = new TNFe.InfNFe.Det.Imposto.PIS.PISOutr();
         pisOutr.setCST(cst);
-        pisOutr.setVBC(toPlainString(source.getVbc()));
-        pisOutr.setPPIS(toPlainString(source.getPpis()));
-        pisOutr.setQBCProd(toPlainString(source.getQbcProd()));
-        pisOutr.setVAliqProd(toPlainString(source.getValiqProd()));
-        pisOutr.setVPIS(toPlainString(source.getVpis()));
+        pisOutr.setVBC(RUTypes.toString(source.getVbc()));
+        pisOutr.setPPIS(RUTypes.toString(source.getPpis()));
+        pisOutr.setQBCProd(RUTypes.toString(source.getQbcProd()));
+        pisOutr.setVAliqProd(RUTypes.toString(source.getValiqProd()));
+        pisOutr.setVPIS(RUTypes.toString(source.getVpis()));
         target.setPISOutr(pisOutr);
         break;
     }
@@ -797,26 +794,26 @@ public final class MapperForNfeAutorizacaoLoteV400 {
     if (source.getPISAliq() != null) {
       TNFe.InfNFe.Det.Imposto.PIS.PISAliq aliq = source.getPISAliq();
       target.setCst(SEFAZEnums.valueOfXMLData(SEFAZ_CST_PIS.class, aliq.getCST()));
-      target.setVbc(toBigDecimal(aliq.getVBC()));
-      target.setPpis(toBigDecimal(aliq.getPPIS()));
-      target.setVpis(toBigDecimal(aliq.getVPIS()));
+      target.setVbc(RUTypes.toBigDecimal(aliq.getVBC()));
+      target.setPpis(RUTypes.toBigDecimal(aliq.getPPIS()));
+      target.setVpis(RUTypes.toBigDecimal(aliq.getVPIS()));
     } else if (source.getPISQtde() != null) {
       TNFe.InfNFe.Det.Imposto.PIS.PISQtde qtde = source.getPISQtde();
       target.setCst(SEFAZEnums.valueOfXMLData(SEFAZ_CST_PIS.class, qtde.getCST()));
-      target.setQbcProd(toBigDecimal(qtde.getQBCProd()));
-      target.setValiqProd(toBigDecimal(qtde.getVAliqProd()));
-      target.setVpis(toBigDecimal(qtde.getVPIS()));
+      target.setQbcProd(RUTypes.toBigDecimal(qtde.getQBCProd()));
+      target.setValiqProd(RUTypes.toBigDecimal(qtde.getVAliqProd()));
+      target.setVpis(RUTypes.toBigDecimal(qtde.getVPIS()));
     } else if (source.getPISNT() != null) {
       TNFe.InfNFe.Det.Imposto.PIS.PISNT nt = source.getPISNT();
       target.setCst(SEFAZEnums.valueOfXMLData(SEFAZ_CST_PIS.class, nt.getCST()));
     } else if (source.getPISOutr() != null) {
       TNFe.InfNFe.Det.Imposto.PIS.PISOutr outr = source.getPISOutr();
       target.setCst(SEFAZEnums.valueOfXMLData(SEFAZ_CST_PIS.class, outr.getCST()));
-      target.setVbc(toBigDecimal(outr.getVBC()));
-      target.setPpis(toBigDecimal(outr.getPPIS()));
-      target.setQbcProd(toBigDecimal(outr.getQBCProd()));
-      target.setValiqProd(toBigDecimal(outr.getVAliqProd()));
-      target.setVpis(toBigDecimal(outr.getVPIS()));
+      target.setVbc(RUTypes.toBigDecimal(outr.getVBC()));
+      target.setPpis(RUTypes.toBigDecimal(outr.getPPIS()));
+      target.setQbcProd(RUTypes.toBigDecimal(outr.getQBCProd()));
+      target.setValiqProd(RUTypes.toBigDecimal(outr.getVAliqProd()));
+      target.setVpis(RUTypes.toBigDecimal(outr.getVPIS()));
     }
     return target;
   }
@@ -832,17 +829,17 @@ public final class MapperForNfeAutorizacaoLoteV400 {
       case CST_02_OPERACAO_TRIBUTAVEL_BC_VALOR_ALIQUOTA_DIFERENCIADA:
         TNFe.InfNFe.Det.Imposto.COFINS.COFINSAliq cofinsAliq = new TNFe.InfNFe.Det.Imposto.COFINS.COFINSAliq();
         cofinsAliq.setCST(cst);
-        cofinsAliq.setVBC(toPlainString(source.getVbc()));
-        cofinsAliq.setPCOFINS(toPlainString(source.getPcofins()));
-        cofinsAliq.setVCOFINS(toPlainString(source.getVcofins()));
+        cofinsAliq.setVBC(RUTypes.toString(source.getVbc()));
+        cofinsAliq.setPCOFINS(RUTypes.toString(source.getPcofins()));
+        cofinsAliq.setVCOFINS(RUTypes.toString(source.getVcofins()));
         target.setCOFINSAliq(cofinsAliq);
         break;
       case CST_03_OPERACAO_TRIBUTAVEL_BC_QTDE_ALIQUOTA_POR_UNIDADE:
         TNFe.InfNFe.Det.Imposto.COFINS.COFINSQtde cofinsQtde = new TNFe.InfNFe.Det.Imposto.COFINS.COFINSQtde();
         cofinsQtde.setCST(cst);
-        cofinsQtde.setQBCProd(toPlainString(source.getQbcProd()));
-        cofinsQtde.setVAliqProd(toPlainString(source.getValiqProd()));
-        cofinsQtde.setVCOFINS(toPlainString(source.getVcofins()));
+        cofinsQtde.setQBCProd(RUTypes.toString(source.getQbcProd()));
+        cofinsQtde.setVAliqProd(RUTypes.toString(source.getValiqProd()));
+        cofinsQtde.setVCOFINS(RUTypes.toString(source.getVcofins()));
         target.setCOFINSQtde(cofinsQtde);
         break;
       case CST_04_OPERACAO_TRIBUTAVEL_MONOFASICA_ALIQUOTA_ZERO:
@@ -858,11 +855,11 @@ public final class MapperForNfeAutorizacaoLoteV400 {
       default:
         TNFe.InfNFe.Det.Imposto.COFINS.COFINSOutr cofinsOutr = new TNFe.InfNFe.Det.Imposto.COFINS.COFINSOutr();
         cofinsOutr.setCST(cst);
-        cofinsOutr.setVBC(toPlainString(source.getVbc()));
-        cofinsOutr.setPCOFINS(toPlainString(source.getPcofins()));
-        cofinsOutr.setQBCProd(toPlainString(source.getQbcProd()));
-        cofinsOutr.setVAliqProd(toPlainString(source.getValiqProd()));
-        cofinsOutr.setVCOFINS(toPlainString(source.getVcofins()));
+        cofinsOutr.setVBC(RUTypes.toString(source.getVbc()));
+        cofinsOutr.setPCOFINS(RUTypes.toString(source.getPcofins()));
+        cofinsOutr.setQBCProd(RUTypes.toString(source.getQbcProd()));
+        cofinsOutr.setVAliqProd(RUTypes.toString(source.getValiqProd()));
+        cofinsOutr.setVCOFINS(RUTypes.toString(source.getVcofins()));
         target.setCOFINSOutr(cofinsOutr);
         break;
     }
@@ -878,26 +875,26 @@ public final class MapperForNfeAutorizacaoLoteV400 {
     if (source.getCOFINSAliq() != null) {
       TNFe.InfNFe.Det.Imposto.COFINS.COFINSAliq aliq = source.getCOFINSAliq();
       target.setCst(SEFAZEnums.valueOfXMLData(SEFAZ_CST_COFINS.class, aliq.getCST()));
-      target.setVbc(toBigDecimal(aliq.getVBC()));
-      target.setPcofins(toBigDecimal(aliq.getPCOFINS()));
-      target.setVcofins(toBigDecimal(aliq.getVCOFINS()));
+      target.setVbc(RUTypes.toBigDecimal(aliq.getVBC()));
+      target.setPcofins(RUTypes.toBigDecimal(aliq.getPCOFINS()));
+      target.setVcofins(RUTypes.toBigDecimal(aliq.getVCOFINS()));
     } else if (source.getCOFINSQtde() != null) {
       TNFe.InfNFe.Det.Imposto.COFINS.COFINSQtde qtde = source.getCOFINSQtde();
       target.setCst(SEFAZEnums.valueOfXMLData(SEFAZ_CST_COFINS.class, qtde.getCST()));
-      target.setQbcProd(toBigDecimal(qtde.getQBCProd()));
-      target.setValiqProd(toBigDecimal(qtde.getVAliqProd()));
-      target.setVcofins(toBigDecimal(qtde.getVCOFINS()));
+      target.setQbcProd(RUTypes.toBigDecimal(qtde.getQBCProd()));
+      target.setValiqProd(RUTypes.toBigDecimal(qtde.getVAliqProd()));
+      target.setVcofins(RUTypes.toBigDecimal(qtde.getVCOFINS()));
     } else if (source.getCOFINSNT() != null) {
       TNFe.InfNFe.Det.Imposto.COFINS.COFINSNT nt = source.getCOFINSNT();
       target.setCst(SEFAZEnums.valueOfXMLData(SEFAZ_CST_COFINS.class, nt.getCST()));
     } else if (source.getCOFINSOutr() != null) {
       TNFe.InfNFe.Det.Imposto.COFINS.COFINSOutr outr = source.getCOFINSOutr();
       target.setCst(SEFAZEnums.valueOfXMLData(SEFAZ_CST_COFINS.class, outr.getCST()));
-      target.setVbc(toBigDecimal(outr.getVBC()));
-      target.setPcofins(toBigDecimal(outr.getPCOFINS()));
-      target.setQbcProd(toBigDecimal(outr.getQBCProd()));
-      target.setValiqProd(toBigDecimal(outr.getVAliqProd()));
-      target.setVcofins(toBigDecimal(outr.getVCOFINS()));
+      target.setVbc(RUTypes.toBigDecimal(outr.getVBC()));
+      target.setPcofins(RUTypes.toBigDecimal(outr.getPCOFINS()));
+      target.setQbcProd(RUTypes.toBigDecimal(outr.getQBCProd()));
+      target.setValiqProd(RUTypes.toBigDecimal(outr.getVAliqProd()));
+      target.setVcofins(RUTypes.toBigDecimal(outr.getVCOFINS()));
     }
     return target;
   }
@@ -1075,10 +1072,10 @@ public final class MapperForNfeAutorizacaoLoteV400 {
       return null;
     }
     TNFe.InfNFe.Transp.RetTransp target = new TNFe.InfNFe.Transp.RetTransp();
-    target.setVServ(toPlainString(source.getVserv()));
-    target.setVBCRet(toPlainString(source.getVbcret()));
-    target.setPICMSRet(toPlainString(source.getPicmsRet()));
-    target.setVICMSRet(toPlainString(source.getVicmsRet()));
+    target.setVServ(RUTypes.toString(source.getVserv()));
+    target.setVBCRet(RUTypes.toString(source.getVbcret()));
+    target.setPICMSRet(RUTypes.toString(source.getPicmsRet()));
+    target.setVICMSRet(RUTypes.toString(source.getVicmsRet()));
     target.setCFOP(source.getCfop());
     target.setCMunFG(source.getCmunFg());
     return target;
@@ -1090,10 +1087,10 @@ public final class MapperForNfeAutorizacaoLoteV400 {
     }
     SEFAZRetTranspVO target = new SEFAZRetTranspVO();
     target.setTranspVO(parent);
-    target.setVserv(toBigDecimal(source.getVServ()));
-    target.setVbcret(toBigDecimal(source.getVBCRet()));
-    target.setPicmsRet(toBigDecimal(source.getPICMSRet()));
-    target.setVicmsRet(toBigDecimal(source.getVICMSRet()));
+    target.setVserv(RUTypes.toBigDecimal(source.getVServ()));
+    target.setVbcret(RUTypes.toBigDecimal(source.getVBCRet()));
+    target.setPicmsRet(RUTypes.toBigDecimal(source.getPICMSRet()));
+    target.setVicmsRet(RUTypes.toBigDecimal(source.getVICMSRet()));
     target.setCfop(source.getCFOP());
     target.setCmunFg(source.getCMunFG());
     return target;
@@ -1158,12 +1155,12 @@ public final class MapperForNfeAutorizacaoLoteV400 {
       return null;
     }
     TNFe.InfNFe.Transp.Vol target = new TNFe.InfNFe.Transp.Vol();
-    target.setQVol(toPlainString(source.getQvol()));
+    target.setQVol(RUTypes.toString(source.getQvol()));
     target.setEsp(source.getEsp());
     target.setMarca(source.getMarca());
     target.setNVol(source.getNvol());
-    target.setPesoL(toPlainString(source.getPesoL()));
-    target.setPesoB(toPlainString(source.getPesoB()));
+    target.setPesoL(RUTypes.toString(source.getPesoL()));
+    target.setPesoB(RUTypes.toString(source.getPesoB()));
     if (source.getLacresVO() != null) {
       for (SEFAZLacresVO lacre : source.getLacresVO()) {
         TNFe.InfNFe.Transp.Vol.Lacres node = toJaxb(lacre);
@@ -1181,12 +1178,12 @@ public final class MapperForNfeAutorizacaoLoteV400 {
     }
     SEFAZVolVO target = new SEFAZVolVO();
     target.setTranspVO(parent);
-    target.setQvol(toBigDecimal(source.getQVol()));
+    target.setQvol(RUTypes.toBigDecimal(source.getQVol()));
     target.setEsp(source.getEsp());
     target.setMarca(source.getMarca());
     target.setNvol(source.getNVol());
-    target.setPesoL(toBigDecimal(source.getPesoL()));
-    target.setPesoB(toBigDecimal(source.getPesoB()));
+    target.setPesoL(RUTypes.toBigDecimal(source.getPesoL()));
+    target.setPesoB(RUTypes.toBigDecimal(source.getPesoB()));
     if (source.getLacres() != null && !source.getLacres().isEmpty()) {
       List<SEFAZLacresVO> lacres = new ArrayList<>(source.getLacres().size());
       for (TNFe.InfNFe.Transp.Vol.Lacres lacre : source.getLacres()) {
@@ -1219,17 +1216,6 @@ public final class MapperForNfeAutorizacaoLoteV400 {
     return target;
   }
 
-  private static Integer parseInteger(String value) {
-    if (value == null) {
-      return null;
-    }
-    try {
-      return Integer.valueOf(value);
-    } catch (NumberFormatException e) {
-      throw new IllegalStateException("Falha ao converter campo numerico da NF-e.", e);
-    }
-  }
-
   private static String formatDateTime(LocalDateTime value) {
     return value != null ? RUTypes.formatToyyyy_MM_dd_T_HH_mm_ssXXX(value) : null;
   }
@@ -1243,13 +1229,5 @@ public final class MapperForNfeAutorizacaoLoteV400 {
     } catch (RFWException e) {
       throw new IllegalStateException("Falha ao converter data/hora da NF-e.", e);
     }
-  }
-
-  private static String toPlainString(BigDecimal value) {
-    return value != null ? value.toPlainString() : null;
-  }
-
-  private static BigDecimal toBigDecimal(String value) {
-    return value == null ? null : new BigDecimal(value);
   }
 }
