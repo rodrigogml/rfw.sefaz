@@ -40,6 +40,7 @@ import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZImpostoVO;
 import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZInfNFeVO;
 import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZLacresVO;
 import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZNFRefVO;
+import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZNFeProcVO;
 import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZNFeVO;
 import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZPISVO;
 import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZProdVO;
@@ -58,6 +59,7 @@ import xsdobjects.enviNFe400.TEndereco;
 import xsdobjects.enviNFe400.TEnviNFe;
 import xsdobjects.enviNFe400.TNFe;
 import xsdobjects.enviNFe400.TNFe.InfNFe.Ide.NFref;
+import xsdobjects.enviNFe400.TNfeProc;
 import xsdobjects.enviNFe400.TUf;
 import xsdobjects.enviNFe400.TUfEmi;
 import xsdobjects.enviNFe400.TVeiculo;
@@ -92,7 +94,12 @@ public final class MapperForNfeAutorizacaoLoteV400 {
       target.setIndSinc(source.getIndSinc().getXmlData());
     }
     if (source.getNfeList() != null && !source.getNfeList().isEmpty()) {
-      target.getNFe().addAll(mapNFeListToJaxb(source.getNfeList()));
+      for (SEFAZNFeVO nfeVO : source.getNfeList()) {
+        TNFe nfe = toJaxb(nfeVO);
+        if (nfe != null) {
+          target.getNFe().add(nfe);
+        }
+      }
     }
     return target;
   }
@@ -116,34 +123,43 @@ public final class MapperForNfeAutorizacaoLoteV400 {
       target.setIndSinc(SEFAZEnums.valueOfXMLData(SEFAZ_indSinc.class, source.getIndSinc()));
     }
     if (source.getNFe() != null && !source.getNFe().isEmpty()) {
-      target.setNfeList(mapNFeListToVo(source.getNFe(), target));
+      ArrayList<SEFAZNFeVO> nfeList = new ArrayList<>(source.getNFe().size());
+      for (TNFe nfe : source.getNFe()) {
+        SEFAZNFeVO item = toVO(nfe, target);
+        if (item != null) {
+          nfeList.add(item);
+        }
+      }
+      target.setNfeList(nfeList);
     }
     return target;
   }
 
-  private static List<TNFe> mapNFeListToJaxb(List<SEFAZNFeVO> sourceList) {
-    if (sourceList == null || sourceList.isEmpty()) {
-      return new ArrayList<>();
+  public static TNfeProc toJaxb(SEFAZNFeProcVO source) {
+    if (source == null) {
+      return null;
     }
-    List<TNFe> targetList = new ArrayList<>(sourceList.size());
-    for (SEFAZNFeVO nfeVO : sourceList) {
-      targetList.add(toJaxb(nfeVO));
+    TNfeProc target = new TNfeProc();
+    if (source.getVersao() != null) {
+      target.setVersao(source.getVersao().getXmlData());
     }
-    return targetList;
+    target.setNFe(toJaxb(source.getNfeVO()));
+    return target;
   }
 
-  private static List<SEFAZNFeVO> mapNFeListToVo(List<TNFe> sourceList, SEFAZEnviNFeVO parent) {
-    if (sourceList == null || sourceList.isEmpty()) {
-      return new ArrayList<>();
+  public static SEFAZNFeProcVO toVO(TNfeProc source) {
+    if (source == null) {
+      return null;
     }
-    List<SEFAZNFeVO> targetList = new ArrayList<>(sourceList.size());
-    for (TNFe nfe : sourceList) {
-      targetList.add(toVO(nfe, parent));
+    SEFAZNFeProcVO target = new SEFAZNFeProcVO();
+    if (source.getVersao() != null) {
+      target.setVersao(SEFAZEnums.valueOfXMLData(SEFAZ_versao.class, source.getVersao()));
     }
-    return targetList;
+    target.setNfeVO(toVO(source.getNFe(), (SEFAZEnviNFeVO) null));
+    return target;
   }
 
-  private static TNFe toJaxb(SEFAZNFeVO nfeVO) {
+  public static TNFe toJaxb(SEFAZNFeVO nfeVO) {
     if (nfeVO == null) {
       return null;
     }
@@ -152,7 +168,7 @@ public final class MapperForNfeAutorizacaoLoteV400 {
     return target;
   }
 
-  private static SEFAZNFeVO toVO(TNFe nfe, SEFAZEnviNFeVO parent) {
+  public static SEFAZNFeVO toVO(TNFe nfe, SEFAZEnviNFeVO parent) {
     if (nfe == null) {
       return null;
     }
@@ -161,7 +177,7 @@ public final class MapperForNfeAutorizacaoLoteV400 {
     return target;
   }
 
-  private static TNFe.InfNFe toJaxb(SEFAZInfNFeVO source) {
+  public static TNFe.InfNFe toJaxb(SEFAZInfNFeVO source) {
     if (source == null) {
       return null;
     }
@@ -185,7 +201,7 @@ public final class MapperForNfeAutorizacaoLoteV400 {
     return target;
   }
 
-  private static SEFAZInfNFeVO toVO(TNFe.InfNFe source, SEFAZNFeVO parent) {
+  public static SEFAZInfNFeVO toVO(TNFe.InfNFe source, SEFAZNFeVO parent) {
     if (source == null) {
       return null;
     }
@@ -212,13 +228,13 @@ public final class MapperForNfeAutorizacaoLoteV400 {
     return target;
   }
 
-  private static TNFe.InfNFe.Ide toJaxb(SEFAZIdeVO source) {
+  public static TNFe.InfNFe.Ide toJaxb(SEFAZIdeVO source) {
     if (source == null) {
       return null;
     }
     TNFe.InfNFe.Ide target = new TNFe.InfNFe.Ide();
     if (source.getCuf() != null) {
-      target.setCUF(RUTypes.toString(source.getCuf()));
+      target.setCUF(source.getCuf());
     }
     if (source.getCnf() != null) {
       target.setCNF(RUTypes.toString(source.getCnf()));
@@ -291,13 +307,13 @@ public final class MapperForNfeAutorizacaoLoteV400 {
     return target;
   }
 
-  private static SEFAZIdeVO toVO(TNFe.InfNFe.Ide source, SEFAZInfNFeVO parent) {
+  public static SEFAZIdeVO toVO(TNFe.InfNFe.Ide source, SEFAZInfNFeVO parent) {
     if (source == null) {
       return null;
     }
     SEFAZIdeVO target = new SEFAZIdeVO();
     target.setInfNFeVO(parent);
-    target.setCuf(RUTypes.toBigDecimal(source.getCUF()));
+    target.setCuf(source.getCUF());
     target.setCnf(RUTypes.toBigDecimal(source.getCNF()));
     target.setNatOp(source.getNatOp());
     if (source.getMod() != null) {
@@ -353,7 +369,7 @@ public final class MapperForNfeAutorizacaoLoteV400 {
     return target;
   }
 
-  private static TNFe.InfNFe.Ide.NFref toJaxb(SEFAZNFRefVO source) {
+  public static TNFe.InfNFe.Ide.NFref toJaxb(SEFAZNFRefVO source) {
     if (source == null) {
       return null;
     }
@@ -372,7 +388,7 @@ public final class MapperForNfeAutorizacaoLoteV400 {
     return target;
   }
 
-  private static SEFAZNFRefVO toVO(TNFe.InfNFe.Ide.NFref source, SEFAZIdeVO parent) {
+  public static SEFAZNFRefVO toVO(TNFe.InfNFe.Ide.NFref source, SEFAZIdeVO parent) {
     if (source == null) {
       return null;
     }
@@ -392,7 +408,7 @@ public final class MapperForNfeAutorizacaoLoteV400 {
     return target;
   }
 
-  private static TNFe.InfNFe.Ide.NFref.RefNF toJaxb(SEFAZRefNFVO source) {
+  public static TNFe.InfNFe.Ide.NFref.RefNF toJaxb(SEFAZRefNFVO source) {
     if (source == null) {
       return null;
     }
@@ -408,7 +424,7 @@ public final class MapperForNfeAutorizacaoLoteV400 {
     return target;
   }
 
-  private static SEFAZRefNFVO toVO(TNFe.InfNFe.Ide.NFref.RefNF source, SEFAZNFRefVO parent) {
+  public static SEFAZRefNFVO toVO(TNFe.InfNFe.Ide.NFref.RefNF source, SEFAZNFRefVO parent) {
     if (source == null) {
       return null;
     }
@@ -425,7 +441,7 @@ public final class MapperForNfeAutorizacaoLoteV400 {
     return target;
   }
 
-  private static TNFe.InfNFe.Ide.NFref.RefNFP toJaxbP(SEFAZRefNFPVO source) {
+  public static TNFe.InfNFe.Ide.NFref.RefNFP toJaxbP(SEFAZRefNFPVO source) {
     if (source == null) {
       return null;
     }
@@ -443,7 +459,7 @@ public final class MapperForNfeAutorizacaoLoteV400 {
     return target;
   }
 
-  private static SEFAZRefNFPVO toVOP(TNFe.InfNFe.Ide.NFref.RefNFP source, SEFAZNFRefVO parent) {
+  public static SEFAZRefNFPVO toVOP(TNFe.InfNFe.Ide.NFref.RefNFP source, SEFAZNFRefVO parent) {
     if (source == null) {
       return null;
     }
@@ -462,7 +478,7 @@ public final class MapperForNfeAutorizacaoLoteV400 {
     return target;
   }
 
-  private static TNFe.InfNFe.Ide.NFref.RefECF toJaxb(SEFAZRefECFVO source) {
+  public static TNFe.InfNFe.Ide.NFref.RefECF toJaxb(SEFAZRefECFVO source) {
     if (source == null) {
       return null;
     }
@@ -475,7 +491,7 @@ public final class MapperForNfeAutorizacaoLoteV400 {
     return target;
   }
 
-  private static SEFAZRefECFVO toVO(TNFe.InfNFe.Ide.NFref.RefECF source, SEFAZNFRefVO parent) {
+  public static SEFAZRefECFVO toVO(TNFe.InfNFe.Ide.NFref.RefECF source, SEFAZNFRefVO parent) {
     if (source == null) {
       return null;
     }
@@ -489,7 +505,7 @@ public final class MapperForNfeAutorizacaoLoteV400 {
     return target;
   }
 
-  private static TNFe.InfNFe.Emit toJaxb(SEFAZEmitVO source) {
+  public static TNFe.InfNFe.Emit toJaxb(SEFAZEmitVO source) {
     if (source == null) {
       return null;
     }
@@ -509,7 +525,7 @@ public final class MapperForNfeAutorizacaoLoteV400 {
     return target;
   }
 
-  private static TNFe.InfNFe.Dest toJaxb(SEFAZDestVO source) {
+  public static TNFe.InfNFe.Dest toJaxb(SEFAZDestVO source) {
     if (source == null) {
       return null;
     }
@@ -529,7 +545,7 @@ public final class MapperForNfeAutorizacaoLoteV400 {
     return target;
   }
 
-  private static SEFAZDestVO toVO(TNFe.InfNFe.Dest source, SEFAZInfNFeVO parent) {
+  public static SEFAZDestVO toVO(TNFe.InfNFe.Dest source, SEFAZInfNFeVO parent) {
     if (source == null) {
       return null;
     }
@@ -550,7 +566,7 @@ public final class MapperForNfeAutorizacaoLoteV400 {
     return target;
   }
 
-  private static TEndereco toJaxb(SEFAZEnderDestVO source) {
+  public static TEndereco toJaxb(SEFAZEnderDestVO source) {
     if (source == null) {
       return null;
     }
@@ -571,7 +587,7 @@ public final class MapperForNfeAutorizacaoLoteV400 {
     return target;
   }
 
-  private static SEFAZEnderDestVO toVO(TEndereco source, SEFAZDestVO parent) {
+  public static SEFAZEnderDestVO toVO(TEndereco source, SEFAZDestVO parent) {
     if (source == null) {
       return null;
     }
@@ -593,7 +609,7 @@ public final class MapperForNfeAutorizacaoLoteV400 {
     return target;
   }
 
-  private static TNFe.InfNFe.Det toJaxb(SEFAZDetVO source) {
+  public static TNFe.InfNFe.Det toJaxb(SEFAZDetVO source) {
     if (source == null) {
       return null;
     }
@@ -606,7 +622,7 @@ public final class MapperForNfeAutorizacaoLoteV400 {
     return target;
   }
 
-  private static SEFAZDetVO toVO(TNFe.InfNFe.Det source, SEFAZInfNFeVO parent) {
+  public static SEFAZDetVO toVO(TNFe.InfNFe.Det source, SEFAZInfNFeVO parent) {
     if (source == null) {
       return null;
     }
@@ -620,7 +636,7 @@ public final class MapperForNfeAutorizacaoLoteV400 {
     return target;
   }
 
-  private static TNFe.InfNFe.Det.Prod toJaxb(SEFAZProdVO source) {
+  public static TNFe.InfNFe.Det.Prod toJaxb(SEFAZProdVO source) {
     if (source == null) {
       return null;
     }
@@ -656,7 +672,7 @@ public final class MapperForNfeAutorizacaoLoteV400 {
     return target;
   }
 
-  private static SEFAZProdVO toVO(TNFe.InfNFe.Det.Prod source, SEFAZDetVO parent) {
+  public static SEFAZProdVO toVO(TNFe.InfNFe.Det.Prod source, SEFAZDetVO parent) {
     if (source == null) {
       return null;
     }
@@ -693,7 +709,7 @@ public final class MapperForNfeAutorizacaoLoteV400 {
     return target;
   }
 
-  private static TNFe.InfNFe.Det.Imposto toJaxb(SEFAZImpostoVO source) {
+  public static TNFe.InfNFe.Det.Imposto toJaxb(SEFAZImpostoVO source) {
     if (source == null) {
       return null;
     }
@@ -712,7 +728,7 @@ public final class MapperForNfeAutorizacaoLoteV400 {
     return target;
   }
 
-  private static SEFAZImpostoVO toVO(TNFe.InfNFe.Det.Imposto source, SEFAZDetVO parent) {
+  public static SEFAZImpostoVO toVO(TNFe.InfNFe.Det.Imposto source, SEFAZDetVO parent) {
     if (source == null) {
       return null;
     }
@@ -737,7 +753,7 @@ public final class MapperForNfeAutorizacaoLoteV400 {
     return target;
   }
 
-  private static TNFe.InfNFe.Det.Imposto.PIS toJaxb(SEFAZPISVO source) {
+  public static TNFe.InfNFe.Det.Imposto.PIS toJaxb(SEFAZPISVO source) {
     if (source == null || source.getCst() == null) {
       return null;
     }
@@ -785,7 +801,7 @@ public final class MapperForNfeAutorizacaoLoteV400 {
     return target;
   }
 
-  private static SEFAZPISVO toVO(TNFe.InfNFe.Det.Imposto.PIS source, SEFAZImpostoVO parent) {
+  public static SEFAZPISVO toVO(TNFe.InfNFe.Det.Imposto.PIS source, SEFAZImpostoVO parent) {
     if (source == null) {
       return null;
     }
@@ -818,7 +834,7 @@ public final class MapperForNfeAutorizacaoLoteV400 {
     return target;
   }
 
-  private static TNFe.InfNFe.Det.Imposto.COFINS toJaxb(SEFAZCOFINSVO source) {
+  public static TNFe.InfNFe.Det.Imposto.COFINS toJaxb(SEFAZCOFINSVO source) {
     if (source == null || source.getCst() == null) {
       return null;
     }
@@ -866,7 +882,7 @@ public final class MapperForNfeAutorizacaoLoteV400 {
     return target;
   }
 
-  private static SEFAZCOFINSVO toVO(TNFe.InfNFe.Det.Imposto.COFINS source, SEFAZImpostoVO parent) {
+  public static SEFAZCOFINSVO toVO(TNFe.InfNFe.Det.Imposto.COFINS source, SEFAZImpostoVO parent) {
     if (source == null) {
       return null;
     }
@@ -899,7 +915,7 @@ public final class MapperForNfeAutorizacaoLoteV400 {
     return target;
   }
 
-  private static SEFAZEmitVO toVO(TNFe.InfNFe.Emit source, SEFAZInfNFeVO parent) {
+  public static SEFAZEmitVO toVO(TNFe.InfNFe.Emit source, SEFAZInfNFeVO parent) {
     if (source == null) {
       return null;
     }
@@ -920,7 +936,7 @@ public final class MapperForNfeAutorizacaoLoteV400 {
     return target;
   }
 
-  private static TEnderEmi toJaxb(SEFAZEnderEmitVO source) {
+  public static TEnderEmi toJaxb(SEFAZEnderEmitVO source) {
     if (source == null) {
       return null;
     }
@@ -941,7 +957,7 @@ public final class MapperForNfeAutorizacaoLoteV400 {
     return target;
   }
 
-  private static SEFAZEnderEmitVO toVO(TEnderEmi source, SEFAZEmitVO parent) {
+  public static SEFAZEnderEmitVO toVO(TEnderEmi source, SEFAZEmitVO parent) {
     if (source == null) {
       return null;
     }
@@ -963,7 +979,7 @@ public final class MapperForNfeAutorizacaoLoteV400 {
     return target;
   }
 
-  private static TNFe.InfNFe.Transp toJaxb(SEFAZTranspVO source) {
+  public static TNFe.InfNFe.Transp toJaxb(SEFAZTranspVO source) {
     if (source == null) {
       return null;
     }
@@ -995,7 +1011,7 @@ public final class MapperForNfeAutorizacaoLoteV400 {
     return target;
   }
 
-  private static SEFAZTranspVO toVO(TNFe.InfNFe.Transp source, SEFAZInfNFeVO parent) {
+  public static SEFAZTranspVO toVO(TNFe.InfNFe.Transp source, SEFAZInfNFeVO parent) {
     if (source == null) {
       return null;
     }
@@ -1032,7 +1048,7 @@ public final class MapperForNfeAutorizacaoLoteV400 {
     return target;
   }
 
-  private static TNFe.InfNFe.Transp.Transporta toJaxb(SEFAZTransportaVO source) {
+  public static TNFe.InfNFe.Transp.Transporta toJaxb(SEFAZTransportaVO source) {
     if (source == null) {
       return null;
     }
@@ -1049,7 +1065,7 @@ public final class MapperForNfeAutorizacaoLoteV400 {
     return target;
   }
 
-  private static SEFAZTransportaVO toVO(TNFe.InfNFe.Transp.Transporta source, SEFAZTranspVO parent) {
+  public static SEFAZTransportaVO toVO(TNFe.InfNFe.Transp.Transporta source, SEFAZTranspVO parent) {
     if (source == null) {
       return null;
     }
@@ -1067,7 +1083,7 @@ public final class MapperForNfeAutorizacaoLoteV400 {
     return target;
   }
 
-  private static TNFe.InfNFe.Transp.RetTransp toJaxb(SEFAZRetTranspVO source) {
+  public static TNFe.InfNFe.Transp.RetTransp toJaxb(SEFAZRetTranspVO source) {
     if (source == null) {
       return null;
     }
@@ -1081,7 +1097,7 @@ public final class MapperForNfeAutorizacaoLoteV400 {
     return target;
   }
 
-  private static SEFAZRetTranspVO toVO(TNFe.InfNFe.Transp.RetTransp source, SEFAZTranspVO parent) {
+  public static SEFAZRetTranspVO toVO(TNFe.InfNFe.Transp.RetTransp source, SEFAZTranspVO parent) {
     if (source == null) {
       return null;
     }
@@ -1096,7 +1112,7 @@ public final class MapperForNfeAutorizacaoLoteV400 {
     return target;
   }
 
-  private static TVeiculo toJaxb(SEFAZVeicTranspVO source) {
+  public static TVeiculo toJaxb(SEFAZVeicTranspVO source) {
     if (source == null) {
       return null;
     }
@@ -1109,7 +1125,7 @@ public final class MapperForNfeAutorizacaoLoteV400 {
     return target;
   }
 
-  private static TVeiculo toJaxb(SEFAZReboqueVO source) {
+  public static TVeiculo toJaxb(SEFAZReboqueVO source) {
     if (source == null) {
       return null;
     }
@@ -1122,7 +1138,7 @@ public final class MapperForNfeAutorizacaoLoteV400 {
     return target;
   }
 
-  private static SEFAZVeicTranspVO toVO(TVeiculo source, SEFAZTranspVO parent, SEFAZVeicTranspVO marker) {
+  public static SEFAZVeicTranspVO toVO(TVeiculo source, SEFAZTranspVO parent, SEFAZVeicTranspVO marker) {
     if (source == null) {
       return null;
     }
@@ -1136,7 +1152,7 @@ public final class MapperForNfeAutorizacaoLoteV400 {
     return target;
   }
 
-  private static SEFAZReboqueVO toVO(TVeiculo source, SEFAZTranspVO parent, SEFAZReboqueVO marker) {
+  public static SEFAZReboqueVO toVO(TVeiculo source, SEFAZTranspVO parent, SEFAZReboqueVO marker) {
     if (source == null) {
       return null;
     }
@@ -1150,7 +1166,7 @@ public final class MapperForNfeAutorizacaoLoteV400 {
     return target;
   }
 
-  private static TNFe.InfNFe.Transp.Vol toJaxb(SEFAZVolVO source) {
+  public static TNFe.InfNFe.Transp.Vol toJaxb(SEFAZVolVO source) {
     if (source == null) {
       return null;
     }
@@ -1172,7 +1188,7 @@ public final class MapperForNfeAutorizacaoLoteV400 {
     return target;
   }
 
-  private static SEFAZVolVO toVO(TNFe.InfNFe.Transp.Vol source, SEFAZTranspVO parent) {
+  public static SEFAZVolVO toVO(TNFe.InfNFe.Transp.Vol source, SEFAZTranspVO parent) {
     if (source == null) {
       return null;
     }
@@ -1197,7 +1213,7 @@ public final class MapperForNfeAutorizacaoLoteV400 {
     return target;
   }
 
-  private static TNFe.InfNFe.Transp.Vol.Lacres toJaxb(SEFAZLacresVO source) {
+  public static TNFe.InfNFe.Transp.Vol.Lacres toJaxb(SEFAZLacresVO source) {
     if (source == null) {
       return null;
     }
@@ -1206,7 +1222,7 @@ public final class MapperForNfeAutorizacaoLoteV400 {
     return target;
   }
 
-  private static SEFAZLacresVO toVO(TNFe.InfNFe.Transp.Vol.Lacres source, SEFAZVolVO parent) {
+  public static SEFAZLacresVO toVO(TNFe.InfNFe.Transp.Vol.Lacres source, SEFAZVolVO parent) {
     if (source == null) {
       return null;
     }

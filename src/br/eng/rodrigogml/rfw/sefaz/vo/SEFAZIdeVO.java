@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import br.eng.rodrigogml.rfw.kernel.preprocess.PreProcess.PreProcessOption;
 import br.eng.rodrigogml.rfw.kernel.rfwmeta.RFWMetaBigDecimalField;
 import br.eng.rodrigogml.rfw.kernel.rfwmeta.RFWMetaDateField;
 import br.eng.rodrigogml.rfw.kernel.rfwmeta.RFWMetaDateField.DateResolution;
@@ -52,8 +53,8 @@ public class SEFAZIdeVO extends RFWVO {
    * <p>
    * Obrigatório na especificação. Utilizar a Tabela do IBGE de código de unidades da federação (MOC – Visão Geral, Tabela de UF, Município e País).
    */
-  @RFWMetaBigDecimalField(caption = "Código da UF do emitente", required = false)
-  private BigDecimal cuf;
+  @RFWMetaStringField(caption = "Código da UF do emitente", required = false, minLength = 2, maxLength = 2, pattern = "\\d\\d", preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
+  private String cuf;
 
   /**
    * Código numérico que compõe a Chave de Acesso ({@code cNF}).
@@ -327,7 +328,7 @@ public class SEFAZIdeVO extends RFWVO {
    *
    * @return the código da UF do emitente do Documento Fiscal ({@code cUF})
    */
-  public BigDecimal getCuf() {
+  public String getCuf() {
     return cuf;
   }
 
@@ -338,7 +339,7 @@ public class SEFAZIdeVO extends RFWVO {
    *
    * @param cuf the new código da UF do emitente do Documento Fiscal ({@code cUF})
    */
-  public void setCuf(BigDecimal cuf) {
+  public void setCuf(String cuf) {
     this.cuf = cuf;
   }
 
