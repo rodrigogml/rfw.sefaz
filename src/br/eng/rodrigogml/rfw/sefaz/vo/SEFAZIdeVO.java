@@ -1,11 +1,9 @@
 package br.eng.rodrigogml.rfw.sefaz.vo;
 
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
 import br.eng.rodrigogml.rfw.kernel.preprocess.PreProcess.PreProcessOption;
-import br.eng.rodrigogml.rfw.kernel.rfwmeta.RFWMetaBigDecimalField;
 import br.eng.rodrigogml.rfw.kernel.rfwmeta.RFWMetaDateField;
 import br.eng.rodrigogml.rfw.kernel.rfwmeta.RFWMetaDateField.DateResolution;
 import br.eng.rodrigogml.rfw.kernel.rfwmeta.RFWMetaEnumField;
@@ -54,8 +52,8 @@ public class SEFAZIdeVO extends RFWVO {
    * <p>
    * Obrigatório na especificação. Utilizar a Tabela do IBGE de código de unidades da federação (MOC – Visão Geral, Tabela de UF, Município e País).
    */
-  @RFWMetaStringField(caption = "Código da UF do emitente", required = false, minLength = 2, maxLength = 2, pattern = "\\d\\d", preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
-  private String cuf;
+  @RFWMetaIntegerField(caption = "Código da UF do emitente", required = false, minValue = 0, maxValue = 99)
+  private Integer cuf;
 
   /**
    * Código numérico que compõe a Chave de Acesso ({@code cNF}).
@@ -63,8 +61,8 @@ public class SEFAZIdeVO extends RFWVO {
    * <p>
    * Obrigatório na especificação. Número aleatório gerado pelo emitente para cada NF-e, utilizado na composição da chave de acesso para evitar acessos indevidos ao documento.
    */
-  @RFWMetaBigDecimalField(caption = "Código numérico da chave de acesso", required = false)
-  private BigDecimal cnf;
+  @RFWMetaIntegerField(caption = "Código numérico da chave de acesso", required = false, minValue = 0, maxValue = 99999999)
+  private Integer cnf;
 
   /**
    * Descrição da Natureza da Operação ({@code natOp}).
@@ -74,15 +72,6 @@ public class SEFAZIdeVO extends RFWVO {
    */
   @RFWMetaStringField(caption = "Natureza da operação", required = false, maxLength = 60)
   private String natOp;
-
-  /**
-   * Indicador da forma de pagamento ({@code indPag}).
-   *
-   * <p>
-   * Campo obrigatório nas versões antigas da especificação, mas excluído no leiaute 4.0 (NT 2016.002). Mantido aqui apenas para compatibilidade com documentos antigos.
-   */
-  @RFWMetaBigDecimalField(caption = "Indicador da forma de pagamento (obsoleto)", required = false)
-  private BigDecimal indPag;
 
   /**
    * Código do Modelo do Documento Fiscal ({@code mod}).
@@ -107,8 +96,8 @@ public class SEFAZIdeVO extends RFWVO {
    * <li>{@code 900–999}: Emissão no site do Fisco (NFA-e e outros cenários conforme NT 2018/001)</li>
    * </ul>
    */
-  @RFWMetaBigDecimalField(caption = "Série do documento fiscal", required = false)
-  private BigDecimal serie;
+  @RFWMetaIntegerField(caption = "Série do documento fiscal", required = false, minValue = 0, maxValue = 999)
+  private Integer serie;
 
   /**
    * Número do Documento Fiscal ({@code nNF}).
@@ -116,8 +105,8 @@ public class SEFAZIdeVO extends RFWVO {
    * <p>
    * Obrigatório na especificação. Identifica a numeração do documento fiscal dentro da série.
    */
-  @RFWMetaBigDecimalField(caption = "Número do documento fiscal", required = false)
-  private BigDecimal nnf;
+  @RFWMetaIntegerField(caption = "Número do documento fiscal", required = false, minValue = 1, maxValue = 999999999)
+  private Integer nnf;
 
   /**
    * Data e hora de emissão do Documento Fiscal ({@code dhEmi}).
@@ -170,8 +159,8 @@ public class SEFAZIdeVO extends RFWVO {
    * <p>
    * Obrigatório na especificação. Informar o município de ocorrência do fato gerador do ICMS. Utilizar a tabela de municípios do IBGE (MOC, Seção 8.2).
    */
-  @RFWMetaBigDecimalField(caption = "Município do fato gerador", required = false)
-  private BigDecimal cmunFG;
+  @RFWMetaIntegerField(caption = "Município do fato gerador", required = false, minValue = 0, maxValue = 9999999)
+  private Integer cmunFG;
 
   /**
    * Formato de impressão do DANFE ({@code tpImp}).
@@ -329,7 +318,7 @@ public class SEFAZIdeVO extends RFWVO {
    *
    * @return the código da UF do emitente do Documento Fiscal ({@code cUF})
    */
-  public String getCuf() {
+  public Integer getCuf() {
     return cuf;
   }
 
@@ -340,7 +329,7 @@ public class SEFAZIdeVO extends RFWVO {
    *
    * @param cuf the new código da UF do emitente do Documento Fiscal ({@code cUF})
    */
-  public void setCuf(String cuf) {
+  public void setCuf(Integer cuf) {
     this.cuf = cuf;
   }
 
@@ -351,7 +340,7 @@ public class SEFAZIdeVO extends RFWVO {
    *
    * @return the código numérico que compõe a Chave de Acesso ({@code cNF})
    */
-  public BigDecimal getCnf() {
+  public Integer getCnf() {
     return cnf;
   }
 
@@ -362,7 +351,7 @@ public class SEFAZIdeVO extends RFWVO {
    *
    * @param cnf the new código numérico que compõe a Chave de Acesso ({@code cNF})
    */
-  public void setCnf(BigDecimal cnf) {
+  public void setCnf(Integer cnf) {
     this.cnf = cnf;
   }
 
@@ -386,28 +375,6 @@ public class SEFAZIdeVO extends RFWVO {
    */
   public void setNatOp(String natOp) {
     this.natOp = natOp;
-  }
-
-  /**
-   * # indicador da forma de pagamento ({@code indPag}).
-   * <p>
-   * Campo obrigatório nas versões antigas da especificação, mas excluído no leiaute 4.0 (NT 2016.002). Mantido aqui apenas para compatibilidade com documentos antigos.
-   *
-   * @return the indicador da forma de pagamento ({@code indPag})
-   */
-  public BigDecimal getIndPag() {
-    return indPag;
-  }
-
-  /**
-   * # indicador da forma de pagamento ({@code indPag}).
-   * <p>
-   * Campo obrigatório nas versões antigas da especificação, mas excluído no leiaute 4.0 (NT 2016.002). Mantido aqui apenas para compatibilidade com documentos antigos.
-   *
-   * @param indPag the new indicador da forma de pagamento ({@code indPag})
-   */
-  public void setIndPag(BigDecimal indPag) {
-    this.indPag = indPag;
   }
 
   /**
@@ -454,7 +421,7 @@ public class SEFAZIdeVO extends RFWVO {
    *
    * @return the série do Documento Fiscal ({@code serie})
    */
-  public BigDecimal getSerie() {
+  public Integer getSerie() {
     return serie;
   }
 
@@ -470,7 +437,7 @@ public class SEFAZIdeVO extends RFWVO {
    *
    * @param serie the new série do Documento Fiscal ({@code serie})
    */
-  public void setSerie(BigDecimal serie) {
+  public void setSerie(Integer serie) {
     this.serie = serie;
   }
 
@@ -481,7 +448,7 @@ public class SEFAZIdeVO extends RFWVO {
    *
    * @return the número do Documento Fiscal ({@code nNF})
    */
-  public BigDecimal getNnf() {
+  public Integer getNnf() {
     return nnf;
   }
 
@@ -492,7 +459,7 @@ public class SEFAZIdeVO extends RFWVO {
    *
    * @param nnf the new número do Documento Fiscal ({@code nNF})
    */
-  public void setNnf(BigDecimal nnf) {
+  public void setNnf(Integer nnf) {
     this.nnf = nnf;
   }
 
@@ -613,7 +580,7 @@ public class SEFAZIdeVO extends RFWVO {
    *
    * @return the código do município de ocorrência do fato gerador do ICMS ({@code cMunFG})
    */
-  public BigDecimal getCmunFG() {
+  public Integer getCmunFG() {
     return cmunFG;
   }
 
@@ -624,7 +591,7 @@ public class SEFAZIdeVO extends RFWVO {
    *
    * @param cmunFG the new código do município de ocorrência do fato gerador do ICMS ({@code cMunFG})
    */
-  public void setCmunFG(BigDecimal cmunFG) {
+  public void setCmunFG(Integer cmunFG) {
     this.cmunFG = cmunFG;
   }
 

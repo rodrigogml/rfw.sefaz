@@ -10,11 +10,21 @@ CREATE TABLE `sefaz_nfeproc` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB;
 
--- Tabela derivada de br.eng.rodrigogml.rfw.sefaz.vo.SEFAZNFeVO
+-- Tabela derivada de br.eng.rodrigogml.rfw.sefaz.vo.SEFAZEnviNFeVO
+CREATE TABLE `sefaz_envinfe` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `versao` varchar(50) NOT NULL,
+  `idlote` varchar(15) NOT NULL,
+  `indsinc` varchar(50) ,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB;
+
 CREATE TABLE `sefaz_nfe` (
   `id` bigint NOT NULL AUTO_INCREMENT,
-  `idsefaz_nfeproc` bigint NOT NULL,
+  `idsefaz_envinfe` bigint ,
+  `idsefaz_nfeproc` bigint ,
   PRIMARY KEY (`id`),
+  CONSTRAINT `fk_sefaz_nfe_sefaz_envinfe` FOREIGN KEY (`idsefaz_envinfe`) REFERENCES `sefaz_envinfe` (`id`),
   CONSTRAINT `fk_sefaz_nfe_sefaz_nfeproc` FOREIGN KEY (`idsefaz_nfeproc`) REFERENCES `sefaz_nfeproc` (`id`)
 ) ENGINE=InnoDB;
 
@@ -32,12 +42,11 @@ CREATE TABLE `sefaz_infnfe` (
 CREATE TABLE `sefaz_ide` (
   `id` bigint NOT NULL AUTO_INCREMENT,
   `idsefaz_infnfe` bigint NOT NULL,
-  `cuf` smallint ,
+  `cuf` int ,
   `cnf` int ,
   `natop` varchar(60) ,
-  `indpag` tinyint ,
   `mod` varchar(50) ,
-  `serie` smallint ,
+  `serie` int ,
   `nnf` int ,
   `dhemi` datetime ,
   `dhsaient` datetime ,
@@ -74,12 +83,12 @@ CREATE TABLE `sefaz_nfref` (
 CREATE TABLE `sefaz_refnf` (
   `id` bigint NOT NULL AUTO_INCREMENT,
   `idsefaz_nfref` bigint NOT NULL,
-  `cuf` char(2) NOT NULL,
+  `cuf` int NOT NULL,
   `aamm` char(4) NOT NULL,
   `cnpj` char(14) NOT NULL,
   `mod` varchar(50) ,
-  `serie` varchar(255) NOT NULL,
-  `nnf` varchar(9) NOT NULL,
+  `serie` int NOT NULL,
+  `nnf` int NOT NULL,
   PRIMARY KEY (`id`),
   CONSTRAINT `fk_sefaz_refnf_sefaz_nfref` FOREIGN KEY (`idsefaz_nfref`) REFERENCES `sefaz_nfref` (`id`)
 ) ENGINE=InnoDB;
@@ -88,14 +97,14 @@ CREATE TABLE `sefaz_refnf` (
 CREATE TABLE `sefaz_refnfp` (
   `id` bigint NOT NULL AUTO_INCREMENT,
   `idsefaz_nfref` bigint NOT NULL,
-  `cuf` char(2) NOT NULL,
+  `cuf` int NOT NULL,
   `aamm` char(4) NOT NULL,
   `cnpj` char(14) ,
   `cpf` char(11) NOT NULL,
   `ie` varchar(20) NOT NULL,
   `mod` varchar(50) ,
-  `serie` varchar(255) NOT NULL,
-  `nnf` varchar(9) NOT NULL,
+  `serie` int NOT NULL,
+  `nnf` int NOT NULL,
   PRIMARY KEY (`id`),
   CONSTRAINT `fk_sefaz_refnfp_sefaz_nfref` FOREIGN KEY (`idsefaz_nfref`) REFERENCES `sefaz_nfref` (`id`)
 ) ENGINE=InnoDB;
@@ -686,22 +695,38 @@ CREATE TABLE `sefaz_icmsst` (
 ) ENGINE=InnoDB;
 
 -- Tabela derivada de br.eng.rodrigogml.rfw.sefaz.vo.SEFAZEnviNFeVO
-CREATE TABLE `sefaz_envinfe` (
+-- Tabela derivada de br.eng.rodrigogml.rfw.sefaz.vo.SEFAZRetEnviNFeVO
+CREATE TABLE `sefaz_retenvinfe` (
   `id` bigint NOT NULL AUTO_INCREMENT,
-  `versao` varchar(50) NOT NULL,
-  `idlote` varchar(15) NOT NULL,
-  `indsinc` varchar(50) ,
+  `versao` varchar(50) ,
+  `tpamb` varchar(50) ,
+  `veraplic` varchar(20) ,
+  `cstat` int ,
+  `xmotivo` varchar(255) ,
+  `cuf` int ,
+  `dhrecbto` datetime ,
+  `nrec` bigint ,
+  `tmed` decimal(15,4) ,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB;
 
--- Tabela de associao entre lotes (SEFAZEnviNFeVO) e NF-e
-CREATE TABLE `sefaz_envinfe_nfe` (
+-- Tabela derivada de br.eng.rodrigogml.rfw.sefaz.vo.SEFAZProtNFeVO
+CREATE TABLE `sefaz_protnfe` (
   `id` bigint NOT NULL AUTO_INCREMENT,
-  `idsefaz_envinfe` bigint NOT NULL,
-  `idsefaz_nfe` bigint NOT NULL,
+  `idsefaz_retenvinfe` bigint NOT NULL,
+  `versao` varchar(50) ,
+  `tpamb` varchar(50) ,
+  `veraplic` varchar(20) ,
+  `chnfe` char(44) ,
+  `dhrecbto` datetime ,
+  `nprot` bigint ,
+  `digval` varchar(28) ,
+  `cstat` int ,
+  `xmotivo` varchar(255) ,
+  `cmsg` int ,
+  `xmsg` varchar(200) ,
   PRIMARY KEY (`id`),
-  CONSTRAINT `fk_sefaz_envinfe_nfe_envinfe` FOREIGN KEY (`idsefaz_envinfe`) REFERENCES `sefaz_envinfe` (`id`),
-  CONSTRAINT `fk_sefaz_envinfe_nfe_nfe` FOREIGN KEY (`idsefaz_nfe`) REFERENCES `sefaz_nfe` (`id`)
+  CONSTRAINT `fk_sefaz_protnfe_retenvinfe` FOREIGN KEY (`idsefaz_retenvinfe`) REFERENCES `sefaz_retenvinfe` (`id`)
 ) ENGINE=InnoDB;
 
 

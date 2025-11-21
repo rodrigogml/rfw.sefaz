@@ -2,6 +2,7 @@ package br.eng.rodrigogml.rfw.sefaz.vo;
 
 import br.eng.rodrigogml.rfw.kernel.preprocess.PreProcess.PreProcessOption;
 import br.eng.rodrigogml.rfw.kernel.rfwmeta.RFWMetaEnumField;
+import br.eng.rodrigogml.rfw.kernel.rfwmeta.RFWMetaIntegerField;
 import br.eng.rodrigogml.rfw.kernel.rfwmeta.RFWMetaRelationshipField;
 import br.eng.rodrigogml.rfw.kernel.rfwmeta.RFWMetaRelationshipField.RelationshipTypes;
 import br.eng.rodrigogml.rfw.kernel.rfwmeta.RFWMetaStringCNPJField;
@@ -29,8 +30,8 @@ public class SEFAZRefNFPVO extends RFWVO {
   /**
    * BA11 - Código da UF do emitente. Utilizar a tabela de UF do IBGE. Ocorrência: 1-1.
    */
-  @RFWMetaStringField(caption = "Código da UF do emitente da NF de produtor", required = true, unique = false, maxLength = 2, minLength = 2, pattern = "", preProcess = { PreProcessOption.NONE })
-  private String cuf;
+  @RFWMetaIntegerField(caption = "Código da UF do emitente da NF de produtor", required = true, minValue = 0, maxValue = 99)
+  private Integer cuf;
 
   /**
    * BA12 - Ano e Mês de emissão da NF de produtor. Formato AAMM da emissão da NF de produtor. Ocorrência: 1-1.
@@ -65,14 +66,14 @@ public class SEFAZRefNFPVO extends RFWVO {
   /**
    * BA17 - Série do Documento Fiscal. Informar a série do documento fiscal; informar zero se inexistente. Ocorrência: 1-1.
    */
-  @RFWMetaStringField(caption = "Série do Documento Fiscal da NF de produtor", required = true, unique = false, maxLength = -1, minLength = -1, pattern = "", preProcess = { PreProcessOption.NONE })
-  private String serie;
+  @RFWMetaIntegerField(caption = "Série do Documento Fiscal da NF de produtor", required = true, minValue = 0, maxValue = 999)
+  private Integer serie;
 
   /**
    * BA18 - Número do Documento Fiscal. Faixa: 1–999999999. Tamanho 1-9 caracteres. Ocorrência: 1-1.
    */
-  @RFWMetaStringField(caption = "Número do Documento Fiscal da NF de produtor", required = true, unique = false, maxLength = 9, minLength = 1, pattern = "", preProcess = { PreProcessOption.NONE })
-  private String nnf;
+  @RFWMetaIntegerField(caption = "Número do Documento Fiscal da NF de produtor", required = true, minValue = 1, maxValue = 999999999)
+  private Integer nnf;
 
   /**
    * # {@link SEFAZNFRefVO}.
@@ -97,7 +98,7 @@ public class SEFAZRefNFPVO extends RFWVO {
    *
    * @return the bA11 - Código da UF do emitente
    */
-  public String getCuf() {
+  public Integer getCuf() {
     return cuf;
   }
 
@@ -106,7 +107,7 @@ public class SEFAZRefNFPVO extends RFWVO {
    *
    * @param cuf the new bA11 - Código da UF do emitente
    */
-  public void setCuf(String cuf) {
+  public void setCuf(Integer cuf) {
     this.cuf = cuf;
   }
 
@@ -187,7 +188,7 @@ public class SEFAZRefNFPVO extends RFWVO {
    *
    * @return the bA17 - Série do Documento Fiscal
    */
-  public String getSerie() {
+  public Integer getSerie() {
     return serie;
   }
 
@@ -196,7 +197,7 @@ public class SEFAZRefNFPVO extends RFWVO {
    *
    * @param serie the new bA17 - Série do Documento Fiscal
    */
-  public void setSerie(String serie) {
+  public void setSerie(Integer serie) {
     this.serie = serie;
   }
 
@@ -205,7 +206,7 @@ public class SEFAZRefNFPVO extends RFWVO {
    *
    * @return the bA18 - Número do Documento Fiscal
    */
-  public String getNnf() {
+  public Integer getNnf() {
     return nnf;
   }
 
@@ -214,7 +215,7 @@ public class SEFAZRefNFPVO extends RFWVO {
    *
    * @param nnf the new bA18 - Número do Documento Fiscal
    */
-  public void setNnf(String nnf) {
+  public void setNnf(Integer nnf) {
     this.nnf = nnf;
   }
 

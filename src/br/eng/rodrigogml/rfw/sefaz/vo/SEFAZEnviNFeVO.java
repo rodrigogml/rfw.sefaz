@@ -36,10 +36,10 @@ public class SEFAZEnviNFeVO extends RFWVO {
    * Lista de NF-e que compem o lote (AP04). Ocorrncia mnima/mxima oficial: 1-50.
    *
    * <p>
-   * Relacionamento por associao com {@link SEFAZNFeVO}, uma vez que a NF-e pode ser tratada fora do contexto estrito do lote, mas deve ser vinculada ao enviNFe no momento do envio. O relacionamento inverso no necessrio.
-   * </p>
-   */
-  @RFWMetaRelationshipField(caption = "NFe", relationship = RelationshipTypes.ASSOCIATION, required = true, column = "idsefaz_nfe", minSize = 1, maxSize = 50)
+  * Relacionamento por associao com {@link SEFAZNFeVO}, uma vez que a NF-e pode ser tratada fora do contexto estrito do lote, mas deve ser vinculada ao enviNFe no momento do envio. O relacionamento inverso no necessrio.
+  * </p>
+  */
+  @RFWMetaRelationshipField(caption = "NFe", relationship = RelationshipTypes.ASSOCIATION, required = true, columnMapped = "idsefaz_envinfe", minSize = 1, maxSize = 50)
   private List<SEFAZNFeVO> nfeList;
 
   /**

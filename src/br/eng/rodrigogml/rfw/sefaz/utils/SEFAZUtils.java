@@ -351,28 +351,6 @@ public class SEFAZUtils {
   }
 
   /**
-   * Interpreta diversos formatos de data encontrados na NF-e e os converte para {@link LocalDateTime}.
-   * <p>
-   * Os formatos suportados são:
-   * <ul>
-   * <li>"yyyy-MM-dd'T'HH:mm:ssXXX" Exemplo: "2024-02-20T15:30:00-07:00" (UTC com timezone)</li>
-   * <li>"yyyy-MM-dd'T'HH:mm:ssZ" Exemplo: "2024-02-20T15:30:00-0700" (UTC com timezone)</li>
-   * <li>"yyyy-MM-dd'T'HH:mm:ss" Exemplo: "2024-02-20T15:30:00" (UTC sem timezone)</li>
-   * <li>"yyyy-MM-dd" Exemplo: "2024-02-20"</li>
-   * <li>"dd/MM/yyyy" Exemplo: "20/02/2024"</li>
-   * </ul>
-   * <p>
-   * Quando o timezone está ausente, assume-se o fuso horário do sistema.
-   *
-   * @param date String representando a data.
-   * @return {@link LocalDateTime} correspondente.
-   * @throws RFWException Se o formato da data não for reconhecido ou se ocorrer um erro de conversão.
-   */
-  public static LocalDateTime parseLocalDateTime(String date) throws RFWException {
-    return RUTypes.parseLocalDateTime(date);
-  }
-
-  /**
    * A partir de um objeto {@link TEnviNFe} cria o XML como esperado para enviar para o WebService e assina as tags "infNFe" como solicitado pelo padrão NFe.<br>
    *
    * @param cert Certificado utilizado para assinar o documento. Deve conter chave privada.
