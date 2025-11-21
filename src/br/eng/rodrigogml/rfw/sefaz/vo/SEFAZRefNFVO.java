@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import br.eng.rodrigogml.rfw.kernel.preprocess.PreProcess.PreProcessOption;
 import br.eng.rodrigogml.rfw.kernel.rfwmeta.RFWMetaEnumField;
+import br.eng.rodrigogml.rfw.kernel.rfwmeta.RFWMetaIntegerField;
 import br.eng.rodrigogml.rfw.kernel.rfwmeta.RFWMetaRelationshipField;
 import br.eng.rodrigogml.rfw.kernel.rfwmeta.RFWMetaRelationshipField.RelationshipTypes;
 import br.eng.rodrigogml.rfw.kernel.rfwmeta.RFWMetaStringCNPJField;
@@ -29,8 +30,8 @@ public class SEFAZRefNFVO extends RFWVO implements Serializable {
   /**
    * BA04 - Código da UF do emitente. Utilizar a tabela de UF do IBGE. Ocorrência: 1-1.
    */
-  @RFWMetaStringField(caption = "Código da UF do emitente", required = true, unique = false, maxLength = 2, minLength = 2, pattern = "", preProcess = { PreProcessOption.NONE })
-  private String cuf;
+  @RFWMetaIntegerField(caption = "Código da UF do emitente", required = true, minValue = 0, maxValue = 99)
+  private Integer cuf;
 
   /**
    * BA05 - Ano e Mês de emissão da NF. Formato AAMM da emissão da NF referenciada. Ocorrência: 1-1.
@@ -53,21 +54,21 @@ public class SEFAZRefNFVO extends RFWVO implements Serializable {
   /**
    * BA08 - Série do Documento Fiscal. Informar a série do documento fiscal; informar zero se não utilizada série. Ocorrência: 1-1.
    */
-  @RFWMetaStringField(caption = "Série do Documento Fiscal", required = true, unique = false, maxLength = -1, minLength = -1, pattern = "", preProcess = { PreProcessOption.NONE })
-  private String serie;
+  @RFWMetaIntegerField(caption = "Série do Documento Fiscal", required = true, minValue = 0, maxValue = 999)
+  private Integer serie;
 
   /**
    * BA09 - Número do Documento Fiscal. Faixa: 1–999999999. Tamanho 1-9 caracteres. Ocorrência: 1-1.
    */
-  @RFWMetaStringField(caption = "Número do Documento Fiscal", required = true, unique = false, maxLength = 9, minLength = 1, pattern = "", preProcess = { PreProcessOption.NONE })
-  private String nnf;
+  @RFWMetaIntegerField(caption = "Número do Documento Fiscal", required = true, minValue = 1, maxValue = 999999999)
+  private Integer nnf;
 
   /**
    * # bA04 - Código da UF do emitente. Utilizar a tabela de UF do IBGE. Ocorrência: 1-1.
    *
    * @return the bA04 - Código da UF do emitente
    */
-  public String getCuf() {
+  public Integer getCuf() {
     return cuf;
   }
 
@@ -76,7 +77,7 @@ public class SEFAZRefNFVO extends RFWVO implements Serializable {
    *
    * @param cuf the new bA04 - Código da UF do emitente
    */
-  public void setCuf(String cuf) {
+  public void setCuf(Integer cuf) {
     this.cuf = cuf;
   }
 
@@ -121,7 +122,7 @@ public class SEFAZRefNFVO extends RFWVO implements Serializable {
    *
    * @return the bA08 - Série do Documento Fiscal
    */
-  public String getSerie() {
+  public Integer getSerie() {
     return serie;
   }
 
@@ -130,7 +131,7 @@ public class SEFAZRefNFVO extends RFWVO implements Serializable {
    *
    * @param serie the new bA08 - Série do Documento Fiscal
    */
-  public void setSerie(String serie) {
+  public void setSerie(Integer serie) {
     this.serie = serie;
   }
 
@@ -139,7 +140,7 @@ public class SEFAZRefNFVO extends RFWVO implements Serializable {
    *
    * @return the bA09 - Número do Documento Fiscal
    */
-  public String getNnf() {
+  public Integer getNnf() {
     return nnf;
   }
 
@@ -148,7 +149,7 @@ public class SEFAZRefNFVO extends RFWVO implements Serializable {
    *
    * @param nnf the new bA09 - Número do Documento Fiscal
    */
-  public void setNnf(String nnf) {
+  public void setNnf(Integer nnf) {
     this.nnf = nnf;
   }
 

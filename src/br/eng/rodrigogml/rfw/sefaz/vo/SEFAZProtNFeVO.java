@@ -10,6 +10,7 @@ import br.eng.rodrigogml.rfw.kernel.rfwmeta.RFWMetaIntegerField;
 import br.eng.rodrigogml.rfw.kernel.rfwmeta.RFWMetaLongField;
 import br.eng.rodrigogml.rfw.kernel.rfwmeta.RFWMetaStringField;
 import br.eng.rodrigogml.rfw.kernel.vo.RFWVO;
+import br.eng.rodrigogml.rfw.orm.dao.annotations.dao.RFWDAOAnnotation;
 import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_tpAmb;
 import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_versao;
 
@@ -21,6 +22,7 @@ import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_versao;
  * @author Rodrigo Leitão
  * @since (21 de nov. de 2025)
  */
+@RFWDAOAnnotation(schema = "_RFW.SEFAZ", table = "sefaz_protnfe")
 public class SEFAZProtNFeVO extends RFWVO {
 
   private static final long serialVersionUID = -5696764880595637140L;

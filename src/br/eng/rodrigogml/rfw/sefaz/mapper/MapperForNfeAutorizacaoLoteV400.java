@@ -1,12 +1,12 @@
 package br.eng.rodrigogml.rfw.sefaz.mapper;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.bind.JAXBElement;
 
 import br.eng.rodrigogml.rfw.kernel.exceptions.RFWException;
+import br.eng.rodrigogml.rfw.kernel.utils.RUString;
 import br.eng.rodrigogml.rfw.kernel.utils.RUTypes;
 import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums;
 import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.IndIEDestEnum;
@@ -157,9 +157,9 @@ public final class MapperForNfeAutorizacaoLoteV400 {
     }
     target.setXMotivo(source.getXmotivo());
     if (source.getCuf() != null) {
-      target.setCUF(RUTypes.toString(source.getCuf()));
+      target.setCUF(RUString.completeUntilLengthLeft("0", RUTypes.toString(source.getCuf()), 2));
     }
-    target.setDhRecbto(formatDateTime(source.getDhRecbto()));
+    target.setDhRecbto(RUTypes.formatToyyyy_MM_dd_T_HH_mm_ssXXX(source.getDhRecbto()));
     if (source.getProtNFeVO() != null) {
       target.setProtNFe(toJaxb(source.getProtNFeVO()));
     } else if (source.getNrec() != null || source.getTmed() != null) {
@@ -192,9 +192,9 @@ public final class MapperForNfeAutorizacaoLoteV400 {
     }
     target.setXmotivo(source.getXMotivo());
     if (source.getCUF() != null) {
-      target.setCuf(RUTypes.toInteger(source.getCUF()));
+      target.setCuf(RUTypes.parseInteger(source.getCUF()));
     }
-    target.setDhRecbto(parseDateTime(source.getDhRecbto()));
+    target.setDhRecbto(RUTypes.parseLocalDateTime(source.getDhRecbto()));
     if (source.getProtNFe() != null) {
       target.setProtNFeVO(toVO(source.getProtNFe(), target));
     } else if (source.getInfRec() != null) {
@@ -230,7 +230,7 @@ public final class MapperForNfeAutorizacaoLoteV400 {
     }
     infProt.setVerAplic(source.getVerAplic());
     infProt.setChNFe(source.getChNFe());
-    infProt.setDhRecbto(formatDateTime(source.getDhRecbto()));
+    infProt.setDhRecbto(RUTypes.formatToyyyy_MM_dd_T_HH_mm_ssXXX(source.getDhRecbto()));
     if (source.getNprot() != null) {
       infProt.setNProt(RUTypes.toString(source.getNprot()));
     }
@@ -263,7 +263,7 @@ public final class MapperForNfeAutorizacaoLoteV400 {
       }
       target.setVerAplic(source.getInfProt().getVerAplic());
       target.setChNFe(source.getInfProt().getChNFe());
-      target.setDhRecbto(parseDateTime(source.getInfProt().getDhRecbto()));
+      target.setDhRecbto(RUTypes.parseLocalDateTime(source.getInfProt().getDhRecbto()));
       target.setNprot(RUTypes.toLong(source.getInfProt().getNProt()));
       if (source.getInfProt().getDigVal() != null) {
         target.setDigVal(new String(source.getInfProt().getDigVal()));
@@ -363,26 +363,26 @@ public final class MapperForNfeAutorizacaoLoteV400 {
     }
     TNFe.InfNFe.Ide target = new TNFe.InfNFe.Ide();
     if (source.getCuf() != null) {
-      target.setCUF(source.getCuf());
+      target.setCUF(RUString.completeUntilLengthLeft("0", RUTypes.toString(source.getCuf()), 2));
     }
     if (source.getCnf() != null) {
-      target.setCNF(RUTypes.toString(source.getCnf()));
+      target.setCNF(RUString.completeUntilLengthLeft("0", RUTypes.toString(source.getCnf()), 8));
     }
     target.setNatOp(source.getNatOp());
     if (source.getMod() != null) {
       target.setMod(source.getMod().getXmlData());
     }
     if (source.getSerie() != null) {
-      target.setSerie(RUTypes.toString(source.getSerie()));
+      target.setSerie(RUString.completeUntilLengthLeft("0", RUTypes.toString(source.getSerie()), 3));
     }
     if (source.getNnf() != null) {
       target.setNNF(RUTypes.toString(source.getNnf()));
     }
     if (source.getDhEmi() != null) {
-      target.setDhEmi(formatDateTime(source.getDhEmi()));
+      target.setDhEmi(RUTypes.formatToyyyy_MM_dd_T_HH_mm_ssXXX(source.getDhEmi()));
     }
     if (source.getDhSaiEnt() != null) {
-      target.setDhSaiEnt(formatDateTime(source.getDhSaiEnt()));
+      target.setDhSaiEnt(RUTypes.formatToyyyy_MM_dd_T_HH_mm_ssXXX(source.getDhSaiEnt()));
     }
     if (source.getTpNF() != null) {
       target.setTpNF(source.getTpNF().getXmlData());
@@ -391,7 +391,7 @@ public final class MapperForNfeAutorizacaoLoteV400 {
       target.setIdDest(source.getIdDest().getXmlData());
     }
     if (source.getCmunFG() != null) {
-      target.setCMunFG(RUTypes.toString(source.getCmunFG()));
+      target.setCMunFG(RUString.completeUntilLengthLeft("0", RUTypes.toString(source.getCmunFG()), 7));
     }
     if (source.getTpImp() != null) {
       target.setTpImp(source.getTpImp().getXmlData());
@@ -422,7 +422,7 @@ public final class MapperForNfeAutorizacaoLoteV400 {
     }
     target.setVerProc(source.getVerProc());
     if (source.getDhCont() != null) {
-      target.setDhCont(formatDateTime(source.getDhCont()));
+      target.setDhCont(RUTypes.formatToyyyy_MM_dd_T_HH_mm_ssXXX(source.getDhCont()));
     }
     target.setXJust(source.getXjust());
     if (source.getNfRefList() != null) {
@@ -442,23 +442,23 @@ public final class MapperForNfeAutorizacaoLoteV400 {
     }
     SEFAZIdeVO target = new SEFAZIdeVO();
     target.setInfNFeVO(parent);
-    target.setCuf(source.getCUF());
-    target.setCnf(RUTypes.toBigDecimal(source.getCNF()));
+    target.setCuf(RUTypes.parseInteger(source.getCUF()));
+    target.setCnf(RUTypes.parseInteger(source.getCNF()));
     target.setNatOp(source.getNatOp());
     if (source.getMod() != null) {
       target.setMod(SEFAZEnums.valueOfXMLData(SEFAZ_mod.class, source.getMod()));
     }
-    target.setSerie(RUTypes.toBigDecimal(source.getSerie()));
-    target.setNnf(RUTypes.toBigDecimal(source.getNNF()));
-    target.setDhEmi(parseDateTime(source.getDhEmi()));
-    target.setDhSaiEnt(parseDateTime(source.getDhSaiEnt()));
+    target.setSerie(RUTypes.parseInteger(source.getSerie()));
+    target.setNnf(RUTypes.parseInteger(source.getNNF()));
+    target.setDhEmi(RUTypes.parseLocalDateTime(source.getDhEmi()));
+    target.setDhSaiEnt(RUTypes.parseLocalDateTime(source.getDhSaiEnt()));
     if (source.getTpNF() != null) {
       target.setTpNF(SEFAZEnums.valueOfXMLData(SEFAZ_tpNF.class, source.getTpNF()));
     }
     if (source.getIdDest() != null) {
       target.setIdDest(SEFAZEnums.valueOfXMLData(SEFAZ_idDest.class, source.getIdDest()));
     }
-    target.setCmunFG(RUTypes.toBigDecimal(source.getCMunFG()));
+    target.setCmunFG(RUTypes.parseInteger(source.getCMunFG()));
     if (source.getTpImp() != null) {
       target.setTpImp(SEFAZEnums.valueOfXMLData(SEFAZ_tpImp.class, source.getTpImp()));
     }
@@ -485,7 +485,7 @@ public final class MapperForNfeAutorizacaoLoteV400 {
       target.setProcEmi(SEFAZEnums.valueOfXMLData(SEFAZ_procEmi.class, source.getProcEmi()));
     }
     target.setVerProc(source.getVerProc());
-    target.setDhCont(parseDateTime(source.getDhCont()));
+    target.setDhCont(RUTypes.parseLocalDateTime(source.getDhCont()));
     target.setXjust(source.getXJust());
 
     if (source.getNFref() != null && !source.getNFref().isEmpty()) {
@@ -542,14 +542,14 @@ public final class MapperForNfeAutorizacaoLoteV400 {
       return null;
     }
     TNFe.InfNFe.Ide.NFref.RefNF target = new TNFe.InfNFe.Ide.NFref.RefNF();
-    target.setCUF(source.getCuf());
+    target.setCUF(RUString.completeUntilLengthLeft("0", RUTypes.toString(source.getCuf()), 2));
     target.setAAMM(source.getAamm());
     target.setCNPJ(source.getCnpj());
     if (source.getMod() != null) {
       target.setMod(source.getMod().getXmlData());
     }
-    target.setSerie(source.getSerie());
-    target.setNNF(source.getNnf());
+    target.setSerie(RUString.completeUntilLengthLeft("0", RUTypes.toString(source.getSerie()), 3));
+    target.setNNF(RUTypes.toString(source.getNnf()));
     return target;
   }
 
@@ -559,14 +559,14 @@ public final class MapperForNfeAutorizacaoLoteV400 {
     }
     SEFAZRefNFVO target = new SEFAZRefNFVO();
     target.setNfRefVO(parent);
-    target.setCuf(source.getCUF());
+    target.setCuf(RUTypes.parseInteger(source.getCUF()));
     target.setAamm(source.getAAMM());
     target.setCnpj(source.getCNPJ());
     if (source.getMod() != null) {
       target.setMod(SEFAZEnums.valueOfXMLData(SEFAZ_mod.class, source.getMod()));
     }
-    target.setSerie(source.getSerie());
-    target.setNnf(source.getNNF());
+    target.setSerie(RUTypes.parseInteger(source.getSerie()));
+    target.setNnf(RUTypes.parseInteger(source.getNNF()));
     return target;
   }
 
@@ -575,7 +575,7 @@ public final class MapperForNfeAutorizacaoLoteV400 {
       return null;
     }
     TNFe.InfNFe.Ide.NFref.RefNFP target = new TNFe.InfNFe.Ide.NFref.RefNFP();
-    target.setCUF(source.getCuf());
+    target.setCUF(RUString.completeUntilLengthLeft("0", RUTypes.toString(source.getCuf()), 2));
     target.setAAMM(source.getAamm());
     target.setCNPJ(source.getCnpj());
     target.setCPF(source.getCpf());
@@ -583,8 +583,8 @@ public final class MapperForNfeAutorizacaoLoteV400 {
     if (source.getMod() != null) {
       target.setMod(source.getMod().getXmlData());
     }
-    target.setSerie(source.getSerie());
-    target.setNNF(source.getNnf());
+    target.setSerie(RUString.completeUntilLengthLeft("0", RUTypes.toString(source.getSerie()), 3));
+    target.setNNF(RUTypes.toString(source.getNnf()));
     return target;
   }
 
@@ -594,7 +594,7 @@ public final class MapperForNfeAutorizacaoLoteV400 {
     }
     SEFAZRefNFPVO target = new SEFAZRefNFPVO();
     target.setNfRefVO(parent);
-    target.setCuf(source.getCUF());
+    target.setCuf(RUTypes.parseInteger(source.getCUF()));
     target.setAamm(source.getAAMM());
     target.setCnpj(source.getCNPJ());
     target.setCpf(source.getCPF());
@@ -602,8 +602,8 @@ public final class MapperForNfeAutorizacaoLoteV400 {
     if (source.getMod() != null) {
       target.setMod(SEFAZEnums.valueOfXMLData(SEFAZ_mod.class, source.getMod()));
     }
-    target.setSerie(source.getSerie());
-    target.setNnf(source.getNNF());
+    target.setSerie(RUTypes.parseInteger(source.getSerie()));
+    target.setNnf(RUTypes.parseInteger(source.getNNF()));
     return target;
   }
 
@@ -1361,18 +1361,4 @@ public final class MapperForNfeAutorizacaoLoteV400 {
     return target;
   }
 
-  private static String formatDateTime(LocalDateTime value) {
-    return value != null ? RUTypes.formatToyyyy_MM_dd_T_HH_mm_ssXXX(value) : null;
-  }
-
-  private static LocalDateTime parseDateTime(String value) {
-    if (value == null) {
-      return null;
-    }
-    try {
-      return SEFAZUtils.parseLocalDateTime(value);
-    } catch (RFWException e) {
-      throw new IllegalStateException("Falha ao converter data/hora da NF-e.", e);
-    }
-  }
 }
