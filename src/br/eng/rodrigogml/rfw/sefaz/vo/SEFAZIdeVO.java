@@ -9,6 +9,7 @@ import br.eng.rodrigogml.rfw.kernel.rfwmeta.RFWMetaBigDecimalField;
 import br.eng.rodrigogml.rfw.kernel.rfwmeta.RFWMetaDateField;
 import br.eng.rodrigogml.rfw.kernel.rfwmeta.RFWMetaDateField.DateResolution;
 import br.eng.rodrigogml.rfw.kernel.rfwmeta.RFWMetaEnumField;
+import br.eng.rodrigogml.rfw.kernel.rfwmeta.RFWMetaIntegerField;
 import br.eng.rodrigogml.rfw.kernel.rfwmeta.RFWMetaRelationshipField;
 import br.eng.rodrigogml.rfw.kernel.rfwmeta.RFWMetaRelationshipField.RelationshipTypes;
 import br.eng.rodrigogml.rfw.kernel.rfwmeta.RFWMetaStringField;
@@ -204,8 +205,8 @@ public class SEFAZIdeVO extends RFWVO {
    * <p>
    * Obrigatório na especificação. Informar o DV da chave de acesso, calculado pelo algoritmo módulo 11 (base 2,9) sobre os demais campos da chave.
    */
-  @RFWMetaBigDecimalField(caption = "Dígito verificador da chave de acesso", required = false)
-  private BigDecimal cdv;
+  @RFWMetaIntegerField(caption = "Dígito verificador da chave de acesso", required = false, minValue = 0, maxValue = 9)
+  private Integer cdv;
 
   /**
    * Identificação do ambiente de autorização da NF-e ({@code tpAmb}).
@@ -696,7 +697,7 @@ public class SEFAZIdeVO extends RFWVO {
    *
    * @return the dígito verificador da chave de acesso da NF-e ({@code cDV})
    */
-  public BigDecimal getCdv() {
+  public Integer getCdv() {
     return cdv;
   }
 
@@ -707,7 +708,7 @@ public class SEFAZIdeVO extends RFWVO {
    *
    * @param cdv the new dígito verificador da chave de acesso da NF-e ({@code cDV})
    */
-  public void setCdv(BigDecimal cdv) {
+  public void setCdv(Integer cdv) {
     this.cdv = cdv;
   }
 

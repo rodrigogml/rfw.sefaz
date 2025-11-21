@@ -2,7 +2,6 @@ package br.eng.rodrigogml.rfw.sefaz;
 
 // Codificação UTF-8 – caracteres de exemplo: á, é, í, ó, ú, ç.
 
-
 import static org.junit.Assert.assertEquals;
 
 import java.time.LocalDateTime;
@@ -141,6 +140,7 @@ public class SEFAZTest {
    * @return Objeto pronto para assinatura e envio ao webservice de autorizao.
    * @throws RFWException Caso ocorra falha ao calcular informaes derivadas (ex.: hashes).
    */
+  // TODO Me apague
   public static TEnviNFe mountSampleNFCeHomologationMessage() throws RFWException {
     final String cUF = RFW.getDevProperty("rfw.sefaz.nfce.cuf");
     final String emitCnpj = RFW.getDevProperty("rfw.sefaz.nfce.cnpj");
@@ -159,7 +159,7 @@ public class SEFAZTest {
     final DateTimeFormatter aammFormatter = DateTimeFormatter.ofPattern("yyMM", RFW.getLocale());
     final String aamm = emissionDate.atZone(RFW.getZoneId()).format(aammFormatter);
     final String chaveSemDV = cUF + aamm + emitCnpj + SEFAZ_mod.NFCE_MODELO_65.getXmlData() + String.format(RFW.getLocale(), "%03d", serie) + String.format(Locale.ROOT, "%09d", numero) + tpEmis + cNF;
-    final String dv = RUValueValidation.calcDVDANFeV400(chaveSemDV);
+    final String dv = "" + RUValueValidation.calcDVDANFeV400(chaveSemDV);
     final String chave = chaveSemDV + dv;
     final String cMunFG = "3509502";
 
