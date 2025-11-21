@@ -109,8 +109,9 @@ public final class MapperForNfeAutorizacaoLoteV400 {
    *
    * @param source objeto JAXB recebido/construido via SEFAZ.
    * @return {@link SEFAZEnviNFeVO} populado; {@code null} se {@code source} for {@code null}.
+   * @throws RFWException
    */
-  public static SEFAZEnviNFeVO toVO(TEnviNFe source) {
+  public static SEFAZEnviNFeVO toVO(TEnviNFe source) throws RFWException {
     if (source == null) {
       return null;
     }
@@ -147,7 +148,7 @@ public final class MapperForNfeAutorizacaoLoteV400 {
     return target;
   }
 
-  public static SEFAZNFeProcVO toVO(TNfeProc source) {
+  public static SEFAZNFeProcVO toVO(TNfeProc source) throws RFWException {
     if (source == null) {
       return null;
     }
@@ -168,7 +169,7 @@ public final class MapperForNfeAutorizacaoLoteV400 {
     return target;
   }
 
-  public static SEFAZNFeVO toVO(TNFe nfe, SEFAZEnviNFeVO parent) {
+  public static SEFAZNFeVO toVO(TNFe nfe, SEFAZEnviNFeVO parent) throws RFWException {
     if (nfe == null) {
       return null;
     }
@@ -201,7 +202,7 @@ public final class MapperForNfeAutorizacaoLoteV400 {
     return target;
   }
 
-  public static SEFAZInfNFeVO toVO(TNFe.InfNFe source, SEFAZNFeVO parent) {
+  public static SEFAZInfNFeVO toVO(TNFe.InfNFe source, SEFAZNFeVO parent) throws RFWException {
     if (source == null) {
       return null;
     }
@@ -307,7 +308,7 @@ public final class MapperForNfeAutorizacaoLoteV400 {
     return target;
   }
 
-  public static SEFAZIdeVO toVO(TNFe.InfNFe.Ide source, SEFAZInfNFeVO parent) {
+  public static SEFAZIdeVO toVO(TNFe.InfNFe.Ide source, SEFAZInfNFeVO parent) throws RFWException {
     if (source == null) {
       return null;
     }
@@ -336,7 +337,7 @@ public final class MapperForNfeAutorizacaoLoteV400 {
     if (source.getTpEmis() != null) {
       target.setTpEmis(SEFAZEnums.valueOfXMLData(SEFAZ_tpEmis.class, source.getTpEmis()));
     }
-    target.setCdv(RUTypes.toBigDecimal(source.getCDV()));
+    target.setCdv(RUTypes.toInteger(source.getCDV()));
     if (source.getTpAmb() != null) {
       target.setTpAmb(SEFAZEnums.valueOfXMLData(SEFAZ_tpAmb.class, source.getTpAmb()));
     }
@@ -622,7 +623,7 @@ public final class MapperForNfeAutorizacaoLoteV400 {
     return target;
   }
 
-  public static SEFAZDetVO toVO(TNFe.InfNFe.Det source, SEFAZInfNFeVO parent) {
+  public static SEFAZDetVO toVO(TNFe.InfNFe.Det source, SEFAZInfNFeVO parent) throws RFWException {
     if (source == null) {
       return null;
     }
@@ -672,7 +673,7 @@ public final class MapperForNfeAutorizacaoLoteV400 {
     return target;
   }
 
-  public static SEFAZProdVO toVO(TNFe.InfNFe.Det.Prod source, SEFAZDetVO parent) {
+  public static SEFAZProdVO toVO(TNFe.InfNFe.Det.Prod source, SEFAZDetVO parent) throws RFWException {
     if (source == null) {
       return null;
     }
@@ -728,7 +729,7 @@ public final class MapperForNfeAutorizacaoLoteV400 {
     return target;
   }
 
-  public static SEFAZImpostoVO toVO(TNFe.InfNFe.Det.Imposto source, SEFAZDetVO parent) {
+  public static SEFAZImpostoVO toVO(TNFe.InfNFe.Det.Imposto source, SEFAZDetVO parent) throws RFWException {
     if (source == null) {
       return null;
     }
@@ -801,7 +802,7 @@ public final class MapperForNfeAutorizacaoLoteV400 {
     return target;
   }
 
-  public static SEFAZPISVO toVO(TNFe.InfNFe.Det.Imposto.PIS source, SEFAZImpostoVO parent) {
+  public static SEFAZPISVO toVO(TNFe.InfNFe.Det.Imposto.PIS source, SEFAZImpostoVO parent) throws RFWException {
     if (source == null) {
       return null;
     }
@@ -882,7 +883,7 @@ public final class MapperForNfeAutorizacaoLoteV400 {
     return target;
   }
 
-  public static SEFAZCOFINSVO toVO(TNFe.InfNFe.Det.Imposto.COFINS source, SEFAZImpostoVO parent) {
+  public static SEFAZCOFINSVO toVO(TNFe.InfNFe.Det.Imposto.COFINS source, SEFAZImpostoVO parent) throws RFWException {
     if (source == null) {
       return null;
     }
@@ -1011,7 +1012,7 @@ public final class MapperForNfeAutorizacaoLoteV400 {
     return target;
   }
 
-  public static SEFAZTranspVO toVO(TNFe.InfNFe.Transp source, SEFAZInfNFeVO parent) {
+  public static SEFAZTranspVO toVO(TNFe.InfNFe.Transp source, SEFAZInfNFeVO parent) throws RFWException {
     if (source == null) {
       return null;
     }
@@ -1097,7 +1098,7 @@ public final class MapperForNfeAutorizacaoLoteV400 {
     return target;
   }
 
-  public static SEFAZRetTranspVO toVO(TNFe.InfNFe.Transp.RetTransp source, SEFAZTranspVO parent) {
+  public static SEFAZRetTranspVO toVO(TNFe.InfNFe.Transp.RetTransp source, SEFAZTranspVO parent) throws RFWException {
     if (source == null) {
       return null;
     }
@@ -1188,7 +1189,7 @@ public final class MapperForNfeAutorizacaoLoteV400 {
     return target;
   }
 
-  public static SEFAZVolVO toVO(TNFe.InfNFe.Transp.Vol source, SEFAZTranspVO parent) {
+  public static SEFAZVolVO toVO(TNFe.InfNFe.Transp.Vol source, SEFAZTranspVO parent) throws RFWException {
     if (source == null) {
       return null;
     }

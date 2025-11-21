@@ -52,6 +52,7 @@ import br.eng.rodrigogml.rfw.kernel.utils.RUCert;
 import br.eng.rodrigogml.rfw.kernel.utils.RUFile;
 import br.eng.rodrigogml.rfw.kernel.utils.RUIO;
 import br.eng.rodrigogml.rfw.sefaz.SEFAZDefinitions.SefazContingency;
+import br.eng.rodrigogml.rfw.sefaz.mapper.MapperForNfeAutorizacaoLoteV400;
 import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums;
 import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_WebServices;
 import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_mod;
@@ -59,6 +60,7 @@ import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_tpAmb;
 import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_uf;
 import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZUtils;
 import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZXMLValidator;
+import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZEnviNFeVO;
 
 import br.inf.portalfiscal.www.nfe.wsdl.cadconsultacadastro4.CadConsultaCadastro4Stub;
 import br.inf.portalfiscal.www.nfe.wsdl.nfeautorizacao4.NFeAutorizacao4Stub;
@@ -340,7 +342,20 @@ public class SEFAZ {
   }
 
   /**
-   * Chama o método "nfeAutorizacaoLote v4.00" disponibilizado no WebSerice da SEFAZ para consultar o contribuinte. <Br>
+   * Chama o método "nfeAutorizacaoLote v4.00" disponibilizado no WebSerice da SEFAZ para autorização de NFe/NFCe. <Br>
+   *
+   * @param root Objeto representando o XML para envio da requisição.
+   * @return Object[] com 2 posições onde: 0 - String com o XML enviado como msg para a SEFAZ, tag raiz &lt;enviNFe&gt; cm todas as NFes assinadas dentro (para arquivamento do sistema ou conferência); 1 - TRetEnviNFe equivalente ao XML de retorno da SEFAZ.
+   * @throws RFWException
+   */
+  public Object[] nfeAutorizacaoLoteV400(SEFAZEnviNFeVO enviNFeVO) throws RFWException {
+    TEnviNFe root = MapperForNfeAutorizacaoLoteV400.toJaxb(enviNFeVO);
+    String[] ret = nfeAutorizacaoLoteV400asXML(root);
+    return new Object[] { ret[0], SEFAZUtils.readXMLToObject(ret[1], TRetEnviNFe.class) };
+  }
+
+  /**
+   * Chama o método "nfeAutorizacaoLote v4.00" disponibilizado no WebSerice da SEFAZ para autorização de NFe/NFCe. <Br>
    *
    * @param root Objeto representando o XML para envio da requisição.
    * @return Object[] com 2 posições onde: 0 - String com o XML enviado como msg para a SEFAZ, tag raiz &lt;enviNFe&gt; cm todas as NFes assinadas dentro (para arquivamento do sistema ou conferência); 1 - TRetEnviNFe equivalente ao XML de retorno da SEFAZ.
@@ -352,7 +367,7 @@ public class SEFAZ {
   }
 
   /**
-   * Chama o método "nfeAutorizacaoLote v4.00" disponibilizado no WebSerice da SEFAZ para consultar o contribuinte. <Br>
+   * Chama o método "nfeAutorizacaoLote v4.00" disponibilizado no WebSerice da SEFAZ para autorização de NFe/NFCe. <Br>
    *
    * @param root Objeto representando o XML para envio da requisição.
    * @return String[] com 2 posições onde: 0 - XML enviado como msg para a SEFAZ, tag raiz &lt;enviNFe&gt; cm todas as NFes assinadas dentro (para arquivamento do sistema ou conferência); 1 - XML de retorno da SEFAZ.
@@ -827,7 +842,7 @@ public class SEFAZ {
   // }
 
   /**
-   * Chama o método "nfeRetAutorizacao v4.00" disponibilizado no WebSerice da SEFAZ para consultar o contribuinte passando um recibo de consulta.<Br>
+   * Chama o método "nfeRetAutorizacao v4.00" disponibilizado no WebSerice da SEFAZ para consultar autorização de NFe/NFCe passando um recibo de consulta.<Br>
    *
    * @param nRec Número do recibo obtido na entrega do documento para realizar a consulta.
    * @return Objeto do XML da mensagem de retorno do WebService.
@@ -839,7 +854,7 @@ public class SEFAZ {
   }
 
   /**
-   * Chama o método "nfeRetAutorizacao v4.00" disponibilizado no WebSerice da SEFAZ para consultar o contribuinte passando um recibo de consulta.<Br>
+   * Chama o método "nfeRetAutorizacao v4.00" disponibilizado no WebSerice da SEFAZ para consultar autorização de NFe/NFCe passando um recibo de consulta.<Br>
    *
    * @param nRec Número do recibo obtido na entrega do documento para realizar a consulta.
    * @return XML da mensagem de retorno do WebService.
@@ -851,7 +866,7 @@ public class SEFAZ {
   }
 
   /**
-   * Chama o método "nfeRetAutorizacao v4.00" disponibilizado no WebSerice da SEFAZ para consultar o contribuinte. <Br>
+   * Chama o método "nfeRetAutorizacao v4.00" disponibilizado no WebSerice da SEFAZ para consultar autorização de NFe/NFCe. <Br>
    *
    * @param root Objeto representando o XML para envio da requisição.
    * @return Objeto do XML da mensagem de retorno do WebService.
@@ -862,7 +877,7 @@ public class SEFAZ {
   }
 
   /**
-   * Chama o método "nfeRetAutorizacao v4.00" disponibilizado no WebSerice da SEFAZ para consultar o contribuinte. <Br>
+   * Chama o método "nfeRetAutorizacao v4.00" disponibilizado no WebSerice da SEFAZ para consultar autorização de NFe/NFCe. <Br>
    *
    * @param root Objeto representando o XML para envio da requisição.
    * @return XML da mensagem de retorno do WebService.
