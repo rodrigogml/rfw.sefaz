@@ -61,6 +61,7 @@ import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_uf;
 import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZUtils;
 import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZXMLValidator;
 import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZEnviNFeVO;
+import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZRetEnviNFeVO;
 
 import br.inf.portalfiscal.www.nfe.wsdl.cadconsultacadastro4.CadConsultaCadastro4Stub;
 import br.inf.portalfiscal.www.nfe.wsdl.nfeautorizacao4.NFeAutorizacao4Stub;
@@ -345,13 +346,16 @@ public class SEFAZ {
    * Chama o método "nfeAutorizacaoLote v4.00" disponibilizado no WebSerice da SEFAZ para autorização de NFe/NFCe. <Br>
    *
    * @param root Objeto representando o XML para envio da requisição.
-   * @return Object[] com 2 posições onde: 0 - String com o XML enviado como msg para a SEFAZ, tag raiz &lt;enviNFe&gt; cm todas as NFes assinadas dentro (para arquivamento do sistema ou conferência); 1 - TRetEnviNFe equivalente ao XML de retorno da SEFAZ.
+   * @return Object[] com 2 posições onde: <br>
+   *         <li>0 - {@link SEFAZEnviNFeVO} completado com dados automáticos e com o arquivo XML do jeito que foi enviado para a SEFAZ;<br>
+   *         <li>1 - {@link SEFAZRetEnviNFeVO} equivalente ao XML de retorno da SEFAZ.
    * @throws RFWException
    */
   public Object[] nfeAutorizacaoLoteV400(SEFAZEnviNFeVO enviNFeVO) throws RFWException {
     TEnviNFe root = MapperForNfeAutorizacaoLoteV400.toJaxb(enviNFeVO);
     String[] ret = nfeAutorizacaoLoteV400asXML(root);
-    return new Object[] { ret[0], SEFAZUtils.readXMLToObject(ret[1], TRetEnviNFe.class) };
+    SEFAZRetEnviNFeVO retEnviNFeVO = MapperForNfeAutorizacaoLoteV400.toVO(SEFAZUtils.readXMLToObject(ret[1], TRetEnviNFe.class));
+    return new Object[] { ret[0], retEnviNFeVO };
   }
 
   /**

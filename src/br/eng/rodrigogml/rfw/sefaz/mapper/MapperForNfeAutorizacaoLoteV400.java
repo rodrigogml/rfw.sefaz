@@ -53,6 +53,8 @@ import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZTranspVO;
 import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZTransportaVO;
 import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZVeicTranspVO;
 import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZVolVO;
+import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZProtNFeVO;
+import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZRetEnviNFeVO;
 
 import xsdobjects.enviNFe400.TEnderEmi;
 import xsdobjects.enviNFe400.TEndereco;
@@ -63,6 +65,8 @@ import xsdobjects.enviNFe400.TNfeProc;
 import xsdobjects.enviNFe400.TUf;
 import xsdobjects.enviNFe400.TUfEmi;
 import xsdobjects.enviNFe400.TVeiculo;
+import xsdobjects.enviNFe400.TProtNFe;
+import xsdobjects.enviNFe400.TRetEnviNFe;
 
 /**
  * Mapper responsvel por converter o VO {@link SEFAZEnviNFeVO} no contrato JAXB {@link TEnviNFe} utilizado pelo mtodo {@code nfeAutorizacaoLoteV400} (envio de lote v4.00), e vice-versa.
@@ -136,6 +140,70 @@ public final class MapperForNfeAutorizacaoLoteV400 {
     return target;
   }
 
+  public static TRetEnviNFe toJaxb(SEFAZRetEnviNFeVO source) {
+    if (source == null) {
+      return null;
+    }
+    TRetEnviNFe target = new TRetEnviNFe();
+    if (source.getVersao() != null) {
+      target.setVersao(source.getVersao().getXmlData());
+    }
+    if (source.getTpAmb() != null) {
+      target.setTpAmb(source.getTpAmb().getXmlData());
+    }
+    target.setVerAplic(source.getVerAplic());
+    if (source.getCstat() != null) {
+      target.setCStat(RUTypes.toString(source.getCstat()));
+    }
+    target.setXMotivo(source.getXmotivo());
+    if (source.getCuf() != null) {
+      target.setCUF(RUTypes.toString(source.getCuf()));
+    }
+    target.setDhRecbto(formatDateTime(source.getDhRecbto()));
+    if (source.getProtNFeVO() != null) {
+      target.setProtNFe(toJaxb(source.getProtNFeVO()));
+    } else if (source.getNrec() != null || source.getTmed() != null) {
+      TRetEnviNFe.InfRec infRec = new TRetEnviNFe.InfRec();
+      if (source.getNrec() != null) {
+        infRec.setNRec(RUTypes.toString(source.getNrec()));
+      }
+      if (source.getTmed() != null) {
+        infRec.setTMed(RUTypes.toString(source.getTmed()));
+      }
+      target.setInfRec(infRec);
+    }
+    return target;
+  }
+
+  public static SEFAZRetEnviNFeVO toVO(TRetEnviNFe source) throws RFWException {
+    if (source == null) {
+      return null;
+    }
+    SEFAZRetEnviNFeVO target = new SEFAZRetEnviNFeVO();
+    if (source.getVersao() != null) {
+      target.setVersao(SEFAZEnums.valueOfXMLData(SEFAZ_versao.class, source.getVersao()));
+    }
+    if (source.getTpAmb() != null) {
+      target.setTpAmb(SEFAZEnums.valueOfXMLData(SEFAZ_tpAmb.class, source.getTpAmb()));
+    }
+    target.setVerAplic(source.getVerAplic());
+    if (source.getCStat() != null) {
+      target.setCstat(RUTypes.toInteger(source.getCStat()));
+    }
+    target.setXmotivo(source.getXMotivo());
+    if (source.getCUF() != null) {
+      target.setCuf(RUTypes.toInteger(source.getCUF()));
+    }
+    target.setDhRecbto(parseDateTime(source.getDhRecbto()));
+    if (source.getProtNFe() != null) {
+      target.setProtNFeVO(toVO(source.getProtNFe(), target));
+    } else if (source.getInfRec() != null) {
+      target.setNrec(RUTypes.toLong(source.getInfRec().getNRec()));
+      target.setTmed(RUTypes.toBigDecimal(source.getInfRec().getTMed()));
+    }
+    return target;
+  }
+
   public static TNfeProc toJaxb(SEFAZNFeProcVO source) {
     if (source == null) {
       return null;
@@ -145,6 +213,66 @@ public final class MapperForNfeAutorizacaoLoteV400 {
       target.setVersao(source.getVersao().getXmlData());
     }
     target.setNFe(toJaxb(source.getNfeVO()));
+    return target;
+  }
+
+  public static TProtNFe toJaxb(SEFAZProtNFeVO source) {
+    if (source == null) {
+      return null;
+    }
+    TProtNFe target = new TProtNFe();
+    if (source.getVersao() != null) {
+      target.setVersao(source.getVersao().getXmlData());
+    }
+    TProtNFe.InfProt infProt = new TProtNFe.InfProt();
+    if (source.getTpAmb() != null) {
+      infProt.setTpAmb(source.getTpAmb().getXmlData());
+    }
+    infProt.setVerAplic(source.getVerAplic());
+    infProt.setChNFe(source.getChNFe());
+    infProt.setDhRecbto(formatDateTime(source.getDhRecbto()));
+    if (source.getNprot() != null) {
+      infProt.setNProt(RUTypes.toString(source.getNprot()));
+    }
+    if (source.getDigVal() != null) {
+      infProt.setDigVal(source.getDigVal().getBytes());
+    }
+    if (source.getCstat() != null) {
+      infProt.setCStat(RUTypes.toString(source.getCstat()));
+    }
+    infProt.setXMotivo(source.getXmotivo());
+    if (source.getCmsg() != null) {
+      infProt.setCMsg(RUTypes.toString(source.getCmsg()));
+    }
+    infProt.setXMsg(source.getXmsg());
+    target.setInfProt(infProt);
+    return target;
+  }
+
+  public static SEFAZProtNFeVO toVO(TProtNFe source, SEFAZRetEnviNFeVO parent) throws RFWException {
+    if (source == null) {
+      return null;
+    }
+    SEFAZProtNFeVO target = new SEFAZProtNFeVO();
+    if (source.getVersao() != null) {
+      target.setVersao(SEFAZEnums.valueOfXMLData(SEFAZ_versao.class, source.getVersao()));
+    }
+    if (source.getInfProt() != null) {
+      if (source.getInfProt().getTpAmb() != null) {
+        target.setTpAmb(SEFAZEnums.valueOfXMLData(SEFAZ_tpAmb.class, source.getInfProt().getTpAmb()));
+      }
+      target.setVerAplic(source.getInfProt().getVerAplic());
+      target.setChNFe(source.getInfProt().getChNFe());
+      target.setDhRecbto(parseDateTime(source.getInfProt().getDhRecbto()));
+      target.setNprot(RUTypes.toLong(source.getInfProt().getNProt()));
+      if (source.getInfProt().getDigVal() != null) {
+        target.setDigVal(new String(source.getInfProt().getDigVal()));
+      }
+      target.setCstat(RUTypes.toInteger(source.getInfProt().getCStat()));
+      target.setXmotivo(source.getInfProt().getXMotivo());
+      target.setCmsg(RUTypes.toInteger(source.getInfProt().getCMsg()));
+      target.setXmsg(source.getInfProt().getXMsg());
+    }
     return target;
   }
 

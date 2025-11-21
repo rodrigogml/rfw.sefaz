@@ -4,14 +4,15 @@ import br.eng.rodrigogml.rfw.kernel.rfwmeta.RFWMetaRelationshipField;
 import br.eng.rodrigogml.rfw.kernel.rfwmeta.RFWMetaRelationshipField.RelationshipTypes;
 import br.eng.rodrigogml.rfw.kernel.vo.RFWVO;
 import br.eng.rodrigogml.rfw.orm.dao.annotations.dao.RFWDAOAnnotation;
+import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZEnviNFeVO;
 
 /**
  * Description: Classe que representa a estrutura da tag NFe (TAG raiz da NF-e).<br>
- * Tabela: Campo=NFe | Ele=G | Pai=- | Tipo=- | Ocor.=1-1 | Tam.=- | Observação=TAG raiz da NF-e.
+ * Tabela: Campo=NFe | Ele=G | Pai=- | Tipo=- | Ocor.=1-1 | Tam.=- | ObservaÃ§Ã£o=TAG raiz da NF-e.
  *
- * Não possui atributos diretos nesta tabela; elementos filhos serão modelados em VOs próprios.
+ * NÃ£o possui atributos diretos nesta tabela; elementos filhos serÃ£o modelados em VOs prÃ³prios.
  *
- * @author Rodrigo Leitão
+ * @author Rodrigo LeitÃ£o
  * @since (11 de nov. de 2025)
  */
 @RFWDAOAnnotation(schema = "_RFW.SEFAZ", table = "sefaz_nfe")
@@ -22,8 +23,14 @@ public class SEFAZNFeVO extends RFWVO {
   /**
    * {@link SEFAZNFeProcVO}.
    */
-  @RFWMetaRelationshipField(caption = "nfeProc", relationship = RelationshipTypes.PARENT_ASSOCIATION, required = true, column = "idsefaz_nfeproc")
+  @RFWMetaRelationshipField(caption = "nfeProc", relationship = RelationshipTypes.PARENT_ASSOCIATION, required = false, column = "idsefaz_nfeproc")
   private SEFAZNFeProcVO nfeProcVO = null;
+
+  /**
+   * {@link SEFAZEnviNFeVO}.
+   */
+  @RFWMetaRelationshipField(caption = "enviNFe", relationship = RelationshipTypes.PARENT_ASSOCIATION, required = false, column = "idsefaz_envinfe")
+  private SEFAZEnviNFeVO enviNFeVO = null;
 
   /**
    * {@link SEFAZInfNFeVO}
@@ -47,6 +54,24 @@ public class SEFAZNFeVO extends RFWVO {
    */
   public void setNfeProcVO(SEFAZNFeProcVO nfeProcVO) {
     this.nfeProcVO = nfeProcVO;
+  }
+
+  /**
+   * # tAG enviNFe.
+   *
+   * @return the tAG enviNFe
+   */
+  public SEFAZEnviNFeVO getEnviNFeVO() {
+    return enviNFeVO;
+  }
+
+  /**
+   * # tAG enviNFe.
+   *
+   * @param enviNFeVO the new tAG enviNFe
+   */
+  public void setEnviNFeVO(SEFAZEnviNFeVO enviNFeVO) {
+    this.enviNFeVO = enviNFeVO;
   }
 
   /**
