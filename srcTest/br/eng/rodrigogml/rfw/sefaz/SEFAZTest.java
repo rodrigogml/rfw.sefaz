@@ -98,7 +98,7 @@ public class SEFAZTest {
 
   @Test
   public void t00_consultaCadastroCPF() throws RFWException {
-    SEFAZ sefaz = new SEFAZ(cert, SEFAZ_WebServices.SP, SEFAZ_tpAmb.PRODUCAO);
+    SEFAZ sefaz = new SEFAZ(cert, SEFAZ_WebServices.SP, SEFAZ_tpAmb.PRODUCAO, SEFAZ_tpEmis.EMISSAO_NORMAL);
 
     final String cpf = "12345678910";
     TRetConsCad root = sefaz.consultaCadastroV200byCPF(cpf);
@@ -108,7 +108,7 @@ public class SEFAZTest {
 
   @Test
   public void t01_consultaCadastroCNPJ() throws RFWException {
-    SEFAZ sefaz = new SEFAZ(cert, SEFAZ_WebServices.SP, SEFAZ_tpAmb.PRODUCAO);
+    SEFAZ sefaz = new SEFAZ(cert, SEFAZ_WebServices.SP, SEFAZ_tpAmb.PRODUCAO, SEFAZ_tpEmis.EMISSAO_NORMAL);
 
     final String cnpj = "45990181000189";
     TRetConsCad root = sefaz.consultaCadastroV200byCNPJ(cnpj);
@@ -117,21 +117,28 @@ public class SEFAZTest {
   }
 
   @Test
-  public void t02_consultaCadastroCPF() throws RFWException {
-    SEFAZ sefaz = new SEFAZ(cert, SEFAZ_WebServices.SP, SEFAZ_tpAmb.HOMOLOGACAO);
-
-    TRetConsStatServ root = sefaz.nfeStatusServicoNFV400();
-    assertEquals("107", root.getCStat());
-  }
-
-  @Test
-  public void t01_enviaNFCe_Homologacao_SP() throws RFWException {
-    SEFAZ sefaz = new SEFAZ(cert, SEFAZ_WebServices.SP, SEFAZ_tpAmb.HOMOLOGACAO);
+  public void t03_enviaNFCe_Homologacao_SP() throws RFWException {
+    SEFAZ sefaz = new SEFAZ(cert, SEFAZ_WebServices.SP, SEFAZ_tpAmb.HOMOLOGACAO, SEFAZ_tpEmis.EMISSAO_NORMAL);
     TEnviNFe tNFe = mountSampleNFCeHomologationMessage();
 
     Object[] ret = sefaz.nfeAutorizacaoLoteV400(tNFe);
     TRetEnviNFe retEnvi = (TRetEnviNFe) ret[1];
     assertEquals("100", retEnvi.getCStat());
+  }
+
+  @Test
+  public void t04_nfeStatusServicoNFV400() throws RFWException {
+    SEFAZ sefaz = new SEFAZ(cert, SEFAZ_WebServices.SP, SEFAZ_tpAmb.HOMOLOGACAO, SEFAZ_tpEmis.EMISSAO_NORMAL);
+
+    TRetConsStatServ ret = sefaz.nfeStatusServicoNFV400(SEFAZ_mod.NFCE_MODELO_65);
+    System.out.println(ret.getCStat());
+    System.out.println(ret.getXMotivo());
+    assertEquals("107", ret.getCStat());
+
+    ret = sefaz.nfeStatusServicoNFV400(SEFAZ_mod.NFE_MODELO_55);
+    System.out.println(ret.getCStat());
+    System.out.println(ret.getXMotivo());
+    assertEquals("107", ret.getCStat());
   }
 
   /**

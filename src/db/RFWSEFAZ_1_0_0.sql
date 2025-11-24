@@ -2,7 +2,6 @@
 -- Script para criação das tabelas 'sefaz_' oferecidas pelo RFW.SEFAZ
 -- ----------------------------
 
--- [1]
 -- Tabela derivada de br.eng.rodrigogml.rfw.sefaz.vo.SEFAZNFeProcVO
 CREATE TABLE `sefaz_nfeproc` (
   `id` bigint NOT NULL AUTO_INCREMENT,
@@ -728,6 +727,3 @@ CREATE TABLE `sefaz_protnfe` (
   PRIMARY KEY (`id`),
   CONSTRAINT `fk_sefaz_protnfe_retenvinfe` FOREIGN KEY (`idsefaz_retenvinfe`) REFERENCES `sefaz_retenvinfe` (`id`)
 ) ENGINE=InnoDB;
-
-
--- [2]

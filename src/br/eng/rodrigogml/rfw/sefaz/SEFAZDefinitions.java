@@ -20,6 +20,7 @@ public class SEFAZDefinitions {
   public static final String NFE_SP_PRODUCTION_V400_NFESTATUSSERVICO4 = "https://nfe.fazenda.sp.gov.br/ws/nfestatusservico4.asmx";
   public static final String NFE_SP_PRODUCTION_V400_NFECONSULTAPROTOCOLO4 = "https://nfe.fazenda.sp.gov.br/ws/nfeconsultaprotocolo4.asmx";
   public static final String NFCE_SP_PRODUCTION_V400_NFEAUTORIZACAO4 = "https://nfce.fazenda.sp.gov.br/ws/NFeAutorizacao4.asmx";
+  public static final String NFCE_SP_PRODUCTION_V400_NFESTATUSSERVICO4 = "https://nfce.fazenda.sp.gov.br/ws/NFeStatusServico4.asmx";
 
   // Ambientes de Homologação
   public static final String NFE_SP_TEST_V400_NFEAUTORIZACAO4 = "https://homologacao.nfe.fazenda.sp.gov.br/ws/NFeAutorizacao4.asmx";
@@ -30,6 +31,7 @@ public class SEFAZDefinitions {
   public static final String NFE_SP_TEST_V400_NFESTATUSSERVICO4 = "https://homologacao.nfe.fazenda.sp.gov.br/ws/nfestatusservico4.asmx";
   public static final String NFE_SP_TEST_V400_NFECONSULTAPROTOCOLO4 = "https://homologacao.nfe.fazenda.sp.gov.br/ws/nfeconsultaprotocolo4.asmx";
   public static final String NFCE_SP_TEST_V400_NFEAUTORIZACAO4 = "https://homologacao.nfce.fazenda.sp.gov.br/ws/NFeAutorizacao4.asmx";
+  public static final String NFCE_SP_TEST_V400_NFESTATUSSERVICO4 = "https://homologacao.nfce.fazenda.sp.gov.br/ws/NFeStatusServico4.asmx";
 
   /**
    * Construtor privado para classe totalmente estática.
