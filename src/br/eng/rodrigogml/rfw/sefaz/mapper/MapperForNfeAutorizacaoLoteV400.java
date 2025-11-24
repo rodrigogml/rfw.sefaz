@@ -44,17 +44,17 @@ import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZNFeProcVO;
 import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZNFeVO;
 import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZPISVO;
 import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZProdVO;
+import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZProtNFeVO;
 import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZReboqueVO;
 import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZRefECFVO;
 import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZRefNFPVO;
 import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZRefNFVO;
+import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZRetEnviNFeVO;
 import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZRetTranspVO;
 import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZTranspVO;
 import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZTransportaVO;
 import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZVeicTranspVO;
 import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZVolVO;
-import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZProtNFeVO;
-import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZRetEnviNFeVO;
 
 import xsdobjects.enviNFe400.TEnderEmi;
 import xsdobjects.enviNFe400.TEndereco;
@@ -62,11 +62,11 @@ import xsdobjects.enviNFe400.TEnviNFe;
 import xsdobjects.enviNFe400.TNFe;
 import xsdobjects.enviNFe400.TNFe.InfNFe.Ide.NFref;
 import xsdobjects.enviNFe400.TNfeProc;
+import xsdobjects.enviNFe400.TProtNFe;
+import xsdobjects.enviNFe400.TRetEnviNFe;
 import xsdobjects.enviNFe400.TUf;
 import xsdobjects.enviNFe400.TUfEmi;
 import xsdobjects.enviNFe400.TVeiculo;
-import xsdobjects.enviNFe400.TProtNFe;
-import xsdobjects.enviNFe400.TRetEnviNFe;
 
 /**
  * Mapper responsvel por converter o VO {@link SEFAZEnviNFeVO} no contrato JAXB {@link TEnviNFe} utilizado pelo mtodo {@code nfeAutorizacaoLoteV400} (envio de lote v4.00), e vice-versa.
@@ -188,7 +188,7 @@ public final class MapperForNfeAutorizacaoLoteV400 {
     }
     target.setVerAplic(source.getVerAplic());
     if (source.getCStat() != null) {
-      target.setCstat(RUTypes.toInteger(source.getCStat()));
+      target.setCstat(RUTypes.parseInteger(source.getCStat()));
     }
     target.setXmotivo(source.getXMotivo());
     if (source.getCUF() != null) {
@@ -268,9 +268,9 @@ public final class MapperForNfeAutorizacaoLoteV400 {
       if (source.getInfProt().getDigVal() != null) {
         target.setDigVal(new String(source.getInfProt().getDigVal()));
       }
-      target.setCstat(RUTypes.toInteger(source.getInfProt().getCStat()));
+      target.setCstat(RUTypes.parseInteger(source.getInfProt().getCStat()));
       target.setXmotivo(source.getInfProt().getXMotivo());
-      target.setCmsg(RUTypes.toInteger(source.getInfProt().getCMsg()));
+      target.setCmsg(RUTypes.parseInteger(source.getInfProt().getCMsg()));
       target.setXmsg(source.getInfProt().getXMsg());
     }
     return target;
@@ -465,7 +465,7 @@ public final class MapperForNfeAutorizacaoLoteV400 {
     if (source.getTpEmis() != null) {
       target.setTpEmis(SEFAZEnums.valueOfXMLData(SEFAZ_tpEmis.class, source.getTpEmis()));
     }
-    target.setCdv(RUTypes.toInteger(source.getCDV()));
+    target.setCdv(RUTypes.parseInteger(source.getCDV()));
     if (source.getTpAmb() != null) {
       target.setTpAmb(SEFAZEnums.valueOfXMLData(SEFAZ_tpAmb.class, source.getTpAmb()));
     }
@@ -517,7 +517,7 @@ public final class MapperForNfeAutorizacaoLoteV400 {
     return target;
   }
 
-  public static SEFAZNFRefVO toVO(TNFe.InfNFe.Ide.NFref source, SEFAZIdeVO parent) {
+  public static SEFAZNFRefVO toVO(TNFe.InfNFe.Ide.NFref source, SEFAZIdeVO parent) throws RFWException {
     if (source == null) {
       return null;
     }
@@ -553,7 +553,7 @@ public final class MapperForNfeAutorizacaoLoteV400 {
     return target;
   }
 
-  public static SEFAZRefNFVO toVO(TNFe.InfNFe.Ide.NFref.RefNF source, SEFAZNFRefVO parent) {
+  public static SEFAZRefNFVO toVO(TNFe.InfNFe.Ide.NFref.RefNF source, SEFAZNFRefVO parent) throws RFWException {
     if (source == null) {
       return null;
     }
@@ -588,7 +588,7 @@ public final class MapperForNfeAutorizacaoLoteV400 {
     return target;
   }
 
-  public static SEFAZRefNFPVO toVOP(TNFe.InfNFe.Ide.NFref.RefNFP source, SEFAZNFRefVO parent) {
+  public static SEFAZRefNFPVO toVOP(TNFe.InfNFe.Ide.NFref.RefNFP source, SEFAZNFRefVO parent) throws RFWException {
     if (source == null) {
       return null;
     }

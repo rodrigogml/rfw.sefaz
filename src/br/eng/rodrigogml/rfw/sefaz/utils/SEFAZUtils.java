@@ -207,8 +207,9 @@ public class SEFAZUtils {
    * @param value Valor a ser transformado em BigDecimal
    * @return BigDecimal com o valor encontrato, ou nulo caso a string esteja vazia/nula.
    * @throws RFWException
-   * @TODO Refatorar esse método para um prefixo 'parse', mais comum
+   * @TODO Refatorar esse método para um prefixo 'parse', mais comum e migrar para o RUTypes
    */
+  // TODO Refatorar esse método para um prefixo 'parse', mais comum e migrar para o RUTypes
   public static BigDecimal convertBigDecimalToJava(String value) throws RFWException {
     value = PreProcess.processStringToNull(value);
     if (value != null) {
@@ -231,6 +232,7 @@ public class SEFAZUtils {
    * @throws RFWException
    * @TODO Refatorar esse método para um prefixo 'parse', mais comum
    */
+  // TODO Refatorar esse método para um prefixo 'parse', mais comum e migrar para o RUTypes
   public static BigDecimal convertBigDecimalToJava(String value, Integer decimals) throws RFWException {
     BigDecimal v = convertBigDecimalToJava(value);
     if (v != null) v = v.setScale(decimals, RFW.getRoundingMode());
