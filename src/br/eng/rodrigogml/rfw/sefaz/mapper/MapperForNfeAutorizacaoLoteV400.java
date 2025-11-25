@@ -93,7 +93,7 @@ public final class MapperForNfeAutorizacaoLoteV400 {
     if (source.getVersao() != null) {
       target.setVersao(source.getVersao().getXmlData());
     }
-    target.setIdLote(source.getIdLote());
+    target.setIdLote(RUTypes.toString(source.getIdLote()));
     if (source.getIndSinc() != null) {
       target.setIndSinc(source.getIndSinc().getXmlData());
     }
@@ -123,7 +123,7 @@ public final class MapperForNfeAutorizacaoLoteV400 {
     if (source.getVersao() != null) {
       target.setVersao(SEFAZEnums.valueOfXMLData(SEFAZ_versao.class, source.getVersao()));
     }
-    target.setIdLote(source.getIdLote());
+    target.setIdLote(RUTypes.toLong(source.getIdLote()));
     if (source.getIndSinc() != null) {
       target.setIndSinc(SEFAZEnums.valueOfXMLData(SEFAZ_indSinc.class, source.getIndSinc()));
     }

@@ -36,9 +36,9 @@ public class SEFAZEnviNFeVO extends RFWVO {
    * Lista de NF-e que compem o lote (AP04). Ocorrncia mnima/mxima oficial: 1-50.
    *
    * <p>
-  * Relacionamento por associao com {@link SEFAZNFeVO}, uma vez que a NF-e pode ser tratada fora do contexto estrito do lote, mas deve ser vinculada ao enviNFe no momento do envio. O relacionamento inverso no necessrio.
-  * </p>
-  */
+   * Relacionamento por associao com {@link SEFAZNFeVO}, uma vez que a NF-e pode ser tratada fora do contexto estrito do lote, mas deve ser vinculada ao enviNFe no momento do envio. O relacionamento inverso no necessrio.
+   * </p>
+   */
   @RFWMetaRelationshipField(caption = "NFe", relationship = RelationshipTypes.ASSOCIATION, required = true, columnMapped = "idsefaz_envinfe", minSize = 1, maxSize = 50)
   private List<SEFAZNFeVO> nfeList;
 
@@ -60,7 +60,7 @@ public class SEFAZEnviNFeVO extends RFWVO {
    * </p>
    */
   @RFWMetaStringField(caption = "Identificador do lote", required = true, unique = false, maxLength = 15, minLength = 1, preProcess = { PreProcessOption.STRING_SPACESCLEAN_TO_NULL })
-  private String idLote;
+  private Long idLote;
 
   /**
    * AP03a - {@code indSinc}. Indicador de processamento sncrono do lote, conforme NT 2013/005.
@@ -117,7 +117,7 @@ public class SEFAZEnviNFeVO extends RFWVO {
    *
    * @return identificador atualmente atribudo ao lote.
    */
-  public String getIdLote() {
+  public Long getIdLote() {
     return idLote;
   }
 
@@ -126,7 +126,7 @@ public class SEFAZEnviNFeVO extends RFWVO {
    *
    * @param idLote novo identificador do lote (1-15 caracteres numricos).
    */
-  public void setIdLote(String idLote) {
+  public void setIdLote(Long idLote) {
     this.idLote = idLote;
   }
 
