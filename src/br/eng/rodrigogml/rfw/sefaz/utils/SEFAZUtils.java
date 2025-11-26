@@ -1,18 +1,11 @@
 package br.eng.rodrigogml.rfw.sefaz.utils;
 
-import java.io.StringReader;
-import java.io.StringWriter;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Marshaller;
-import javax.xml.bind.Unmarshaller;
 import javax.xml.namespace.QName;
 
-import br.eng.rodrigogml.rfw.kernel.exceptions.RFWCriticalException;
 import br.eng.rodrigogml.rfw.kernel.exceptions.RFWException;
 import br.eng.rodrigogml.rfw.kernel.interfaces.RFWCertificate;
 import br.eng.rodrigogml.rfw.kernel.preprocess.PreProcess;
@@ -46,65 +39,41 @@ public class SEFAZUtils {
   }
 
   /**
-   * Faz o parser de um XML convertendo-o em objeto compatível utilizando o Unmarshaller do JAXB.
+   * Faz o parser de um XML convertendo-o em objeto compatível utilizando o Unmarshaller do JAXB.<br>
+   * <br>
+   * Utilizar as classes {@link RUXML#removeXmlFragmentTag(String)} e {@link RUSerializer#desserializeFromXML(String, Class)} em conjunto para garantir o objeto esperado.
    *
    * @param xml XML para ser lido.
    * @param rootClass Classe do objeto que repreta a tag rais do XML.
    * @return Objeto da Classe
    * @throws RFWException
-   * @Deprecated Similar ao método {@link RUSerializer#desserializeFromXML(String, Class)} no entanto este método já está em uso para NF no BIS2 e resolvi mantê-lo aqui até entender a real necessidade dele.
-   *
    */
   @SuppressWarnings("unchecked")
-  @Deprecated
   public static <T> T readXMLToObject(String xml, Class<T> rootClass) throws RFWException {
     PreProcess.requiredNonNull(xml);
     PreProcess.requiredNonNull(rootClass);
-    try {
-      JAXBContext context = JAXBContext.newInstance(rootClass);
-      Unmarshaller um = context.createUnmarshaller();
+    xml = RUXML.removeXmlFragmentTag(xml);
 
-      Pattern pattern = Pattern.compile("<xml-fragment.*?>(.*?)</xml-fragment>", Pattern.DOTALL);
-      Matcher matcher = pattern.matcher(xml);
-
-      if (matcher.find()) {
-        xml = matcher.group(1);
-      } else {
-        // Se não encontrou a tag fragment, utiliza o conteúdo recebido;
-      }
-
-      Object element = um.unmarshal(new StringReader(xml));
-      if (element instanceof JAXBElement) {
-        return ((JAXBElement<T>) element).getValue();
-      } else {
-        return rootClass.cast(element);
-      }
-    } catch (JAXBException e) {
-      throw new RFWCriticalException("Falha o ler o XML para restaura o Objeto!", new String[] { xml, rootClass.getCanonicalName() }, e);
+    Object element = RUSerializer.desserializeFromXML(xml, rootClass);
+    // JAXB pode retornar JAXBElement dependendo da classe
+    if (element instanceof JAXBElement) {
+      return ((JAXBElement<T>) element).getValue();
+    } else {
+      return rootClass.cast(element);
     }
   }
 
   /**
    * Converte um objeto em XML utilizando o Marshal do JAXB.
    *
-   * @param root Objecto raiz para ser serializado em XML.
-   * @return String xml representando o conteúdo do objeto sem formatação.
-   * @throws RFWException Lançado em caso de falha ou dados inválidos.
-   * @Deprecated Similar ao método {@link RUSerializer#serializeToXML(Object, Class)} no entanto este método já está em uso para NF no BIS2 e resolvi mantê-lo aqui até entender a real necessidade dele.
+   * @param root Objeto
+   * @return XML serializado
+   * @throws RFWException
+   * @Deprecated Este método passou a ser apenas um relay, utilizar o acesso direto ao {@link RUSerializer}
    */
   @Deprecated
   public static String writeXMLFromObject(Object root) throws RFWException {
-    PreProcess.requiredNonNull(root);
-    try {
-      JAXBContext context = JAXBContext.newInstance(root.getClass());
-      StringWriter stringWriter = new StringWriter();
-      final Marshaller marshaller = context.createMarshaller();
-      marshaller.setProperty(Marshaller.JAXB_FRAGMENT, true);
-      marshaller.marshal(root, stringWriter);
-      return stringWriter.toString();
-    } catch (JAXBException e) {
-      throw new RFWCriticalException("Falha o criar o XML a partir do Objeto!", new String[] { root.getClass().getCanonicalName() }, e);
-    }
+    return RUSerializer.serializeToXML(root, root.getClass(), false);
   }
 
   /**

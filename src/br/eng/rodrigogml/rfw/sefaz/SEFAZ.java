@@ -51,6 +51,8 @@ import br.eng.rodrigogml.rfw.kernel.preprocess.PreProcess;
 import br.eng.rodrigogml.rfw.kernel.utils.RUCert;
 import br.eng.rodrigogml.rfw.kernel.utils.RUFile;
 import br.eng.rodrigogml.rfw.kernel.utils.RUIO;
+import br.eng.rodrigogml.rfw.kernel.utils.RUSerializer;
+import br.eng.rodrigogml.rfw.sefaz.bean.SEFAZnfeAutorizacaoLoteV400Bean;
 import br.eng.rodrigogml.rfw.sefaz.mapper.MapperForNfeAutorizacaoLoteV400;
 import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums;
 import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_WebServices;
@@ -61,7 +63,7 @@ import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_uf;
 import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZUtils;
 import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZXMLValidator;
 import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZEnviNFeVO;
-import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZRetEnviNFeVO;
+import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZNFeVO;
 
 import br.inf.portalfiscal.www.nfe.wsdl.cadconsultacadastro4.CadConsultaCadastro4Stub;
 import br.inf.portalfiscal.www.nfe.wsdl.nfeautorizacao4.NFeAutorizacao4Stub;
@@ -84,6 +86,7 @@ import xsdobjects.envEvento100.TEnvEvento;
 import xsdobjects.envEvento100.TRetEnvEvento;
 import xsdobjects.enviNFe400.TEnviNFe;
 import xsdobjects.enviNFe400.TNFe;
+import xsdobjects.enviNFe400.TNfeProc;
 import xsdobjects.enviNFe400.TRetEnviNFe;
 import xsdobjects.inutNFe400.TInutNFe;
 import xsdobjects.inutNFe400.TRetInutNFe;
@@ -362,17 +365,95 @@ public class SEFAZ {
   /**
    * Chama o método "nfeAutorizacaoLote v4.00" disponibilizado no WebSerice da SEFAZ para autorização de NFe/NFCe. <Br>
    *
-   * @param root Objeto representando o XML para envio da requisição.
-   * @return Object[] com 2 posições onde: <br>
-   *         <li>0 - {@link SEFAZEnviNFeVO} completado com dados automáticos e com o arquivo XML do jeito que foi enviado para a SEFAZ;<br>
-   *         <li>1 - {@link SEFAZRetEnviNFeVO} equivalente ao XML de retorno da SEFAZ.
-   * @throws RFWException
+   * @param enviNFeVO Objeto representando a tag de envio da NFe
+   * @return {@link SEFAZnfeAutorizacaoLoteV400Bean} com os objetos e XMLs da operação.
+   * @throws RFWException the RFW exception
    */
-  public Object[] nfeAutorizacaoLoteV400(SEFAZEnviNFeVO enviNFeVO) throws RFWException {
-    TEnviNFe root = MapperForNfeAutorizacaoLoteV400.toJaxb(enviNFeVO);
-    String[] ret = nfeAutorizacaoLoteV400asXML(root);
-    SEFAZRetEnviNFeVO retEnviNFeVO = MapperForNfeAutorizacaoLoteV400.toVO(SEFAZUtils.readXMLToObject(ret[1], TRetEnviNFe.class));
-    return new Object[] { ret[0], retEnviNFeVO };
+  public SEFAZnfeAutorizacaoLoteV400Bean nfeAutorizacaoLoteV400(SEFAZEnviNFeVO enviNFeVO) throws RFWException {
+    final SEFAZnfeAutorizacaoLoteV400Bean bean = new SEFAZnfeAutorizacaoLoteV400Bean();
+
+    // ### Validações
+    SEFAZ_mod mod = null;
+    try {
+      mod = enviNFeVO.getNfeList().get(0).getInfNFeVO().getIdeVO().getMod();
+    } catch (Exception e) {
+      throw new RFWCriticalException("Falha ao detectar o modelo do Documento Fiscal!", e);
+    }
+    if (mod == null) throw new RFWCriticalException("Falha ao detectar o modelo do Documento Fiscal!");
+
+    if (!SEFAZ_mod.NFE_MODELO_55.equals(mod) && !SEFAZ_mod.NFCE_MODELO_65.equals(mod)) {
+      throw new RFWCriticalException("Este método só permite a emissão de documentos fo tipo NFe ou NFCe (não simultâneamente). Documento inválido: '${0}'.", new String[] { RFWBundle.get(mod) });
+    }
+
+    for (int i = 1; i < enviNFeVO.getNfeList().size(); i++) {
+      SEFAZNFeVO nfeVO = enviNFeVO.getNfeList().get(i);
+      try {
+        if (mod != nfeVO.getInfNFeVO().getIdeVO().getMod()) {
+          throw new RFWCriticalException("Não é permitido misturar diferentes modelos de documentos no mesmo Lote para Autorização! Modelo do primeiro documento: '${0}'.", new String[] { RFWBundle.get(mod) });
+        }
+      } catch (Exception e) {
+        throw new RFWCriticalException("Falha ao identificar o modelo do documento. Index: '${0}'.", new String[] { "" + i }, e);
+      }
+    }
+
+    // ### Converte para Objeto JAXB e inicia o processo de envio
+    final TEnviNFe root = MapperForNfeAutorizacaoLoteV400.toJaxb(enviNFeVO);
+    NfeDadosMsgDocument nfeDadosMsg = NfeDadosMsgDocument.Factory.newInstance();
+    NfeDadosMsgDocument.NfeDadosMsg req = nfeDadosMsg.addNewNfeDadosMsg();
+
+    String xml = SEFAZUtils.signNfeAutorizacaoLoteV400Message(cert, root);
+
+    // Para a NFCe, preenchemos as definições do QRCode. Fazemos isso aqui por ele depender de valores calculados na assinatura da NFe.
+    if (mod == SEFAZ_mod.NFCE_MODELO_65) {
+      // Inserir tag infNFeSupl diretamente no XML "msg" (enviNFe assinado)
+      xml = preencherInfNFeSuplComQRCode(xml);
+    }
+    SEFAZXMLValidator.validateEnviNFeV400(xml);
+
+    if (RFW.isDevelopmentEnvironment() && RFW.getDevProperty("rfw.sefaz.pathToLogCommunicationXML") != null) {
+      RUFile.writeFileContent(RFW.getDevProperty("rfw.sefaz.pathToLogCommunicationXML") + "\\enviNFe.xml", xml);
+    }
+    try {
+      req.set(XmlObject.Factory.parse(xml));
+    } catch (Exception e) {
+      throw new RFWCriticalException("Falha ao criar mensagem para enviar pelo WebService da SEFAZ.", new String[] { xml }, e);
+    }
+
+    NFeAutorizacao4Stub stub = createNFeAutorizacao4Stub(mod);
+    try {
+      NfeResultMsgDocument result = stub.nfeAutorizacaoLote(nfeDadosMsg);
+      String xmlRet = result.getNfeResultMsg().toString();
+      if (RFW.isDevelopmentEnvironment() && RFW.getDevProperty("rfw.sefaz.pathToLogCommunicationXML") != null) {
+        RUFile.writeFileContent(RFW.getDevProperty("rfw.sefaz.pathToLogCommunicationXML") + "\\retEnviNFe.xml", xmlRet);
+      }
+
+      TRetEnviNFe retEnviNFe = SEFAZUtils.readXMLToObject(xmlRet, TRetEnviNFe.class);
+
+      // No caso de solicitação síncrona, podemos receber diretamente a tag 'protNFe' que contém a NFe Autorizada. Neste caso já montamos para retornar no Bean.
+      if (retEnviNFe.getProtNFe() != null) {
+        TNfeProc nfeProc = new TNfeProc();
+        nfeProc.setVersao(retEnviNFe.getVersao());
+        nfeProc.setNFe(SEFAZUtils.readXMLToObject(xml, TEnviNFe.class).getNFe().get(0)); // Extrai o objeto que representa a tag NFe (com assinatura) do XML enviado para autenticação
+        nfeProc.setProtNFe(retEnviNFe.getProtNFe());// Incluímos a tag do protocolo que no método síncrono já vem pronta no retorno.
+        String nfeProcXML = RUSerializer.serializeToXML(nfeProc, TNfeProc.class, false);
+        bean.setNfeProcXML(nfeProcXML);
+      }
+
+      bean.setEnviNFeVO(enviNFeVO);
+      bean.setRetEnviNFeVO(MapperForNfeAutorizacaoLoteV400.toVO(retEnviNFe));
+      bean.setEnviNFeXML(xml);
+      bean.setRetEnviNFeXML(xmlRet);
+    } catch (RemoteException e) {
+      if ("Transport error: 403 Error: Forbidden".equals(e.getMessage())) {
+        throw new RFWWarningException("Não foi possível comunicar com o servidor da SEFAZ.", e);
+      } else if ("Read timed out".equals(e.getMessage())) {
+        throw new RFWWarningException("Não foi possível comunicar com o servidor da SEFAZ.", e);
+      } else {
+        RFWLogger.logError("Mensagem não mapeada de erro durante comunicação com a SEFAZ: " + e.getMessage());
+        throw new RFWWarningException("Não foi possível comunicar com o servidor da SEFAZ.", e);
+      }
+    }
+    return bean;
   }
 
   /**
@@ -381,7 +462,9 @@ public class SEFAZ {
    * @param root Objeto representando o XML para envio da requisição.
    * @return Object[] com 2 posições onde: 0 - String com o XML enviado como msg para a SEFAZ, tag raiz &lt;enviNFe&gt; cm todas as NFes assinadas dentro (para arquivamento do sistema ou conferência); 1 - TRetEnviNFe equivalente ao XML de retorno da SEFAZ.
    * @throws RFWException
+   * @deprecated Dê preferência em utilizar o método {@link #nfeAutorizacaoLoteV400(SEFAZEnviNFeVO)} pois ele deverá abstrair melhor as alterações dos objetos JAXB, além de manter enumerations com os valorez aceitos no XML e anotações de depreciações.
    */
+  @Deprecated
   public Object[] nfeAutorizacaoLoteV400(TEnviNFe root) throws RFWException {
     String[] ret = nfeAutorizacaoLoteV400asXML(root);
     return new Object[] { ret[0], SEFAZUtils.readXMLToObject(ret[1], TRetEnviNFe.class) };
@@ -393,7 +476,9 @@ public class SEFAZ {
    * @param root Objeto representando o XML para envio da requisição.
    * @return String[] com 2 posições onde: 0 - XML enviado como msg para a SEFAZ, tag raiz &lt;enviNFe&gt; cm todas as NFes assinadas dentro (para arquivamento do sistema ou conferência); 1 - XML de retorno da SEFAZ.
    * @throws RFWException
+   * @deprecated Dê preferência em utilizar o método {@link #nfeAutorizacaoLoteV400(SEFAZEnviNFeVO)} pois ele deverá abstrair melhor as alterações dos objetos JAXB, além de manter enumerations com os valorez aceitos no XML e anotações de depreciações.
    */
+  @Deprecated
   public String[] nfeAutorizacaoLoteV400asXML(TEnviNFe root) throws RFWException {
     SEFAZ_mod mod = null;
     try {
