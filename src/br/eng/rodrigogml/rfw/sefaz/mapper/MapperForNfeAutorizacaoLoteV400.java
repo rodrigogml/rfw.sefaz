@@ -13,6 +13,7 @@ import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.IndIEDestEnum;
 import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_CRT;
 import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_CST_COFINS;
 import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_CST_PIS;
+import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_cRegTrib;
 import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_finNFe;
 import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_idDest;
 import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_indFinal;
@@ -349,13 +350,122 @@ public final class MapperForNfeAutorizacaoLoteV400 {
   }
 
   private static ISSQNtot toJaxb(SEFAZISSQNTotVO issqnTotVO) {
-    // TODO Auto-generated method stub
-    return null;
+    if (issqnTotVO == null) {
+      return null;
+    }
+    ISSQNtot target = new ISSQNtot();
+    target.setVServ(RUTypes.parseString(issqnTotVO.getVserv()));
+    target.setVBC(RUTypes.parseString(issqnTotVO.getVbc()));
+    target.setVISS(RUTypes.parseString(issqnTotVO.getViss()));
+    target.setVPIS(RUTypes.parseString(issqnTotVO.getVpis()));
+    target.setVCOFINS(RUTypes.parseString(issqnTotVO.getVcofins()));
+    target.setDCompet(RUTypes.formatToyyyy_MM_dd(issqnTotVO.getDcompet()));
+    target.setVDeducao(RUTypes.parseString(issqnTotVO.getVdeducao()));
+    target.setVOutro(RUTypes.parseString(issqnTotVO.getVoutro()));
+    target.setVDescIncond(RUTypes.parseString(issqnTotVO.getVdescIncond()));
+    target.setVDescCond(RUTypes.parseString(issqnTotVO.getVdescCond()));
+    target.setVISSRet(RUTypes.parseString(issqnTotVO.getVissRet()));
+    if (issqnTotVO.getCregTrib() != null) {
+      target.setCRegTrib(issqnTotVO.getCregTrib().getXmlData());
+    }
+    return target;
   }
 
   private static ICMSTot toJaxb(SEFAZICMSTotVO icmsTotVO) {
-    // TODO Auto-generated method stub
-    return null;
+    if (icmsTotVO == null) {
+      return null;
+    }
+    ICMSTot target = new ICMSTot();
+    target.setVBC(RUTypes.parseString(icmsTotVO.getVbc()));
+    target.setVICMS(RUTypes.parseString(icmsTotVO.getVicms()));
+    target.setVICMSDeson(RUTypes.parseString(icmsTotVO.getVicmsDeson()));
+    target.setVFCPUFDest(RUTypes.parseString(icmsTotVO.getVfcpUFDest()));
+    target.setVICMSUFDest(RUTypes.parseString(icmsTotVO.getVicmsUFDest()));
+    target.setVICMSUFRemet(RUTypes.parseString(icmsTotVO.getVicmsUFRemet()));
+    target.setVFCP(RUTypes.parseString(icmsTotVO.getVfcp()));
+    target.setVBCST(RUTypes.parseString(icmsTotVO.getVbcST()));
+    target.setVST(RUTypes.parseString(icmsTotVO.getVst()));
+    target.setVFCPST(RUTypes.parseString(icmsTotVO.getVfcpST()));
+    target.setVFCPSTRet(RUTypes.parseString(icmsTotVO.getVfcpSTRet()));
+    target.setVProd(RUTypes.parseString(icmsTotVO.getVprod()));
+    target.setVFrete(RUTypes.parseString(icmsTotVO.getVfrete()));
+    target.setVSeg(RUTypes.parseString(icmsTotVO.getVseg()));
+    target.setVDesc(RUTypes.parseString(icmsTotVO.getVdesc()));
+    target.setVII(RUTypes.parseString(icmsTotVO.getVii()));
+    target.setVIPI(RUTypes.parseString(icmsTotVO.getVipi()));
+    target.setVIPIDevol(RUTypes.parseString(icmsTotVO.getVipiDevol()));
+    target.setVPIS(RUTypes.parseString(icmsTotVO.getVpis()));
+    target.setVCOFINS(RUTypes.parseString(icmsTotVO.getVcofins()));
+    target.setVOutro(RUTypes.parseString(icmsTotVO.getVoutro()));
+    target.setVNF(RUTypes.parseString(icmsTotVO.getVnf()));
+    target.setVTotTrib(RUTypes.parseString(icmsTotVO.getVtotTrib()));
+    return target;
+  }
+
+  public static SEFAZTotalVO toVO(Total source, SEFAZInfNFeVO parent) throws RFWException {
+    if (source == null) {
+      return null;
+    }
+    SEFAZTotalVO target = new SEFAZTotalVO();
+    target.setInfNFeVO(parent);
+    target.setIcmsTotVO(toVO(source.getICMSTot(), target));
+    target.setIssqnTotVO(toVO(source.getISSQNtot(), target));
+    return target;
+  }
+
+  private static SEFAZICMSTotVO toVO(ICMSTot source, SEFAZTotalVO parent) throws RFWException {
+    if (source == null) {
+      return null;
+    }
+    SEFAZICMSTotVO target = new SEFAZICMSTotVO();
+    target.setTotalVO(parent);
+    target.setVbc(RUTypes.parseBigDecimal(source.getVBC()));
+    target.setVicms(RUTypes.parseBigDecimal(source.getVICMS()));
+    target.setVicmsDeson(RUTypes.parseBigDecimal(source.getVICMSDeson()));
+    target.setVfcpUFDest(RUTypes.parseBigDecimal(source.getVFCPUFDest()));
+    target.setVicmsUFDest(RUTypes.parseBigDecimal(source.getVICMSUFDest()));
+    target.setVicmsUFRemet(RUTypes.parseBigDecimal(source.getVICMSUFRemet()));
+    target.setVfcp(RUTypes.parseBigDecimal(source.getVFCP()));
+    target.setVbcST(RUTypes.parseBigDecimal(source.getVBCST()));
+    target.setVst(RUTypes.parseBigDecimal(source.getVST()));
+    target.setVfcpST(RUTypes.parseBigDecimal(source.getVFCPST()));
+    target.setVfcpSTRet(RUTypes.parseBigDecimal(source.getVFCPSTRet()));
+    target.setVprod(RUTypes.parseBigDecimal(source.getVProd()));
+    target.setVfrete(RUTypes.parseBigDecimal(source.getVFrete()));
+    target.setVseg(RUTypes.parseBigDecimal(source.getVSeg()));
+    target.setVdesc(RUTypes.parseBigDecimal(source.getVDesc()));
+    target.setVii(RUTypes.parseBigDecimal(source.getVII()));
+    target.setVipi(RUTypes.parseBigDecimal(source.getVIPI()));
+    target.setVipiDevol(RUTypes.parseBigDecimal(source.getVIPIDevol()));
+    target.setVpis(RUTypes.parseBigDecimal(source.getVPIS()));
+    target.setVcofins(RUTypes.parseBigDecimal(source.getVCOFINS()));
+    target.setVoutro(RUTypes.parseBigDecimal(source.getVOutro()));
+    target.setVnf(RUTypes.parseBigDecimal(source.getVNF()));
+    target.setVtotTrib(RUTypes.parseBigDecimal(source.getVTotTrib()));
+    return target;
+  }
+
+  private static SEFAZISSQNTotVO toVO(ISSQNtot source, SEFAZTotalVO parent) throws RFWException {
+    if (source == null) {
+      return null;
+    }
+    SEFAZISSQNTotVO target = new SEFAZISSQNTotVO();
+    target.setTotalVO(parent);
+    target.setVserv(RUTypes.parseBigDecimal(source.getVServ()));
+    target.setVbc(RUTypes.parseBigDecimal(source.getVBC()));
+    target.setViss(RUTypes.parseBigDecimal(source.getVISS()));
+    target.setVpis(RUTypes.parseBigDecimal(source.getVPIS()));
+    target.setVcofins(RUTypes.parseBigDecimal(source.getVCOFINS()));
+    target.setDcompet(RUTypes.parseDate(source.getDCompet()));
+    target.setVdeducao(RUTypes.parseBigDecimal(source.getVDeducao()));
+    target.setVoutro(RUTypes.parseBigDecimal(source.getVOutro()));
+    target.setVdescIncond(RUTypes.parseBigDecimal(source.getVDescIncond()));
+    target.setVdescCond(RUTypes.parseBigDecimal(source.getVDescCond()));
+    target.setVissRet(RUTypes.parseBigDecimal(source.getVISSRet()));
+    if (source.getCRegTrib() != null) {
+      target.setCregTrib(SEFAZEnums.valueOfXMLData(SEFAZ_cRegTrib.class, source.getCRegTrib()));
+    }
+    return target;
   }
 
   public static SEFAZInfNFeVO toVO(TNFe.InfNFe source, SEFAZNFeVO parent) throws RFWException {
@@ -381,6 +491,7 @@ public final class MapperForNfeAutorizacaoLoteV400 {
       }
       target.setDetList(detList);
     }
+    target.setTotalVO(toVO(source.getTotal(), target));
     target.setTranspVO(toVO(source.getTransp(), target));
     return target;
   }
