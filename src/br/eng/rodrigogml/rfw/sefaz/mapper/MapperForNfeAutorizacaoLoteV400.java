@@ -335,6 +335,7 @@ public final class MapperForNfeAutorizacaoLoteV400 {
     }
     target.setTotal(toJaxb(source.getTotalVO()));
     target.setTransp(toJaxb(source.getTranspVO()));
+    target.setPag(toJaxb(source.getPagVO()));
     return target;
   }
 
@@ -359,7 +360,7 @@ public final class MapperForNfeAutorizacaoLoteV400 {
     target.setVISS(RUTypes.parseString(issqnTotVO.getViss()));
     target.setVPIS(RUTypes.parseString(issqnTotVO.getVpis()));
     target.setVCOFINS(RUTypes.parseString(issqnTotVO.getVcofins()));
-    target.setDCompet(RUTypes.formatToyyyy_MM_dd(issqnTotVO.getDcompet()));
+    target.setDCompet(RUTypes.formatToYYYY_MM_DDHyphen(issqnTotVO.getDcompet()));
     target.setVDeducao(RUTypes.parseString(issqnTotVO.getVdeducao()));
     target.setVOutro(RUTypes.parseString(issqnTotVO.getVoutro()));
     target.setVDescIncond(RUTypes.parseString(issqnTotVO.getVdescIncond()));
