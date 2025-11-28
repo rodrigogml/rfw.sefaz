@@ -1476,8 +1476,8 @@ public class SEFAZEnums {
     /** 65 = Crédito Presumido – Operação de Aquisição Vinculada a Receitas Não-Tributadas no Mercado Interno e de Exportação. */
     CST_65_CREDITO_PRESUMIDO_AQUISICAO_RECEITAS_NAO_TRIBUTADAS_INTERNA_E_EXPORTACAO("65", false),
 
-    /** 66 = Crédito Presumido – Operação de Aquisição Vinculada a Receitas Tributadas e Não-Tributadas no Mercado Interno. */
-    CST_66_CREDITO_PRESUMIDO_AQUISICAO_RECEITAS_TRIBUTADAS_E_NAO_TRIBUTADAS_INTERNA("66", false),
+    /** 66 = Crédito Presumido – Operação de Aquisição Vinculada a Receitas Tributadas e Não-Tributadas no Mercado Interno e de Exportação. */
+    CST_66_CREDITO_PRESUMIDO_AQUISICAO_RECEITAS_TRIBUTADAS_E_NAO_TRIBUTADAS_INTERNA_E_EXPORTACAO("66", false),
 
     /** 67 = Crédito Presumido – Outras Operações. */
     CST_67_CREDITO_PRESUMIDO_OUTRAS_OPERACOES("67", false),
@@ -1593,8 +1593,11 @@ public class SEFAZEnums {
     /** 55 = Operação com Direito a Crédito – Vinculada a Receitas Não-Tributadas no Mercado Interno e de Exportação. */
     CST_55_DIREITO_CREDITO_RECEITAS_NAO_TRIBUTADAS_INTERNA_E_EXPORTACAO("55", false),
 
-    /** 56 = Crédito Presumido – Operação de Aquisição Vinculada exclusivamente a Receita Tributada no Mercado Interno. */
-    CST_56_CREDITO_PRESUMIDO_AQUISICAO_EXCLUSIVA_RECEITA_TRIBUTADA_INTERNA("56", false),
+    /** 56 = Operação com Direito a Crédito - Vinculada a Receitas Tributadas e Não-Tributadas no Mercado Interno, e de Exportação; */
+    CST_56_DIREITO_CREDITO_RECEITAS_TRIBUTADAS_E_NAO_TRIBUTADAS_INTERNA_E_EXPORTACAO("56", false),
+
+    /** 60 = Crédito Presumido – Operação de Aquisição Vinculada Exclusivamente a Receita Tributada no Mercado Interno. */
+    CST_60_CREDITO_PRESUMIDO_AQUISICAO_EXCLUSIVA_RECEITA_TRIBUTADA_INTERNA("60", false),
 
     /** 61 = Crédito Presumido – Operação de Aquisição Vinculada exclusivamente a Receita Não-Tributada no Mercado Interno. */
     CST_61_CREDITO_PRESUMIDO_AQUISICAO_EXCLUSIVA_RECEITA_NAO_TRIBUTADA_INTERNA("61", false),
@@ -1602,8 +1605,8 @@ public class SEFAZEnums {
     /** 62 = Crédito Presumido – Operação de Aquisição Vinculada exclusivamente a Receita de Exportação. */
     CST_62_CREDITO_PRESUMIDO_AQUISICAO_EXCLUSIVA_RECEITA_EXPORTACAO("62", false),
 
-    /** 63 = Crédito Presumido – Operação Vinculada a Receitas Tributadas e Não-Tributadas no Mercado Interno. */
-    CST_63_CREDITO_PRESUMIDO_OPERACAO_RECEITAS_TRIBUTADAS_E_NAO_TRIBUTADAS_INTERNA("63", false),
+    /** 63 = Crédito Presumido – Operação de Aquisição Vinculada a Receitas Tributadas e Não-Tributadas no Mercado Interno. */
+    CST_63_CREDITO_PRESUMIDO_AQUISICAO_RECEITAS_TRIBUTADAS_E_NAO_TRIBUTADAS_INTERNA("63", false),
 
     /** 64 = Crédito Presumido – Operação de Aquisição Vinculada a Receitas Tributadas no Mercado Interno e de Exportação. */
     CST_64_CREDITO_PRESUMIDO_AQUISICAO_RECEITAS_TRIBUTADAS_INTERNA_E_EXPORTACAO("64", false),
@@ -1617,17 +1620,23 @@ public class SEFAZEnums {
     /** 67 = Crédito Presumido – Outras Operações. */
     CST_67_CREDITO_PRESUMIDO_OUTRAS_OPERACOES("67", false),
 
-    /** 70 = Operação de Aquisição com Suspensão. */
-    CST_70_AQUISICAO_COM_SUSPENSAO("70", false),
+    /** 70 = Operação de Aquisição com Direito a Crédito. */
+    CST_70_AQUISICAO_COM_DIREITO_A_CREDITO("70", false),
 
-    /** 71 = Operação de Aquisição com Alíquota Zero. */
-    CST_71_AQUISICAO_ALIQUOTA_ZERO("71", false),
+    /** 71 = Operação de Aquisição com Isenção. */
+    CST_71_AQUISICAO_COM_ISENCAO("71", false),
 
-    /** 72 = Operação de Aquisição sem Incidência da Contribuição. */
-    CST_72_AQUISICAO_SEM_INCIDENCIA("72", false),
+    /** 72 = Operação de Aquisição com Suspensão. */
+    CST_72_AQUISICAO_COM_SUSPENSAO("72", false),
 
-    /** 73 = Operação de Aquisição por Substituição Tributária. */
-    CST_73_AQUISICAO_POR_SUBSTITUICAO_TRIBUTARIA("73", false),
+    /** 73 = Operação de Aquisição – Alíquota Zero. */
+    CST_73_AQUISICAO_ALIQUOTA_ZERO("73", false),
+
+    /** 74 = Operação de Aquisição – Sem Incidência da Contribuição. */
+    CST_74_AQUISICAO_SEM_INCIDENCIA("74", false),
+
+    /** 75 = Operação de Aquisição por Substituição Tributária. */
+    CST_75_AQUISICAO_POR_SUBSTITUICAO_TRIBUTARIA("75", false),
 
     /** 98 = Outras Operações de Entrada. */
     CST_98_OUTRAS_OPERACOES_ENTRADA("98", false),

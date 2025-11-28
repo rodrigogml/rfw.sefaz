@@ -35,6 +35,8 @@ import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZEmitVO;
 import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZEnderDestVO;
 import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZEnderEmitVO;
 import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZEnviNFeVO;
+import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZICMSTotVO;
+import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZISSQNTotVO;
 import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZIdeVO;
 import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZImpostoVO;
 import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZInfNFeVO;
@@ -51,6 +53,7 @@ import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZRefNFPVO;
 import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZRefNFVO;
 import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZRetEnviNFeVO;
 import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZRetTranspVO;
+import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZTotalVO;
 import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZTranspVO;
 import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZTransportaVO;
 import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZVeicTranspVO;
@@ -61,6 +64,9 @@ import xsdobjects.enviNFe400.TEndereco;
 import xsdobjects.enviNFe400.TEnviNFe;
 import xsdobjects.enviNFe400.TNFe;
 import xsdobjects.enviNFe400.TNFe.InfNFe.Ide.NFref;
+import xsdobjects.enviNFe400.TNFe.InfNFe.Total;
+import xsdobjects.enviNFe400.TNFe.InfNFe.Total.ICMSTot;
+import xsdobjects.enviNFe400.TNFe.InfNFe.Total.ISSQNtot;
 import xsdobjects.enviNFe400.TNfeProc;
 import xsdobjects.enviNFe400.TProtNFe;
 import xsdobjects.enviNFe400.TRetEnviNFe;
@@ -326,8 +332,30 @@ public final class MapperForNfeAutorizacaoLoteV400 {
         }
       }
     }
+    target.setTotal(toJaxb(source.getTotalVO()));
     target.setTransp(toJaxb(source.getTranspVO()));
     return target;
+  }
+
+  public static Total toJaxb(SEFAZTotalVO source) {
+    if (source == null) {
+      return null;
+    }
+    Total target = new Total();
+    target.setICMSTot(toJaxb(source.getIcmsTotVO()));
+    target.setISSQNtot(toJaxb(source.getIssqnTotVO()));
+
+    return target;
+  }
+
+  private static ISSQNtot toJaxb(SEFAZISSQNTotVO issqnTotVO) {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  private static ICMSTot toJaxb(SEFAZICMSTotVO icmsTotVO) {
+    // TODO Auto-generated method stub
+    return null;
   }
 
   public static SEFAZInfNFeVO toVO(TNFe.InfNFe source, SEFAZNFeVO parent) throws RFWException {
@@ -373,7 +401,7 @@ public final class MapperForNfeAutorizacaoLoteV400 {
       target.setMod(source.getMod().getXmlData());
     }
     if (source.getSerie() != null) {
-      target.setSerie(RUString.completeUntilLengthLeft("0", RUTypes.parseString(source.getSerie()), 3));
+      target.setSerie(RUTypes.parseString(source.getSerie()));
     }
     if (source.getNnf() != null) {
       target.setNNF(RUTypes.parseString(source.getNnf()));
@@ -781,7 +809,7 @@ public final class MapperForNfeAutorizacaoLoteV400 {
     target.setIndEscala(source.getIndescala());
     target.setCNPJFab(source.getCnpjFab());
     target.setCBenef(source.getCbenef());
-    target.setEXTIPI(source.getExtipi());
+    if (source.getExtipi() == null) target.setEXTIPI(RUString.completeUntilLengthRight("0", source.getExtipi(), 2));
     target.setCFOP(source.getCfop());
     target.setUCom(source.getUcom());
     target.setQCom(RUTypes.parseString(source.getQcom()));
