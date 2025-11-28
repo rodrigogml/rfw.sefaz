@@ -1,5 +1,7 @@
 package br.eng.rodrigogml.rfw.sefaz.mapper;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,31 +23,45 @@ import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_indIntermed;
 import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_indPres;
 import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_indSinc;
 import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_indTot;
+import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_indPag;
+import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_indProc;
 import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_mod;
 import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_procEmi;
 import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_tpAmb;
 import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_tpEmis;
 import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_tpImp;
+import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_tBand;
+import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_tPag;
+import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_tpIntegra;
 import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_tpNF;
 import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_versao;
 import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZUtils;
 import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZCOFINSVO;
+import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZCobrVO;
 import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZDestVO;
 import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZDetVO;
+import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZDetPagVO;
+import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZDupVO;
 import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZEmitVO;
 import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZEnderDestVO;
 import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZEnderEmitVO;
 import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZEnviNFeVO;
+import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZFatVO;
 import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZICMSTotVO;
 import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZISSQNTotVO;
 import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZIdeVO;
 import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZImpostoVO;
+import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZInfAdicVO;
 import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZInfNFeVO;
 import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZLacresVO;
+import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZObsContVO;
+import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZObsFiscoVO;
 import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZNFRefVO;
 import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZNFeProcVO;
 import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZNFeVO;
+import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZPagVO;
 import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZPISVO;
+import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZProcRefVO;
 import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZProdVO;
 import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZProtNFeVO;
 import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZReboqueVO;
@@ -313,18 +329,18 @@ public final class MapperForNfeAutorizacaoLoteV400 {
     return target;
   }
 
-  public static TNFe.InfNFe toJaxb(SEFAZInfNFeVO source) {
-    if (source == null) {
-      return null;
-    }
-    TNFe.InfNFe target = new TNFe.InfNFe();
+    public static TNFe.InfNFe toJaxb(SEFAZInfNFeVO source) {
+      if (source == null) {
+        return null;
+      }
+      TNFe.InfNFe target = new TNFe.InfNFe();
     if (source.getVersao() != null) {
       target.setVersao(source.getVersao().getXmlData());
     }
-    target.setId(source.getIdXML());
-    target.setIde(toJaxb(source.getIdeVO()));
-    target.setEmit(toJaxb(source.getEmitVO()));
-    target.setDest(toJaxb(source.getDestVO()));
+      target.setId(source.getIdXML());
+      target.setIde(toJaxb(source.getIdeVO()));
+      target.setEmit(toJaxb(source.getEmitVO()));
+      target.setDest(toJaxb(source.getDestVO()));
     if (source.getDetList() != null && !source.getDetList().isEmpty()) {
       for (SEFAZDetVO detVO : source.getDetList()) {
         TNFe.InfNFe.Det detNode = toJaxb(detVO);
@@ -332,11 +348,348 @@ public final class MapperForNfeAutorizacaoLoteV400 {
           target.getDet().add(detNode);
         }
       }
+      }
+      target.setTotal(toJaxb(source.getTotalVO()));
+      target.setTransp(toJaxb(source.getTranspVO()));
+      target.setCobr(toJaxb(source.getCobrVO()));
+      target.setPag(toJaxb(source.getPagVO()));
+      target.setInfAdic(toJaxb(source.getInfAdicVO()));
+      return target;
     }
-    target.setTotal(toJaxb(source.getTotalVO()));
-    target.setTransp(toJaxb(source.getTranspVO()));
-    return target;
-  }
+
+    public static TNFe.InfNFe.Cobr toJaxb(SEFAZCobrVO source) {
+      if (source == null) {
+        return null;
+      }
+      TNFe.InfNFe.Cobr target = new TNFe.InfNFe.Cobr();
+      target.setFat(toJaxb(source.getFatVO()));
+      if (source.getDupList() != null) {
+        for (SEFAZDupVO dupVO : source.getDupList()) {
+          TNFe.InfNFe.Cobr.Dup dup = toJaxb(dupVO);
+          if (dup != null) {
+            target.getDup().add(dup);
+          }
+        }
+      }
+      return target;
+    }
+
+    public static TNFe.InfNFe.Cobr.Fat toJaxb(SEFAZFatVO source) {
+      if (source == null) {
+        return null;
+      }
+      TNFe.InfNFe.Cobr.Fat target = new TNFe.InfNFe.Cobr.Fat();
+      target.setNFat(source.getNfat());
+      target.setVOrig(RUTypes.parseString(source.getVorig()));
+      target.setVDesc(RUTypes.parseString(source.getVdesc()));
+      target.setVLiq(RUTypes.parseString(source.getVliq()));
+      return target;
+    }
+
+    public static TNFe.InfNFe.Cobr.Dup toJaxb(SEFAZDupVO source) {
+      if (source == null) {
+        return null;
+      }
+      TNFe.InfNFe.Cobr.Dup target = new TNFe.InfNFe.Cobr.Dup();
+      target.setNDup(source.getNdup());
+      if (source.getDvenc() != null) {
+        target.setDVenc(source.getDvenc().format(DateTimeFormatter.ISO_LOCAL_DATE));
+      }
+      target.setVDup(RUTypes.parseString(source.getVdup()));
+      return target;
+    }
+
+    public static TNFe.InfNFe.Pag toJaxb(SEFAZPagVO source) {
+      if (source == null) {
+        return null;
+      }
+      TNFe.InfNFe.Pag target = new TNFe.InfNFe.Pag();
+      if (source.getDetPag() != null) {
+        for (SEFAZDetPagVO detPagVO : source.getDetPag()) {
+          TNFe.InfNFe.Pag.DetPag detPag = toJaxb(detPagVO);
+          if (detPag != null) {
+            target.getDetPag().add(detPag);
+          }
+        }
+      }
+      target.setVTroco(RUTypes.parseString(source.getVtroco()));
+      return target;
+    }
+
+    public static TNFe.InfNFe.Pag.DetPag toJaxb(SEFAZDetPagVO source) {
+      if (source == null) {
+        return null;
+      }
+      TNFe.InfNFe.Pag.DetPag target = new TNFe.InfNFe.Pag.DetPag();
+      if (source.getIndPag() != null) {
+        target.setIndPag(source.getIndPag().getXmlData());
+      }
+      if (source.getTpag() != null) {
+        target.setTPag(source.getTpag().getXmlData());
+      }
+      target.setVPag(RUTypes.parseString(source.getVpag()));
+      target.setCard(toJaxb(source.getCard()));
+      return target;
+    }
+
+    public static TNFe.InfNFe.Pag.DetPag.Card toJaxb(SEFAZCardVO source) {
+      if (source == null) {
+        return null;
+      }
+      TNFe.InfNFe.Pag.DetPag.Card target = new TNFe.InfNFe.Pag.DetPag.Card();
+      if (source.getTpIntegra() != null) {
+        target.setTpIntegra(source.getTpIntegra().getXmlData());
+      }
+      target.setCNPJ(source.getCnpj());
+      if (source.getTband() != null) {
+        target.setTBand(source.getTband().getXmlData());
+      }
+      target.setCAut(source.getCaut());
+      return target;
+    }
+
+    public static TNFe.InfNFe.InfAdic toJaxb(SEFAZInfAdicVO source) {
+      if (source == null) {
+        return null;
+      }
+      TNFe.InfNFe.InfAdic target = new TNFe.InfNFe.InfAdic();
+      target.setInfAdFisco(source.getInfAdFisco());
+      target.setInfCpl(source.getInfCpl());
+      if (source.getObsCont() != null) {
+        for (SEFAZObsContVO obs : source.getObsCont()) {
+          TNFe.InfNFe.InfAdic.ObsCont obsNode = toJaxb(obs);
+          if (obsNode != null) {
+            target.getObsCont().add(obsNode);
+          }
+        }
+      }
+      if (source.getObsFisco() != null) {
+        for (SEFAZObsFiscoVO obs : source.getObsFisco()) {
+          TNFe.InfNFe.InfAdic.ObsFisco obsNode = toJaxb(obs);
+          if (obsNode != null) {
+            target.getObsFisco().add(obsNode);
+          }
+        }
+      }
+      if (source.getProcRef() != null) {
+        for (SEFAZProcRefVO proc : source.getProcRef()) {
+          TNFe.InfNFe.InfAdic.ProcRef procNode = toJaxb(proc);
+          if (procNode != null) {
+            target.getProcRef().add(procNode);
+          }
+        }
+      }
+      return target;
+    }
+
+    public static SEFAZCobrVO toVO(TNFe.InfNFe.Cobr source, SEFAZInfNFeVO parent) throws RFWException {
+      if (source == null) {
+        return null;
+      }
+      SEFAZCobrVO target = new SEFAZCobrVO();
+      target.setInfNFeVO(parent);
+      target.setFatVO(toVO(source.getFat(), target));
+      if (source.getDup() != null && !source.getDup().isEmpty()) {
+        List<SEFAZDupVO> dupList = new ArrayList<>(source.getDup().size());
+        for (TNFe.InfNFe.Cobr.Dup dup : source.getDup()) {
+          SEFAZDupVO item = toVO(dup, target);
+          if (item != null) {
+            dupList.add(item);
+          }
+        }
+        target.setDupList(dupList);
+      }
+      return target;
+    }
+
+    public static SEFAZFatVO toVO(TNFe.InfNFe.Cobr.Fat source, SEFAZCobrVO parent) throws RFWException {
+      if (source == null) {
+        return null;
+      }
+      SEFAZFatVO target = new SEFAZFatVO();
+      target.setCobrVO(parent);
+      target.setNfat(source.getNFat());
+      target.setVorig(RUTypes.parseBigDecimal(source.getVOrig()));
+      target.setVdesc(RUTypes.parseBigDecimal(source.getVDesc()));
+      target.setVliq(RUTypes.parseBigDecimal(source.getVLiq()));
+      return target;
+    }
+
+    public static SEFAZDupVO toVO(TNFe.InfNFe.Cobr.Dup source, SEFAZCobrVO parent) throws RFWException {
+      if (source == null) {
+        return null;
+      }
+      SEFAZDupVO target = new SEFAZDupVO();
+      target.setCobrVO(parent);
+      target.setNdup(source.getNDup());
+      if (source.getDVenc() != null) {
+        target.setDvenc(LocalDate.parse(source.getDVenc(), DateTimeFormatter.ISO_LOCAL_DATE));
+      }
+      target.setVdup(RUTypes.parseBigDecimal(source.getVDup()));
+      return target;
+    }
+
+    public static SEFAZPagVO toVO(TNFe.InfNFe.Pag source, SEFAZInfNFeVO parent) throws RFWException {
+      if (source == null) {
+        return null;
+      }
+      SEFAZPagVO target = new SEFAZPagVO();
+      target.setInfNFeVO(parent);
+      if (source.getDetPag() != null && !source.getDetPag().isEmpty()) {
+        List<SEFAZDetPagVO> detList = new ArrayList<>(source.getDetPag().size());
+        for (TNFe.InfNFe.Pag.DetPag detPag : source.getDetPag()) {
+          SEFAZDetPagVO item = toVO(detPag, target);
+          if (item != null) {
+            detList.add(item);
+          }
+        }
+        target.setDetPag(detList);
+      }
+      target.setVtroco(RUTypes.parseBigDecimal(source.getVTroco()));
+      return target;
+    }
+
+    public static SEFAZDetPagVO toVO(TNFe.InfNFe.Pag.DetPag source, SEFAZPagVO parent) throws RFWException {
+      if (source == null) {
+        return null;
+      }
+      SEFAZDetPagVO target = new SEFAZDetPagVO();
+      target.setPagVO(parent);
+      if (source.getIndPag() != null) {
+        target.setIndPag(SEFAZEnums.valueOfXMLData(SEFAZ_indPag.class, source.getIndPag()));
+      }
+      if (source.getTPag() != null) {
+        target.setTpag(SEFAZEnums.valueOfXMLData(SEFAZ_tPag.class, source.getTPag()));
+      }
+      target.setVpag(RUTypes.parseBigDecimal(source.getVPag()));
+      target.setCard(toVO(source.getCard(), target));
+      return target;
+    }
+
+    public static SEFAZCardVO toVO(TNFe.InfNFe.Pag.DetPag.Card source, SEFAZDetPagVO parent) throws RFWException {
+      if (source == null) {
+        return null;
+      }
+      SEFAZCardVO target = new SEFAZCardVO();
+      target.setDetPagVO(parent);
+      if (source.getTpIntegra() != null) {
+        target.setTpIntegra(SEFAZEnums.valueOfXMLData(SEFAZ_tpIntegra.class, source.getTpIntegra()));
+      }
+      target.setCnpj(source.getCNPJ());
+      if (source.getTBand() != null) {
+        target.setTband(SEFAZEnums.valueOfXMLData(SEFAZ_tBand.class, source.getTBand()));
+      }
+      target.setCaut(source.getCAut());
+      return target;
+    }
+
+    public static SEFAZInfAdicVO toVO(TNFe.InfNFe.InfAdic source, SEFAZInfNFeVO parent) throws RFWException {
+      if (source == null) {
+        return null;
+      }
+      SEFAZInfAdicVO target = new SEFAZInfAdicVO();
+      target.setInfNFeVO(parent);
+      target.setInfAdFisco(source.getInfAdFisco());
+      target.setInfCpl(source.getInfCpl());
+      if (source.getObsCont() != null && !source.getObsCont().isEmpty()) {
+        List<SEFAZObsContVO> obsList = new ArrayList<>(source.getObsCont().size());
+        for (TNFe.InfNFe.InfAdic.ObsCont obs : source.getObsCont()) {
+          SEFAZObsContVO item = toVO(obs, target);
+          if (item != null) {
+            obsList.add(item);
+          }
+        }
+        target.setObsCont(obsList);
+      }
+      if (source.getObsFisco() != null && !source.getObsFisco().isEmpty()) {
+        List<SEFAZObsFiscoVO> obsList = new ArrayList<>(source.getObsFisco().size());
+        for (TNFe.InfNFe.InfAdic.ObsFisco obs : source.getObsFisco()) {
+          SEFAZObsFiscoVO item = toVO(obs, target);
+          if (item != null) {
+            obsList.add(item);
+          }
+        }
+        target.setObsFisco(obsList);
+      }
+      if (source.getProcRef() != null && !source.getProcRef().isEmpty()) {
+        List<SEFAZProcRefVO> procList = new ArrayList<>(source.getProcRef().size());
+        for (TNFe.InfNFe.InfAdic.ProcRef proc : source.getProcRef()) {
+          SEFAZProcRefVO item = toVO(proc, target);
+          if (item != null) {
+            procList.add(item);
+          }
+        }
+        target.setProcRef(procList);
+      }
+      return target;
+    }
+
+    private static TNFe.InfNFe.InfAdic.ObsCont toJaxb(SEFAZObsContVO source) {
+      if (source == null) {
+        return null;
+      }
+      TNFe.InfNFe.InfAdic.ObsCont target = new TNFe.InfNFe.InfAdic.ObsCont();
+      target.setXCampo(source.getXcampo());
+      target.setXTexto(source.getXtexto());
+      return target;
+    }
+
+    private static TNFe.InfNFe.InfAdic.ObsFisco toJaxb(SEFAZObsFiscoVO source) {
+      if (source == null) {
+        return null;
+      }
+      TNFe.InfNFe.InfAdic.ObsFisco target = new TNFe.InfNFe.InfAdic.ObsFisco();
+      target.setXCampo(source.getXcampo());
+      target.setXTexto(source.getXtexto());
+      return target;
+    }
+
+    private static TNFe.InfNFe.InfAdic.ProcRef toJaxb(SEFAZProcRefVO source) {
+      if (source == null) {
+        return null;
+      }
+      TNFe.InfNFe.InfAdic.ProcRef target = new TNFe.InfNFe.InfAdic.ProcRef();
+      target.setNProc(source.getNproc());
+      if (source.getIndProc() != null) {
+        target.setIndProc(source.getIndProc().getXmlData());
+      }
+      return target;
+    }
+
+    private static SEFAZObsContVO toVO(TNFe.InfNFe.InfAdic.ObsCont source, SEFAZInfAdicVO parent) {
+      if (source == null) {
+        return null;
+      }
+      SEFAZObsContVO target = new SEFAZObsContVO();
+      target.setInfAdicVO(parent);
+      target.setXcampo(source.getXCampo());
+      target.setXtexto(source.getXTexto());
+      return target;
+    }
+
+    private static SEFAZObsFiscoVO toVO(TNFe.InfNFe.InfAdic.ObsFisco source, SEFAZInfAdicVO parent) {
+      if (source == null) {
+        return null;
+      }
+      SEFAZObsFiscoVO target = new SEFAZObsFiscoVO();
+      target.setInfAdicVO(parent);
+      target.setXcampo(source.getXCampo());
+      target.setXtexto(source.getXTexto());
+      return target;
+    }
+
+    private static SEFAZProcRefVO toVO(TNFe.InfNFe.InfAdic.ProcRef source, SEFAZInfAdicVO parent) {
+      if (source == null) {
+        return null;
+      }
+      SEFAZProcRefVO target = new SEFAZProcRefVO();
+      target.setInfAdicVO(parent);
+      target.setNproc(source.getNProc());
+      if (source.getIndProc() != null) {
+        target.setIndProc(SEFAZEnums.valueOfXMLData(SEFAZ_indProc.class, source.getIndProc()));
+      }
+      return target;
+    }
 
   public static Total toJaxb(SEFAZTotalVO source) {
     if (source == null) {
@@ -481,20 +834,23 @@ public final class MapperForNfeAutorizacaoLoteV400 {
     target.setIdeVO(toVO(source.getIde(), target));
     target.setEmitVO(toVO(source.getEmit(), target));
     target.setDestVO(toVO(source.getDest(), target));
-    if (source.getDet() != null && !source.getDet().isEmpty()) {
-      List<SEFAZDetVO> detList = new ArrayList<>(source.getDet().size());
-      for (TNFe.InfNFe.Det det : source.getDet()) {
-        SEFAZDetVO item = toVO(det, target);
-        if (item != null) {
-          detList.add(item);
+      if (source.getDet() != null && !source.getDet().isEmpty()) {
+        List<SEFAZDetVO> detList = new ArrayList<>(source.getDet().size());
+        for (TNFe.InfNFe.Det det : source.getDet()) {
+          SEFAZDetVO item = toVO(det, target);
+          if (item != null) {
+            detList.add(item);
+          }
         }
+        target.setDetList(detList);
       }
-      target.setDetList(detList);
+      target.setTotalVO(toVO(source.getTotal(), target));
+      target.setTranspVO(toVO(source.getTransp(), target));
+      target.setCobrVO(toVO(source.getCobr(), target));
+      target.setPagVO(toVO(source.getPag(), target));
+      target.setInfAdicVO(toVO(source.getInfAdic(), target));
+      return target;
     }
-    target.setTotalVO(toVO(source.getTotal(), target));
-    target.setTranspVO(toVO(source.getTransp(), target));
-    return target;
-  }
 
   public static TNFe.InfNFe.Ide toJaxb(SEFAZIdeVO source) {
     if (source == null) {
