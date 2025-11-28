@@ -6,6 +6,7 @@ import br.eng.rodrigogml.rfw.kernel.rfwmeta.RFWMetaRelationshipField;
 import br.eng.rodrigogml.rfw.kernel.rfwmeta.RFWMetaRelationshipField.RelationshipTypes;
 import br.eng.rodrigogml.rfw.kernel.vo.RFWVO;
 import br.eng.rodrigogml.rfw.orm.dao.annotations.dao.RFWDAOAnnotation;
+import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZDupVO;
 
 /**
  * Grupo Y01 - cobr: Cobrança.
@@ -39,7 +40,7 @@ public class SEFAZCobrVO extends RFWVO {
    * {@link SEFAZDupVO}
    */
   @RFWMetaRelationshipField(caption = "Dup", relationship = RelationshipTypes.COMPOSITION, required = false, columnMapped = "idsefaz_dup", minSize = 0, maxSize = 120)
-  private List<SEFAZFatVO> dupList = null;
+  private List<SEFAZDupVO> dupList = null;
 
   /**
    * # {@link SEFAZInfNFeVO}.
@@ -82,7 +83,7 @@ public class SEFAZCobrVO extends RFWVO {
    *
    * @return the {@link SEFAZDupVO}
    */
-  public List<SEFAZFatVO> getDupList() {
+  public List<SEFAZDupVO> getDupList() {
     return dupList;
   }
 
@@ -91,7 +92,7 @@ public class SEFAZCobrVO extends RFWVO {
    *
    * @param dupList the new {@link SEFAZDupVO}
    */
-  public void setDupList(List<SEFAZFatVO> dupList) {
+  public void setDupList(List<SEFAZDupVO> dupList) {
     this.dupList = dupList;
   }
 

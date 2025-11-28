@@ -1,7 +1,7 @@
 package br.eng.rodrigogml.rfw.sefaz.vo;
 
 import java.math.BigDecimal;
-import java.util.Date;
+import java.time.LocalDate;
 
 import br.eng.rodrigogml.rfw.kernel.preprocess.PreProcess.PreProcessOption;
 import br.eng.rodrigogml.rfw.kernel.rfwmeta.RFWMetaBigDecimalField;
@@ -42,7 +42,7 @@ public class SEFAZDupVO extends RFWVO {
    * As datas de vencimento devem ser informadas em ordem crescente.
    */
   @RFWMetaDateField(caption = "dVenc", required = false, unique = false)
-  private Date dvenc;
+  private LocalDate dvenc;
 
   /**
    * Y10 - vDup: Valor da Parcela. Tipo: N, Tamanho: 13v2, Ocorrência: 1-1 (obrigatório na estrutura da parcela).
@@ -97,7 +97,7 @@ public class SEFAZDupVO extends RFWVO {
    *
    * @return the y09 - dVenc: Data de vencimento
    */
-  public Date getDvenc() {
+  public LocalDate getDvenc() {
     return dvenc;
   }
 
@@ -108,7 +108,7 @@ public class SEFAZDupVO extends RFWVO {
    *
    * @param dvenc the new y09 - dVenc: Data de vencimento
    */
-  public void setDvenc(Date dvenc) {
+  public void setDvenc(LocalDate dvenc) {
     this.dvenc = dvenc;
   }
 
