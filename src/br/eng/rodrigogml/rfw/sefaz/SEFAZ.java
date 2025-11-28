@@ -2,6 +2,7 @@ package br.eng.rodrigogml.rfw.sefaz;
 
 import java.io.ByteArrayInputStream;
 import java.io.StringWriter;
+import java.net.UnknownHostException;
 import java.nio.charset.StandardCharsets;
 import java.rmi.RemoteException;
 import java.security.KeyStore;
@@ -268,7 +269,9 @@ public class SEFAZ {
       result = stub.nfeStatusServicoNF(nfeDadosMsg);
       return result.getNfeResultMsg().toString();
     } catch (RemoteException e) {
-      if ("Transport error: 403 Error: Forbidden".equals(e.getMessage())) {
+      if (e.getCause() != null && e.getCause() instanceof UnknownHostException) {
+        throw new RFWWarningException("RFW_ERR_900008", new String[] { e.getMessage() });
+      } else if ("Transport error: 403 Error: Forbidden".equals(e.getMessage())) {
         throw new RFWWarningException("Não foi possível comunicar com o servidor da SEFAZ.", e);
       } else if ("Read timed out".equals(e.getMessage())) {
         throw new RFWWarningException("Não foi possível comunicar com o servidor da SEFAZ.", e);
