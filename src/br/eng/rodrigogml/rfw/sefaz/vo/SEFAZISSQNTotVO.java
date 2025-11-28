@@ -4,7 +4,7 @@
 package br.eng.rodrigogml.rfw.sefaz.vo;
 
 import java.math.BigDecimal;
-import java.util.Date;
+import java.time.LocalDate;
 
 import br.eng.rodrigogml.rfw.kernel.rfwmeta.RFWMetaBigDecimalField;
 import br.eng.rodrigogml.rfw.kernel.rfwmeta.RFWMetaDateField;
@@ -67,7 +67,7 @@ public class SEFAZISSQNTotVO extends RFWVO {
    * W22a - dCompet: Data da prestação do serviço. Tipo: N (data AAAA-MM-DD), Tamanho: 8, Ocorrência: 1-1 (obrigatório na estrutura).
    */
   @RFWMetaDateField(caption = "dCompet", required = false, unique = false)
-  private Date dcompet;
+  private LocalDate dcompet;
 
   /**
    * W22b - vDeducao: Valor total dedução para redução da Base de Cálculo. Tipo: N, Tamanho: 13v2, Ocorrência: 0-1 (campo opcional).
@@ -225,7 +225,7 @@ public class SEFAZISSQNTotVO extends RFWVO {
    *
    * @return the w22a - dCompet: Data da prestação do serviço
    */
-  public Date getDcompet() {
+  public LocalDate getDcompet() {
     return dcompet;
   }
 
@@ -234,7 +234,7 @@ public class SEFAZISSQNTotVO extends RFWVO {
    *
    * @param dcompet the new w22a - dCompet: Data da prestação do serviço
    */
-  public void setDcompet(Date dcompet) {
+  public void setDcompet(LocalDate dcompet) {
     this.dcompet = dcompet;
   }
 
