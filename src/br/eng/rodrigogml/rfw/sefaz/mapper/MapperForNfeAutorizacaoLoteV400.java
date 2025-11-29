@@ -17,7 +17,6 @@ import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_CST_COFINS;
 import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_CST_ICMS;
 import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_CST_IPI;
 import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_CST_PIS;
-import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_CSOSN;
 import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_cRegTrib;
 import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_finNFe;
 import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_idDest;
@@ -28,9 +27,8 @@ import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_indPres;
 import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_indProc;
 import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_indSinc;
 import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_indTot;
-import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_modBC;
-import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_modBCST;
 import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_mod;
+import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_motDesICMS;
 import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_procEmi;
 import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_tBand;
 import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_tPag;
@@ -55,6 +53,8 @@ import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZEnviNFeVO;
 import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZFatVO;
 import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZICMSTotVO;
 import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZICMSUFDestVO;
+import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZICMSVO;
+import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZIPIVO;
 import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZISSQNTotVO;
 import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZIdeVO;
 import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZImpostoVO;
@@ -77,8 +77,6 @@ import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZRefNFPVO;
 import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZRefNFVO;
 import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZRetEnviNFeVO;
 import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZRetTranspVO;
-import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZICMSVO;
-import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZIPIVO;
 import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZTotalVO;
 import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZTranspVO;
 import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZTransportaVO;
@@ -1419,8 +1417,8 @@ public final class MapperForNfeAutorizacaoLoteV400 {
           sn101.setVCredICMSSN(RUTypes.parseString(source.getVcredICMSSN()));
           target.setICMSSN101(sn101);
           break;
-        case CSOSN_102_TRIBUTADA_SEM_PERMISSAO_CREDITO:
-        case CSOSN_103_ISENTA_NTRIBUTADO_NOVARG:
+        case CSOSN_102_TRIBUTADA_SEM_CREDITO:
+        case CSOSN_103_ISENCAO_FAIXA_RECEITA:
         case CSOSN_300_IMUNE:
         case CSOSN_400_NAO_TRIBUTADA:
           TNFe.InfNFe.Det.Imposto.ICMS.ICMSSN102 sn102 = new TNFe.InfNFe.Det.Imposto.ICMS.ICMSSN102();
@@ -1428,11 +1426,11 @@ public final class MapperForNfeAutorizacaoLoteV400 {
           sn102.setCSOSN(source.getCsosn().getXmlData());
           target.setICMSSN102(sn102);
           break;
-        case CSOSN_201_TRIBUTADA_COM_PERMISSAO_CREDITO_COM_ST:
+        case CSOSN_201_TRIBUTADA_COM_CREDITO_E_ST:
           TNFe.InfNFe.Det.Imposto.ICMS.ICMSSN201 sn201 = new TNFe.InfNFe.Det.Imposto.ICMS.ICMSSN201();
           sn201.setOrig(source.getOrig().getXmlData());
           sn201.setCSOSN(source.getCsosn().getXmlData());
-          sn201.setModBCST(RUTypes.parseString(source.getModBCST()));
+          sn201.setModBCST(source.getModBCST().getXmlData());
           sn201.setPMVAST(RUTypes.parseString(source.getPmvaST()));
           sn201.setPRedBCST(RUTypes.parseString(source.getPredBCST()));
           sn201.setVBCST(RUTypes.parseString(source.getVbcST()));
@@ -1445,12 +1443,12 @@ public final class MapperForNfeAutorizacaoLoteV400 {
           sn201.setVCredICMSSN(RUTypes.parseString(source.getVcredICMSSN()));
           target.setICMSSN201(sn201);
           break;
-        case CSOSN_202_TRIBUTADA_SEM_PERMISSAO_CREDITO_COM_ST:
-        case CSOSN_203_ISENCAO_ICMS_PARA_FAIXA_COM_ST:
+        case CSOSN_202_TRIBUTADA_SEM_CREDITO_COM_ST:
+        case CSOSN_203_ISENCAO_FAIXA_RECEITA_COM_ST:
           TNFe.InfNFe.Det.Imposto.ICMS.ICMSSN202 sn202 = new TNFe.InfNFe.Det.Imposto.ICMS.ICMSSN202();
           sn202.setOrig(source.getOrig().getXmlData());
           sn202.setCSOSN(source.getCsosn().getXmlData());
-          sn202.setModBCST(RUTypes.parseString(source.getModBCST()));
+          sn202.setModBCST(source.getModBCST().getXmlData());
           sn202.setPMVAST(RUTypes.parseString(source.getPmvaST()));
           sn202.setPRedBCST(RUTypes.parseString(source.getPredBCST()));
           sn202.setVBCST(RUTypes.parseString(source.getVbcST()));
@@ -1461,7 +1459,7 @@ public final class MapperForNfeAutorizacaoLoteV400 {
           sn202.setVFCPST(RUTypes.parseString(source.getVfcpST()));
           target.setICMSSN202(sn202);
           break;
-        case CSOSN_500_ICMS_COBRADO_ANTECIPACAO_ST:
+        case CSOSN_500_ST_OU_ANTECIPACAO:
           TNFe.InfNFe.Det.Imposto.ICMS.ICMSSN500 sn500 = new TNFe.InfNFe.Det.Imposto.ICMS.ICMSSN500();
           sn500.setOrig(source.getOrig().getXmlData());
           sn500.setCSOSN(source.getCsosn().getXmlData());
@@ -1477,12 +1475,12 @@ public final class MapperForNfeAutorizacaoLoteV400 {
           TNFe.InfNFe.Det.Imposto.ICMS.ICMSSN900 sn900 = new TNFe.InfNFe.Det.Imposto.ICMS.ICMSSN900();
           sn900.setOrig(source.getOrig().getXmlData());
           sn900.setCSOSN(source.getCsosn().getXmlData());
-          sn900.setModBC(RUTypes.parseString(source.getModBC()));
+          sn900.setModBC(source.getModBC().getXmlData());
           sn900.setVBC(RUTypes.parseString(source.getVbc()));
           sn900.setPRedBC(RUTypes.parseString(source.getPredBC()));
           sn900.setPICMS(RUTypes.parseString(source.getPicms()));
           sn900.setVICMS(RUTypes.parseString(source.getVicms()));
-          sn900.setModBCST(RUTypes.parseString(source.getModBCST()));
+          sn900.setModBCST(source.getModBCST().getXmlData());
           sn900.setPMVAST(RUTypes.parseString(source.getPmvaST()));
           sn900.setPRedBCST(RUTypes.parseString(source.getPredBCST()));
           sn900.setVBCST(RUTypes.parseString(source.getVbcST()));
@@ -1506,7 +1504,7 @@ public final class MapperForNfeAutorizacaoLoteV400 {
         TNFe.InfNFe.Det.Imposto.ICMS.ICMS00 icms00 = new TNFe.InfNFe.Det.Imposto.ICMS.ICMS00();
         icms00.setOrig(source.getOrig().getXmlData());
         icms00.setCST(source.getCst().getXmlData());
-        icms00.setModBC(RUTypes.parseString(source.getModBC()));
+        icms00.setModBC(source.getModBC().getXmlData());
         icms00.setVBC(RUTypes.parseString(source.getVbc()));
         icms00.setPICMS(RUTypes.parseString(source.getPicms()));
         icms00.setVICMS(RUTypes.parseString(source.getVicms()));
@@ -1518,13 +1516,13 @@ public final class MapperForNfeAutorizacaoLoteV400 {
         TNFe.InfNFe.Det.Imposto.ICMS.ICMS10 icms10 = new TNFe.InfNFe.Det.Imposto.ICMS.ICMS10();
         icms10.setOrig(source.getOrig().getXmlData());
         icms10.setCST(source.getCst().getXmlData());
-        icms10.setModBC(RUTypes.parseString(source.getModBC()));
+        icms10.setModBC(source.getModBC().getXmlData());
         icms10.setVBC(RUTypes.parseString(source.getVbc()));
         icms10.setPICMS(RUTypes.parseString(source.getPicms()));
         icms10.setVICMS(RUTypes.parseString(source.getVicms()));
         icms10.setPFCP(RUTypes.parseString(source.getPfcp()));
         icms10.setVFCP(RUTypes.parseString(source.getVfcp()));
-        icms10.setModBCST(RUTypes.parseString(source.getModBCST()));
+        icms10.setModBCST(source.getModBCST().getXmlData());
         icms10.setPMVAST(RUTypes.parseString(source.getPmvaST()));
         icms10.setPRedBCST(RUTypes.parseString(source.getPredBCST()));
         icms10.setVBCST(RUTypes.parseString(source.getVbcST()));
@@ -1539,7 +1537,7 @@ public final class MapperForNfeAutorizacaoLoteV400 {
         TNFe.InfNFe.Det.Imposto.ICMS.ICMS20 icms20 = new TNFe.InfNFe.Det.Imposto.ICMS.ICMS20();
         icms20.setOrig(source.getOrig().getXmlData());
         icms20.setCST(source.getCst().getXmlData());
-        icms20.setModBC(RUTypes.parseString(source.getModBC()));
+        icms20.setModBC(source.getModBC().getXmlData());
         icms20.setPRedBC(RUTypes.parseString(source.getPredBC()));
         icms20.setVBC(RUTypes.parseString(source.getVbc()));
         icms20.setPICMS(RUTypes.parseString(source.getPicms()));
@@ -1547,14 +1545,14 @@ public final class MapperForNfeAutorizacaoLoteV400 {
         icms20.setVFCP(RUTypes.parseString(source.getVfcp()));
         icms20.setPFCP(RUTypes.parseString(source.getPfcp()));
         icms20.setVICMSDeson(RUTypes.parseString(source.getVicmsDeson()));
-        icms20.setMotDesICMS(RUTypes.parseString(source.getMotDesICMS()));
+        icms20.setMotDesICMS(source.getMotDesICMS().getXmlData());
         target.setICMS20(icms20);
         break;
       case CST_30_ISENTA_OU_NAO_TRIBUTADA_COM_ST:
         TNFe.InfNFe.Det.Imposto.ICMS.ICMS30 icms30 = new TNFe.InfNFe.Det.Imposto.ICMS.ICMS30();
         icms30.setOrig(source.getOrig().getXmlData());
         icms30.setCST(source.getCst().getXmlData());
-        icms30.setModBCST(RUTypes.parseString(source.getModBCST()));
+        icms30.setModBCST(source.getModBCST().getXmlData());
         icms30.setPMVAST(RUTypes.parseString(source.getPmvaST()));
         icms30.setPRedBCST(RUTypes.parseString(source.getPredBCST()));
         icms30.setVBCST(RUTypes.parseString(source.getVbcST()));
@@ -1564,7 +1562,7 @@ public final class MapperForNfeAutorizacaoLoteV400 {
         icms30.setPFCPST(RUTypes.parseString(source.getPfcpST()));
         icms30.setVFCPST(RUTypes.parseString(source.getVfcpST()));
         icms30.setVICMSDeson(RUTypes.parseString(source.getVicmsDeson()));
-        icms30.setMotDesICMS(RUTypes.parseString(source.getMotDesICMS()));
+        icms30.setMotDesICMS(source.getMotDesICMS().getXmlData());
         target.setICMS30(icms30);
         break;
       case CST_40_ISENTA:
@@ -1574,14 +1572,14 @@ public final class MapperForNfeAutorizacaoLoteV400 {
         icms40.setOrig(source.getOrig().getXmlData());
         icms40.setCST(source.getCst().getXmlData());
         icms40.setVICMSDeson(RUTypes.parseString(source.getVicmsDeson()));
-        icms40.setMotDesICMS(RUTypes.parseString(source.getMotDesICMS()));
+        icms40.setMotDesICMS(source.getMotDesICMS().getXmlData());
         target.setICMS40(icms40);
         break;
       case CST_51_DIFERIMENTO:
         TNFe.InfNFe.Det.Imposto.ICMS.ICMS51 icms51 = new TNFe.InfNFe.Det.Imposto.ICMS.ICMS51();
         icms51.setOrig(source.getOrig().getXmlData());
         icms51.setCST(source.getCst().getXmlData());
-        icms51.setModBC(RUTypes.parseString(source.getModBC()));
+        icms51.setModBC(source.getModBC().getXmlData());
         icms51.setVBC(RUTypes.parseString(source.getVbc()));
         icms51.setPRedBC(RUTypes.parseString(source.getPredBC()));
         icms51.setPICMS(RUTypes.parseString(source.getPicms()));
@@ -1611,14 +1609,14 @@ public final class MapperForNfeAutorizacaoLoteV400 {
         TNFe.InfNFe.Det.Imposto.ICMS.ICMS70 icms70 = new TNFe.InfNFe.Det.Imposto.ICMS.ICMS70();
         icms70.setOrig(source.getOrig().getXmlData());
         icms70.setCST(source.getCst().getXmlData());
-        icms70.setModBC(RUTypes.parseString(source.getModBC()));
+        icms70.setModBC(source.getModBC().getXmlData());
         icms70.setPRedBC(RUTypes.parseString(source.getPredBC()));
         icms70.setVBC(RUTypes.parseString(source.getVbc()));
         icms70.setPICMS(RUTypes.parseString(source.getPicms()));
         icms70.setVICMS(RUTypes.parseString(source.getVicms()));
         icms70.setPFCP(RUTypes.parseString(source.getPfcp()));
         icms70.setVFCP(RUTypes.parseString(source.getVfcp()));
-        icms70.setModBCST(RUTypes.parseString(source.getModBCST()));
+        icms70.setModBCST(source.getModBCST().getXmlData());
         icms70.setPMVAST(RUTypes.parseString(source.getPmvaST()));
         icms70.setPRedBCST(RUTypes.parseString(source.getPredBCST()));
         icms70.setVBCST(RUTypes.parseString(source.getVbcST()));
@@ -1628,7 +1626,7 @@ public final class MapperForNfeAutorizacaoLoteV400 {
         icms70.setPFCPST(RUTypes.parseString(source.getPfcpST()));
         icms70.setVFCPST(RUTypes.parseString(source.getVfcpST()));
         icms70.setVICMSDeson(RUTypes.parseString(source.getVicmsDeson()));
-        icms70.setMotDesICMS(RUTypes.parseString(source.getMotDesICMS()));
+        icms70.setMotDesICMS(source.getMotDesICMS().getXmlData());
         target.setICMS70(icms70);
         break;
       case CST_90_OUTROS:
@@ -1636,14 +1634,14 @@ public final class MapperForNfeAutorizacaoLoteV400 {
         TNFe.InfNFe.Det.Imposto.ICMS.ICMS90 icms90 = new TNFe.InfNFe.Det.Imposto.ICMS.ICMS90();
         icms90.setOrig(source.getOrig().getXmlData());
         icms90.setCST(source.getCst().getXmlData());
-        icms90.setModBC(RUTypes.parseString(source.getModBC()));
+        icms90.setModBC(source.getModBC().getXmlData());
         icms90.setVBC(RUTypes.parseString(source.getVbc()));
         icms90.setPRedBC(RUTypes.parseString(source.getPredBC()));
         icms90.setPICMS(RUTypes.parseString(source.getPicms()));
         icms90.setVICMS(RUTypes.parseString(source.getVicms()));
         icms90.setVFCP(RUTypes.parseString(source.getVfcp()));
         icms90.setPFCP(RUTypes.parseString(source.getPfcp()));
-        icms90.setModBCST(RUTypes.parseString(source.getModBCST()));
+        icms90.setModBCST(source.getModBCST().getXmlData());
         icms90.setPMVAST(RUTypes.parseString(source.getPmvaST()));
         icms90.setPRedBCST(RUTypes.parseString(source.getPredBCST()));
         icms90.setVBCST(RUTypes.parseString(source.getVbcST()));
@@ -1653,7 +1651,7 @@ public final class MapperForNfeAutorizacaoLoteV400 {
         icms90.setPFCPST(RUTypes.parseString(source.getPfcpST()));
         icms90.setVFCPST(RUTypes.parseString(source.getVfcpST()));
         icms90.setVICMSDeson(RUTypes.parseString(source.getVicmsDeson()));
-        icms90.setMotDesICMS(RUTypes.parseString(source.getMotDesICMS()));
+        icms90.setMotDesICMS(source.getMotDesICMS().getXmlData());
         target.setICMS90(icms90);
         break;
     }
@@ -1707,7 +1705,7 @@ public final class MapperForNfeAutorizacaoLoteV400 {
       target.setPfcp(RUTypes.parseBigDecimal(node.getPFCP()));
       target.setVfcp(RUTypes.parseBigDecimal(node.getVFCP()));
       target.setVicmsDeson(RUTypes.parseBigDecimal(node.getVICMSDeson()));
-      target.setMotDesICMS(RUTypes.parseInteger(node.getMotDesICMS()));
+      target.setMotDesICMS(SEFAZEnums.valueOfXMLData(SEFAZ_motDesICMS.class, node.getMotDesICMS()));
     } else if (source.getICMS30() != null) {
       TNFe.InfNFe.Det.Imposto.ICMS.ICMS30 node = source.getICMS30();
       target.setCst(SEFAZEnums.valueOfXMLData(SEFAZ_CST_ICMS.class, node.getCST()));
@@ -1722,13 +1720,13 @@ public final class MapperForNfeAutorizacaoLoteV400 {
       target.setPfcpST(RUTypes.parseBigDecimal(node.getPFCPST()));
       target.setVfcpST(RUTypes.parseBigDecimal(node.getVFCPST()));
       target.setVicmsDeson(RUTypes.parseBigDecimal(node.getVICMSDeson()));
-      target.setMotDesICMS(RUTypes.parseInteger(node.getMotDesICMS()));
+      target.setMotDesICMS(SEFAZEnums.valueOfXMLData(SEFAZ_motDesICMS.class, node.getMotDesICMS()));
     } else if (source.getICMS40() != null) {
       TNFe.InfNFe.Det.Imposto.ICMS.ICMS40 node = source.getICMS40();
       target.setCst(SEFAZEnums.valueOfXMLData(SEFAZ_CST_ICMS.class, node.getCST()));
       target.setOrig(SEFAZEnums.valueOfXMLData(SEFAZEnums.SEFAZ_orig.class, node.getOrig()));
       target.setVicmsDeson(RUTypes.parseBigDecimal(node.getVICMSDeson()));
-      target.setMotDesICMS(RUTypes.parseInteger(node.getMotDesICMS()));
+      target.setMotDesICMS(SEFAZEnums.valueOfXMLData(SEFAZ_motDesICMS.class, node.getMotDesICMS()));
     } else if (source.getICMS51() != null) {
       TNFe.InfNFe.Det.Imposto.ICMS.ICMS51 node = source.getICMS51();
       target.setCst(SEFAZEnums.valueOfXMLData(SEFAZ_CST_ICMS.class, node.getCST()));
@@ -1776,7 +1774,7 @@ public final class MapperForNfeAutorizacaoLoteV400 {
       target.setPfcpST(RUTypes.parseBigDecimal(node.getPFCPST()));
       target.setVfcpST(RUTypes.parseBigDecimal(node.getVFCPST()));
       target.setVicmsDeson(RUTypes.parseBigDecimal(node.getVICMSDeson()));
-      target.setMotDesICMS(RUTypes.parseInteger(node.getMotDesICMS()));
+      target.setMotDesICMS(SEFAZEnums.valueOfXMLData(SEFAZ_motDesICMS.class, node.getMotDesICMS()));
     } else if (source.getICMS90() != null) {
       TNFe.InfNFe.Det.Imposto.ICMS.ICMS90 node = source.getICMS90();
       target.setCst(SEFAZEnums.valueOfXMLData(SEFAZ_CST_ICMS.class, node.getCST()));
@@ -1798,7 +1796,7 @@ public final class MapperForNfeAutorizacaoLoteV400 {
       target.setPfcpST(RUTypes.parseBigDecimal(node.getPFCPST()));
       target.setVfcpST(RUTypes.parseBigDecimal(node.getVFCPST()));
       target.setVicmsDeson(RUTypes.parseBigDecimal(node.getVICMSDeson()));
-      target.setMotDesICMS(RUTypes.parseInteger(node.getMotDesICMS()));
+      target.setMotDesICMS(SEFAZEnums.valueOfXMLData(SEFAZ_motDesICMS.class, node.getMotDesICMS()));
     } else if (source.getICMSSN101() != null) {
       TNFe.InfNFe.Det.Imposto.ICMS.ICMSSN101 node = source.getICMSSN101();
       target.setCsosn(SEFAZEnums.valueOfXMLData(SEFAZEnums.SEFAZ_CSOSN.class, node.getCSOSN()));
