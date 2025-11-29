@@ -14,7 +14,10 @@ import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums;
 import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.IndIEDestEnum;
 import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_CRT;
 import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_CST_COFINS;
+import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_CST_ICMS;
+import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_CST_IPI;
 import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_CST_PIS;
+import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_CSOSN;
 import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_cRegTrib;
 import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_finNFe;
 import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_idDest;
@@ -25,6 +28,8 @@ import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_indPres;
 import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_indProc;
 import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_indSinc;
 import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_indTot;
+import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_modBC;
+import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_modBCST;
 import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_mod;
 import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_procEmi;
 import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_tBand;
@@ -49,6 +54,7 @@ import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZEnderEmitVO;
 import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZEnviNFeVO;
 import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZFatVO;
 import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZICMSTotVO;
+import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZICMSUFDestVO;
 import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZISSQNTotVO;
 import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZIdeVO;
 import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZImpostoVO;
@@ -71,6 +77,8 @@ import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZRefNFPVO;
 import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZRefNFVO;
 import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZRetEnviNFeVO;
 import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZRetTranspVO;
+import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZICMSVO;
+import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZIPIVO;
 import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZTotalVO;
 import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZTranspVO;
 import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZTransportaVO;
@@ -1339,6 +1347,18 @@ public final class MapperForNfeAutorizacaoLoteV400 {
       return null;
     }
     TNFe.InfNFe.Det.Imposto target = new TNFe.InfNFe.Det.Imposto();
+    TNFe.InfNFe.Det.Imposto.ICMS icms = toJaxb(source.getIcmsVO());
+    if (icms != null) {
+      target.getContent().add(SEFAZUtils.auxCreateJAXBElement("ICMS", icms));
+    }
+    TNFe.InfNFe.Det.Imposto.ICMSUFDest icmsUFDest = toJaxb(source.getIcmsUFDestVO());
+    if (icmsUFDest != null) {
+      target.getContent().add(SEFAZUtils.auxCreateJAXBElement("ICMSUFDest", icmsUFDest));
+    }
+    TNFe.InfNFe.Det.Imposto.IPI ipi = toJaxb(source.getIpiVO());
+    if (ipi != null) {
+      target.getContent().add(SEFAZUtils.auxCreateJAXBElement("IPI", ipi));
+    }
     if (source.getVtotTrib() != null) {
       target.getContent().add(SEFAZUtils.auxCreateJAXBElement("vTotTrib", RUTypes.parseString(source.getVtotTrib())));
     }
@@ -1366,7 +1386,13 @@ public final class MapperForNfeAutorizacaoLoteV400 {
         }
         Object value = element.getValue();
         String localName = element.getName().getLocalPart();
-        if ("vTotTrib".equals(localName) && value instanceof String) {
+        if ("ICMS".equals(localName) && value instanceof TNFe.InfNFe.Det.Imposto.ICMS) {
+          target.setIcmsVO(toVO((TNFe.InfNFe.Det.Imposto.ICMS) value, target));
+        } else if ("ICMSUFDest".equals(localName) && value instanceof TNFe.InfNFe.Det.Imposto.ICMSUFDest) {
+          target.setIcmsUFDestVO(toVO((TNFe.InfNFe.Det.Imposto.ICMSUFDest) value, target));
+        } else if ("IPI".equals(localName) && value instanceof TNFe.InfNFe.Det.Imposto.IPI) {
+          target.setIpiVO(toVO((TNFe.InfNFe.Det.Imposto.IPI) value, target));
+        } else if ("vTotTrib".equals(localName) && value instanceof String) {
           target.setVtotTrib(RUTypes.parseBigDecimal((String) value));
         } else if ("PIS".equals(localName) && value instanceof TNFe.InfNFe.Det.Imposto.PIS) {
           target.setPisVO(toVO((TNFe.InfNFe.Det.Imposto.PIS) value, target));
@@ -1374,6 +1400,568 @@ public final class MapperForNfeAutorizacaoLoteV400 {
           target.setCofinsVO(toVO((TNFe.InfNFe.Det.Imposto.COFINS) value, target));
         }
       }
+    }
+    return target;
+  }
+
+  public static TNFe.InfNFe.Det.Imposto.ICMS toJaxb(SEFAZICMSVO source) {
+    if (source == null) {
+      return null;
+    }
+    TNFe.InfNFe.Det.Imposto.ICMS target = new TNFe.InfNFe.Det.Imposto.ICMS();
+    if (source.getCsosn() != null) {
+      switch (source.getCsosn()) {
+        case CSOSN_101_TRIBUTADA_COM_PERMISSAO_CREDITO:
+          TNFe.InfNFe.Det.Imposto.ICMS.ICMSSN101 sn101 = new TNFe.InfNFe.Det.Imposto.ICMS.ICMSSN101();
+          sn101.setOrig(source.getOrig().getXmlData());
+          sn101.setCSOSN(source.getCsosn().getXmlData());
+          sn101.setPCredSN(RUTypes.parseString(source.getPcredSN()));
+          sn101.setVCredICMSSN(RUTypes.parseString(source.getVcredICMSSN()));
+          target.setICMSSN101(sn101);
+          break;
+        case CSOSN_102_TRIBUTADA_SEM_PERMISSAO_CREDITO:
+        case CSOSN_103_ISENTA_NTRIBUTADO_NOVARG:
+        case CSOSN_300_IMUNE:
+        case CSOSN_400_NAO_TRIBUTADA:
+          TNFe.InfNFe.Det.Imposto.ICMS.ICMSSN102 sn102 = new TNFe.InfNFe.Det.Imposto.ICMS.ICMSSN102();
+          sn102.setOrig(source.getOrig().getXmlData());
+          sn102.setCSOSN(source.getCsosn().getXmlData());
+          target.setICMSSN102(sn102);
+          break;
+        case CSOSN_201_TRIBUTADA_COM_PERMISSAO_CREDITO_COM_ST:
+          TNFe.InfNFe.Det.Imposto.ICMS.ICMSSN201 sn201 = new TNFe.InfNFe.Det.Imposto.ICMS.ICMSSN201();
+          sn201.setOrig(source.getOrig().getXmlData());
+          sn201.setCSOSN(source.getCsosn().getXmlData());
+          sn201.setModBCST(RUTypes.parseString(source.getModBCST()));
+          sn201.setPMVAST(RUTypes.parseString(source.getPmvaST()));
+          sn201.setPRedBCST(RUTypes.parseString(source.getPredBCST()));
+          sn201.setVBCST(RUTypes.parseString(source.getVbcST()));
+          sn201.setPICMSST(RUTypes.parseString(source.getPicmsST()));
+          sn201.setVICMSST(RUTypes.parseString(source.getVicmsST()));
+          sn201.setVBCFCPST(RUTypes.parseString(source.getVbcFCPST()));
+          sn201.setPFCPST(RUTypes.parseString(source.getPfcpST()));
+          sn201.setVFCPST(RUTypes.parseString(source.getVfcpST()));
+          sn201.setPCredSN(RUTypes.parseString(source.getPcredSN()));
+          sn201.setVCredICMSSN(RUTypes.parseString(source.getVcredICMSSN()));
+          target.setICMSSN201(sn201);
+          break;
+        case CSOSN_202_TRIBUTADA_SEM_PERMISSAO_CREDITO_COM_ST:
+        case CSOSN_203_ISENCAO_ICMS_PARA_FAIXA_COM_ST:
+          TNFe.InfNFe.Det.Imposto.ICMS.ICMSSN202 sn202 = new TNFe.InfNFe.Det.Imposto.ICMS.ICMSSN202();
+          sn202.setOrig(source.getOrig().getXmlData());
+          sn202.setCSOSN(source.getCsosn().getXmlData());
+          sn202.setModBCST(RUTypes.parseString(source.getModBCST()));
+          sn202.setPMVAST(RUTypes.parseString(source.getPmvaST()));
+          sn202.setPRedBCST(RUTypes.parseString(source.getPredBCST()));
+          sn202.setVBCST(RUTypes.parseString(source.getVbcST()));
+          sn202.setPICMSST(RUTypes.parseString(source.getPicmsST()));
+          sn202.setVICMSST(RUTypes.parseString(source.getVicmsST()));
+          sn202.setVBCFCPST(RUTypes.parseString(source.getVbcFCPST()));
+          sn202.setPFCPST(RUTypes.parseString(source.getPfcpST()));
+          sn202.setVFCPST(RUTypes.parseString(source.getVfcpST()));
+          target.setICMSSN202(sn202);
+          break;
+        case CSOSN_500_ICMS_COBRADO_ANTECIPACAO_ST:
+          TNFe.InfNFe.Det.Imposto.ICMS.ICMSSN500 sn500 = new TNFe.InfNFe.Det.Imposto.ICMS.ICMSSN500();
+          sn500.setOrig(source.getOrig().getXmlData());
+          sn500.setCSOSN(source.getCsosn().getXmlData());
+          sn500.setVBCSTRet(RUTypes.parseString(source.getVbcSTRet()));
+          sn500.setPST(RUTypes.parseString(source.getPst()));
+          sn500.setVICMSSTRet(RUTypes.parseString(source.getVicmsSTRet()));
+          sn500.setVBCFCPSTRet(RUTypes.parseString(source.getVbcFCPSTRet()));
+          sn500.setPFCPSTRet(RUTypes.parseString(source.getPfcpSTRet()));
+          sn500.setVFCPSTRet(RUTypes.parseString(source.getVfcpSTRet()));
+          target.setICMSSN500(sn500);
+          break;
+        default:
+          TNFe.InfNFe.Det.Imposto.ICMS.ICMSSN900 sn900 = new TNFe.InfNFe.Det.Imposto.ICMS.ICMSSN900();
+          sn900.setOrig(source.getOrig().getXmlData());
+          sn900.setCSOSN(source.getCsosn().getXmlData());
+          sn900.setModBC(RUTypes.parseString(source.getModBC()));
+          sn900.setVBC(RUTypes.parseString(source.getVbc()));
+          sn900.setPRedBC(RUTypes.parseString(source.getPredBC()));
+          sn900.setPICMS(RUTypes.parseString(source.getPicms()));
+          sn900.setVICMS(RUTypes.parseString(source.getVicms()));
+          sn900.setModBCST(RUTypes.parseString(source.getModBCST()));
+          sn900.setPMVAST(RUTypes.parseString(source.getPmvaST()));
+          sn900.setPRedBCST(RUTypes.parseString(source.getPredBCST()));
+          sn900.setVBCST(RUTypes.parseString(source.getVbcST()));
+          sn900.setPICMSST(RUTypes.parseString(source.getPicmsST()));
+          sn900.setVICMSST(RUTypes.parseString(source.getVicmsST()));
+          sn900.setVBCFCPST(RUTypes.parseString(source.getVbcFCPST()));
+          sn900.setPFCPST(RUTypes.parseString(source.getPfcpST()));
+          sn900.setVFCPST(RUTypes.parseString(source.getVfcpST()));
+          sn900.setPCredSN(RUTypes.parseString(source.getPcredSN()));
+          sn900.setVCredICMSSN(RUTypes.parseString(source.getVcredICMSSN()));
+          target.setICMSSN900(sn900);
+          break;
+      }
+      return target;
+    }
+    if (source.getCst() == null) {
+      return target;
+    }
+    switch (source.getCst()) {
+      case CST_00_TRIBUTADO_INTEGRALMENTE:
+        TNFe.InfNFe.Det.Imposto.ICMS.ICMS00 icms00 = new TNFe.InfNFe.Det.Imposto.ICMS.ICMS00();
+        icms00.setOrig(source.getOrig().getXmlData());
+        icms00.setCST(source.getCst().getXmlData());
+        icms00.setModBC(RUTypes.parseString(source.getModBC()));
+        icms00.setVBC(RUTypes.parseString(source.getVbc()));
+        icms00.setPICMS(RUTypes.parseString(source.getPicms()));
+        icms00.setVICMS(RUTypes.parseString(source.getVicms()));
+        icms00.setPFCP(RUTypes.parseString(source.getPfcp()));
+        icms00.setVFCP(RUTypes.parseString(source.getVfcp()));
+        target.setICMS00(icms00);
+        break;
+      case CST_10_TRIBUTADO_COM_ICMS_ST:
+        TNFe.InfNFe.Det.Imposto.ICMS.ICMS10 icms10 = new TNFe.InfNFe.Det.Imposto.ICMS.ICMS10();
+        icms10.setOrig(source.getOrig().getXmlData());
+        icms10.setCST(source.getCst().getXmlData());
+        icms10.setModBC(RUTypes.parseString(source.getModBC()));
+        icms10.setVBC(RUTypes.parseString(source.getVbc()));
+        icms10.setPICMS(RUTypes.parseString(source.getPicms()));
+        icms10.setVICMS(RUTypes.parseString(source.getVicms()));
+        icms10.setPFCP(RUTypes.parseString(source.getPfcp()));
+        icms10.setVFCP(RUTypes.parseString(source.getVfcp()));
+        icms10.setModBCST(RUTypes.parseString(source.getModBCST()));
+        icms10.setPMVAST(RUTypes.parseString(source.getPmvaST()));
+        icms10.setPRedBCST(RUTypes.parseString(source.getPredBCST()));
+        icms10.setVBCST(RUTypes.parseString(source.getVbcST()));
+        icms10.setPICMSST(RUTypes.parseString(source.getPicmsST()));
+        icms10.setVICMSST(RUTypes.parseString(source.getVicmsST()));
+        icms10.setVBCFCPST(RUTypes.parseString(source.getVbcFCPST()));
+        icms10.setPFCPST(RUTypes.parseString(source.getPfcpST()));
+        icms10.setVFCPST(RUTypes.parseString(source.getVfcpST()));
+        target.setICMS10(icms10);
+        break;
+      case CST_20_REDUCAO_BASE_CALCULO:
+        TNFe.InfNFe.Det.Imposto.ICMS.ICMS20 icms20 = new TNFe.InfNFe.Det.Imposto.ICMS.ICMS20();
+        icms20.setOrig(source.getOrig().getXmlData());
+        icms20.setCST(source.getCst().getXmlData());
+        icms20.setModBC(RUTypes.parseString(source.getModBC()));
+        icms20.setPRedBC(RUTypes.parseString(source.getPredBC()));
+        icms20.setVBC(RUTypes.parseString(source.getVbc()));
+        icms20.setPICMS(RUTypes.parseString(source.getPicms()));
+        icms20.setVICMS(RUTypes.parseString(source.getVicms()));
+        icms20.setVFCP(RUTypes.parseString(source.getVfcp()));
+        icms20.setPFCP(RUTypes.parseString(source.getPfcp()));
+        icms20.setVICMSDeson(RUTypes.parseString(source.getVicmsDeson()));
+        icms20.setMotDesICMS(RUTypes.parseString(source.getMotDesICMS()));
+        target.setICMS20(icms20);
+        break;
+      case CST_30_ISENTA_OU_NAO_TRIBUTADA_COM_ST:
+        TNFe.InfNFe.Det.Imposto.ICMS.ICMS30 icms30 = new TNFe.InfNFe.Det.Imposto.ICMS.ICMS30();
+        icms30.setOrig(source.getOrig().getXmlData());
+        icms30.setCST(source.getCst().getXmlData());
+        icms30.setModBCST(RUTypes.parseString(source.getModBCST()));
+        icms30.setPMVAST(RUTypes.parseString(source.getPmvaST()));
+        icms30.setPRedBCST(RUTypes.parseString(source.getPredBCST()));
+        icms30.setVBCST(RUTypes.parseString(source.getVbcST()));
+        icms30.setPICMSST(RUTypes.parseString(source.getPicmsST()));
+        icms30.setVICMSST(RUTypes.parseString(source.getVicmsST()));
+        icms30.setVBCFCPST(RUTypes.parseString(source.getVbcFCPST()));
+        icms30.setPFCPST(RUTypes.parseString(source.getPfcpST()));
+        icms30.setVFCPST(RUTypes.parseString(source.getVfcpST()));
+        icms30.setVICMSDeson(RUTypes.parseString(source.getVicmsDeson()));
+        icms30.setMotDesICMS(RUTypes.parseString(source.getMotDesICMS()));
+        target.setICMS30(icms30);
+        break;
+      case CST_40_ISENTA:
+      case CST_41_NAO_TRIBUTADA:
+      case CST_50_SUSPENSAO:
+        TNFe.InfNFe.Det.Imposto.ICMS.ICMS40 icms40 = new TNFe.InfNFe.Det.Imposto.ICMS.ICMS40();
+        icms40.setOrig(source.getOrig().getXmlData());
+        icms40.setCST(source.getCst().getXmlData());
+        icms40.setVICMSDeson(RUTypes.parseString(source.getVicmsDeson()));
+        icms40.setMotDesICMS(RUTypes.parseString(source.getMotDesICMS()));
+        target.setICMS40(icms40);
+        break;
+      case CST_51_DIFERIMENTO:
+        TNFe.InfNFe.Det.Imposto.ICMS.ICMS51 icms51 = new TNFe.InfNFe.Det.Imposto.ICMS.ICMS51();
+        icms51.setOrig(source.getOrig().getXmlData());
+        icms51.setCST(source.getCst().getXmlData());
+        icms51.setModBC(RUTypes.parseString(source.getModBC()));
+        icms51.setVBC(RUTypes.parseString(source.getVbc()));
+        icms51.setPRedBC(RUTypes.parseString(source.getPredBC()));
+        icms51.setPICMS(RUTypes.parseString(source.getPicms()));
+        icms51.setVICMSOp(RUTypes.parseString(source.getVicmsOp()));
+        icms51.setPDif(RUTypes.parseString(source.getPdif()));
+        icms51.setVICMSDif(RUTypes.parseString(source.getVicmsDif()));
+        icms51.setVICMS(RUTypes.parseString(source.getVicms()));
+        icms51.setVFCP(RUTypes.parseString(source.getVfcp()));
+        icms51.setPFCP(RUTypes.parseString(source.getPfcp()));
+        target.setICMS51(icms51);
+        break;
+      case CST_60_COBRADO_ANTERIOR_ST:
+        TNFe.InfNFe.Det.Imposto.ICMS.ICMS60 icms60 = new TNFe.InfNFe.Det.Imposto.ICMS.ICMS60();
+        icms60.setOrig(source.getOrig().getXmlData());
+        icms60.setCST(source.getCst().getXmlData());
+        icms60.setVBCSTRet(RUTypes.parseString(source.getVbcSTRet()));
+        icms60.setPST(RUTypes.parseString(source.getPst()));
+        icms60.setVICMSSTRet(RUTypes.parseString(source.getVicmsSTRet()));
+        icms60.setVBCFCPSTRet(RUTypes.parseString(source.getVbcFCPSTRet()));
+        icms60.setPFCPSTRet(RUTypes.parseString(source.getPfcpSTRet()));
+        icms60.setVFCPSTRet(RUTypes.parseString(source.getVfcpSTRet()));
+        icms60.setVBCSTRetDest(RUTypes.parseString(source.getVbcSTDest()));
+        icms60.setVICMSSTRetDest(RUTypes.parseString(source.getVicmsSTDest()));
+        target.setICMS60(icms60);
+        break;
+      case CST_70_REDUCAO_BC_COM_ST:
+        TNFe.InfNFe.Det.Imposto.ICMS.ICMS70 icms70 = new TNFe.InfNFe.Det.Imposto.ICMS.ICMS70();
+        icms70.setOrig(source.getOrig().getXmlData());
+        icms70.setCST(source.getCst().getXmlData());
+        icms70.setModBC(RUTypes.parseString(source.getModBC()));
+        icms70.setPRedBC(RUTypes.parseString(source.getPredBC()));
+        icms70.setVBC(RUTypes.parseString(source.getVbc()));
+        icms70.setPICMS(RUTypes.parseString(source.getPicms()));
+        icms70.setVICMS(RUTypes.parseString(source.getVicms()));
+        icms70.setPFCP(RUTypes.parseString(source.getPfcp()));
+        icms70.setVFCP(RUTypes.parseString(source.getVfcp()));
+        icms70.setModBCST(RUTypes.parseString(source.getModBCST()));
+        icms70.setPMVAST(RUTypes.parseString(source.getPmvaST()));
+        icms70.setPRedBCST(RUTypes.parseString(source.getPredBCST()));
+        icms70.setVBCST(RUTypes.parseString(source.getVbcST()));
+        icms70.setPICMSST(RUTypes.parseString(source.getPicmsST()));
+        icms70.setVICMSST(RUTypes.parseString(source.getVicmsST()));
+        icms70.setVBCFCPST(RUTypes.parseString(source.getVbcFCPST()));
+        icms70.setPFCPST(RUTypes.parseString(source.getPfcpST()));
+        icms70.setVFCPST(RUTypes.parseString(source.getVfcpST()));
+        icms70.setVICMSDeson(RUTypes.parseString(source.getVicmsDeson()));
+        icms70.setMotDesICMS(RUTypes.parseString(source.getMotDesICMS()));
+        target.setICMS70(icms70);
+        break;
+      case CST_90_OUTROS:
+      default:
+        TNFe.InfNFe.Det.Imposto.ICMS.ICMS90 icms90 = new TNFe.InfNFe.Det.Imposto.ICMS.ICMS90();
+        icms90.setOrig(source.getOrig().getXmlData());
+        icms90.setCST(source.getCst().getXmlData());
+        icms90.setModBC(RUTypes.parseString(source.getModBC()));
+        icms90.setVBC(RUTypes.parseString(source.getVbc()));
+        icms90.setPRedBC(RUTypes.parseString(source.getPredBC()));
+        icms90.setPICMS(RUTypes.parseString(source.getPicms()));
+        icms90.setVICMS(RUTypes.parseString(source.getVicms()));
+        icms90.setVFCP(RUTypes.parseString(source.getVfcp()));
+        icms90.setPFCP(RUTypes.parseString(source.getPfcp()));
+        icms90.setModBCST(RUTypes.parseString(source.getModBCST()));
+        icms90.setPMVAST(RUTypes.parseString(source.getPmvaST()));
+        icms90.setPRedBCST(RUTypes.parseString(source.getPredBCST()));
+        icms90.setVBCST(RUTypes.parseString(source.getVbcST()));
+        icms90.setPICMSST(RUTypes.parseString(source.getPicmsST()));
+        icms90.setVICMSST(RUTypes.parseString(source.getVicmsST()));
+        icms90.setVBCFCPST(RUTypes.parseString(source.getVbcFCPST()));
+        icms90.setPFCPST(RUTypes.parseString(source.getPfcpST()));
+        icms90.setVFCPST(RUTypes.parseString(source.getVfcpST()));
+        icms90.setVICMSDeson(RUTypes.parseString(source.getVicmsDeson()));
+        icms90.setMotDesICMS(RUTypes.parseString(source.getMotDesICMS()));
+        target.setICMS90(icms90);
+        break;
+    }
+    return target;
+  }
+
+  public static SEFAZICMSVO toVO(TNFe.InfNFe.Det.Imposto.ICMS source, SEFAZImpostoVO parent) throws RFWException {
+    if (source == null) {
+      return null;
+    }
+    SEFAZICMSVO target = new SEFAZICMSVO();
+    target.setImpostoVO(parent);
+    if (source.getICMS00() != null) {
+      TNFe.InfNFe.Det.Imposto.ICMS.ICMS00 node = source.getICMS00();
+      target.setCst(SEFAZEnums.valueOfXMLData(SEFAZ_CST_ICMS.class, node.getCST()));
+      target.setOrig(SEFAZEnums.valueOfXMLData(SEFAZEnums.SEFAZ_orig.class, node.getOrig()));
+      target.setModBC(SEFAZEnums.valueOfXMLData(SEFAZEnums.SEFAZ_modBC.class, node.getModBC()));
+      target.setVbc(RUTypes.parseBigDecimal(node.getVBC()));
+      target.setPicms(RUTypes.parseBigDecimal(node.getPICMS()));
+      target.setVicms(RUTypes.parseBigDecimal(node.getVICMS()));
+      target.setPfcp(RUTypes.parseBigDecimal(node.getPFCP()));
+      target.setVfcp(RUTypes.parseBigDecimal(node.getVFCP()));
+    } else if (source.getICMS10() != null) {
+      TNFe.InfNFe.Det.Imposto.ICMS.ICMS10 node = source.getICMS10();
+      target.setCst(SEFAZEnums.valueOfXMLData(SEFAZ_CST_ICMS.class, node.getCST()));
+      target.setOrig(SEFAZEnums.valueOfXMLData(SEFAZEnums.SEFAZ_orig.class, node.getOrig()));
+      target.setModBC(SEFAZEnums.valueOfXMLData(SEFAZEnums.SEFAZ_modBC.class, node.getModBC()));
+      target.setVbc(RUTypes.parseBigDecimal(node.getVBC()));
+      target.setPicms(RUTypes.parseBigDecimal(node.getPICMS()));
+      target.setVicms(RUTypes.parseBigDecimal(node.getVICMS()));
+      target.setPfcp(RUTypes.parseBigDecimal(node.getPFCP()));
+      target.setVfcp(RUTypes.parseBigDecimal(node.getVFCP()));
+      target.setModBCST(SEFAZEnums.valueOfXMLData(SEFAZEnums.SEFAZ_modBCST.class, node.getModBCST()));
+      target.setPmvaST(RUTypes.parseBigDecimal(node.getPMVAST()));
+      target.setPredBCST(RUTypes.parseBigDecimal(node.getPRedBCST()));
+      target.setVbcST(RUTypes.parseBigDecimal(node.getVBCST()));
+      target.setPicmsST(RUTypes.parseBigDecimal(node.getPICMSST()));
+      target.setVicmsST(RUTypes.parseBigDecimal(node.getVICMSST()));
+      target.setVbcFCPST(RUTypes.parseBigDecimal(node.getVBCFCPST()));
+      target.setPfcpST(RUTypes.parseBigDecimal(node.getPFCPST()));
+      target.setVfcpST(RUTypes.parseBigDecimal(node.getVFCPST()));
+    } else if (source.getICMS20() != null) {
+      TNFe.InfNFe.Det.Imposto.ICMS.ICMS20 node = source.getICMS20();
+      target.setCst(SEFAZEnums.valueOfXMLData(SEFAZ_CST_ICMS.class, node.getCST()));
+      target.setOrig(SEFAZEnums.valueOfXMLData(SEFAZEnums.SEFAZ_orig.class, node.getOrig()));
+      target.setModBC(SEFAZEnums.valueOfXMLData(SEFAZEnums.SEFAZ_modBC.class, node.getModBC()));
+      target.setPredBC(RUTypes.parseBigDecimal(node.getPRedBC()));
+      target.setVbc(RUTypes.parseBigDecimal(node.getVBC()));
+      target.setPicms(RUTypes.parseBigDecimal(node.getPICMS()));
+      target.setVicms(RUTypes.parseBigDecimal(node.getVICMS()));
+      target.setPfcp(RUTypes.parseBigDecimal(node.getPFCP()));
+      target.setVfcp(RUTypes.parseBigDecimal(node.getVFCP()));
+      target.setVicmsDeson(RUTypes.parseBigDecimal(node.getVICMSDeson()));
+      target.setMotDesICMS(RUTypes.parseInteger(node.getMotDesICMS()));
+    } else if (source.getICMS30() != null) {
+      TNFe.InfNFe.Det.Imposto.ICMS.ICMS30 node = source.getICMS30();
+      target.setCst(SEFAZEnums.valueOfXMLData(SEFAZ_CST_ICMS.class, node.getCST()));
+      target.setOrig(SEFAZEnums.valueOfXMLData(SEFAZEnums.SEFAZ_orig.class, node.getOrig()));
+      target.setModBCST(SEFAZEnums.valueOfXMLData(SEFAZEnums.SEFAZ_modBCST.class, node.getModBCST()));
+      target.setPmvaST(RUTypes.parseBigDecimal(node.getPMVAST()));
+      target.setPredBCST(RUTypes.parseBigDecimal(node.getPRedBCST()));
+      target.setVbcST(RUTypes.parseBigDecimal(node.getVBCST()));
+      target.setPicmsST(RUTypes.parseBigDecimal(node.getPICMSST()));
+      target.setVicmsST(RUTypes.parseBigDecimal(node.getVICMSST()));
+      target.setVbcFCPST(RUTypes.parseBigDecimal(node.getVBCFCPST()));
+      target.setPfcpST(RUTypes.parseBigDecimal(node.getPFCPST()));
+      target.setVfcpST(RUTypes.parseBigDecimal(node.getVFCPST()));
+      target.setVicmsDeson(RUTypes.parseBigDecimal(node.getVICMSDeson()));
+      target.setMotDesICMS(RUTypes.parseInteger(node.getMotDesICMS()));
+    } else if (source.getICMS40() != null) {
+      TNFe.InfNFe.Det.Imposto.ICMS.ICMS40 node = source.getICMS40();
+      target.setCst(SEFAZEnums.valueOfXMLData(SEFAZ_CST_ICMS.class, node.getCST()));
+      target.setOrig(SEFAZEnums.valueOfXMLData(SEFAZEnums.SEFAZ_orig.class, node.getOrig()));
+      target.setVicmsDeson(RUTypes.parseBigDecimal(node.getVICMSDeson()));
+      target.setMotDesICMS(RUTypes.parseInteger(node.getMotDesICMS()));
+    } else if (source.getICMS51() != null) {
+      TNFe.InfNFe.Det.Imposto.ICMS.ICMS51 node = source.getICMS51();
+      target.setCst(SEFAZEnums.valueOfXMLData(SEFAZ_CST_ICMS.class, node.getCST()));
+      target.setOrig(SEFAZEnums.valueOfXMLData(SEFAZEnums.SEFAZ_orig.class, node.getOrig()));
+      target.setModBC(SEFAZEnums.valueOfXMLData(SEFAZEnums.SEFAZ_modBC.class, node.getModBC()));
+      target.setVbc(RUTypes.parseBigDecimal(node.getVBC()));
+      target.setPredBC(RUTypes.parseBigDecimal(node.getPRedBC()));
+      target.setPicms(RUTypes.parseBigDecimal(node.getPICMS()));
+      target.setVicmsOp(RUTypes.parseBigDecimal(node.getVICMSOp()));
+      target.setPdif(RUTypes.parseBigDecimal(node.getPDif()));
+      target.setVicmsDif(RUTypes.parseBigDecimal(node.getVICMSDif()));
+      target.setVicms(RUTypes.parseBigDecimal(node.getVICMS()));
+      target.setPfcp(RUTypes.parseBigDecimal(node.getPFCP()));
+      target.setVfcp(RUTypes.parseBigDecimal(node.getVFCP()));
+    } else if (source.getICMS60() != null) {
+      TNFe.InfNFe.Det.Imposto.ICMS.ICMS60 node = source.getICMS60();
+      target.setCst(SEFAZEnums.valueOfXMLData(SEFAZ_CST_ICMS.class, node.getCST()));
+      target.setOrig(SEFAZEnums.valueOfXMLData(SEFAZEnums.SEFAZ_orig.class, node.getOrig()));
+      target.setVbcSTRet(RUTypes.parseBigDecimal(node.getVBCSTRet()));
+      target.setPst(RUTypes.parseBigDecimal(node.getPST()));
+      target.setVicmsSTRet(RUTypes.parseBigDecimal(node.getVICMSSTRet()));
+      target.setVbcFCPSTRet(RUTypes.parseBigDecimal(node.getVBCFCPSTRet()));
+      target.setPfcpSTRet(RUTypes.parseBigDecimal(node.getPFCPSTRet()));
+      target.setVfcpSTRet(RUTypes.parseBigDecimal(node.getVFCPSTRet()));
+      target.setVbcSTDest(RUTypes.parseBigDecimal(node.getVBCSTRetDest()));
+      target.setVicmsSTDest(RUTypes.parseBigDecimal(node.getVICMSSTRetDest()));
+    } else if (source.getICMS70() != null) {
+      TNFe.InfNFe.Det.Imposto.ICMS.ICMS70 node = source.getICMS70();
+      target.setCst(SEFAZEnums.valueOfXMLData(SEFAZ_CST_ICMS.class, node.getCST()));
+      target.setOrig(SEFAZEnums.valueOfXMLData(SEFAZEnums.SEFAZ_orig.class, node.getOrig()));
+      target.setModBC(SEFAZEnums.valueOfXMLData(SEFAZEnums.SEFAZ_modBC.class, node.getModBC()));
+      target.setPredBC(RUTypes.parseBigDecimal(node.getPRedBC()));
+      target.setVbc(RUTypes.parseBigDecimal(node.getVBC()));
+      target.setPicms(RUTypes.parseBigDecimal(node.getPICMS()));
+      target.setVicms(RUTypes.parseBigDecimal(node.getVICMS()));
+      target.setPfcp(RUTypes.parseBigDecimal(node.getPFCP()));
+      target.setVfcp(RUTypes.parseBigDecimal(node.getVFCP()));
+      target.setModBCST(SEFAZEnums.valueOfXMLData(SEFAZEnums.SEFAZ_modBCST.class, node.getModBCST()));
+      target.setPmvaST(RUTypes.parseBigDecimal(node.getPMVAST()));
+      target.setPredBCST(RUTypes.parseBigDecimal(node.getPRedBCST()));
+      target.setVbcST(RUTypes.parseBigDecimal(node.getVBCST()));
+      target.setPicmsST(RUTypes.parseBigDecimal(node.getPICMSST()));
+      target.setVicmsST(RUTypes.parseBigDecimal(node.getVICMSST()));
+      target.setVbcFCPST(RUTypes.parseBigDecimal(node.getVBCFCPST()));
+      target.setPfcpST(RUTypes.parseBigDecimal(node.getPFCPST()));
+      target.setVfcpST(RUTypes.parseBigDecimal(node.getVFCPST()));
+      target.setVicmsDeson(RUTypes.parseBigDecimal(node.getVICMSDeson()));
+      target.setMotDesICMS(RUTypes.parseInteger(node.getMotDesICMS()));
+    } else if (source.getICMS90() != null) {
+      TNFe.InfNFe.Det.Imposto.ICMS.ICMS90 node = source.getICMS90();
+      target.setCst(SEFAZEnums.valueOfXMLData(SEFAZ_CST_ICMS.class, node.getCST()));
+      target.setOrig(SEFAZEnums.valueOfXMLData(SEFAZEnums.SEFAZ_orig.class, node.getOrig()));
+      target.setModBC(SEFAZEnums.valueOfXMLData(SEFAZEnums.SEFAZ_modBC.class, node.getModBC()));
+      target.setVbc(RUTypes.parseBigDecimal(node.getVBC()));
+      target.setPredBC(RUTypes.parseBigDecimal(node.getPRedBC()));
+      target.setPicms(RUTypes.parseBigDecimal(node.getPICMS()));
+      target.setVicms(RUTypes.parseBigDecimal(node.getVICMS()));
+      target.setPfcp(RUTypes.parseBigDecimal(node.getPFCP()));
+      target.setVfcp(RUTypes.parseBigDecimal(node.getVFCP()));
+      target.setModBCST(SEFAZEnums.valueOfXMLData(SEFAZEnums.SEFAZ_modBCST.class, node.getModBCST()));
+      target.setPmvaST(RUTypes.parseBigDecimal(node.getPMVAST()));
+      target.setPredBCST(RUTypes.parseBigDecimal(node.getPRedBCST()));
+      target.setVbcST(RUTypes.parseBigDecimal(node.getVBCST()));
+      target.setPicmsST(RUTypes.parseBigDecimal(node.getPICMSST()));
+      target.setVicmsST(RUTypes.parseBigDecimal(node.getVICMSST()));
+      target.setVbcFCPST(RUTypes.parseBigDecimal(node.getVBCFCPST()));
+      target.setPfcpST(RUTypes.parseBigDecimal(node.getPFCPST()));
+      target.setVfcpST(RUTypes.parseBigDecimal(node.getVFCPST()));
+      target.setVicmsDeson(RUTypes.parseBigDecimal(node.getVICMSDeson()));
+      target.setMotDesICMS(RUTypes.parseInteger(node.getMotDesICMS()));
+    } else if (source.getICMSSN101() != null) {
+      TNFe.InfNFe.Det.Imposto.ICMS.ICMSSN101 node = source.getICMSSN101();
+      target.setCsosn(SEFAZEnums.valueOfXMLData(SEFAZEnums.SEFAZ_CSOSN.class, node.getCSOSN()));
+      target.setOrig(SEFAZEnums.valueOfXMLData(SEFAZEnums.SEFAZ_orig.class, node.getOrig()));
+      target.setPcredSN(RUTypes.parseBigDecimal(node.getPCredSN()));
+      target.setVcredICMSSN(RUTypes.parseBigDecimal(node.getVCredICMSSN()));
+    } else if (source.getICMSSN102() != null) {
+      TNFe.InfNFe.Det.Imposto.ICMS.ICMSSN102 node = source.getICMSSN102();
+      target.setCsosn(SEFAZEnums.valueOfXMLData(SEFAZEnums.SEFAZ_CSOSN.class, node.getCSOSN()));
+      target.setOrig(SEFAZEnums.valueOfXMLData(SEFAZEnums.SEFAZ_orig.class, node.getOrig()));
+    } else if (source.getICMSSN201() != null) {
+      TNFe.InfNFe.Det.Imposto.ICMS.ICMSSN201 node = source.getICMSSN201();
+      target.setCsosn(SEFAZEnums.valueOfXMLData(SEFAZEnums.SEFAZ_CSOSN.class, node.getCSOSN()));
+      target.setOrig(SEFAZEnums.valueOfXMLData(SEFAZEnums.SEFAZ_orig.class, node.getOrig()));
+      target.setModBCST(SEFAZEnums.valueOfXMLData(SEFAZEnums.SEFAZ_modBCST.class, node.getModBCST()));
+      target.setPmvaST(RUTypes.parseBigDecimal(node.getPMVAST()));
+      target.setPredBCST(RUTypes.parseBigDecimal(node.getPRedBCST()));
+      target.setVbcST(RUTypes.parseBigDecimal(node.getVBCST()));
+      target.setPicmsST(RUTypes.parseBigDecimal(node.getPICMSST()));
+      target.setVicmsST(RUTypes.parseBigDecimal(node.getVICMSST()));
+      target.setVbcFCPST(RUTypes.parseBigDecimal(node.getVBCFCPST()));
+      target.setPfcpST(RUTypes.parseBigDecimal(node.getPFCPST()));
+      target.setVfcpST(RUTypes.parseBigDecimal(node.getVFCPST()));
+      target.setPcredSN(RUTypes.parseBigDecimal(node.getPCredSN()));
+      target.setVcredICMSSN(RUTypes.parseBigDecimal(node.getVCredICMSSN()));
+    } else if (source.getICMSSN202() != null) {
+      TNFe.InfNFe.Det.Imposto.ICMS.ICMSSN202 node = source.getICMSSN202();
+      target.setCsosn(SEFAZEnums.valueOfXMLData(SEFAZEnums.SEFAZ_CSOSN.class, node.getCSOSN()));
+      target.setOrig(SEFAZEnums.valueOfXMLData(SEFAZEnums.SEFAZ_orig.class, node.getOrig()));
+      target.setModBCST(SEFAZEnums.valueOfXMLData(SEFAZEnums.SEFAZ_modBCST.class, node.getModBCST()));
+      target.setPmvaST(RUTypes.parseBigDecimal(node.getPMVAST()));
+      target.setPredBCST(RUTypes.parseBigDecimal(node.getPRedBCST()));
+      target.setVbcST(RUTypes.parseBigDecimal(node.getVBCST()));
+      target.setPicmsST(RUTypes.parseBigDecimal(node.getPICMSST()));
+      target.setVicmsST(RUTypes.parseBigDecimal(node.getVICMSST()));
+      target.setVbcFCPST(RUTypes.parseBigDecimal(node.getVBCFCPST()));
+      target.setPfcpST(RUTypes.parseBigDecimal(node.getPFCPST()));
+      target.setVfcpST(RUTypes.parseBigDecimal(node.getVFCPST()));
+    } else if (source.getICMSSN500() != null) {
+      TNFe.InfNFe.Det.Imposto.ICMS.ICMSSN500 node = source.getICMSSN500();
+      target.setCsosn(SEFAZEnums.valueOfXMLData(SEFAZEnums.SEFAZ_CSOSN.class, node.getCSOSN()));
+      target.setOrig(SEFAZEnums.valueOfXMLData(SEFAZEnums.SEFAZ_orig.class, node.getOrig()));
+      target.setVbcSTRet(RUTypes.parseBigDecimal(node.getVBCSTRet()));
+      target.setPst(RUTypes.parseBigDecimal(node.getPST()));
+      target.setVicmsSTRet(RUTypes.parseBigDecimal(node.getVICMSSTRet()));
+      target.setVbcFCPSTRet(RUTypes.parseBigDecimal(node.getVBCFCPSTRet()));
+      target.setPfcpSTRet(RUTypes.parseBigDecimal(node.getPFCPSTRet()));
+      target.setVfcpSTRet(RUTypes.parseBigDecimal(node.getVFCPSTRet()));
+    } else if (source.getICMSSN900() != null) {
+      TNFe.InfNFe.Det.Imposto.ICMS.ICMSSN900 node = source.getICMSSN900();
+      target.setCsosn(SEFAZEnums.valueOfXMLData(SEFAZEnums.SEFAZ_CSOSN.class, node.getCSOSN()));
+      target.setOrig(SEFAZEnums.valueOfXMLData(SEFAZEnums.SEFAZ_orig.class, node.getOrig()));
+      target.setModBC(SEFAZEnums.valueOfXMLData(SEFAZEnums.SEFAZ_modBC.class, node.getModBC()));
+      target.setVbc(RUTypes.parseBigDecimal(node.getVBC()));
+      target.setPredBC(RUTypes.parseBigDecimal(node.getPRedBC()));
+      target.setPicms(RUTypes.parseBigDecimal(node.getPICMS()));
+      target.setVicms(RUTypes.parseBigDecimal(node.getVICMS()));
+      target.setModBCST(SEFAZEnums.valueOfXMLData(SEFAZEnums.SEFAZ_modBCST.class, node.getModBCST()));
+      target.setPmvaST(RUTypes.parseBigDecimal(node.getPMVAST()));
+      target.setPredBCST(RUTypes.parseBigDecimal(node.getPRedBCST()));
+      target.setVbcST(RUTypes.parseBigDecimal(node.getVBCST()));
+      target.setPicmsST(RUTypes.parseBigDecimal(node.getPICMSST()));
+      target.setVicmsST(RUTypes.parseBigDecimal(node.getVICMSST()));
+      target.setVbcFCPST(RUTypes.parseBigDecimal(node.getVBCFCPST()));
+      target.setPfcpST(RUTypes.parseBigDecimal(node.getPFCPST()));
+      target.setVfcpST(RUTypes.parseBigDecimal(node.getVFCPST()));
+      target.setPcredSN(RUTypes.parseBigDecimal(node.getPCredSN()));
+      target.setVcredICMSSN(RUTypes.parseBigDecimal(node.getVCredICMSSN()));
+    }
+    return target;
+  }
+
+  public static TNFe.InfNFe.Det.Imposto.ICMSUFDest toJaxb(SEFAZICMSUFDestVO source) {
+    if (source == null) {
+      return null;
+    }
+    TNFe.InfNFe.Det.Imposto.ICMSUFDest target = new TNFe.InfNFe.Det.Imposto.ICMSUFDest();
+    target.setVBCUFDest(RUTypes.parseString(source.getVbcUFDest()));
+    target.setVBCFCPUFDest(RUTypes.parseString(source.getVbcFCPIFDest()));
+    target.setPFCPUFDest(RUTypes.parseString(source.getPfcpUFDest()));
+    target.setPICMSUFDest(RUTypes.parseString(source.getPicmsUFDest()));
+    target.setPICMSInter(RUTypes.parseString(source.getPicmsInter()));
+    target.setPICMSInterPart(RUTypes.parseString(source.getPicmsInterPart()));
+    target.setVFCPUFDest(RUTypes.parseString(source.getVfcpUFDest()));
+    target.setVICMSUFDest(RUTypes.parseString(source.getVicmsUFDest()));
+    target.setVICMSUFRemet(RUTypes.parseString(source.getVicmsUFRemet()));
+    return target;
+  }
+
+  public static SEFAZICMSUFDestVO toVO(TNFe.InfNFe.Det.Imposto.ICMSUFDest source, SEFAZImpostoVO parent) {
+    if (source == null) {
+      return null;
+    }
+    SEFAZICMSUFDestVO target = new SEFAZICMSUFDestVO();
+    target.setImpostoVO(parent);
+    target.setVbcUFDest(RUTypes.parseBigDecimal(source.getVBCUFDest()));
+    target.setVbcFCPIFDest(RUTypes.parseBigDecimal(source.getVBCFCPUFDest()));
+    target.setPfcpUFDest(RUTypes.parseBigDecimal(source.getPFCPUFDest()));
+    target.setPicmsUFDest(RUTypes.parseBigDecimal(source.getPICMSUFDest()));
+    target.setPicmsInter(RUTypes.parseBigDecimal(source.getPICMSInter()));
+    target.setPicmsInterPart(RUTypes.parseBigDecimal(source.getPICMSInterPart()));
+    target.setVfcpUFDest(RUTypes.parseBigDecimal(source.getVFCPUFDest()));
+    target.setVicmsUFDest(RUTypes.parseBigDecimal(source.getVICMSUFDest()));
+    target.setVicmsUFRemet(RUTypes.parseBigDecimal(source.getVICMSUFRemet()));
+    return target;
+  }
+
+  public static TNFe.InfNFe.Det.Imposto.IPI toJaxb(SEFAZIPIVO source) {
+    if (source == null || source.getCstIpi() == null) {
+      return null;
+    }
+    TNFe.InfNFe.Det.Imposto.IPI target = new TNFe.InfNFe.Det.Imposto.IPI();
+    target.setCIEnq(source.getCiEnq());
+    target.setCNPJProd(source.getCnpjProd());
+    target.setCSelo(source.getCselo());
+    target.setQSelo(RUTypes.parseString(source.getQselo()));
+    target.setCEnq(source.getCenq());
+    String cst = source.getCstIpi().getXmlData();
+    switch (source.getCstIpi()) {
+      case CST_00_ENTRADA_RECUPERACAO_CREDITO:
+      case CST_49_OUTRAS_ENTRADAS:
+      case CST_50_SAIDA_TRIBUTADA:
+      case CST_99_OUTRAS_SAIDAS:
+        TNFe.InfNFe.Det.Imposto.IPI.IPITrib trib = new TNFe.InfNFe.Det.Imposto.IPI.IPITrib();
+        trib.setCST(cst);
+        trib.setVBC(RUTypes.parseString(source.getVbcIpi()));
+        trib.setPIPI(RUTypes.parseString(source.getPipi()));
+        trib.setQUnid(RUTypes.parseString(source.getQunidIpi()));
+        trib.setVUnid(RUTypes.parseString(source.getVunidIpi()));
+        trib.setVIPI(RUTypes.parseString(source.getVipi()));
+        target.setIPITrib(trib);
+        break;
+      default:
+        TNFe.InfNFe.Det.Imposto.IPI.IPINT ipint = new TNFe.InfNFe.Det.Imposto.IPI.IPINT();
+        ipint.setCST(cst);
+        target.setIPINT(ipint);
+        break;
+    }
+    return target;
+  }
+
+  public static SEFAZIPIVO toVO(TNFe.InfNFe.Det.Imposto.IPI source, SEFAZImpostoVO parent) throws RFWException {
+    if (source == null) {
+      return null;
+    }
+    SEFAZIPIVO target = new SEFAZIPIVO();
+    target.setImpostoVO(parent);
+    target.setCiEnq(source.getCIEnq());
+    target.setCnpjProd(source.getCNPJProd());
+    target.setCselo(source.getCSelo());
+    target.setQselo(RUTypes.parseBigDecimal(source.getQSelo()));
+    target.setCenq(source.getCEnq());
+    if (source.getIPITrib() != null) {
+      TNFe.InfNFe.Det.Imposto.IPI.IPITrib trib = source.getIPITrib();
+      target.setCstIpi(SEFAZEnums.valueOfXMLData(SEFAZ_CST_IPI.class, trib.getCST()));
+      target.setVbcIpi(RUTypes.parseBigDecimal(trib.getVBC()));
+      target.setPipi(RUTypes.parseBigDecimal(trib.getPIPI()));
+      target.setQunidIpi(RUTypes.parseBigDecimal(trib.getQUnid()));
+      target.setVunidIpi(RUTypes.parseBigDecimal(trib.getVUnid()));
+      target.setVipi(RUTypes.parseBigDecimal(trib.getVIPI()));
+    } else if (source.getIPINT() != null) {
+      TNFe.InfNFe.Det.Imposto.IPI.IPINT nt = source.getIPINT();
+      target.setCstIpi(SEFAZEnums.valueOfXMLData(SEFAZ_CST_IPI.class, nt.getCST()));
     }
     return target;
   }
