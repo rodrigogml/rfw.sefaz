@@ -196,4 +196,15 @@ public class SEFAZUtils {
   public static <T> JAXBElement<T> auxCreateJAXBElement(String tagName, T value) {
     return new JAXBElement<>(new QName("http://www.portalfiscal.inf.br/nfe", tagName), (Class<T>) value.getClass(), value);
   }
+
+  public static boolean isCStatAuthorized(Integer cStat) throws RFWException {
+    PreProcess.requiredNonNullCritical(cStat);
+    switch (cStat) {
+      case 100: // Autorizado o uso da NFC-e
+      case 150:// Autorizado o uso da NFC-e fora de prazo
+        return true;
+      default:
+        return false;
+    }
+  }
 }
