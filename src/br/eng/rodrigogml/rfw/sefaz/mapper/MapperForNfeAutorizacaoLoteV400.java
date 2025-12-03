@@ -86,6 +86,7 @@ import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZVolVO;
 import xsdobjects.enviNFe400.TEnderEmi;
 import xsdobjects.enviNFe400.TEndereco;
 import xsdobjects.enviNFe400.TEnviNFe;
+import xsdobjects.enviNFe400.TIpi;
 import xsdobjects.enviNFe400.TNFe;
 import xsdobjects.enviNFe400.TNFe.InfNFe.Ide.NFref;
 import xsdobjects.enviNFe400.TNFe.InfNFe.Total;
@@ -1353,7 +1354,7 @@ public final class MapperForNfeAutorizacaoLoteV400 {
     if (icmsUFDest != null) {
       target.getContent().add(SEFAZUtils.auxCreateJAXBElement("ICMSUFDest", icmsUFDest));
     }
-    TNFe.InfNFe.Det.Imposto.IPI ipi = toJaxb(source.getIpiVO());
+    TIpi ipi = toJaxb(source.getIpiVO());
     if (ipi != null) {
       target.getContent().add(SEFAZUtils.auxCreateJAXBElement("IPI", ipi));
     }
@@ -1388,8 +1389,8 @@ public final class MapperForNfeAutorizacaoLoteV400 {
           target.setIcmsVO(toVO((TNFe.InfNFe.Det.Imposto.ICMS) value, target));
         } else if ("ICMSUFDest".equals(localName) && value instanceof TNFe.InfNFe.Det.Imposto.ICMSUFDest) {
           target.setIcmsUFDestVO(toVO((TNFe.InfNFe.Det.Imposto.ICMSUFDest) value, target));
-        } else if ("IPI".equals(localName) && value instanceof TNFe.InfNFe.Det.Imposto.IPI) {
-          target.setIpiVO(toVO((TNFe.InfNFe.Det.Imposto.IPI) value, target));
+        } else if ("IPI".equals(localName) && value instanceof TIpi) {
+          target.setIpiVO(toVO((TIpi) value, target));
         } else if ("vTotTrib".equals(localName) && value instanceof String) {
           target.setVtotTrib(RUTypes.parseBigDecimal((String) value));
         } else if ("PIS".equals(localName) && value instanceof TNFe.InfNFe.Det.Imposto.PIS) {
@@ -1601,8 +1602,6 @@ public final class MapperForNfeAutorizacaoLoteV400 {
         icms60.setVBCFCPSTRet(RUTypes.parseString(source.getVbcFCPSTRet()));
         icms60.setPFCPSTRet(RUTypes.parseString(source.getPfcpSTRet()));
         icms60.setVFCPSTRet(RUTypes.parseString(source.getVfcpSTRet()));
-        icms60.setVBCSTRetDest(RUTypes.parseString(source.getVbcSTDest()));
-        icms60.setVICMSSTRetDest(RUTypes.parseString(source.getVicmsSTDest()));
         target.setICMS60(icms60);
         break;
       case CST_70_REDUCAO_BC_COM_ST:
@@ -1751,8 +1750,6 @@ public final class MapperForNfeAutorizacaoLoteV400 {
       target.setVbcFCPSTRet(RUTypes.parseBigDecimal(node.getVBCFCPSTRet()));
       target.setPfcpSTRet(RUTypes.parseBigDecimal(node.getPFCPSTRet()));
       target.setVfcpSTRet(RUTypes.parseBigDecimal(node.getVFCPSTRet()));
-      target.setVbcSTDest(RUTypes.parseBigDecimal(node.getVBCSTRetDest()));
-      target.setVicmsSTDest(RUTypes.parseBigDecimal(node.getVICMSSTRetDest()));
     } else if (source.getICMS70() != null) {
       TNFe.InfNFe.Det.Imposto.ICMS.ICMS70 node = source.getICMS70();
       target.setCst(SEFAZEnums.valueOfXMLData(SEFAZ_CST_ICMS.class, node.getCST()));
@@ -1886,7 +1883,7 @@ public final class MapperForNfeAutorizacaoLoteV400 {
     return target;
   }
 
-  public static SEFAZICMSUFDestVO toVO(TNFe.InfNFe.Det.Imposto.ICMSUFDest source, SEFAZImpostoVO parent) {
+  public static SEFAZICMSUFDestVO toVO(TNFe.InfNFe.Det.Imposto.ICMSUFDest source, SEFAZImpostoVO parent) throws RFWException {
     if (source == null) {
       return null;
     }
@@ -1904,12 +1901,11 @@ public final class MapperForNfeAutorizacaoLoteV400 {
     return target;
   }
 
-  public static TNFe.InfNFe.Det.Imposto.IPI toJaxb(SEFAZIPIVO source) {
+  public static TIpi toJaxb(SEFAZIPIVO source) {
     if (source == null || source.getCstIpi() == null) {
       return null;
     }
-    TNFe.InfNFe.Det.Imposto.IPI target = new TNFe.InfNFe.Det.Imposto.IPI();
-    target.setCIEnq(source.getCiEnq());
+    TIpi target = new TIpi();
     target.setCNPJProd(source.getCnpjProd());
     target.setCSelo(source.getCselo());
     target.setQSelo(RUTypes.parseString(source.getQselo()));
@@ -1920,7 +1916,7 @@ public final class MapperForNfeAutorizacaoLoteV400 {
       case CST_49_OUTRAS_ENTRADAS:
       case CST_50_SAIDA_TRIBUTADA:
       case CST_99_OUTRAS_SAIDAS:
-        TNFe.InfNFe.Det.Imposto.IPI.IPITrib trib = new TNFe.InfNFe.Det.Imposto.IPI.IPITrib();
+        TIpi.IPITrib trib = new TIpi.IPITrib();
         trib.setCST(cst);
         trib.setVBC(RUTypes.parseString(source.getVbcIpi()));
         trib.setPIPI(RUTypes.parseString(source.getPipi()));
@@ -1930,7 +1926,7 @@ public final class MapperForNfeAutorizacaoLoteV400 {
         target.setIPITrib(trib);
         break;
       default:
-        TNFe.InfNFe.Det.Imposto.IPI.IPINT ipint = new TNFe.InfNFe.Det.Imposto.IPI.IPINT();
+        TIpi.IPINT ipint = new TIpi.IPINT();
         ipint.setCST(cst);
         target.setIPINT(ipint);
         break;
@@ -1938,19 +1934,18 @@ public final class MapperForNfeAutorizacaoLoteV400 {
     return target;
   }
 
-  public static SEFAZIPIVO toVO(TNFe.InfNFe.Det.Imposto.IPI source, SEFAZImpostoVO parent) throws RFWException {
+  public static SEFAZIPIVO toVO(TIpi source, SEFAZImpostoVO parent) throws RFWException {
     if (source == null) {
       return null;
     }
     SEFAZIPIVO target = new SEFAZIPIVO();
     target.setImpostoVO(parent);
-    target.setCiEnq(source.getCIEnq());
     target.setCnpjProd(source.getCNPJProd());
     target.setCselo(source.getCSelo());
     target.setQselo(RUTypes.parseBigDecimal(source.getQSelo()));
     target.setCenq(source.getCEnq());
     if (source.getIPITrib() != null) {
-      TNFe.InfNFe.Det.Imposto.IPI.IPITrib trib = source.getIPITrib();
+      TIpi.IPITrib trib = source.getIPITrib();
       target.setCstIpi(SEFAZEnums.valueOfXMLData(SEFAZ_CST_IPI.class, trib.getCST()));
       target.setVbcIpi(RUTypes.parseBigDecimal(trib.getVBC()));
       target.setPipi(RUTypes.parseBigDecimal(trib.getPIPI()));
@@ -1958,7 +1953,7 @@ public final class MapperForNfeAutorizacaoLoteV400 {
       target.setVunidIpi(RUTypes.parseBigDecimal(trib.getVUnid()));
       target.setVipi(RUTypes.parseBigDecimal(trib.getVIPI()));
     } else if (source.getIPINT() != null) {
-      TNFe.InfNFe.Det.Imposto.IPI.IPINT nt = source.getIPINT();
+      TIpi.IPINT nt = source.getIPINT();
       target.setCstIpi(SEFAZEnums.valueOfXMLData(SEFAZ_CST_IPI.class, nt.getCST()));
     }
     return target;
