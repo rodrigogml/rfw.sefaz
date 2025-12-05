@@ -8,6 +8,7 @@ import javax.xml.namespace.QName;
 
 import br.eng.rodrigogml.rfw.kernel.exceptions.RFWException;
 import br.eng.rodrigogml.rfw.kernel.interfaces.RFWCertificate;
+import br.eng.rodrigogml.rfw.kernel.logger.RFWLogger;
 import br.eng.rodrigogml.rfw.kernel.preprocess.PreProcess;
 import br.eng.rodrigogml.rfw.kernel.utils.RUSerializer;
 import br.eng.rodrigogml.rfw.kernel.utils.RUString;
@@ -197,13 +198,39 @@ public class SEFAZUtils {
     return new JAXBElement<>(new QName("http://www.portalfiscal.inf.br/nfe", tagName), (Class<T>) value.getClass(), value);
   }
 
-  public static boolean isCStatAuthorized(Integer cStat) throws RFWException {
+  /**
+   * Método utilizado para concentrar a lógica dos Status da NFe/NFCe para saber se o documento foi autorizado ou não.
+   *
+   * @param cStat Código do status retornado para a NFe (não para o lote, para avaliação do Lote verifique o método: {@link SEFAZUtils#isLoteCStatAuthorized(Integer)} )
+   * @return true caso seja um status que retorne o documento emitido, false caso contrário.
+   * @throws RFWException Lançado em caso de valor nulo, o método dá preferência a retornar true/false, ainda que o código recebido seja desconhecido.
+   */
+  public static boolean isNFCStatAuthorized(Integer cStat) throws RFWException {
     PreProcess.requiredNonNullCritical(cStat);
     switch (cStat) {
       case 100: // Autorizado o uso da NFC-e
       case 150:// Autorizado o uso da NFC-e fora de prazo
         return true;
       default:
+        RFWLogger.logDev("A Autorização da NFe/NFCe retornou um status desconhecido pelo sistema: '${0}'.", new String[] { "" + cStat });
+        return false;
+    }
+  }
+
+  /**
+   * Método utilizado para concentrar a lógica dos Status do processamento do LOTE da SEFAZ para saber se o lote foi procesado ou não.
+   *
+   * @param cStat Código do status retornado para o LOTE (não para a NF, para avaliação do Lote verifique o método: {@link SEFAZUtils#isNFCStatAuthorized(Integer)} )
+   * @return true caso seja um status que retorne o lote foi processado (e temos as tags de protocolo da NFe), false caso contrário.
+   * @throws RFWException Lançado em caso de valor nulo, o método dá preferência a retornar true/false, ainda que o código recebido seja desconhecido.
+   */
+  public static boolean isLoteCStatAuthorized(Integer cStat) throws RFWException {
+    PreProcess.requiredNonNullCritical(cStat);
+    switch (cStat) {
+      case 104: // Lote processado com sucesso
+        return true;
+      default:
+        RFWLogger.logDev("O processamento do Lote da SEFAZ retornou um status desconhecido pelo sistema: '${0}'.", new String[] { "" + cStat });
         return false;
     }
   }
