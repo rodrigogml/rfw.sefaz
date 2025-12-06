@@ -1346,6 +1346,9 @@ public final class MapperForNfeAutorizacaoLoteV400 {
       return null;
     }
     TNFe.InfNFe.Det.Imposto target = new TNFe.InfNFe.Det.Imposto();
+    if (source.getVtotTrib() != null) {
+      target.getContent().add(SEFAZUtils.auxCreateJAXBElement("vTotTrib", RUTypes.parseString(source.getVtotTrib())));
+    }
     TNFe.InfNFe.Det.Imposto.ICMS icms = toJaxb(source.getIcmsVO());
     if (icms != null) {
       target.getContent().add(SEFAZUtils.auxCreateJAXBElement("ICMS", icms));
@@ -1357,9 +1360,6 @@ public final class MapperForNfeAutorizacaoLoteV400 {
     TIpi ipi = toJaxb(source.getIpiVO());
     if (ipi != null) {
       target.getContent().add(SEFAZUtils.auxCreateJAXBElement("IPI", ipi));
-    }
-    if (source.getVtotTrib() != null) {
-      target.getContent().add(SEFAZUtils.auxCreateJAXBElement("vTotTrib", RUTypes.parseString(source.getVtotTrib())));
     }
     TNFe.InfNFe.Det.Imposto.PIS pis = toJaxb(source.getPisVO());
     if (pis != null) {
