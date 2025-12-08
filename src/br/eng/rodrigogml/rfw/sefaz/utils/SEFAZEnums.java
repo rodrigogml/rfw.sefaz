@@ -1843,52 +1843,99 @@ public class SEFAZEnums {
   public enum SEFAZ_tPag implements SEFAZEnum<SEFAZ_tPag> {
 
     /** 01 = Dinheiro. */
-    DINHEIRO("01", false),
+    DINHEIRO("01", false, "Dinheiro"),
 
     /** 02 = Cheque. */
-    CHEQUE("02", false),
+    CHEQUE("02", false, "Cheque"),
 
     /** 03 = Cartão de Crédito. */
-    CARTAO_CREDITO("03", false),
+    CARTAO_CREDITO("03", false, "Cartão de Crédito"),
 
     /** 04 = Cartão de Débito. */
-    CARTAO_DEBITO("04", false),
+    CARTAO_DEBITO("04", false, "Cartão de Débito"),
 
-    /** 05 = Crédito Loja. */
-    CREDITO_LOJA("05", false),
+    /**
+     * 05 = Cartão da Loja (Private Label).
+     * <li>IT2024.002 - Alterado de 'Crédito de Loja' para 'Cartão da Loja (Private Label)', para separar do novo tipo 21 'Crédito em Loja'.
+     */
+    CREDITO_LOJA_PRIVATELABEL("05", false, "Cartão da Loja (Private Label)"),
 
     /** 10 = Vale Alimentação. */
-    VALE_ALIMENTACAO("10", false),
+    VALE_ALIMENTACAO("10", false, "Vale Alimentação"),
 
     /** 11 = Vale Refeição. */
-    VALE_REFEICAO("11", false),
+    VALE_REFEICAO("11", false, "Vale Refeição"),
 
     /** 12 = Vale Presente. */
-    VALE_PRESENTE("12", false),
+    VALE_PRESENTE("12", false, "Vale Presente"),
 
     /** 13 = Vale Combustível. */
-    VALE_COMBUSTIVEL("13", false),
+    VALE_COMBUSTIVEL("13", false, "Vale Combustível"),
 
-    /** 15 = Boleto Bancário. */
-    BOLETO_BANCARIO("15", false),
+    /**
+     * 14 = Duplicata Mercantil.
+     * <li>IT2024.002 - Adicionada a coluna 'Observação' para este modo de pagamento.
+     */
+    DUPLICATA_MERCANTIL("14", false, "Duplicata Mercantil"),
 
-    /** 16 = Depósito Bancário. */
-    DEPOSITO_BANCARIO("16", false),
+    /**
+     * 15 = Boleto Bancário.
+     */
+    BOLETO_BANCARIO("15", false, "Boleto Bancário"),
 
-    /** 17 = Pagamento Instantâneo (PIX). */
-    PIX("17", false),
+    /**
+     * 16 = Depósito Bancário.
+     */
+    DEPOSITO_BANCARIO("16", false, "Depósito Bancário"),
 
-    /** 18 = Transferência bancária, Carteira Digital. */
-    TRANSFERENCIA_OU_CARTEIRA_DIGITAL("18", false),
+    /**
+     * 17 = Pagamento Instantâneo (PIX) - Dinâmico
+     * <li>IT2024.002 - Alterado de "Pagamento Instantâneo (PIX)" para "Pagamento Instantâneo (PIX) - Dinâmico" para diferenciar do novo tipo 20.
+     */
+    PIX("17", false, "Pagamento Instantâneo (PIX) - Dinâmico"),
 
-    /** 19 = Programa de fidelidade, Cashback, Crédito Virtual. */
-    FIDELIDADE_CASHBACK_CREDITO_VIRTUAL("19", false),
+    /**
+     * 18 = Transferência bancária, Carteira Digital.
+     */
+    TRANSFERENCIA_OU_CARTEIRA_DIGITAL("18", false, "Transferência bancária, Carteira Digital"),
 
-    /** 90 = Sem pagamento. */
-    SEM_PAGAMENTO("90", false),
+    /**
+     * 19 = Programa de fidelidade, Cashback, Crédito Virtual.
+     */
+    FIDELIDADE_CASHBACK_CREDITO_VIRTUAL("19", false, "Fidelidade, Cashback, Crédito Virtual"),
 
-    /** 99 = Outros. */
-    OUTROS("99", false);
+    /**
+     * 20 = Pagamento Instantâneo (PIX) - Estático.
+     * <li>IT2024.002 - Incluído para diferenciar o tipo estático do dinâmico.
+     */
+    PIX_ESTATICO("20", false, "Pagamento Instantâneo (PIX) - Estático"),
+
+    /**
+     * 21 = Crédito em Loja. Ocorrido de Valor pago antecipadamente, devolução de mercadoria, etc.
+     * <li>IT2024.002 - Incluído para diferenciar do item 05.
+     */
+    CREDITO_LOJA("20", false, "Crédito em Loja"),
+
+    /**
+     * 22 = Pagamento Eletrônico não Informado - falha de hardware do sistema emissor.
+     * <li>IT2024.002 - Incluído.
+     */
+    PAG_ELETRONICO_NAO_INFORMADO_FALHA_HARDWARE("20", false, "Pagamento Eletrônico não Informado"),
+
+    /**
+     * 90 = Sem pagamento.
+     */
+    SEM_PAGAMENTO("90", false, "Sem pagamento"),
+
+    /**
+     * 91 = Pagamento Posterior.
+     */
+    PAGAMENTO_PORTERIOR("91", false, "Pagamento Posterior"),
+
+    /**
+     * 99 = Outros.
+     */
+    OUTROS("99", false, "Outros");
 
     /** Valor exato gravado/lido no XML (campo tPag). */
     private final String xmlData;
@@ -1896,9 +1943,16 @@ public class SEFAZEnums {
     /** Indica se o tipo está obsoleto/descontinuado para uso atual. */
     private final boolean deprecated;
 
-    SEFAZ_tPag(String xmlData, boolean deprecated) {
+    /**
+     * Descrição da forma de pagamento oficial conforme documentação da SEFAZ. <br>
+     * A descrição definida aqui é utilizada na impressão dos documentos oficiais, como NFe/NFCe.
+     */
+    private String sefazDescription;
+
+    SEFAZ_tPag(String xmlData, boolean deprecated, String sefazDescription) {
       this.xmlData = xmlData;
       this.deprecated = deprecated;
+      this.sefazDescription = sefazDescription;
     }
 
     /**
@@ -1918,6 +1972,10 @@ public class SEFAZEnums {
      */
     public boolean isDeprecated() {
       return this.deprecated;
+    }
+
+    public String getSefazDescription() {
+      return sefazDescription;
     }
 
   }
