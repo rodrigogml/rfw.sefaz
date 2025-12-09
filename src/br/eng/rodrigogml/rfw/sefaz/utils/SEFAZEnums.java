@@ -1914,13 +1914,13 @@ public class SEFAZEnums {
      * 21 = Crédito em Loja. Ocorrido de Valor pago antecipadamente, devolução de mercadoria, etc.
      * <li>IT2024.002 - Incluído para diferenciar do item 05.
      */
-    CREDITO_LOJA("20", false, "Crédito em Loja"),
+    CREDITO_LOJA("21", false, "Crédito em Loja"),
 
     /**
      * 22 = Pagamento Eletrônico não Informado - falha de hardware do sistema emissor.
      * <li>IT2024.002 - Incluído.
      */
-    PAG_ELETRONICO_NAO_INFORMADO_FALHA_HARDWARE("20", false, "Pagamento Eletrônico não Informado"),
+    PAG_ELETRONICO_NAO_INFORMADO_FALHA_HARDWARE("22", false, "Pagamento Eletrônico não Informado"),
 
     /**
      * 90 = Sem pagamento.
