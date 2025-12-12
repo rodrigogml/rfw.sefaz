@@ -869,6 +869,7 @@ public final class MapperForNfeAutorizacaoLoteV400 {
       target.setCUF(RUString.completeUntilLengthLeft("0", RUTypes.parseString(source.getCuf()), 2));
     }
     if (source.getCnf() != null) {
+      // Não faz o truncate aqui pois esse número é utilizado na chave, e se tinha dígito a mais podemos realizar o truncate na parte errada do número.
       target.setCNF(RUString.completeUntilLengthLeft("0", RUTypes.parseString(source.getCnf()), 8));
     }
     target.setNatOp(source.getNatOp());
