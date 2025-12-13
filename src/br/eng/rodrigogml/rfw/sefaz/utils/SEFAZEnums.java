@@ -582,6 +582,93 @@ public class SEFAZEnums {
   }
 
   /**
+   * Tipo de Nota de Débito ({@code tpNFDebito}).
+   */
+  public enum SEFAZ_tpNFDebito implements SEFAZEnum<SEFAZ_tpNFDebito> {
+
+    /** Transferência de créditos para Cooperativas ({@code 01}). */
+    TRANSFERENCIA_COOPERATIVAS("01", false),
+
+    /** Anulação de Crédito por Saídas Imunes/Isentas ({@code 02}). */
+    ANULACAO_SAIDAS_IMUNES_ISENTAS("02", false),
+
+    /** Débitos de notas fiscais não processadas ({@code 03}). */
+    DEBITO_NF_NAO_PROCESSADA("03", false),
+
+    /** Multa e juros ({@code 04}). */
+    MULTA_E_JUROS("04", false),
+
+    /** Transferência de crédito na sucessão ({@code 05}). */
+    TRANSFERENCIA_SUCESSAO("05", false),
+
+    /** Pagamento antecipado ({@code 06}). */
+    PAGAMENTO_ANTECIPADO("06", false),
+
+    /** Perda em estoque ({@code 07}). */
+    PERDA_ESTOQUE("07", false),
+
+    /** Desenquadramento do SN ({@code 08}). */
+    DESENQUADRAMENTO_SN("08", false);
+
+    private final String xmlData;
+    private final boolean deprecated;
+
+    private SEFAZ_tpNFDebito(String xmlData, boolean deprecated) {
+      this.xmlData = xmlData;
+      this.deprecated = deprecated;
+    }
+
+    @Override
+    public String getXmlData() {
+      return this.xmlData;
+    }
+
+    public boolean isDeprecated() {
+      return this.deprecated;
+    }
+
+  }
+
+  /**
+   * Tipo de Nota de Crédito ({@code tpNFCredito}).
+   */
+  public enum SEFAZ_tpNFCredito implements SEFAZEnum<SEFAZ_tpNFCredito> {
+
+    /** Multa e juros ({@code 01}). */
+    MULTA_E_JUROS("01", false),
+
+    /** Crédito presumido na ZFM ({@code 02}). */
+    CREDITO_PRESUMIDO_ZFM("02", false),
+
+    /** Retorno por recusa ou não localização ({@code 03}). */
+    RETORNO_ENTREGA("03", false),
+
+    /** Redução de valores ({@code 04}). */
+    REDUCAO_VALORES("04", false),
+
+    /** Transferência de crédito na sucessão ({@code 05}). */
+    TRANSFERENCIA_SUCESSAO("05", false);
+
+    private final String xmlData;
+    private final boolean deprecated;
+
+    private SEFAZ_tpNFCredito(String xmlData, boolean deprecated) {
+      this.xmlData = xmlData;
+      this.deprecated = deprecated;
+    }
+
+    @Override
+    public String getXmlData() {
+      return this.xmlData;
+    }
+
+    public boolean isDeprecated() {
+      return this.deprecated;
+    }
+
+  }
+
+  /**
    * Indicador de operação com consumidor final ({@code indFinal}).
    *
    * <p>

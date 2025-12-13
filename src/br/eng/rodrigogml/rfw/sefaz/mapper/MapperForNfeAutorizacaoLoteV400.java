@@ -37,6 +37,8 @@ import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_tpEmis;
 import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_tpImp;
 import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_tpIntegra;
 import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_tpNF;
+import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_tpNFCredito;
+import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_tpNFDebito;
 import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_versao;
 import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZUtils;
 import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZCOFINSVO;
@@ -66,6 +68,8 @@ import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZNFeProcVO;
 import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZNFeVO;
 import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZObsContVO;
 import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZObsFiscoVO;
+import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZPagAntecipadoRefVO;
+import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZPagAntecipadoVO;
 import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZPISVO;
 import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZPagVO;
 import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZProcRefVO;
@@ -82,11 +86,13 @@ import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZTranspVO;
 import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZTransportaVO;
 import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZVeicTranspVO;
 import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZVolVO;
+import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZCompraGovVO;
 
 import xsdobjects.enviNFe400.TEnderEmi;
 import xsdobjects.enviNFe400.TEndereco;
 import xsdobjects.enviNFe400.TEnviNFe;
 import xsdobjects.enviNFe400.TIpi;
+import xsdobjects.enviNFe400.TCompraGov;
 import xsdobjects.enviNFe400.TNFe;
 import xsdobjects.enviNFe400.TNFe.InfNFe.Ide.NFref;
 import xsdobjects.enviNFe400.TNFe.InfNFe.Total;
@@ -915,6 +921,12 @@ public final class MapperForNfeAutorizacaoLoteV400 {
     if (source.getFinNFe() != null) {
       target.setFinNFe(source.getFinNFe().getXmlData());
     }
+    if (source.getTpNFDebito() != null) {
+      target.setTpNFDebito(source.getTpNFDebito().getXmlData());
+    }
+    if (source.getTpNFCredito() != null) {
+      target.setTpNFCredito(source.getTpNFCredito().getXmlData());
+    }
     if (source.getIndFinal() != null) {
       target.setIndFinal(source.getIndFinal().getXmlData());
     }
@@ -939,6 +951,12 @@ public final class MapperForNfeAutorizacaoLoteV400 {
           target.getNFref().add(nfref);
         }
       }
+    }
+    if (source.getCompraGovVO() != null) {
+      target.setGCompraGov(toJaxb(source.getCompraGovVO()));
+    }
+    if (source.getPagAntecipadoVO() != null) {
+      target.setGPagAntecipado(toJaxb(source.getPagAntecipadoVO()));
     }
     return target;
   }
@@ -980,6 +998,12 @@ public final class MapperForNfeAutorizacaoLoteV400 {
     if (source.getFinNFe() != null) {
       target.setFinNFe(SEFAZEnums.valueOfXMLData(SEFAZ_finNFe.class, source.getFinNFe()));
     }
+    if (source.getTpNFDebito() != null) {
+      target.setTpNFDebito(SEFAZEnums.valueOfXMLData(SEFAZ_tpNFDebito.class, source.getTpNFDebito()));
+    }
+    if (source.getTpNFCredito() != null) {
+      target.setTpNFCredito(SEFAZEnums.valueOfXMLData(SEFAZ_tpNFCredito.class, source.getTpNFCredito()));
+    }
     if (source.getIndFinal() != null) {
       target.setIndFinal(SEFAZEnums.valueOfXMLData(SEFAZ_indFinal.class, source.getIndFinal()));
     }
@@ -1002,6 +1026,12 @@ public final class MapperForNfeAutorizacaoLoteV400 {
         nfRefList.add(toVO(nfRef, target));
       }
       target.setNfRefList(nfRefList);
+    }
+    if (source.getGCompraGov() != null) {
+      target.setCompraGovVO(toVO(source.getGCompraGov(), target));
+    }
+    if (source.getGPagAntecipado() != null) {
+      target.setPagAntecipadoVO(toVO(source.getGPagAntecipado(), target));
     }
     return target;
   }
@@ -1041,6 +1071,63 @@ public final class MapperForNfeAutorizacaoLoteV400 {
     }
     if (source.getRefECF() != null) {
       target.setRefECFVO(toVO(source.getRefECF(), target));
+    }
+    return target;
+  }
+
+  public static TCompraGov toJaxb(SEFAZCompraGovVO source) {
+    if (source == null) {
+      return null;
+    }
+    TCompraGov target = new TCompraGov();
+    target.setTpEnteGov(source.getTpEnteGov());
+    target.setPRedutor(source.getPRedutor());
+    target.setTpOperGov(source.getTpOperGov());
+    return target;
+  }
+
+  public static SEFAZCompraGovVO toVO(TCompraGov source, SEFAZIdeVO parent) {
+    if (source == null) {
+      return null;
+    }
+    SEFAZCompraGovVO target = new SEFAZCompraGovVO();
+    target.setIdeVO(parent);
+    target.setTpEnteGov(source.getTpEnteGov());
+    target.setPRedutor(source.getPRedutor());
+    target.setTpOperGov(source.getTpOperGov());
+    return target;
+  }
+
+  public static TNFe.InfNFe.Ide.GPagAntecipado toJaxb(SEFAZPagAntecipadoVO source) {
+    if (source == null) {
+      return null;
+    }
+    TNFe.InfNFe.Ide.GPagAntecipado target = new TNFe.InfNFe.Ide.GPagAntecipado();
+    if (source.getRefNFeList() != null) {
+      for (SEFAZPagAntecipadoRefVO refVO : source.getRefNFeList()) {
+        if (refVO != null && refVO.getRefNFe() != null) {
+          target.getRefNFe().add(refVO.getRefNFe());
+        }
+      }
+    }
+    return target;
+  }
+
+  public static SEFAZPagAntecipadoVO toVO(TNFe.InfNFe.Ide.GPagAntecipado source, SEFAZIdeVO parent) {
+    if (source == null) {
+      return null;
+    }
+    SEFAZPagAntecipadoVO target = new SEFAZPagAntecipadoVO();
+    target.setIdeVO(parent);
+    if (source.getRefNFe() != null && !source.getRefNFe().isEmpty()) {
+      List<SEFAZPagAntecipadoRefVO> refList = new ArrayList<>(source.getRefNFe().size());
+      for (String refNFe : source.getRefNFe()) {
+        SEFAZPagAntecipadoRefVO refVO = new SEFAZPagAntecipadoRefVO();
+        refVO.setPagAntecipadoVO(target);
+        refVO.setRefNFe(refNFe);
+        refList.add(refVO);
+      }
+      target.setRefNFeList(refList);
     }
     return target;
   }

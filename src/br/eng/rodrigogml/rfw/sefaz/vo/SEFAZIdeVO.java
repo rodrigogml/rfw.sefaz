@@ -22,6 +22,8 @@ import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_tpAmb;
 import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_tpEmis;
 import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_tpImp;
 import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_tpNF;
+import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_tpNFCredito;
+import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_tpNFDebito;
 
 /**
  * Informações de identificação da NF-e ({@code ide}).
@@ -44,6 +46,18 @@ public class SEFAZIdeVO extends RFWVO {
    */
   @RFWMetaRelationshipField(caption = "NFRef", relationship = RelationshipTypes.COMPOSITION, required = false, columnMapped = "idsefaz_nfref", minSize = 0, maxSize = 500)
   private List<SEFAZNFRefVO> nfRefList = null;
+
+  /**
+   * {@link SEFAZCompraGovVO}
+   */
+  @RFWMetaRelationshipField(caption = "Compra Governamental", relationship = RelationshipTypes.COMPOSITION, required = false, columnMapped = "idsefaz_compra_gov")
+  private SEFAZCompraGovVO compraGovVO = null;
+
+  /**
+   * {@link SEFAZPagAntecipadoVO}
+   */
+  @RFWMetaRelationshipField(caption = "Pagamento antecipado", relationship = RelationshipTypes.COMPOSITION, required = false, columnMapped = "idsefaz_pag_antecipado")
+  private SEFAZPagAntecipadoVO pagAntecipadoVO = null;
 
   /**
    * Código da UF do emitente do Documento Fiscal ({@code cUF}).
@@ -233,6 +247,18 @@ public class SEFAZIdeVO extends RFWVO {
    */
   @RFWMetaEnumField(caption = "Finalidade de emissão", required = false)
   private SEFAZ_finNFe finNFe;
+
+  /**
+   * Tipo de Nota de Débito ({@code tpNFDebito}).
+   */
+  @RFWMetaEnumField(caption = "Tipo de Nota de Débito", required = false)
+  private SEFAZ_tpNFDebito tpNFDebito;
+
+  /**
+   * Tipo de Nota de Crédito ({@code tpNFCredito}).
+   */
+  @RFWMetaEnumField(caption = "Tipo de Nota de Crédito", required = false)
+  private SEFAZ_tpNFCredito tpNFCredito;
 
   /**
    * Indicador de operação com consumidor final ({@code indFinal}).
@@ -757,6 +783,42 @@ public class SEFAZIdeVO extends RFWVO {
   }
 
   /**
+   * Tipo de Nota de Débito ({@code tpNFDebito}).
+   *
+   * @return the tipo de Nota de Débito
+   */
+  public SEFAZ_tpNFDebito getTpNFDebito() {
+    return tpNFDebito;
+  }
+
+  /**
+   * Tipo de Nota de Débito ({@code tpNFDebito}).
+   *
+   * @param tpNFDebito the tipo de Nota de Débito
+   */
+  public void setTpNFDebito(SEFAZ_tpNFDebito tpNFDebito) {
+    this.tpNFDebito = tpNFDebito;
+  }
+
+  /**
+   * Tipo de Nota de Crédito ({@code tpNFCredito}).
+   *
+   * @return the tipo de Nota de Crédito
+   */
+  public SEFAZ_tpNFCredito getTpNFCredito() {
+    return tpNFCredito;
+  }
+
+  /**
+   * Tipo de Nota de Crédito ({@code tpNFCredito}).
+   *
+   * @param tpNFCredito the tipo de Nota de Crédito
+   */
+  public void setTpNFCredito(SEFAZ_tpNFCredito tpNFCredito) {
+    this.tpNFCredito = tpNFCredito;
+  }
+
+  /**
    * # indicador de operação com consumidor final ({@code indFinal}).
    * <p>
    * Obrigatório na especificação. Valores:
@@ -998,6 +1060,42 @@ public class SEFAZIdeVO extends RFWVO {
    */
   public void setNfRefList(List<SEFAZNFRefVO> nfRefList) {
     this.nfRefList = nfRefList;
+  }
+
+  /**
+   * Grupo de compras governamentais ({@code gCompraGov}).
+   *
+   * @return o grupo de compras governamentais
+   */
+  public SEFAZCompraGovVO getCompraGovVO() {
+    return compraGovVO;
+  }
+
+  /**
+   * Grupo de compras governamentais ({@code gCompraGov}).
+   *
+   * @param compraGovVO o grupo de compras governamentais
+   */
+  public void setCompraGovVO(SEFAZCompraGovVO compraGovVO) {
+    this.compraGovVO = compraGovVO;
+  }
+
+  /**
+   * Grupo de pagamento antecipado ({@code gPagAntecipado}).
+   *
+   * @return o grupo de pagamento antecipado
+   */
+  public SEFAZPagAntecipadoVO getPagAntecipadoVO() {
+    return pagAntecipadoVO;
+  }
+
+  /**
+   * Grupo de pagamento antecipado ({@code gPagAntecipado}).
+   *
+   * @param pagAntecipadoVO o grupo de pagamento antecipado
+   */
+  public void setPagAntecipadoVO(SEFAZPagAntecipadoVO pagAntecipadoVO) {
+    this.pagAntecipadoVO = pagAntecipadoVO;
   }
 
   /**
