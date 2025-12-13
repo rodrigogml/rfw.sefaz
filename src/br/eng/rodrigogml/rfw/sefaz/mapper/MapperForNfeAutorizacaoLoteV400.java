@@ -904,7 +904,7 @@ public final class MapperForNfeAutorizacaoLoteV400 {
       target.setCMunFG(RUString.completeUntilLengthLeft("0", RUTypes.parseString(source.getCmunFG()), 7));
     }
     if (source.getCmunFGIBS() != null) {
-      target.setCMunFGIBS(RUString.completeUntilLengthLeft("0", RUTypes.parseString(source.getCmunFG()), 7));
+      target.setCMunFGIBS(RUString.completeUntilLengthLeft("0", RUTypes.parseString(source.getCmunFGIBS()), 7));
     }
     if (source.getTpImp() != null) {
       target.setTpImp(source.getTpImp().getXmlData());
