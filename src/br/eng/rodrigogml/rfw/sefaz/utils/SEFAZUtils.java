@@ -211,6 +211,7 @@ public class SEFAZUtils {
       case 100: // Autorizado o uso da NFC-e
       case 150:// Autorizado o uso da NFC-e fora de prazo
         return true;
+      case 539: // Duplicidade de NF-e com diferença na Chave de Acesso
       default:
         RFWLogger.logDev("A Autorização da NFe/NFCe retornou um status desconhecido pelo sistema: '${0}'.", new String[] { "" + cStat });
         return false;

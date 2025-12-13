@@ -26,7 +26,7 @@ public class SEFAZXMLValidator {
 
   public static void validateEnviNFeV400(String xml) throws RFWException {
     // SEFAZXMLValidator.validateXMLAgainstSchema(xml, "enviNFe_v4.00.xsd", "/xsd/PL_009p_NT2024_003_v1.02/");
-    SEFAZXMLValidator.validateXMLAgainstSchema(xml, "enviNFe_v4.00.xsd", "/xsd/PL_009q_NT2025_001_v1.00_PL_010b_NT2025_002_v1.30/");
+    SEFAZXMLValidator.validateXMLAgainstSchema(xml, "enviNFe_v4.00.xsd", "/xsd/PL_009q_NT2025_001_v1.00/PL_010b_NT2025_002_v1.30_20251007/");
   }
 
   public static void validateConsReciNFeV400(String xml) throws RFWException {

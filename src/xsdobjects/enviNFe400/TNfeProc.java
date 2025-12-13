@@ -1,8 +1,8 @@
 //
-// Este arquivo foi gerado pela Arquitetura JavaTM para Implementação de Referência (JAXB) de Bind XML, v2.2.8-b130911.1802
+// Este arquivo foi gerado pela Arquitetura JavaTM para Implementa��o de Refer�ncia (JAXB) de Bind XML, v2.2.8-b130911.1802
 // Consulte <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a>
-// Todas as modificações neste arquivo serão perdidas após a recompilação do esquema de origem.
-// Gerado em: 2025.02.09 às 04:58:58 PM BRT
+// Todas as modifica��es neste arquivo ser�o perdidas ap�s a recompila��o do esquema de origem.
+// Gerado em: 2025.12.13 �s 10:09:55 AM BRT
 //
 
 package xsdobjects.enviNFe400;
@@ -21,7 +21,7 @@ import javax.xml.bind.annotation.XmlType;
  * Classe Java de TNfeProc complex type.
  *
  * <p>
- * O seguinte fragmento do esquema especifica o conteúdo esperado contido dentro desta classe.
+ * O seguinte fragmento do esquema especifica o conte�do esperado contido dentro desta classe.
  *
  * <pre>
  * &lt;complexType name="TNfeProc">
@@ -40,10 +40,7 @@ import javax.xml.bind.annotation.XmlType;
  *
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "TNfeProc", propOrder = {
-    "nFe",
-    "protNFe"
-})
+@XmlType(name = "TNfeProc", propOrder = { "nFe", "protNFe" })
 @XmlRootElement(name = "nfeProc")
 public class TNfeProc {
 
@@ -55,7 +52,7 @@ public class TNfeProc {
   protected String versao;
 
   /**
-   * Obtém o valor da propriedade nFe.
+   * Obt�m o valor da propriedade nFe.
    * 
    * @return possible object is {@link TNFe }
    * 
@@ -75,7 +72,7 @@ public class TNfeProc {
   }
 
   /**
-   * Obtém o valor da propriedade protNFe.
+   * Obt�m o valor da propriedade protNFe.
    * 
    * @return possible object is {@link TProtNFe }
    * 
@@ -95,7 +92,7 @@ public class TNfeProc {
   }
 
   /**
-   * Obtém o valor da propriedade versao.
+   * Obt�m o valor da propriedade versao.
    * 
    * @return possible object is {@link String }
    * 

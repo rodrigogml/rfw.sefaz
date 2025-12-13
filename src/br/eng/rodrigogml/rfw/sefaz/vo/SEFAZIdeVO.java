@@ -3,7 +3,6 @@ package br.eng.rodrigogml.rfw.sefaz.vo;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import br.eng.rodrigogml.rfw.kernel.preprocess.PreProcess.PreProcessOption;
 import br.eng.rodrigogml.rfw.kernel.rfwmeta.RFWMetaDateField;
 import br.eng.rodrigogml.rfw.kernel.rfwmeta.RFWMetaDateField.DateResolution;
 import br.eng.rodrigogml.rfw.kernel.rfwmeta.RFWMetaEnumField;
@@ -152,6 +151,16 @@ public class SEFAZIdeVO extends RFWVO {
    */
   @RFWMetaEnumField(caption = "Destino da operação", required = false)
   private SEFAZ_idDest idDest;
+
+  /**
+   * Código do Município de consumo, fato gerador do IBS / CBS<br>
+   *
+   * <p>
+   * Informar o município de ocorrência do fato gerador do IBS / CBS.<br>
+   * Campo preenchido somente quando “indPres = 5 (Operação presencial, fora do estabelecimento)”, e não tiver endereço do destinatário. (Grupo: E05) ou local de entrega (Grupo: G01).
+   */
+  @RFWMetaIntegerField(caption = "Município do fato gerador", required = false, minValue = 0, maxValue = 9999999)
+  private Integer cmunFGIBS;
 
   /**
    * Código do município de ocorrência do fato gerador do ICMS ({@code cMunFG}).
@@ -989,6 +998,34 @@ public class SEFAZIdeVO extends RFWVO {
    */
   public void setNfRefList(List<SEFAZNFRefVO> nfRefList) {
     this.nfRefList = nfRefList;
+  }
+
+  /**
+   * # código do Município de consumo, fato gerador do IBS / CBS<br>
+   * <p>
+   * Informar o município de ocorrência do fato gerador do IBS / CBS.<br>
+   * Campo preenchido somente quando “indPres = 5 (Operação presencial, fora do estabelecimento)”, e não tiver endereço do destinatário. (Grupo: E05) ou local de entrega (Grupo: G01).
+   *
+   * @return the código do Município de consumo, fato gerador do IBS / CBS<br>
+   *         <p>
+   *         Informar o município de ocorrência do fato gerador do IBS / CBS
+   */
+  public Integer getCmunFGIBS() {
+    return cmunFGIBS;
+  }
+
+  /**
+   * # código do Município de consumo, fato gerador do IBS / CBS<br>
+   * <p>
+   * Informar o município de ocorrência do fato gerador do IBS / CBS.<br>
+   * Campo preenchido somente quando “indPres = 5 (Operação presencial, fora do estabelecimento)”, e não tiver endereço do destinatário. (Grupo: E05) ou local de entrega (Grupo: G01).
+   *
+   * @param cmunFGIBS the new código do Município de consumo, fato gerador do IBS / CBS<br>
+   *          <p>
+   *          Informar o município de ocorrência do fato gerador do IBS / CBS
+   */
+  public void setCmunFGIBS(Integer cmunFGIBS) {
+    this.cmunFGIBS = cmunFGIBS;
   }
 
 }

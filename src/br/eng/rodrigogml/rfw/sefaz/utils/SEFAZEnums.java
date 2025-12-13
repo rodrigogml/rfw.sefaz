@@ -471,6 +471,62 @@ public class SEFAZEnums {
   }
 
   /**
+   * Identificação do ambiente de autorização da NF-e ({@code tpAmb}).
+   *
+   * <p>
+   * Valores possíveis:
+   * <ul>
+   * <li>{@code 1} = Produção</li>
+   * <li>{@code 2} = Homologação</li>
+   * </ul>
+   */
+  public enum SEFAZ_tpCredPresIBSZFM implements SEFAZEnum<SEFAZ_tpAmb> {
+
+    /** 0 - Sem Crédito Presumido */
+    SEM_CREDITO_PRESUMIDO("0", false),
+
+    /** 1 - Bens de consumo final (55%) */
+    BENS_DE_CONSUMO_FINAL("1", false),
+
+    /** 2 - Bens de capital (75%) */
+    BENS_DE_CAPITAL("2", false),
+
+    /** 3 - Bens intermediários (90,25%) */
+    BENS_INTERMEDIARIOS("3", false),
+
+    /** 4 - Bens de informática e outros definidos em legislação (100%) */
+    BENS_DE_INFORMATICA_E_OUTROS("4", false);
+
+    private final String xmlData;
+    private final boolean deprecated;
+
+    private SEFAZ_tpCredPresIBSZFM(String xmlData, boolean deprecated) {
+      this.xmlData = xmlData;
+      this.deprecated = deprecated;
+    }
+
+    /**
+     * Retorna o valor esperado no XML para o campo {@code tpAmb}.
+     *
+     * @return the XML data
+     */
+    @Override
+    public String getXmlData() {
+      return this.xmlData;
+    }
+
+    /**
+     * Indica se o código está obsoleto/descontinuado na especificação.
+     *
+     * @return true, if is deprecated
+     */
+    public boolean isDeprecated() {
+      return this.deprecated;
+    }
+
+  }
+
+  /**
    * Finalidade de emissão da NF-e ({@code finNFe}).
    *
    * <p>

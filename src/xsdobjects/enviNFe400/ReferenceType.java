@@ -1,8 +1,8 @@
 //
-// Este arquivo foi gerado pela Arquitetura JavaTM para Implementação de Referência (JAXB) de Bind XML, v2.2.8-b130911.1802 
+// Este arquivo foi gerado pela Arquitetura JavaTM para Implementa��o de Refer�ncia (JAXB) de Bind XML, v2.2.8-b130911.1802 
 // Consulte <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
-// Todas as modificações neste arquivo serão perdidas após a recompilação do esquema de origem. 
-// Gerado em: 2025.02.09 às 04:58:58 PM BRT 
+// Todas as modifica��es neste arquivo ser�o perdidas ap�s a recompila��o do esquema de origem. 
+// Gerado em: 2025.12.13 �s 10:09:55 AM BRT 
 //
 
 
@@ -22,7 +22,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 /**
  * <p>Classe Java de ReferenceType complex type.
  * 
- * <p>O seguinte fragmento do esquema especifica o conteúdo esperado contido dentro desta classe.
+ * <p>O seguinte fragmento do esquema especifica o conte�do esperado contido dentro desta classe.
  * 
  * <pre>
  * &lt;complexType name="ReferenceType">
@@ -83,7 +83,7 @@ public class ReferenceType {
     protected String type;
 
     /**
-     * Obtém o valor da propriedade transforms.
+     * Obt�m o valor da propriedade transforms.
      * 
      * @return
      *     possible object is
@@ -107,7 +107,7 @@ public class ReferenceType {
     }
 
     /**
-     * Obtém o valor da propriedade digestMethod.
+     * Obt�m o valor da propriedade digestMethod.
      * 
      * @return
      *     possible object is
@@ -131,7 +131,7 @@ public class ReferenceType {
     }
 
     /**
-     * Obtém o valor da propriedade digestValue.
+     * Obt�m o valor da propriedade digestValue.
      * 
      * @return
      *     possible object is
@@ -153,7 +153,7 @@ public class ReferenceType {
     }
 
     /**
-     * Obtém o valor da propriedade id.
+     * Obt�m o valor da propriedade id.
      * 
      * @return
      *     possible object is
@@ -177,7 +177,7 @@ public class ReferenceType {
     }
 
     /**
-     * Obtém o valor da propriedade uri.
+     * Obt�m o valor da propriedade uri.
      * 
      * @return
      *     possible object is
@@ -201,7 +201,7 @@ public class ReferenceType {
     }
 
     /**
-     * Obtém o valor da propriedade type.
+     * Obt�m o valor da propriedade type.
      * 
      * @return
      *     possible object is
@@ -228,7 +228,7 @@ public class ReferenceType {
     /**
      * <p>Classe Java de anonymous complex type.
      * 
-     * <p>O seguinte fragmento do esquema especifica o conteúdo esperado contido dentro desta classe.
+     * <p>O seguinte fragmento do esquema especifica o conte�do esperado contido dentro desta classe.
      * 
      * <pre>
      * &lt;complexType>
@@ -251,7 +251,7 @@ public class ReferenceType {
         protected String algorithm;
 
         /**
-         * Obtém o valor da propriedade algorithm.
+         * Obt�m o valor da propriedade algorithm.
          * 
          * @return
          *     possible object is

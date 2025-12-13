@@ -1,8 +1,8 @@
 //
-// Este arquivo foi gerado pela Arquitetura JavaTM para Implementação de Referência (JAXB) de Bind XML, v2.2.8-b130911.1802
+// Este arquivo foi gerado pela Arquitetura JavaTM para Implementa��o de Refer�ncia (JAXB) de Bind XML, v2.2.8-b130911.1802
 // Consulte <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a>
-// Todas as modificações neste arquivo serão perdidas após a recompilação do esquema de origem.
-// Gerado em: 2025.02.09 às 04:58:58 PM BRT
+// Todas as modifica��es neste arquivo ser�o perdidas ap�s a recompila��o do esquema de origem.
+// Gerado em: 2025.12.13 �s 10:09:55 AM BRT
 //
 
 package xsdobjects.enviNFe400;
@@ -15,13 +15,13 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 /**
- * Tipo Retorno do Pedido de Autorização da Nota Fiscal Eletrônica
+ * Tipo Retorno do Pedido de Autoriza��o da Nota Fiscal Eletr�nica
  *
  * <p>
  * Classe Java de TRetEnviNFe complex type.
  *
  * <p>
- * O seguinte fragmento do esquema especifica o conteúdo esperado contido dentro desta classe.
+ * O seguinte fragmento do esquema especifica o conte�do esperado contido dentro desta classe.
  *
  * <pre>
  * &lt;complexType name="TRetEnviNFe">
@@ -59,16 +59,7 @@ import javax.xml.bind.annotation.XmlType;
  *
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "TRetEnviNFe", propOrder = {
-    "tpAmb",
-    "verAplic",
-    "cStat",
-    "xMotivo",
-    "cuf",
-    "dhRecbto",
-    "infRec",
-    "protNFe"
-})
+@XmlType(name = "TRetEnviNFe", propOrder = { "tpAmb", "verAplic", "cStat", "xMotivo", "cuf", "dhRecbto", "infRec", "protNFe" })
 @XmlRootElement(name = "retEnviNFe")
 public class TRetEnviNFe {
 
@@ -90,7 +81,7 @@ public class TRetEnviNFe {
   protected String versao;
 
   /**
-   * Obtém o valor da propriedade tpAmb.
+   * Obt�m o valor da propriedade tpAmb.
    * 
    * @return possible object is {@link String }
    * 
@@ -110,7 +101,7 @@ public class TRetEnviNFe {
   }
 
   /**
-   * Obtém o valor da propriedade verAplic.
+   * Obt�m o valor da propriedade verAplic.
    * 
    * @return possible object is {@link String }
    * 
@@ -130,7 +121,7 @@ public class TRetEnviNFe {
   }
 
   /**
-   * Obtém o valor da propriedade cStat.
+   * Obt�m o valor da propriedade cStat.
    * 
    * @return possible object is {@link String }
    * 
@@ -150,7 +141,7 @@ public class TRetEnviNFe {
   }
 
   /**
-   * Obtém o valor da propriedade xMotivo.
+   * Obt�m o valor da propriedade xMotivo.
    * 
    * @return possible object is {@link String }
    * 
@@ -170,7 +161,7 @@ public class TRetEnviNFe {
   }
 
   /**
-   * Obtém o valor da propriedade cuf.
+   * Obt�m o valor da propriedade cuf.
    * 
    * @return possible object is {@link String }
    * 
@@ -190,7 +181,7 @@ public class TRetEnviNFe {
   }
 
   /**
-   * Obtém o valor da propriedade dhRecbto.
+   * Obt�m o valor da propriedade dhRecbto.
    * 
    * @return possible object is {@link String }
    * 
@@ -210,7 +201,7 @@ public class TRetEnviNFe {
   }
 
   /**
-   * Obtém o valor da propriedade infRec.
+   * Obt�m o valor da propriedade infRec.
    * 
    * @return possible object is {@link TRetEnviNFe.InfRec }
    * 
@@ -230,7 +221,7 @@ public class TRetEnviNFe {
   }
 
   /**
-   * Obtém o valor da propriedade protNFe.
+   * Obt�m o valor da propriedade protNFe.
    * 
    * @return possible object is {@link TProtNFe }
    * 
@@ -250,7 +241,7 @@ public class TRetEnviNFe {
   }
 
   /**
-   * Obtém o valor da propriedade versao.
+   * Obt�m o valor da propriedade versao.
    * 
    * @return possible object is {@link String }
    * 
@@ -274,7 +265,7 @@ public class TRetEnviNFe {
    * Classe Java de anonymous complex type.
    * 
    * <p>
-   * O seguinte fragmento do esquema especifica o conteúdo esperado contido dentro desta classe.
+   * O seguinte fragmento do esquema especifica o conte�do esperado contido dentro desta classe.
    * 
    * <pre>
    * &lt;complexType>
@@ -292,10 +283,7 @@ public class TRetEnviNFe {
    * 
    */
   @XmlAccessorType(XmlAccessType.FIELD)
-  @XmlType(name = "", propOrder = {
-      "nRec",
-      "tMed"
-  })
+  @XmlType(name = "", propOrder = { "nRec", "tMed" })
   public static class InfRec {
 
     @XmlElement(required = true)
@@ -304,7 +292,7 @@ public class TRetEnviNFe {
     protected String tMed;
 
     /**
-     * Obtém o valor da propriedade nRec.
+     * Obt�m o valor da propriedade nRec.
      * 
      * @return possible object is {@link String }
      * 
@@ -324,7 +312,7 @@ public class TRetEnviNFe {
     }
 
     /**
-     * Obtém o valor da propriedade tMed.
+     * Obt�m o valor da propriedade tMed.
      * 
      * @return possible object is {@link String }
      * 

@@ -897,6 +897,9 @@ public final class MapperForNfeAutorizacaoLoteV400 {
     if (source.getCmunFG() != null) {
       target.setCMunFG(RUString.completeUntilLengthLeft("0", RUTypes.parseString(source.getCmunFG()), 7));
     }
+    if (source.getCmunFGIBS() != null) {
+      target.setCMunFGIBS(RUString.completeUntilLengthLeft("0", RUTypes.parseString(source.getCmunFG()), 7));
+    }
     if (source.getTpImp() != null) {
       target.setTpImp(source.getTpImp().getXmlData());
     }
@@ -963,6 +966,7 @@ public final class MapperForNfeAutorizacaoLoteV400 {
       target.setIdDest(SEFAZEnums.valueOfXMLData(SEFAZ_idDest.class, source.getIdDest()));
     }
     target.setCmunFG(RUTypes.parseInteger(source.getCMunFG()));
+    target.setCmunFGIBS(RUTypes.parseInteger(source.getCMunFGIBS()));
     if (source.getTpImp() != null) {
       target.setTpImp(SEFAZEnums.valueOfXMLData(SEFAZ_tpImp.class, source.getTpImp()));
     }

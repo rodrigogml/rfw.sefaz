@@ -13,6 +13,7 @@ import br.eng.rodrigogml.rfw.kernel.rfwmeta.RFWMetaStringField;
 import br.eng.rodrigogml.rfw.kernel.vo.RFWVO;
 import br.eng.rodrigogml.rfw.orm.dao.annotations.dao.RFWDAOAnnotation;
 import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_indTot;
+import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_tpCredPresIBSZFM;
 
 /**
  * Grupo I - Detalhamento de Produtos e Serviços (tag prod / I01). Detalhamento de Produtos e Serviços do item da NF-e.
@@ -83,6 +84,13 @@ public class SEFAZProdVO extends RFWVO implements Serializable {
    */
   @RFWMetaStringField(caption = "Código de benefício fiscal (UF)", required = false, unique = false, maxLength = 8, minLength = 1, preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
   private String cbenef;
+
+  /**
+   * I05k - Classificação para subapuração do IBS na ZFM<br>
+   * Classificação conforme percentuais definidos no art. 450, § 1º, da LC 214/25 para o cálculo do crédito presumido.
+   */
+  @RFWMetaEnumField(caption = "Classificação para Subapuração do IBS na ZFM", required = false)
+  private SEFAZ_tpCredPresIBSZFM tpCredPresIBSZFM = null;
 
   /**
    * I06 - EXTIPI. EX_TIPI. Ocor.: 0–1 / Tam.: 3 / Tipo: N.
@@ -622,6 +630,28 @@ public class SEFAZProdVO extends RFWVO implements Serializable {
    */
   public void setDetVO(SEFAZDetVO detVO) {
     this.detVO = detVO;
+  }
+
+  /**
+   * # i05k - Classificação para subapuração do IBS na ZFM<br>
+   * Classificação conforme percentuais definidos no art. 450, § 1º, da LC 214/25 para o cálculo do crédito presumido.
+   *
+   * @return the i05k - Classificação para subapuração do IBS na ZFM<br>
+   *         Classificação conforme percentuais definidos no art
+   */
+  public SEFAZ_tpCredPresIBSZFM getTpCredPresIBSZFM() {
+    return tpCredPresIBSZFM;
+  }
+
+  /**
+   * # i05k - Classificação para subapuração do IBS na ZFM<br>
+   * Classificação conforme percentuais definidos no art. 450, § 1º, da LC 214/25 para o cálculo do crédito presumido.
+   *
+   * @param tpCredPresIBSZFM the new i05k - Classificação para subapuração do IBS na ZFM<br>
+   *          Classificação conforme percentuais definidos no art
+   */
+  public void setTpCredPresIBSZFM(SEFAZ_tpCredPresIBSZFM tpCredPresIBSZFM) {
+    this.tpCredPresIBSZFM = tpCredPresIBSZFM;
   }
 
 }
