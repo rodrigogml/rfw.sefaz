@@ -618,11 +618,21 @@ public class SEFAZEnums {
       this.deprecated = deprecated;
     }
 
+    /**
+     * Gets the xml data.
+     *
+     * @return the xml data
+     */
     @Override
     public String getXmlData() {
       return this.xmlData;
     }
 
+    /**
+     * Checks if is deprecated.
+     *
+     * @return true, if is deprecated
+     */
     public boolean isDeprecated() {
       return this.deprecated;
     }
@@ -657,11 +667,21 @@ public class SEFAZEnums {
       this.deprecated = deprecated;
     }
 
+    /**
+     * Gets the xml data.
+     *
+     * @return the xml data
+     */
     @Override
     public String getXmlData() {
       return this.xmlData;
     }
 
+    /**
+     * Checks if is deprecated.
+     *
+     * @return true, if is deprecated
+     */
     public boolean isDeprecated() {
       return this.deprecated;
     }
@@ -2117,6 +2137,12 @@ public class SEFAZEnums {
       return this.deprecated;
     }
 
+    /**
+     * # descrição da forma de pagamento oficial conforme documentação da SEFAZ. <br>
+     * A descrição definida aqui é utilizada na impressão dos documentos oficiais, como NFe/NFCe.
+     *
+     * @return the descrição da forma de pagamento oficial conforme documentação da SEFAZ
+     */
     public String getSefazDescription() {
       return sefazDescription;
     }
@@ -2890,4 +2916,199 @@ public class SEFAZEnums {
     }
   }
 
+  /**
+   * Enumeration do CST IBS/CBS utilizada no XML da NFe.
+   *
+   * Cada item representa um código de situação tributária do IBS/CBS, conforme tabela oficial da SEFAZ, incluindo os indicadores de grupos aplicáveis para cada CST.
+   */
+  public enum SEFAZ_CST_IBSCBS implements SEFAZEnum<SEFAZ_CST_IBSCBS> {
+
+    /** 000 – Tributação integral. */
+    CST_000_TRIBUTACAO_INTEGRAL("000", false, true, false, false, false, false, false, false, false),
+
+    /** 010 – Tributação com alíquotas uniformes. */
+    CST_010_TRIBUTACAO_ALIQUOTAS_UNIFORMES("010", false, true, false, false, false, false, false, false, false),
+
+    /** 011 – Tributação com alíquotas uniformes reduzidas. */
+    CST_011_TRIBUTACAO_ALIQUOTAS_UNIFORMES_REDUZIDAS("011", false, true, false, true, false, false, false, false, false),
+
+    /** 200 – Alíquota reduzida. */
+    CST_200_ALIQUOTA_REDUZIDA("200", false, true, false, true, false, false, false, false, false),
+
+    /** 220 – Alíquota fixa. */
+    CST_220_ALIQUOTA_FIXA("220", false, true, false, false, false, false, false, false, false),
+
+    /** 221 – Alíquota fixa proporcional. */
+    CST_221_ALIQUOTA_FIXA_PROPORCIONAL("221", false, true, false, false, false, false, false, false, false),
+
+    /** 222 – Redução de base de cálculo. */
+    CST_222_REDUCAO_BASE_CALCULO("222", false, true, false, false, false, false, false, false, true),
+
+    /** 400 – Isenção. */
+    CST_400_ISENCAO("400", false, false, false, false, false, false, false, false, false),
+
+    /** 410 – Imunidade e não incidência. */
+    CST_410_IMUNIDADE_NAO_INCIDENCIA("410", false, false, false, false, false, false, false, false, false),
+
+    /** 510 – Diferimento. */
+    CST_510_DIFERIMENTO("510", false, true, false, false, true, false, false, false, false),
+
+    /** 515 – Diferimento com redução de alíquota. */
+    CST_515_DIFERIMENTO_REDUCAO_ALIQUOTA("515", false, true, false, true, true, false, false, false, false),
+
+    /** 550 – Suspensão. */
+    CST_550_SUSPENSAO("550", false, true, false, false, false, false, false, false, false),
+
+    /** 620 – Tributação monofásica. */
+    CST_620_TRIBUTACAO_MONOFASICA("620", false, false, true, false, false, false, false, false, false),
+
+    /** 800 – Transferência de crédito. */
+    CST_800_TRANSFERENCIA_CREDITO("800", false, false, false, false, false, true, false, false, false),
+
+    /** 810 – Ajuste de IBS na ZFM. */
+    CST_810_AJUSTE_IBS_ZFM("810", false, false, false, false, false, false, true, false, false),
+
+    /** 811 – Ajustes. */
+    CST_811_AJUSTES("811", false, false, false, false, false, false, false, true, false),
+
+    /** 820 – Tributação em declaração de regime específico. */
+    CST_820_REGIME_ESPECIFICO("820", false, false, false, false, false, false, false, false, false),
+
+    /** 830 – Exclusão de base de cálculo. */
+    CST_830_EXCLUSAO_BASE_CALCULO("830", false, true, false, false, false, false, false, false, false);
+
+    /** Valor exato gravado/lido no XML (campo CST). */
+    private final String xmlData;
+
+    /** Indica se o tipo está obsoleto/descontinuado para uso atual. */
+    private final boolean deprecated;
+
+    /** Indicador de grupo IBS/CBS. */
+    private final boolean indGIBSCBS;
+
+    /** Indicador de IBS/CBS monofásico. */
+    private final boolean indGIBSCBSMono;
+
+    /** Indicador de redução. */
+    private final boolean indGRed;
+
+    /** Indicador de diferimento. */
+    private final boolean indGDif;
+
+    /** Indicador de transferência de crédito. */
+    private final boolean indGTransfCred;
+
+    /** Indicador de crédito presumido IBS ZFM. */
+    private final boolean indGCredPresIBSZFM;
+
+    /** Indicador de ajuste de competência. */
+    private final boolean indGAjusteCompet;
+
+    /** Indicador de redutor de base de cálculo. */
+    private final boolean indRedutorBC;
+
+    SEFAZ_CST_IBSCBS(String xmlData, boolean deprecated, boolean indGIBSCBS, boolean indGIBSCBSMono, boolean indGRed, boolean indGDif, boolean indGTransfCred, boolean indGCredPresIBSZFM, boolean indGAjusteCompet, boolean indRedutorBC) {
+      this.xmlData = xmlData;
+      this.deprecated = deprecated;
+      this.indGIBSCBS = indGIBSCBS;
+      this.indGIBSCBSMono = indGIBSCBSMono;
+      this.indGRed = indGRed;
+      this.indGDif = indGDif;
+      this.indGTransfCred = indGTransfCred;
+      this.indGCredPresIBSZFM = indGCredPresIBSZFM;
+      this.indGAjusteCompet = indGAjusteCompet;
+      this.indRedutorBC = indRedutorBC;
+    }
+
+    /**
+     * # valor exato gravado/lido no XML (campo CST).
+     *
+     * @return the valor exato gravado/lido no XML (campo CST)
+     */
+    @Override
+    public String getXmlData() {
+      return this.xmlData;
+    }
+
+    /**
+     * # indica se o tipo está obsoleto/descontinuado para uso atual.
+     *
+     * @return the indica se o tipo está obsoleto/descontinuado para uso atual
+     */
+    public boolean isDeprecated() {
+      return this.deprecated;
+    }
+
+    /**
+     * # indicador de grupo IBS/CBS.
+     *
+     * @return the indicador de grupo IBS/CBS
+     */
+    public boolean isIndGIBSCBS() {
+      return indGIBSCBS;
+    }
+
+    /**
+     * # indicador de IBS/CBS monofásico.
+     *
+     * @return the indicador de IBS/CBS monofásico
+     */
+    public boolean isIndGIBSCBSMono() {
+      return indGIBSCBSMono;
+    }
+
+    /**
+     * # indicador de redução.
+     *
+     * @return the indicador de redução
+     */
+    public boolean isIndGRed() {
+      return indGRed;
+    }
+
+    /**
+     * # indicador de diferimento.
+     *
+     * @return the indicador de diferimento
+     */
+    public boolean isIndGDif() {
+      return indGDif;
+    }
+
+    /**
+     * # indicador de transferência de crédito.
+     *
+     * @return the indicador de transferência de crédito
+     */
+    public boolean isIndGTransfCred() {
+      return indGTransfCred;
+    }
+
+    /**
+     * # indicador de crédito presumido IBS ZFM.
+     *
+     * @return the indicador de crédito presumido IBS ZFM
+     */
+    public boolean isIndGCredPresIBSZFM() {
+      return indGCredPresIBSZFM;
+    }
+
+    /**
+     * # indicador de ajuste de competência.
+     *
+     * @return the indicador de ajuste de competência
+     */
+    public boolean isIndGAjusteCompet() {
+      return indGAjusteCompet;
+    }
+
+    /**
+     * # indicador de redutor de base de cálculo.
+     *
+     * @return the indicador de redutor de base de cálculo
+     */
+    public boolean isIndRedutorBC() {
+      return indRedutorBC;
+    }
+  }
 }

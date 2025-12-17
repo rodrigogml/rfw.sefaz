@@ -5,6 +5,7 @@ import br.eng.rodrigogml.rfw.kernel.rfwmeta.RFWMetaRelationshipField;
 import br.eng.rodrigogml.rfw.kernel.rfwmeta.RFWMetaRelationshipField.RelationshipTypes;
 import br.eng.rodrigogml.rfw.kernel.rfwmeta.RFWMetaStringField;
 import br.eng.rodrigogml.rfw.kernel.vo.RFWVO;
+import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums.SEFAZ_CST_IBSCBS;
 
 /**
  * IBSCBS - Informações do Imposto sobre Bens e Serviços (IBS) e da Contribuição sobre Bens e Serviços (CBS).
@@ -26,7 +27,7 @@ public class SEFAZIBSCBSVO extends RFWVO {
    * CST - Código de Situação Tributária do IBS e CBS.
    */
   @RFWMetaStringField(caption = "CST do IBS e CBS", required = false, maxLength = 3, pattern = "^[0-9]{3}$", preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
-  private String cst;
+  private SEFAZ_CST_IBSCBS cst;
 
   /**
    * cClassTrib - Código de Classificação Tributária do IBS e CBS.
@@ -65,7 +66,7 @@ public class SEFAZIBSCBSVO extends RFWVO {
    *
    * @return the cST - Código de Situação Tributária do IBS e CBS
    */
-  public String getCst() {
+  public SEFAZ_CST_IBSCBS getCst() {
     return cst;
   }
 
@@ -74,7 +75,7 @@ public class SEFAZIBSCBSVO extends RFWVO {
    *
    * @param cst the new cST - Código de Situação Tributária do IBS e CBS
    */
-  public void setCst(String cst) {
+  public void setCst(SEFAZ_CST_IBSCBS cst) {
     this.cst = cst;
   }
 
