@@ -64,6 +64,12 @@ public class SEFAZImpostoVO extends RFWVO implements Serializable {
   private SEFAZISVO isVO = null;
 
   /**
+   * {@link SEFAZIBSCBSVO}
+   */
+  @RFWMetaRelationshipField(caption = "IBSCBS", relationship = RelationshipTypes.COMPOSITION, required = false, columnMapped = "idsefaz_imposto")
+  private SEFAZIBSCBSVO ibsCbsVO = null;
+
+  /**
    * M02 - vTotTrib. Valor aproximado total de tributos federais, estaduais e municipais. (NT 2013/003)
    *
    * Ocor.: 0–1 / Tam.: 13v2 / Tipo: N. No MOC o campo é opcional.
@@ -213,6 +219,24 @@ public class SEFAZImpostoVO extends RFWVO implements Serializable {
    */
   public void setIsVO(SEFAZISVO isVO) {
     this.isVO = isVO;
+  }
+
+  /**
+   * # {@link SEFAZIBSCBSVO}.
+   *
+   * @return the {@link SEFAZIBSCBSVO}
+   */
+  public SEFAZIBSCBSVO getIbsCbsVO() {
+    return ibsCbsVO;
+  }
+
+  /**
+   * # {@link SEFAZIBSCBSVO}.
+   *
+   * @param ibsCbsVO the new {@link SEFAZIBSCBSVO}
+   */
+  public void setIbsCbsVO(SEFAZIBSCBSVO ibsCbsVO) {
+    this.ibsCbsVO = ibsCbsVO;
   }
 
 }

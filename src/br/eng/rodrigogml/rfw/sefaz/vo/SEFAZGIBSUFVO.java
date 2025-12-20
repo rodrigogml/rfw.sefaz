@@ -30,7 +30,7 @@ public class SEFAZGIBSUFVO extends RFWVO {
    * vIBSUF - Valor do IBS da UF.
    */
   @RFWMetaBigDecimalField(caption = "Valor do IBS da UF", required = true, scale = 2, scaleMax = 2, absolute = true)
-  private BigDecimal vibsUf;
+  private BigDecimal vibsUF;
 
   /**
    * pDif - Percentual do diferimento.
@@ -103,17 +103,17 @@ public class SEFAZGIBSUFVO extends RFWVO {
    *
    * @return the vIBSUF - Valor do IBS da UF
    */
-  public BigDecimal getVibsUf() {
-    return vibsUf;
+  public BigDecimal getVibsUF() {
+    return vibsUF;
   }
 
   /**
    * # vIBSUF - Valor do IBS da UF.
    *
-   * @param vibsUf the new vIBSUF - Valor do IBS da UF
+   * @param vibsUF the new vIBSUF - Valor do IBS da UF
    */
-  public void setVibsUf(BigDecimal vibsUf) {
-    this.vibsUf = vibsUf;
+  public void setVibsUF(BigDecimal vibsUF) {
+    this.vibsUF = vibsUF;
   }
 
   /**

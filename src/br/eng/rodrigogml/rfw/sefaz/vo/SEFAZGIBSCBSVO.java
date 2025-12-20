@@ -23,12 +23,12 @@ public class SEFAZGIBSCBSVO extends RFWVO {
   /**
    * gIBSUF - Grupo de Informações do IBS da UF.
    */
-  private SEFAZGIBSUFVO gibsUf;
+  private SEFAZGIBSUFVO gibsUFVO;
 
   /**
    * gIBSMun - Grupo de Informações do IBS do Município.
    */
-  private SEFAZGIBSMunVO gibsMun;
+  private SEFAZGIBSMunVO gibsMunVO;
 
   /**
    * vIBS - Valor total do IBS.
@@ -85,17 +85,17 @@ public class SEFAZGIBSCBSVO extends RFWVO {
    *
    * @return the gIBSUF - Grupo de Informações do IBS da UF
    */
-  public SEFAZGIBSUFVO getGibsUf() {
-    return gibsUf;
+  public SEFAZGIBSUFVO getGibsUFVO() {
+    return gibsUFVO;
   }
 
   /**
    * # gIBSUF - Grupo de Informações do IBS da UF.
    *
-   * @param gibsUf the new gIBSUF - Grupo de Informações do IBS da UF
+   * @param gibsUFVO the new gIBSUF - Grupo de Informações do IBS da UF
    */
-  public void setGibsUf(SEFAZGIBSUFVO gibsUf) {
-    this.gibsUf = gibsUf;
+  public void setGibsUFVO(SEFAZGIBSUFVO gibsUFVO) {
+    this.gibsUFVO = gibsUFVO;
   }
 
   /**
@@ -103,17 +103,17 @@ public class SEFAZGIBSCBSVO extends RFWVO {
    *
    * @return the gIBSMun - Grupo de Informações do IBS do Município
    */
-  public SEFAZGIBSMunVO getGibsMun() {
-    return gibsMun;
+  public SEFAZGIBSMunVO getGibsMunVO() {
+    return gibsMunVO;
   }
 
   /**
    * # gIBSMun - Grupo de Informações do IBS do Município.
    *
-   * @param gibsMun the new gIBSMun - Grupo de Informações do IBS do Município
+   * @param gibsMunVO the new gIBSMun - Grupo de Informações do IBS do Município
    */
-  public void setGibsMun(SEFAZGIBSMunVO gibsMun) {
-    this.gibsMun = gibsMun;
+  public void setGibsMunVO(SEFAZGIBSMunVO gibsMun) {
+    this.gibsMunVO = gibsMun;
   }
 
   /**

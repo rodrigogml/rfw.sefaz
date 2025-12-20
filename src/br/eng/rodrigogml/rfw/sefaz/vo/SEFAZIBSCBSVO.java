@@ -18,10 +18,16 @@ public class SEFAZIBSCBSVO extends RFWVO {
   private static final long serialVersionUID = -3837222129422932793L;
 
   /**
+   * {@link SEFAZImpostoVO}
+   */
+  @RFWMetaRelationshipField(caption = "Imposto", relationship = RelationshipTypes.PARENT_ASSOCIATION, required = true, column = "idsefaz_imposto")
+  private SEFAZImpostoVO impostoVO = null;
+
+  /**
    * {@link SEFAZGIIBSCBSVO}
    */
   @RFWMetaRelationshipField(caption = "ICMS", relationship = RelationshipTypes.COMPOSITION, required = false)
-  private SEFAZGIBSCBSVO gibsCbs;
+  private SEFAZGIBSCBSVO gibsCbsVO;
 
   /**
    * CST - Código de Situação Tributária do IBS e CBS.
@@ -48,17 +54,17 @@ public class SEFAZIBSCBSVO extends RFWVO {
    *
    * @return the gibs cbs
    */
-  public SEFAZGIBSCBSVO getGibsCbs() {
-    return gibsCbs;
+  public SEFAZGIBSCBSVO getGibsCbsVO() {
+    return gibsCbsVO;
   }
 
   /**
    * Sets the gibs cbs.
    *
-   * @param gibsCbs the new gibs cbs
+   * @param gibsCbsVO the new gibs cbs
    */
-  public void setGibsCbs(SEFAZGIBSCBSVO gibsCbs) {
-    this.gibsCbs = gibsCbs;
+  public void setGibsCbsVO(SEFAZGIBSCBSVO gibsCbsVO) {
+    this.gibsCbsVO = gibsCbsVO;
   }
 
   /**
@@ -117,6 +123,24 @@ public class SEFAZIBSCBSVO extends RFWVO {
    */
   public void setIndDoacao(String indDoacao) {
     this.indDoacao = indDoacao;
+  }
+
+  /**
+   * # {@link SEFAZImpostoVO}.
+   *
+   * @return the {@link SEFAZImpostoVO}
+   */
+  public SEFAZImpostoVO getImpostoVO() {
+    return impostoVO;
+  }
+
+  /**
+   * # {@link SEFAZImpostoVO}.
+   *
+   * @param impostoVO the new {@link SEFAZImpostoVO}
+   */
+  public void setImpostoVO(SEFAZImpostoVO impostoVO) {
+    this.impostoVO = impostoVO;
   }
 
 }
