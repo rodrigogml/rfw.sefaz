@@ -40,6 +40,18 @@ public class SEFAZTotalVO extends RFWVO {
   private SEFAZISSQNTotVO issqnTotVO = null;
 
   /**
+   * {@link SEFAZISTotVO}
+   */
+  @RFWMetaRelationshipField(caption = "ISTot", relationship = RelationshipTypes.COMPOSITION, required = false, columnMapped = "idsefaz_istot")
+  private SEFAZISTotVO isTotVO = null;
+
+  /**
+   * {@link SEFAZIBSCBSTotVO}
+   */
+  @RFWMetaRelationshipField(caption = "IBSCBSTot", relationship = RelationshipTypes.COMPOSITION, required = false, columnMapped = "idsefaz_ibscbstot")
+  private SEFAZIBSCBSTotVO ibsCbsTotVO = null;
+
+  /**
    * # {@link SEFAZInfNFeVO}.
    *
    * @return the {@link SEFAZInfNFeVO}
@@ -91,6 +103,42 @@ public class SEFAZTotalVO extends RFWVO {
    */
   public void setIssqnTotVO(SEFAZISSQNTotVO issqnTotVO) {
     this.issqnTotVO = issqnTotVO;
+  }
+
+  /**
+   * # {@link SEFAZISTotVO}.
+   *
+   * @return the {@link SEFAZISTotVO}
+   */
+  public SEFAZISTotVO getIsTotVO() {
+    return isTotVO;
+  }
+
+  /**
+   * # {@link SEFAZISTotVO}.
+   *
+   * @param isTotVO the new {@link SEFAZISTotVO}
+   */
+  public void setIsTotVO(SEFAZISTotVO isTotVO) {
+    this.isTotVO = isTotVO;
+  }
+
+  /**
+   * # {@link SEFAZIBSCBSTotVO}.
+   *
+   * @return the {@link SEFAZIBSCBSTotVO}
+   */
+  public SEFAZIBSCBSTotVO getIbsCbsTotVO() {
+    return ibsCbsTotVO;
+  }
+
+  /**
+   * # {@link SEFAZIBSCBSTotVO}.
+   *
+   * @param ibsCbsTotVO the new {@link SEFAZIBSCBSTotVO}
+   */
+  public void setIbsCbsTotVO(SEFAZIBSCBSTotVO ibsCbsTotVO) {
+    this.ibsCbsTotVO = ibsCbsTotVO;
   }
 
 }
