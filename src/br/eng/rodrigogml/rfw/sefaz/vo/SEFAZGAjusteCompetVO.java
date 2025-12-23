@@ -1,6 +1,7 @@
 package br.eng.rodrigogml.rfw.sefaz.vo;
 
 import java.math.BigDecimal;
+import java.time.YearMonth;
 
 import br.eng.rodrigogml.rfw.kernel.preprocess.PreProcess.PreProcessOption;
 import br.eng.rodrigogml.rfw.kernel.rfwmeta.RFWMetaBigDecimalField;
@@ -25,7 +26,7 @@ public class SEFAZGAjusteCompetVO extends RFWVO {
    * competApur - Ano e mês de referência do período de apuração (AAAA-MM).
    */
   @RFWMetaStringField(caption = "Competência de Apuração", required = true, maxLength = 7, pattern = "^[0-9]{4}-[0-9]{2}$", preProcess = PreProcessOption.STRING_SPACESCLEAN_TO_NULL)
-  private String competApur;
+  private YearMonth competApur;
 
   /**
    * vIBS - Valor do IBS.
@@ -62,7 +63,7 @@ public class SEFAZGAjusteCompetVO extends RFWVO {
    *
    * @return the competApur - Ano e mês de referência do período de apuração (AAAA-MM)
    */
-  public String getCompetApur() {
+  public YearMonth getCompetApur() {
     return competApur;
   }
 
@@ -71,7 +72,7 @@ public class SEFAZGAjusteCompetVO extends RFWVO {
    *
    * @param competApur the new competApur - Ano e mês de referência do período de apuração (AAAA-MM)
    */
-  public void setCompetApur(String competApur) {
+  public void setCompetApur(YearMonth competApur) {
     this.competApur = competApur;
   }
 
