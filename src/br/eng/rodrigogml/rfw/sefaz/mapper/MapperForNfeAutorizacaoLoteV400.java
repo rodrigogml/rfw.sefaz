@@ -1,10 +1,10 @@
 package br.eng.rodrigogml.rfw.sefaz.mapper;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.xml.bind.JAXBElement;
 
 import br.eng.rodrigogml.rfw.kernel.exceptions.RFWException;
@@ -58,18 +58,32 @@ import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZICMSTotVO;
 import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZICMSUFDestVO;
 import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZICMSVO;
 import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZIPIVO;
+import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZGAjusteCompetVO;
+import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZGCBSVO;
+import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZIBSCBSVO;
 import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZISSQNTotVO;
 import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZIdeVO;
 import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZImpostoVO;
 import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZInfAdicVO;
 import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZInfNFeVO;
 import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZLacresVO;
+import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZGCBSTotVO;
+import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZGEstornoCredTotVO;
+import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZGIBSMunTotVO;
+import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZGIBSTotVO;
+import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZGIBSUFTotVO;
+import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZGMonoTotVO;
 import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZNFRefVO;
 import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZNFeProcVO;
 import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZNFeVO;
 import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZObsContVO;
 import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZObsFiscoVO;
 import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZPISVO;
+import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZGIBSCBSVO;
+import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZGIBSMunVO;
+import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZGIBSUFVO;
+import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZGTransfCredVO;
+import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZGTribRegularVO;
 import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZPagAntecipadoRefVO;
 import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZPagAntecipadoVO;
 import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZPagVO;
@@ -93,6 +107,10 @@ import xsdobjects.enviNFe400.TEnderEmi;
 import xsdobjects.enviNFe400.TEndereco;
 import xsdobjects.enviNFe400.TEnviNFe;
 import xsdobjects.enviNFe400.TIpi;
+import xsdobjects.enviNFe400.TAjusteCompet;
+import xsdobjects.enviNFe400.TCIBS;
+import xsdobjects.enviNFe400.TDevTrib;
+import xsdobjects.enviNFe400.TDif;
 import xsdobjects.enviNFe400.TNFe;
 import xsdobjects.enviNFe400.TNFe.InfNFe.Ide.NFref;
 import xsdobjects.enviNFe400.TNFe.InfNFe.Total;
@@ -101,6 +119,11 @@ import xsdobjects.enviNFe400.TNFe.InfNFe.Total.ISSQNtot;
 import xsdobjects.enviNFe400.TNfeProc;
 import xsdobjects.enviNFe400.TProtNFe;
 import xsdobjects.enviNFe400.TRetEnviNFe;
+import xsdobjects.enviNFe400.TIBSCBSMonoTot;
+import xsdobjects.enviNFe400.TRed;
+import xsdobjects.enviNFe400.TTransfCred;
+import xsdobjects.enviNFe400.TTribNFe;
+import xsdobjects.enviNFe400.TTribRegular;
 import xsdobjects.enviNFe400.TUf;
 import xsdobjects.enviNFe400.TUfEmi;
 import xsdobjects.enviNFe400.TVeiculo;
@@ -712,6 +735,7 @@ public final class MapperForNfeAutorizacaoLoteV400 {
     Total target = new Total();
     target.setICMSTot(toJaxb(source.getIcmsTotVO()));
     target.setISSQNtot(toJaxb(source.getIssqnTotVO()));
+    target.setIBSCBSTot(toJaxb(source.getIbsCbsTotVO()));
 
     return target;
   }
@@ -777,6 +801,7 @@ public final class MapperForNfeAutorizacaoLoteV400 {
     target.setInfNFeVO(parent);
     target.setIcmsTotVO(toVO(source.getICMSTot(), target));
     target.setIssqnTotVO(toVO(source.getISSQNtot(), target));
+    target.setIbsCbsTotVO(toVO(source.getIBSCBSTot(), target));
     return target;
   }
 
@@ -832,6 +857,183 @@ public final class MapperForNfeAutorizacaoLoteV400 {
     if (source.getCRegTrib() != null) {
       target.setCregTrib(SEFAZEnums.valueOfXMLData(SEFAZ_cRegTrib.class, source.getCRegTrib()));
     }
+    return target;
+  }
+
+  private static TIBSCBSMonoTot toJaxb(SEFAZIBSCBSTotVO source) {
+    if (source == null) {
+      return null;
+    }
+    TIBSCBSMonoTot target = new TIBSCBSMonoTot();
+    target.setVBCIBSCBS(RUTypes.parseString(source.getVbcIbsCbs()));
+    target.setGIBS(toJaxb(source.getGibs()));
+    target.setGCBS(toJaxb(source.getGcbs()));
+    target.setGMono(toJaxb(source.getGmono()));
+    target.setGEstornoCred(toJaxb(source.getGestornoCred()));
+    return target;
+  }
+
+  private static SEFAZIBSCBSTotVO toVO(TIBSCBSMonoTot source, SEFAZTotalVO parent) throws RFWException {
+    if (source == null) {
+      return null;
+    }
+    SEFAZIBSCBSTotVO target = new SEFAZIBSCBSTotVO();
+    target.setTotalVO(parent);
+    target.setVbcIbsCbs(RUTypes.parseBigDecimal(source.getVBCIBSCBS()));
+    target.setGibs(toVO(source.getGIBS(), target));
+    target.setGcbs(toVO(source.getGCBS(), target));
+    target.setGmono(toVO(source.getGMono(), target));
+    target.setGestornoCred(toVO(source.getGEstornoCred(), target));
+    return target;
+  }
+
+  private static TIBSCBSMonoTot.GIBS toJaxb(SEFAZGIBSTotVO source) {
+    if (source == null) {
+      return null;
+    }
+    TIBSCBSMonoTot.GIBS target = new TIBSCBSMonoTot.GIBS();
+    target.setGIBSUF(toJaxb(source.getGibsUf()));
+    target.setGIBSMun(toJaxb(source.getGibsMun()));
+    target.setVIBS(RUTypes.parseString(source.getVibs()));
+    target.setVCredPres(RUTypes.parseString(source.getVcredPres()));
+    target.setVCredPresCondSus(RUTypes.parseString(source.getVcredPresCondSus()));
+    return target;
+  }
+
+  private static TIBSCBSMonoTot.GIBS.GIBSUF toJaxb(SEFAZGIBSUFTotVO source) {
+    if (source == null) {
+      return null;
+    }
+    TIBSCBSMonoTot.GIBS.GIBSUF target = new TIBSCBSMonoTot.GIBS.GIBSUF();
+    target.setVDif(RUTypes.parseString(source.getVdif()));
+    target.setVDevTrib(RUTypes.parseString(source.getVdevTrib()));
+    target.setVIBSUF(RUTypes.parseString(source.getVibsUf()));
+    return target;
+  }
+
+  private static TIBSCBSMonoTot.GIBS.GIBSMun toJaxb(SEFAZGIBSMunTotVO source) {
+    if (source == null) {
+      return null;
+    }
+    TIBSCBSMonoTot.GIBS.GIBSMun target = new TIBSCBSMonoTot.GIBS.GIBSMun();
+    target.setVDif(RUTypes.parseString(source.getVdif()));
+    target.setVDevTrib(RUTypes.parseString(source.getVdevTrib()));
+    target.setVIBSMun(RUTypes.parseString(source.getVibsMun()));
+    return target;
+  }
+
+  private static TIBSCBSMonoTot.GCBS toJaxb(SEFAZGCBSTotVO source) {
+    if (source == null) {
+      return null;
+    }
+    TIBSCBSMonoTot.GCBS target = new TIBSCBSMonoTot.GCBS();
+    target.setVDif(RUTypes.parseString(source.getVdif()));
+    target.setVDevTrib(RUTypes.parseString(source.getVdevTrib()));
+    target.setVCBS(RUTypes.parseString(source.getVcbs()));
+    target.setVCredPres(RUTypes.parseString(source.getVcredPres()));
+    target.setVCredPresCondSus(RUTypes.parseString(source.getVcredPresCondSus()));
+    return target;
+  }
+
+  private static TIBSCBSMonoTot.GMono toJaxb(SEFAZGMonoTotVO source) {
+    if (source == null) {
+      return null;
+    }
+    TIBSCBSMonoTot.GMono target = new TIBSCBSMonoTot.GMono();
+    target.setVIBSMono(RUTypes.parseString(source.getVibsMono()));
+    target.setVCBSMono(RUTypes.parseString(source.getVcbsMono()));
+    target.setVIBSMonoReten(RUTypes.parseString(source.getVibsMonoReten()));
+    target.setVCBSMonoReten(RUTypes.parseString(source.getVcbsMonoReten()));
+    target.setVIBSMonoRet(RUTypes.parseString(source.getVibsMonoRet()));
+    target.setVCBSMonoRet(RUTypes.parseString(source.getVcbsMonoRet()));
+    return target;
+  }
+
+  private static TIBSCBSMonoTot.GEstornoCred toJaxb(SEFAZGEstornoCredTotVO source) {
+    if (source == null) {
+      return null;
+    }
+    TIBSCBSMonoTot.GEstornoCred target = new TIBSCBSMonoTot.GEstornoCred();
+    target.setVIBSEstCred(RUTypes.parseString(source.getVibseStCred()));
+    target.setVCBSEstCred(RUTypes.parseString(source.getVcbseStCred()));
+    return target;
+  }
+
+  private static SEFAZGIBSTotVO toVO(TIBSCBSMonoTot.GIBS source, SEFAZIBSCBSTotVO parent) throws RFWException {
+    if (source == null) {
+      return null;
+    }
+    SEFAZGIBSTotVO target = new SEFAZGIBSTotVO();
+    target.setIbsCBSTotVO(parent);
+    target.setGibsUf(toVO(source.getGIBSUF(), target));
+    target.setGibsMun(toVO(source.getGIBSMun(), target));
+    target.setVibs(RUTypes.parseBigDecimal(source.getVIBS()));
+    target.setVcredPres(RUTypes.parseBigDecimal(source.getVCredPres()));
+    target.setVcredPresCondSus(RUTypes.parseBigDecimal(source.getVCredPresCondSus()));
+    return target;
+  }
+
+  private static SEFAZGIBSUFTotVO toVO(TIBSCBSMonoTot.GIBS.GIBSUF source, SEFAZGIBSTotVO parent) throws RFWException {
+    if (source == null) {
+      return null;
+    }
+    SEFAZGIBSUFTotVO target = new SEFAZGIBSUFTotVO();
+    target.setGibsTotVO(parent);
+    target.setVdif(RUTypes.parseBigDecimal(source.getVDif()));
+    target.setVdevTrib(RUTypes.parseBigDecimal(source.getVDevTrib()));
+    target.setVibsUf(RUTypes.parseBigDecimal(source.getVIBSUF()));
+    return target;
+  }
+
+  private static SEFAZGIBSMunTotVO toVO(TIBSCBSMonoTot.GIBS.GIBSMun source, SEFAZGIBSTotVO parent) throws RFWException {
+    if (source == null) {
+      return null;
+    }
+    SEFAZGIBSMunTotVO target = new SEFAZGIBSMunTotVO();
+    target.setGibsTotVO(parent);
+    target.setVdif(RUTypes.parseBigDecimal(source.getVDif()));
+    target.setVdevTrib(RUTypes.parseBigDecimal(source.getVDevTrib()));
+    target.setVibsMun(RUTypes.parseBigDecimal(source.getVIBSMun()));
+    return target;
+  }
+
+  private static SEFAZGCBSTotVO toVO(TIBSCBSMonoTot.GCBS source, SEFAZIBSCBSTotVO parent) throws RFWException {
+    if (source == null) {
+      return null;
+    }
+    SEFAZGCBSTotVO target = new SEFAZGCBSTotVO();
+    target.setIbsCBSTotVO(parent);
+    target.setVdif(RUTypes.parseBigDecimal(source.getVDif()));
+    target.setVdevTrib(RUTypes.parseBigDecimal(source.getVDevTrib()));
+    target.setVcbs(RUTypes.parseBigDecimal(source.getVCBS()));
+    target.setVcredPres(RUTypes.parseBigDecimal(source.getVCredPres()));
+    target.setVcredPresCondSus(RUTypes.parseBigDecimal(source.getVCredPresCondSus()));
+    return target;
+  }
+
+  private static SEFAZGMonoTotVO toVO(TIBSCBSMonoTot.GMono source, SEFAZIBSCBSTotVO parent) throws RFWException {
+    if (source == null) {
+      return null;
+    }
+    SEFAZGMonoTotVO target = new SEFAZGMonoTotVO();
+    target.setIbsCBSTotVO(parent);
+    target.setVibsMono(RUTypes.parseBigDecimal(source.getVIBSMono()));
+    target.setVcbsMono(RUTypes.parseBigDecimal(source.getVCBSMono()));
+    target.setVibsMonoReten(RUTypes.parseBigDecimal(source.getVIBSMonoReten()));
+    target.setVcbsMonoReten(RUTypes.parseBigDecimal(source.getVCBSMonoReten()));
+    target.setVibsMonoRet(RUTypes.parseBigDecimal(source.getVIBSMonoRet()));
+    target.setVcbsMonoRet(RUTypes.parseBigDecimal(source.getVCBSMonoRet()));
+    return target;
+  }
+
+  private static SEFAZGEstornoCredTotVO toVO(TIBSCBSMonoTot.GEstornoCred source, SEFAZIBSCBSTotVO parent) throws RFWException {
+    if (source == null) {
+      return null;
+    }
+    SEFAZGEstornoCredTotVO target = new SEFAZGEstornoCredTotVO();
+    target.setIbsCBSTotVO(parent);
+    target.setVibseStCred(RUTypes.parseBigDecimal(source.getVIBSEstCred()));
+    target.setVcbseStCred(RUTypes.parseBigDecimal(source.getVCBSEstCred()));
     return target;
   }
 
@@ -1453,6 +1655,10 @@ public final class MapperForNfeAutorizacaoLoteV400 {
     if (ipi != null) {
       target.getContent().add(SEFAZUtils.auxCreateJAXBElement("IPI", ipi));
     }
+    TTribNFe ibsCbs = toJaxb(source.getIbsCbsVO());
+    if (ibsCbs != null) {
+      target.getContent().add(SEFAZUtils.auxCreateJAXBElement("IBSCBS", ibsCbs));
+    }
     TNFe.InfNFe.Det.Imposto.PIS pis = toJaxb(source.getPisVO());
     if (pis != null) {
       target.getContent().add(SEFAZUtils.auxCreateJAXBElement("PIS", pis));
@@ -1489,6 +1695,8 @@ public final class MapperForNfeAutorizacaoLoteV400 {
           target.setPisVO(toVO((TNFe.InfNFe.Det.Imposto.PIS) value, target));
         } else if ("COFINS".equals(localName) && value instanceof TNFe.InfNFe.Det.Imposto.COFINS) {
           target.setCofinsVO(toVO((TNFe.InfNFe.Det.Imposto.COFINS) value, target));
+        } else if ("IBSCBS".equals(localName) && value instanceof TTribNFe) {
+          target.setIbsCbsVO(toVO((TTribNFe) value, target));
         }
       }
     }
@@ -1746,6 +1954,274 @@ public final class MapperForNfeAutorizacaoLoteV400 {
         target.setICMS90(icms90);
         break;
     }
+    return target;
+  }
+
+  public static TTribNFe toJaxb(SEFAZIBSCBSVO source) {
+    if (source == null) {
+      return null;
+    }
+    TTribNFe target = new TTribNFe();
+    if (source.getCst() != null) {
+      target.setCST(source.getCst().getXmlData());
+    }
+    target.setCClassTrib(source.getCclassTrib());
+    target.setIndDoacao(source.getIndDoacao());
+    if (source.getGibsCbsVO() != null) {
+      target.setGIBSCBS(toJaxb(source.getGibsCbsVO()));
+      if (source.getGibsCbsVO().getGtransfCred() != null) {
+        target.setGTransfCred(toJaxb(source.getGibsCbsVO().getGtransfCred()));
+      }
+      if (source.getGibsCbsVO().getGajusteCompet() != null) {
+        target.setGAjusteCompet(toJaxb(source.getGibsCbsVO().getGajusteCompet()));
+      }
+    }
+    return target;
+  }
+
+  public static SEFAZIBSCBSVO toVO(TTribNFe source, SEFAZImpostoVO parent) throws RFWException {
+    if (source == null) {
+      return null;
+    }
+    SEFAZIBSCBSVO target = new SEFAZIBSCBSVO();
+    target.setImpostoVO(parent);
+    if (source.getCST() != null) {
+      target.setCst(SEFAZEnums.valueOfXMLData(SEFAZEnums.SEFAZ_CST_IBSCBS.class, source.getCST()));
+    }
+    target.setCclassTrib(source.getCClassTrib());
+    target.setIndDoacao(source.getIndDoacao());
+    if (source.getGIBSCBS() != null) {
+      target.setGibsCbsVO(toVO(source.getGIBSCBS(), target));
+    } else if (source.getGTransfCred() != null || source.getGAjusteCompet() != null) {
+      target.setGibsCbsVO(new SEFAZGIBSCBSVO());
+      target.getGibsCbsVO().setIbsCBSVO(target);
+    }
+    if (target.getGibsCbsVO() != null) {
+      target.getGibsCbsVO().setGtransfCred(toVO(source.getGTransfCred(), target.getGibsCbsVO()));
+      target.getGibsCbsVO().setGajusteCompet(toVO(source.getGAjusteCompet(), target.getGibsCbsVO()));
+    }
+    return target;
+  }
+
+  private static TCIBS toJaxb(SEFAZGIBSCBSVO source) {
+    if (source == null) {
+      return null;
+    }
+    TCIBS target = new TCIBS();
+    target.setVBC(RUTypes.parseString(source.getVbc()));
+    target.setGIBSUF(toJaxb(source.getGibsUFVO()));
+    target.setGIBSMun(toJaxb(source.getGibsMunVO()));
+    target.setVIBS(RUTypes.parseString(source.getVibs()));
+    target.setGCBS(toJaxb(source.getGcbs()));
+    target.setGTribRegular(toJaxb(source.getGtribRegular()));
+    return target;
+  }
+
+  private static SEFAZGIBSCBSVO toVO(TCIBS source, SEFAZIBSCBSVO parent) throws RFWException {
+    if (source == null) {
+      return null;
+    }
+    SEFAZGIBSCBSVO target = new SEFAZGIBSCBSVO();
+    target.setIbsCBSVO(parent);
+    target.setVbc(RUTypes.parseBigDecimal(source.getVBC()));
+    target.setGibsUFVO(toVO(source.getGIBSUF(), target));
+    target.setGibsMunVO(toVO(source.getGIBSMun(), target));
+    target.setVibs(RUTypes.parseBigDecimal(source.getVIBS()));
+    target.setGcbs(toVO(source.getGCBS(), target));
+    target.setGtribRegular(toVO(source.getGTribRegular(), target));
+    return target;
+  }
+
+  private static TCIBS.GIBSUF toJaxb(SEFAZGIBSUFVO source) {
+    if (source == null) {
+      return null;
+    }
+    TCIBS.GIBSUF target = new TCIBS.GIBSUF();
+    target.setPIBSUF(RUTypes.parseString(source.getPibsUf()));
+    target.setGDif(toJaxbDif(source.getPdif(), source.getVdif()));
+    target.setGDevTrib(toJaxbDevTrib(source.getVdevTrib()));
+    target.setGRed(toJaxbRed(source.getPredAliq(), source.getPaliqEfet()));
+    target.setVIBSUF(RUTypes.parseString(source.getVibsUF()));
+    return target;
+  }
+
+  private static TCIBS.GIBSMun toJaxb(SEFAZGIBSMunVO source) {
+    if (source == null) {
+      return null;
+    }
+    TCIBS.GIBSMun target = new TCIBS.GIBSMun();
+    target.setPIBSMun(RUTypes.parseString(source.getPibsMun()));
+    target.setGDif(toJaxbDif(source.getPdif(), source.getVdif()));
+    target.setGDevTrib(toJaxbDevTrib(source.getVdevTrib()));
+    target.setGRed(toJaxbRed(source.getPredAliq(), source.getPaliqEfet()));
+    target.setVIBSMun(RUTypes.parseString(source.getVibsMun()));
+    return target;
+  }
+
+  private static TCIBS.GCBS toJaxb(SEFAZGCBSVO source) {
+    if (source == null) {
+      return null;
+    }
+    TCIBS.GCBS target = new TCIBS.GCBS();
+    target.setPCBS(RUTypes.parseString(source.getPcbs()));
+    target.setGDif(toJaxbDif(source.getPdif(), source.getVdif()));
+    target.setGDevTrib(toJaxbDevTrib(source.getVdevTrib()));
+    target.setGRed(toJaxbRed(source.getPredAliq(), source.getPaliqEfet()));
+    target.setVCBS(RUTypes.parseString(source.getVcbs()));
+    return target;
+  }
+
+  private static TTribRegular toJaxb(SEFAZGTribRegularVO source) {
+    if (source == null) {
+      return null;
+    }
+    TTribRegular target = new TTribRegular();
+    target.setCSTReg(source.getCstreg());
+    target.setCClassTribReg(source.getCclassTribReg());
+    target.setPAliqEfetRegIBSUF(RUTypes.parseString(source.getPaliqEfetRegIbsUf()));
+    target.setVTribRegIBSUF(RUTypes.parseString(source.getVtribRegIbsUf()));
+    target.setPAliqEfetRegIBSMun(RUTypes.parseString(source.getPaliqEfetRegIbsMun()));
+    target.setVTribRegIBSMun(RUTypes.parseString(source.getVtribRegIbsMun()));
+    target.setPAliqEfetRegCBS(RUTypes.parseString(source.getPaliqEfetRegCbs()));
+    target.setVTribRegCBS(RUTypes.parseString(source.getVtribRegCbs()));
+    return target;
+  }
+
+  private static TTransfCred toJaxb(SEFAZGTransfCredVO source) {
+    if (source == null) {
+      return null;
+    }
+    TTransfCred target = new TTransfCred();
+    target.setVIBS(RUTypes.parseString(source.getVibs()));
+    target.setVCBS(RUTypes.parseString(source.getVcbs()));
+    return target;
+  }
+
+  private static TAjusteCompet toJaxb(SEFAZGAjusteCompetVO source) {
+    if (source == null) {
+      return null;
+    }
+    TAjusteCompet target = new TAjusteCompet();
+    target.setCompetApur(RUTypes.parseXMLGregorianCalendar(source.getCompetApur()));
+    target.setVIBS(RUTypes.parseString(source.getVibs()));
+    target.setVCBS(RUTypes.parseString(source.getVcbs()));
+    return target;
+  }
+
+  private static SEFAZGIBSUFVO toVO(TCIBS.GIBSUF source, SEFAZGIBSCBSVO parent) throws RFWException {
+    if (source == null) {
+      return null;
+    }
+    SEFAZGIBSUFVO target = new SEFAZGIBSUFVO();
+    target.setGibsCBSVO(parent);
+    target.setPibsUf(RUTypes.parseBigDecimal(source.getPIBSUF()));
+    target.setPdif(RUTypes.parseBigDecimal(source.getGDif() != null ? source.getGDif().getPDif() : null));
+    target.setVdif(RUTypes.parseBigDecimal(source.getGDif() != null ? source.getGDif().getVDif() : null));
+    target.setVdevTrib(RUTypes.parseBigDecimal(source.getGDevTrib() != null ? source.getGDevTrib().getVDevTrib() : null));
+    target.setPredAliq(RUTypes.parseBigDecimal(source.getGRed() != null ? source.getGRed().getPRedAliq() : null));
+    target.setPaliqEfet(RUTypes.parseBigDecimal(source.getGRed() != null ? source.getGRed().getPAliqEfet() : null));
+    target.setVibsUF(RUTypes.parseBigDecimal(source.getVIBSUF()));
+    return target;
+  }
+
+  private static SEFAZGIBSMunVO toVO(TCIBS.GIBSMun source, SEFAZGIBSCBSVO parent) throws RFWException {
+    if (source == null) {
+      return null;
+    }
+    SEFAZGIBSMunVO target = new SEFAZGIBSMunVO();
+    target.setGibsCBSVO(parent);
+    target.setPibsMun(RUTypes.parseBigDecimal(source.getPIBSMun()));
+    target.setPdif(RUTypes.parseBigDecimal(source.getGDif() != null ? source.getGDif().getPDif() : null));
+    target.setVdif(RUTypes.parseBigDecimal(source.getGDif() != null ? source.getGDif().getVDif() : null));
+    target.setVdevTrib(RUTypes.parseBigDecimal(source.getGDevTrib() != null ? source.getGDevTrib().getVDevTrib() : null));
+    target.setPredAliq(RUTypes.parseBigDecimal(source.getGRed() != null ? source.getGRed().getPRedAliq() : null));
+    target.setPaliqEfet(RUTypes.parseBigDecimal(source.getGRed() != null ? source.getGRed().getPAliqEfet() : null));
+    target.setVibsMun(RUTypes.parseBigDecimal(source.getVIBSMun()));
+    return target;
+  }
+
+  private static SEFAZGCBSVO toVO(TCIBS.GCBS source, SEFAZGIBSCBSVO parent) throws RFWException {
+    if (source == null) {
+      return null;
+    }
+    SEFAZGCBSVO target = new SEFAZGCBSVO();
+    target.setGibsCBSVO(parent);
+    target.setPcbs(RUTypes.parseBigDecimal(source.getPCBS()));
+    target.setPdif(RUTypes.parseBigDecimal(source.getGDif() != null ? source.getGDif().getPDif() : null));
+    target.setVdif(RUTypes.parseBigDecimal(source.getGDif() != null ? source.getGDif().getVDif() : null));
+    target.setVdevTrib(RUTypes.parseBigDecimal(source.getGDevTrib() != null ? source.getGDevTrib().getVDevTrib() : null));
+    target.setPredAliq(RUTypes.parseBigDecimal(source.getGRed() != null ? source.getGRed().getPRedAliq() : null));
+    target.setPaliqEfet(RUTypes.parseBigDecimal(source.getGRed() != null ? source.getGRed().getPAliqEfet() : null));
+    target.setVcbs(RUTypes.parseBigDecimal(source.getVCBS()));
+    return target;
+  }
+
+  private static SEFAZGTribRegularVO toVO(TTribRegular source, SEFAZGIBSCBSVO parent) throws RFWException {
+    if (source == null) {
+      return null;
+    }
+    SEFAZGTribRegularVO target = new SEFAZGTribRegularVO();
+    target.setGibsCBSVO(parent);
+    target.setCstreg(source.getCSTReg());
+    target.setCclassTribReg(source.getCClassTribReg());
+    target.setPaliqEfetRegIbsUf(RUTypes.parseBigDecimal(source.getPAliqEfetRegIBSUF()));
+    target.setVtribRegIbsUf(RUTypes.parseBigDecimal(source.getVTribRegIBSUF()));
+    target.setPaliqEfetRegIbsMun(RUTypes.parseBigDecimal(source.getPAliqEfetRegIBSMun()));
+    target.setVtribRegIbsMun(RUTypes.parseBigDecimal(source.getVTribRegIBSMun()));
+    target.setPaliqEfetRegCbs(RUTypes.parseBigDecimal(source.getPAliqEfetRegCBS()));
+    target.setVtribRegCbs(RUTypes.parseBigDecimal(source.getVTribRegCBS()));
+    return target;
+  }
+
+  private static SEFAZGTransfCredVO toVO(TTransfCred source, SEFAZGIBSCBSVO parent) throws RFWException {
+    if (source == null) {
+      return null;
+    }
+    SEFAZGTransfCredVO target = new SEFAZGTransfCredVO();
+    target.setGibsCBSVO(parent);
+    target.setVibs(RUTypes.parseBigDecimal(source.getVIBS()));
+    target.setVcbs(RUTypes.parseBigDecimal(source.getVCBS()));
+    return target;
+  }
+
+  private static SEFAZGAjusteCompetVO toVO(TAjusteCompet source, SEFAZGIBSCBSVO parent) throws RFWException {
+    if (source == null) {
+      return null;
+    }
+    SEFAZGAjusteCompetVO target = new SEFAZGAjusteCompetVO();
+    target.setGibsCBSVO(parent);
+    target.setCompetApur(RUTypes.parseYearMonth(source.getCompetApur()));
+    target.setVibs(RUTypes.parseBigDecimal(source.getVIBS()));
+    target.setVcbs(RUTypes.parseBigDecimal(source.getVCBS()));
+    return target;
+  }
+
+  private static TDif toJaxbDif(BigDecimal pDif, BigDecimal vDif) {
+    if (pDif == null && vDif == null) {
+      return null;
+    }
+    TDif target = new TDif();
+    target.setPDif(RUTypes.parseString(pDif));
+    target.setVDif(RUTypes.parseString(vDif));
+    return target;
+  }
+
+  private static TDevTrib toJaxbDevTrib(BigDecimal vDevTrib) {
+    if (vDevTrib == null) {
+      return null;
+    }
+    TDevTrib target = new TDevTrib();
+    target.setVDevTrib(RUTypes.parseString(vDevTrib));
+    return target;
+  }
+
+  private static TRed toJaxbRed(BigDecimal pRedAliq, BigDecimal pAliqEfet) {
+    if (pRedAliq == null && pAliqEfet == null) {
+      return null;
+    }
+    TRed target = new TRed();
+    target.setPRedAliq(RUTypes.parseString(pRedAliq));
+    target.setPAliqEfet(RUTypes.parseString(pAliqEfet));
     return target;
   }
 
