@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.xml.bind.JAXBElement;
 
 import br.eng.rodrigogml.rfw.kernel.exceptions.RFWException;
@@ -54,36 +55,37 @@ import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZEnderDestVO;
 import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZEnderEmitVO;
 import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZEnviNFeVO;
 import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZFatVO;
+import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZGAjusteCompetVO;
+import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZGCBSTotVO;
+import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZGCBSVO;
+import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZGEstornoCredTotVO;
+import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZGIBSCBSVO;
+import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZGIBSMunTotVO;
+import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZGIBSMunVO;
+import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZGIBSTotVO;
+import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZGIBSUFTotVO;
+import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZGIBSUFVO;
+import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZGMonoTotVO;
+import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZGTransfCredVO;
+import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZGTribRegularVO;
+import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZIBSCBSTotVO;
+import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZIBSCBSVO;
 import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZICMSTotVO;
 import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZICMSUFDestVO;
 import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZICMSVO;
 import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZIPIVO;
-import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZGAjusteCompetVO;
-import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZGCBSVO;
-import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZIBSCBSVO;
 import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZISSQNTotVO;
 import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZIdeVO;
 import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZImpostoVO;
 import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZInfAdicVO;
 import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZInfNFeVO;
 import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZLacresVO;
-import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZGCBSTotVO;
-import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZGEstornoCredTotVO;
-import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZGIBSMunTotVO;
-import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZGIBSTotVO;
-import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZGIBSUFTotVO;
-import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZGMonoTotVO;
 import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZNFRefVO;
 import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZNFeProcVO;
 import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZNFeVO;
 import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZObsContVO;
 import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZObsFiscoVO;
 import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZPISVO;
-import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZGIBSCBSVO;
-import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZGIBSMunVO;
-import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZGIBSUFVO;
-import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZGTransfCredVO;
-import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZGTribRegularVO;
 import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZPagAntecipadoRefVO;
 import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZPagAntecipadoVO;
 import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZPagVO;
@@ -102,15 +104,16 @@ import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZTransportaVO;
 import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZVeicTranspVO;
 import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZVolVO;
 
+import xsdobjects.enviNFe400.TAjusteCompet;
+import xsdobjects.enviNFe400.TCIBS;
 import xsdobjects.enviNFe400.TCompraGov;
+import xsdobjects.enviNFe400.TDevTrib;
+import xsdobjects.enviNFe400.TDif;
 import xsdobjects.enviNFe400.TEnderEmi;
 import xsdobjects.enviNFe400.TEndereco;
 import xsdobjects.enviNFe400.TEnviNFe;
+import xsdobjects.enviNFe400.TIBSCBSMonoTot;
 import xsdobjects.enviNFe400.TIpi;
-import xsdobjects.enviNFe400.TAjusteCompet;
-import xsdobjects.enviNFe400.TCIBS;
-import xsdobjects.enviNFe400.TDevTrib;
-import xsdobjects.enviNFe400.TDif;
 import xsdobjects.enviNFe400.TNFe;
 import xsdobjects.enviNFe400.TNFe.InfNFe.Ide.NFref;
 import xsdobjects.enviNFe400.TNFe.InfNFe.Total;
@@ -118,9 +121,8 @@ import xsdobjects.enviNFe400.TNFe.InfNFe.Total.ICMSTot;
 import xsdobjects.enviNFe400.TNFe.InfNFe.Total.ISSQNtot;
 import xsdobjects.enviNFe400.TNfeProc;
 import xsdobjects.enviNFe400.TProtNFe;
-import xsdobjects.enviNFe400.TRetEnviNFe;
-import xsdobjects.enviNFe400.TIBSCBSMonoTot;
 import xsdobjects.enviNFe400.TRed;
+import xsdobjects.enviNFe400.TRetEnviNFe;
 import xsdobjects.enviNFe400.TTransfCred;
 import xsdobjects.enviNFe400.TTribNFe;
 import xsdobjects.enviNFe400.TTribRegular;
@@ -1655,10 +1657,6 @@ public final class MapperForNfeAutorizacaoLoteV400 {
     if (ipi != null) {
       target.getContent().add(SEFAZUtils.auxCreateJAXBElement("IPI", ipi));
     }
-    TTribNFe ibsCbs = toJaxb(source.getIbsCbsVO());
-    if (ibsCbs != null) {
-      target.getContent().add(SEFAZUtils.auxCreateJAXBElement("IBSCBS", ibsCbs));
-    }
     TNFe.InfNFe.Det.Imposto.PIS pis = toJaxb(source.getPisVO());
     if (pis != null) {
       target.getContent().add(SEFAZUtils.auxCreateJAXBElement("PIS", pis));
@@ -1666,6 +1664,10 @@ public final class MapperForNfeAutorizacaoLoteV400 {
     TNFe.InfNFe.Det.Imposto.COFINS cofins = toJaxb(source.getCofinsVO());
     if (cofins != null) {
       target.getContent().add(SEFAZUtils.auxCreateJAXBElement("COFINS", cofins));
+    }
+    TTribNFe ibsCbs = toJaxb(source.getIbsCbsVO());
+    if (ibsCbs != null) {
+      target.getContent().add(SEFAZUtils.auxCreateJAXBElement("IBSCBS", ibsCbs));
     }
     return target;
   }
