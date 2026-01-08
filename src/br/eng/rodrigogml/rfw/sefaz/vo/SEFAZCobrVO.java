@@ -6,7 +6,6 @@ import br.eng.rodrigogml.rfw.kernel.rfwmeta.RFWMetaRelationshipField;
 import br.eng.rodrigogml.rfw.kernel.rfwmeta.RFWMetaRelationshipField.RelationshipTypes;
 import br.eng.rodrigogml.rfw.kernel.vo.RFWVO;
 import br.eng.rodrigogml.rfw.orm.dao.annotations.dao.RFWDAOAnnotation;
-import br.eng.rodrigogml.rfw.sefaz.vo.SEFAZDupVO;
 
 /**
  * Grupo Y01 - cobr: Cobrança.
