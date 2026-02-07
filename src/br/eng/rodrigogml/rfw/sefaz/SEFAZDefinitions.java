@@ -11,6 +11,12 @@ import br.eng.rodrigogml.rfw.sefaz.utils.SEFAZEnums;
  */
 public class SEFAZDefinitions {
 
+  // Paths de pacotes XSD
+  public static final String XSD_BASEPATH_NFE_PL_009K_NT2023_001_V120 = "/xsd/PL_009k_NT2023_001_v120/";
+  public static final String XSD_BASEPATH_NFE_PL_009P_NT2024_003_V1_02 = "/xsd/PL_009p_NT2024_003_v1.02/";
+  public static final String XSD_BASEPATH_NFE_PL_010B_NT2025_002_V1_30_20251007 = "/xsd/PL_009q_NT2025_001_v1.00/PL_010b_NT2025_002_v1.30_20251007/";
+  public static final String XSD_BASEPATH_NFE_EVENTO_GENERICO_PL_V1_01 = "/xsd/Evento_Generico_PL_v1.01/";
+
   // Ambientes de Produção
   public static final String NFE_SP_PRODUCTION_V400_NFEAUTORIZACAO4 = "https://nfe.fazenda.sp.gov.br/ws/nfeautorizacao4.asmx";
   public static final String NFE_SP_PRODUCTION_V400_NFEINUTILIZACAO4 = "https://nfe.fazenda.sp.gov.br/ws/nfeinutilizacao4.asmx";
