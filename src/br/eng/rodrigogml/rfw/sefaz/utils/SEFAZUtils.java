@@ -23,6 +23,7 @@ import xsdobjects.consReciNFe400.TConsReciNFe;
 import xsdobjects.consReciNFe400.TNfeProc;
 import xsdobjects.consStatServ400.TConsStatServ;
 import xsdobjects.enviNFe400.TEnviNFe;
+import xsdobjects.inutNFe400.TInutNFe;
 
 /**
  * Description: Esta classe contém métodos utilitários para processar e trabalhar com o XML (ou objeto) da NFe.<br>
@@ -108,6 +109,73 @@ public class SEFAZUtils {
     root.setCUF(ws.getXmlData());
     root.setXServ("STATUS");
     return root;
+  }
+
+  /**
+   * Monta o objeto de mensagem utilizado no serviço "nfeInutilizacaoNF" utilizando o layout v4.00.<Br>
+   *
+   * @param env Ambiente a ser consultado.
+   * @param ws Servidor de WebService a ser consultado.
+   * @param ano Ano da inutilização no formato AA.
+   * @param cnpj CNPJ do emitente.
+   * @param mod Modelo do documento (55/65).
+   * @param serie Série da numeração.
+   * @param nNFIni Número inicial da faixa a inutilizar.
+   * @param nNFFin Número final da faixa a inutilizar.
+   * @param xJust Justificativa da inutilização.
+   * @return Payload pronto para serialização e envio.
+   * @throws RFWException
+   */
+  public static TInutNFe mountNfeInutilizacaoV400Message(SEFAZ_tpAmb env, SEFAZ_WebServices ws, String ano, String cnpj, String mod, String serie, String nNFIni, String nNFFin, String xJust)
+      throws RFWException {
+    TInutNFe root = new TInutNFe();
+    root.setVersao("4.00");
+    root.setInfInut(new TInutNFe.InfInut());
+    root.getInfInut().setTpAmb(env.getXmlData());
+    root.getInfInut().setXServ("INUTILIZAR");
+    root.getInfInut().setCUF(ws.getXmlData());
+    root.getInfInut().setAno(ano);
+    root.getInfInut().setCNPJ(cnpj);
+    root.getInfInut().setMod(mod);
+    root.getInfInut().setSerie(serie);
+    root.getInfInut().setNNFIni(nNFIni);
+    root.getInfInut().setNNFFin(nNFFin);
+    root.getInfInut().setXJust(xJust);
+    root.getInfInut().setId(mountNfeInutilizacaoIdV400(ws.getXmlData(), ano, cnpj, mod, serie, nNFIni, nNFFin));
+    return root;
+  }
+
+  /**
+   * Monta o atributo Id do layout de inutilização no padrão "ID" + 41 dígitos.
+   *
+   * @param cUF Código IBGE da UF com 2 dígitos.
+   * @param ano Ano da inutilização no formato AA.
+   * @param cnpj CNPJ do emitente.
+   * @param mod Modelo do documento.
+   * @param serie Série da numeração.
+   * @param nNFIni Número inicial da faixa.
+   * @param nNFFin Número final da faixa.
+   * @return Valor do atributo Id no padrão do layout.
+   * @throws RFWException
+   */
+  public static String mountNfeInutilizacaoIdV400(String cUF, String ano, String cnpj, String mod, String serie, String nNFIni, String nNFFin) throws RFWException {
+    PreProcess.requiredNonNull(cUF);
+    PreProcess.requiredNonNull(ano);
+    PreProcess.requiredNonNull(cnpj);
+    PreProcess.requiredNonNull(mod);
+    PreProcess.requiredNonNull(serie);
+    PreProcess.requiredNonNull(nNFIni);
+    PreProcess.requiredNonNull(nNFFin);
+
+    return "ID" + leftPadWithZero(cUF, 2) + leftPadWithZero(ano, 2) + leftPadWithZero(cnpj, 14) + leftPadWithZero(mod, 2) + leftPadWithZero(serie, 3) + leftPadWithZero(nNFIni, 9)
+        + leftPadWithZero(nNFFin, 9);
+  }
+
+  /**
+   * Completa o valor com zeros à esquerda até o tamanho informado.
+   */
+  private static String leftPadWithZero(String value, int size) {
+    return String.format("%1$" + size + "s", value).replace(' ', '0');
   }
 
   /**

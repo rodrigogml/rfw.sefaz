@@ -1353,6 +1353,23 @@ public class SEFAZ {
   }
 
   /**
+   * Chama o método de inutilização da NFC-e (modelo 65) no layout v4.00 recebendo parâmetros de negócio.<Br>
+   *
+   * @param ano Ano da inutilização no formato AA.
+   * @param cnpj CNPJ do emitente.
+   * @param serie Série da faixa a inutilizar.
+   * @param nNFIni Número inicial da faixa.
+   * @param nNFFin Número final da faixa.
+   * @param xJust Justificativa da inutilização.
+   * @return Objeto do XML da mensagem de retorno do WebService.
+   * @throws RFWException
+   */
+  public TRetInutNFe nfeInutilizacaoNFCeV400(String ano, String cnpj, String serie, String nNFIni, String nNFFin, String xJust) throws RFWException {
+    TInutNFe root = SEFAZUtils.mountNfeInutilizacaoV400Message(tpAmb, ws, ano, cnpj, "65", serie, nNFIni, nNFFin, xJust);
+    return nfeInutilizacaoNFV400(root);
+  }
+
+  /**
    * Chama o método "consultaCadastro v2.00" disponibilizado no WebSerice da SEFAZ para consultar o contribuinte. <Br>
    *
    * @param root Objeto representando o XML para envio da requisição.
