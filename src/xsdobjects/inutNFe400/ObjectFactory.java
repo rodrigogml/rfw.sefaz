@@ -33,6 +33,7 @@ public class ObjectFactory {
 
     private final static QName _Signature_QNAME = new QName("http://www.w3.org/2000/09/xmldsig#", "Signature");
     private final static QName _InutNFe_QNAME = new QName("http://www.portalfiscal.inf.br/nfe", "inutNFe");
+    private final static QName _RetInutNFe_QNAME = new QName("http://www.portalfiscal.inf.br/nfe", "retInutNFe");
 
     /**
      * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: xsdobjects.inutNFe400
@@ -185,6 +186,15 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://www.portalfiscal.inf.br/nfe", name = "inutNFe")
     public JAXBElement<TInutNFe> createInutNFe(TInutNFe value) {
         return new JAXBElement<TInutNFe>(_InutNFe_QNAME, TInutNFe.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link TRetInutNFe }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://www.portalfiscal.inf.br/nfe", name = "retInutNFe")
+    public JAXBElement<TRetInutNFe> createRetInutNFe(TRetInutNFe value) {
+        return new JAXBElement<TRetInutNFe>(_RetInutNFe_QNAME, TRetInutNFe.class, null, value);
     }
 
 }
