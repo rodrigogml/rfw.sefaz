@@ -79,7 +79,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
     "infInut",
     "signature"
 })
-@XmlRootElement(name = "inutNFe")
+@XmlRootElement(name = "inutNFe", namespace = "http://www.portalfiscal.inf.br/nfe")
 public class TInutNFe {
 
   @XmlElement(required = true)
