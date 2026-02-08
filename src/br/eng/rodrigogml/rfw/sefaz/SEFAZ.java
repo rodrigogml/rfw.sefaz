@@ -1393,7 +1393,7 @@ public class SEFAZ {
     br.inf.portalfiscal.www.nfe.wsdl.nfeinutilizacao4.NfeDadosMsgDocument nfeDadosMsg = br.inf.portalfiscal.www.nfe.wsdl.nfeinutilizacao4.NfeDadosMsgDocument.Factory.newInstance();
     br.inf.portalfiscal.www.nfe.wsdl.nfeinutilizacao4.NfeDadosMsgDocument.NfeDadosMsg req = nfeDadosMsg.addNewNfeDadosMsg();
 
-    String msg = RUSerializer.serializeToXML(root, root.getClass(), false);
+    String msg = SEFAZUtils.signNfeInutilizacaoV400Message(cert, root);
     SEFAZXMLValidator.validateInutNFeV400(msg);
     try {
       req.set(XmlObject.Factory.parse(msg));

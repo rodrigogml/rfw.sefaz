@@ -254,6 +254,22 @@ public class SEFAZUtils {
   }
 
   /**
+   * A partir de um objeto {@link TInutNFe} cria o XML como esperado para enviar para o WebService e assina a tag "infInut" como solicitado pelo padrão de inutilização.<br>
+   *
+   * @param cert Certificado utilizado para assinar o documento. Deve conter chave privada.
+   * @param root Tag raiz completamente preenchida para ser convertida em XML e assinada para transmissão.
+   * @return XML com a tag raiz inutNFe assinada e pronta para transmissão.
+   * @throws RFWException
+   */
+  public static String signNfeInutilizacaoV400Message(RFWCertificate cert, TInutNFe root) throws RFWException {
+    String rawMsg = SEFAZUtils.writeXMLFromObject(root);
+    rawMsg = rawMsg.replaceAll(" xmlns:ns2=\"http://www.w3.org/2000/09/xmldsig#\"", ""); // Se houver outro namespace além do xmlns="http://www.portalfiscal.inf.br/nfe" a assinatura falha, pois a receita retira o namespace antes de validar a assinatura
+    rawMsg = RUString.removeAccents(rawMsg); // Remove os acentos que o sistema possa ter escrito nos campos, pois o charset da NFe não suporta.
+    String xml = RUXML.signXmlDocument(rawMsg, "infInut", cert);
+    return xml;
+  }
+
+  /**
    * Método auxiliar genérico para simplificar a criação de um JAXBElement de qualquer tipo (String, BigDecimal, ICMS, IPI, etc.) para os elemebtos genéricos.
    *
    * @param tagName Nome da tag XML (ex: "vTotTrib", "ICMS", "IPI").
