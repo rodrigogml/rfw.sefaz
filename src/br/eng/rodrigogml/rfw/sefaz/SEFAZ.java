@@ -1348,7 +1348,25 @@ public class SEFAZ {
    * @throws RFWException
    */
   public TRetInutNFe nfeInutilizacaoNFV400(TInutNFe root) throws RFWException {
-    return SEFAZUtils.readXMLToObject(nfeInutilizacaoNFV400asXML(root), TRetInutNFe.class);
+    SEFAZ_mod mod = resolveInutilizacaoMod(root);
+    return SEFAZUtils.readXMLToObject(nfeInutilizacaoNFV400asXML(root, mod), TRetInutNFe.class);
+  }
+
+  /**
+   * Chama o método de inutilização da NFC-e (modelo 65) no layout v4.00 recebendo parâmetros de negócio.<Br>
+   *
+   * @param ano Ano da inutilização no formato AA.
+   * @param cnpj CNPJ do emitente.
+   * @param serie Série da faixa a inutilizar.
+   * @param nNFIni Número inicial da faixa.
+   * @param nNFFin Número final da faixa.
+   * @param xJust Justificativa da inutilização.
+   * @return Objeto do XML da mensagem de retorno do WebService.
+   * @throws RFWException
+   */
+  public TRetInutNFe nfeInutilizacaoNFCeV400(String ano, String cnpj, String serie, String nNFIni, String nNFFin, String xJust) throws RFWException {
+    TInutNFe root = SEFAZUtils.mountNfeInutilizacaoV400Message(tpAmb, ws, ano, cnpj, "65", serie, nNFIni, nNFFin, xJust);
+    return nfeInutilizacaoNFV400(root);
   }
 
   /**
@@ -1359,6 +1377,19 @@ public class SEFAZ {
    * @throws RFWException
    */
   public String nfeInutilizacaoNFV400asXML(TInutNFe root) throws RFWException {
+    SEFAZ_mod mod = resolveInutilizacaoMod(root);
+    return nfeInutilizacaoNFV400asXML(root, mod);
+  }
+
+  /**
+   * Chama o método "consultaCadastro v2.00" disponibilizado no WebSerice da SEFAZ para consultar o contribuinte. <Br>
+   *
+   * @param root Objeto representando o XML para envio da requisição.
+   * @param mod Modelo do documento fiscal identificado no payload de inutilização.
+   * @return XML da mensagem de retorno do WebService.
+   * @throws RFWException
+   */
+  private String nfeInutilizacaoNFV400asXML(TInutNFe root, SEFAZ_mod mod) throws RFWException {
     br.inf.portalfiscal.www.nfe.wsdl.nfeinutilizacao4.NfeDadosMsgDocument nfeDadosMsg = br.inf.portalfiscal.www.nfe.wsdl.nfeinutilizacao4.NfeDadosMsgDocument.Factory.newInstance();
     br.inf.portalfiscal.www.nfe.wsdl.nfeinutilizacao4.NfeDadosMsgDocument.NfeDadosMsg req = nfeDadosMsg.addNewNfeDadosMsg();
 
@@ -1370,7 +1401,7 @@ public class SEFAZ {
       throw new RFWCriticalException("Falha ao criar mensagem para enviar pelo WebService da SEFAZ.", new String[] { msg }, e);
     }
 
-    NFeInutilizacao4Stub stub = createNFeInutilizacao4Stub();
+    NFeInutilizacao4Stub stub = createNFeInutilizacao4Stub(mod);
 
     try {
       br.inf.portalfiscal.www.nfe.wsdl.nfeinutilizacao4.NfeResultMsgDocument result = stub.nfeInutilizacaoNF(nfeDadosMsg);
@@ -1388,36 +1419,84 @@ public class SEFAZ {
   }
 
   /**
+   * Identifica e valida o modelo informado no payload de inutilização (tag infInut/mod).
+   *
+   * @param root Objeto representando o XML para envio da requisição.
+   * @return Modelo identificado no payload.
+   * @throws RFWException
+   */
+  private SEFAZ_mod resolveInutilizacaoMod(TInutNFe root) throws RFWException {
+    SEFAZ_mod mod = null;
+    try {
+      String value = root.getInfInut().getMod();
+      mod = SEFAZEnums.valueOfXMLData(SEFAZ_mod.class, value);
+    } catch (Exception e) {
+    }
+    if (mod == null) throw new RFWCriticalException("Falha ao detectar o modelo da NF para inutilização!");
+
+    if (!SEFAZ_mod.NFE_MODELO_55.equals(mod) && !SEFAZ_mod.NFCE_MODELO_65.equals(mod)) {
+      throw new RFWCriticalException("Este método só permite a inutilização de documentos do tipo NFe ou NFCe. Documento inválido: '${0}'.", new String[] { RFWBundle.get(mod) });
+    }
+
+    if (SEFAZ_mod.NFCE_MODELO_65.equals(mod) && !"65".equals(root.getInfInut().getMod())) {
+      throw new RFWCriticalException("Falha ao identificar o modelo da NFCe na tag infInut/mod para inutilização.");
+    }
+    return mod;
+  }
+
+  /**
    * Cria o STUB de conexão para o serviço nfeInutilizacaoNFV400.
    *
    * @return Stub pronto para conexão.
    * @throws RFWException
    */
-  private NFeInutilizacao4Stub createNFeInutilizacao4Stub() throws RFWException {
+  private NFeInutilizacao4Stub createNFeInutilizacao4Stub(SEFAZ_mod mod) throws RFWException {
     NFeInutilizacao4Stub stub = null;
     try {
-      if (tpAmb == SEFAZ_tpAmb.PRODUCAO) {
-        if (ws == SEFAZ_WebServices.SP) {
-          if (tpEmis == SEFAZ_tpEmis.EMISSAO_NORMAL) {
-            stub = new NFeInutilizacao4Stub(SEFAZDefinitions.NFE_SP_PRODUCTION_V400_NFEINUTILIZACAO4);
-          } else {
-            throw new RFWCriticalException("Falha ao criar Stub! Ambiente '${0}', WebService '${1}', Tipo Emissão: '${2}', ", new String[] { "" + tpAmb, "" + ws, "" + tpEmis });
+      if (mod == SEFAZ_mod.NFE_MODELO_55) {
+        if (tpAmb == SEFAZ_tpAmb.PRODUCAO) {
+          if (ws == SEFAZ_WebServices.SP) {
+            if (tpEmis == SEFAZ_tpEmis.EMISSAO_NORMAL) {
+              stub = new NFeInutilizacao4Stub(SEFAZDefinitions.NFE_SP_PRODUCTION_V400_NFEINUTILIZACAO4);
+            } else {
+              throw new RFWCriticalException("Falha ao criar Stub! Documento '${0}', Ambiente '${1}', WebService '${2}', Tipo Emissão: '${3}', ", new String[] { "" + mod, "" + tpAmb, "" + ws, "" + tpEmis });
+            }
+          }
+        } else if (tpAmb == SEFAZ_tpAmb.HOMOLOGACAO) {
+          if (ws == SEFAZ_WebServices.SP) {
+            if (tpEmis == SEFAZ_tpEmis.EMISSAO_NORMAL) {
+              stub = new NFeInutilizacao4Stub(SEFAZDefinitions.NFE_SP_TEST_V400_NFEINUTILIZACAO4);
+            } else {
+              throw new RFWCriticalException("Falha ao criar Stub! Documento '${0}', Ambiente '${1}', WebService '${2}', Tipo Emissão: '${3}', ", new String[] { "" + mod, "" + tpAmb, "" + ws, "" + tpEmis });
+            }
           }
         }
-      } else if (tpAmb == SEFAZ_tpAmb.HOMOLOGACAO) {
-        if (ws == SEFAZ_WebServices.SP) {
-          if (tpEmis == SEFAZ_tpEmis.EMISSAO_NORMAL) {
-            stub = new NFeInutilizacao4Stub(SEFAZDefinitions.NFE_SP_TEST_V400_NFEINUTILIZACAO4);
-          } else {
-            throw new RFWCriticalException("Falha ao criar Stub! Ambiente '${0}', WebService '${1}', Tipo Emissão: '${2}', ", new String[] { "" + tpAmb, "" + ws, "" + tpEmis });
+      } else if (mod == SEFAZ_mod.NFCE_MODELO_65) {
+        if (tpAmb == SEFAZ_tpAmb.PRODUCAO) {
+          if (ws == SEFAZ_WebServices.SP) {
+            if (tpEmis == SEFAZ_tpEmis.EMISSAO_NORMAL) {
+              stub = new NFeInutilizacao4Stub(SEFAZDefinitions.NFCE_SP_PRODUCTION_V400_NFEINUTILIZACAO4);
+            } else {
+              throw new RFWCriticalException("Falha ao criar Stub! Documento '${0}', Ambiente '${1}', WebService '${2}', Tipo Emissão: '${3}', ", new String[] { "" + mod, "" + tpAmb, "" + ws, "" + tpEmis });
+            }
+          }
+        } else if (tpAmb == SEFAZ_tpAmb.HOMOLOGACAO) {
+          if (ws == SEFAZ_WebServices.SP) {
+            if (tpEmis == SEFAZ_tpEmis.EMISSAO_NORMAL) {
+              stub = new NFeInutilizacao4Stub(SEFAZDefinitions.NFCE_SP_TEST_V400_NFEINUTILIZACAO4);
+            } else {
+              throw new RFWCriticalException("Falha ao criar Stub! Documento '${0}', Ambiente '${1}', WebService '${2}', Tipo Emissão: '${3}', ", new String[] { "" + mod, "" + tpAmb, "" + ws, "" + tpEmis });
+            }
           }
         }
+      } else {
+        throw new RFWCriticalException("Falha ao criar Stub! Documento '${0}', Ambiente '${1}', WebService '${2}', Tipo Emissão: '${3}', ", new String[] { "" + mod, "" + tpAmb, "" + ws, "" + tpEmis });
       }
     } catch (AxisFault e) {
-      throw new RFWCriticalException("Falha ao criar Stub! Ambiente '${0}', WebService '${1}', Tipo Emissão: '${2}', ", new String[] { "" + tpAmb, "" + ws, "" + tpEmis }, e);
+      throw new RFWCriticalException("Falha ao criar Stub! Documento '${0}', Ambiente '${1}', WebService '${2}', Tipo Emissão: '${3}', ", new String[] { "" + mod, "" + tpAmb, "" + ws, "" + tpEmis }, e);
     }
     if (stub == null) {
-      throw new RFWCriticalException("Falha ao criar Stub! Ambiente '${0}', WebService '${1}', Tipo Emissão: '${2}', ", new String[] { "" + tpAmb, "" + ws, "" + tpEmis });
+      throw new RFWCriticalException("Falha ao criar Stub! Documento '${0}', Ambiente '${1}', WebService '${2}', Tipo Emissão: '${3}', ", new String[] { "" + mod, "" + tpAmb, "" + ws, "" + tpEmis });
     }
     stub._getServiceClient().getOptions().setProperty(HTTPConstants.CACHED_HTTP_CLIENT, this.httpClientCustom);
     return stub;

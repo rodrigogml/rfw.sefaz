@@ -1,5 +1,6 @@
 package br.eng.rodrigogml.rfw.sefaz.utils;
 
+import br.eng.rodrigogml.rfw.sefaz.SEFAZDefinitions;
 import br.eng.rodrigogml.rfw.kernel.exceptions.RFWCriticalException;
 import br.eng.rodrigogml.rfw.kernel.exceptions.RFWException;
 import br.eng.rodrigogml.rfw.kernel.logger.RFWLogger;
@@ -17,32 +18,31 @@ public class SEFAZXMLValidator {
   }
 
   public static void validateNfeStatusServicoNFV400(String xml) throws RFWException {
-    SEFAZXMLValidator.validateXMLAgainstSchema(xml, "consStatServ_v4.00.xsd", "/xsd/PL_009p_NT2024_003_v1.02/");
+    SEFAZXMLValidator.validateXMLAgainstSchema(xml, "consStatServ_v4.00.xsd", SEFAZDefinitions.XSD_BASEPATH_NFE_PL_009P_NT2024_003_V1_02);
   }
 
   public static void validateConsCadV200(String xml) throws RFWException {
-    SEFAZXMLValidator.validateXMLAgainstSchema(xml, "consCad_v2.00.xsd", "/xsd/PL_009k_NT2023_001_v120/");
+    SEFAZXMLValidator.validateXMLAgainstSchema(xml, "consCad_v2.00.xsd", SEFAZDefinitions.XSD_BASEPATH_NFE_PL_009K_NT2023_001_V120);
   }
 
   public static void validateEnviNFeV400(String xml) throws RFWException {
-    // SEFAZXMLValidator.validateXMLAgainstSchema(xml, "enviNFe_v4.00.xsd", "/xsd/PL_009p_NT2024_003_v1.02/");
-    SEFAZXMLValidator.validateXMLAgainstSchema(xml, "enviNFe_v4.00.xsd", "/xsd/PL_009q_NT2025_001_v1.00/PL_010b_NT2025_002_v1.30_20251007/");
+    SEFAZXMLValidator.validateXMLAgainstSchema(xml, "enviNFe_v4.00.xsd", SEFAZDefinitions.XSD_BASEPATH_NFE_PL_010B_NT2025_002_V1_30_20251007);
   }
 
   public static void validateConsReciNFeV400(String xml) throws RFWException {
-    SEFAZXMLValidator.validateXMLAgainstSchema(xml, "consReciNFe_v4.00.xsd", "/xsd/PL_009p_NT2024_003_v1.02/");
+    SEFAZXMLValidator.validateXMLAgainstSchema(xml, "consReciNFe_v4.00.xsd", SEFAZDefinitions.XSD_BASEPATH_NFE_PL_009P_NT2024_003_V1_02);
   }
 
   public static void validateInutNFeV400(String xml) throws RFWException {
-    SEFAZXMLValidator.validateXMLAgainstSchema(xml, "inutNFe_v4.00.xsd", "/xsd/PL_009p_NT2024_003_v1.02/");
+    SEFAZXMLValidator.validateXMLAgainstSchema(xml, "inutNFe_v4.00.xsd", SEFAZDefinitions.XSD_BASEPATH_NFE_PL_010B_NT2025_002_V1_30_20251007);
   }
 
   public static void validateEnvEventoV100(String xml) throws RFWException {
-    SEFAZXMLValidator.validateXMLAgainstSchema(xml, "envEvento_v1.00.xsd", "/xsd/Evento_Generico_PL_v1.01/");
+    SEFAZXMLValidator.validateXMLAgainstSchema(xml, "envEvento_v1.00.xsd", SEFAZDefinitions.XSD_BASEPATH_NFE_EVENTO_GENERICO_PL_V1_01);
   }
 
   public static void validateConsSitNFeV400(String xml) throws RFWException {
-    SEFAZXMLValidator.validateXMLAgainstSchema(xml, "consSitNFe_v4.00.xsd", "/xsd/PL_009p_NT2024_003_v1.02/");
+    SEFAZXMLValidator.validateXMLAgainstSchema(xml, "consSitNFe_v4.00.xsd", SEFAZDefinitions.XSD_BASEPATH_NFE_PL_009P_NT2024_003_V1_02);
   }
 
   /**
